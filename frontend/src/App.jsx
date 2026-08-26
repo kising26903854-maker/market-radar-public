@@ -152,24 +152,24 @@ export default function App() {
           </div>
         </div>
 
-        {/* ⚖️ 상단 중앙 투자 책임 고지 배너 (폰트 크기 확대 & 선명도 강화) */}
-        <div style={{
+        {/* ⚖️ 상단 중앙 투자 책임 고지 배너 (PC 전용 데스크탑 헤더 중앙 배치) */}
+        <div className="header-notice hide-on-mobile" style={{
           display: 'flex',
           alignItems: 'center',
           gap: 10,
-          padding: '8px 22px',
+          padding: '7px 20px',
           background: 'linear-gradient(135deg, rgba(234, 179, 8, 0.18) 0%, rgba(239, 68, 68, 0.12) 100%)',
           border: '1.5px solid rgba(234, 179, 8, 0.45)',
           borderRadius: 24,
-          fontSize: '.90rem',
+          fontSize: '.85rem',
           fontWeight: 700,
           color: '#f8fafc',
-          lineHeight: 1.5,
-          maxWidth: '680px',
+          lineHeight: 1.4,
+          maxWidth: '640px',
           boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
           letterSpacing: '-0.2px'
         }}>
-          <span style={{ fontSize: '1.15rem' }}>⚖️</span>
+          <span style={{ fontSize: '1.1rem' }}>⚖️</span>
           <span>
             <strong style={{ color: '#fbbf24', fontWeight: 900, marginRight: 4 }}>[투자 유의사항]</strong>
             본 서비스의 퀀트 지표는 시장 분석 참고용이며 매수·매도를 권유하지 않습니다. 모든 투자의 최종 판단과 결과에 대한 책임은 <strong style={{ color: '#fbbf24', fontWeight: 900, textDecoration: 'underline' }}>투자자 본인</strong>에게 있습니다.
@@ -324,6 +324,20 @@ export default function App() {
 
       {/* ─── 3. 우측 메인 콘텐츠 영역 ─── */}
       <main className="main-content">
+        {/* 📱 모바일 전용 상단 슬림 투자 유의사항 배너 */}
+        <div className="mobile-notice-banner show-on-mobile" style={{
+          padding: '8px 14px',
+          marginBottom: '14px',
+          background: 'linear-gradient(135deg, rgba(234, 179, 8, 0.12) 0%, rgba(239, 68, 68, 0.08) 100%)',
+          border: '1px solid rgba(234, 179, 8, 0.35)',
+          borderRadius: 10,
+          fontSize: '.76rem',
+          color: '#cbd5e1',
+          lineHeight: 1.45
+        }}>
+          ⚖️ <strong style={{ color: '#fbbf24' }}>[투자 유의사항]</strong> 본 퀀트 지표는 시장 분석 참고용이며 모든 투자의 최종 판단과 책임은 <strong>투자자 본인</strong>에게 있습니다.
+        </div>
+
         {/* 상단 모닝 브리핑 배너 */}
         <MorningBriefingBanner />
 

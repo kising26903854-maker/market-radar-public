@@ -54,3 +54,6 @@ Docker 환경 및 Koyeb/Render 플랫폼에서 바로 빌드 및 배포할 수 �
 ## ⚖️ 투자 유의사항 (Disclaimer)
 
 본 서비스의 모든 퀀트 지표 및 실시간 분석 데이터는 시장 분석 및 투자 판단을 위한 참고 정보이며, 특정 금융투자상품의 매수·매도를 권유하지 않습니다. 모든 투자의 최종 결정과 결과에 대한 책임은 투자자 본인에게 있습니다.
+"# market-radar-public" 
+"# market-radar-public" 
+"# market-radar-public" 
