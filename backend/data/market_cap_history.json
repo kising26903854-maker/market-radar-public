@@ -1,0 +1,1730 @@
+[
+  {
+    "day": "2026-08-14",
+    "date": "2026-08-13T18:09:10.914Z",
+    "kospi": [
+      {
+        "rank": 1,
+        "code": "005930",
+        "name": "삼성전자",
+        "price": 274500,
+        "marketCap": 16048035
+      },
+      {
+        "rank": 2,
+        "code": "000660",
+        "name": "SK하이닉스",
+        "price": 1645000,
+        "marketCap": 12016599
+      },
+      {
+        "rank": 3,
+        "code": "402340",
+        "name": "SK스퀘어",
+        "price": 1154000,
+        "marketCap": 1522800
+      },
+      {
+        "rank": 4,
+        "code": "009150",
+        "name": "삼성전기",
+        "price": 1558000,
+        "marketCap": 1163728
+      },
+      {
+        "rank": 5,
+        "code": "005380",
+        "name": "현대차",
+        "price": 453000,
+        "marketCap": 927553
+      },
+      {
+        "rank": 6,
+        "code": "373220",
+        "name": "LG에너지솔루션",
+        "price": 369500,
+        "marketCap": 864630
+      },
+      {
+        "rank": 7,
+        "code": "207940",
+        "name": "삼성바이오로직스",
+        "price": 1548000,
+        "marketCap": 716584
+      },
+      {
+        "rank": 8,
+        "code": "032830",
+        "name": "삼성생명",
+        "price": 301000,
+        "marketCap": 602000
+      },
+      {
+        "rank": 9,
+        "code": "028260",
+        "name": "삼성물산",
+        "price": 369000,
+        "marketCap": 598398
+      },
+      {
+        "rank": 10,
+        "code": "012450",
+        "name": "한화에어로스페이스",
+        "price": 1160000,
+        "marketCap": 598135
+      },
+      {
+        "rank": 11,
+        "code": "105560",
+        "name": "KB금융",
+        "price": 168500,
+        "marketCap": 597649
+      },
+      {
+        "rank": 12,
+        "code": "000270",
+        "name": "기아",
+        "price": 141700,
+        "marketCap": 553215
+      },
+      {
+        "rank": 13,
+        "code": "329180",
+        "name": "HD현대중공업",
+        "price": 510000,
+        "marketCap": 535302
+      },
+      {
+        "rank": 14,
+        "code": "034020",
+        "name": "두산에너빌리티",
+        "price": 82600,
+        "marketCap": 529104
+      },
+      {
+        "rank": 15,
+        "code": "055550",
+        "name": "신한지주",
+        "price": 107400,
+        "marketCap": 504190
+      },
+      {
+        "rank": 16,
+        "code": "012330",
+        "name": "현대모비스",
+        "price": 547000,
+        "marketCap": 496307
+      },
+      {
+        "rank": 17,
+        "code": "068270",
+        "name": "셀트리온",
+        "price": 201000,
+        "marketCap": 467561
+      },
+      {
+        "rank": 18,
+        "code": "034730",
+        "name": "SK",
+        "price": 585000,
+        "marketCap": 424141
+      },
+      {
+        "rank": 19,
+        "code": "006400",
+        "name": "삼성SDI",
+        "price": 516000,
+        "marketCap": 415821
+      },
+      {
+        "rank": 20,
+        "code": "086790",
+        "name": "하나금융지주",
+        "price": 133000,
+        "marketCap": 364909
+      }
+    ],
+    "kosdaq": [
+      {
+        "rank": 1,
+        "code": "196170",
+        "name": "알테오젠",
+        "price": 314000,
+        "marketCap": 168261
+      },
+      {
+        "rank": 2,
+        "code": "086520",
+        "name": "에코프로",
+        "price": 93600,
+        "marketCap": 127086
+      },
+      {
+        "rank": 3,
+        "code": "247540",
+        "name": "에코프로비엠",
+        "price": 116700,
+        "marketCap": 114168
+      },
+      {
+        "rank": 4,
+        "code": "277810",
+        "name": "레인보우로보틱스",
+        "price": 501000,
+        "marketCap": 97193
+      },
+      {
+        "rank": 5,
+        "code": "036930",
+        "name": "주성엔지니어링",
+        "price": 177800,
+        "marketCap": 82643
+      },
+      {
+        "rank": 6,
+        "code": "028300",
+        "name": "HLB",
+        "price": 43150,
+        "marketCap": 57475
+      },
+      {
+        "rank": 7,
+        "code": "240810",
+        "name": "원익IPS",
+        "price": 116600,
+        "marketCap": 57232
+      },
+      {
+        "rank": 8,
+        "code": "058470",
+        "name": "리노공업",
+        "price": 70800,
+        "marketCap": 53958
+      },
+      {
+        "rank": 9,
+        "code": "039030",
+        "name": "이오테크닉스",
+        "price": 404000,
+        "marketCap": 49771
+      },
+      {
+        "rank": 10,
+        "code": "298380",
+        "name": "에이비엘바이오",
+        "price": 84100,
+        "marketCap": 47085
+      },
+      {
+        "rank": 11,
+        "code": "087010",
+        "name": "펩트론",
+        "price": 194000,
+        "marketCap": 45236
+      },
+      {
+        "rank": 12,
+        "code": "000250",
+        "name": "삼천당제약",
+        "price": 189000,
+        "marketCap": 44335
+      },
+      {
+        "rank": 13,
+        "code": "141080",
+        "name": "리가켐바이오",
+        "price": 113900,
+        "marketCap": 42165
+      },
+      {
+        "rank": 14,
+        "code": "214450",
+        "name": "파마리서치",
+        "price": 398000,
+        "marketCap": 41351
+      },
+      {
+        "rank": 15,
+        "code": "108490",
+        "name": "로보티즈",
+        "price": 280000,
+        "marketCap": 41051
+      },
+      {
+        "rank": 16,
+        "code": "222800",
+        "name": "심텍",
+        "price": 108700,
+        "marketCap": 40723
+      },
+      {
+        "rank": 17,
+        "code": "319660",
+        "name": "피에스케이",
+        "price": 134100,
+        "marketCap": 38844
+      },
+      {
+        "rank": 18,
+        "code": "095340",
+        "name": "ISC",
+        "price": 161300,
+        "marketCap": 34191
+      },
+      {
+        "rank": 19,
+        "code": "214370",
+        "name": "케어젠",
+        "price": 61900,
+        "marketCap": 33250
+      },
+      {
+        "rank": 20,
+        "code": "403870",
+        "name": "HPSP",
+        "price": 40400,
+        "marketCap": 33249
+      }
+    ]
+  },
+  {
+    "day": "2026-08-15",
+    "date": "2026-08-15T06:59:45.066Z",
+    "kospi": [
+      {
+        "rank": 1,
+        "code": "005930",
+        "name": "삼성전자",
+        "price": 274500,
+        "marketCap": 16048035
+      },
+      {
+        "rank": 2,
+        "code": "000660",
+        "name": "SK하이닉스",
+        "price": 1645000,
+        "marketCap": 12016599
+      },
+      {
+        "rank": 3,
+        "code": "402340",
+        "name": "SK스퀘어",
+        "price": 1154000,
+        "marketCap": 1522800
+      },
+      {
+        "rank": 4,
+        "code": "009150",
+        "name": "삼성전기",
+        "price": 1558000,
+        "marketCap": 1163728
+      },
+      {
+        "rank": 5,
+        "code": "005380",
+        "name": "현대차",
+        "price": 453000,
+        "marketCap": 927553
+      },
+      {
+        "rank": 6,
+        "code": "373220",
+        "name": "LG에너지솔루션",
+        "price": 369500,
+        "marketCap": 864630
+      },
+      {
+        "rank": 7,
+        "code": "207940",
+        "name": "삼성바이오로직스",
+        "price": 1548000,
+        "marketCap": 716584
+      },
+      {
+        "rank": 8,
+        "code": "032830",
+        "name": "삼성생명",
+        "price": 301000,
+        "marketCap": 602000
+      },
+      {
+        "rank": 9,
+        "code": "028260",
+        "name": "삼성물산",
+        "price": 369000,
+        "marketCap": 598398
+      },
+      {
+        "rank": 10,
+        "code": "012450",
+        "name": "한화에어로스페이스",
+        "price": 1160000,
+        "marketCap": 598135
+      },
+      {
+        "rank": 11,
+        "code": "105560",
+        "name": "KB금융",
+        "price": 168500,
+        "marketCap": 597649
+      },
+      {
+        "rank": 12,
+        "code": "000270",
+        "name": "기아",
+        "price": 141700,
+        "marketCap": 553215
+      },
+      {
+        "rank": 13,
+        "code": "329180",
+        "name": "HD현대중공업",
+        "price": 510000,
+        "marketCap": 535302
+      },
+      {
+        "rank": 14,
+        "code": "034020",
+        "name": "두산에너빌리티",
+        "price": 82600,
+        "marketCap": 529104
+      },
+      {
+        "rank": 15,
+        "code": "055550",
+        "name": "신한지주",
+        "price": 107400,
+        "marketCap": 504190
+      },
+      {
+        "rank": 16,
+        "code": "012330",
+        "name": "현대모비스",
+        "price": 547000,
+        "marketCap": 496307
+      },
+      {
+        "rank": 17,
+        "code": "068270",
+        "name": "셀트리온",
+        "price": 201000,
+        "marketCap": 467561
+      },
+      {
+        "rank": 18,
+        "code": "034730",
+        "name": "SK",
+        "price": 585000,
+        "marketCap": 424141
+      },
+      {
+        "rank": 19,
+        "code": "006400",
+        "name": "삼성SDI",
+        "price": 516000,
+        "marketCap": 415821
+      },
+      {
+        "rank": 20,
+        "code": "086790",
+        "name": "하나금융지주",
+        "price": 133000,
+        "marketCap": 364909
+      }
+    ],
+    "kosdaq": [
+      {
+        "rank": 1,
+        "code": "196170",
+        "name": "알테오젠",
+        "price": 314000,
+        "marketCap": 168261
+      },
+      {
+        "rank": 2,
+        "code": "086520",
+        "name": "에코프로",
+        "price": 93600,
+        "marketCap": 127086
+      },
+      {
+        "rank": 3,
+        "code": "247540",
+        "name": "에코프로비엠",
+        "price": 116700,
+        "marketCap": 114168
+      },
+      {
+        "rank": 4,
+        "code": "277810",
+        "name": "레인보우로보틱스",
+        "price": 501000,
+        "marketCap": 97193
+      },
+      {
+        "rank": 5,
+        "code": "036930",
+        "name": "주성엔지니어링",
+        "price": 177800,
+        "marketCap": 82643
+      },
+      {
+        "rank": 6,
+        "code": "028300",
+        "name": "HLB",
+        "price": 43150,
+        "marketCap": 57475
+      },
+      {
+        "rank": 7,
+        "code": "240810",
+        "name": "원익IPS",
+        "price": 116600,
+        "marketCap": 57232
+      },
+      {
+        "rank": 8,
+        "code": "058470",
+        "name": "리노공업",
+        "price": 70800,
+        "marketCap": 53958
+      },
+      {
+        "rank": 9,
+        "code": "039030",
+        "name": "이오테크닉스",
+        "price": 404000,
+        "marketCap": 49771
+      },
+      {
+        "rank": 10,
+        "code": "298380",
+        "name": "에이비엘바이오",
+        "price": 84100,
+        "marketCap": 47085
+      },
+      {
+        "rank": 11,
+        "code": "087010",
+        "name": "펩트론",
+        "price": 194000,
+        "marketCap": 45236
+      },
+      {
+        "rank": 12,
+        "code": "000250",
+        "name": "삼천당제약",
+        "price": 189000,
+        "marketCap": 44335
+      },
+      {
+        "rank": 13,
+        "code": "141080",
+        "name": "리가켐바이오",
+        "price": 113900,
+        "marketCap": 42165
+      },
+      {
+        "rank": 14,
+        "code": "214450",
+        "name": "파마리서치",
+        "price": 398000,
+        "marketCap": 41351
+      },
+      {
+        "rank": 15,
+        "code": "108490",
+        "name": "로보티즈",
+        "price": 280000,
+        "marketCap": 41051
+      },
+      {
+        "rank": 16,
+        "code": "222800",
+        "name": "심텍",
+        "price": 108700,
+        "marketCap": 40723
+      },
+      {
+        "rank": 17,
+        "code": "319660",
+        "name": "피에스케이",
+        "price": 134100,
+        "marketCap": 38844
+      },
+      {
+        "rank": 18,
+        "code": "095340",
+        "name": "ISC",
+        "price": 161300,
+        "marketCap": 34191
+      },
+      {
+        "rank": 19,
+        "code": "214370",
+        "name": "케어젠",
+        "price": 61900,
+        "marketCap": 33250
+      },
+      {
+        "rank": 20,
+        "code": "403870",
+        "name": "HPSP",
+        "price": 40400,
+        "marketCap": 33249
+      }
+    ]
+  },
+  {
+    "day": "2026-08-16",
+    "date": "2026-08-16T10:56:45.983Z",
+    "kospi": [
+      {
+        "rank": 1,
+        "code": "005930",
+        "name": "삼성전자",
+        "price": 274500,
+        "marketCap": 16048035
+      },
+      {
+        "rank": 2,
+        "code": "000660",
+        "name": "SK하이닉스",
+        "price": 1645000,
+        "marketCap": 12016599
+      },
+      {
+        "rank": 3,
+        "code": "402340",
+        "name": "SK스퀘어",
+        "price": 1154000,
+        "marketCap": 1522800
+      },
+      {
+        "rank": 4,
+        "code": "009150",
+        "name": "삼성전기",
+        "price": 1558000,
+        "marketCap": 1163728
+      },
+      {
+        "rank": 5,
+        "code": "005380",
+        "name": "현대차",
+        "price": 453000,
+        "marketCap": 927553
+      },
+      {
+        "rank": 6,
+        "code": "373220",
+        "name": "LG에너지솔루션",
+        "price": 369500,
+        "marketCap": 864630
+      },
+      {
+        "rank": 7,
+        "code": "207940",
+        "name": "삼성바이오로직스",
+        "price": 1548000,
+        "marketCap": 716584
+      },
+      {
+        "rank": 8,
+        "code": "032830",
+        "name": "삼성생명",
+        "price": 301000,
+        "marketCap": 602000
+      },
+      {
+        "rank": 9,
+        "code": "028260",
+        "name": "삼성물산",
+        "price": 369000,
+        "marketCap": 598398
+      },
+      {
+        "rank": 10,
+        "code": "012450",
+        "name": "한화에어로스페이스",
+        "price": 1160000,
+        "marketCap": 598135
+      },
+      {
+        "rank": 11,
+        "code": "105560",
+        "name": "KB금융",
+        "price": 168500,
+        "marketCap": 597649
+      },
+      {
+        "rank": 12,
+        "code": "000270",
+        "name": "기아",
+        "price": 141700,
+        "marketCap": 553215
+      },
+      {
+        "rank": 13,
+        "code": "329180",
+        "name": "HD현대중공업",
+        "price": 510000,
+        "marketCap": 535302
+      },
+      {
+        "rank": 14,
+        "code": "034020",
+        "name": "두산에너빌리티",
+        "price": 82600,
+        "marketCap": 529104
+      },
+      {
+        "rank": 15,
+        "code": "055550",
+        "name": "신한지주",
+        "price": 107400,
+        "marketCap": 504190
+      },
+      {
+        "rank": 16,
+        "code": "012330",
+        "name": "현대모비스",
+        "price": 547000,
+        "marketCap": 496307
+      },
+      {
+        "rank": 17,
+        "code": "068270",
+        "name": "셀트리온",
+        "price": 201000,
+        "marketCap": 467561
+      },
+      {
+        "rank": 18,
+        "code": "034730",
+        "name": "SK",
+        "price": 585000,
+        "marketCap": 424141
+      },
+      {
+        "rank": 19,
+        "code": "006400",
+        "name": "삼성SDI",
+        "price": 516000,
+        "marketCap": 415821
+      },
+      {
+        "rank": 20,
+        "code": "086790",
+        "name": "하나금융지주",
+        "price": 133000,
+        "marketCap": 364909
+      }
+    ],
+    "kosdaq": [
+      {
+        "rank": 1,
+        "code": "196170",
+        "name": "알테오젠",
+        "price": 314000,
+        "marketCap": 168261
+      },
+      {
+        "rank": 2,
+        "code": "086520",
+        "name": "에코프로",
+        "price": 93600,
+        "marketCap": 127086
+      },
+      {
+        "rank": 3,
+        "code": "247540",
+        "name": "에코프로비엠",
+        "price": 116700,
+        "marketCap": 114168
+      },
+      {
+        "rank": 4,
+        "code": "277810",
+        "name": "레인보우로보틱스",
+        "price": 501000,
+        "marketCap": 97193
+      },
+      {
+        "rank": 5,
+        "code": "036930",
+        "name": "주성엔지니어링",
+        "price": 177800,
+        "marketCap": 82643
+      },
+      {
+        "rank": 6,
+        "code": "028300",
+        "name": "HLB",
+        "price": 43150,
+        "marketCap": 57475
+      },
+      {
+        "rank": 7,
+        "code": "240810",
+        "name": "원익IPS",
+        "price": 116600,
+        "marketCap": 57232
+      },
+      {
+        "rank": 8,
+        "code": "058470",
+        "name": "리노공업",
+        "price": 70800,
+        "marketCap": 53958
+      },
+      {
+        "rank": 9,
+        "code": "039030",
+        "name": "이오테크닉스",
+        "price": 404000,
+        "marketCap": 49771
+      },
+      {
+        "rank": 10,
+        "code": "298380",
+        "name": "에이비엘바이오",
+        "price": 84100,
+        "marketCap": 47085
+      },
+      {
+        "rank": 11,
+        "code": "087010",
+        "name": "펩트론",
+        "price": 194000,
+        "marketCap": 45236
+      },
+      {
+        "rank": 12,
+        "code": "000250",
+        "name": "삼천당제약",
+        "price": 189000,
+        "marketCap": 44335
+      },
+      {
+        "rank": 13,
+        "code": "141080",
+        "name": "리가켐바이오",
+        "price": 113900,
+        "marketCap": 42165
+      },
+      {
+        "rank": 14,
+        "code": "214450",
+        "name": "파마리서치",
+        "price": 398000,
+        "marketCap": 41351
+      },
+      {
+        "rank": 15,
+        "code": "108490",
+        "name": "로보티즈",
+        "price": 280000,
+        "marketCap": 41051
+      },
+      {
+        "rank": 16,
+        "code": "222800",
+        "name": "심텍",
+        "price": 108700,
+        "marketCap": 40723
+      },
+      {
+        "rank": 17,
+        "code": "319660",
+        "name": "피에스케이",
+        "price": 134100,
+        "marketCap": 38844
+      },
+      {
+        "rank": 18,
+        "code": "095340",
+        "name": "ISC",
+        "price": 161300,
+        "marketCap": 34191
+      },
+      {
+        "rank": 19,
+        "code": "214370",
+        "name": "케어젠",
+        "price": 61900,
+        "marketCap": 33250
+      },
+      {
+        "rank": 20,
+        "code": "403870",
+        "name": "HPSP",
+        "price": 40400,
+        "marketCap": 33249
+      }
+    ]
+  },
+  {
+    "day": "2026-08-17",
+    "date": "2026-08-16T19:09:14.249Z",
+    "kospi": [
+      {
+        "rank": 1,
+        "code": "005930",
+        "name": "삼성전자",
+        "price": 274500,
+        "marketCap": 16048035
+      },
+      {
+        "rank": 2,
+        "code": "000660",
+        "name": "SK하이닉스",
+        "price": 1645000,
+        "marketCap": 12016599
+      },
+      {
+        "rank": 3,
+        "code": "402340",
+        "name": "SK스퀘어",
+        "price": 1154000,
+        "marketCap": 1522800
+      },
+      {
+        "rank": 4,
+        "code": "009150",
+        "name": "삼성전기",
+        "price": 1558000,
+        "marketCap": 1163728
+      },
+      {
+        "rank": 5,
+        "code": "005380",
+        "name": "현대차",
+        "price": 453000,
+        "marketCap": 927553
+      },
+      {
+        "rank": 6,
+        "code": "373220",
+        "name": "LG에너지솔루션",
+        "price": 369500,
+        "marketCap": 864630
+      },
+      {
+        "rank": 7,
+        "code": "207940",
+        "name": "삼성바이오로직스",
+        "price": 1548000,
+        "marketCap": 716584
+      },
+      {
+        "rank": 8,
+        "code": "032830",
+        "name": "삼성생명",
+        "price": 301000,
+        "marketCap": 602000
+      },
+      {
+        "rank": 9,
+        "code": "028260",
+        "name": "삼성물산",
+        "price": 369000,
+        "marketCap": 598398
+      },
+      {
+        "rank": 10,
+        "code": "012450",
+        "name": "한화에어로스페이스",
+        "price": 1160000,
+        "marketCap": 598135
+      },
+      {
+        "rank": 11,
+        "code": "105560",
+        "name": "KB금융",
+        "price": 168500,
+        "marketCap": 597649
+      },
+      {
+        "rank": 12,
+        "code": "000270",
+        "name": "기아",
+        "price": 141700,
+        "marketCap": 553215
+      },
+      {
+        "rank": 13,
+        "code": "329180",
+        "name": "HD현대중공업",
+        "price": 510000,
+        "marketCap": 535302
+      },
+      {
+        "rank": 14,
+        "code": "034020",
+        "name": "두산에너빌리티",
+        "price": 82600,
+        "marketCap": 529104
+      },
+      {
+        "rank": 15,
+        "code": "055550",
+        "name": "신한지주",
+        "price": 107400,
+        "marketCap": 504190
+      },
+      {
+        "rank": 16,
+        "code": "012330",
+        "name": "현대모비스",
+        "price": 547000,
+        "marketCap": 496307
+      },
+      {
+        "rank": 17,
+        "code": "068270",
+        "name": "셀트리온",
+        "price": 201000,
+        "marketCap": 467561
+      },
+      {
+        "rank": 18,
+        "code": "034730",
+        "name": "SK",
+        "price": 585000,
+        "marketCap": 424141
+      },
+      {
+        "rank": 19,
+        "code": "006400",
+        "name": "삼성SDI",
+        "price": 516000,
+        "marketCap": 415821
+      },
+      {
+        "rank": 20,
+        "code": "086790",
+        "name": "하나금융지주",
+        "price": 133000,
+        "marketCap": 364909
+      }
+    ],
+    "kosdaq": [
+      {
+        "rank": 1,
+        "code": "196170",
+        "name": "알테오젠",
+        "price": 314000,
+        "marketCap": 168261
+      },
+      {
+        "rank": 2,
+        "code": "086520",
+        "name": "에코프로",
+        "price": 93600,
+        "marketCap": 127086
+      },
+      {
+        "rank": 3,
+        "code": "247540",
+        "name": "에코프로비엠",
+        "price": 116700,
+        "marketCap": 114168
+      },
+      {
+        "rank": 4,
+        "code": "277810",
+        "name": "레인보우로보틱스",
+        "price": 501000,
+        "marketCap": 97193
+      },
+      {
+        "rank": 5,
+        "code": "036930",
+        "name": "주성엔지니어링",
+        "price": 177800,
+        "marketCap": 82643
+      },
+      {
+        "rank": 6,
+        "code": "028300",
+        "name": "HLB",
+        "price": 43150,
+        "marketCap": 57475
+      },
+      {
+        "rank": 7,
+        "code": "240810",
+        "name": "원익IPS",
+        "price": 116600,
+        "marketCap": 57232
+      },
+      {
+        "rank": 8,
+        "code": "058470",
+        "name": "리노공업",
+        "price": 70800,
+        "marketCap": 53958
+      },
+      {
+        "rank": 9,
+        "code": "039030",
+        "name": "이오테크닉스",
+        "price": 404000,
+        "marketCap": 49771
+      },
+      {
+        "rank": 10,
+        "code": "298380",
+        "name": "에이비엘바이오",
+        "price": 84100,
+        "marketCap": 47085
+      },
+      {
+        "rank": 11,
+        "code": "087010",
+        "name": "펩트론",
+        "price": 194000,
+        "marketCap": 45236
+      },
+      {
+        "rank": 12,
+        "code": "000250",
+        "name": "삼천당제약",
+        "price": 189000,
+        "marketCap": 44335
+      },
+      {
+        "rank": 13,
+        "code": "141080",
+        "name": "리가켐바이오",
+        "price": 113900,
+        "marketCap": 42165
+      },
+      {
+        "rank": 14,
+        "code": "214450",
+        "name": "파마리서치",
+        "price": 398000,
+        "marketCap": 41351
+      },
+      {
+        "rank": 15,
+        "code": "108490",
+        "name": "로보티즈",
+        "price": 280000,
+        "marketCap": 41051
+      },
+      {
+        "rank": 16,
+        "code": "222800",
+        "name": "심텍",
+        "price": 108700,
+        "marketCap": 40723
+      },
+      {
+        "rank": 17,
+        "code": "319660",
+        "name": "피에스케이",
+        "price": 134100,
+        "marketCap": 38844
+      },
+      {
+        "rank": 18,
+        "code": "095340",
+        "name": "ISC",
+        "price": 161300,
+        "marketCap": 34191
+      },
+      {
+        "rank": 19,
+        "code": "214370",
+        "name": "케어젠",
+        "price": 61900,
+        "marketCap": 33250
+      },
+      {
+        "rank": 20,
+        "code": "403870",
+        "name": "HPSP",
+        "price": 40400,
+        "marketCap": 33249
+      }
+    ]
+  },
+  {
+    "day": "2026-08-18",
+    "date": "2026-08-18T10:31:49.018Z",
+    "kospi": [
+      {
+        "rank": 1,
+        "code": "005930",
+        "name": "삼성전자",
+        "price": 268500,
+        "marketCap": 15697258
+      },
+      {
+        "rank": 2,
+        "code": "000660",
+        "name": "SK하이닉스",
+        "price": 1662000,
+        "marketCap": 12140783
+      },
+      {
+        "rank": 3,
+        "code": "402340",
+        "name": "SK스퀘어",
+        "price": 1135000,
+        "marketCap": 1497728
+      },
+      {
+        "rank": 4,
+        "code": "009150",
+        "name": "삼성전기",
+        "price": 1440000,
+        "marketCap": 1075589
+      },
+      {
+        "rank": 5,
+        "code": "005380",
+        "name": "현대차",
+        "price": 435000,
+        "marketCap": 890696
+      },
+      {
+        "rank": 6,
+        "code": "373220",
+        "name": "LG에너지솔루션",
+        "price": 351000,
+        "marketCap": 821340
+      },
+      {
+        "rank": 7,
+        "code": "207940",
+        "name": "삼성바이오로직스",
+        "price": 1531000,
+        "marketCap": 708714
+      },
+      {
+        "rank": 8,
+        "code": "032830",
+        "name": "삼성생명",
+        "price": 310500,
+        "marketCap": 621000
+      },
+      {
+        "rank": 9,
+        "code": "028260",
+        "name": "삼성물산",
+        "price": 369000,
+        "marketCap": 598398
+      },
+      {
+        "rank": 10,
+        "code": "105560",
+        "name": "KB금융",
+        "price": 168500,
+        "marketCap": 597649
+      },
+      {
+        "rank": 11,
+        "code": "012450",
+        "name": "한화에어로스페이스",
+        "price": 1146000,
+        "marketCap": 590917
+      },
+      {
+        "rank": 12,
+        "code": "000270",
+        "name": "기아",
+        "price": 137200,
+        "marketCap": 535647
+      },
+      {
+        "rank": 13,
+        "code": "329180",
+        "name": "HD현대중공업",
+        "price": 489500,
+        "marketCap": 513785
+      },
+      {
+        "rank": 14,
+        "code": "055550",
+        "name": "신한지주",
+        "price": 106500,
+        "marketCap": 499964
+      },
+      {
+        "rank": 15,
+        "code": "034020",
+        "name": "두산에너빌리티",
+        "price": 77900,
+        "marketCap": 498997
+      },
+      {
+        "rank": 16,
+        "code": "012330",
+        "name": "현대모비스",
+        "price": 518000,
+        "marketCap": 469995
+      },
+      {
+        "rank": 17,
+        "code": "068270",
+        "name": "셀트리온",
+        "price": 195500,
+        "marketCap": 454767
+      },
+      {
+        "rank": 18,
+        "code": "034730",
+        "name": "SK",
+        "price": 590000,
+        "marketCap": 427766
+      },
+      {
+        "rank": 19,
+        "code": "006400",
+        "name": "삼성SDI",
+        "price": 488000,
+        "marketCap": 393257
+      },
+      {
+        "rank": 20,
+        "code": "086790",
+        "name": "하나금융지주",
+        "price": 130700,
+        "marketCap": 358599
+      }
+    ],
+    "kosdaq": [
+      {
+        "rank": 1,
+        "code": "196170",
+        "name": "알테오젠",
+        "price": 298000,
+        "marketCap": 159687
+      },
+      {
+        "rank": 2,
+        "code": "086520",
+        "name": "에코프로",
+        "price": 87100,
+        "marketCap": 118261
+      },
+      {
+        "rank": 3,
+        "code": "247540",
+        "name": "에코프로비엠",
+        "price": 109100,
+        "marketCap": 106733
+      },
+      {
+        "rank": 4,
+        "code": "277810",
+        "name": "레인보우로보틱스",
+        "price": 470000,
+        "marketCap": 91179
+      },
+      {
+        "rank": 5,
+        "code": "036930",
+        "name": "주성엔지니어링",
+        "price": 179300,
+        "marketCap": 83341
+      },
+      {
+        "rank": 6,
+        "code": "028300",
+        "name": "HLB",
+        "price": 43150,
+        "marketCap": 57475
+      },
+      {
+        "rank": 7,
+        "code": "240810",
+        "name": "원익IPS",
+        "price": 112400,
+        "marketCap": 55170
+      },
+      {
+        "rank": 8,
+        "code": "058470",
+        "name": "리노공업",
+        "price": 67800,
+        "marketCap": 51672
+      },
+      {
+        "rank": 9,
+        "code": "039030",
+        "name": "이오테크닉스",
+        "price": 414000,
+        "marketCap": 51003
+      },
+      {
+        "rank": 10,
+        "code": "298380",
+        "name": "에이비엘바이오",
+        "price": 79800,
+        "marketCap": 44678
+      },
+      {
+        "rank": 11,
+        "code": "000250",
+        "name": "삼천당제약",
+        "price": 184700,
+        "marketCap": 43326
+      },
+      {
+        "rank": 12,
+        "code": "087010",
+        "name": "펩트론",
+        "price": 180000,
+        "marketCap": 41971
+      },
+      {
+        "rank": 13,
+        "code": "222800",
+        "name": "심텍",
+        "price": 110900,
+        "marketCap": 41547
+      },
+      {
+        "rank": 14,
+        "code": "108490",
+        "name": "로보티즈",
+        "price": 279000,
+        "marketCap": 40904
+      },
+      {
+        "rank": 15,
+        "code": "214450",
+        "name": "파마리서치",
+        "price": 393000,
+        "marketCap": 40831
+      },
+      {
+        "rank": 16,
+        "code": "141080",
+        "name": "리가켐바이오",
+        "price": 105100,
+        "marketCap": 38907
+      },
+      {
+        "rank": 17,
+        "code": "319660",
+        "name": "피에스케이",
+        "price": 132000,
+        "marketCap": 38236
+      },
+      {
+        "rank": 18,
+        "code": "095340",
+        "name": "ISC",
+        "price": 167100,
+        "marketCap": 35420
+      },
+      {
+        "rank": 19,
+        "code": "403870",
+        "name": "HPSP",
+        "price": 42650,
+        "marketCap": 35101
+      },
+      {
+        "rank": 20,
+        "code": "440110",
+        "name": "파두",
+        "price": 68300,
+        "marketCap": 34226
+      }
+    ]
+  },
+  {
+    "day": "2026-08-19",
+    "date": "2026-08-19T09:06:40.197Z",
+    "kospi": [
+      {
+        "rank": 1,
+        "code": "005930",
+        "name": "삼성전자",
+        "price": 247500,
+        "marketCap": 14469540
+      },
+      {
+        "rank": 2,
+        "code": "000660",
+        "name": "SK하이닉스",
+        "price": 1500000,
+        "marketCap": 10957385
+      },
+      {
+        "rank": 3,
+        "code": "402340",
+        "name": "SK스퀘어",
+        "price": 1004000,
+        "marketCap": 1324517
+      },
+      {
+        "rank": 4,
+        "code": "009150",
+        "name": "삼성전기",
+        "price": 1387000,
+        "marketCap": 1036002
+      },
+      {
+        "rank": 5,
+        "code": "005380",
+        "name": "현대차",
+        "price": 414000,
+        "marketCap": 847697
+      },
+      {
+        "rank": 6,
+        "code": "373220",
+        "name": "LG에너지솔루션",
+        "price": 357500,
+        "marketCap": 836550
+      },
+      {
+        "rank": 7,
+        "code": "207940",
+        "name": "삼성바이오로직스",
+        "price": 1544000,
+        "marketCap": 714732
+      },
+      {
+        "rank": 8,
+        "code": "012450",
+        "name": "한화에어로스페이스",
+        "price": 1177000,
+        "marketCap": 606901
+      },
+      {
+        "rank": 9,
+        "code": "105560",
+        "name": "KB금융",
+        "price": 166400,
+        "marketCap": 590200
+      },
+      {
+        "rank": 10,
+        "code": "028260",
+        "name": "삼성물산",
+        "price": 347000,
+        "marketCap": 562722
+      },
+      {
+        "rank": 11,
+        "code": "032830",
+        "name": "삼성생명",
+        "price": 276000,
+        "marketCap": 552000
+      },
+      {
+        "rank": 12,
+        "code": "000270",
+        "name": "기아",
+        "price": 133000,
+        "marketCap": 519249
+      },
+      {
+        "rank": 13,
+        "code": "329180",
+        "name": "HD현대중공업",
+        "price": 474000,
+        "marketCap": 497516
+      },
+      {
+        "rank": 14,
+        "code": "055550",
+        "name": "신한지주",
+        "price": 105000,
+        "marketCap": 492923
+      },
+      {
+        "rank": 15,
+        "code": "034020",
+        "name": "두산에너빌리티",
+        "price": 76200,
+        "marketCap": 488108
+      },
+      {
+        "rank": 16,
+        "code": "012330",
+        "name": "현대모비스",
+        "price": 509000,
+        "marketCap": 461829
+      },
+      {
+        "rank": 17,
+        "code": "068270",
+        "name": "셀트리온",
+        "price": 194100,
+        "marketCap": 451510
+      },
+      {
+        "rank": 18,
+        "code": "034730",
+        "name": "SK",
+        "price": 551000,
+        "marketCap": 399490
+      },
+      {
+        "rank": 19,
+        "code": "006400",
+        "name": "삼성SDI",
+        "price": 487000,
+        "marketCap": 392452
+      },
+      {
+        "rank": 20,
+        "code": "086790",
+        "name": "하나금융지주",
+        "price": 127500,
+        "marketCap": 349819
+      }
+    ],
+    "kosdaq": [
+      {
+        "rank": 1,
+        "code": "196170",
+        "name": "알테오젠",
+        "price": 303500,
+        "marketCap": 162635
+      },
+      {
+        "rank": 2,
+        "code": "086520",
+        "name": "에코프로",
+        "price": 86200,
+        "marketCap": 117039
+      },
+      {
+        "rank": 3,
+        "code": "247540",
+        "name": "에코프로비엠",
+        "price": 109800,
+        "marketCap": 107418
+      },
+      {
+        "rank": 4,
+        "code": "277810",
+        "name": "레인보우로보틱스",
+        "price": 462500,
+        "marketCap": 89724
+      },
+      {
+        "rank": 5,
+        "code": "036930",
+        "name": "주성엔지니어링",
+        "price": 171600,
+        "marketCap": 79762
+      },
+      {
+        "rank": 6,
+        "code": "028300",
+        "name": "HLB",
+        "price": 42100,
+        "marketCap": 56076
+      },
+      {
+        "rank": 7,
+        "code": "240810",
+        "name": "원익IPS",
+        "price": 109300,
+        "marketCap": 53649
+      },
+      {
+        "rank": 8,
+        "code": "058470",
+        "name": "리노공업",
+        "price": 67900,
+        "marketCap": 51748
+      },
+      {
+        "rank": 9,
+        "code": "039030",
+        "name": "이오테크닉스",
+        "price": 415000,
+        "marketCap": 51126
+      },
+      {
+        "rank": 10,
+        "code": "298380",
+        "name": "에이비엘바이오",
+        "price": 79700,
+        "marketCap": 44622
+      },
+      {
+        "rank": 11,
+        "code": "087010",
+        "name": "펩트론",
+        "price": 185900,
+        "marketCap": 43347
+      },
+      {
+        "rank": 12,
+        "code": "000250",
+        "name": "삼천당제약",
+        "price": 179600,
+        "marketCap": 42130
+      },
+      {
+        "rank": 13,
+        "code": "222800",
+        "name": "심텍",
+        "price": 110700,
+        "marketCap": 41473
+      },
+      {
+        "rank": 14,
+        "code": "214450",
+        "name": "파마리서치",
+        "price": 391000,
+        "marketCap": 40624
+      },
+      {
+        "rank": 15,
+        "code": "108490",
+        "name": "로보티즈",
+        "price": 267000,
+        "marketCap": 39145
+      },
+      {
+        "rank": 16,
+        "code": "141080",
+        "name": "리가켐바이오",
+        "price": 104400,
+        "marketCap": 38648
+      },
+      {
+        "rank": 17,
+        "code": "403870",
+        "name": "HPSP",
+        "price": 45700,
+        "marketCap": 37611
+      },
+      {
+        "rank": 18,
+        "code": "095340",
+        "name": "ISC",
+        "price": 177300,
+        "marketCap": 37582
+      },
+      {
+        "rank": 19,
+        "code": "319660",
+        "name": "피에스케이",
+        "price": 129100,
+        "marketCap": 37396
+      },
+      {
+        "rank": 20,
+        "code": "310210",
+        "name": "보로노이",
+        "price": 176400,
+        "marketCap": 32534
+      }
+    ]
+  }
+]

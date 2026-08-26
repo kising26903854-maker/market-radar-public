@@ -1,0 +1,20 @@
+[
+  {
+    "code": "0182R0",
+    "name": "1Q K반도체TOP2+",
+    "type": "ETF",
+    "shares": 240,
+    "buy_price": 14967,
+    "buyDate": "2026-08-25",
+    "note": ""
+  },
+  {
+    "code": "454910",
+    "name": "두산로보틱스",
+    "type": "주식",
+    "shares": 10,
+    "buy_price": 69000,
+    "buyDate": "2026-08-26",
+    "note": ""
+  }
+]

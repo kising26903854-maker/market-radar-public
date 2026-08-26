@@ -1,0 +1,455 @@
+{
+  "kospi": {
+    "current": [
+      {
+        "rank": 1,
+        "code": "005930",
+        "name": "삼성전자",
+        "price": 261500,
+        "diff": 0,
+        "marketCap": 1528801900000000,
+        "marketCapEok": 15288019,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 2,
+        "code": "000660",
+        "name": "SK하이닉스",
+        "price": 1688000,
+        "diff": 0,
+        "marketCap": 1233071100000000,
+        "marketCapEok": 12330711,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 3,
+        "code": "005935",
+        "name": "삼성전자우",
+        "price": 196800,
+        "diff": 0,
+        "marketCap": 157906700000000,
+        "marketCapEok": 1579067,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 4,
+        "code": "402340",
+        "name": "SK스퀘어",
+        "price": 1058000,
+        "diff": 0,
+        "marketCap": 139575600000000,
+        "marketCapEok": 1395756,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 5,
+        "code": "009150",
+        "name": "삼성전기",
+        "price": 1330000,
+        "diff": 0,
+        "marketCap": 99342600000000,
+        "marketCapEok": 993426,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 6,
+        "code": "005380",
+        "name": "현대차",
+        "price": 408000,
+        "diff": 0,
+        "marketCap": 83541200000000,
+        "marketCapEok": 835412,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 7,
+        "code": "373220",
+        "name": "LG에너지솔루션",
+        "price": 351000,
+        "diff": 0,
+        "marketCap": 82134000000000,
+        "marketCapEok": 821340,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 8,
+        "code": "207940",
+        "name": "삼성바이오로직스",
+        "price": 1599000,
+        "diff": 0,
+        "marketCap": 74019200000000,
+        "marketCapEok": 740192,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 9,
+        "code": "028260",
+        "name": "삼성물산",
+        "price": 387500,
+        "diff": 0,
+        "marketCap": 62839900000000,
+        "marketCapEok": 628399,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 10,
+        "code": "032830",
+        "name": "삼성생명",
+        "price": 309500,
+        "diff": 0,
+        "marketCap": 61900000000000,
+        "marketCapEok": 619000,
+        "status": "UP",
+        "change": 1
+      },
+      {
+        "rank": 11,
+        "code": "105560",
+        "name": "KB금융",
+        "price": 166600,
+        "diff": 0,
+        "marketCap": 59091000000000,
+        "marketCapEok": 590910,
+        "status": "DOWN",
+        "change": 1
+      },
+      {
+        "rank": 12,
+        "code": "012450",
+        "name": "한화에어로스페이스",
+        "price": 1087000,
+        "diff": 0,
+        "marketCap": 56049400000000,
+        "marketCapEok": 560494,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 13,
+        "code": "034020",
+        "name": "두산에너빌리티",
+        "price": 85800,
+        "diff": 0,
+        "marketCap": 54960100000000,
+        "marketCapEok": 549601,
+        "status": "UP",
+        "change": 1
+      },
+      {
+        "rank": 14,
+        "code": "000270",
+        "name": "기아",
+        "price": 131400,
+        "diff": 0,
+        "marketCap": 51300300000000,
+        "marketCapEok": 513003,
+        "status": "DOWN",
+        "change": 1
+      },
+      {
+        "rank": 15,
+        "code": "055550",
+        "name": "신한지주",
+        "price": 107400,
+        "diff": 0,
+        "marketCap": 50419000000000,
+        "marketCapEok": 504190,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 16,
+        "code": "329180",
+        "name": "HD현대중공업",
+        "price": 464500,
+        "diff": 0,
+        "marketCap": 48754500000000,
+        "marketCapEok": 487545,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 17,
+        "code": "068270",
+        "name": "셀트리온",
+        "price": 193400,
+        "diff": 0,
+        "marketCap": 44988200000000,
+        "marketCapEok": 449882,
+        "status": "UP",
+        "change": 1
+      },
+      {
+        "rank": 18,
+        "code": "012330",
+        "name": "현대모비스",
+        "price": 464000,
+        "diff": 0,
+        "marketCap": 41676800000000,
+        "marketCapEok": 416768,
+        "status": "DOWN",
+        "change": 1
+      },
+      {
+        "rank": 19,
+        "code": "006400",
+        "name": "삼성SDI",
+        "price": 516000,
+        "diff": 0,
+        "marketCap": 41582100000000,
+        "marketCapEok": 415821,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 20,
+        "code": "034730",
+        "name": "SK",
+        "price": 554000,
+        "diff": 0,
+        "marketCap": 40166500000000,
+        "marketCapEok": 401665,
+        "status": "SAME",
+        "change": 0
+      }
+    ],
+    "out": []
+  },
+  "kosdaq": {
+    "current": [
+      {
+        "rank": 1,
+        "code": "196170",
+        "name": "알테오젠",
+        "price": 311500,
+        "diff": 0,
+        "marketCap": 21697600000000,
+        "marketCapEok": 216976,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 2,
+        "code": "086520",
+        "name": "에코프로",
+        "price": 87000,
+        "diff": 0,
+        "marketCap": 11812500000000,
+        "marketCapEok": 118125,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 3,
+        "code": "247540",
+        "name": "에코프로비엠",
+        "price": 111500,
+        "diff": 0,
+        "marketCap": 10908100000000,
+        "marketCapEok": 109081,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 4,
+        "code": "277810",
+        "name": "레인보우로보틱스",
+        "price": 450500,
+        "diff": 0,
+        "marketCap": 8739600000000,
+        "marketCapEok": 87396,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 5,
+        "code": "036930",
+        "name": "주성엔지니어링",
+        "price": 173400,
+        "diff": 0,
+        "marketCap": 8059800000000,
+        "marketCapEok": 80598,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 6,
+        "code": "240810",
+        "name": "원익IPS",
+        "price": 109300,
+        "diff": 0,
+        "marketCap": 5364900000000,
+        "marketCapEok": 53649,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 7,
+        "code": "058470",
+        "name": "리노공업",
+        "price": 66400,
+        "diff": 0,
+        "marketCap": 5060500000000,
+        "marketCapEok": 50605,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 8,
+        "code": "039030",
+        "name": "이오테크닉스",
+        "price": 400500,
+        "diff": 0,
+        "marketCap": 4934000000000,
+        "marketCapEok": 49340,
+        "status": "UP",
+        "change": 1
+      },
+      {
+        "rank": 9,
+        "code": "028300",
+        "name": "HLB",
+        "price": 36500,
+        "diff": 0,
+        "marketCap": 4861700000000,
+        "marketCapEok": 48617,
+        "status": "DOWN",
+        "change": 1
+      },
+      {
+        "rank": 10,
+        "code": "214450",
+        "name": "파마리서치",
+        "price": 442000,
+        "diff": 0,
+        "marketCap": 4592200000000,
+        "marketCapEok": 45922,
+        "status": "UP",
+        "change": 1
+      },
+      {
+        "rank": 11,
+        "code": "087010",
+        "name": "펩트론",
+        "price": 185000,
+        "diff": 0,
+        "marketCap": 4313700000000,
+        "marketCapEok": 43137,
+        "status": "UP",
+        "change": 1
+      },
+      {
+        "rank": 12,
+        "code": "222800",
+        "name": "심텍",
+        "price": 112700,
+        "diff": 0,
+        "marketCap": 4222200000000,
+        "marketCapEok": 42222,
+        "status": "DOWN",
+        "change": 2
+      },
+      {
+        "rank": 13,
+        "code": "298380",
+        "name": "에이비엘바이오",
+        "price": 74600,
+        "diff": 0,
+        "marketCap": 4176700000000,
+        "marketCapEok": 41767,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 14,
+        "code": "000250",
+        "name": "삼천당제약",
+        "price": 171100,
+        "diff": 0,
+        "marketCap": 4013600000000,
+        "marketCapEok": 40136,
+        "status": "UP",
+        "change": 1
+      },
+      {
+        "rank": 15,
+        "code": "403870",
+        "name": "HPSP",
+        "price": 48500,
+        "diff": 0,
+        "marketCap": 3991600000000,
+        "marketCapEok": 39916,
+        "status": "DOWN",
+        "change": 1
+      },
+      {
+        "rank": 16,
+        "code": "319660",
+        "name": "피에스케이",
+        "price": 129500,
+        "diff": 0,
+        "marketCap": 3751200000000,
+        "marketCapEok": 37512,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 17,
+        "code": "108490",
+        "name": "로보티즈",
+        "price": 250500,
+        "diff": 0,
+        "marketCap": 3672600000000,
+        "marketCapEok": 36726,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 18,
+        "code": "141080",
+        "name": "리가켐바이오",
+        "price": 98300,
+        "diff": 0,
+        "marketCap": 3639000000000,
+        "marketCapEok": 36390,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 19,
+        "code": "095340",
+        "name": "ISC",
+        "price": 164800,
+        "diff": 0,
+        "marketCap": 3493300000000,
+        "marketCapEok": 34933,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 20,
+        "code": "257720",
+        "name": "실리콘투",
+        "price": 51800,
+        "diff": 0,
+        "marketCap": 3396800000000,
+        "marketCapEok": 33968,
+        "status": "SAME",
+        "change": 0
+      }
+    ],
+    "out": []
+  },
+  "day": "오늘",
+  "date": "2026-08-26T06:39:27.364Z",
+  "prevDay": "2026-08-25"
+}
