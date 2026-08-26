@@ -1671,6 +1671,287 @@
     "updatedAt": "2026-08-25T14:01:34.984Z"
   },
   "2026-08-26": {
+    "kospi": [],
+    "kosdaq": [
+      {
+        "rank": 1,
+        "code": "196170",
+        "name": "알테오젠",
+        "price": 311500,
+        "diff": 0,
+        "marketCap": 21697600000000,
+        "marketCapEok": 216976,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 2,
+        "code": "086520",
+        "name": "에코프로",
+        "price": 87000,
+        "diff": 0,
+        "marketCap": 11812500000000,
+        "marketCapEok": 118125,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 3,
+        "code": "247540",
+        "name": "에코프로비엠",
+        "price": 111500,
+        "diff": 0,
+        "marketCap": 10908100000000,
+        "marketCapEok": 109081,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 4,
+        "code": "277810",
+        "name": "레인보우로보틱스",
+        "price": 450500,
+        "diff": 0,
+        "marketCap": 8739600000000,
+        "marketCapEok": 87396,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 5,
+        "code": "036930",
+        "name": "주성엔지니어링",
+        "price": 173400,
+        "diff": 0,
+        "marketCap": 8059800000000,
+        "marketCapEok": 80598,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 6,
+        "code": "240810",
+        "name": "원익IPS",
+        "price": 109300,
+        "diff": 0,
+        "marketCap": 5364900000000,
+        "marketCapEok": 53649,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 7,
+        "code": "058470",
+        "name": "리노공업",
+        "price": 66400,
+        "diff": 0,
+        "marketCap": 5060500000000,
+        "marketCapEok": 50605,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 8,
+        "code": "039030",
+        "name": "이오테크닉스",
+        "price": 400500,
+        "diff": 0,
+        "marketCap": 4934000000000,
+        "marketCapEok": 49340,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 9,
+        "code": "028300",
+        "name": "HLB",
+        "price": 36500,
+        "diff": 0,
+        "marketCap": 4861700000000,
+        "marketCapEok": 48617,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 10,
+        "code": "214450",
+        "name": "파마리서치",
+        "price": 442000,
+        "diff": 0,
+        "marketCap": 4592200000000,
+        "marketCapEok": 45922,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 11,
+        "code": "087010",
+        "name": "펩트론",
+        "price": 185000,
+        "diff": 0,
+        "marketCap": 4313700000000,
+        "marketCapEok": 43137,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 12,
+        "code": "222800",
+        "name": "심텍",
+        "price": 112700,
+        "diff": 0,
+        "marketCap": 4222200000000,
+        "marketCapEok": 42222,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 13,
+        "code": "298380",
+        "name": "에이비엘바이오",
+        "price": 74600,
+        "diff": 0,
+        "marketCap": 4176700000000,
+        "marketCapEok": 41767,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 14,
+        "code": "000250",
+        "name": "삼천당제약",
+        "price": 171100,
+        "diff": 0,
+        "marketCap": 4013600000000,
+        "marketCapEok": 40136,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 15,
+        "code": "403870",
+        "name": "HPSP",
+        "price": 48500,
+        "diff": 0,
+        "marketCap": 3991600000000,
+        "marketCapEok": 39916,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 16,
+        "code": "319660",
+        "name": "피에스케이",
+        "price": 129500,
+        "diff": 0,
+        "marketCap": 3751200000000,
+        "marketCapEok": 37512,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 17,
+        "code": "108490",
+        "name": "로보티즈",
+        "price": 250500,
+        "diff": 0,
+        "marketCap": 3672600000000,
+        "marketCapEok": 36726,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 18,
+        "code": "141080",
+        "name": "리가켐바이오",
+        "price": 98300,
+        "diff": 0,
+        "marketCap": 3639000000000,
+        "marketCapEok": 36390,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 19,
+        "code": "095340",
+        "name": "ISC",
+        "price": 164800,
+        "diff": 0,
+        "marketCap": 3493300000000,
+        "marketCapEok": 34933,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 20,
+        "code": "257720",
+        "name": "실리콘투",
+        "price": 51800,
+        "diff": 0,
+        "marketCap": 3396800000000,
+        "marketCapEok": 33968,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 21,
+        "code": "440110",
+        "name": "파두",
+        "price": 62600,
+        "diff": 0,
+        "marketCap": 3137000000000,
+        "marketCapEok": 31370,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 22,
+        "code": "145020",
+        "name": "휴젤",
+        "price": 250500,
+        "diff": 0,
+        "marketCap": 3135000000000,
+        "marketCapEok": 31350,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 23,
+        "code": "084370",
+        "name": "유진테크",
+        "price": 134100,
+        "diff": 0,
+        "marketCap": 3073000000000,
+        "marketCapEok": 30730,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 24,
+        "code": "310210",
+        "name": "보로노이",
+        "price": 165800,
+        "diff": 0,
+        "marketCap": 3057900000000,
+        "marketCapEok": 30579,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 25,
+        "code": "214370",
+        "name": "케어젠",
+        "price": 53000,
+        "diff": 0,
+        "marketCap": 2846900000000,
+        "marketCapEok": 28469,
+        "status": "SAME",
+        "change": 0
+      }
+    ],
+    "updatedAt": "2026-08-26T13:38:20.033Z"
+  },
+  "2026-08-27": {
     "kospi": [
       {
         "rank": 1,
@@ -2225,6 +2506,6 @@
         "change": 0
       }
     ],
-    "updatedAt": "2026-08-26T07:49:27.379Z"
+    "updatedAt": "2026-08-26T22:23:20.936Z"
   }
 }

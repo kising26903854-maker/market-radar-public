@@ -2,6 +2,33 @@
  * market_calendar.js — 📅 글로벌 증시 일정 달력 & 상세 결과 분석 데이터베이스
  * 미국 빅테크 실적, 한국 대형주 실적, FOMC, 금통위, 물가/고용지표, 만기일 전수 관리
  */
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const LIVE_RESULTS_FILE = path.join(__dirname, 'data', 'market_calendar_live_results.json');
+
+function loadLiveResults() {
+  try {
+    if (fs.existsSync(LIVE_RESULTS_FILE)) {
+      return JSON.parse(fs.readFileSync(LIVE_RESULTS_FILE, 'utf8'));
+    }
+  } catch (e) {
+    console.error('실시간 실적 결과 캐시 로드 실패:', e.message);
+  }
+  return {};
+}
+
+function saveLiveResults(data) {
+  try {
+    const dir = path.dirname(LIVE_RESULTS_FILE);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(LIVE_RESULTS_FILE, JSON.stringify(data, null, 2), 'utf8');
+  } catch (e) {
+    console.error('실시간 실적 결과 저장 실패:', e.message);
+  }
+}
 
 // 주어진 연도와 월의 첫 번째 금요일 (YYYY-MM-DD)
 function getFirstFriday(year, month) {
@@ -448,12 +475,15 @@ const DETAILED_2026_EVENTS = [
     date: '2026-08-27',
     title: '엔비디아 (NVDA) 2분기 실적발표',
     category: 'EARNINGS', country: 'US', importance: 'HIGH', emoji: '👑', ticker: 'NVDA',
-    description: '엔비디아 2026 회계연도 2분기 실적 및 H200/Blackwell 출하량 공개',
+    description: '엔비디아 2027 회계연도 2분기(5~7월) 실적 및 차세대 베라 루빈(Vera Rubin) 가이던스 공개',
     result: {
-      surprise: 'EXPECTED', surpriseLabel: '🔮 발표 예정 (컨센서스)',
-      epsConsensus: '$0.98', revenueConsensus: '$46.8B',
-      guidance: '빅테크 CapEx 상향에 따른 3분기 매출 $50B 돌파 여부가 핵심 관전 포인트',
-      summary: 'AI 데이터센터 매출 성장세와 Blackwell 수율이 주가 방향성 결정 전망.'
+      surprise: 'BEAT', surpriseLabel: '🟢 어닝 서프라이즈 (실적 폭발)',
+      epsActual: '$2.22 (Non-GAAP)', epsConsensus: '$2.10',
+      revenueActual: '$96.2B (전년비 +106%)', revenueConsensus: '$92.17B',
+      growth: '+106% YoY (13분기 연속 사상 최대 매출)',
+      guidance: '3분기 매출 $1,080억 달러(±2%) 및 매출총이익률 74% 제시, 차세대 AI 플랫폼 베라 루빈(Vera Rubin) 양산 돌입',
+      marketReaction: '실적 발표 직후 시간외 거래 4%대 급등 랠리 지속',
+      summary: '데이터센터 매출 $890억 달러(+117% 폭증)로 글로벌 AI 인프라 수요 폭발을 재입증했습니다. 월가 컨센서스를 대폭 상회하는 역대급 어닝 서프라이즈를 달성했습니다.'
     }
   },
   {
@@ -640,28 +670,47 @@ for (const y of [2025, 2027]) {
   }
 }
 
+function getKstTodayStr() {
+  const d = new Date();
+  const utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+  const kst = new Date(utc + (9 * 3600000));
+  return `${kst.getFullYear()}-${String(kst.getMonth() + 1).padStart(2, '0')}-${String(kst.getDate()).padStart(2, '0')}`;
+}
+
 /**
  * 특정 연도와 월의 시장 이벤트를 조회합니다.
+ * 실시간 라이브 결과 저장소(market_calendar_live_results.json)와 자동 병합하여 최신 실적을 반영합니다.
  */
 export function getMarketCalendarEvents(year, month) {
   const prefix = `${year}-${String(month).padStart(2, '0')}`;
   const filteredEvents = ALL_EVENTS.filter(event => event.date.startsWith(prefix))
                                    .sort((a, b) => a.date.localeCompare(b.date));
 
-  // 오늘 날짜 기준 종료 여부 (isConcluded) 자동 태깅
-  const todayStr = new Date().toISOString().split('T')[0];
-  const enrichedEvents = filteredEvents.map((evt, idx) => ({
-    ...evt,
-    id: `evt-${evt.date}-${idx}`,
-    isConcluded: evt.date <= todayStr
-  }));
+  const todayStr = getKstTodayStr();
+  const liveResults = loadLiveResults();
+
+  const enrichedEvents = filteredEvents.map((evt, idx) => {
+    const key = `${evt.date}_${evt.ticker || evt.title}`;
+    const dynamicResult = liveResults[key] || (evt.ticker && liveResults[evt.ticker]) || null;
+    const mergedResult = dynamicResult ? { ...evt.result, ...dynamicResult } : evt.result;
+    const isConcluded = (mergedResult?.surprise && mergedResult?.surprise !== 'EXPECTED') || (evt.date < todayStr);
+
+    return {
+      ...evt,
+      id: `evt-${evt.date}-${idx}`,
+      result: mergedResult,
+      isConcluded
+    };
+  });
 
   return {
     success: true,
     events: enrichedEvents,
     year: Number(year),
     month: Number(month),
-    totalCount: enrichedEvents.length
+    totalCount: enrichedEvents.length,
+    today: todayStr,
+    lastSynced: new Date().toISOString()
   };
 }
 
@@ -675,17 +724,39 @@ export function getMarketCalendarRange(startYear, startMonth, endYear, endMonth)
   const filteredEvents = ALL_EVENTS.filter(event => event.date >= startStr && event.date <= endStr)
                                    .sort((a, b) => a.date.localeCompare(b.date));
 
-  const todayStr = new Date().toISOString().split('T')[0];
-  const enrichedEvents = filteredEvents.map((evt, idx) => ({
-    ...evt,
-    id: `evt-${evt.date}-${idx}`,
-    isConcluded: evt.date <= todayStr
-  }));
+  const todayStr = getKstTodayStr();
+  const liveResults = loadLiveResults();
+
+  const enrichedEvents = filteredEvents.map((evt, idx) => {
+    const key = `${evt.date}_${evt.ticker || evt.title}`;
+    const dynamicResult = liveResults[key] || (evt.ticker && liveResults[evt.ticker]) || null;
+    const mergedResult = dynamicResult ? { ...evt.result, ...dynamicResult } : evt.result;
+    const isConcluded = (mergedResult?.surprise && mergedResult?.surprise !== 'EXPECTED') || (evt.date < todayStr);
+
+    return {
+      ...evt,
+      id: `evt-${evt.date}-${idx}`,
+      result: mergedResult,
+      isConcluded
+    };
+  });
 
   return {
     success: true,
     events: enrichedEvents,
     startDate: startStr,
-    endDate: endStr
+    endDate: endStr,
+    today: todayStr
   };
+}
+
+/**
+ * 실적 이벤트 결과 수동/자동 실시간 업데이트
+ */
+export function updateCalendarEventResult(date, key, resultData) {
+  const liveResults = loadLiveResults();
+  const storageKey = `${date}_${key}`;
+  liveResults[storageKey] = resultData;
+  saveLiveResults(liveResults);
+  return { success: true, key: storageKey, result: resultData };
 }

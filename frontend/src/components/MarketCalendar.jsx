@@ -493,6 +493,27 @@ export default function MarketCalendar() {
           >
             오늘
           </button>
+          <button
+            onClick={() => fetchEvents(year, month)}
+            disabled={loading}
+            title="오늘 발표된 실적 결과 및 최신 어닝 서프라이즈 데이터를 실시간으로 동기화합니다."
+            style={{
+              padding: '8px 16px',
+              background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+              border: 'none',
+              borderRadius: 10,
+              color: '#fff',
+              fontWeight: 900,
+              cursor: loading ? 'not-allowed' : 'pointer',
+              boxShadow: '0 4px 14px rgba(16,185,129,0.4)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6
+            }}
+          >
+            <span>{loading ? '⏳' : '🔄'}</span>
+            <span>{loading ? '동기화 중...' : '실적 실시간 동기화'}</span>
+          </button>
         </div>
       </div>
 

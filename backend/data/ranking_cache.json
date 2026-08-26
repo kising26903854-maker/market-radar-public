@@ -108,8 +108,8 @@
         "diff": 0,
         "marketCap": 61900000000000,
         "marketCapEok": 619000,
-        "status": "UP",
-        "change": 1
+        "status": "SAME",
+        "change": 0
       },
       {
         "rank": 11,
@@ -119,8 +119,8 @@
         "diff": 0,
         "marketCap": 59091000000000,
         "marketCapEok": 590910,
-        "status": "DOWN",
-        "change": 1
+        "status": "SAME",
+        "change": 0
       },
       {
         "rank": 12,
@@ -141,8 +141,8 @@
         "diff": 0,
         "marketCap": 54960100000000,
         "marketCapEok": 549601,
-        "status": "UP",
-        "change": 1
+        "status": "SAME",
+        "change": 0
       },
       {
         "rank": 14,
@@ -152,8 +152,8 @@
         "diff": 0,
         "marketCap": 51300300000000,
         "marketCapEok": 513003,
-        "status": "DOWN",
-        "change": 1
+        "status": "SAME",
+        "change": 0
       },
       {
         "rank": 15,
@@ -185,8 +185,8 @@
         "diff": 0,
         "marketCap": 44988200000000,
         "marketCapEok": 449882,
-        "status": "UP",
-        "change": 1
+        "status": "SAME",
+        "change": 0
       },
       {
         "rank": 18,
@@ -196,8 +196,8 @@
         "diff": 0,
         "marketCap": 41676800000000,
         "marketCapEok": 416768,
-        "status": "DOWN",
-        "change": 1
+        "status": "SAME",
+        "change": 0
       },
       {
         "rank": 19,
@@ -311,8 +311,8 @@
         "diff": 0,
         "marketCap": 4934000000000,
         "marketCapEok": 49340,
-        "status": "UP",
-        "change": 1
+        "status": "SAME",
+        "change": 0
       },
       {
         "rank": 9,
@@ -322,8 +322,8 @@
         "diff": 0,
         "marketCap": 4861700000000,
         "marketCapEok": 48617,
-        "status": "DOWN",
-        "change": 1
+        "status": "SAME",
+        "change": 0
       },
       {
         "rank": 10,
@@ -333,8 +333,8 @@
         "diff": 0,
         "marketCap": 4592200000000,
         "marketCapEok": 45922,
-        "status": "UP",
-        "change": 1
+        "status": "SAME",
+        "change": 0
       },
       {
         "rank": 11,
@@ -344,8 +344,8 @@
         "diff": 0,
         "marketCap": 4313700000000,
         "marketCapEok": 43137,
-        "status": "UP",
-        "change": 1
+        "status": "SAME",
+        "change": 0
       },
       {
         "rank": 12,
@@ -355,8 +355,8 @@
         "diff": 0,
         "marketCap": 4222200000000,
         "marketCapEok": 42222,
-        "status": "DOWN",
-        "change": 2
+        "status": "SAME",
+        "change": 0
       },
       {
         "rank": 13,
@@ -377,8 +377,8 @@
         "diff": 0,
         "marketCap": 4013600000000,
         "marketCapEok": 40136,
-        "status": "UP",
-        "change": 1
+        "status": "SAME",
+        "change": 0
       },
       {
         "rank": 15,
@@ -388,8 +388,8 @@
         "diff": 0,
         "marketCap": 3991600000000,
         "marketCapEok": 39916,
-        "status": "DOWN",
-        "change": 1
+        "status": "SAME",
+        "change": 0
       },
       {
         "rank": 16,
@@ -450,6 +450,6 @@
     "out": []
   },
   "day": "오늘",
-  "date": "2026-08-26T07:49:27.379Z",
-  "prevDay": "2026-08-25"
+  "date": "2026-08-26T22:23:20.936Z",
+  "prevDay": "2026-08-26"
 }
