@@ -8,48 +8,47 @@ let lastScanTime = 0;
 const CACHE_TTL = 60 * 1000; // 1분 캐시
 
 /**
- * 네이버 금융 52주 신고가 근접 종목 크롤링
+ * 네이버 금융 모바일 API를 이용한 실시간 52주 신고가 종목 조회
  */
 async function fetch52WeekHighs() {
   try {
-    const url = 'https://finance.naver.com/sise/sise_high52.naver';
-    const res = await axios.get(url, {
-      responseType: 'arraybuffer',
-      timeout: 4000,
-      headers: { 'User-Agent': 'Mozilla/5.0' }
+    const headers = {
+      'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1',
+      'Referer': 'https://m.stock.naver.com'
+    };
+
+    const [kospiRes, kosdaqRes] = await Promise.all([
+      axios.get('https://m.stock.naver.com/api/stocks/high52week/KOSPI?pageSize=15&page=1', { headers, timeout: 5000 }),
+      axios.get('https://m.stock.naver.com/api/stocks/high52week/KOSDAQ?pageSize=15&page=1', { headers, timeout: 5000 })
+    ]);
+
+    const kospiList = kospiRes.data?.stocks || [];
+    const kosdaqList = kosdaqRes.data?.stocks || [];
+    const combined = [...kospiList, ...kosdaqList];
+
+    const list = combined.map(s => {
+      const price = parseInt(s.closePriceRaw, 10) || 0;
+      const changeVal = parseFloat(s.fluctuationsRatio || 0);
+      const isDown = s.compareToPreviousPrice?.name === 'FALLING' || s.compareToPreviousPrice?.text === '하락';
+      const changeText = isDown ? `-${changeVal.toFixed(2)}%` : `+${changeVal.toFixed(2)}%`;
+
+      return {
+        code: s.itemCode,
+        name: s.stockName,
+        price,
+        change: changeText,
+        high52: price,
+        diffPct: '0.0%',
+        momentumScore: Math.min(99, Math.max(90, 95 + Math.round(changeVal / 2))),
+        status: '🚀 52주 신고가 돌파!'
+      };
     });
 
-    const html = iconv.decode(res.data, 'EUC-KR');
-    const $ = cheerio.load(html);
-
-    const list = [];
-    $('table.type_2 tr').each((i, el) => {
-      const nameEl = $(el).find('td a.title');
-      const name = nameEl.text().trim();
-      const href = nameEl.attr('href') || '';
-      const codeMatch = href.match(/code=(\d+)/);
-      const code = codeMatch ? codeMatch[1] : '';
-
-      const priceText = $(el).find('td.number').eq(0).text().trim().replace(/,/g, '');
-      const changeText = $(el).find('td.number').eq(1).text().trim();
-      const high52Text = $(el).find('td.number').eq(3).text().trim().replace(/,/g, '');
-
-      if (name && code) {
-        const price = parseInt(priceText, 10) || 0;
-        const high52 = parseInt(high52Text, 10) || price;
-        const diffPct = high52 > 0 ? (((price - high52) / high52) * 100).toFixed(1) : '0.0';
-
-        list.push({
-          code,
-          name,
-          price,
-          change: changeText,
-          high52,
-          diffPct: `${diffPct}%`,
-          momentumScore: Math.min(99, Math.max(80, 95 + Math.round(parseFloat(diffPct)))),
-          status: parseFloat(diffPct) >= 0 ? '🚀 52주 신고가 돌파!' : '⚡ 신고가 3% 이내 초근접'
-        });
-      }
+    // 전일 대비 등락률 내림차순 정렬
+    list.sort((a, b) => {
+      const aVal = parseFloat(a.change);
+      const bVal = parseFloat(b.change);
+      return bVal - aVal;
     });
 
     return list.slice(0, 15);
