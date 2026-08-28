@@ -37,44 +37,37 @@ export async function getCompanyFinancials(code) {
       }
     });
 
-    // 재무 항목별 데이터 행 추출
-    const parseRow = (rowIdx) => {
-      const row = $('div.section.cop_analysis table.tb_type1 tbody tr').eq(rowIdx);
+    // 모든 재무 데이터 행 미리 파싱
+    const allFinancialRows = [];
+    $('div.section.cop_analysis table.tb_type1 tbody tr').each((i, trEl) => {
+      const row = $(trEl);
       const title = row.find('th strong').text().trim() || row.find('th').text().trim();
       const values = [];
-      row.find('td').each((i, el) => {
-        if (i < years.length) {
-          const raw = $(el).text().trim().replace(/,/g, '');
+      row.find('td').each((j, tdEl) => {
+        if (j < years.length) {
+          const raw = $(tdEl).text().trim().replace(/,/g, '');
           const val = parseFloat(raw);
           values.push(isNaN(val) ? 0 : val);
         }
       });
-      return { title, values };
+      allFinancialRows.push({ title, values });
+    });
+
+    // 제목 키워드로 행 찾기 헬퍼 (인덱스 시프트 방지)
+    const getRowByTitle = (keyword) => {
+      const found = allFinancialRows.find(r => r.title.includes(keyword));
+      if (found) return found;
+      return { title: keyword, values: Array(years.length).fill(0) };
     };
 
     // 주요 재무 지표 추출
-    // Row 0: 매출액 (억원)
-    // Row 1: 영업이익 (억원)
-    // Row 2: 당기순이익 (억원)
-    // Row 3: 영업이익률 (%)
-    // Row 4: 순이익률 (%)
-    // Row 5: ROE (%)
-    // Row 6: 부채비율 (%)
-    // Row 7: 당좌비율 (%)
-    // Row 8: 유보율 (%)
-    // Row 9: EPS (원)
-    // Row 10: PER (배)
-    // Row 11: BPS (원)
-    // Row 12: PBR (배)
-    // Row 13: 주당배당금 (원)
-    // Row 14: 시가배당률 (%)
-    const revenueRow = parseRow(0);
-    const opProfitRow = parseRow(1);
-    const netProfitRow = parseRow(2);
-    const opMarginRow = parseRow(3);
-    const roeRow = parseRow(5);
-    const debtRatioRow = parseRow(6);
-    const divYieldRow = parseRow(14);
+    const revenueRow = getRowByTitle('매출액');
+    const opProfitRow = getRowByTitle('영업이익');
+    const netProfitRow = getRowByTitle('당기순이익');
+    const opMarginRow = getRowByTitle('영업이익률');
+    const roeRow = getRowByTitle('ROE');
+    const debtRatioRow = getRowByTitle('부채비율');
+    const divYieldRow = getRowByTitle('시가배당률');
 
     const yearHeaders = years.length >= 3 ? years : ['2023.12', '2024.12', '2025.12(E)', '2026.12(E)'];
 

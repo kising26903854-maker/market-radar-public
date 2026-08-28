@@ -41,7 +41,7 @@ export async function getCompanySummary(code) {
     });
 
     // 2. WICS 업종 및 시가총액 정보 추출
-    const wicsSector = $('div.trade_compare h4.h_trade em a, table.tbl_type1 td.num').first().text().trim() || '';
+    const wicsSector = $('div.trade_compare h4.h_sub a, div.trade_compare h4.h_sub em a, div.trade_compare h4.h_trade em a').first().text().trim() || '';
     const name = $('div.wrap_company h2 a').text().trim() || '';
 
     const summaryText = paragraphs.join('\n\n');
