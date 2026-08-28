@@ -1,0 +1,4638 @@
+{
+  "success": true,
+  "timestamp": "2026-08-28T01:31:22.253Z",
+  "totalScanned": 78,
+  "validScanned": 78,
+  "summary": {
+    "perfectCount": 5,
+    "topAssetCount": 20,
+    "topOpCount": 20,
+    "topRevCount": 20,
+    "soundDebtCount": 47
+  },
+  "perfectMatches": [
+    {
+      "code": "196170",
+      "name": "알테오젠",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 965,
+      "revenueEnd": 2159,
+      "revenueGrowthRate": 123.73,
+      "opProfitStart": -97,
+      "opProfitEnd": 1069,
+      "opProfitGrowthRate": 1202.06,
+      "debtRatio": 53.76,
+      "assetGrowthRate": 162.24,
+      "roe": 39.42,
+      "per": 170.74,
+      "pbr": 54.45,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 965,
+          "opProfit": -97,
+          "debtRatio": 73.23,
+          "bps": 2150,
+          "roe": -2.27
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 1029,
+          "opProfit": 254,
+          "debtRatio": 49.23,
+          "bps": 3949,
+          "roe": 29.52
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 2159,
+          "opProfit": 1069,
+          "debtRatio": 53.76,
+          "bps": 6352,
+          "roe": 39.42
+        }
+      ],
+      "growthScore": 502,
+      "isPerfectMatch": true,
+      "matchTags": [
+        "💎 자산증가율 TOP20",
+        "🚀 영업이익증가율 TOP20",
+        "💰 매출증가율 TOP20",
+        "🛡️ 부채비율 120%이하"
+      ]
+    },
+    {
+      "code": "000660",
+      "name": "SK하이닉스",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 327657,
+      "revenueEnd": 971467,
+      "revenueGrowthRate": 196.49,
+      "opProfitStart": -77303,
+      "opProfitEnd": 472063,
+      "opProfitGrowthRate": 710.67,
+      "debtRatio": 45.95,
+      "assetGrowthRate": 71.93,
+      "roe": 44.15,
+      "per": 11.04,
+      "pbr": 3.79,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 327657,
+          "opProfit": -77303,
+          "debtRatio": 87.52,
+          "bps": 77752,
+          "roe": -15.61
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 661930,
+          "opProfit": 234673,
+          "debtRatio": 62.15,
+          "bps": 107256,
+          "roe": 31.06
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 971467,
+          "opProfit": 472063,
+          "debtRatio": 45.95,
+          "bps": 171751,
+          "roe": 44.15
+        }
+      ],
+      "growthScore": 327,
+      "isPerfectMatch": true,
+      "matchTags": [
+        "💎 자산증가율 TOP20",
+        "🚀 영업이익증가율 TOP20",
+        "💰 매출증가율 TOP20",
+        "🛡️ 부채비율 120%이하"
+      ]
+    },
+    {
+      "code": "003230",
+      "name": "삼양식품",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 11929,
+      "revenueEnd": 23518,
+      "revenueGrowthRate": 97.15,
+      "opProfitStart": 1475,
+      "opProfitEnd": 5242,
+      "opProfitGrowthRate": 255.39,
+      "debtRatio": 72.74,
+      "assetGrowthRate": 87.34,
+      "roe": 37.59,
+      "per": 23.81,
+      "pbr": 7.39,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 11929,
+          "opProfit": 1475,
+          "debtRatio": 102.9,
+          "bps": 75732,
+          "roe": 24.81
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 17280,
+          "opProfit": 3446,
+          "debtRatio": 92.6,
+          "bps": 109524,
+          "roe": 39.37
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 23518,
+          "opProfit": 5242,
+          "debtRatio": 72.74,
+          "bps": 166650,
+          "roe": 37.59
+        }
+      ],
+      "growthScore": 143,
+      "isPerfectMatch": true,
+      "matchTags": [
+        "💎 자산증가율 TOP20",
+        "🚀 영업이익증가율 TOP20",
+        "💰 매출증가율 TOP20",
+        "🛡️ 부채비율 120%이하"
+      ]
+    },
+    {
+      "code": "214150",
+      "name": "클래시스",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 1801,
+      "revenueEnd": 3368,
+      "revenueGrowthRate": 87.01,
+      "opProfitStart": 896,
+      "opProfitEnd": 1706,
+      "opProfitGrowthRate": 90.4,
+      "debtRatio": 27.73,
+      "assetGrowthRate": 84.78,
+      "roe": 26.21,
+      "per": 27.06,
+      "pbr": 6.42,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 1801,
+          "opProfit": 896,
+          "debtRatio": 32.43,
+          "bps": 4430,
+          "roe": 28.93
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 2429,
+          "opProfit": 1224,
+          "debtRatio": 34.41,
+          "bps": 6931,
+          "roe": 26.54
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 3368,
+          "opProfit": 1706,
+          "debtRatio": 27.73,
+          "bps": 8487,
+          "roe": 26.21
+        }
+      ],
+      "growthScore": 88,
+      "isPerfectMatch": true,
+      "matchTags": [
+        "💎 자산증가율 TOP20",
+        "🚀 영업이익증가율 TOP20",
+        "💰 매출증가율 TOP20",
+        "🛡️ 부채비율 120%이하"
+      ]
+    },
+    {
+      "code": "010130",
+      "name": "고려아연",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 97045,
+      "revenueEnd": 165879,
+      "revenueGrowthRate": 70.93,
+      "opProfitStart": 6599,
+      "opProfitEnd": 12319,
+      "opProfitGrowthRate": 86.68,
+      "debtRatio": 82.36,
+      "assetGrowthRate": 73.46,
+      "roe": 8.48,
+      "per": 34.17,
+      "pbr": 2.45,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 97045,
+          "opProfit": 6599,
+          "debtRatio": 24.93,
+          "bps": 451351,
+          "roe": 5.72
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 120529,
+          "opProfit": 7235,
+          "debtRatio": 94.75,
+          "bps": 403756,
+          "roe": 2.28
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 165879,
+          "opProfit": 12319,
+          "debtRatio": 82.36,
+          "bps": 536342,
+          "roe": 8.48
+        }
+      ],
+      "growthScore": 72,
+      "isPerfectMatch": true,
+      "matchTags": [
+        "💎 자산증가율 TOP20",
+        "🚀 영업이익증가율 TOP20",
+        "💰 매출증가율 TOP20",
+        "🛡️ 부채비율 120%이하"
+      ]
+    }
+  ],
+  "strongCandidates": [
+    {
+      "code": "042700",
+      "name": "한미반도체",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 1590,
+      "revenueEnd": 5767,
+      "revenueGrowthRate": 262.7,
+      "opProfitStart": 346,
+      "opProfitEnd": 2514,
+      "opProfitGrowthRate": 626.59,
+      "debtRatio": 17.82,
+      "assetGrowthRate": 14.69,
+      "roe": 34.76,
+      "per": 57.05,
+      "pbr": 17.51,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 1590,
+          "opProfit": 346,
+          "debtRatio": 26.57,
+          "bps": 5907,
+          "roe": 55.54
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 5589,
+          "opProfit": 2554,
+          "debtRatio": 31.43,
+          "bps": 5698,
+          "roe": 27.43
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 5767,
+          "opProfit": 2514,
+          "debtRatio": 17.82,
+          "bps": 7278,
+          "roe": 34.76
+        }
+      ],
+      "growthScore": 304,
+      "matchedCount": 3,
+      "matchTags": [
+        "영업이익증가 TOP20",
+        "매출증가 TOP20",
+        "부채 120%이하"
+      ],
+      "isPerfectMatch": false
+    },
+    {
+      "code": "005930",
+      "name": "삼성전자",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 2589355,
+      "revenueEnd": 3336059,
+      "revenueGrowthRate": 28.84,
+      "opProfitStart": 65670,
+      "opProfitEnd": 436011,
+      "opProfitGrowthRate": 563.94,
+      "debtRatio": 29.94,
+      "assetGrowthRate": 27.56,
+      "roe": 10.85,
+      "per": 18.27,
+      "pbr": 1.87,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 2589355,
+          "opProfit": 65670,
+          "debtRatio": 25.36,
+          "bps": 52002,
+          "roe": 4.15
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 3008709,
+          "opProfit": 327260,
+          "debtRatio": 27.93,
+          "bps": 57981,
+          "roe": 9.03
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 3336059,
+          "opProfit": 436011,
+          "debtRatio": 29.94,
+          "bps": 63997,
+          "roe": 10.85
+        }
+      ],
+      "growthScore": 225,
+      "matchedCount": 3,
+      "matchTags": [
+        "자산증가 TOP20",
+        "영업이익증가 TOP20",
+        "부채 120%이하"
+      ],
+      "isPerfectMatch": false
+    },
+    {
+      "code": "277810",
+      "name": "레인보우로보틱스",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 153,
+      "revenueEnd": 341,
+      "revenueGrowthRate": 122.88,
+      "opProfitStart": -446,
+      "opProfitEnd": -25,
+      "opProfitGrowthRate": 94.39,
+      "debtRatio": 7.08,
+      "assetGrowthRate": 8.07,
+      "roe": 1.07,
+      "per": 6421.11,
+      "pbr": 68.2,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 153,
+          "opProfit": -446,
+          "debtRatio": 1.5,
+          "bps": 6735,
+          "roe": -0.93
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 193,
+          "opProfit": -30,
+          "debtRatio": 5.37,
+          "bps": 6843,
+          "roe": 1.62
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 341,
+          "opProfit": -25,
+          "debtRatio": 7.08,
+          "bps": 6899,
+          "roe": 1.07
+        }
+      ],
+      "growthScore": 83,
+      "matchedCount": 3,
+      "matchTags": [
+        "영업이익증가 TOP20",
+        "매출증가 TOP20",
+        "부채 120%이하"
+      ],
+      "isPerfectMatch": false
+    },
+    {
+      "code": "068270",
+      "name": "셀트리온",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 21764,
+      "revenueEnd": 41625,
+      "revenueGrowthRate": 91.26,
+      "opProfitStart": 6515,
+      "opProfitEnd": 11685,
+      "opProfitGrowthRate": 79.36,
+      "debtRatio": 28.71,
+      "assetGrowthRate": 18.02,
+      "roe": 5.94,
+      "per": 40.71,
+      "pbr": 2.31,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 21764,
+          "opProfit": 6515,
+          "debtRatio": 16.53,
+          "bps": 70023,
+          "roe": 5.07
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 35573,
+          "opProfit": 4920,
+          "debtRatio": 19.77,
+          "bps": 73962,
+          "roe": 2.46
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 41625,
+          "opProfit": 11685,
+          "debtRatio": 28.71,
+          "bps": 74822,
+          "roe": 5.94
+        }
+      ],
+      "growthScore": 69,
+      "matchedCount": 3,
+      "matchTags": [
+        "영업이익증가 TOP20",
+        "매출증가 TOP20",
+        "부채 120%이하"
+      ],
+      "isPerfectMatch": false
+    },
+    {
+      "code": "259960",
+      "name": "크래프톤",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 19106,
+      "revenueEnd": 33266,
+      "revenueGrowthRate": 74.11,
+      "opProfitStart": 7680,
+      "opProfitEnd": 10544,
+      "opProfitGrowthRate": 37.29,
+      "debtRatio": 31.31,
+      "assetGrowthRate": 48.75,
+      "roe": 10.6,
+      "per": 15.94,
+      "pbr": 1.56,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 19106,
+          "opProfit": 7680,
+          "debtRatio": 15.86,
+          "bps": 120194,
+          "roe": 11.16
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 27098,
+          "opProfit": 11825,
+          "debtRatio": 15.97,
+          "bps": 150187,
+          "roe": 21.1
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 33266,
+          "opProfit": 10544,
+          "debtRatio": 31.31,
+          "bps": 157747,
+          "roe": 10.6
+        }
+      ],
+      "growthScore": 57,
+      "matchedCount": 3,
+      "matchTags": [
+        "자산증가 TOP20",
+        "매출증가 TOP20",
+        "부채 120%이하"
+      ],
+      "isPerfectMatch": false
+    },
+    {
+      "code": "058470",
+      "name": "리노공업",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 2556,
+      "revenueEnd": 3725,
+      "revenueGrowthRate": 45.74,
+      "opProfitStart": 1144,
+      "opProfitEnd": 1770,
+      "opProfitGrowthRate": 54.72,
+      "debtRatio": 8.3,
+      "assetGrowthRate": 35.87,
+      "roe": 22.45,
+      "per": 30.24,
+      "pbr": 6.26,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 2556,
+          "opProfit": 1144,
+          "debtRatio": 4.63,
+          "bps": 7340,
+          "roe": 21.12
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 2782,
+          "opProfit": 1242,
+          "debtRatio": 5.59,
+          "bps": 8204,
+          "roe": 19.2
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 3725,
+          "opProfit": 1770,
+          "debtRatio": 8.3,
+          "bps": 9635,
+          "roe": 22.45
+        }
+      ],
+      "growthScore": 56,
+      "matchedCount": 3,
+      "matchTags": [
+        "자산증가 TOP20",
+        "매출증가 TOP20",
+        "부채 120%이하"
+      ],
+      "isPerfectMatch": false
+    },
+    {
+      "code": "161890",
+      "name": "한국콜마",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 21557,
+      "revenueEnd": 27224,
+      "revenueGrowthRate": 26.29,
+      "opProfitStart": 1361,
+      "opProfitEnd": 2396,
+      "opProfitGrowthRate": 76.05,
+      "debtRatio": 107.38,
+      "assetGrowthRate": 33,
+      "roe": 14.69,
+      "per": 11.72,
+      "pbr": 1.61,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 21557,
+          "opProfit": 1361,
+          "debtRatio": 112.14,
+          "bps": 28347,
+          "roe": 0.79
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 24521,
+          "opProfit": 1939,
+          "debtRatio": 107.65,
+          "bps": 33579,
+          "roe": 12.5
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 27224,
+          "opProfit": 2396,
+          "debtRatio": 107.38,
+          "bps": 38566,
+          "roe": 14.69
+        }
+      ],
+      "growthScore": 43,
+      "matchedCount": 3,
+      "matchTags": [
+        "자산증가 TOP20",
+        "영업이익증가 TOP20",
+        "부채 120%이하"
+      ],
+      "isPerfectMatch": false
+    },
+    {
+      "code": "035900",
+      "name": "JYP Ent.",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 5665,
+      "revenueEnd": 8219,
+      "revenueGrowthRate": 45.08,
+      "opProfitStart": 1694,
+      "opProfitEnd": 1552,
+      "opProfitGrowthRate": -8.38,
+      "debtRatio": 36.19,
+      "assetGrowthRate": 49.32,
+      "roe": 29.21,
+      "per": 16.07,
+      "pbr": 3.88,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 5665,
+          "opProfit": 1694,
+          "debtRatio": 43.59,
+          "bps": 11897,
+          "roe": 30.37
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 6018,
+          "opProfit": 1283,
+          "debtRatio": 40.57,
+          "bps": 14445,
+          "roe": 22.41
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 8219,
+          "opProfit": 1552,
+          "debtRatio": 36.19,
+          "bps": 18730,
+          "roe": 29.21
+        }
+      ],
+      "growthScore": 33,
+      "matchedCount": 3,
+      "matchTags": [
+        "자산증가 TOP20",
+        "매출증가 TOP20",
+        "부채 120%이하"
+      ],
+      "isPerfectMatch": false
+    },
+    {
+      "code": "090430",
+      "name": "아모레퍼시픽",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 36740,
+      "revenueEnd": 42528,
+      "revenueGrowthRate": 15.75,
+      "opProfitStart": 1082,
+      "opProfitEnd": 3358,
+      "opProfitGrowthRate": 210.35,
+      "debtRatio": 26.49,
+      "assetGrowthRate": 16.55,
+      "roe": 4.41,
+      "per": 35.01,
+      "pbr": 1.51,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 36740,
+          "opProfit": 1082,
+          "debtRatio": 20.81,
+          "bps": 70962,
+          "roe": 3.72
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 38851,
+          "opProfit": 2205,
+          "debtRatio": 27.37,
+          "bps": 76149,
+          "roe": 11.69
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 42528,
+          "opProfit": 3358,
+          "debtRatio": 26.49,
+          "bps": 78989,
+          "roe": 4.41
+        }
+      ],
+      "growthScore": 96,
+      "matchedCount": 2,
+      "matchTags": [
+        "영업이익증가 TOP20",
+        "부채 120%이하"
+      ],
+      "isPerfectMatch": false
+    },
+    {
+      "code": "039030",
+      "name": "이오테크닉스",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 3163,
+      "revenueEnd": 3809,
+      "revenueGrowthRate": 20.42,
+      "opProfitStart": 309,
+      "opProfitEnd": 808,
+      "opProfitGrowthRate": 161.49,
+      "debtRatio": 13.06,
+      "assetGrowthRate": 26.39,
+      "roe": 8.9,
+      "per": 58.57,
+      "pbr": 4.87,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 3163,
+          "opProfit": 309,
+          "debtRatio": 8.75,
+          "bps": 45930,
+          "roe": 6.73
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 3209,
+          "opProfit": 312,
+          "debtRatio": 8.29,
+          "bps": 49352,
+          "roe": 7.43
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 3809,
+          "opProfit": 808,
+          "debtRatio": 13.06,
+          "bps": 55838,
+          "roe": 8.9
+        }
+      ],
+      "growthScore": 84,
+      "matchedCount": 2,
+      "matchTags": [
+        "영업이익증가 TOP20",
+        "부채 120%이하"
+      ],
+      "isPerfectMatch": false
+    },
+    {
+      "code": "011200",
+      "name": "HMM",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 84010,
+      "revenueEnd": 108914,
+      "revenueGrowthRate": 29.64,
+      "opProfitStart": 5848,
+      "opProfitEnd": 14612,
+      "opProfitGrowthRate": 149.86,
+      "debtRatio": 26.31,
+      "assetGrowthRate": -4.66,
+      "roe": 6.9,
+      "per": 10.49,
+      "pbr": 0.73,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 84010,
+          "opProfit": 5848,
+          "debtRatio": 19.93,
+          "bps": 31115,
+          "roe": 4.59
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 117002,
+          "opProfit": 35128,
+          "debtRatio": 21.52,
+          "bps": 31615,
+          "roe": 15.35
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 108914,
+          "opProfit": 14612,
+          "debtRatio": 26.31,
+          "bps": 28168,
+          "roe": 6.9
+        }
+      ],
+      "growthScore": 73,
+      "matchedCount": 2,
+      "matchTags": [
+        "영업이익증가 TOP20",
+        "부채 120%이하"
+      ],
+      "isPerfectMatch": false
+    },
+    {
+      "code": "145020",
+      "name": "휴젤",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 3197,
+      "revenueEnd": 4251,
+      "revenueGrowthRate": 32.97,
+      "opProfitStart": 1178,
+      "opProfitEnd": 2009,
+      "opProfitGrowthRate": 70.54,
+      "debtRatio": 9.86,
+      "assetGrowthRate": 18.42,
+      "roe": 16.06,
+      "per": 20.31,
+      "pbr": 2.62,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 3197,
+          "opProfit": 1178,
+          "debtRatio": 19.18,
+          "bps": 68472,
+          "roe": 12.09
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 3730,
+          "opProfit": 1662,
+          "debtRatio": 11.73,
+          "bps": 74668,
+          "roe": 17.51
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 4251,
+          "opProfit": 2009,
+          "debtRatio": 9.86,
+          "bps": 87960,
+          "roe": 16.06
+        }
+      ],
+      "growthScore": 54,
+      "matchedCount": 2,
+      "matchTags": [
+        "매출증가 TOP20",
+        "부채 120%이하"
+      ],
+      "isPerfectMatch": false
+    },
+    {
+      "code": "000100",
+      "name": "유한양행",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 18590,
+      "revenueEnd": 21866,
+      "revenueGrowthRate": 17.62,
+      "opProfitStart": 570,
+      "opProfitEnd": 1044,
+      "opProfitGrowthRate": 83.16,
+      "debtRatio": 36.35,
+      "assetGrowthRate": 14.86,
+      "roe": 8.81,
+      "per": 47.05,
+      "pbr": 3.64,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 18590,
+          "opProfit": 570,
+          "debtRatio": 33.88,
+          "bps": 27358,
+          "roe": 6.75
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 20678,
+          "opProfit": 549,
+          "debtRatio": 36.8,
+          "bps": 28030,
+          "roe": 3.4
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 21866,
+          "opProfit": 1044,
+          "debtRatio": 36.35,
+          "bps": 30855,
+          "roe": 8.81
+        }
+      ],
+      "growthScore": 50,
+      "matchedCount": 2,
+      "matchTags": [
+        "영업이익증가 TOP20",
+        "부채 120%이하"
+      ],
+      "isPerfectMatch": false
+    },
+    {
+      "code": "068760",
+      "name": "셀트리온제약",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 3888,
+      "revenueEnd": 5364,
+      "revenueGrowthRate": 37.96,
+      "opProfitStart": 361,
+      "opProfitEnd": 561,
+      "opProfitGrowthRate": 55.4,
+      "debtRatio": 74.2,
+      "assetGrowthRate": 18.52,
+      "roe": 9.3,
+      "per": 66.68,
+      "pbr": 5.89,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 3888,
+          "opProfit": 361,
+          "debtRatio": 70.35,
+          "bps": 8492,
+          "roe": 5.8
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 4778,
+          "opProfit": 372,
+          "debtRatio": 68.66,
+          "bps": 8953,
+          "roe": 5.68
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 5364,
+          "opProfit": 561,
+          "debtRatio": 74.2,
+          "bps": 9842,
+          "roe": 9.3
+        }
+      ],
+      "growthScore": 40,
+      "matchedCount": 2,
+      "matchTags": [
+        "매출증가 TOP20",
+        "부채 120%이하"
+      ],
+      "isPerfectMatch": false
+    },
+    {
+      "code": "028300",
+      "name": "HLB",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 429,
+      "revenueEnd": 842,
+      "revenueGrowthRate": 96.27,
+      "opProfitStart": -1250,
+      "opProfitEnd": -1042,
+      "opProfitGrowthRate": 16.64,
+      "debtRatio": 88.14,
+      "assetGrowthRate": 15.6,
+      "roe": -44.32,
+      "per": -30.3,
+      "pbr": 16.08,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 429,
+          "opProfit": -1250,
+          "debtRatio": 21.4,
+          "bps": 4235,
+          "roe": -31.57
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 681,
+          "opProfit": -1185,
+          "debtRatio": 36.08,
+          "bps": 4397,
+          "roe": -16.33
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 842,
+          "opProfit": -1042,
+          "debtRatio": 88.14,
+          "bps": 3159,
+          "roe": -44.32
+        }
+      ],
+      "growthScore": 39,
+      "matchedCount": 2,
+      "matchTags": [
+        "매출증가 TOP20",
+        "부채 120%이하"
+      ],
+      "isPerfectMatch": false
+    }
+  ],
+  "topAssetList": [
+    {
+      "code": "196170",
+      "name": "알테오젠",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 965,
+      "revenueEnd": 2159,
+      "revenueGrowthRate": 123.73,
+      "opProfitStart": -97,
+      "opProfitEnd": 1069,
+      "opProfitGrowthRate": 1202.06,
+      "debtRatio": 53.76,
+      "assetGrowthRate": 162.24,
+      "roe": 39.42,
+      "per": 170.74,
+      "pbr": 54.45,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 965,
+          "opProfit": -97,
+          "debtRatio": 73.23,
+          "bps": 2150,
+          "roe": -2.27
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 1029,
+          "opProfit": 254,
+          "debtRatio": 49.23,
+          "bps": 3949,
+          "roe": 29.52
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 2159,
+          "opProfit": 1069,
+          "debtRatio": 53.76,
+          "bps": 6352,
+          "roe": 39.42
+        }
+      ],
+      "rank": 1
+    },
+    {
+      "code": "012450",
+      "name": "한화에어로스페이스",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 78897,
+      "revenueEnd": 267029,
+      "revenueGrowthRate": 238.45,
+      "opProfitStart": 5943,
+      "opProfitEnd": 30893,
+      "opProfitGrowthRate": 419.82,
+      "debtRatio": 221.38,
+      "assetGrowthRate": 111.24,
+      "roe": 19.14,
+      "per": 32.93,
+      "pbr": 5,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 78897,
+          "opProfit": 5943,
+          "debtRatio": 317.21,
+          "bps": 68644,
+          "roe": 25.6
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 112401,
+          "opProfit": 17319,
+          "debtRatio": 279.06,
+          "bps": 108084,
+          "roe": 53.94
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 267029,
+          "opProfit": 30893,
+          "debtRatio": 221.38,
+          "bps": 188244,
+          "roe": 19.14
+        }
+      ],
+      "rank": 2
+    },
+    {
+      "code": "079550",
+      "name": "LIG넥스원",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 23086,
+      "revenueEnd": 43069,
+      "revenueGrowthRate": 86.56,
+      "opProfitStart": 1864,
+      "opProfitEnd": 3194,
+      "opProfitGrowthRate": 71.35,
+      "debtRatio": 446.35,
+      "assetGrowthRate": 104.29,
+      "roe": 19.2,
+      "per": 36.56,
+      "pbr": 6.43,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 23086,
+          "opProfit": 1864,
+          "debtRatio": 262.59,
+          "bps": 48286,
+          "roe": 17.61
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 32763,
+          "opProfit": 2234,
+          "debtRatio": 389.91,
+          "bps": 55488,
+          "roe": 19.4
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 43069,
+          "opProfit": 3194,
+          "debtRatio": 446.35,
+          "bps": 65465,
+          "roe": 19.2
+        }
+      ],
+      "rank": 3
+    },
+    {
+      "code": "003230",
+      "name": "삼양식품",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 11929,
+      "revenueEnd": 23518,
+      "revenueGrowthRate": 97.15,
+      "opProfitStart": 1475,
+      "opProfitEnd": 5242,
+      "opProfitGrowthRate": 255.39,
+      "debtRatio": 72.74,
+      "assetGrowthRate": 87.34,
+      "roe": 37.59,
+      "per": 23.81,
+      "pbr": 7.39,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 11929,
+          "opProfit": 1475,
+          "debtRatio": 102.9,
+          "bps": 75732,
+          "roe": 24.81
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 17280,
+          "opProfit": 3446,
+          "debtRatio": 92.6,
+          "bps": 109524,
+          "roe": 39.37
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 23518,
+          "opProfit": 5242,
+          "debtRatio": 72.74,
+          "bps": 166650,
+          "roe": 37.59
+        }
+      ],
+      "rank": 4
+    },
+    {
+      "code": "214150",
+      "name": "클래시스",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 1801,
+      "revenueEnd": 3368,
+      "revenueGrowthRate": 87.01,
+      "opProfitStart": 896,
+      "opProfitEnd": 1706,
+      "opProfitGrowthRate": 90.4,
+      "debtRatio": 27.73,
+      "assetGrowthRate": 84.78,
+      "roe": 26.21,
+      "per": 27.06,
+      "pbr": 6.42,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 1801,
+          "opProfit": 896,
+          "debtRatio": 32.43,
+          "bps": 4430,
+          "roe": 28.93
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 2429,
+          "opProfit": 1224,
+          "debtRatio": 34.41,
+          "bps": 6931,
+          "roe": 26.54
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 3368,
+          "opProfit": 1706,
+          "debtRatio": 27.73,
+          "bps": 8487,
+          "roe": 26.21
+        }
+      ],
+      "rank": 5
+    },
+    {
+      "code": "010130",
+      "name": "고려아연",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 97045,
+      "revenueEnd": 165879,
+      "revenueGrowthRate": 70.93,
+      "opProfitStart": 6599,
+      "opProfitEnd": 12319,
+      "opProfitGrowthRate": 86.68,
+      "debtRatio": 82.36,
+      "assetGrowthRate": 73.46,
+      "roe": 8.48,
+      "per": 34.17,
+      "pbr": 2.45,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 97045,
+          "opProfit": 6599,
+          "debtRatio": 24.93,
+          "bps": 451351,
+          "roe": 5.72
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 120529,
+          "opProfit": 7235,
+          "debtRatio": 94.75,
+          "bps": 403756,
+          "roe": 2.28
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 165879,
+          "opProfit": 12319,
+          "debtRatio": 82.36,
+          "bps": 536342,
+          "roe": 8.48
+        }
+      ],
+      "rank": 6
+    },
+    {
+      "code": "000660",
+      "name": "SK하이닉스",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 327657,
+      "revenueEnd": 971467,
+      "revenueGrowthRate": 196.49,
+      "opProfitStart": -77303,
+      "opProfitEnd": 472063,
+      "opProfitGrowthRate": 710.67,
+      "debtRatio": 45.95,
+      "assetGrowthRate": 71.93,
+      "roe": 44.15,
+      "per": 11.04,
+      "pbr": 3.79,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 327657,
+          "opProfit": -77303,
+          "debtRatio": 87.52,
+          "bps": 77752,
+          "roe": -15.61
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 661930,
+          "opProfit": 234673,
+          "debtRatio": 62.15,
+          "bps": 107256,
+          "roe": 31.06
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 971467,
+          "opProfit": 472063,
+          "debtRatio": 45.95,
+          "bps": 171751,
+          "roe": 44.15
+        }
+      ],
+      "rank": 7
+    },
+    {
+      "code": "143240",
+      "name": "사람인",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 1315,
+      "revenueEnd": 1212,
+      "revenueGrowthRate": -7.83,
+      "opProfitStart": 253,
+      "opProfitEnd": 168,
+      "opProfitGrowthRate": -33.6,
+      "debtRatio": 22.35,
+      "assetGrowthRate": 64.4,
+      "roe": 41.2,
+      "per": 1.72,
+      "pbr": 0.53,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 1315,
+          "opProfit": 253,
+          "debtRatio": 17.66,
+          "bps": 16087,
+          "roe": 10.91
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 1284,
+          "opProfit": 213,
+          "debtRatio": 16.5,
+          "bps": 16817,
+          "roe": 7.12
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 1212,
+          "opProfit": 168,
+          "debtRatio": 22.35,
+          "bps": 25433,
+          "roe": 41.2
+        }
+      ],
+      "rank": 8
+    },
+    {
+      "code": "035900",
+      "name": "JYP Ent.",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 5665,
+      "revenueEnd": 8219,
+      "revenueGrowthRate": 45.08,
+      "opProfitStart": 1694,
+      "opProfitEnd": 1552,
+      "opProfitGrowthRate": -8.38,
+      "debtRatio": 36.19,
+      "assetGrowthRate": 49.32,
+      "roe": 29.21,
+      "per": 16.07,
+      "pbr": 3.88,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 5665,
+          "opProfit": 1694,
+          "debtRatio": 43.59,
+          "bps": 11897,
+          "roe": 30.37
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 6018,
+          "opProfit": 1283,
+          "debtRatio": 40.57,
+          "bps": 14445,
+          "roe": 22.41
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 8219,
+          "opProfit": 1552,
+          "debtRatio": 36.19,
+          "bps": 18730,
+          "roe": 29.21
+        }
+      ],
+      "rank": 9
+    },
+    {
+      "code": "259960",
+      "name": "크래프톤",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 19106,
+      "revenueEnd": 33266,
+      "revenueGrowthRate": 74.11,
+      "opProfitStart": 7680,
+      "opProfitEnd": 10544,
+      "opProfitGrowthRate": 37.29,
+      "debtRatio": 31.31,
+      "assetGrowthRate": 48.75,
+      "roe": 10.6,
+      "per": 15.94,
+      "pbr": 1.56,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 19106,
+          "opProfit": 7680,
+          "debtRatio": 15.86,
+          "bps": 120194,
+          "roe": 11.16
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 27098,
+          "opProfit": 11825,
+          "debtRatio": 15.97,
+          "bps": 150187,
+          "roe": 21.1
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 33266,
+          "opProfit": 10544,
+          "debtRatio": 31.31,
+          "bps": 157747,
+          "roe": 10.6
+        }
+      ],
+      "rank": 10
+    },
+    {
+      "code": "042660",
+      "name": "한화오션",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 74083,
+      "revenueEnd": 127835,
+      "revenueGrowthRate": 72.56,
+      "opProfitStart": -1965,
+      "opProfitEnd": 11676,
+      "opProfitGrowthRate": 694.2,
+      "debtRatio": 226.17,
+      "assetGrowthRate": 44.45,
+      "roe": 22.59,
+      "per": 27.94,
+      "pbr": 5.64,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 74083,
+          "opProfit": -1965,
+          "debtRatio": 223.38,
+          "bps": 14061,
+          "roe": 6.33
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 107760,
+          "opProfit": 2379,
+          "debtRatio": 266.9,
+          "bps": 15857,
+          "roe": 11.52
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 127835,
+          "opProfit": 11676,
+          "debtRatio": 226.17,
+          "bps": 20138,
+          "roe": 22.59
+        }
+      ],
+      "rank": 11
+    },
+    {
+      "code": "357780",
+      "name": "솔브레인",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 8440,
+      "revenueEnd": 9234,
+      "revenueGrowthRate": 9.41,
+      "opProfitStart": 1335,
+      "opProfitEnd": 1336,
+      "opProfitGrowthRate": 0.07,
+      "debtRatio": 30.15,
+      "assetGrowthRate": 43.86,
+      "roe": 7.66,
+      "per": 25.78,
+      "pbr": 1.9,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 8440,
+          "opProfit": 1335,
+          "debtRatio": 8.34,
+          "bps": 115118,
+          "roe": 15.61
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 8634,
+          "opProfit": 1679,
+          "debtRatio": 12.62,
+          "bps": 130226,
+          "roe": 12.47
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 9234,
+          "opProfit": 1336,
+          "debtRatio": 30.15,
+          "bps": 137853,
+          "roe": 7.66
+        }
+      ],
+      "rank": 12
+    },
+    {
+      "code": "047810",
+      "name": "한국항공우주",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 38193,
+      "revenueEnd": 36964,
+      "revenueGrowthRate": -3.22,
+      "opProfitStart": 2475,
+      "opProfitEnd": 2692,
+      "opProfitGrowthRate": 8.77,
+      "debtRatio": 446.57,
+      "assetGrowthRate": 42.09,
+      "roe": 10.51,
+      "per": 59.99,
+      "pbr": 6.09,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 38193,
+          "opProfit": 2475,
+          "debtRatio": 340.73,
+          "bps": 16388,
+          "roe": 14.81
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 36337,
+          "opProfit": 2407,
+          "debtRatio": 364.66,
+          "bps": 17500,
+          "roe": 10.42
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 36964,
+          "opProfit": 2692,
+          "debtRatio": 446.57,
+          "bps": 18776,
+          "roe": 10.51
+        }
+      ],
+      "rank": 13
+    },
+    {
+      "code": "058470",
+      "name": "리노공업",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 2556,
+      "revenueEnd": 3725,
+      "revenueGrowthRate": 45.74,
+      "opProfitStart": 1144,
+      "opProfitEnd": 1770,
+      "opProfitGrowthRate": 54.72,
+      "debtRatio": 8.3,
+      "assetGrowthRate": 35.87,
+      "roe": 22.45,
+      "per": 30.24,
+      "pbr": 6.26,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 2556,
+          "opProfit": 1144,
+          "debtRatio": 4.63,
+          "bps": 7340,
+          "roe": 21.12
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 2782,
+          "opProfit": 1242,
+          "debtRatio": 5.59,
+          "bps": 8204,
+          "roe": 19.2
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 3725,
+          "opProfit": 1770,
+          "debtRatio": 8.3,
+          "bps": 9635,
+          "roe": 22.45
+        }
+      ],
+      "rank": 14
+    },
+    {
+      "code": "161890",
+      "name": "한국콜마",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 21557,
+      "revenueEnd": 27224,
+      "revenueGrowthRate": 26.29,
+      "opProfitStart": 1361,
+      "opProfitEnd": 2396,
+      "opProfitGrowthRate": 76.05,
+      "debtRatio": 107.38,
+      "assetGrowthRate": 33,
+      "roe": 14.69,
+      "per": 11.72,
+      "pbr": 1.61,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 21557,
+          "opProfit": 1361,
+          "debtRatio": 112.14,
+          "bps": 28347,
+          "roe": 0.79
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 24521,
+          "opProfit": 1939,
+          "debtRatio": 107.65,
+          "bps": 33579,
+          "roe": 12.5
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 27224,
+          "opProfit": 2396,
+          "debtRatio": 107.38,
+          "bps": 38566,
+          "roe": 14.69
+        }
+      ],
+      "rank": 15
+    },
+    {
+      "code": "271560",
+      "name": "오리온",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 29124,
+      "revenueEnd": 33324,
+      "revenueGrowthRate": 14.42,
+      "opProfitStart": 4924,
+      "opProfitEnd": 5583,
+      "opProfitGrowthRate": 13.38,
+      "debtRatio": 17.55,
+      "assetGrowthRate": 31.27,
+      "roe": 10.51,
+      "per": 10.92,
+      "pbr": 1.1,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 29124,
+          "opProfit": 4924,
+          "debtRatio": 19.15,
+          "bps": 72413,
+          "roe": 13.91
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 31043,
+          "opProfit": 5436,
+          "debtRatio": 20.55,
+          "bps": 87815,
+          "roe": 16.56
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 33324,
+          "opProfit": 5583,
+          "debtRatio": 17.55,
+          "bps": 96352,
+          "roe": 10.51
+        }
+      ],
+      "rank": 16
+    },
+    {
+      "code": "005380",
+      "name": "현대차",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 1626636,
+      "revenueEnd": 1862545,
+      "revenueGrowthRate": 14.5,
+      "opProfitStart": 151269,
+      "opProfitEnd": 114679,
+      "opProfitGrowthRate": -24.19,
+      "debtRatio": 188.95,
+      "assetGrowthRate": 30.1,
+      "roe": 8.41,
+      "per": 8.39,
+      "pbr": 0.67,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 1626636,
+          "opProfit": 151269,
+          "debtRatio": 177.44,
+          "bps": 351861,
+          "roe": 13.68
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 1752312,
+          "opProfit": 142396,
+          "debtRatio": 182.52,
+          "bps": 413568,
+          "roe": 12.43
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 1862545,
+          "opProfit": 114679,
+          "debtRatio": 188.95,
+          "bps": 439541,
+          "roe": 8.41
+        }
+      ],
+      "rank": 17
+    },
+    {
+      "code": "003670",
+      "name": "포스코퓨처엠",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 47599,
+      "revenueEnd": 29387,
+      "revenueGrowthRate": -38.26,
+      "opProfitStart": 359,
+      "opProfitEnd": 328,
+      "opProfitGrowthRate": -8.64,
+      "debtRatio": 102.65,
+      "assetGrowthRate": 29.9,
+      "roe": 0.92,
+      "per": 485.02,
+      "pbr": 4.09,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 47599,
+          "opProfit": 359,
+          "debtRatio": 142.57,
+          "bps": 29410,
+          "roe": 1.19
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 36999,
+          "opProfit": 7,
+          "debtRatio": 138.89,
+          "bps": 37162,
+          "roe": -7.98
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 29387,
+          "opProfit": 328,
+          "debtRatio": 102.65,
+          "bps": 45731,
+          "roe": 0.92
+        }
+      ],
+      "rank": 18
+    },
+    {
+      "code": "005930",
+      "name": "삼성전자",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 2589355,
+      "revenueEnd": 3336059,
+      "revenueGrowthRate": 28.84,
+      "opProfitStart": 65670,
+      "opProfitEnd": 436011,
+      "opProfitGrowthRate": 563.94,
+      "debtRatio": 29.94,
+      "assetGrowthRate": 27.56,
+      "roe": 10.85,
+      "per": 18.27,
+      "pbr": 1.87,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 2589355,
+          "opProfit": 65670,
+          "debtRatio": 25.36,
+          "bps": 52002,
+          "roe": 4.15
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 3008709,
+          "opProfit": 327260,
+          "debtRatio": 27.93,
+          "bps": 57981,
+          "roe": 9.03
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 3336059,
+          "opProfit": 436011,
+          "debtRatio": 29.94,
+          "bps": 63997,
+          "roe": 10.85
+        }
+      ],
+      "rank": 19
+    },
+    {
+      "code": "023530",
+      "name": "롯데쇼핑",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 145559,
+      "revenueEnd": 137384,
+      "revenueGrowthRate": -5.62,
+      "opProfitStart": 5084,
+      "opProfitEnd": 5470,
+      "opProfitGrowthRate": 7.59,
+      "debtRatio": 124.77,
+      "assetGrowthRate": 27.13,
+      "roe": 0.34,
+      "per": 39.78,
+      "pbr": 0.13,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 145559,
+          "opProfit": 5084,
+          "debtRatio": 182.79,
+          "bps": 335809,
+          "roe": 1.83
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 139866,
+          "opProfit": 4731,
+          "debtRatio": 128.98,
+          "bps": 548412,
+          "roe": -7.75
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 137384,
+          "opProfit": 5470,
+          "debtRatio": 124.77,
+          "bps": 537131,
+          "roe": 0.34
+        }
+      ],
+      "rank": 20
+    }
+  ],
+  "topOpList": [
+    {
+      "code": "196170",
+      "name": "알테오젠",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 965,
+      "revenueEnd": 2159,
+      "revenueGrowthRate": 123.73,
+      "opProfitStart": -97,
+      "opProfitEnd": 1069,
+      "opProfitGrowthRate": 1202.06,
+      "debtRatio": 53.76,
+      "assetGrowthRate": 162.24,
+      "roe": 39.42,
+      "per": 170.74,
+      "pbr": 54.45,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 965,
+          "opProfit": -97,
+          "debtRatio": 73.23,
+          "bps": 2150,
+          "roe": -2.27
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 1029,
+          "opProfit": 254,
+          "debtRatio": 49.23,
+          "bps": 3949,
+          "roe": 29.52
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 2159,
+          "opProfit": 1069,
+          "debtRatio": 53.76,
+          "bps": 6352,
+          "roe": 39.42
+        }
+      ],
+      "rank": 1
+    },
+    {
+      "code": "139480",
+      "name": "이마트",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 294722,
+      "revenueEnd": 289704,
+      "revenueGrowthRate": -1.7,
+      "opProfitStart": -469,
+      "opProfitEnd": 3225,
+      "opProfitGrowthRate": 787.63,
+      "debtRatio": 144.61,
+      "assetGrowthRate": -2.83,
+      "roe": 1.27,
+      "per": 16.52,
+      "pbr": 0.2,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 294722,
+          "opProfit": -469,
+          "debtRatio": 141.75,
+          "bps": 427553,
+          "roe": -0.79
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 290209,
+          "opProfit": 471,
+          "debtRatio": 159.31,
+          "bps": 387877,
+          "roe": -5.4
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 289704,
+          "opProfit": 3225,
+          "debtRatio": 144.61,
+          "bps": 410591,
+          "roe": 1.27
+        }
+      ],
+      "rank": 2
+    },
+    {
+      "code": "000660",
+      "name": "SK하이닉스",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 327657,
+      "revenueEnd": 971467,
+      "revenueGrowthRate": 196.49,
+      "opProfitStart": -77303,
+      "opProfitEnd": 472063,
+      "opProfitGrowthRate": 710.67,
+      "debtRatio": 45.95,
+      "assetGrowthRate": 71.93,
+      "roe": 44.15,
+      "per": 11.04,
+      "pbr": 3.79,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 327657,
+          "opProfit": -77303,
+          "debtRatio": 87.52,
+          "bps": 77752,
+          "roe": -15.61
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 661930,
+          "opProfit": 234673,
+          "debtRatio": 62.15,
+          "bps": 107256,
+          "roe": 31.06
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 971467,
+          "opProfit": 472063,
+          "debtRatio": 45.95,
+          "bps": 171751,
+          "roe": 44.15
+        }
+      ],
+      "rank": 3
+    },
+    {
+      "code": "042660",
+      "name": "한화오션",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 74083,
+      "revenueEnd": 127835,
+      "revenueGrowthRate": 72.56,
+      "opProfitStart": -1965,
+      "opProfitEnd": 11676,
+      "opProfitGrowthRate": 694.2,
+      "debtRatio": 226.17,
+      "assetGrowthRate": 44.45,
+      "roe": 22.59,
+      "per": 27.94,
+      "pbr": 5.64,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 74083,
+          "opProfit": -1965,
+          "debtRatio": 223.38,
+          "bps": 14061,
+          "roe": 6.33
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 107760,
+          "opProfit": 2379,
+          "debtRatio": 266.9,
+          "bps": 15857,
+          "roe": 11.52
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 127835,
+          "opProfit": 11676,
+          "debtRatio": 226.17,
+          "bps": 20138,
+          "roe": 22.59
+        }
+      ],
+      "rank": 4
+    },
+    {
+      "code": "042700",
+      "name": "한미반도체",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 1590,
+      "revenueEnd": 5767,
+      "revenueGrowthRate": 262.7,
+      "opProfitStart": 346,
+      "opProfitEnd": 2514,
+      "opProfitGrowthRate": 626.59,
+      "debtRatio": 17.82,
+      "assetGrowthRate": 14.69,
+      "roe": 34.76,
+      "per": 57.05,
+      "pbr": 17.51,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 1590,
+          "opProfit": 346,
+          "debtRatio": 26.57,
+          "bps": 5907,
+          "roe": 55.54
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 5589,
+          "opProfit": 2554,
+          "debtRatio": 31.43,
+          "bps": 5698,
+          "roe": 27.43
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 5767,
+          "opProfit": 2514,
+          "debtRatio": 17.82,
+          "bps": 7278,
+          "roe": 34.76
+        }
+      ],
+      "rank": 5
+    },
+    {
+      "code": "005930",
+      "name": "삼성전자",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 2589355,
+      "revenueEnd": 3336059,
+      "revenueGrowthRate": 28.84,
+      "opProfitStart": 65670,
+      "opProfitEnd": 436011,
+      "opProfitGrowthRate": 563.94,
+      "debtRatio": 29.94,
+      "assetGrowthRate": 27.56,
+      "roe": 10.85,
+      "per": 18.27,
+      "pbr": 1.87,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 2589355,
+          "opProfit": 65670,
+          "debtRatio": 25.36,
+          "bps": 52002,
+          "roe": 4.15
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 3008709,
+          "opProfit": 327260,
+          "debtRatio": 27.93,
+          "bps": 57981,
+          "roe": 9.03
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 3336059,
+          "opProfit": 436011,
+          "debtRatio": 29.94,
+          "bps": 63997,
+          "roe": 10.85
+        }
+      ],
+      "rank": 6
+    },
+    {
+      "code": "012450",
+      "name": "한화에어로스페이스",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 78897,
+      "revenueEnd": 267029,
+      "revenueGrowthRate": 238.45,
+      "opProfitStart": 5943,
+      "opProfitEnd": 30893,
+      "opProfitGrowthRate": 419.82,
+      "debtRatio": 221.38,
+      "assetGrowthRate": 111.24,
+      "roe": 19.14,
+      "per": 32.93,
+      "pbr": 5,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 78897,
+          "opProfit": 5943,
+          "debtRatio": 317.21,
+          "bps": 68644,
+          "roe": 25.6
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 112401,
+          "opProfit": 17319,
+          "debtRatio": 279.06,
+          "bps": 108084,
+          "roe": 53.94
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 267029,
+          "opProfit": 30893,
+          "debtRatio": 221.38,
+          "bps": 188244,
+          "roe": 19.14
+        }
+      ],
+      "rank": 7
+    },
+    {
+      "code": "003230",
+      "name": "삼양식품",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 11929,
+      "revenueEnd": 23518,
+      "revenueGrowthRate": 97.15,
+      "opProfitStart": 1475,
+      "opProfitEnd": 5242,
+      "opProfitGrowthRate": 255.39,
+      "debtRatio": 72.74,
+      "assetGrowthRate": 87.34,
+      "roe": 37.59,
+      "per": 23.81,
+      "pbr": 7.39,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 11929,
+          "opProfit": 1475,
+          "debtRatio": 102.9,
+          "bps": 75732,
+          "roe": 24.81
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 17280,
+          "opProfit": 3446,
+          "debtRatio": 92.6,
+          "bps": 109524,
+          "roe": 39.37
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 23518,
+          "opProfit": 5242,
+          "debtRatio": 72.74,
+          "bps": 166650,
+          "roe": 37.59
+        }
+      ],
+      "rank": 8
+    },
+    {
+      "code": "090430",
+      "name": "아모레퍼시픽",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 36740,
+      "revenueEnd": 42528,
+      "revenueGrowthRate": 15.75,
+      "opProfitStart": 1082,
+      "opProfitEnd": 3358,
+      "opProfitGrowthRate": 210.35,
+      "debtRatio": 26.49,
+      "assetGrowthRate": 16.55,
+      "roe": 4.41,
+      "per": 35.01,
+      "pbr": 1.51,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 36740,
+          "opProfit": 1082,
+          "debtRatio": 20.81,
+          "bps": 70962,
+          "roe": 3.72
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 38851,
+          "opProfit": 2205,
+          "debtRatio": 27.37,
+          "bps": 76149,
+          "roe": 11.69
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 42528,
+          "opProfit": 3358,
+          "debtRatio": 26.49,
+          "bps": 78989,
+          "roe": 4.41
+        }
+      ],
+      "rank": 9
+    },
+    {
+      "code": "267250",
+      "name": "HD현대일렉트릭",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 613313,
+      "revenueEnd": 712594,
+      "revenueGrowthRate": 16.19,
+      "opProfitStart": 20316,
+      "opProfitEnd": 60996,
+      "opProfitGrowthRate": 200.24,
+      "debtRatio": 159.39,
+      "assetGrowthRate": 22.38,
+      "roe": 10.25,
+      "per": 15.47,
+      "pbr": 1.32,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 613313,
+          "opProfit": 20316,
+          "debtRatio": 192.63,
+          "bps": 103689,
+          "roe": 3.57
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 677656,
+          "opProfit": 29832,
+          "debtRatio": 179.96,
+          "bps": 122761,
+          "roe": 6.36
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 712594,
+          "opProfit": 60996,
+          "debtRatio": 159.39,
+          "bps": 143153,
+          "roe": 10.25
+        }
+      ],
+      "rank": 10
+    },
+    {
+      "code": "039030",
+      "name": "이오테크닉스",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 3163,
+      "revenueEnd": 3809,
+      "revenueGrowthRate": 20.42,
+      "opProfitStart": 309,
+      "opProfitEnd": 808,
+      "opProfitGrowthRate": 161.49,
+      "debtRatio": 13.06,
+      "assetGrowthRate": 26.39,
+      "roe": 8.9,
+      "per": 58.57,
+      "pbr": 4.87,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 3163,
+          "opProfit": 309,
+          "debtRatio": 8.75,
+          "bps": 45930,
+          "roe": 6.73
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 3209,
+          "opProfit": 312,
+          "debtRatio": 8.29,
+          "bps": 49352,
+          "roe": 7.43
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 3809,
+          "opProfit": 808,
+          "debtRatio": 13.06,
+          "bps": 55838,
+          "roe": 8.9
+        }
+      ],
+      "rank": 11
+    },
+    {
+      "code": "011200",
+      "name": "HMM",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 84010,
+      "revenueEnd": 108914,
+      "revenueGrowthRate": 29.64,
+      "opProfitStart": 5848,
+      "opProfitEnd": 14612,
+      "opProfitGrowthRate": 149.86,
+      "debtRatio": 26.31,
+      "assetGrowthRate": -4.66,
+      "roe": 6.9,
+      "per": 10.49,
+      "pbr": 0.73,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 84010,
+          "opProfit": 5848,
+          "debtRatio": 19.93,
+          "bps": 31115,
+          "roe": 4.59
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 117002,
+          "opProfit": 35128,
+          "debtRatio": 21.52,
+          "bps": 31615,
+          "roe": 15.35
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 108914,
+          "opProfit": 14612,
+          "debtRatio": 26.31,
+          "bps": 28168,
+          "roe": 6.9
+        }
+      ],
+      "rank": 12
+    },
+    {
+      "code": "222800",
+      "name": "심텍",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 10419,
+      "revenueEnd": 14106,
+      "revenueGrowthRate": 35.39,
+      "opProfitStart": -881,
+      "opProfitEnd": 119,
+      "opProfitGrowthRate": 113.51,
+      "debtRatio": 181.13,
+      "assetGrowthRate": 17.82,
+      "roe": -32.1,
+      "per": -9.96,
+      "pbr": 3.2,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 10419,
+          "opProfit": -881,
+          "debtRatio": 149.99,
+          "bps": 14717,
+          "roe": -21.29
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 12314,
+          "opProfit": -470,
+          "debtRatio": 221.82,
+          "bps": 14044,
+          "roe": -6.63
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 14106,
+          "opProfit": 119,
+          "debtRatio": 181.13,
+          "bps": 15419,
+          "roe": -32.1
+        }
+      ],
+      "rank": 13
+    },
+    {
+      "code": "010770",
+      "name": "평화홀딩스",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 7971,
+      "revenueEnd": 8837,
+      "revenueGrowthRate": 10.86,
+      "opProfitStart": 168,
+      "opProfitEnd": 349,
+      "opProfitGrowthRate": 107.74,
+      "debtRatio": 243.35,
+      "assetGrowthRate": -3.83,
+      "roe": 31.18,
+      "per": 1.6,
+      "pbr": 0.43,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 7971,
+          "opProfit": 168,
+          "debtRatio": 336.45,
+          "bps": 7243,
+          "roe": 8
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 8352,
+          "opProfit": 288,
+          "debtRatio": 344.76,
+          "bps": 6627,
+          "roe": 1.56
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 8837,
+          "opProfit": 349,
+          "debtRatio": 243.35,
+          "bps": 8854,
+          "roe": 31.18
+        }
+      ],
+      "rank": 14
+    },
+    {
+      "code": "277810",
+      "name": "레인보우로보틱스",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 153,
+      "revenueEnd": 341,
+      "revenueGrowthRate": 122.88,
+      "opProfitStart": -446,
+      "opProfitEnd": -25,
+      "opProfitGrowthRate": 94.39,
+      "debtRatio": 7.08,
+      "assetGrowthRate": 8.07,
+      "roe": 1.07,
+      "per": 6421.11,
+      "pbr": 68.2,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 153,
+          "opProfit": -446,
+          "debtRatio": 1.5,
+          "bps": 6735,
+          "roe": -0.93
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 193,
+          "opProfit": -30,
+          "debtRatio": 5.37,
+          "bps": 6843,
+          "roe": 1.62
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 341,
+          "opProfit": -25,
+          "debtRatio": 7.08,
+          "bps": 6899,
+          "roe": 1.07
+        }
+      ],
+      "rank": 15
+    },
+    {
+      "code": "214150",
+      "name": "클래시스",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 1801,
+      "revenueEnd": 3368,
+      "revenueGrowthRate": 87.01,
+      "opProfitStart": 896,
+      "opProfitEnd": 1706,
+      "opProfitGrowthRate": 90.4,
+      "debtRatio": 27.73,
+      "assetGrowthRate": 84.78,
+      "roe": 26.21,
+      "per": 27.06,
+      "pbr": 6.42,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 1801,
+          "opProfit": 896,
+          "debtRatio": 32.43,
+          "bps": 4430,
+          "roe": 28.93
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 2429,
+          "opProfit": 1224,
+          "debtRatio": 34.41,
+          "bps": 6931,
+          "roe": 26.54
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 3368,
+          "opProfit": 1706,
+          "debtRatio": 27.73,
+          "bps": 8487,
+          "roe": 26.21
+        }
+      ],
+      "rank": 16
+    },
+    {
+      "code": "010130",
+      "name": "고려아연",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 97045,
+      "revenueEnd": 165879,
+      "revenueGrowthRate": 70.93,
+      "opProfitStart": 6599,
+      "opProfitEnd": 12319,
+      "opProfitGrowthRate": 86.68,
+      "debtRatio": 82.36,
+      "assetGrowthRate": 73.46,
+      "roe": 8.48,
+      "per": 34.17,
+      "pbr": 2.45,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 97045,
+          "opProfit": 6599,
+          "debtRatio": 24.93,
+          "bps": 451351,
+          "roe": 5.72
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 120529,
+          "opProfit": 7235,
+          "debtRatio": 94.75,
+          "bps": 403756,
+          "roe": 2.28
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 165879,
+          "opProfit": 12319,
+          "debtRatio": 82.36,
+          "bps": 536342,
+          "roe": 8.48
+        }
+      ],
+      "rank": 17
+    },
+    {
+      "code": "000100",
+      "name": "유한양행",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 18590,
+      "revenueEnd": 21866,
+      "revenueGrowthRate": 17.62,
+      "opProfitStart": 570,
+      "opProfitEnd": 1044,
+      "opProfitGrowthRate": 83.16,
+      "debtRatio": 36.35,
+      "assetGrowthRate": 14.86,
+      "roe": 8.81,
+      "per": 47.05,
+      "pbr": 3.64,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 18590,
+          "opProfit": 570,
+          "debtRatio": 33.88,
+          "bps": 27358,
+          "roe": 6.75
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 20678,
+          "opProfit": 549,
+          "debtRatio": 36.8,
+          "bps": 28030,
+          "roe": 3.4
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 21866,
+          "opProfit": 1044,
+          "debtRatio": 36.35,
+          "bps": 30855,
+          "roe": 8.81
+        }
+      ],
+      "rank": 18
+    },
+    {
+      "code": "068270",
+      "name": "셀트리온",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 21764,
+      "revenueEnd": 41625,
+      "revenueGrowthRate": 91.26,
+      "opProfitStart": 6515,
+      "opProfitEnd": 11685,
+      "opProfitGrowthRate": 79.36,
+      "debtRatio": 28.71,
+      "assetGrowthRate": 18.02,
+      "roe": 5.94,
+      "per": 40.71,
+      "pbr": 2.31,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 21764,
+          "opProfit": 6515,
+          "debtRatio": 16.53,
+          "bps": 70023,
+          "roe": 5.07
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 35573,
+          "opProfit": 4920,
+          "debtRatio": 19.77,
+          "bps": 73962,
+          "roe": 2.46
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 41625,
+          "opProfit": 11685,
+          "debtRatio": 28.71,
+          "bps": 74822,
+          "roe": 5.94
+        }
+      ],
+      "rank": 19
+    },
+    {
+      "code": "161890",
+      "name": "한국콜마",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 21557,
+      "revenueEnd": 27224,
+      "revenueGrowthRate": 26.29,
+      "opProfitStart": 1361,
+      "opProfitEnd": 2396,
+      "opProfitGrowthRate": 76.05,
+      "debtRatio": 107.38,
+      "assetGrowthRate": 33,
+      "roe": 14.69,
+      "per": 11.72,
+      "pbr": 1.61,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 21557,
+          "opProfit": 1361,
+          "debtRatio": 112.14,
+          "bps": 28347,
+          "roe": 0.79
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 24521,
+          "opProfit": 1939,
+          "debtRatio": 107.65,
+          "bps": 33579,
+          "roe": 12.5
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 27224,
+          "opProfit": 2396,
+          "debtRatio": 107.38,
+          "bps": 38566,
+          "roe": 14.69
+        }
+      ],
+      "rank": 20
+    }
+  ],
+  "topRevList": [
+    {
+      "code": "042700",
+      "name": "한미반도체",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 1590,
+      "revenueEnd": 5767,
+      "revenueGrowthRate": 262.7,
+      "opProfitStart": 346,
+      "opProfitEnd": 2514,
+      "opProfitGrowthRate": 626.59,
+      "debtRatio": 17.82,
+      "assetGrowthRate": 14.69,
+      "roe": 34.76,
+      "per": 57.05,
+      "pbr": 17.51,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 1590,
+          "opProfit": 346,
+          "debtRatio": 26.57,
+          "bps": 5907,
+          "roe": 55.54
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 5589,
+          "opProfit": 2554,
+          "debtRatio": 31.43,
+          "bps": 5698,
+          "roe": 27.43
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 5767,
+          "opProfit": 2514,
+          "debtRatio": 17.82,
+          "bps": 7278,
+          "roe": 34.76
+        }
+      ],
+      "rank": 1
+    },
+    {
+      "code": "012450",
+      "name": "한화에어로스페이스",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 78897,
+      "revenueEnd": 267029,
+      "revenueGrowthRate": 238.45,
+      "opProfitStart": 5943,
+      "opProfitEnd": 30893,
+      "opProfitGrowthRate": 419.82,
+      "debtRatio": 221.38,
+      "assetGrowthRate": 111.24,
+      "roe": 19.14,
+      "per": 32.93,
+      "pbr": 5,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 78897,
+          "opProfit": 5943,
+          "debtRatio": 317.21,
+          "bps": 68644,
+          "roe": 25.6
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 112401,
+          "opProfit": 17319,
+          "debtRatio": 279.06,
+          "bps": 108084,
+          "roe": 53.94
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 267029,
+          "opProfit": 30893,
+          "debtRatio": 221.38,
+          "bps": 188244,
+          "roe": 19.14
+        }
+      ],
+      "rank": 2
+    },
+    {
+      "code": "000660",
+      "name": "SK하이닉스",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 327657,
+      "revenueEnd": 971467,
+      "revenueGrowthRate": 196.49,
+      "opProfitStart": -77303,
+      "opProfitEnd": 472063,
+      "opProfitGrowthRate": 710.67,
+      "debtRatio": 45.95,
+      "assetGrowthRate": 71.93,
+      "roe": 44.15,
+      "per": 11.04,
+      "pbr": 3.79,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 327657,
+          "opProfit": -77303,
+          "debtRatio": 87.52,
+          "bps": 77752,
+          "roe": -15.61
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 661930,
+          "opProfit": 234673,
+          "debtRatio": 62.15,
+          "bps": 107256,
+          "roe": 31.06
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 971467,
+          "opProfit": 472063,
+          "debtRatio": 45.95,
+          "bps": 171751,
+          "roe": 44.15
+        }
+      ],
+      "rank": 3
+    },
+    {
+      "code": "196170",
+      "name": "알테오젠",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 965,
+      "revenueEnd": 2159,
+      "revenueGrowthRate": 123.73,
+      "opProfitStart": -97,
+      "opProfitEnd": 1069,
+      "opProfitGrowthRate": 1202.06,
+      "debtRatio": 53.76,
+      "assetGrowthRate": 162.24,
+      "roe": 39.42,
+      "per": 170.74,
+      "pbr": 54.45,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 965,
+          "opProfit": -97,
+          "debtRatio": 73.23,
+          "bps": 2150,
+          "roe": -2.27
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 1029,
+          "opProfit": 254,
+          "debtRatio": 49.23,
+          "bps": 3949,
+          "roe": 29.52
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 2159,
+          "opProfit": 1069,
+          "debtRatio": 53.76,
+          "bps": 6352,
+          "roe": 39.42
+        }
+      ],
+      "rank": 4
+    },
+    {
+      "code": "277810",
+      "name": "레인보우로보틱스",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 153,
+      "revenueEnd": 341,
+      "revenueGrowthRate": 122.88,
+      "opProfitStart": -446,
+      "opProfitEnd": -25,
+      "opProfitGrowthRate": 94.39,
+      "debtRatio": 7.08,
+      "assetGrowthRate": 8.07,
+      "roe": 1.07,
+      "per": 6421.11,
+      "pbr": 68.2,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 153,
+          "opProfit": -446,
+          "debtRatio": 1.5,
+          "bps": 6735,
+          "roe": -0.93
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 193,
+          "opProfit": -30,
+          "debtRatio": 5.37,
+          "bps": 6843,
+          "roe": 1.62
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 341,
+          "opProfit": -25,
+          "debtRatio": 7.08,
+          "bps": 6899,
+          "roe": 1.07
+        }
+      ],
+      "rank": 5
+    },
+    {
+      "code": "003230",
+      "name": "삼양식품",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 11929,
+      "revenueEnd": 23518,
+      "revenueGrowthRate": 97.15,
+      "opProfitStart": 1475,
+      "opProfitEnd": 5242,
+      "opProfitGrowthRate": 255.39,
+      "debtRatio": 72.74,
+      "assetGrowthRate": 87.34,
+      "roe": 37.59,
+      "per": 23.81,
+      "pbr": 7.39,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 11929,
+          "opProfit": 1475,
+          "debtRatio": 102.9,
+          "bps": 75732,
+          "roe": 24.81
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 17280,
+          "opProfit": 3446,
+          "debtRatio": 92.6,
+          "bps": 109524,
+          "roe": 39.37
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 23518,
+          "opProfit": 5242,
+          "debtRatio": 72.74,
+          "bps": 166650,
+          "roe": 37.59
+        }
+      ],
+      "rank": 6
+    },
+    {
+      "code": "028300",
+      "name": "HLB",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 429,
+      "revenueEnd": 842,
+      "revenueGrowthRate": 96.27,
+      "opProfitStart": -1250,
+      "opProfitEnd": -1042,
+      "opProfitGrowthRate": 16.64,
+      "debtRatio": 88.14,
+      "assetGrowthRate": 15.6,
+      "roe": -44.32,
+      "per": -30.3,
+      "pbr": 16.08,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 429,
+          "opProfit": -1250,
+          "debtRatio": 21.4,
+          "bps": 4235,
+          "roe": -31.57
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 681,
+          "opProfit": -1185,
+          "debtRatio": 36.08,
+          "bps": 4397,
+          "roe": -16.33
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 842,
+          "opProfit": -1042,
+          "debtRatio": 88.14,
+          "bps": 3159,
+          "roe": -44.32
+        }
+      ],
+      "rank": 7
+    },
+    {
+      "code": "068270",
+      "name": "셀트리온",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 21764,
+      "revenueEnd": 41625,
+      "revenueGrowthRate": 91.26,
+      "opProfitStart": 6515,
+      "opProfitEnd": 11685,
+      "opProfitGrowthRate": 79.36,
+      "debtRatio": 28.71,
+      "assetGrowthRate": 18.02,
+      "roe": 5.94,
+      "per": 40.71,
+      "pbr": 2.31,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 21764,
+          "opProfit": 6515,
+          "debtRatio": 16.53,
+          "bps": 70023,
+          "roe": 5.07
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 35573,
+          "opProfit": 4920,
+          "debtRatio": 19.77,
+          "bps": 73962,
+          "roe": 2.46
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 41625,
+          "opProfit": 11685,
+          "debtRatio": 28.71,
+          "bps": 74822,
+          "roe": 5.94
+        }
+      ],
+      "rank": 8
+    },
+    {
+      "code": "214150",
+      "name": "클래시스",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 1801,
+      "revenueEnd": 3368,
+      "revenueGrowthRate": 87.01,
+      "opProfitStart": 896,
+      "opProfitEnd": 1706,
+      "opProfitGrowthRate": 90.4,
+      "debtRatio": 27.73,
+      "assetGrowthRate": 84.78,
+      "roe": 26.21,
+      "per": 27.06,
+      "pbr": 6.42,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 1801,
+          "opProfit": 896,
+          "debtRatio": 32.43,
+          "bps": 4430,
+          "roe": 28.93
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 2429,
+          "opProfit": 1224,
+          "debtRatio": 34.41,
+          "bps": 6931,
+          "roe": 26.54
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 3368,
+          "opProfit": 1706,
+          "debtRatio": 27.73,
+          "bps": 8487,
+          "roe": 26.21
+        }
+      ],
+      "rank": 9
+    },
+    {
+      "code": "079550",
+      "name": "LIG넥스원",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 23086,
+      "revenueEnd": 43069,
+      "revenueGrowthRate": 86.56,
+      "opProfitStart": 1864,
+      "opProfitEnd": 3194,
+      "opProfitGrowthRate": 71.35,
+      "debtRatio": 446.35,
+      "assetGrowthRate": 104.29,
+      "roe": 19.2,
+      "per": 36.56,
+      "pbr": 6.43,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 23086,
+          "opProfit": 1864,
+          "debtRatio": 262.59,
+          "bps": 48286,
+          "roe": 17.61
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 32763,
+          "opProfit": 2234,
+          "debtRatio": 389.91,
+          "bps": 55488,
+          "roe": 19.4
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 43069,
+          "opProfit": 3194,
+          "debtRatio": 446.35,
+          "bps": 65465,
+          "roe": 19.2
+        }
+      ],
+      "rank": 10
+    },
+    {
+      "code": "259960",
+      "name": "크래프톤",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 19106,
+      "revenueEnd": 33266,
+      "revenueGrowthRate": 74.11,
+      "opProfitStart": 7680,
+      "opProfitEnd": 10544,
+      "opProfitGrowthRate": 37.29,
+      "debtRatio": 31.31,
+      "assetGrowthRate": 48.75,
+      "roe": 10.6,
+      "per": 15.94,
+      "pbr": 1.56,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 19106,
+          "opProfit": 7680,
+          "debtRatio": 15.86,
+          "bps": 120194,
+          "roe": 11.16
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 27098,
+          "opProfit": 11825,
+          "debtRatio": 15.97,
+          "bps": 150187,
+          "roe": 21.1
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 33266,
+          "opProfit": 10544,
+          "debtRatio": 31.31,
+          "bps": 157747,
+          "roe": 10.6
+        }
+      ],
+      "rank": 11
+    },
+    {
+      "code": "042660",
+      "name": "한화오션",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 74083,
+      "revenueEnd": 127835,
+      "revenueGrowthRate": 72.56,
+      "opProfitStart": -1965,
+      "opProfitEnd": 11676,
+      "opProfitGrowthRate": 694.2,
+      "debtRatio": 226.17,
+      "assetGrowthRate": 44.45,
+      "roe": 22.59,
+      "per": 27.94,
+      "pbr": 5.64,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 74083,
+          "opProfit": -1965,
+          "debtRatio": 223.38,
+          "bps": 14061,
+          "roe": 6.33
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 107760,
+          "opProfit": 2379,
+          "debtRatio": 266.9,
+          "bps": 15857,
+          "roe": 11.52
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 127835,
+          "opProfit": 11676,
+          "debtRatio": 226.17,
+          "bps": 20138,
+          "roe": 22.59
+        }
+      ],
+      "rank": 12
+    },
+    {
+      "code": "010130",
+      "name": "고려아연",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 97045,
+      "revenueEnd": 165879,
+      "revenueGrowthRate": 70.93,
+      "opProfitStart": 6599,
+      "opProfitEnd": 12319,
+      "opProfitGrowthRate": 86.68,
+      "debtRatio": 82.36,
+      "assetGrowthRate": 73.46,
+      "roe": 8.48,
+      "per": 34.17,
+      "pbr": 2.45,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 97045,
+          "opProfit": 6599,
+          "debtRatio": 24.93,
+          "bps": 451351,
+          "roe": 5.72
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 120529,
+          "opProfit": 7235,
+          "debtRatio": 94.75,
+          "bps": 403756,
+          "roe": 2.28
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 165879,
+          "opProfit": 12319,
+          "debtRatio": 82.36,
+          "bps": 536342,
+          "roe": 8.48
+        }
+      ],
+      "rank": 13
+    },
+    {
+      "code": "058470",
+      "name": "리노공업",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 2556,
+      "revenueEnd": 3725,
+      "revenueGrowthRate": 45.74,
+      "opProfitStart": 1144,
+      "opProfitEnd": 1770,
+      "opProfitGrowthRate": 54.72,
+      "debtRatio": 8.3,
+      "assetGrowthRate": 35.87,
+      "roe": 22.45,
+      "per": 30.24,
+      "pbr": 6.26,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 2556,
+          "opProfit": 1144,
+          "debtRatio": 4.63,
+          "bps": 7340,
+          "roe": 21.12
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 2782,
+          "opProfit": 1242,
+          "debtRatio": 5.59,
+          "bps": 8204,
+          "roe": 19.2
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 3725,
+          "opProfit": 1770,
+          "debtRatio": 8.3,
+          "bps": 9635,
+          "roe": 22.45
+        }
+      ],
+      "rank": 14
+    },
+    {
+      "code": "035900",
+      "name": "JYP Ent.",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 5665,
+      "revenueEnd": 8219,
+      "revenueGrowthRate": 45.08,
+      "opProfitStart": 1694,
+      "opProfitEnd": 1552,
+      "opProfitGrowthRate": -8.38,
+      "debtRatio": 36.19,
+      "assetGrowthRate": 49.32,
+      "roe": 29.21,
+      "per": 16.07,
+      "pbr": 3.88,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 5665,
+          "opProfit": 1694,
+          "debtRatio": 43.59,
+          "bps": 11897,
+          "roe": 30.37
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 6018,
+          "opProfit": 1283,
+          "debtRatio": 40.57,
+          "bps": 14445,
+          "roe": 22.41
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 8219,
+          "opProfit": 1552,
+          "debtRatio": 36.19,
+          "bps": 18730,
+          "roe": 29.21
+        }
+      ],
+      "rank": 15
+    },
+    {
+      "code": "307950",
+      "name": "현대오토에버",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 30650,
+      "revenueEnd": 42521,
+      "revenueGrowthRate": 38.73,
+      "opProfitStart": 1814,
+      "opProfitEnd": 2553,
+      "opProfitGrowthRate": 40.74,
+      "debtRatio": 92.31,
+      "assetGrowthRate": 25.92,
+      "roe": 10.27,
+      "per": 49.89,
+      "pbr": 4.93,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 30650,
+          "opProfit": 1814,
+          "debtRatio": 78.55,
+          "bps": 57613,
+          "roe": 9.01
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 37136,
+          "opProfit": 2244,
+          "debtRatio": 93.55,
+          "bps": 62189,
+          "roe": 10.4
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 42521,
+          "opProfit": 2553,
+          "debtRatio": 92.31,
+          "bps": 67357,
+          "roe": 10.27
+        }
+      ],
+      "rank": 16
+    },
+    {
+      "code": "068760",
+      "name": "셀트리온제약",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 3888,
+      "revenueEnd": 5364,
+      "revenueGrowthRate": 37.96,
+      "opProfitStart": 361,
+      "opProfitEnd": 561,
+      "opProfitGrowthRate": 55.4,
+      "debtRatio": 74.2,
+      "assetGrowthRate": 18.52,
+      "roe": 9.3,
+      "per": 66.68,
+      "pbr": 5.89,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 3888,
+          "opProfit": 361,
+          "debtRatio": 70.35,
+          "bps": 8492,
+          "roe": 5.8
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 4778,
+          "opProfit": 372,
+          "debtRatio": 68.66,
+          "bps": 8953,
+          "roe": 5.68
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 5364,
+          "opProfit": 561,
+          "debtRatio": 74.2,
+          "bps": 9842,
+          "roe": 9.3
+        }
+      ],
+      "rank": 17
+    },
+    {
+      "code": "222800",
+      "name": "심텍",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 10419,
+      "revenueEnd": 14106,
+      "revenueGrowthRate": 35.39,
+      "opProfitStart": -881,
+      "opProfitEnd": 119,
+      "opProfitGrowthRate": 113.51,
+      "debtRatio": 181.13,
+      "assetGrowthRate": 17.82,
+      "roe": -32.1,
+      "per": -9.96,
+      "pbr": 3.2,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 10419,
+          "opProfit": -881,
+          "debtRatio": 149.99,
+          "bps": 14717,
+          "roe": -21.29
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 12314,
+          "opProfit": -470,
+          "debtRatio": 221.82,
+          "bps": 14044,
+          "roe": -6.63
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 14106,
+          "opProfit": 119,
+          "debtRatio": 181.13,
+          "bps": 15419,
+          "roe": -32.1
+        }
+      ],
+      "rank": 18
+    },
+    {
+      "code": "192820",
+      "name": "코스맥스",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 17775,
+      "revenueEnd": 23988,
+      "revenueGrowthRate": 34.95,
+      "opProfitStart": 1157,
+      "opProfitEnd": 1958,
+      "opProfitGrowthRate": 69.23,
+      "debtRatio": 247.1,
+      "assetGrowthRate": 23.07,
+      "roe": 23.86,
+      "per": 15.03,
+      "pbr": 3.31,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 17775,
+          "opProfit": 1157,
+          "debtRatio": 334.26,
+          "bps": 31952,
+          "roe": 12.11
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 21661,
+          "opProfit": 1754,
+          "debtRatio": 280.05,
+          "bps": 41725,
+          "roe": 20.53
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 23988,
+          "opProfit": 1958,
+          "debtRatio": 247.1,
+          "bps": 49196,
+          "roe": 23.86
+        }
+      ],
+      "rank": 19
+    },
+    {
+      "code": "145020",
+      "name": "휴젤",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 3197,
+      "revenueEnd": 4251,
+      "revenueGrowthRate": 32.97,
+      "opProfitStart": 1178,
+      "opProfitEnd": 2009,
+      "opProfitGrowthRate": 70.54,
+      "debtRatio": 9.86,
+      "assetGrowthRate": 18.42,
+      "roe": 16.06,
+      "per": 20.31,
+      "pbr": 2.62,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 3197,
+          "opProfit": 1178,
+          "debtRatio": 19.18,
+          "bps": 68472,
+          "roe": 12.09
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 3730,
+          "opProfit": 1662,
+          "debtRatio": 11.73,
+          "bps": 74668,
+          "roe": 17.51
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 4251,
+          "opProfit": 2009,
+          "debtRatio": 9.86,
+          "bps": 87960,
+          "roe": 16.06
+        }
+      ],
+      "rank": 20
+    }
+  ],
+  "soundDebtList": [
+    {
+      "code": "277810",
+      "name": "레인보우로보틱스",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 153,
+      "revenueEnd": 341,
+      "revenueGrowthRate": 122.88,
+      "opProfitStart": -446,
+      "opProfitEnd": -25,
+      "opProfitGrowthRate": 94.39,
+      "debtRatio": 7.08,
+      "assetGrowthRate": 8.07,
+      "roe": 1.07,
+      "per": 6421.11,
+      "pbr": 68.2,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 153,
+          "opProfit": -446,
+          "debtRatio": 1.5,
+          "bps": 6735,
+          "roe": -0.93
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 193,
+          "opProfit": -30,
+          "debtRatio": 5.37,
+          "bps": 6843,
+          "roe": 1.62
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 341,
+          "opProfit": -25,
+          "debtRatio": 7.08,
+          "bps": 6899,
+          "roe": 1.07
+        }
+      ]
+    },
+    {
+      "code": "058470",
+      "name": "리노공업",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 2556,
+      "revenueEnd": 3725,
+      "revenueGrowthRate": 45.74,
+      "opProfitStart": 1144,
+      "opProfitEnd": 1770,
+      "opProfitGrowthRate": 54.72,
+      "debtRatio": 8.3,
+      "assetGrowthRate": 35.87,
+      "roe": 22.45,
+      "per": 30.24,
+      "pbr": 6.26,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 2556,
+          "opProfit": 1144,
+          "debtRatio": 4.63,
+          "bps": 7340,
+          "roe": 21.12
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 2782,
+          "opProfit": 1242,
+          "debtRatio": 5.59,
+          "bps": 8204,
+          "roe": 19.2
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 3725,
+          "opProfit": 1770,
+          "debtRatio": 8.3,
+          "bps": 9635,
+          "roe": 22.45
+        }
+      ]
+    },
+    {
+      "code": "145020",
+      "name": "휴젤",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 3197,
+      "revenueEnd": 4251,
+      "revenueGrowthRate": 32.97,
+      "opProfitStart": 1178,
+      "opProfitEnd": 2009,
+      "opProfitGrowthRate": 70.54,
+      "debtRatio": 9.86,
+      "assetGrowthRate": 18.42,
+      "roe": 16.06,
+      "per": 20.31,
+      "pbr": 2.62,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 3197,
+          "opProfit": 1178,
+          "debtRatio": 19.18,
+          "bps": 68472,
+          "roe": 12.09
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 3730,
+          "opProfit": 1662,
+          "debtRatio": 11.73,
+          "bps": 74668,
+          "roe": 17.51
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 4251,
+          "opProfit": 2009,
+          "debtRatio": 9.86,
+          "bps": 87960,
+          "roe": 16.06
+        }
+      ]
+    },
+    {
+      "code": "039030",
+      "name": "이오테크닉스",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 3163,
+      "revenueEnd": 3809,
+      "revenueGrowthRate": 20.42,
+      "opProfitStart": 309,
+      "opProfitEnd": 808,
+      "opProfitGrowthRate": 161.49,
+      "debtRatio": 13.06,
+      "assetGrowthRate": 26.39,
+      "roe": 8.9,
+      "per": 58.57,
+      "pbr": 4.87,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 3163,
+          "opProfit": 309,
+          "debtRatio": 8.75,
+          "bps": 45930,
+          "roe": 6.73
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 3209,
+          "opProfit": 312,
+          "debtRatio": 8.29,
+          "bps": 49352,
+          "roe": 7.43
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 3809,
+          "opProfit": 808,
+          "debtRatio": 13.06,
+          "bps": 55838,
+          "roe": 8.9
+        }
+      ]
+    },
+    {
+      "code": "271560",
+      "name": "오리온",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 29124,
+      "revenueEnd": 33324,
+      "revenueGrowthRate": 14.42,
+      "opProfitStart": 4924,
+      "opProfitEnd": 5583,
+      "opProfitGrowthRate": 13.38,
+      "debtRatio": 17.55,
+      "assetGrowthRate": 31.27,
+      "roe": 10.51,
+      "per": 10.92,
+      "pbr": 1.1,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 29124,
+          "opProfit": 4924,
+          "debtRatio": 19.15,
+          "bps": 72413,
+          "roe": 13.91
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 31043,
+          "opProfit": 5436,
+          "debtRatio": 20.55,
+          "bps": 87815,
+          "roe": 16.56
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 33324,
+          "opProfit": 5583,
+          "debtRatio": 17.55,
+          "bps": 96352,
+          "roe": 10.51
+        }
+      ]
+    },
+    {
+      "code": "042700",
+      "name": "한미반도체",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 1590,
+      "revenueEnd": 5767,
+      "revenueGrowthRate": 262.7,
+      "opProfitStart": 346,
+      "opProfitEnd": 2514,
+      "opProfitGrowthRate": 626.59,
+      "debtRatio": 17.82,
+      "assetGrowthRate": 14.69,
+      "roe": 34.76,
+      "per": 57.05,
+      "pbr": 17.51,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 1590,
+          "opProfit": 346,
+          "debtRatio": 26.57,
+          "bps": 5907,
+          "roe": 55.54
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 5589,
+          "opProfit": 2554,
+          "debtRatio": 31.43,
+          "bps": 5698,
+          "roe": 27.43
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 5767,
+          "opProfit": 2514,
+          "debtRatio": 17.82,
+          "bps": 7278,
+          "roe": 34.76
+        }
+      ]
+    },
+    {
+      "code": "403870",
+      "name": "HPSP",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 1791,
+      "revenueEnd": 1730,
+      "revenueGrowthRate": -3.41,
+      "opProfitStart": 952,
+      "opProfitEnd": 899,
+      "opProfitGrowthRate": -5.57,
+      "debtRatio": 19.95,
+      "assetGrowthRate": 17.9,
+      "roe": 24.79,
+      "per": 38.5,
+      "pbr": 8.79,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 1791,
+          "opProfit": 952,
+          "debtRatio": 15.74,
+          "bps": 3350,
+          "roe": 34.05
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 1814,
+          "opProfit": 939,
+          "debtRatio": 15.11,
+          "bps": 3458,
+          "roe": 31.09
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 1730,
+          "opProfit": 899,
+          "debtRatio": 19.95,
+          "bps": 3811,
+          "roe": 24.79
+        }
+      ]
+    },
+    {
+      "code": "143240",
+      "name": "사람인",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 1315,
+      "revenueEnd": 1212,
+      "revenueGrowthRate": -7.83,
+      "opProfitStart": 253,
+      "opProfitEnd": 168,
+      "opProfitGrowthRate": -33.6,
+      "debtRatio": 22.35,
+      "assetGrowthRate": 64.4,
+      "roe": 41.2,
+      "per": 1.72,
+      "pbr": 0.53,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 1315,
+          "opProfit": 253,
+          "debtRatio": 17.66,
+          "bps": 16087,
+          "roe": 10.91
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 1284,
+          "opProfit": 213,
+          "debtRatio": 16.5,
+          "bps": 16817,
+          "roe": 7.12
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 1212,
+          "opProfit": 168,
+          "debtRatio": 22.35,
+          "bps": 25433,
+          "roe": 41.2
+        }
+      ]
+    },
+    {
+      "code": "051900",
+      "name": "LG생활건강",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 68048,
+      "revenueEnd": 63555,
+      "revenueGrowthRate": -6.6,
+      "opProfitStart": 4870,
+      "opProfitEnd": 1707,
+      "opProfitGrowthRate": -64.95,
+      "debtRatio": 23.32,
+      "assetGrowthRate": -4.95,
+      "roe": -1.82,
+      "per": -45.44,
+      "pbr": 0.79,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 68048,
+          "opProfit": 4870,
+          "debtRatio": 30.12,
+          "bps": 324268,
+          "roe": 2.65
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 68119,
+          "opProfit": 4590,
+          "debtRatio": 30.25,
+          "bps": 332194,
+          "roe": 3.44
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 63555,
+          "opProfit": 1707,
+          "debtRatio": 23.32,
+          "bps": 325224,
+          "roe": -1.82
+        }
+      ]
+    },
+    {
+      "code": "011200",
+      "name": "HMM",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 84010,
+      "revenueEnd": 108914,
+      "revenueGrowthRate": 29.64,
+      "opProfitStart": 5848,
+      "opProfitEnd": 14612,
+      "opProfitGrowthRate": 149.86,
+      "debtRatio": 26.31,
+      "assetGrowthRate": -4.66,
+      "roe": 6.9,
+      "per": 10.49,
+      "pbr": 0.73,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 84010,
+          "opProfit": 5848,
+          "debtRatio": 19.93,
+          "bps": 31115,
+          "roe": 4.59
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 117002,
+          "opProfit": 35128,
+          "debtRatio": 21.52,
+          "bps": 31615,
+          "roe": 15.35
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 108914,
+          "opProfit": 14612,
+          "debtRatio": 26.31,
+          "bps": 28168,
+          "roe": 6.9
+        }
+      ]
+    },
+    {
+      "code": "090430",
+      "name": "아모레퍼시픽",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 36740,
+      "revenueEnd": 42528,
+      "revenueGrowthRate": 15.75,
+      "opProfitStart": 1082,
+      "opProfitEnd": 3358,
+      "opProfitGrowthRate": 210.35,
+      "debtRatio": 26.49,
+      "assetGrowthRate": 16.55,
+      "roe": 4.41,
+      "per": 35.01,
+      "pbr": 1.51,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 36740,
+          "opProfit": 1082,
+          "debtRatio": 20.81,
+          "bps": 70962,
+          "roe": 3.72
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 38851,
+          "opProfit": 2205,
+          "debtRatio": 27.37,
+          "bps": 76149,
+          "roe": 11.69
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 42528,
+          "opProfit": 3358,
+          "debtRatio": 26.49,
+          "bps": 78989,
+          "roe": 4.41
+        }
+      ]
+    },
+    {
+      "code": "214150",
+      "name": "클래시스",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 1801,
+      "revenueEnd": 3368,
+      "revenueGrowthRate": 87.01,
+      "opProfitStart": 896,
+      "opProfitEnd": 1706,
+      "opProfitGrowthRate": 90.4,
+      "debtRatio": 27.73,
+      "assetGrowthRate": 84.78,
+      "roe": 26.21,
+      "per": 27.06,
+      "pbr": 6.42,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 1801,
+          "opProfit": 896,
+          "debtRatio": 32.43,
+          "bps": 4430,
+          "roe": 28.93
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 2429,
+          "opProfit": 1224,
+          "debtRatio": 34.41,
+          "bps": 6931,
+          "roe": 26.54
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 3368,
+          "opProfit": 1706,
+          "debtRatio": 27.73,
+          "bps": 8487,
+          "roe": 26.21
+        }
+      ]
+    },
+    {
+      "code": "068270",
+      "name": "셀트리온",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 21764,
+      "revenueEnd": 41625,
+      "revenueGrowthRate": 91.26,
+      "opProfitStart": 6515,
+      "opProfitEnd": 11685,
+      "opProfitGrowthRate": 79.36,
+      "debtRatio": 28.71,
+      "assetGrowthRate": 18.02,
+      "roe": 5.94,
+      "per": 40.71,
+      "pbr": 2.31,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 21764,
+          "opProfit": 6515,
+          "debtRatio": 16.53,
+          "bps": 70023,
+          "roe": 5.07
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 35573,
+          "opProfit": 4920,
+          "debtRatio": 19.77,
+          "bps": 73962,
+          "roe": 2.46
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 41625,
+          "opProfit": 11685,
+          "debtRatio": 28.71,
+          "bps": 74822,
+          "roe": 5.94
+        }
+      ]
+    },
+    {
+      "code": "253450",
+      "name": "스튜디오드래곤",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 7531,
+      "revenueEnd": 5307,
+      "revenueGrowthRate": -29.53,
+      "opProfitStart": 559,
+      "opProfitEnd": 304,
+      "opProfitGrowthRate": -45.62,
+      "debtRatio": 29.27,
+      "assetGrowthRate": -5.29,
+      "roe": 1.34,
+      "per": 124.52,
+      "pbr": 1.61,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 7531,
+          "opProfit": 559,
+          "debtRatio": 54.32,
+          "bps": 23546,
+          "roe": 4.4
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 5501,
+          "opProfit": 364,
+          "debtRatio": 25.13,
+          "bps": 24606,
+          "roe": 4.63
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 5307,
+          "opProfit": 304,
+          "debtRatio": 29.27,
+          "bps": 26623,
+          "roe": 1.34
+        }
+      ]
+    },
+    {
+      "code": "005930",
+      "name": "삼성전자",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 2589355,
+      "revenueEnd": 3336059,
+      "revenueGrowthRate": 28.84,
+      "opProfitStart": 65670,
+      "opProfitEnd": 436011,
+      "opProfitGrowthRate": 563.94,
+      "debtRatio": 29.94,
+      "assetGrowthRate": 27.56,
+      "roe": 10.85,
+      "per": 18.27,
+      "pbr": 1.87,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 2589355,
+          "opProfit": 65670,
+          "debtRatio": 25.36,
+          "bps": 52002,
+          "roe": 4.15
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 3008709,
+          "opProfit": 327260,
+          "debtRatio": 27.93,
+          "bps": 57981,
+          "roe": 9.03
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 3336059,
+          "opProfit": 436011,
+          "debtRatio": 29.94,
+          "bps": 63997,
+          "roe": 10.85
+        }
+      ]
+    },
+    {
+      "code": "357780",
+      "name": "솔브레인",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 8440,
+      "revenueEnd": 9234,
+      "revenueGrowthRate": 9.41,
+      "opProfitStart": 1335,
+      "opProfitEnd": 1336,
+      "opProfitGrowthRate": 0.07,
+      "debtRatio": 30.15,
+      "assetGrowthRate": 43.86,
+      "roe": 7.66,
+      "per": 25.78,
+      "pbr": 1.9,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 8440,
+          "opProfit": 1335,
+          "debtRatio": 8.34,
+          "bps": 115118,
+          "roe": 15.61
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 8634,
+          "opProfit": 1679,
+          "debtRatio": 12.62,
+          "bps": 130226,
+          "roe": 12.47
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 9234,
+          "opProfit": 1336,
+          "debtRatio": 30.15,
+          "bps": 137853,
+          "roe": 7.66
+        }
+      ]
+    },
+    {
+      "code": "018260",
+      "name": "삼성에스디에스",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 132768,
+      "revenueEnd": 139299,
+      "revenueGrowthRate": 4.92,
+      "opProfitStart": 8082,
+      "opProfitEnd": 9571,
+      "opProfitGrowthRate": 18.42,
+      "debtRatio": 31.09,
+      "assetGrowthRate": 9.37,
+      "roe": 7.89,
+      "per": 17.47,
+      "pbr": 1.34,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 132768,
+          "opProfit": 8082,
+          "debtRatio": 37.27,
+          "bps": 111933,
+          "roe": 8.21
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 138282,
+          "opProfit": 9111,
+          "debtRatio": 36.4,
+          "bps": 120661,
+          "roe": 8.42
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 139299,
+          "opProfit": 9571,
+          "debtRatio": 31.09,
+          "bps": 128198,
+          "roe": 7.89
+        }
+      ]
+    },
+    {
+      "code": "259960",
+      "name": "크래프톤",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 19106,
+      "revenueEnd": 33266,
+      "revenueGrowthRate": 74.11,
+      "opProfitStart": 7680,
+      "opProfitEnd": 10544,
+      "opProfitGrowthRate": 37.29,
+      "debtRatio": 31.31,
+      "assetGrowthRate": 48.75,
+      "roe": 10.6,
+      "per": 15.94,
+      "pbr": 1.56,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 19106,
+          "opProfit": 7680,
+          "debtRatio": 15.86,
+          "bps": 120194,
+          "roe": 11.16
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 27098,
+          "opProfit": 11825,
+          "debtRatio": 15.97,
+          "bps": 150187,
+          "roe": 21.1
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 33266,
+          "opProfit": 10544,
+          "debtRatio": 31.31,
+          "bps": 157747,
+          "roe": 10.6
+        }
+      ]
+    },
+    {
+      "code": "035900",
+      "name": "JYP Ent.",
+      "market": "KOSDAQ",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 5665,
+      "revenueEnd": 8219,
+      "revenueGrowthRate": 45.08,
+      "opProfitStart": 1694,
+      "opProfitEnd": 1552,
+      "opProfitGrowthRate": -8.38,
+      "debtRatio": 36.19,
+      "assetGrowthRate": 49.32,
+      "roe": 29.21,
+      "per": 16.07,
+      "pbr": 3.88,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 5665,
+          "opProfit": 1694,
+          "debtRatio": 43.59,
+          "bps": 11897,
+          "roe": 30.37
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 6018,
+          "opProfit": 1283,
+          "debtRatio": 40.57,
+          "bps": 14445,
+          "roe": 22.41
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 8219,
+          "opProfit": 1552,
+          "debtRatio": 36.19,
+          "bps": 18730,
+          "roe": 29.21
+        }
+      ]
+    },
+    {
+      "code": "000100",
+      "name": "유한양행",
+      "market": "KOSPI",
+      "startYear": "2023.12.",
+      "endYear": "2025.12.",
+      "revenueStart": 18590,
+      "revenueEnd": 21866,
+      "revenueGrowthRate": 17.62,
+      "opProfitStart": 570,
+      "opProfitEnd": 1044,
+      "opProfitGrowthRate": 83.16,
+      "debtRatio": 36.35,
+      "assetGrowthRate": 14.86,
+      "roe": 8.81,
+      "per": 47.05,
+      "pbr": 3.64,
+      "history": [
+        {
+          "year": "2023년 12.",
+          "revenue": 18590,
+          "opProfit": 570,
+          "debtRatio": 33.88,
+          "bps": 27358,
+          "roe": 6.75
+        },
+        {
+          "year": "2024년 12.",
+          "revenue": 20678,
+          "opProfit": 549,
+          "debtRatio": 36.8,
+          "bps": 28030,
+          "roe": 3.4
+        },
+        {
+          "year": "2025년 12.",
+          "revenue": 21866,
+          "opProfit": 1044,
+          "debtRatio": 36.35,
+          "bps": 30855,
+          "roe": 8.81
+        }
+      ]
+    }
+  ]
+}

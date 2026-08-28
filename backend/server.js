@@ -27,14 +27,40 @@ import { getMorningBriefing } from './morning_briefing.js'
 import { getTelegramConfig, saveTelegramConfig, sendTelegramMessage, detectTelegramChatId, getPriceAlerts, createPriceAlert, updatePriceAlert, deletePriceAlert, getAlertHistory, startAlertEngine, sendHoldingsBriefing, sendWatchlistBriefing, sendNpsDisclosuresBriefing, testSendNpsSingleAlert } from './telegram_alert.js'
 import { getKrxVolatilityData, sendVkospiBriefing } from './vkospi_tracker.js'
 import { getBearMarketStocks, sendBearMarketBriefing } from './bear_market_scanner.js'
-
-
-
-
+import { runGrowthStockScreener } from './growth_stock_screener.js'
+import { getStockShortSelling } from './short_selling_tracker.js'
 
 const app = express()
 app.use(cors())
 app.use(express.json())
+
+// 🚀 4대 재무 퀀트 엄격 AND 조건 종목 발굴기 API
+app.get('/api/growth-screener', async (req, res) => {
+  try {
+    const force = req.query.force === 'true';
+    const data = await runGrowthStockScreener(force);
+    res.json(data);
+  } catch (err) {
+    console.error('종목 발굴기 실행 실패:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// 📉 한국거래소(KRX) 공식 개별종목 공매도(Short Selling) 추이 및 퀀트 과열 진단 API
+app.get('/api/stock-short-selling', async (req, res) => {
+  try {
+    const code = req.query.code;
+    const period = req.query.period || '3m';
+    if (!code) {
+      return res.status(400).json({ success: false, error: '종목코드(code)가 필요합니다.' });
+    }
+    const data = await getStockShortSelling(code, period);
+    res.json(data);
+  } catch (err) {
+    console.error('공매도 데이터 조회 실패:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
 
 
   app.get('/api/stock/:code/market-cap', async (req, res) => {

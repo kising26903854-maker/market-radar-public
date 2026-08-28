@@ -1,5 +1,6 @@
 // StockDetailModal.jsx — 🏛️ 종목 상세 퀀트 분석 & 실시간 차트 모달 팝업
 import React, { useState, useEffect } from 'react'
+import StockShortSellingChart from './StockShortSellingChart.jsx'
 
 export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
   const [period, setPeriod] = useState('day') // 'minute' | 'day' | 'week' | 'month' | 'year'
@@ -194,6 +195,27 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                   🎯 월가 적정목표: {Number(stock.targetPrice).toLocaleString()}원
                 </span>
               )}
+              <button
+                onClick={() => {
+                  const el = document.getElementById('short-selling-section');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+                style={{
+                  padding: '4px 12px',
+                  background: 'rgba(239,68,68,0.2)',
+                  border: '1px solid #ef4444',
+                  borderRadius: 20,
+                  fontSize: '.82rem',
+                  color: '#f87171',
+                  fontWeight: 800,
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 4
+                }}
+              >
+                <span>📉 공매도 추이 분석</span>
+              </button>
             </div>
           </div>
 
@@ -478,6 +500,11 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
               <div style={{ textAlign: 'center', padding: 40, color: 'var(--t3)' }}>차트 데이터를 불러올 수 없습니다.</div>
             )}
           </div>
+        </div>
+
+        {/* ─── 📉 한국거래소(KRX) 공식 개별종목 공매도(Short Selling) 거래량·거래대금·비중(%) 인터랙티브 듀얼 차트 ─── */}
+        <div id="short-selling-section">
+          <StockShortSellingChart stockCode={stock.code} stockName={stock.name} />
         </div>
 
         {/* ─── 4. 🕵️‍♂️ 세력 매집봉 포착 일자 타임라인 표 ─── */}

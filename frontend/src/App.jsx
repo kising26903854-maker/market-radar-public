@@ -13,6 +13,7 @@ import SmartSupplyDemand from './components/SmartSupplyDemand.jsx'
 import MomentumScanner from './components/MomentumScanner.jsx'
 import VkospiTrackerTab from './components/VkospiTrackerTab.jsx'
 import BearMarketScannerTab from './components/BearMarketScannerTab.jsx'
+import GrowthStockScreener from './components/GrowthStockScreener.jsx'
 
 export default function App() {
   const [tab, setTab] = useState('vkospi') // 기본 랜딩 탭: ⚡ KRX 변동성지수 & 3대 지수 레이더
@@ -239,6 +240,9 @@ export default function App() {
           <button className={`tab-btn ${tab === 'bear-market' ? 'active' : ''}`} onClick={() => { setTab('bear-market'); setIsMenuOpen(false); }}>
             🛡️ 하락장 역주행주 스캐너
           </button>
+          <button className={`tab-btn ${tab === 'growth-screener' ? 'active' : ''}`} onClick={() => { setTab('growth-screener'); setIsMenuOpen(false); }}>
+            🔍 종목 발굴기 (4대 퀀트)
+          </button>
           <button className={`tab-btn ${tab === 'smart-supply' ? 'active' : ''}`} onClick={() => { setTab('smart-supply'); setIsMenuOpen(false); }}>
             🔥 외인·기관 쌍끌이 수급
           </button>
@@ -349,6 +353,9 @@ export default function App() {
 
         {/* 탭 3: 🛡️ 하락장 역주행주 스캐너 */}
         {tab === 'bear-market' && <BearMarketScannerTab onSelectStock={handleOpenStockChart} onOpenValueChain={handleOpenValueChain} />}
+
+        {/* 탭 3.5: 🔍 4대 재무 퀀트 엄격 AND 조건 종목 발굴기 */}
+        {tab === 'growth-screener' && <GrowthStockScreener onSelectStock={handleOpenStockChart} onOpenValueChain={handleOpenValueChain} />}
 
         {/* 탭 4: 🔥 외인·기관 쌍끌이 스마트 수급 */}
         {tab === 'smart-supply' && <SmartSupplyDemand onSelectStock={handleOpenStockChart} onOpenValueChain={handleOpenValueChain} />}
