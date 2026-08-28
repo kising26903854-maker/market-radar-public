@@ -23,9 +23,9 @@ function ensureFiles() {
   // 1. 텔레그램 설정 초기화
   if (!fs.existsSync(CONFIG_FILE)) {
     const initialConfig = {
-      botToken: process.env.TELEGRAM_BOT_TOKEN || '8323711372:AAHOQzJ689B6jS_rB7OLfGCsbk_H6-yOMME',
-      chatId: process.env.TELEGRAM_CHAT_ID || '7478457870',
-      userName: 'Chib Dfgh',
+      botToken: process.env.TELEGRAM_BOT_TOKEN || '',
+      chatId: process.env.TELEGRAM_CHAT_ID || '',
+      userName: '',
       isEnabled: true,
       notifyHoldings: true,
       notifyWatchlist: true,

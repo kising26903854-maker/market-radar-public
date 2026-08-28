@@ -5,3 +5,11 @@ dist
 .DS_Store
 *.log
 .vite
+
+# User data & config files containing secrets/privacy data
+backend/data/telegram_config.json
+backend/data/portfolio_positions.json
+backend/data/price_alerts.json
+backend/data/trading_journals.json
+backend/data/watchlist_stocks.json
+backend/data/alert_history.json
