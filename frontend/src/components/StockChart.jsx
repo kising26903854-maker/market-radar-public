@@ -4,6 +4,14 @@ export default function StockChart({ positions, targetChartCode }) {
   const [selectedCode, setSelectedCode] = useState(positions?.[0]?.code || '0182R0')
   const [period, setPeriod] = useState('minute') // 'minute' | 'day' | 'year'
   const [analysisDays, setAnalysisDays] = useState(60) // 30 | 60 | 120 | 365
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
   const [chartData, setChartData] = useState([])
   const [smartMoney, setSmartMoney] = useState(null)
   const [wallStreet, setWallStreet] = useState(null)
@@ -380,7 +388,7 @@ export default function StockChart({ positions, targetChartCode }) {
               return (
                 <g key={i}>
                   <line x1={padding.left} y1={y} x2={width - padding.right} y2={y} stroke="rgba(255,255,255,0.06)" strokeDasharray="3 3" />
-                  <text x={width - padding.right + 12} y={y + 4} fill="#64748b" fontSize="11" fontFamily="Space Mono" fontWeight="700">{(priceVal || 0).toLocaleString()}</text>
+                  <text x={width - padding.right + 12} y={y + 4} fill="#64748b" fontSize={isMobile ? "15" : "11"} fontFamily="Space Mono" fontWeight="700">{(priceVal || 0).toLocaleString()}</text>
                 </g>
               )
             })}
@@ -434,8 +442,8 @@ export default function StockChart({ positions, targetChartCode }) {
                       {/* X축 눈금선 (Tick) */}
                       <line x1={x} y1={height - padding.bottom} x2={x} y2={height - padding.bottom + 6} stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" />
                       {/* 하단 날짜 텍스트 배지 */}
-                      <rect x={x - 28} y={height - padding.bottom + 8} width={56} height={20} rx={4} fill="rgba(30,41,59,0.7)" stroke="rgba(255,255,255,0.08)" strokeWidth="0.8" />
-                      <text x={x} y={height - padding.bottom + 21.5} fill="#e2e8f0" fontSize="11" fontWeight="800" fontFamily="Space Mono" textAnchor="middle">
+                      <rect x={x - (isMobile ? 38 : 28)} y={height - padding.bottom + 8} width={isMobile ? 76 : 56} height={isMobile ? 24 : 20} rx={4} fill="rgba(30,41,59,0.7)" stroke="rgba(255,255,255,0.08)" strokeWidth="0.8" />
+                      <text x={x} y={height - padding.bottom + (isMobile ? 24.5 : 21.5)} fill="#e2e8f0" fontSize={isMobile ? "14" : "11"} fontWeight="800" fontFamily="Space Mono" textAnchor="middle">
                         {labelText || (idx + 1)}
                       </text>
                     </g>
@@ -524,8 +532,8 @@ export default function StockChart({ positions, targetChartCode }) {
                   {/* 안쪽 중심 화이트 코어 실선 (Pure White Solid Core) */}
                   <line x1={padding.left} y1={y} x2={width - padding.right + 6} y2={y} stroke="#ffffff" strokeWidth="1.6" />
                   
-                  <rect x={width - padding.right + 6} y={y - 14} width={122} height={28} rx={6} fill="#059669" stroke="#00ff9d" strokeWidth="2" filter="drop-shadow(0 0 10px rgba(0,255,157,0.6))" />
-                  <text x={width - padding.right + 14} y={y + 5} fill="#ffffff" fontSize="12" fontWeight="900" fontFamily="Space Mono">
+                  <rect x={width - padding.right + 6} y={y - (isMobile ? 18 : 14)} width={isMobile ? 165 : 122} height={isMobile ? 36 : 28} rx={6} fill="#059669" stroke="#00ff9d" strokeWidth="2" filter="drop-shadow(0 0 10px rgba(0,255,157,0.6))" />
+                  <text x={width - padding.right + 14} y={y + (isMobile ? 6 : 5)} fill="#ffffff" fontSize={isMobile ? "16" : "12"} fontWeight="900" fontFamily="Space Mono">
                     최적 {Number(optimalPrice).toLocaleString()}
                   </text>
                   <circle cx={padding.left + 8} cy={y} r="5" fill="#00ff9d" stroke="#ffffff" strokeWidth="1.5" />
@@ -543,8 +551,8 @@ export default function StockChart({ positions, targetChartCode }) {
                   {/* 안쪽 중심 화이트 코어 실선 */}
                   <line x1={padding.left} y1={y} x2={width - padding.right + 6} y2={y} stroke="#ffffff" strokeWidth="1.8" />
                   
-                  <rect x={width - padding.right + 6} y={y - 15} width={122} height={30} rx={6} fill="#7e22ce" stroke="#d8b4fe" strokeWidth="2" filter="drop-shadow(0 0 12px rgba(216,180,254,0.7))" />
-                  <text x={width - padding.right + 14} y={y + 6} fill="#ffffff" fontSize="12.5" fontWeight="900" fontFamily="Space Mono">
+                  <rect x={width - padding.right + 6} y={y - (isMobile ? 19 : 15)} width={isMobile ? 165 : 122} height={isMobile ? 38 : 30} rx={6} fill="#7e22ce" stroke="#d8b4fe" strokeWidth="2" filter="drop-shadow(0 0 12px rgba(216,180,254,0.7))" />
+                  <text x={width - padding.right + 14} y={y + (isMobile ? 7 : 6)} fill="#ffffff" fontSize={isMobile ? "16.5" : "12.5"} fontWeight="900" fontFamily="Space Mono">
                     세력 {Number(smartMoney.estimatedCost).toLocaleString()}
                   </text>
                   <circle cx={padding.left + 18} cy={y} r="5.5" fill="#d8b4fe" stroke="#ffffff" strokeWidth="1.8" />
@@ -562,8 +570,8 @@ export default function StockChart({ positions, targetChartCode }) {
                   {/* 안쪽 중심 화이트 코어 실선 */}
                   <line x1={padding.left} y1={y} x2={width - padding.right + 6} y2={y} stroke="#ffffff" strokeWidth="2.2" />
                   
-                  <rect x={width - padding.right + 6} y={y - 16} width={122} height={32} rx={7} fill="#ffb300" stroke="#ffffff" strokeWidth="2.5" filter="drop-shadow(0 0 16px rgba(255,179,0,0.8))" />
-                  <text x={width - padding.right + 14} y={y + 6} fill="#000000" fontSize="13" fontWeight="900" fontFamily="Space Mono">
+                  <rect x={width - padding.right + 6} y={y - (isMobile ? 20 : 16)} width={isMobile ? 165 : 122} height={isMobile ? 40 : 32} rx={7} fill="#ffb300" stroke="#ffffff" strokeWidth="2.5" filter="drop-shadow(0 0 16px rgba(255,179,0,0.8))" />
+                  <text x={width - padding.right + 14} y={y + (isMobile ? 7 : 6)} fill="#000000" fontSize={isMobile ? "17" : "13"} fontWeight="900" fontFamily="Space Mono">
                     내평단 {Number(activePos.buy_price).toLocaleString()}
                   </text>
                   <circle cx={padding.left + 30} cy={y} r="6.5" fill="#ffb300" stroke="#ffffff" strokeWidth="2.2" />

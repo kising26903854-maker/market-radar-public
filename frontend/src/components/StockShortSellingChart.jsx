@@ -7,6 +7,14 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
   const [period, setPeriod] = useState('3m'); // '1m' | '3m' | '6m'
   const [hoverIndex, setHoverIndex] = useState(null);
   const [showTable, setShowTable] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     if (!stockCode) return;
@@ -336,7 +344,7 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
                     x={padding.left - 8}
                     y={y + 4}
                     fill="#38bdf8"
-                    fontSize="9.5"
+                    fontSize={isMobile ? "13.5" : "9.5"}
                     fontFamily="Space Mono"
                     textAnchor="end"
                     fontWeight="700"
@@ -348,7 +356,7 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
                     x={padding.left + innerW + 8}
                     y={y + 4}
                     fill="#f87171"
-                    fontSize="9.5"
+                    fontSize={isMobile ? "13.5" : "9.5"}
                     fontFamily="Space Mono"
                     textAnchor="start"
                     fontWeight="700"
@@ -412,7 +420,7 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
                   x={x}
                   y={padding.top + innerH + 22}
                   fill="var(--t3)"
-                  fontSize="10"
+                  fontSize={isMobile ? "13" : "10"}
                   fontFamily="Space Mono"
                   textAnchor="middle"
                 >

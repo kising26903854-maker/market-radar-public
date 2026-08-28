@@ -7,6 +7,14 @@ export default function RoeTrendChart({ stock }) {
   const [error, setError] = useState(null)
   const [hoveredPoint, setHoveredPoint] = useState(null)
   const [activeTab, setActiveTab] = useState('annual') // 'annual' | 'quarter'
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const code = stock?.code
 
@@ -199,7 +207,7 @@ export default function RoeTrendChart({ stock }) {
           {yTicks.map((t, i) => (
             <g key={i}>
               <line x1={pad.left} y1={t.y} x2={width - pad.right} y2={t.y} stroke="rgba(255,255,255,0.06)" strokeDasharray="4,4" />
-              <text x={pad.left - 5} y={t.y + 4} fill="var(--t3)" fontSize="10" textAnchor="end">{t.val}%</text>
+              <text x={pad.left - 5} y={t.y + 4} fill="var(--t3)" fontSize={isMobile ? "13.5" : "10"} textAnchor="end">{t.val}%</text>
             </g>
           ))}
 
@@ -233,13 +241,13 @@ export default function RoeTrendChart({ stock }) {
               <g key={i} style={{ cursor: 'pointer' }} onMouseEnter={() => setHoveredPoint(i)} onMouseLeave={() => setHoveredPoint(null)}>
                 {isHov && <circle cx={p.x} cy={p.y} r={15} fill={col} opacity={0.15} />}
                 <circle cx={p.x} cy={p.y} r={isHov ? 9 : (p.isCurrentYear ? 7.5 : 5.5)} fill={col} stroke="#0f172a" strokeWidth="2.5" style={{ transition: 'all .2s' }} />
-                <text x={p.x} y={p.y - 14} fill={lblCol} fontSize={p.isCurrentYear ? '12' : '11'} fontWeight={p.isCurrentYear ? '900' : '700'} textAnchor="middle">
+                <text x={p.x} y={p.y - 14} fill={lblCol} fontSize={isMobile ? (p.isCurrentYear ? '16' : '15') : (p.isCurrentYear ? '12' : '11')} fontWeight={p.isCurrentYear ? '900' : '700'} textAnchor="middle">
                   {p.roe}%
                 </text>
-                <text x={p.x} y={height - 15} fill={p.isFuture ? '#f59e0b' : 'var(--t2)'} fontSize="11" fontWeight={p.isFuture || p.isCurrentYear ? '900' : '600'} textAnchor="middle">
+                <text x={p.x} y={height - 15} fill={p.isFuture ? '#f59e0b' : 'var(--t2)'} fontSize={isMobile ? "14.5" : "11"} fontWeight={p.isFuture || p.isCurrentYear ? '900' : '600'} textAnchor="middle">
                   {p.year}
                 </text>
-                <text x={p.x} y={height - 3} fill="var(--t3)" fontSize="9" textAnchor="middle">({p.label})</text>
+                <text x={p.x} y={height - 3} fill="var(--t3)" fontSize={isMobile ? "12" : "9"} textAnchor="middle">({p.label})</text>
               </g>
             )
           })}

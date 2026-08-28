@@ -7,6 +7,14 @@ export default function RevenueIncomeChart({ stock }) {
   const [error, setError] = useState(null)
   const [hoveredPoint, setHoveredPoint] = useState(null)
   const [activeTab, setActiveTab] = useState('annual') // 'annual' | 'quarter'
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const code = stock?.code
 
@@ -239,17 +247,17 @@ export default function RevenueIncomeChart({ stock }) {
 
           {/* 매출액 Y축 눈금 (왼쪽 - 파란색) */}
           {revTicks.map((t, i) => (
-            <text key={i} x={pad.left - 8} y={t.y + 4} fill="#60a5fa" fontSize="9.5" fontWeight="700" textAnchor="end">{t.val}</text>
+            <text key={i} x={pad.left - 8} y={t.y + 4} fill="#60a5fa" fontSize={isMobile ? "13.5" : "9.5"} fontWeight="700" textAnchor="end">{t.val}</text>
           ))}
 
           {/* 영업이익 Y축 눈금 (오른쪽 - 분홍색) */}
           {incTicks.map((t, i) => (
-            <text key={i} x={width - pad.right + 8} y={t.y + 4} fill="#f43f5e" fontSize="9.5" fontWeight="700" textAnchor="start">{t.val}</text>
+            <text key={i} x={width - pad.right + 8} y={t.y + 4} fill="#f43f5e" fontSize={isMobile ? "13.5" : "9.5"} fontWeight="700" textAnchor="start">{t.val}</text>
           ))}
 
           {/* 축 레이블 타이틀 */}
-          <text x={pad.left - 10} y={pad.top - 15} fill="var(--t3)" fontSize="9" fontWeight="800" textAnchor="end">매출액(원)</text>
-          <text x={width - pad.right + 10} y={pad.top - 15} fill="var(--t3)" fontSize="9" fontWeight="800" textAnchor="start">영업이익(원)</text>
+          <text x={pad.left - 10} y={pad.top - 15} fill="var(--t3)" fontSize={isMobile ? "12" : "9"} fontWeight="800" textAnchor="end">매출액(원)</text>
+          <text x={width - pad.right + 10} y={pad.top - 15} fill="var(--t3)" fontSize={isMobile ? "12" : "9"} fontWeight="800" textAnchor="start">영업이익(원)</text>
 
           {/* 1. 매출액 막대 그래프 렌더링 */}
           {points.map((p, i) => {
@@ -271,7 +279,7 @@ export default function RevenueIncomeChart({ stock }) {
                   rx="4"
                 />
                 {/* 막대 상단 매출액 텍스트 */}
-                <text x={p.x} y={p.yRev - 8} fill="#93c5fd" fontSize="10.5" fontWeight="800" textAnchor="middle">
+                <text x={p.x} y={p.yRev - 8} fill="#93c5fd" fontSize={isMobile ? "14" : "10.5"} fontWeight="800" textAnchor="middle">
                   {formatAmt(p.revenue)}
                 </text>
               </g>
@@ -310,15 +318,15 @@ export default function RevenueIncomeChart({ stock }) {
                 />
 
                 {/* 꺾은선 위에 영업이익 금액 텍스트 */}
-                <text x={p.x} y={p.yInc - 13} fill={textCol} fontSize="10" fontWeight="900" textAnchor="middle" style={{ filter: 'drop-shadow(0 0 4px rgba(0,0,0,0.8))' }}>
+                <text x={p.x} y={p.yInc - 13} fill={textCol} fontSize={isMobile ? "13.5" : "10"} fontWeight="900" textAnchor="middle" style={{ filter: 'drop-shadow(0 0 4px rgba(0,0,0,0.8))' }}>
                   {formatAmt(p.opincome)}
                 </text>
 
                 {/* X축 연도 눈금 라벨 */}
-                <text x={p.x} y={height - 15} fill={p.isFuture ? '#fb7185' : 'var(--t2)'} fontSize="11" fontWeight={p.isFuture || p.isCurrentYear ? '900' : '600'} textAnchor="middle">
+                <text x={p.x} y={height - 15} fill={p.isFuture ? '#fb7185' : 'var(--t2)'} fontSize={isMobile ? "14.5" : "11"} fontWeight={p.isFuture || p.isCurrentYear ? '900' : '600'} textAnchor="middle">
                   {p.year}
                 </text>
-                <text x={p.x} y={height - 3} fill="var(--t3)" fontSize="9" textAnchor="middle">({p.label})</text>
+                <text x={p.x} y={height - 3} fill="var(--t3)" fontSize={isMobile ? "12" : "9"} textAnchor="middle">({p.label})</text>
               </g>
             )
           })}

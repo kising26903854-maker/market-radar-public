@@ -12,6 +12,14 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
   const [smartMoney, setSmartMoney] = useState(null)
   const [companySummary, setCompanySummary] = useState(null)
   const [financials, setFinancials] = useState(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
   const [loading, setLoading] = useState(true)
   const [hoverData, setHoverData] = useState(null)
   const [hoverLiqPoint, setHoverLiqPoint] = useState(null)
@@ -433,7 +441,7 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                   return (
                     <g key={idx}>
                       <line x1={padding.left} y1={y} x2={width - padding.right} y2={y} stroke="rgba(255,255,255,0.06)" strokeDasharray="3 3" />
-                      <text x={width - padding.right + 8} y={y + 4} fill="var(--t3)" fontSize="10" fontFamily="Space Mono">
+                      <text x={width - padding.right + 8} y={y + 4} fill="var(--t3)" fontSize={isMobile ? "14" : "10"} fontFamily="Space Mono">
                         {Math.round(p).toLocaleString()}
                       </text>
                     </g>
@@ -474,8 +482,8 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                     <g key="modal-horiz-optimal">
                       <line x1={padding.left} y1={y} x2={width - padding.right + 6} y2={y} stroke="#00ff9d" strokeWidth="3" filter="url(#modal-glow-green)" opacity="0.9" />
                       <line x1={padding.left} y1={y} x2={width - padding.right + 6} y2={y} stroke="#ffffff" strokeWidth="1.2" />
-                      <rect x={width - padding.right + 6} y={y - 12} width={110} height={24} rx={6} fill="#059669" stroke="#00ff9d" strokeWidth="1.5" />
-                      <text x={width - padding.right + 12} y={y + 4} fill="#ffffff" fontSize="11" fontWeight="900" fontFamily="Space Mono">
+                      <rect x={width - padding.right + 6} y={y - (isMobile ? 18 : 12)} width={isMobile ? 155 : 110} height={isMobile ? 36 : 24} rx={6} fill="#059669" stroke="#00ff9d" strokeWidth="1.5" />
+                      <text x={width - padding.right + 12} y={y + (isMobile ? 6 : 4)} fill="#ffffff" fontSize={isMobile ? "15" : "11"} fontWeight="900" fontFamily="Space Mono">
                         적정 {Number(optimalPrice).toLocaleString()}
                       </text>
                     </g>
@@ -489,8 +497,8 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                     <g key="modal-horiz-smart">
                       <line x1={padding.left} y1={y} x2={width - padding.right + 6} y2={y} stroke="#d8b4fe" strokeWidth="3.5" filter="url(#modal-glow-purple)" opacity="0.95" />
                       <line x1={padding.left} y1={y} x2={width - padding.right + 6} y2={y} stroke="#ffffff" strokeWidth="1.4" />
-                      <rect x={width - padding.right + 6} y={y - 13} width={110} height={26} rx={6} fill="#7e22ce" stroke="#d8b4fe" strokeWidth="1.5" />
-                      <text x={width - padding.right + 12} y={y + 4.5} fill="#ffffff" fontSize="11" fontWeight="900" fontFamily="Space Mono">
+                      <rect x={width - padding.right + 6} y={y - (isMobile ? 19 : 13)} width={isMobile ? 155 : 110} height={isMobile ? 38 : 26} rx={6} fill="#7e22ce" stroke="#d8b4fe" strokeWidth="1.5" />
+                      <text x={width - padding.right + 12} y={y + (isMobile ? 6.5 : 4.5)} fill="#ffffff" fontSize={isMobile ? "15" : "11"} fontWeight="900" fontFamily="Space Mono">
                         세력 {Number(smartMoney.estimatedCost).toLocaleString()}
                       </text>
                     </g>
@@ -503,8 +511,8 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                   return (
                     <g key="modal-horiz-poc">
                       <line x1={padding.left} y1={y} x2={width - padding.right + 6} y2={y} stroke="#00d2ff" strokeWidth="2.5" strokeDasharray="4 3" opacity="0.8" />
-                      <rect x={width - padding.right + 6} y={y - 12} width={110} height={24} rx={6} fill="#0369a1" stroke="#00d2ff" strokeWidth="1.5" />
-                      <text x={width - padding.right + 12} y={y + 4} fill="#ffffff" fontSize="11" fontWeight="900" fontFamily="Space Mono">
+                      <rect x={width - padding.right + 6} y={y - (isMobile ? 18 : 12)} width={isMobile ? 155 : 110} height={isMobile ? 36 : 24} rx={6} fill="#0369a1" stroke="#00d2ff" strokeWidth="1.5" />
+                      <text x={width - padding.right + 12} y={y + (isMobile ? 6 : 4)} fill="#ffffff" fontSize={isMobile ? "15" : "11"} fontWeight="900" fontFamily="Space Mono">
                         바닥 {Number(pocPriceLine).toLocaleString()}
                       </text>
                     </g>
