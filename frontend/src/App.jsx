@@ -125,7 +125,7 @@ export default function App() {
 
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-                <span style={{ fontSize: '1.22rem', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.4px', fontFamily: "'Noto Sans KR', sans-serif" }}>
+                <span className="logo-title" style={{ fontSize: '1.22rem', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.4px', fontFamily: "'Noto Sans KR', sans-serif" }}>
                   KRX <span style={{
                     background: 'linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%)',
                     WebkitBackgroundClip: 'text',
@@ -146,7 +146,7 @@ export default function App() {
                   LIVE
                 </span>
               </div>
-              <span style={{ fontSize: '.68rem', color: 'var(--t3)', letterSpacing: '0.4px', fontFamily: 'Space Mono', marginTop: -2 }}>
+              <span className="logo-subtitle" style={{ fontSize: '.68rem', color: 'var(--t3)', letterSpacing: '0.4px', fontFamily: 'Space Mono', marginTop: -2 }}>
                 QUANTITATIVE MARKET RADAR
               </span>
             </div>

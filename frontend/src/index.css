@@ -770,4 +770,16 @@ body {
   .sidebar-pnl {
     margin-bottom: 16px !important;
   }
+
+  /* 모바일 상단 헤더 로고 정렬 & 겹침 방지 */
+  .logo-title {
+    font-size: 0.98rem !important;
+  }
+  .logo-subtitle {
+    display: none !important; /* 모바일에서 영어 서브타이틀 숨겨서 세로 겹침 방지 */
+  }
+  .header-status {
+    display: flex !important;
+    align-items: center !important;
+  }
 }
