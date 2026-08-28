@@ -312,6 +312,39 @@ export async function runGrowthStockScreener(forceRefresh = false) {
     .filter(s => s.matchedCount >= 2 && s.debtRatio <= 120)
     .sort((a, b) => (b.matchedCount - a.matchedCount) || (b.growthScore - a.growthScore));
 
+  // 5. 전체 평가 종목 풀 (체크박스 동적 AND 결합 필터링용)
+  const allStocks = validList.map(s => {
+    const inTopAsset = topAssetCodes.has(s.code);
+    const inTopOp = topOpCodes.has(s.code);
+    const inTopRev = topRevCodes.has(s.code);
+    const isSoundDebt = s.debtRatio <= 120;
+    let matchedCount = 0;
+    const matchTags = [];
+    if (inTopAsset) { matchedCount++; matchTags.push('자산증가 TOP20'); }
+    if (inTopOp) { matchedCount++; matchTags.push('영업이익증가 TOP20'); }
+    if (inTopRev) { matchedCount++; matchTags.push('매출증가 TOP20'); }
+    if (isSoundDebt) { matchedCount++; matchTags.push('부채 120%이하'); }
+
+    const score = Math.round(
+      (s.assetGrowthRate * 0.25) + 
+      (s.opProfitGrowthRate * 0.35) + 
+      (s.revenueGrowthRate * 0.25) + 
+      (Math.max(0, 120 - s.debtRatio) * 0.15)
+    );
+
+    return {
+      ...s,
+      inTopAsset,
+      inTopOp,
+      inTopRev,
+      isSoundDebt,
+      matchedCount,
+      matchTags,
+      growthScore: score,
+      isPerfectMatch: matchedCount === 4
+    };
+  }).sort((a, b) => (b.matchedCount - a.matchedCount) || (b.growthScore - a.growthScore));
+
   const responseData = {
     success: true,
     timestamp: new Date().toISOString(),
@@ -324,6 +357,7 @@ export async function runGrowthStockScreener(forceRefresh = false) {
       topRevCount: topRevList.length,
       soundDebtCount: soundDebtList.length
     },
+    allStocks,
     perfectMatches: perfectAndMatches,
     strongCandidates: strongCandidates.slice(0, 15),
     topAssetList: topAssetList.map((s, idx) => ({ ...s, rank: idx + 1 })),
