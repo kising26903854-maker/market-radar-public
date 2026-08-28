@@ -16,7 +16,7 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
     fetch(`/api/stock-short-selling?code=${stockCode}&period=${period}`)
       .then(res => res.json())
       .then(json => {
-        if (isMounted && json.success) {
+        if (isMounted) {
           setData(json);
         }
       })
@@ -292,6 +292,12 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
         {loading ? (
           <div style={{ padding: '80px 0', textAlign: 'center', color: 'var(--t3)', fontSize: '.9rem' }}>
             ⏳ 한국거래소(KRX) 공매도 시계열 데이터 수집 중...
+          </div>
+        ) : data && !data.success ? (
+          <div style={{ padding: '80px 0 60px', textAlign: 'center', color: '#f87171', fontSize: '.9rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
+            <span style={{ fontSize: '1.8rem' }}>⚠️</span>
+            <div style={{ fontWeight: 800 }}>공매도 데이터를 불러오지 못했습니다.</div>
+            <div style={{ fontSize: '.85rem', color: '#cbd5e1', background: 'rgba(239, 68, 68, 0.1)', padding: '6px 16px', borderRadius: 8, border: '1px solid rgba(239, 68, 68, 0.3)' }}>{data.error || '알 수 없는 이유로 거래소 데이터 연결에 실패했습니다.'}</div>
           </div>
         ) : timeline.length === 0 ? (
           <div style={{ padding: '80px 0', textAlign: 'center', color: 'var(--t3)', fontSize: '.9rem' }}>

@@ -116,6 +116,7 @@ export async function getStockShortSelling(ticker, period = '3m') {
       csvxls_isNo: 'false'
     });
 
+    let krxError = null;
     const krxPromise = fetch(krxUrl, {
       method: 'POST',
       body: krxParams,
@@ -124,8 +125,21 @@ export async function getStockShortSelling(ticker, period = '3m') {
         'Referer': `https://data.krx.co.kr/comm/srt/srtLoader/index.cmd?screenId=MDCSTAT300&isuCd=${cleanCode}`,
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
       }
-    }).then(r => r.json()).catch(err => {
+    }).then(async r => {
+      const text = await r.text();
+      if (text.includes('<!DOCTYPE') || text.includes('시스템 점검') || text.includes('<html>')) {
+        krxError = '한국거래소(KRX) 서버 점검 중';
+        return { OutBlock_1: [] };
+      }
+      try {
+        return JSON.parse(text);
+      } catch (e) {
+        krxError = '한국거래소(KRX) 데이터 파싱 실패';
+        return { OutBlock_1: [] };
+      }
+    }).catch(err => {
       console.warn(`[KRX Short Selling] Error for ${cleanCode}:`, err.message);
+      krxError = '한국거래소(KRX) 통신 실패';
       return { OutBlock_1: [] };
     });
 
@@ -134,6 +148,17 @@ export async function getStockShortSelling(ticker, period = '3m') {
     const naverPromise = fetchNaverPrices(cleanCode, targetPages);
 
     const [krxRes, naverPrices] = await Promise.all([krxPromise, naverPromise]);
+    
+    if (krxError) {
+      const errorResult = {
+        success: false,
+        error: krxError,
+        ticker: cleanCode
+      };
+      shortSellingCache.set(cacheKey, { timestamp: now - 4 * 60 * 1000, data: errorResult });
+      return errorResult;
+    }
+
     const rawKrxList = Array.isArray(krxRes?.OutBlock_1) ? krxRes.OutBlock_1 : [];
 
     // 네이버 주가 매핑 테이블
