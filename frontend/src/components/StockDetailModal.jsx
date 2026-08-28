@@ -85,6 +85,7 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
   })
 
   const optimalPrice = stock.optimalBuyPrice || analysis?.optimalBuyPrice
+  const pocPriceLine = analysis?.vpvr?.pocPrice || smartMoney?.pocPrice || 0
 
   const allPrices = []
   candles.forEach(c => {
@@ -94,6 +95,7 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
 
   if (smartMoney?.estimatedCost && smartMoney.estimatedCost > 0) allPrices.push(Number(smartMoney.estimatedCost))
   if (optimalPrice && optimalPrice > 0) allPrices.push(Number(optimalPrice))
+  if (pocPriceLine && pocPriceLine > 0) allPrices.push(Number(pocPriceLine))
 
   const rawMin = allPrices.length ? Math.min(...allPrices) : 100
   const rawMax = allPrices.length ? Math.max(...allPrices) : 200
@@ -485,6 +487,20 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                       <rect x={width - padding.right + 6} y={y - 13} width={110} height={26} rx={6} fill="#7e22ce" stroke="#d8b4fe" strokeWidth="1.5" />
                       <text x={width - padding.right + 12} y={y + 4.5} fill="#ffffff" fontSize="11" fontWeight="900" fontFamily="Space Mono">
                         세력 {Number(smartMoney.estimatedCost).toLocaleString()}
+                      </text>
+                    </g>
+                  )
+                })()}
+
+                {/* 🧱 3. VPVR POC 바닥선 (최대 매물대 지지선) */}
+                {pocPriceLine > 0 && (() => {
+                  const y = getY(pocPriceLine)
+                  return (
+                    <g key="modal-horiz-poc">
+                      <line x1={padding.left} y1={y} x2={width - padding.right + 6} y2={y} stroke="#00d2ff" strokeWidth="2.5" strokeDasharray="4 3" opacity="0.8" />
+                      <rect x={width - padding.right + 6} y={y - 12} width={110} height={24} rx={6} fill="#0369a1" stroke="#00d2ff" strokeWidth="1.5" />
+                      <text x={width - padding.right + 12} y={y + 4} fill="#ffffff" fontSize="11" fontWeight="900" fontFamily="Space Mono">
+                        바닥 {Number(pocPriceLine).toLocaleString()}
                       </text>
                     </g>
                   )
