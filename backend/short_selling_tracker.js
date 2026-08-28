@@ -184,7 +184,18 @@ export async function getStockShortSelling(ticker, period = '3m') {
         priceChangePct: pInfo.changePct || 0,
         shortRatio
       };
-    }).filter(item => item.shortVolume > 0 || item.totalVolume > 0).reverse(); // 오래된 순으로 정렬
+    })
+    .filter(item => {
+      // ⚠️ 당일(오늘) KRX 공매도 미집계 데이터 제거: 공매도량=0이고 날짜가 오늘인 경우 차트에서 제외
+      // KRX 공매도 데이터는 장 마감 후 수 시간 뒤 집계되므로 장중에는 0으로 반환됨
+      // → 이 데이터를 포함하면 차트 우측 끝이 0%로 뚝 떨어지는 시각적 오해 유발
+      if (item.shortVolume === 0) {
+        const todayKst = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10);
+        if (item.date === todayKst) return false; // 오늘 미집계 0 데이터 제거
+      }
+      return item.shortVolume > 0 || item.totalVolume > 0;
+    })
+    .reverse(); // 오래된 순으로 정렬
 
     // 4. 공매도 퀀트 분석 지표 산출
     let totalShortVolume = 0;

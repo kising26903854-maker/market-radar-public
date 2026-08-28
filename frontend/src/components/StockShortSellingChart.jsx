@@ -210,18 +210,35 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
       </div>
 
       {/* ─── 3. 진단 브리핑 박스 ─── */}
-      <div style={{
-        padding: '12px 16px',
-        background: 'rgba(0,0,0,0.35)',
-        borderRadius: 12,
-        borderLeft: summary.isDecreasing ? '4px solid #10b981' : (summary.overheatStatus === 'OVERHEAT' ? '4px solid #ef4444' : '4px solid #f59e0b'),
-        marginBottom: 16,
-        fontSize: '.85rem',
-        color: '#f1f5f9',
-        lineHeight: 1.6
-      }}>
-        {summary.isDecreasing ? '🚀' : '💡'} <strong>퀀트 진단:</strong> {summary.overheatDesc || '공매도 비중이 안정적인 범위 내에서 유지되고 있습니다.'}
-      </div>
+      {(() => {
+        const st = summary.overheatStatus;
+        const borderColor =
+          st === 'SHRINKING' ? '#10b981' :
+          st === 'STABILIZING' ? '#34d399' :
+          st === 'OVERHEAT' ? '#ef4444' :
+          st === 'CAUTION' ? '#f59e0b' :
+          '#94a3b8';
+        const icon =
+          st === 'SHRINKING' ? '📉' :
+          st === 'STABILIZING' ? '📊' :
+          st === 'OVERHEAT' ? '🚨' :
+          st === 'CAUTION' ? '⚠️' :
+          '💡';
+        return (
+          <div style={{
+            padding: '12px 16px',
+            background: 'rgba(0,0,0,0.35)',
+            borderRadius: 12,
+            borderLeft: `4px solid ${borderColor}`,
+            marginBottom: 16,
+            fontSize: '.85rem',
+            color: '#f1f5f9',
+            lineHeight: 1.6
+          }}>
+            {icon} <strong>퀀트 진단:</strong> {summary.overheatDesc || '공매도 비중이 안정적인 범위 내에서 유지되고 있습니다.'}
+          </div>
+        );
+      })()}
 
       {/* ─── 4. 인터랙티브 SVG 듀얼 차트 (주가 vs 공매도 비중 % + 하단 거래량 바) ─── */}
       <div style={{
