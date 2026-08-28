@@ -5,6 +5,51 @@ import EpsTrendChart from './EpsTrendChart.jsx'
 import RoeTrendChart from './RoeTrendChart.jsx'
 import RevenueIncomeChart from './RevenueIncomeChart.jsx'
 
+// 🎨 세련된 현대식 SVG 라인 아이콘 컴포넌트들
+const MenuIcon = ({ type, size = 16, color = "currentColor", style = {} }) => {
+  const getPath = () => {
+    switch (type) {
+      case 'nps':
+        return <path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11M20 10v11M8 10v11M12 10v11M16 10v11" />
+      case 'trophy':
+        return <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34M12 2a7 7 0 0 1 7 7c0 2.25-1.5 4.5-4 5H9c-2.5-.5-4-2.75-4-5a7 7 0 0 1 7-7z" />
+      case 'company':
+        return (
+          <>
+            <rect x="4" y="2" width="16" height="20" rx="2" ry="2" />
+            <line x1="9" y1="22" x2="9" y2="16" /><line x1="15" y1="22" x2="15" y2="16" />
+            <path d="M8 6h.01M16 6h.01M8 10h.01M16 10h.01M12 6h.01M12 10h.01" />
+          </>
+        )
+      case 'short-selling':
+        return (
+          <>
+            <polyline points="23 18 13.5 8.5 8.5 13.5 1 6" />
+            <polyline points="17 18 23 18 23 12" />
+          </>
+        )
+      default:
+        return null
+    }
+  }
+
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color}
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: 8, ...style }}
+    >
+      {getPath()}
+    </svg>
+  )
+}
+
 export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
   const [period, setPeriod] = useState('day') // 'minute' | 'day' | 'week' | 'month' | 'year'
   const [chartData, setChartData] = useState([])
@@ -204,8 +249,13 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                 현재가: {displayCurrentPrice ? Number(displayCurrentPrice).toLocaleString() + '원' : '실시간 시세 동기화 중...'}
               </span>
               {stock.targetPrice && (
-                <span style={{ padding: '3px 10px', background: 'rgba(16,185,129,0.15)', border: '1px solid #10b981', borderRadius: 14, fontSize: '.8rem', color: '#34d399', fontWeight: 800 }}>
-                  🎯 월가 적정목표: {Number(stock.targetPrice).toLocaleString()}원
+                <span style={{ padding: '3px 10px', background: 'rgba(16,185,129,0.15)', border: '1px solid #10b981', borderRadius: 14, fontSize: '.8rem', color: '#34d399', fontWeight: 800, display: 'inline-flex', alignItems: 'center' }}>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: 6 }}>
+                    <circle cx="12" cy="12" r="10" />
+                    <circle cx="12" cy="12" r="6" />
+                    <circle cx="12" cy="12" r="2" />
+                  </svg>
+                  월가 적정목표: {Number(stock.targetPrice).toLocaleString()}원
                 </span>
               )}
               <button
@@ -227,7 +277,7 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                   gap: 4
                 }}
               >
-                <span>📉 공매도 추이 분석</span>
+                <span><MenuIcon type="short-selling" size={14} color="#f87171" style={{ marginRight: 4 }} />공매도 추이 분석</span>
               </button>
             </div>
           </div>
@@ -244,10 +294,15 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                   borderRadius: 10,
                   fontSize: '.8rem',
                   fontWeight: 800,
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center'
                 }}
               >
-                🔗 밸류체인 보기
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: 6 }}>
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                </svg>
+                밸류체인 보기
               </button>
             )}
             <button
@@ -286,7 +341,7 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10, flexWrap: 'wrap', gap: 8 }}>
               <div style={{ fontSize: '.95rem', fontWeight: 900, color: '#93c5fd', display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span>🏢</span>
+                <MenuIcon type="company" size={18} color="#93c5fd" style={{ marginRight: 0 }} />
                 <span>무엇을 하는 회사인가? (기업 개요 & 핵심 비즈니스)</span>
                 {companySummary.wicsSector && (
                   <span style={{ fontSize: '.74rem', background: 'rgba(59,130,246,0.25)', color: '#60a5fa', padding: '2px 8px', borderRadius: 6, fontWeight: 800 }}>
@@ -294,8 +349,8 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                   </span>
                 )}
                 {companySummary.marketCapRank && (
-                  <span style={{ fontSize: '.74rem', background: 'rgba(234,179,8,0.25)', color: '#fbbf24', padding: '2px 8px', borderRadius: 6, fontWeight: 800 }}>
-                    🏆 {companySummary.marketCapRank}
+                  <span style={{ fontSize: '.74rem', background: 'rgba(234,179,8,0.25)', color: '#fbbf24', padding: '2px 8px', borderRadius: 6, fontWeight: 800, display: 'inline-flex', alignItems: 'center' }}>
+                    <MenuIcon type="trophy" size={13} color="#fbbf24" style={{ marginRight: 4 }} /> {companySummary.marketCapRank}
                   </span>
                 )}
               </div>
