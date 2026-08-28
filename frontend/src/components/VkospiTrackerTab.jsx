@@ -1498,7 +1498,17 @@ export default function VkospiTrackerTab() {
                     {(t.kosdaqChangePct || 0) >= 0 ? '+' : ''}{t.kosdaqChangePct || 0}%
                   </td>
                   <td style={{ padding: '12px 18px', fontFamily: 'Space Mono', fontWeight: 900, color: '#f87171' }}>
-                    {t.vkospi} POINT {idx === 0 && <span style={{ fontSize: '.74rem', color: '#60a5fa' }}>(-0.47 / -0.83%)</span>}
+                    <span>{t.vkospi} pt</span>
+                    {t.vkospiChange !== undefined && (
+                      <span style={{
+                        fontSize: '.74rem',
+                        marginLeft: 6,
+                        color: t.vkospiChange >= 0 ? '#ef4444' : '#10b981',
+                        fontWeight: 800
+                      }}>
+                        ({t.vkospiChange >= 0 ? '+' : ''}{t.vkospiChange} / {t.vkospiChangePct >= 0 ? '+' : ''}{t.vkospiChangePct}%)
+                      </span>
+                    )}
                   </td>
                   <td style={{ padding: '12px 18px' }}>
                     <span style={{
