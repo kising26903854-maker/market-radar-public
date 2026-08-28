@@ -44,6 +44,16 @@ export async function getCompanySummary(code) {
     const wicsSector = $('div.trade_compare h4.h_sub a, div.trade_compare h4.h_sub em a, div.trade_compare h4.h_trade em a').first().text().trim() || '';
     const name = $('div.wrap_company h2 a').text().trim() || '';
 
+    // 🎯 시가총액 순위 추출 (예: "코스피 1위", "코스닥 39위"로 자동 구분됨)
+    let marketCapRank = '';
+    $('a[href*="sise_market_sum.naver"]').each((i, el) => {
+      const parent = $(el).parent();
+      const td = parent.next('td');
+      if (td.length > 0) {
+        marketCapRank = td.text().trim().replace(/\s+/g, ' ');
+      }
+    });
+
     const summaryText = paragraphs.join('\n\n');
 
     // 3. Fallback 기본값 (만약 네이버에서 단락을 못 긁었을 때)
@@ -56,6 +66,7 @@ export async function getCompanySummary(code) {
       code,
       name,
       wicsSector,
+      marketCapRank,
       summary: summaryText || finalParagraphs.join('\n\n'),
       paragraphs: finalParagraphs,
       overview: finalParagraphs[0] || '',

@@ -285,6 +285,11 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                     WICS: {companySummary.wicsSector}
                   </span>
                 )}
+                {companySummary.marketCapRank && (
+                  <span style={{ fontSize: '.74rem', background: 'rgba(234,179,8,0.25)', color: '#fbbf24', padding: '2px 8px', borderRadius: 6, fontWeight: 800 }}>
+                    🏆 {companySummary.marketCapRank}
+                  </span>
+                )}
               </div>
               <span style={{ fontSize: '.72rem', color: 'var(--t3)', fontWeight: 700 }}>
                 📡 FnGuide 공식 연동
