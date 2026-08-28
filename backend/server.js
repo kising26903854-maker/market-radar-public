@@ -1200,8 +1200,35 @@ if (fs.existsSync(frontendDist)) {
   })
 }
 
+// 헬스체크 및 Keep-Alive 활성용 라우트
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
 // ─── 서버 시작 ───────────────────────────────────────────
 app.listen(PORT, () => {
+  // ─── Render.com 프리티어 슬립 방지 셀프 핑 ───
+  const externalUrl = process.env.RENDER_EXTERNAL_URL;
+  if (process.env.RENDER === 'true' && externalUrl) {
+    import('https').then((https) => {
+      const pingInterval = 10 * 60 * 1000; // 10분 주기
+      setInterval(() => {
+        try {
+          console.log(`[Keep Awake] Pinging self at ${externalUrl}/health...`);
+          https.get(`${externalUrl}/health`, (res) => {
+            console.log(`[Keep Awake] Response status: ${res.statusCode}`);
+          }).on('error', (err) => {
+            console.error('[Keep Awake] Ping request error:', err.message);
+          });
+        } catch (err) {
+          console.error('[Keep Awake] Ping failed:', err.message);
+        }
+      }, pingInterval);
+    }).catch((err) => {
+      console.error('[Keep Awake] Failed to import https module:', err.message);
+    });
+  }
+
   console.log(`
   ╔══════════════════════════════════════════╗
   ║   📊 KRX 퀀트 마켓 레이더 (Public)       ║
