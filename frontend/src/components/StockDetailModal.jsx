@@ -1,6 +1,9 @@
 // StockDetailModal.jsx — 🏛️ 종목 상세 퀀트 분석 & 실시간 차트 모달 팝업
 import React, { useState, useEffect } from 'react'
 import StockShortSellingChart from './StockShortSellingChart.jsx'
+import EpsTrendChart from './EpsTrendChart.jsx'
+import RoeTrendChart from './RoeTrendChart.jsx'
+import RevenueIncomeChart from './RevenueIncomeChart.jsx'
 
 export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
   const [period, setPeriod] = useState('day') // 'minute' | 'day' | 'week' | 'month' | 'year'
@@ -501,6 +504,15 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
             )}
           </div>
         </div>
+
+        {/* 📈 주당순이익 (EPS) 추이 (연간/분기) */}
+        <EpsTrendChart stock={stock} />
+
+        {/* 📊 자기자본이익률 (ROE) 추이 (연간/분기) */}
+        <RoeTrendChart stock={stock} />
+
+        {/* 📊 매출액 & 영업이익 추이 (연간/분기) */}
+        <RevenueIncomeChart stock={stock} />
 
         {/* ─── 📉 한국거래소(KRX) 공식 개별종목 공매도(Short Selling) 거래량·거래대금·비중(%) 인터랙티브 듀얼 차트 ─── */}
         <div id="short-selling-section">
