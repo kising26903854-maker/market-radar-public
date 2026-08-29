@@ -17,13 +17,6 @@
       "value": 0
     },
     {
-      "stockCode": "005935",
-      "stockName": "삼성전자우",
-      "ratio": 7.84,
-      "shares": 458637667,
-      "value": 0
-    },
-    {
       "stockCode": "402340",
       "stockName": "SK스퀘어",
       "ratio": 8.84,
@@ -542,13 +535,6 @@
       "value": 0
     },
     {
-      "stockCode": "005387",
-      "stockName": "현대차2우B",
-      "ratio": 7.31,
-      "shares": 14967846,
-      "value": 0
-    },
-    {
       "stockCode": "021240",
       "stockName": "코웨이",
       "ratio": 7.51,
@@ -686,13 +672,6 @@
       "stockName": "LG생활건강",
       "ratio": 6.09,
       "shares": 912621,
-      "value": 0
-    },
-    {
-      "stockCode": "005385",
-      "stockName": "현대차우",
-      "ratio": 7.31,
-      "shares": 14967846,
       "value": 0
     },
     {
