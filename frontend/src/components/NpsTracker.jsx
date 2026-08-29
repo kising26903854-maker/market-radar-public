@@ -629,43 +629,70 @@ export default function NpsTracker({ onSelectStock }) {
           ))}
         </div>
 
-        {/* 실시간 빠른 검색 */}
-        <div style={{ position: 'relative', minWidth: 260 }}>
-          <input
-            type="text"
-            placeholder="🔍 종목명 / 코드 빠른 검색..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+        {/* 정렬 셀렉터 및 실시간 빠른 검색 */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+          <select
+            value={`${sortConfig.key}_${sortConfig.direction}`}
+            onChange={(e) => {
+              const [key, direction] = e.target.value.split('_');
+              setSortConfig({ key, direction });
+            }}
             style={{
-              width: '100%',
-              padding: '10px 16px',
+              padding: '10px 14px',
               background: 'rgba(0,0,0,0.4)',
               border: '1px solid rgba(255,255,255,0.12)',
               borderRadius: 12,
               color: '#fff',
               fontSize: '.85rem',
-              outline: 'none'
+              fontWeight: 800,
+              outline: 'none',
+              cursor: 'pointer'
             }}
-          />
-          {searchQuery && (
-            <button
-              onClick={() => setSearchQuery('')}
+          >
+            <option value="value_desc" style={{ background: '#1e293b' }}>💰 평가금액 상위순</option>
+            <option value="ratio_desc" style={{ background: '#1e293b' }}>📊 지분율 상위순</option>
+            <option value="diffRatio_desc" style={{ background: '#1e293b' }}>📈 비중 확대순 (내림차순)</option>
+            <option value="diffRatio_asc" style={{ background: '#1e293b' }}>📉 비중 축소순 (내림차순)</option>
+            <option value="shares_desc" style={{ background: '#1e293b' }}>📦 보유주식 상위순</option>
+          </select>
+          
+          <div style={{ position: 'relative', minWidth: 260 }}>
+            <input
+              type="text"
+              placeholder="🔍 종목명 / 코드 빠른 검색..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               style={{
-                position: 'absolute',
-                right: 10,
-                top: '50%',
-                transform: 'translateY(-50%)',
-                background: 'transparent',
-                border: 'none',
-                color: 'var(--t3)',
-                cursor: 'pointer',
-                fontSize: '.9rem',
-                fontWeight: 'bold'
+                width: '100%',
+                padding: '10px 16px',
+                background: 'rgba(0,0,0,0.4)',
+                border: '1px solid rgba(255,255,255,0.12)',
+                borderRadius: 12,
+                color: '#fff',
+                fontSize: '.85rem',
+                outline: 'none'
               }}
-            >
-              ✕
-            </button>
-          )}
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                style={{
+                  position: 'absolute',
+                  right: 10,
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'transparent',
+                  border: 'none',
+                  color: 'var(--t3)',
+                  cursor: 'pointer',
+                  fontSize: '.9rem',
+                  fontWeight: 'bold'
+                }}
+              >
+                ✕
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
