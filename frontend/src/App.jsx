@@ -14,6 +14,7 @@ import MomentumScanner from './components/MomentumScanner.jsx'
 import VkospiTrackerTab from './components/VkospiTrackerTab.jsx'
 import BearMarketScannerTab from './components/BearMarketScannerTab.jsx'
 import GrowthStockScreener from './components/GrowthStockScreener.jsx'
+import BaseRateChart from './components/BaseRateChart.jsx'
 
 // 🎨 세련된 현대식 SVG 라인 아이콘 컴포넌트들
 const MenuIcon = ({ type, size = 16, color = "currentColor", style = {} }) => {
@@ -44,6 +45,7 @@ const MenuIcon = ({ type, size = 16, color = "currentColor", style = {} }) => {
       case 'chat':
         return <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
       case 'wallstreet':
+      case 'base-rates':
       case 'nps-tracker':
       case 'nps-disclosures':
       case 'nps':
@@ -421,6 +423,10 @@ export default function App() {
             <MenuIcon type="global-news" color={tab === 'global-news' ? '#fff' : '#818cf8'} />
             국제정세/매크로 뉴스
           </button>
+          <button className={`tab-btn ${tab === 'base-rates' ? 'active' : ''}`} onClick={() => { setTab('base-rates'); setIsMenuOpen(false); }}>
+            <MenuIcon type="base-rates" color={tab === 'base-rates' ? '#fff' : '#3b82f6'} />
+            한·미 기준금리 추이
+          </button>
           <button className={`tab-btn ${tab === 'market_cap' ? 'active' : ''}`} onClick={() => { setTab('market_cap'); setIsMenuOpen(false); }}>
             <MenuIcon type="market_cap" color={tab === 'market_cap' ? '#fff' : '#3b82f6'} />
             코스피·코스닥 시총 랭킹
@@ -535,6 +541,9 @@ export default function App() {
 
         {/* 탭 10: 🌍 국제정세/매크로 뉴스 */}
         {tab === 'global-news' && <GlobalNewsDashboard />}
+
+        {/* 탭 10.5: 🏛️ 한·미 기준금리 추이 분석 */}
+        {tab === 'base-rates' && <BaseRateChart />}
 
         {/* 탭 11: 🏆 코스피·코스닥 시가총액 랭킹 */}
         {tab === 'market_cap' && <MarketCapRanking onSelectStock={handleOpenStockChart} onOpenValueChain={handleOpenValueChain} />}

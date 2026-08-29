@@ -29,6 +29,7 @@ import { getKrxVolatilityData, sendVkospiBriefing } from './vkospi_tracker.js'
 import { getBearMarketStocks, sendBearMarketBriefing } from './bear_market_scanner.js'
 import { runGrowthStockScreener } from './growth_stock_screener.js'
 import { getStockShortSelling } from './short_selling_tracker.js'
+import { getBaseRatesData } from './base_rates.js'
 
 const app = express()
 app.use(cors())
@@ -385,6 +386,17 @@ app.get('/api/bond-yields', async (req, res) => {
     res.json(data)
   } catch (e) {
     res.status(500).json({ success: false, error: e.message })
+  }
+})
+
+// 한·미 기준금리 추이 API
+app.get('/api/base-rates', async (req, res) => {
+  try {
+    const forceRefresh = req.query.refresh === 'true';
+    const data = await getBaseRatesData(forceRefresh);
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
   }
 })
 
