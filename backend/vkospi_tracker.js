@@ -96,60 +96,21 @@ async function fetchNaverIndexHistory(indexCode, targetCount = 60) {
 }
 
 /**
- * ⏱️ 당일 장중 시간대별 실시간 듀얼 시계열 생성 (현재 시각까지만 정밀 생성!)
+ * ⚡ 진짜 KOSPI 분봉 데이터를 기반으로 VKOSPI 역상관 실시간 차트 생성
  */
-function generateIntradayDualTimeline(openPrice, highPrice, lowPrice, closePrice, prevClose, currentVkospi = TARGET_LATEST_VKOSPI, vkospiPrevClose = 55.59) {
-  const { totalMinutes } = getKstNow();
-
-  const startMin = 540; // 09:00
-  const endMinSession = 930; // 15:30
-  const isMarketOpen = totalMinutes >= startMin && totalMinutes <= endMinSession;
-
-  // 장중이면 현재 시각까지만 생성, 장마감 후면 15:30까지 생성
-  const targetEndMin = isMarketOpen ? totalMinutes : (totalMinutes < startMin ? startMin + 30 : endMinSession);
-
-  const timeStrings = [];
-  const minInterval = Math.max(1, Math.floor((targetEndMin - startMin) / 18));
-
-  for (let m = startMin; m <= targetEndMin; m += minInterval) {
-    const h = Math.floor(m / 60);
-    const min = m % 60;
-    timeStrings.push(`${String(h).padStart(2, '0')}:${String(min).padStart(2, '0')}`);
-  }
-
-  // 마지막 점에 정확한 현재 시각 분 추가
-  const curH = Math.floor(targetEndMin / 60);
-  const curM = targetEndMin % 60;
-  const lastTimeStr = `${String(curH).padStart(2, '0')}:${String(curM).padStart(2, '0')}`;
-  if (timeStrings[timeStrings.length - 1] !== lastTimeStr) {
-    timeStrings.push(lastTimeStr);
-  }
-
-  const count = timeStrings.length;
+function buildRealIntradayDualTimeline(kospiIntraday, prevClose, currentVkospi = TARGET_LATEST_VKOSPI, vkospiPrevClose = 55.59) {
+  if (!kospiIntraday || kospiIntraday.length === 0) return [];
+  
   const points = [];
-  const vOpen = parseFloat((currentVkospi + 0.35).toFixed(2));
-
-  for (let i = 0; i < count; i++) {
-    const t = timeStrings[i];
-    let kVal;
-    let vVal;
-
-    if (i === 0) {
-      kVal = openPrice; // 09:00 시가
-      vVal = vOpen;
-    } else if (i === count - 1) {
-      kVal = closePrice; // 현재 실시간 체결가
-      vVal = currentVkospi;
-    } else {
-      // 09:00부터 현재 시각까지 자연스러운 실시간 호가 변동
-      const progress = i / (count - 1);
-      const wave = Math.sin(progress * Math.PI * 2.5) * 6.5;
-      kVal = parseFloat((openPrice + (closePrice - openPrice) * progress + wave).toFixed(2));
-
-      // 변동성 지수 (코스피와 역상관)
-      const vWave = -wave * 0.04;
-      vVal = parseFloat((vOpen + (currentVkospi - vOpen) * progress + vWave).toFixed(2));
-    }
+  const baseKospi = kospiIntraday[0].price;
+  const baseVkospi = parseFloat((currentVkospi + (kospiIntraday[kospiIntraday.length - 1].price - baseKospi) * 0.04).toFixed(2));
+  
+  for (let i = 0; i < kospiIntraday.length; i++) {
+    const t = kospiIntraday[i].time;
+    const kVal = kospiIntraday[i].price;
+    
+    const diff = kVal - baseKospi;
+    const vVal = parseFloat((baseVkospi - diff * 0.04).toFixed(2));
 
     const kChange = parseFloat((kVal - prevClose).toFixed(2));
     const kChangePct = parseFloat(((kChange / prevClose) * 100).toFixed(2));
@@ -182,13 +143,37 @@ function generateIntradayDualTimeline(openPrice, highPrice, lowPrice, closePrice
       riskLabel
     });
   }
-
   return points;
 }
 
 /**
  * ⚡ KRX 변동성지수(VKOSPI) & 코스피 / 코스닥 실시간 시계열 데이터 조회
  */
+async function fetchYahooIntraday(symbol) {
+  try {
+    const url = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=1d&interval=1m`;
+    const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+    if (!res.ok) return [];
+    const data = await res.json();
+    const timestamps = data?.chart?.result?.[0]?.timestamp || [];
+    const closes = data?.chart?.result?.[0]?.indicators?.quote?.[0]?.close || [];
+    const result = [];
+    for(let i=0; i<timestamps.length; i++) {
+      if(closes[i] !== null && closes[i] !== undefined) {
+        const d = new Date(timestamps[i] * 1000);
+        const kstTime = new Date(d.getTime() + (9 * 60 * 60 * 1000));
+        const hh = String(kstTime.getUTCHours()).padStart(2, '0');
+        const mm = String(kstTime.getUTCMinutes()).padStart(2, '0');
+        result.push({ time: hh + ':' + mm, price: parseFloat(closes[i].toFixed(2)) });
+      }
+    }
+    return result;
+  } catch(e) {
+    console.error('Yahoo intraday error:', e);
+    return [];
+  }
+}
+
 export async function getKrxVolatilityData(period = '3m') {
   const now = Date.now();
   if (vkospiCache && (now - lastFetchTime < CACHE_TTL) && vkospiCache.period === period) {
@@ -358,15 +343,14 @@ export async function getKrxVolatilityData(period = '3m') {
     const avgVkospi = parseFloat((allVkospi.reduce((a, b) => a + b, 0) / allVkospi.length).toFixed(2));
     const correlation = calculateCorrelation(allKospi, allVkospi);
 
-    // 당일 장중 시간대별 실시간 데이터 (09:00 ~ 현재 시각)
+    // 당일 장중 시간대별 실시간 데이터 (09:00 ~ 현재 시각) 진짜 분봉 연동
     const kospiPrevClose = parseFloat((latest.kospi - latest.kospiChange).toFixed(2)) || 6808.21;
     const kosdaqPrevClose = parseFloat((latest.kosdaq - latest.kosdaqChange).toFixed(2)) || 826.87;
 
-    const intradayDualTimeline = generateIntradayDualTimeline(
-      latest.kospiOpen || 6996.12,
-      latest.kospiHigh || 6996.12,
-      latest.kospiLow || 6841.88,
-      latest.kospi,
+    const kospiIntraday = await fetchYahooIntraday('^KS11');
+
+    const intradayDualTimeline = buildRealIntradayDualTimeline(
+      kospiIntraday,
       kospiPrevClose,
       latest.vkospi,
       prev.vkospi

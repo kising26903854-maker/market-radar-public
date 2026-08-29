@@ -11,8 +11,7 @@ export default function VkospiTrackerTab() {
   const [topChartMode, setTopChartMode] = useState('INTRADAY'); // 'INTRADAY' | 'DAILY'
   const [sendingTelegram, setSendingTelegram] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
-  const [liveTickCounter, setLiveTickCounter] = useState(0);
-  const [lastLiveUpdated, setLastLiveUpdated] = useState('');
+    const [lastLiveUpdated, setLastLiveUpdated] = useState('');
 
   // 차트 마우스 호버 인터랙션
   const [hoverIndex, setHoverIndex] = useState(null);
@@ -43,11 +42,20 @@ export default function VkospiTrackerTab() {
     }
   };
 
-  // ⚡ 1. 5초 주기 백엔드 API 실시간 동기화
+  // ⚡ 1. 5초 주기 백엔드 API 실시간 동기화 (장 마감 후 폴링 중지)
   useEffect(() => {
     fetchVkospiData(period);
     const interval = setInterval(() => {
-      fetchVkospiData(period, true);
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const totalMinutes = hours * 60 + minutes;
+      const day = now.getDay();
+      const isMarketOpen = day >= 1 && day <= 5 && totalMinutes >= 540 && totalMinutes <= 930;
+      
+      if (isMarketOpen) {
+        fetchVkospiData(period, true);
+      }
     }, 5000);
     return () => clearInterval(interval);
   }, [period]);
@@ -108,16 +116,7 @@ export default function VkospiTrackerTab() {
     showToast('📥 변동성 지수 & 코스피 CSV 파일이 다운로드되었습니다.');
   };
 
-  // 실시간 미세 틱 보정 계수
-  const microJitter = useMemo(() => {
-    const sinVal = Math.sin(liveTickCounter * 0.7);
-    return {
-      kospi: parseFloat((sinVal * 0.45).toFixed(2)),
-      vkospi: parseFloat((-sinVal * 0.04).toFixed(2)),
-      kosdaq: parseFloat((sinVal * 0.12).toFixed(2))
-    };
-  }, [liveTickCounter]);
-
+  
   const cur = data?.current || {};
   const stats = data?.stats || {};
   const contrarian = data?.contrarian || {};
@@ -126,20 +125,11 @@ export default function VkospiTrackerTab() {
   const vkospiData = data?.vkospi || {};
 
   // 실시간 라이브 가격
-  const liveKospiPrice = useMemo(() => {
-    const base = kospiData.currentPrice || 6742.74;
-    return parseFloat((base + microJitter.kospi).toFixed(2));
-  }, [kospiData.currentPrice, microJitter.kospi]);
+  const liveKospiPrice = kospiData.currentPrice || 6742.74;
 
-  const liveVkospiPrice = useMemo(() => {
-    const base = cur.vkospi || 56.29;
-    return parseFloat((base + microJitter.vkospi).toFixed(2));
-  }, [cur.vkospi, microJitter.vkospi]);
+  const liveVkospiPrice = cur.vkospi || 56.29;
 
-  const liveKosdaqPrice = useMemo(() => {
-    const base = kosdaqData.currentPrice || 827.15;
-    return parseFloat((base + microJitter.kosdaq).toFixed(2));
-  }, [kosdaqData.currentPrice, microJitter.kosdaq]);
+  const liveKosdaqPrice = kosdaqData.currentPrice || 827.15;
 
   // 메인 차트에 사용할 시계열 (당일 실시간 vs 일별 시계열)
   const activeTimeline = useMemo(() => {
