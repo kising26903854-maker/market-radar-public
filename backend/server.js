@@ -1262,14 +1262,14 @@ app.listen(PORT, () => {
   // 🔔 실시간 목표가/손절선 텔레그램 감시 엔진 가동
   startAlertEngine()
 
-  // 🔄 매일 재무 데이터 자동 갱신 (PER/PBR/ROE 등 네이버 금융 API 연동)
-  startDailyFinancialsSync()
+  // [중요] 네이버 금융 API 서버 차단(Timeout) 방지: 클라우드 컨테이너 시작 시 부하 분산을 위한 지연(Staggering) 기동
+  setTimeout(() => { startDailyFinancialsSync() }, 10000);
 
-  // 📡 코스피+코스닥 전 종목 저평가 스캔 (매일 08:40 자동 실행)
-  startDailyMarketScan()
+  // 📊 코스피+코스닥 전 종목 저평가 스캔 (매일 08:40 자동 실행)
+  setTimeout(() => { startDailyMarketScan() }, 25000);
 
-  // 🏆 일간 시가총액 랭킹 스케줄러 (매일 장 마감 이후 자동 실행)
-  startDailyMarketCapTracker()
+  // 🏆 주간 시가총액 변동 스케줄러 (매일 장 마감 이후 자동 실행)
+  setTimeout(() => { startDailyMarketCapTracker() }, 40000);
 
   // 🔄 매일 자정/장마감 후 자동 데이터 동기화 스케줄러 (Daily Auto-Sync Engine)
   setInterval(async () => {
