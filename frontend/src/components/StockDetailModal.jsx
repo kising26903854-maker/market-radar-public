@@ -603,58 +603,6 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
           <StockShortSellingChart stockCode={stock.code} stockName={stock.name} />
         </div>
 
-        {/* ─── 4. 🕵️‍♂️ 세력 매집봉 포착 일자 타임라인 표 ─── */}
-        <div style={{ background: 'var(--bg3)', borderRadius: 16, padding: 18, marginBottom: 20, border: '1px solid var(--border)' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, flexWrap: 'wrap', gap: 8 }}>
-            <div style={{ fontWeight: 900, color: 'var(--gold)', fontSize: '.95rem', display: 'flex', alignItems: 'center', gap: 6 }}>
-              <span>🕵️‍♂️ [월가 퀀트] 세력 매집봉 (Smart Money Accumulation Bar) 포착 일자 표</span>
-            </div>
-            <div style={{ fontSize: '.74rem', color: 'var(--t3)' }}>
-              평균 거래량 대비 150% 이상 터진 주포/세력의 매집 캔들 타임라인
-            </div>
-          </div>
-
-          {accumulationBars.length === 0 ? (
-            <div style={{ padding: 24, textAlign: 'center', color: 'var(--t3)', fontSize: '.84rem' }}>
-              최근 60일간 뚜렷한 세력 대량 매집봉이 탐지되지 않았습니다.
-            </div>
-          ) : (
-            <div style={{ overflowX: 'auto' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '.82rem', textAlign: 'left' }}>
-                <thead>
-                  <tr style={{ background: 'var(--bg2)', borderBottom: '1px solid var(--border)', color: 'var(--t2)' }}>
-                    <th style={{ padding: '9px 12px' }}>📅 매집봉 날짜</th>
-                    <th style={{ padding: '9px 12px' }}>💰 종가 / 고가</th>
-                    <th style={{ padding: '9px 12px' }}>📊 당일 거래량 / 폭발률</th>
-                    <th style={{ padding: '9px 12px' }}>📈 당일 등락률</th>
-                    <th style={{ padding: '9px 12px' }}>🏷️ 세력 매집 진단</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {accumulationBars.map((bar, idx) => (
-                    <tr key={idx} style={{ borderBottom: '1px dashed rgba(255,255,255,0.08)', background: idx % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)' }}>
-                      <td style={{ padding: '10px 12px', fontWeight: 800, color: 'var(--t1)' }}>{bar.date}</td>
-                      <td style={{ padding: '10px 12px', fontWeight: 700, color: 'var(--t1)' }}>
-                        {Number(bar.close).toLocaleString()}원 <span style={{ fontSize: '.72rem', color: 'var(--t3)' }}>(고 {Number(bar.high).toLocaleString()})</span>
-                      </td>
-                      <td style={{ padding: '10px 12px', fontWeight: 800, color: bar.volRatio >= 250 ? '#ef4444' : 'var(--gold)' }}>
-                        {Number(bar.volume).toLocaleString()}주 <span style={{ fontSize: '.72rem', padding: '1px 6px', background: `${bar.signalColor}22`, borderRadius: 4 }}>🔥 +{bar.volRatio}% 폭발</span>
-                      </td>
-                      <td style={{ padding: '10px 12px', fontWeight: 800, color: parseFloat(bar.priceChangePct) >= 0 ? '#ef4444' : '#3b82f6' }}>
-                        {parseFloat(bar.priceChangePct) >= 0 ? `+${bar.priceChangePct}%` : `${bar.priceChangePct}%`}
-                      </td>
-                      <td style={{ padding: '10px 12px' }}>
-                        <span style={{ fontSize: '.74rem', padding: '3px 8px', background: `${bar.signalColor}22`, border: `1px solid ${bar.signalColor}`, borderRadius: 6, color: bar.signalColor, fontWeight: 900 }}>
-                          {bar.signal}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
 
         {/* ─── 5. 월가 6대 기관 퀀트 지표 리포트 ─── */}
         {analysis && (
