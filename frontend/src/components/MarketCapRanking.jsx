@@ -149,7 +149,7 @@ export default function MarketCapRanking({ onOpenValueChain }) {
               return (
                 <tr 
                   key={item.code} 
-                  onClick={() => onOpenValueChain && onOpenValueChain(item)}
+                  onClick={() => onOpenValueChain && onOpenValueChain(item.code, item.name)}
                   style={{ 
                     borderBottom: '1px solid rgba(255,255,255,0.04)',
                     cursor: 'pointer',
@@ -217,7 +217,7 @@ export default function MarketCapRanking({ onOpenValueChain }) {
             {outList.map(item => (
               <div 
                 key={item.code} 
-                onClick={() => onOpenValueChain && onOpenValueChain(item)}
+                onClick={() => onOpenValueChain && onOpenValueChain(item.code, item.name)}
                 style={{ 
                   padding: '10px 16px', 
                   background: 'rgba(0,0,0,0.4)', 
