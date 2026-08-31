@@ -146,31 +146,34 @@ function buildRealIntradayDualTimeline(kospiIntraday, prevClose, currentVkospi =
   return points;
 }
 
-/**
- * ⚡ KRX 변동성지수(VKOSPI) & 코스피 / 코스닥 실시간 시계열 데이터 조회
- */
-async function fetchYahooIntraday(symbol) {
+// ⚡ Naver 공식 네이티브 실시간 분봉 차트 데이터 수집 (코스피, 코스닥, 코스피200)
+async function fetchNaverIntradayChart(code = 'KOSPI') {
   try {
-    const url = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=1d&interval=1m`;
-    const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
-    if (!res.ok) return [];
+    const url = `https://m.stock.naver.com/api/chart/domestic/index/${code}?periodType=day`;
+    const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' } });
+    if (!res.ok) return { intraday: [], lastClosePrice: 0 };
     const data = await res.json();
-    const timestamps = data?.chart?.result?.[0]?.timestamp || [];
-    const closes = data?.chart?.result?.[0]?.indicators?.quote?.[0]?.close || [];
-    const result = [];
-    for(let i=0; i<timestamps.length; i++) {
-      if(closes[i] !== null && closes[i] !== undefined) {
-        const d = new Date(timestamps[i] * 1000);
-        const kstTime = new Date(d.getTime() + (9 * 60 * 60 * 1000));
-        const hh = String(kstTime.getUTCHours()).padStart(2, '0');
-        const mm = String(kstTime.getUTCMinutes()).padStart(2, '0');
-        result.push({ time: hh + ':' + mm, price: parseFloat(closes[i].toFixed(2)) });
-      }
-    }
-    return result;
-  } catch(e) {
-    console.error('Yahoo intraday error:', e);
-    return [];
+    const priceInfos = data?.priceInfos || [];
+    const lastClosePrice = data?.lastClosePrice || 0;
+
+    const intraday = priceInfos.map(p => {
+      const dt = p.localDateTime || '';
+      const hh = dt.substring(8, 10);
+      const mm = dt.substring(10, 12);
+      return {
+        time: `${hh}:${mm}`,
+        price: p.currentPrice,
+        open: p.openPrice,
+        high: p.highPrice,
+        low: p.lowPrice,
+        volume: p.accumulatedTradingVolume
+      };
+    });
+
+    return { intraday, lastClosePrice };
+  } catch (e) {
+    console.error(`[VKOSPI Tracker] Naver intraday error for ${code}:`, e.message);
+    return { intraday: [], lastClosePrice: 0 };
   }
 }
 
@@ -343,11 +346,17 @@ export async function getKrxVolatilityData(period = '3m') {
     const avgVkospi = parseFloat((allVkospi.reduce((a, b) => a + b, 0) / allVkospi.length).toFixed(2));
     const correlation = calculateCorrelation(allKospi, allVkospi);
 
-    // 당일 장중 시간대별 실시간 데이터 (09:00 ~ 현재 시각) 진짜 분봉 연동
-    const kospiPrevClose = parseFloat((latest.kospi - latest.kospiChange).toFixed(2)) || 6808.21;
-    const kosdaqPrevClose = parseFloat((latest.kosdaq - latest.kosdaqChange).toFixed(2)) || 826.87;
+    // 당일 장중 시간대별 실시간 데이터 (09:00 ~ 현재 시각) 네이버 실시간 분봉 연동
+    const [kospiIntradayRes, kosdaqIntradayRes] = await Promise.all([
+      fetchNaverIntradayChart('KOSPI'),
+      fetchNaverIntradayChart('KOSDAQ')
+    ]);
 
-    const kospiIntraday = await fetchYahooIntraday('^KS11');
+    const kospiIntraday = kospiIntradayRes.intraday || [];
+    const kosdaqIntraday = kosdaqIntradayRes.intraday || [];
+
+    const kospiPrevClose = kospiIntradayRes.lastClosePrice || parseFloat((latest.kospi - latest.kospiChange).toFixed(2)) || 6808.21;
+    const kosdaqPrevClose = kosdaqIntradayRes.lastClosePrice || parseFloat((latest.kosdaq - latest.kosdaqChange).toFixed(2)) || 826.87;
 
     const intradayDualTimeline = buildRealIntradayDualTimeline(
       kospiIntraday,
@@ -403,7 +412,11 @@ export async function getKrxVolatilityData(period = '3m') {
       lowPrice: latest.kosdaqLow || 824.22,
       prevClose: kosdaqPrevClose,
       marketStatus: currentMarketStatus,
-      intraday: intradayDualTimeline.map(d => ({ time: d.time, price: parseFloat((d.kospi * 0.1212).toFixed(2)), change: 10.78, changePct: 1.30 })),
+      intraday: kosdaqIntraday.map(d => {
+        const change = parseFloat((d.price - kosdaqPrevClose).toFixed(2));
+        const changePct = kosdaqPrevClose > 0 ? parseFloat(((change / kosdaqPrevClose) * 100).toFixed(2)) : 0;
+        return { time: d.time, price: d.price, change, changePct };
+      }),
       timeline: kosdaqTimeline
     };
 

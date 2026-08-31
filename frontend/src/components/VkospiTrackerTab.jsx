@@ -11,7 +11,8 @@ export default function VkospiTrackerTab() {
   const [topChartMode, setTopChartMode] = useState('INTRADAY'); // 'INTRADAY' | 'DAILY'
   const [sendingTelegram, setSendingTelegram] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
-    const [lastLiveUpdated, setLastLiveUpdated] = useState('');
+  const [lastLiveUpdated, setLastLiveUpdated] = useState('');
+  const [liveTickCounter, setLiveTickCounter] = useState(0);
 
   // 차트 마우스 호버 인터랙션
   const [hoverIndex, setHoverIndex] = useState(null);
