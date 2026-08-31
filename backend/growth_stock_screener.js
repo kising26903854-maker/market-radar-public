@@ -6,18 +6,87 @@
 // * 위 4가지 조건을 모두 만족하는 초우량 고성장 알짜 종목 발굴 엔진
 
 import axios from 'axios';
+import iconv from 'iconv-lite';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CACHE_FILE = path.join(__dirname, 'data', 'growth_screener_cache.json');
+const FINANCIALS_CACHE_FILE = path.join(__dirname, 'data', 'growth_screener_financials_cache.json');
+let financialsCacheInMemory = null;
+
+function loadFinancialsCache() {
+  if (financialsCacheInMemory) return financialsCacheInMemory;
+  try {
+    if (fs.existsSync(FINANCIALS_CACHE_FILE)) {
+      financialsCacheInMemory = JSON.parse(fs.readFileSync(FINANCIALS_CACHE_FILE, 'utf8'));
+      return financialsCacheInMemory;
+    }
+  } catch (e) {}
+  financialsCacheInMemory = {};
+  return financialsCacheInMemory;
+}
+
+function saveFinancialsCache(data) {
+  try {
+    const dir = path.dirname(FINANCIALS_CACHE_FILE);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(FINANCIALS_CACHE_FILE, JSON.stringify(data), 'utf8');
+    financialsCacheInMemory = data;
+  } catch (e) {}
+}
 
 const HEADERS = {
-  'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15',
-  'Referer': 'https://m.stock.naver.com/',
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+  'Referer': 'https://finance.naver.com/',
   'Accept': 'application/json'
 };
+
+async function getAllMarketStockCandidates() {
+  const map = new Map();
+  CANDIDATE_STOCKS.forEach(s => map.set(s.code, s));
+
+  try {
+    const fetchMarketList = async (sosok, pages) => {
+      const list = [];
+      for (let p = 1; p <= pages; p++) {
+        try {
+          const url = `https://finance.naver.com/sise/sise_market_sum.naver?sosok=${sosok}&page=${p}`;
+          const res = await axios.get(url, { responseType: 'arraybuffer', headers: HEADERS, timeout: 5000 });
+          const html = iconv.decode(Buffer.from(res.data), 'euc-kr');
+          const trPattern = /<tr[^>]*>([\s\S]*?)<\/tr>/g;
+          let trMatch;
+          while ((trMatch = trPattern.exec(html)) !== null) {
+            const row = trMatch[1];
+            const codeMatch = row.match(/code=(\d{6})/);
+            const nameMatch = row.match(/<a[^>]*item\/main[^>]*>([^<]+)<\/a>/);
+            if (codeMatch && nameMatch) {
+              list.push({
+                code: codeMatch[1],
+                name: nameMatch[1].trim(),
+                market: sosok === 0 ? 'KOSPI' : 'KOSDAQ'
+              });
+            }
+          }
+        } catch (e) {}
+      }
+      return list;
+    };
+
+    const [kospiList, kosdaqList] = await Promise.all([
+      fetchMarketList(0, 15),
+      fetchMarketList(1, 15)
+    ]);
+
+    kospiList.forEach(s => map.set(s.code, s));
+    kosdaqList.forEach(s => map.set(s.code, s));
+  } catch (e) {
+    console.warn('[Growth Screener] Full candidate fetch warning:', e.message);
+  }
+
+  return Array.from(map.values());
+}
 
 // ─── 대상 종목 유니버스 (KOSPI & KOSDAQ 대표 실적 우량주 및 성장주 80선) ───
 export const CANDIDATE_STOCKS = [
@@ -105,6 +174,12 @@ export const CANDIDATE_STOCKS = [
 
 // ─── 단일 종목 재무제표 3개년 수집 및 증가율 계산 ───
 async function analyzeStockFinancialGrowth(stock) {
+  const finCache = loadFinancialsCache();
+  const cachedItem = finCache[stock.code];
+  if (cachedItem && (Date.now() - (cachedItem.updatedAt || 0) < 24 * 60 * 60 * 1000)) {
+    return cachedItem.data;
+  }
+
   try {
     const url = `https://m.stock.naver.com/api/stock/${stock.code}/finance/annual`;
     const res = await axios.get(url, { headers: HEADERS, timeout: 5000 });
@@ -176,7 +251,7 @@ async function analyzeStockFinancialGrowth(stock) {
       roe: getNum('ROE', p.key)
     }));
 
-    return {
+    const resultData = {
       code: stock.code,
       name: stock.name,
       market: stock.market,
@@ -195,10 +270,246 @@ async function analyzeStockFinancialGrowth(stock) {
       pbr: pbr,
       history: history
     };
+
+    finCache[stock.code] = { updatedAt: Date.now(), data: resultData };
+    return resultData;
   } catch (e) {
-    // API 에러 시 스킵
     return null;
   }
+}
+
+// ─── 🍚 밥그릇 3번 패턴 (1번 급락 -> 2번 바닥 매집 완료 -> 3번 상승초입 맥점) 정밀 진단 ───
+export async function fetchDailyCandlesForBowl(code) {
+  try {
+    const url = `https://fchart.stock.naver.com/sise.nhn?symbol=${code}&timeframe=day&count=120&requestType=0`;
+    const res = await axios.get(url, {
+      headers: { 'User-Agent': 'Mozilla/5.0' },
+      responseType: 'arraybuffer',
+      timeout: 5000
+    });
+    const xml = iconv.decode(Buffer.from(res.data), 'euc-kr');
+    const matches = [...xml.matchAll(/<item data="([^"]+)"\s*\/?>/g)];
+    return matches.map(m => {
+      const p = m[1].split('|');
+      return {
+        date: p[0],
+        open: parseInt(p[1], 10),
+        high: parseInt(p[2], 10),
+        low: parseInt(p[3], 10),
+        close: parseInt(p[4], 10),
+        volume: parseInt(p[5], 10)
+      };
+    });
+  } catch (e) {
+    return [];
+  }
+}
+
+export function analyzeBowlPattern(candles, name, code) {
+  if (!candles || candles.length < 60) return null;
+
+  const closes = candles.map(c => c.close);
+  const volumes = candles.map(c => c.volume);
+  const n = candles.length;
+  const curClose = closes[n - 1];
+
+  const ma5 = closes.slice(-5).reduce((a, b) => a + b, 0) / 5;
+  const ma20 = closes.slice(-20).reduce((a, b) => a + b, 0) / 20;
+
+  const historical = closes.slice(0, n - 5);
+  const maxPrice = Math.max(...historical);
+  const maxIdx = historical.indexOf(maxPrice);
+
+  const minPrice = Math.min(...historical);
+  const minIdx = historical.indexOf(minPrice);
+
+  const dropRate = ((minPrice - maxPrice) / maxPrice) * 100;
+  const hasValidDrop = maxIdx < minIdx && dropRate <= -15;
+
+  const daysSinceMin = (n - 1) - minIdx;
+  const hasConsolidation = daysSinceMin >= 12;
+
+  const reboundFromBottom = ((curClose - minPrice) / minPrice) * 100;
+
+  const isAboveMa20 = curClose >= ma20 * 0.98;
+  const isMa5Above20 = ma5 >= ma20 * 0.99;
+  const isEarlyStage = reboundFromBottom >= 2.0 && reboundFromBottom <= 32.0;
+
+  const baseVolumes = volumes.slice(Math.max(0, minIdx - 5), minIdx + 15);
+  const avgBaseVol = baseVolumes.length > 0 ? baseVolumes.reduce((a, b) => a + b, 0) / baseVolumes.length : 1;
+  const recent5Vol = volumes.slice(-5).reduce((a, b) => a + b, 0) / 5;
+  const volRatio = avgBaseVol > 0 ? (recent5Vol / avgBaseVol) : 1;
+
+  let score = 0;
+  const criteria = [];
+
+  if (hasValidDrop) {
+    score += 25;
+    criteria.push(`① 1번 하락 확인: 고점 ${maxPrice.toLocaleString()}원 대비 ${dropRate.toFixed(1)}% 낙폭`);
+  }
+  if (hasConsolidation) {
+    score += 25;
+    criteria.push(`② 2번 매집 횡보: 바닥 ${minPrice.toLocaleString()}원 형성 후 ${daysSinceMin}일간 매집 완료`);
+  }
+  if (isEarlyStage) {
+    score += 25;
+    criteria.push(`③ 3번 상승초입 가격대: 바닥 대비 +${reboundFromBottom.toFixed(1)}% (과열 없는 맥점)`);
+  }
+  if (isAboveMa20 && isMa5Above20) {
+    score += 15;
+    criteria.push(`④ 이평선 정배열 전환: 5일선(${Math.round(ma5).toLocaleString()}원) ≥ 20일선(${Math.round(ma20).toLocaleString()}원)`);
+  }
+  if (volRatio >= 1.05) {
+    score += 10;
+    criteria.push(`⑤ 거래량 점증: 바닥권 대비 최근 거래량 ${volRatio.toFixed(1)}배 증가`);
+  }
+
+  const isBowlStage3 = score >= 70;
+  const stage = isBowlStage3 ? '3번 상승초기' : (hasConsolidation ? '2번 바닥매집' : (hasValidDrop ? '1번 하락진행' : '패턴미달'));
+  const stageNum = isBowlStage3 ? 3 : (hasConsolidation ? 2 : (hasValidDrop ? 1 : 0));
+
+  return {
+    isBowlStage3,
+    score,
+    stage,
+    stageNum,
+    curPrice: curClose,
+    minPrice,
+    maxPrice,
+    dropRate: parseFloat(dropRate.toFixed(1)),
+    daysSinceMin,
+    reboundFromBottom: parseFloat(reboundFromBottom.toFixed(1)),
+    ma5: Math.round(ma5),
+    ma20: Math.round(ma20),
+    volRatio: parseFloat(volRatio.toFixed(1)),
+    criteria,
+    summaryDesc: `1번 하락(${dropRate.toFixed(1)}%) 후 ${daysSinceMin}일간 2번 바닥 매집 완료 → 바닥 대비 +${reboundFromBottom.toFixed(1)}% 3번 상승초입 진입`
+  };
+}
+
+export async function fetchStockTrendData(code) {
+  try {
+    const url = `https://m.stock.naver.com/api/stock/${code}/trend`;
+    const res = await axios.get(url, {
+      headers: HEADERS,
+      timeout: 4000
+    });
+    return Array.isArray(res.data) ? res.data : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function parsePureBuyNum(str) {
+  if (!str) return 0;
+  return parseInt(String(str).replace(/[^0-9-]/g, ''), 10) || 0;
+}
+
+export function analyzeAccumulationBreakout(candles, trends, name, code) {
+  if (!candles || candles.length < 60) return null;
+
+  const closes = candles.map(c => c.close);
+  const volumes = candles.map(c => c.volume);
+  const n = candles.length;
+  const curClose = closes[n - 1];
+  const curVol = volumes[n - 1];
+
+  const ma5 = closes.slice(-5).reduce((a, b) => a + b, 0) / 5;
+  const ma20 = closes.slice(-20).reduce((a, b) => a + b, 0) / 20;
+  const ma60 = closes.slice(-60).reduce((a, b) => a + b, 0) / 60;
+
+  const boxPeriod = closes.slice(Math.max(0, n - 45), n - 3);
+  const boxTop = Math.max(...boxPeriod);
+  const boxBottom = Math.min(...boxPeriod);
+  const boxHeightPct = ((boxTop - boxBottom) / boxBottom) * 100;
+
+  const isTightBox = boxHeightPct <= 30;
+  const breakoutPct = ((curClose - boxTop) / boxTop) * 100;
+  const isBoxBreakout = isTightBox && breakoutPct >= -3.5 && breakoutPct <= 12.0;
+  const isBoxJustBroken = isTightBox && breakoutPct >= 0 && breakoutPct <= 12.0;
+
+  const prev20Vol = volumes.slice(Math.max(0, n - 25), n - 5);
+  const avgPrev20Vol = prev20Vol.length > 0 ? (prev20Vol.reduce((a, b) => a + b, 0) / prev20Vol.length) : 1;
+  const recentVolRatio = avgPrev20Vol > 0 ? (curVol / avgPrev20Vol) : 1;
+  const hasVolumeSurge = recentVolRatio >= 1.15;
+
+  const maMax = Math.max(ma5, ma20, ma60);
+  const maMin = Math.min(ma5, ma20, ma60);
+  const maConvergenceSpread = ((maMax - maMin) / maMin) * 100;
+  const isMaConverged = maConvergenceSpread <= 8.5;
+  const isMaBullish = ma5 >= ma20 && curClose >= ma20 * 0.98;
+
+  let isDualBuy = false;
+  let isForeignNetBuy = false;
+  let isInstNetBuy = false;
+
+  if (trends && trends.length > 0) {
+    const top3 = trends.slice(0, 3);
+    const sumF = top3.reduce((acc, t) => acc + parsePureBuyNum(t.foreignerPureBuyQuant), 0);
+    const sumO = top3.reduce((acc, t) => acc + parsePureBuyNum(t.organPureBuyQuant), 0);
+    isForeignNetBuy = sumF > 0;
+    isInstNetBuy = sumO > 0;
+    isDualBuy = sumF > 0 && sumO > 0;
+  }
+
+  let score = 0;
+  const signals = [];
+
+  if (isBoxJustBroken) {
+    score += 35;
+    signals.push(`📦 ${boxPeriod.length}일 박스권 상단(${boxTop.toLocaleString()}원) 막 상향 돌파 (+${breakoutPct.toFixed(1)}%)`);
+  } else if (isBoxBreakout) {
+    score += 25;
+    signals.push(`📦 ${boxPeriod.length}일 박스권 상단(${boxTop.toLocaleString()}원) 돌파 임박 (현재가 ${curClose.toLocaleString()}원)`);
+  }
+
+  if (isMaConverged) {
+    score += 20;
+    signals.push(`⚡ 5·20·60일선 초밀집(이격도 ${maConvergenceSpread.toFixed(1)}%) 에너지 응축 완료`);
+  }
+  if (isMaBullish) {
+    score += 10;
+    signals.push(`📈 5일선 > 20일선 정배열 전환 및 상향 발산`);
+  }
+
+  if (isDualBuy) {
+    score += 25;
+    signals.push(`🔥 최근 3일 외인·기관 동시 쌍끌이 순매수 (주포 수급 유입)`);
+  } else if (isForeignNetBuy) {
+    score += 15;
+    signals.push(`💵 최근 3일 외국인 연속 순매수 유입 중`);
+  } else if (isInstNetBuy) {
+    score += 15;
+    signals.push(`💵 최근 3일 기관 연속 순매수 유입 중`);
+  }
+
+  if (hasVolumeSurge) {
+    score += 10;
+    signals.push(`📊 거래량 ${recentVolRatio.toFixed(1)}배 실린 출발`);
+  }
+
+  const isTripleBreakout = score >= 50;
+  const grade = score >= 80 ? '⭐ 트리플 올킬 폭발주' : (score >= 50 ? '🔥 매집완료 급등초입' : '일반');
+
+  return {
+    isTripleBreakout,
+    score,
+    grade,
+    boxTop,
+    boxBottom,
+    boxHeightPct: parseFloat(boxHeightPct.toFixed(1)),
+    breakoutPct: parseFloat(breakoutPct.toFixed(1)),
+    recentVolRatio: parseFloat(recentVolRatio.toFixed(1)),
+    maConvergenceSpread: parseFloat(maConvergenceSpread.toFixed(1)),
+    isBoxBreakout,
+    isBoxJustBroken,
+    isMaConverged,
+    isDualBuy,
+    isForeignNetBuy,
+    isInstNetBuy,
+    signals,
+    summaryDesc: `${boxPeriod.length}일 박스권(${boxTop.toLocaleString()}원) 상향 돌파 + 이평선 밀집 발산 + ${isDualBuy ? '외인·기관 쌍끌이' : '거래량 실린'} 시세 분출 초입`
+  };
 }
 
 // ─── 4대 엄격 AND 조건 스크리닝 실행 ───
@@ -215,17 +526,20 @@ export async function runGrowthStockScreener(forceRefresh = false) {
     }
   }
 
-  console.log('🚀 [종목 발굴기] 4대 재무 퀀트 성장주 스크리닝 시작 (총 80여 개 후보군)...');
+  const allCandidates = await getAllMarketStockCandidates();
+  console.log(`🚀 [종목 발굴기] 코스피+코스닥 전 종목 4대 재무 퀀트 스크리닝 시작 (총 ${allCandidates.length}개 후보군)...`);
 
-  // 병렬 5개씩 배치 수집 (네이버 서버 부하 방지)
+  // 병렬 15개씩 배치 수집 (네이버 서버 부하 방지 및 24시간 재무 캐시 적용)
   const results = [];
-  const chunkSize = 5;
-  for (let i = 0; i < CANDIDATE_STOCKS.length; i += chunkSize) {
-    const chunk = CANDIDATE_STOCKS.slice(i, i + chunkSize);
+  const chunkSize = 15;
+  for (let i = 0; i < allCandidates.length; i += chunkSize) {
+    const chunk = allCandidates.slice(i, i + chunkSize);
     const chunkResults = await Promise.all(chunk.map(s => analyzeStockFinancialGrowth(s)));
     results.push(...chunkResults.filter(Boolean));
-    await new Promise(r => setTimeout(r, 80)); // 80ms 슬립
+    await new Promise(r => setTimeout(r, 20)); // 20ms 슬립
   }
+
+  saveFinancialsCache(financialsCacheInMemory || {});
 
   // 1. 유효 데이터 필터링 (양수 성장률 및 기본 지표 보유)
   const validList = results.filter(item => 
@@ -312,6 +626,26 @@ export async function runGrowthStockScreener(forceRefresh = false) {
     .filter(s => s.matchedCount >= 2 && s.debtRatio <= 120)
     .sort((a, b) => (b.matchedCount - a.matchedCount) || (b.growthScore - a.growthScore));
 
+  console.log('🚀 [종목 발굴기] 4대 퀀트 종목 대상 [밥그릇 3번 & 매집완료 트리플 돌파] 초고속 병렬 분석 수행 중...');
+  const bowlChunkSize = 25;
+  for (let i = 0; i < validList.length; i += bowlChunkSize) {
+    const chunk = validList.slice(i, i + bowlChunkSize);
+    await Promise.all(chunk.map(async s => {
+      try {
+        const [candles, trends] = await Promise.all([
+          fetchDailyCandlesForBowl(s.code),
+          fetchStockTrendData(s.code)
+        ]);
+        s.bowlPattern = analyzeBowlPattern(candles, s.name, s.code);
+        s.breakoutAnalysis = analyzeAccumulationBreakout(candles, trends, s.name, s.code);
+      } catch (err) {
+        s.bowlPattern = null;
+        s.breakoutAnalysis = null;
+      }
+    }));
+    await new Promise(r => setTimeout(r, 10)); // 10ms 슬립
+  }
+
   // 5. 전체 평가 종목 풀 (체크박스 동적 AND 결합 필터링용)
   const allStocks = validList.map(s => {
     const inTopAsset = topAssetCodes.has(s.code);
@@ -341,9 +675,19 @@ export async function runGrowthStockScreener(forceRefresh = false) {
       matchedCount,
       matchTags,
       growthScore: score,
-      isPerfectMatch: matchedCount === 4
+      isPerfectMatch: matchedCount === 4,
+      bowlPattern: s.bowlPattern || null,
+      breakoutAnalysis: s.breakoutAnalysis || null
     };
   }).sort((a, b) => (b.matchedCount - a.matchedCount) || (b.growthScore - a.growthScore));
+
+  const bowlMatches = allStocks
+    .filter(s => s.bowlPattern && s.bowlPattern.isBowlStage3)
+    .sort((a, b) => (b.bowlPattern.score - a.bowlPattern.score) || (a.bowlPattern.reboundFromBottom - b.bowlPattern.reboundFromBottom));
+
+  const breakoutMatches = allStocks
+    .filter(s => s.breakoutAnalysis && s.breakoutAnalysis.isTripleBreakout)
+    .sort((a, b) => (b.breakoutAnalysis.score - a.breakoutAnalysis.score));
 
   const responseData = {
     success: true,
