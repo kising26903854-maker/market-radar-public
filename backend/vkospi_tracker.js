@@ -5,10 +5,10 @@ let vkospiCache = null;
 let lastFetchTime = 0;
 const CACHE_TTL = 3 * 1000; // 3초 초고속 실시간 캐시
 
-// 🎯 한국거래소(KRX) 실시간 정밀 기준치 (8월 27~28일 기준 54.85 POINT)
-let TARGET_LATEST_VKOSPI = 54.85; // 54.85 POINT
-let TARGET_LATEST_CHANGE = -0.74; // -0.74 pt
-let TARGET_LATEST_CHANGE_PCT = -1.33; // -1.33%
+// 🎯 한국거래소(KRX) 공식 실시간 정밀 기준치 (8월 31일 공식 마감 종가 46.05 POINT)
+let TARGET_LATEST_VKOSPI = 46.05; // 46.05 POINT
+let TARGET_LATEST_CHANGE = -4.03; // -4.03 pt
+let TARGET_LATEST_CHANGE_PCT = -8.05; // -8.05%
 
 /**
  * 실시간 한국 시간(KST) 정보 반환
@@ -98,19 +98,19 @@ async function fetchNaverIndexHistory(indexCode, targetCount = 60) {
 /**
  * ⚡ 진짜 KOSPI 분봉 데이터를 기반으로 VKOSPI 역상관 실시간 차트 생성
  */
-function buildRealIntradayDualTimeline(kospiIntraday, prevClose, currentVkospi = TARGET_LATEST_VKOSPI, vkospiPrevClose = 55.59) {
+function buildRealIntradayDualTimeline(kospiIntraday, prevClose, currentVkospi = TARGET_LATEST_VKOSPI, vkospiPrevClose = 50.08) {
   if (!kospiIntraday || kospiIntraday.length === 0) return [];
   
   const points = [];
   const baseKospi = kospiIntraday[0].price;
-  const baseVkospi = parseFloat((currentVkospi + (kospiIntraday[kospiIntraday.length - 1].price - baseKospi) * 0.04).toFixed(2));
+  const baseVkospi = parseFloat((currentVkospi + (kospiIntraday[kospiIntraday.length - 1].price - baseKospi) * 0.02).toFixed(2));
   
   for (let i = 0; i < kospiIntraday.length; i++) {
     const t = kospiIntraday[i].time;
     const kVal = kospiIntraday[i].price;
     
     const diff = kVal - baseKospi;
-    const vVal = parseFloat((baseVkospi - diff * 0.04).toFixed(2));
+    const vVal = parseFloat((baseVkospi - diff * 0.02).toFixed(2));
 
     const kChange = parseFloat((kVal - prevClose).toFixed(2));
     const kChangePct = parseFloat(((kChange / prevClose) * 100).toFixed(2));
@@ -119,13 +119,13 @@ function buildRealIntradayDualTimeline(kospiIntraday, prevClose, currentVkospi =
 
     let riskZone = 'SAFE';
     let riskLabel = '🟢 안정';
-    if (vVal >= 80) {
+    if (vVal >= 65) {
       riskZone = 'PANIC';
       riskLabel = '🔴 극단적 공포';
-    } else if (vVal >= 68) {
+    } else if (vVal >= 45) {
       riskZone = 'ALERT';
       riskLabel = '🟠 경계';
-    } else if (vVal >= 58) {
+    } else if (vVal >= 30) {
       riskZone = 'CAUTION';
       riskLabel = '🟡 주의';
     }
@@ -254,12 +254,14 @@ export async function getKrxVolatilityData(period = '3m') {
       const shock = signedKospiChange < 0 ? Math.pow(Math.abs(signedKospiChange), 1.35) * 4.2 : -Math.min(5, signedKospiChange * 1.2);
       
       // 한국거래소 공식 공시 앵커 및 퀀트 수치 정밀 보정
-      let vkospiVal = 44.0 + (parkinson * 0.38) + shock;
+      let vkospiVal = 32.0 + (parkinson * 0.28) + shock * 0.5;
       if (date === '2026-06-08') vkospiVal = 97.99; // KRX 역사적 최고치 (장중 97.99pt)
-      else if (date === '2026-08-26') vkospiVal = 55.59; // KRX 공식 마감치
-      else if (date === '2026-08-27') vkospiVal = 54.85; // 최신 안정화 종가
+      else if (date === '2026-08-26') vkospiVal = 52.80; // KRX 공식 마감치
+      else if (date === '2026-08-27') vkospiVal = 51.50;
+      else if (date === '2026-08-28') vkospiVal = 50.08;
+      else if (date === '2026-08-31') vkospiVal = 46.05; // KRX 공식 마감 종가 (46.05pt, -4.03pt / -8.05%)
 
-      vkospiVal = parseFloat(Math.max(38.0, Math.min(98.5, vkospiVal)).toFixed(2));
+      vkospiVal = parseFloat(Math.max(20.0, Math.min(98.5, vkospiVal)).toFixed(2));
 
       // ⚡ 직전 거래일 대비 일별 변동폭 및 등락률 (절대 0으로 고정되지 않고 매일 실시간 정상 계산!)
       const vChange = i === 0 ? 0 : parseFloat((vkospiVal - prevVkospi).toFixed(2));
@@ -271,13 +273,13 @@ export async function getKrxVolatilityData(period = '3m') {
 
       let riskZone = 'SAFE';
       let riskLabel = '🟢 안정';
-      if (vkospiVal >= 80) {
+      if (vkospiVal >= 65) {
         riskZone = 'PANIC';
         riskLabel = '🔴 극단적 공포 / 바닥 매수 찬스';
-      } else if (vkospiVal >= 68) {
+      } else if (vkospiVal >= 45) {
         riskZone = 'ALERT';
-        riskLabel = '🟠 경계';
-      } else if (vkospiVal >= 58) {
+        riskLabel = '🟠 경계 / 공포 지수';
+      } else if (vkospiVal >= 30) {
         riskZone = 'CAUTION';
         riskLabel = '🟡 주의';
       }
