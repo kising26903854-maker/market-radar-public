@@ -549,30 +549,30 @@ export async function runGrowthStockScreener(forceRefresh = false) {
     item.debtRatio !== null
   );
 
-  // 2. 조건별 개별 TOP 20 랭킹 산출
-  // (1) 최근 3개년 자산 증가율 TOP 20
+  // 2. 조건별 개별 TOP 80 랭킹 산출 (전 종목 1400+개 스캔용)
+  // (1) 최근 3개년 자산 증가율 TOP 80
   const topAssetList = [...validList]
     .sort((a, b) => b.assetGrowthRate - a.assetGrowthRate)
-    .slice(0, 20);
+    .slice(0, 80);
   const topAssetCodes = new Set(topAssetList.map(s => s.code));
 
-  // (2) 최근 3개년 영업이익 증가율 TOP 20
+  // (2) 최근 3개년 영업이익 증가율 TOP 80
   const topOpList = [...validList]
     .sort((a, b) => b.opProfitGrowthRate - a.opProfitGrowthRate)
-    .slice(0, 20);
+    .slice(0, 80);
   const topOpCodes = new Set(topOpList.map(s => s.code));
 
-  // (3) 최근 3개년 매출액 증가율 TOP 20
+  // (3) 최근 3개년 매출액 증가율 TOP 80
   const topRevList = [...validList]
     .sort((a, b) => b.revenueGrowthRate - a.revenueGrowthRate)
-    .slice(0, 20);
+    .slice(0, 80);
   const topRevCodes = new Set(topRevList.map(s => s.code));
 
   // (4) 부채비율 120% 이하 필터링
   const soundDebtList = validList.filter(s => s.debtRatio <= 120);
 
   // ⚡ 3. 대망의 4대 AND 조건 완벽 만족 종목 도출!
-  // 자산 증가율 TOP 20 AND 영업이익 증가율 TOP 20 AND 매출액 증가율 TOP 20 AND 부채비율 <= 120%
+  // 자산 증가율 TOP 80 AND 영업이익 증가율 TOP 80 AND 매출액 증가율 TOP 80 AND 부채비율 <= 120%
   const perfectAndMatches = validList
     .filter(s => 
       topAssetCodes.has(s.code) &&
@@ -592,7 +592,7 @@ export async function runGrowthStockScreener(forceRefresh = false) {
         ...s,
         growthScore: score,
         isPerfectMatch: true,
-        matchTags: ['💎 자산증가율 TOP20', '🚀 영업이익증가율 TOP20', '💰 매출증가율 TOP20', '🛡️ 부채비율 120%이하']
+        matchTags: ['💎 자산증가율 TOP80', '🚀 영업이익증가율 TOP80', '💰 매출증가율 TOP80', '🛡️ 부채비율 120%이하']
       };
     })
     .sort((a, b) => b.growthScore - a.growthScore);
@@ -603,9 +603,9 @@ export async function runGrowthStockScreener(forceRefresh = false) {
     .map(s => {
       let matchedCount = 0;
       const tags = [];
-      if (topAssetCodes.has(s.code)) { matchedCount++; tags.push('자산증가 TOP20'); }
-      if (topOpCodes.has(s.code)) { matchedCount++; tags.push('영업이익증가 TOP20'); }
-      if (topRevCodes.has(s.code)) { matchedCount++; tags.push('매출증가 TOP20'); }
+      if (topAssetCodes.has(s.code)) { matchedCount++; tags.push('자산증가 TOP80'); }
+      if (topOpCodes.has(s.code)) { matchedCount++; tags.push('영업이익증가 TOP80'); }
+      if (topRevCodes.has(s.code)) { matchedCount++; tags.push('매출증가 TOP80'); }
       if (s.debtRatio <= 120) { matchedCount++; tags.push('부채 120%이하'); }
 
       const score = Math.round(
