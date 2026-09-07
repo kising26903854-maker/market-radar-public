@@ -30,6 +30,9 @@ import { getBearMarketStocks, sendBearMarketBriefing } from './bear_market_scann
 import { runGrowthStockScreener } from './growth_stock_screener.js'
 import { getStockShortSelling } from './short_selling_tracker.js'
 import { getBaseRatesData } from './base_rates.js'
+import { getDoubleBottomCache, isDoubleBottomScanStale, runDoubleBottomScan, startDailyDoubleBottomScan } from './double_bottom_scanner.js'
+import { getBaseBreakoutCache, isBaseBreakoutScanStale, runBaseBreakoutScan, startDailyBaseBreakoutScan } from './base_breakout_scanner.js'
+import { getEnergyCondensationCache, isEnergyCondensationScanStale, runEnergyCondensationScan, startDailyEnergyCondensationScan } from './energy_condensation_scanner.js'
 
 const app = express()
 app.use(cors())
@@ -307,6 +310,103 @@ app.get('/api/full-scan-status', (req, res) => {
     totalScanned: cache?.totalScanned || 0,
     topCount: cache?.topCount || 0,
   })
+})
+
+// 📉 하락추세 이후 쌍바닥(Double Bottom) 패턴 스캐너 API
+app.get('/api/double-bottom-stocks', async (req, res) => {
+  try {
+    const cache = getDoubleBottomCache()
+    if (!cache) {
+      // 캐시가 없으면(최초 기동 직후) 백그라운드 스캔을 트리거하고 빈 결과를 반환
+      runDoubleBottomScan().catch(e => console.error('[DOUBLE BOTTOM] 최초 스캔 오류:', e.message))
+      return res.json({ success: true, scanning: true, lastSyncAt: null, kospiCount: 0, kosdaqCount: 0, totalScanned: 0, stocks: [] })
+    }
+    res.json({ success: true, scanning: false, ...cache })
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message })
+  }
+})
+
+// 📉 쌍바닥 스캔 상태 확인 API
+app.get('/api/double-bottom-status', (req, res) => {
+  const cache = getDoubleBottomCache()
+  res.json({
+    hasCache: !!cache,
+    isStale: isDoubleBottomScanStale(),
+    lastSyncAt: cache?.lastSyncAt || null,
+    totalScanned: cache?.totalScanned || 0,
+    totalMatches: cache?.totalMatches || 0,
+  })
+})
+
+// 🔄 수동 쌍바닥 스캔 트리거 API
+app.post('/api/trigger-double-bottom-scan', async (req, res) => {
+  res.json({ success: true, message: '쌍바닥 패턴 스캔이 백그라운드에서 시작되었습니다.' })
+  runDoubleBottomScan().catch(e => console.error('[DOUBLE BOTTOM] 수동 스캔 오류:', e.message))
+})
+
+// 🌱 하락추세 → 횡보 → 상승초입 패턴 스캐너 API
+app.get('/api/base-breakout-stocks', async (req, res) => {
+  try {
+    const cache = getBaseBreakoutCache()
+    if (!cache) {
+      runBaseBreakoutScan().catch(e => console.error('[BASE BREAKOUT] 최초 스캔 오류:', e.message))
+      return res.json({ success: true, scanning: true, lastSyncAt: null, kospiCount: 0, kosdaqCount: 0, totalScanned: 0, stocks: [] })
+    }
+    res.json({ success: true, scanning: false, ...cache })
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message })
+  }
+})
+
+// 🌱 박스권 상승초입 스캔 상태 확인 API
+app.get('/api/base-breakout-status', (req, res) => {
+  const cache = getBaseBreakoutCache()
+  res.json({
+    hasCache: !!cache,
+    isStale: isBaseBreakoutScanStale(),
+    lastSyncAt: cache?.lastSyncAt || null,
+    totalScanned: cache?.totalScanned || 0,
+    totalMatches: cache?.totalMatches || 0,
+  })
+})
+
+// 🔄 수동 박스권 상승초입 스캔 트리거 API
+app.post('/api/trigger-base-breakout-scan', async (req, res) => {
+  res.json({ success: true, message: '박스권 상승초입 패턴 스캔이 백그라운드에서 시작되었습니다.' })
+  runBaseBreakoutScan().catch(e => console.error('[BASE BREAKOUT] 수동 스캔 오류:', e.message))
+})
+
+// 💥 에너지 응축(변동성·거래량 수축) → 거래량 급증 돌파 스캐너 API
+app.get('/api/energy-condensation-stocks', async (req, res) => {
+  try {
+    const cache = getEnergyCondensationCache()
+    if (!cache) {
+      runEnergyCondensationScan().catch(e => console.error('[ENERGY] 최초 스캔 오류:', e.message))
+      return res.json({ success: true, scanning: true, lastSyncAt: null, kospiCount: 0, kosdaqCount: 0, totalScanned: 0, stocks: [] })
+    }
+    res.json({ success: true, scanning: false, ...cache })
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message })
+  }
+})
+
+// 💥 에너지 응축 스캔 상태 확인 API
+app.get('/api/energy-condensation-status', (req, res) => {
+  const cache = getEnergyCondensationCache()
+  res.json({
+    hasCache: !!cache,
+    isStale: isEnergyCondensationScanStale(),
+    lastSyncAt: cache?.lastSyncAt || null,
+    totalScanned: cache?.totalScanned || 0,
+    totalMatches: cache?.totalMatches || 0,
+  })
+})
+
+// 🔄 수동 에너지 응축 스캔 트리거 API
+app.post('/api/trigger-energy-condensation-scan', async (req, res) => {
+  res.json({ success: true, message: '에너지 응축 패턴 스캔이 백그라운드에서 시작되었습니다.' })
+  runEnergyCondensationScan().catch(e => console.error('[ENERGY] 수동 스캔 오류:', e.message))
 })
 
 // 🏢 기업 개요 및 주요 사업·제품 핵심 정보 API
@@ -1254,6 +1354,9 @@ app.listen(PORT, () => {
   GET  /api/bear-market-stocks  — 하락장 역주행주 4대 퀀트
   GET  /api/smart-supply-demand — 외인·기관 쌍끌이 스마트 수급
   GET  /api/undervalued-stocks  — 코스피/코스닥 저평가 레이더
+  GET  /api/double-bottom-stocks — 하락추세 후 쌍바닥 패턴 스캐너
+  GET  /api/base-breakout-stocks — 하락→횡보→상승초입 패턴 스캐너
+  GET  /api/energy-condensation-stocks — 에너지 응축→거래량 돌파 스캐너
   GET  /api/market-calendar     — 한미 증시 일정 달력
   GET  /api/dividend-calendar   — 배당 캘린더
   GET  /api/bond-yields         — 글로벌 국채 금리/스프레드
@@ -1270,6 +1373,15 @@ app.listen(PORT, () => {
 
   // 🏆 주간 시가총액 변동 스케줄러 (매일 장 마감 이후 자동 실행)
   setTimeout(() => { startDailyMarketCapTracker() }, 40000);
+
+  // 📉 하락추세 후 쌍바닥 패턴 스캔 (매일 08:50 자동 실행)
+  setTimeout(() => { startDailyDoubleBottomScan() }, 55000);
+
+  // 🌱 하락추세 → 횡보 → 상승초입 패턴 스캔 (매일 08:55 자동 실행)
+  setTimeout(() => { startDailyBaseBreakoutScan() }, 70000);
+
+  // 💥 에너지 응축 → 거래량 급증 돌파 패턴 스캔 (매일 09:00 자동 실행)
+  setTimeout(() => { startDailyEnergyCondensationScan() }, 85000);
 
   // 🔄 매일 자정/장마감 후 자동 데이터 동기화 스케줄러 (Daily Auto-Sync Engine)
   setInterval(async () => {

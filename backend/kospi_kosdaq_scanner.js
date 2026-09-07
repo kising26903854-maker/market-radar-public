@@ -67,7 +67,7 @@ function parseMarketSumPage(html) {
 }
 
 // ─── 2. 시가총액 전 페이지 수집 (코스피 or 코스닥) ───
-async function fetchAllPages(sosok, totalPages) {
+export async function fetchAllPages(sosok, totalPages) {
   const market = sosok === 0 ? '코스피' : '코스닥';
   const allStocks = [];
   const seen = new Set();

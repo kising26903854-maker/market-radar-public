@@ -15,6 +15,9 @@ import VkospiTrackerTab from './components/VkospiTrackerTab.jsx'
 import BearMarketScannerTab from './components/BearMarketScannerTab.jsx'
 import GrowthStockScreener from './components/GrowthStockScreener.jsx'
 import BaseRateChart from './components/BaseRateChart.jsx'
+import DoubleBottomScannerTab from './components/DoubleBottomScannerTab.jsx'
+import BaseBreakoutScannerTab from './components/BaseBreakoutScannerTab.jsx'
+import EnergyCondensationScannerTab from './components/EnergyCondensationScannerTab.jsx'
 
 // 🎨 세련된 현대식 SVG 라인 아이콘 컴포넌트들
 const MenuIcon = ({ type, size = 16, color = "currentColor", style = {} }) => {
@@ -411,6 +414,18 @@ export default function App() {
             <MenuIcon type="high52w" color={tab === 'momentum' ? '#fff' : '#fbbf24'} />
             52주 신고가 &amp; 골든크로스
           </button>
+          <button className={`tab-btn ${tab === 'double-bottom' ? 'active' : ''}`} onClick={() => { setTab('double-bottom'); setIsMenuOpen(false); }}>
+            <MenuIcon type="accumulation" color={tab === 'double-bottom' ? '#fff' : '#60a5fa'} />
+            하락추세 후 쌍바닥 패턴
+          </button>
+          <button className={`tab-btn ${tab === 'base-breakout' ? 'active' : ''}`} onClick={() => { setTab('base-breakout'); setIsMenuOpen(false); }}>
+            <MenuIcon type="high52w" color={tab === 'base-breakout' ? '#fff' : '#34d399'} />
+            하락→횡보→상승초입 스캐너
+          </button>
+          <button className={`tab-btn ${tab === 'energy-condensation' ? 'active' : ''}`} onClick={() => { setTab('energy-condensation'); setIsMenuOpen(false); }}>
+            <MenuIcon type="accumulation" color={tab === 'energy-condensation' ? '#fff' : '#f59e0b'} />
+            에너지 응축 돌파 스캐너
+          </button>
           <button className={`tab-btn ${tab === 'market-calendar' ? 'active' : ''}`} onClick={() => { setTab('market-calendar'); setIsMenuOpen(false); }}>
             <MenuIcon type="market-calendar" color={tab === 'market-calendar' ? '#fff' : '#f472b6'} />
             한·미 증시 일정 달력
@@ -532,6 +547,9 @@ export default function App() {
 
         {/* 탭 6: 🚀 52주 신고가 & 골든크로스 모멘텀 */}
         {tab === 'momentum' && <MomentumScanner onSelectStock={handleOpenStockChart} onOpenValueChain={handleOpenValueChain} />}
+        {tab === 'double-bottom' && <DoubleBottomScannerTab onSelectStock={handleOpenStockChart} />}
+        {tab === 'base-breakout' && <BaseBreakoutScannerTab onSelectStock={handleOpenStockChart} />}
+        {tab === 'energy-condensation' && <EnergyCondensationScannerTab onSelectStock={handleOpenStockChart} />}
 
         {/* 탭 7: 📅 한·미 증시 일정 달력 */}
         {tab === 'market-calendar' && <MarketCalendar />}
