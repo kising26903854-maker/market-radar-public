@@ -20,8 +20,11 @@ const formatPct = (num) => {
   return Number(num).toFixed(2) + '%';
 };
 
+// DART 공시일자가 아직 확인되지 않은 경우(null) 지어낸 날짜 대신 표시할 문구
+const formatDisclosureDate = (d) => d || '확인중';
+
 // ─── 📑 국민연금 DART 전자공시 상세 리포트 팝업 모달 ───
-function NpsDisclosureModal({ item, onClose, onSelectStock }) {
+function NpsDisclosureModal({ item, onClose, onSelectStock, estimatedComparison }) {
   if (!item) return null;
 
   const isUp = item.diffRatio > 0;
@@ -78,8 +81,13 @@ function NpsDisclosureModal({ item, onClose, onSelectStock }) {
                   DART 공식 5% 대량보유공시
                 </span>
                 <span style={{ fontSize: '0.8rem', color: '#60a5fa', fontWeight: 800 }}>
-                  📅 공시접수: {item.disclosureDate}
+                  📅 공시접수: {formatDisclosureDate(item.disclosureDate)}
                 </span>
+                {estimatedComparison && (
+                  <span style={{ fontSize: '0.7rem', background: '#f59e0b', color: '#1e1b0f', padding: '2px 8px', borderRadius: 8, fontWeight: 900 }}>
+                    ⚠️ 추정치 (실제 DART 공시 아님)
+                  </span>
+                )}
               </div>
               <h3 style={{ fontSize: '1.35rem', fontWeight: 900, color: '#fff', margin: 0, display: 'flex', alignItems: 'center', gap: 8 }}>
                 <span>{item.stockName}</span>
@@ -428,9 +436,20 @@ export default function NpsTracker({ onSelectStock }) {
               <span style={{ fontSize: '.75rem', background: '#10b981', color: '#fff', padding: '3px 10px', borderRadius: 20, fontWeight: 900 }}>
                 {data?.quarter?.replace('_', '년 ')}분기 기준
               </span>
+              {data?.prevQuarterEstimated && (
+                <span
+                  style={{ fontSize: '.75rem', background: '#f59e0b', color: '#1e1b0f', padding: '3px 10px', borderRadius: 20, fontWeight: 900 }}
+                  title="전분기 데이터가 실제 DART 공시가 아닌 추정치로 생성되어, 아래 증가/감소/신규편입 비교는 참고용입니다."
+                >
+                  ⚠️ 추정치 기반 비교 (실제 DART 공시 아님)
+                </span>
+              )}
             </div>
             <div style={{ fontSize: '.9rem', color: 'var(--t2)', marginTop: 6, lineHeight: 1.6 }}>
               금융감독원 DART 공식 <strong>5% 이상 대량보유 지분 공시</strong> 및 분기별 포트폴리오를 전수 추적합니다. (<strong>공시일자 클릭 시 DART 공시 상세 팝업</strong>)
+              {data?.prevQuarterEstimated && (
+                <><br /><span style={{ color: '#fbbf24', fontWeight: 700 }}>⚠️ 전분기({data?.prevQuarter}) 데이터는 실제 DART 공시가 아닌 추정치입니다. 증감 비교는 참고용으로만 사용하세요.</span></>
+              )}
             </div>
           </div>
 
@@ -801,7 +820,7 @@ export default function NpsTracker({ onSelectStock }) {
                               }}
                               title="클릭 시 DART 공시 상세 리포트 보기"
                             >
-                              📅 신규공시: {item.disclosureDate}
+                              📅 신규공시: {formatDisclosureDate(item.disclosureDate)}
                             </span>
                           )}
                           <span style={{ fontSize: '.72rem', background: 'rgba(99,102,241,0.15)', color: '#818cf8', border: '1px solid rgba(99,102,241,0.3)', padding: '1px 6px', borderRadius: 4, fontWeight: 700 }}>
@@ -867,7 +886,7 @@ export default function NpsTracker({ onSelectStock }) {
                               }}
                               title="클릭 시 DART 공시 상세 리포트 보기"
                             >
-                              <span>📅</span><span>{item.disclosureDate} 📑</span>
+                              <span>📅</span><span>{formatDisclosureDate(item.disclosureDate)} 📑</span>
                             </span>
                           </div>
                         )}
@@ -955,34 +974,43 @@ export default function NpsTracker({ onSelectStock }) {
         </div>
       </div>
 
-      {/* ─── DART 실시간 5% 이상 대량보유 공시 타임라인 ─── */}
-      {data?.disclosures?.length > 0 && (
-        <div style={{ marginTop: 24, padding: '22px 26px', background: 'rgba(30,41,59,0.6)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 20 }}>
-          <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#fff', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span>📑</span>
-            <span>최근 DART 국민연금 5% 대량보유 주요 공시 타임라인</span>
-          </div>
+      {/* ─── DART 실시간 5% 이상 대량보유 공시 타임라인 (금융감독원 DART Open API 실시간 조회) ─── */}
+      <div style={{ marginTop: 24, padding: '22px 26px', background: 'rgba(30,41,59,0.6)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 20 }}>
+        <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#fff', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
+          <span>📑</span>
+          <span>최근 DART 국민연금 5% 대량보유 주요 공시 타임라인</span>
+        </div>
+        {data?.disclosures?.length > 0 ? (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 12 }}>
             {data.disclosures.map((d, i) => (
-              <div 
-                key={i} 
-                style={{ padding: '12px 16px', background: 'rgba(0,0,0,0.3)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.05)' }}
+              <a
+                key={d.rcpNo || i}
+                href={d.dartUrl || 'https://dart.fss.or.kr/'}
+                target="_blank"
+                rel="noreferrer"
+                style={{ padding: '12px 16px', background: 'rgba(0,0,0,0.3)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.05)', textDecoration: 'none', display: 'block' }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
-                  <span style={{ fontWeight: 900, color: '#fff', fontSize: '.95rem' }}>{d.company}</span>
+                  <span style={{ fontWeight: 900, color: '#fff', fontSize: '.95rem' }}>{d.company}{d.stockCode ? ` (${d.stockCode})` : ''}</span>
                   <span style={{ fontSize: '.72rem', background: 'rgba(16,185,129,0.15)', color: '#10b981', padding: '2px 6px', borderRadius: 4, fontWeight: 800 }}>{d.type}</span>
                 </div>
                 <div style={{ fontSize: '.78rem', color: 'var(--t2)', marginTop: 2 }}>
-                  {d.report} · {d.shares} ({d.ratio})
+                  {d.report}
+                  {/* DART 공시 목록 API는 지분율/주식수를 제공하지 않으므로 지어내지 않고, 원문 확인 안내만 표시 */}
+                  <span style={{ color: 'var(--t3)' }}> · 지분율/주식수는 공시 원문 참조</span>
                 </div>
                 <div style={{ fontSize: '.72rem', color: 'var(--t3)', marginTop: 4 }}>
-                  공시일자: {d.date}
+                  공시일자: {formatDisclosureDate(d.date)}
                 </div>
-              </div>
+              </a>
             ))}
           </div>
-        </div>
-      )}
+        ) : (
+          <div style={{ padding: '24px 16px', textAlign: 'center', color: 'var(--t3)', fontSize: '.85rem' }}>
+            최근 조회 기간 내 DART에 접수된 국민연금 관련 5% 대량보유 공시가 없습니다.
+          </div>
+        )}
+      </div>
 
       {/* ─── 📑 국민연금 DART 상세 공시 팝업 모달 ─── */}
       {selectedDisclosure && (
@@ -990,6 +1018,7 @@ export default function NpsTracker({ onSelectStock }) {
           item={selectedDisclosure}
           onClose={() => setSelectedDisclosure(null)}
           onSelectStock={onSelectStock}
+          estimatedComparison={!!data?.prevQuarterEstimated}
         />
       )}
 

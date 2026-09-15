@@ -10,15 +10,15 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { fetchAllPages } from './kospi_kosdaq_scanner.js';
+import { fetchMarketCapUniverse } from './kospi_kosdaq_scanner.js';
 import { fetchDailySeries } from './double_bottom_scanner.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CACHE_PATH = path.join(__dirname, 'data', 'energy_condensation_cache.json');
 
 const MIN_MARKET_CAP = 500; // 억원 — 유동성 낮은 소형주 제외
-const KOSPI_SCAN_PAGES = 8; // 시총 상위 약 400종목 (finance.naver.com은 시총 내림차순 정렬)
-const KOSDAQ_SCAN_PAGES = 6; // 시총 상위 약 300종목
+const KOSPI_SCAN_PAGES = 4; // 시총 상위 약 400종목 (marketValue API는 페이지당 100종목, 시총 내림차순 정렬)
+const KOSDAQ_SCAN_PAGES = 3; // 시총 상위 약 300종목
 
 const CONTRACTION_WINDOW = 15; // 에너지 응축(박스) 판정 구간 길이(거래일)
 const PRIOR_WINDOW = 30; // 응축 이전과 비교할 직전 구간 길이(거래일)
@@ -129,8 +129,8 @@ async function executeEnergyCondensationScan() {
   const startTime = Date.now();
 
   const [kospiStocks, kosdaqStocks] = await Promise.all([
-    fetchAllPages(0, KOSPI_SCAN_PAGES),
-    fetchAllPages(1, KOSDAQ_SCAN_PAGES),
+    fetchMarketCapUniverse(0, KOSPI_SCAN_PAGES),
+    fetchMarketCapUniverse(1, KOSDAQ_SCAN_PAGES),
   ]);
 
   const universe = [...kospiStocks, ...kosdaqStocks].filter(s => s.marketCap >= MIN_MARKET_CAP);

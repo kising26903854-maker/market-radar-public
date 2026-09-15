@@ -1,6 +1,8 @@
 {
   "quarter": "2026_Q1",
   "fetchedAt": "2026-03-31T15:00:00.000Z",
+  "isEstimated": true,
+  "estimatedNote": "실제 DART 공시 데이터가 아닌 추정치입니다 (2026_Q3 기준 역산 생성)",
   "holdings": [
     {
       "stockCode": "005930",

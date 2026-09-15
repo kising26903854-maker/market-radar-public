@@ -1,9 +1,8 @@
-import * as cheerio from 'cheerio';
-import iconv from 'iconv-lite';
 import fs from 'fs';
 import path from 'path';
 import axios from 'axios';
 import { fileURLToPath } from 'url';
+import { fetchMarketCapUniverse } from './kospi_kosdaq_scanner.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -31,27 +30,6 @@ function loadJson(file, fallback = {}) {
 
 function saveJson(file, data) {
   fs.writeFileSync(file, JSON.stringify(data, null, 2));
-}
-
-function generateFakeHistory(code, currentMarketCap) {
-  const history = [];
-  const today = new Date();
-  
-  for (let i = 15; i >= 1; i--) {
-    const d = new Date(today);
-    d.setDate(d.getDate() - i);
-    if (d.getDay() === 0 || d.getDay() === 6) continue;
-    
-    const dateStr = d.toISOString().split('T')[0];
-    const randomFactor = 1 - (Math.sin(i * 1.5) * 0.05 + 0.05);
-    const pastCap = Math.round(currentMarketCap * randomFactor);
-    
-    history.push({
-      date: dateStr,
-      marketCap: pastCap
-    });
-  }
-  return history;
 }
 
 export async function getMarketCapData(code) {
@@ -108,10 +86,11 @@ export async function getMarketCapData(code) {
 
   const todayDate = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' }); 
   
+  // 과거 이력이 없으면 지어내지 않고 빈 배열로 시작 — 오늘 이후 실제 수집분만 누적된다.
   if (!data[code]) {
-    data[code] = generateFakeHistory(code, currentMarketCap);
+    data[code] = [];
   }
-  
+
   const codeHistory = data[code];
   const existingToday = codeHistory.find(h => h.date === todayDate);
   
@@ -136,45 +115,24 @@ export async function getMarketCapData(code) {
   };
 }
 
+// ⚠️ 예전에는 finance.naver.com/sise/sise_market_sum.naver를 HTML 스크래핑했으나, 그 구버전
+// 페이지가 stock.naver.com으로 302 리다이렉트되며 완전히 죽었다(테이블 자체가 응답에 없음 →
+// 조용히 빈 배열 반환). m.stock.naver.com의 marketValue API(이미 kospi_kosdaq_scanner.js에서
+// 검증됨)로 교체 — 페이지당 최대 100종목, 시총 내림차순 정렬을 그대로 제공한다.
 export async function fetchRanking(sosok) {
   try {
-    const url = `https://finance.naver.com/sise/sise_market_sum.naver?sosok=${sosok}&page=1`;
-    const res = await axios.get(url, { responseType: 'arraybuffer', timeout: 5000 });
-    const html = iconv.decode(res.data, 'euc-kr');
-    const $ = cheerio.load(html);
-    
-    const ranking = [];
-    $('table.type_2 tbody tr').each((i, el) => {
-      const tdList = $(el).find('td');
-      if (tdList.length >= 10 && ranking.length < 25) {
-        const aTag = tdList.eq(1).find('a');
-        if (!aTag.length) return;
-        
-        const name = aTag.text().trim();
-        const href = aTag.attr('href') || '';
-        const code = href.split('code=')[1];
-        const priceText = tdList.eq(2).text().replace(/,/g, '').trim();
-        const diffText = tdList.eq(3).text().replace(/,/g, '').trim();
-        const icon = tdList.eq(3).find('img').attr('alt') === '하락' ? -1 : 1;
-        const capText = tdList.eq(6).text().replace(/,/g, '').trim(); 
-        
-        if (code && name && capText) {
-          const capEok = parseInt(capText, 10) || 0;
-          ranking.push({
-            rank: ranking.length + 1,
-            code,
-            name,
-            price: parseInt(priceText, 10) || 0,
-            diff: (parseInt(diffText, 10) || 0) * icon,
-            marketCap: capEok * 100000000,
-            marketCapEok: capEok,
-            status: 'SAME',
-            change: 0
-          });
-        }
-      }
-    });
-    return ranking;
+    const stocks = await fetchMarketCapUniverse(sosok, 1); // 1페이지 = 상위 100종목이면 top 25 충분
+    return stocks.slice(0, 25).map((s, idx) => ({
+      rank: idx + 1,
+      code: s.code,
+      name: s.name,
+      price: s.price,
+      changePct: s.changePct,
+      marketCap: Math.round(s.marketCap * 100000000), // 억원 -> 원
+      marketCapEok: s.marketCap,
+      status: 'SAME',
+      change: 0
+    }));
   } catch (e) {
     console.error(`Failed to fetch ranking (sosok=${sosok}):`, e.message);
     return [];
@@ -186,20 +144,10 @@ export async function fetchRanking(sosok) {
  */
 function computeComparison(currentList, prevList) {
   if (!prevList || prevList.length === 0) {
-    // 이전 기록이 없을 때: 등락률 기반으로 현실적인 전일 랭킹 역산 시뮬레이션
+    // 이전 랭킹 기록이 없을 때(최초 실행일): 실제 순위 변동을 알 수 없으므로 절대 지어내지 않고
+    // 전부 'SAME'(변동없음)으로 정직하게 표시한다. 다음 날부터는 실제 이력과 비교된다.
     return {
-      current: currentList.slice(0, 20).map(item => {
-        let status = 'SAME';
-        let change = 0;
-        if (item.diff > 0 && item.rank > 2) {
-          status = 'UP';
-          change = 1;
-        } else if (item.diff < 0 && item.rank < 20) {
-          status = 'DOWN';
-          change = 1;
-        }
-        return { ...item, status, change };
-      }),
+      current: currentList.slice(0, 20).map(item => ({ ...item, status: 'SAME', change: 0 })),
       out: []
     };
   }
@@ -264,9 +212,16 @@ export async function runMarketCapTracking() {
   const kospiRaw = await fetchRanking(0);
   const kosdaqRaw = await fetchRanking(1);
 
+  // 두 시장 모두 0건이면 수집 자체가 실패한 것 — 기존 캐시를 빈 데이터로 덮어쓰지 않고
+  // 실패를 그대로 알린다 (예전엔 이 경우에도 항상 "성공" 응답과 함께 빈 랭킹을 저장했다).
+  if (kospiRaw.length === 0 && kosdaqRaw.length === 0) {
+    console.error('[MARKET CAP] 코스피/코스닥 랭킹 수집 실패(0건) — 기존 캐시 유지, 이번 갱신은 건너뜀');
+    return { success: false, error: '시가총액 랭킹 데이터를 가져오지 못했습니다.', ...getMarketCapComparison() };
+  }
+
   const history = loadJson(RANK_HISTORY_FILE, {});
   const todayKey = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' });
-  
+
   // 가장 최근 이전 거래일 탐색
   const pastDates = Object.keys(history).filter(d => d !== todayKey).sort();
   const prevDateKey = pastDates.length > 0 ? pastDates[pastDates.length - 1] : null;
@@ -276,6 +231,7 @@ export async function runMarketCapTracking() {
   const kosdaqComparison = computeComparison(kosdaqRaw, prevData?.kosdaq || []);
 
   const result = {
+    success: true,
     kospi: kospiComparison,
     kosdaq: kosdaqComparison,
     day: '오늘',

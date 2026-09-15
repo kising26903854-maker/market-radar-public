@@ -70,10 +70,16 @@ export async function getBearMarketStocks() {
         const basic = basicRes.data;
         const priceList = Array.isArray(priceRes.data) ? priceRes.data : [];
 
-        const currentPrice = basic ? parseInt((basic.nowPrice || basic.closePrice || '0').replace(/,/g, ''), 10) : 0;
-        const dayChange = basic ? parseInt((basic.changePrice || '0').replace(/,/g, ''), 10) * (basic.changeType?.name === 'FALLING' ? -1 : 1) : 0;
+        // ⚠️ 예전엔 basic.changePrice / basic.changeType / basic.totalVolume를 읽었는데, 실제
+        // /basic 응답엔 이런 필드가 없어(정확한 필드명은 compareToPreviousClosePrice /
+        // compareToPreviousPrice, totalVolume은 아예 존재하지 않음) dayChange·volume이 항상
+        // 0으로 조용히 고정되고 있었다. 올바른 필드명으로 교체하고, 거래량은 /basic에 없으므로
+        // 일별 시세 목록(priceList)의 최신일 거래량으로 대체한다.
+        const currentPrice = basic ? parseInt(String(basic.nowPrice || basic.closePrice || '0').replace(/,/g, ''), 10) : 0;
+        // compareToPreviousClosePrice는 이미 부호가 포함된 값("−11,000")이라 방향을 다시 곱하지 않는다.
+        const dayChange = basic ? parseInt(String(basic.compareToPreviousClosePrice || '0').replace(/,/g, ''), 10) : 0;
         const dayChangePct = basic ? parseFloat(basic.fluctuationsRatio || '0') : 0;
-        const volume = basic ? parseInt((basic.totalVolume || '0').replace(/,/g, ''), 10) : 0;
+        const volume = priceList[0]?.accumulatedTradingVolume || 0;
 
         // 일별 등락률 맵
         const dateReturnMap = new Map();

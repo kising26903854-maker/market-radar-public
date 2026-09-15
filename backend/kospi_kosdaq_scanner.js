@@ -106,8 +106,56 @@ export async function fetchAllPages(sosok, totalPages) {
   return allStocks;
 }
 
-// ─── 3. PBR 보완: Naver finance/annual API ───
-async function fetchPBR(code) {
+// ─── 2b. 시가총액 유니버스 경량 수집 (네이버 모바일 marketValue API) ───
+// finance.naver.com의 sise_market_sum 구버전 페이지가 stock.naver.com으로 302 리다이렉트되며
+// 더 이상 HTML을 반환하지 않아(fetchAllPages 무력화), PER/ROE가 필요 없는 패턴 스캐너들은
+// 이 경량 API로 시총 유니버스만 빠르게 가져온다 (페이지당 최대 100종목, 이미 시총 내림차순).
+export async function fetchMarketCapUniverse(sosok, totalPages) {
+  const market = sosok === 0 ? '코스피' : '코스닥';
+  const marketParam = sosok === 0 ? 'KOSPI' : 'KOSDAQ';
+  const PAGE_SIZE = 100;
+  const allStocks = [];
+  const seen = new Set();
+
+  const batchSize = 3;
+  for (let i = 1; i <= totalPages; i += batchSize) {
+    const pages = [];
+    for (let p = i; p < i + batchSize && p <= totalPages; p++) pages.push(p);
+
+    const results = await Promise.all(pages.map(async (page) => {
+      try {
+        const url = `https://m.stock.naver.com/api/stocks/marketValue/${marketParam}?page=${page}&pageSize=${PAGE_SIZE}`;
+        const res = await axios.get(url, { headers: HEADERS_M, timeout: 6000 });
+        const list = res.data?.stocks || [];
+        return list.map(s => ({
+          code: s.itemCode,
+          name: s.stockName,
+          price: parseInt(String(s.closePriceRaw || '0'), 10) || 0,
+          changePct: parseFloat(s.fluctuationsRatio) || 0,
+          marketCap: Math.round((parseFloat(s.marketValueRaw) || 0) / 100000000), // 원 -> 억원
+        }));
+      } catch (e) {
+        console.warn(`[SCANNER] ${market} ${page}페이지(marketValue) 실패: ${e.message}`);
+        return [];
+      }
+    }));
+
+    results.forEach(pageStocks => {
+      pageStocks.forEach(s => {
+        if (s.code && !seen.has(s.code)) { seen.add(s.code); allStocks.push({ ...s, market }); }
+      });
+    });
+
+    if (i + batchSize <= totalPages) await new Promise(r => setTimeout(r, 300));
+  }
+  console.log(`[SCANNER] ${market} 시총 유니버스 ${allStocks.length}종목 수집 완료 (marketValue API)`);
+  return allStocks;
+}
+
+// ─── 3. 종목별 재무지표 보완: Naver finance/annual API (PER/ROE/PBR/EPS/BPS/배당) ───
+// finance.naver.com의 옛 시가총액 페이지가 PER/ROE 컬럼을 함께 제공했으나 그 페이지가 죽었으므로
+// (fetchMarketCapUniverse는 시총 랭킹만 제공), 종목별로 이 API를 호출해 재무지표를 직접 채운다.
+async function fetchFinancials(code) {
   try {
     const url = `https://m.stock.naver.com/api/stock/${code}/finance/annual`;
     const res = await axios.get(url, { headers: HEADERS_M, timeout: 5000 });
@@ -116,13 +164,21 @@ async function fetchPBR(code) {
     const confirmed = periods.filter(p => p.isConsensus === 'N');
     const latestKey = confirmed.length > 0 ? confirmed[confirmed.length - 1].key : null;
     if (!latestKey) return null;
-    const pbrRow = rows.find(r => r.title === 'PBR');
-    const divRow = rows.find(r => r.title === '주당배당금');
-    const bpsRow = rows.find(r => r.title === 'BPS');
-    const pbr = parseFloat(pbrRow?.columns?.[latestKey]?.value?.replace(/,/g, '')) || null;
-    const divAmt = parseFloat(divRow?.columns?.[latestKey]?.value?.replace(/,/g, '')) || null;
-    const bps = parseFloat(bpsRow?.columns?.[latestKey]?.value?.replace(/,/g, '')) || null;
-    return { pbr, divAmt, bps };
+    const get = (title) => {
+      const row = rows.find(r => r.title === title);
+      const raw = row?.columns?.[latestKey]?.value;
+      if (raw == null || raw === '') return null;
+      const num = parseFloat(String(raw).replace(/,/g, ''));
+      return Number.isFinite(num) ? num : null;
+    };
+    return {
+      per: get('PER'),
+      roe: get('ROE'),
+      pbr: get('PBR'),
+      eps: get('EPS'),
+      bps: get('BPS'),
+      divAmt: get('주당배당금'),
+    };
   } catch { return null; }
 }
 
@@ -188,47 +244,63 @@ function getGrade(score) {
 }
 
 // ─── 6. 전체 스캔 실행 ───
-export async function runFullMarketScan() {
+let fullScanInFlight = null;
+
+export function runFullMarketScan() {
+  if (fullScanInFlight) {
+    console.log('[FULL SCAN] 이미 스캔이 진행 중이라 요청을 건너뜁니다.');
+    return fullScanInFlight;
+  }
+  fullScanInFlight = executeFullMarketScan().finally(() => { fullScanInFlight = null; });
+  return fullScanInFlight;
+}
+
+async function executeFullMarketScan() {
   console.log('\n[FULL SCAN] 코스피 + 코스닥 전 종목 저평가 스캔 시작...');
   const startTime = Date.now();
 
-  // 코스피 + 코스닥 전 종목 수집
+  // 코스피 + 코스닥 시총 유니버스 수집 (marketValue API, 페이지당 100종목 — 사실상 전 종목 커버)
   const [kospiStocks, kosdaqStocks] = await Promise.all([
-    fetchAllPages(0, 50),   // 코스피 50페이지
-    fetchAllPages(1, 37),   // 코스닥 37페이지
+    fetchMarketCapUniverse(0, 26),   // 코스피 최대 2,600종목
+    fetchMarketCapUniverse(1, 20),   // 코스닥 최대 2,000종목
   ]);
 
   const allStocks = [...kospiStocks, ...kosdaqStocks];
   console.log(`[FULL SCAN] 수집 완료: 코스피 ${kospiStocks.length}종목 + 코스닥 ${kosdaqStocks.length}종목 = 총 ${allStocks.length}종목`);
 
-  // 저평가 1차 필터 (PER + ROE 기준)
-  const candidates = allStocks.filter(isUndervalued);
-  console.log(`[FULL SCAN] 1차 필터(PER<50, ROE≥5%, 시총≥500억): ${candidates.length}종목`);
+  // 시총 1차 필터 (재무지표 조회 대상 축소 — 소형주 제외)
+  const candidates = allStocks.filter(s => s.marketCap >= 500);
+  console.log(`[FULL SCAN] 시총 500억 이상 후보: ${candidates.length}종목 → 재무지표(PER/ROE/PBR) 조회 시작`);
 
-  // PBR 보완 수집 (상위 후보만, 배치 처리)
-  console.log(`[FULL SCAN] PBR 보완 수집 중...`);
-  const batchSize = 10;
+  // 종목별 재무지표(PER/ROE/PBR/배당) 보완 수집 (배치 처리)
+  const batchSize = 15;
   for (let i = 0; i < candidates.length; i += batchSize) {
     const batch = candidates.slice(i, i + batchSize);
-    const pbrResults = await Promise.all(batch.map(s => fetchPBR(s.code)));
-    pbrResults.forEach((res, idx) => {
+    const finResults = await Promise.all(batch.map(s => fetchFinancials(s.code)));
+    finResults.forEach((res, idx) => {
       if (res) {
+        batch[idx].per = res.per;
+        batch[idx].roe = res.roe;
         batch[idx].pbr = res.pbr;
-        batch[idx].divAmt = res.divAmt;
+        batch[idx].eps = res.eps;
         batch[idx].bps = res.bps;
-        // 배당수익률 계산
+        batch[idx].divAmt = res.divAmt;
         if (res.divAmt && batch[idx].price > 0) {
           batch[idx].divYield = parseFloat(((res.divAmt / batch[idx].price) * 100).toFixed(2));
         }
       }
     });
-    if (i + batchSize < candidates.length) await new Promise(r => setTimeout(r, 300));
-    process.stdout.write(`\r[FULL SCAN] PBR 수집: ${Math.min(i+batchSize, candidates.length)}/${candidates.length}`);
+    if (i + batchSize < candidates.length) await new Promise(r => setTimeout(r, 150));
+    process.stdout.write(`\r[FULL SCAN] 재무지표 수집: ${Math.min(i + batchSize, candidates.length)}/${candidates.length}`);
   }
   console.log('');
 
+  // 저평가 최종 필터 (PER/ROE 기준 — 재무지표 확보 후에만 판정 가능)
+  const undervaluedCandidates = candidates.filter(isUndervalued);
+  console.log(`[FULL SCAN] 최종 필터(PER<50, ROE≥5%, 시총≥500억): ${undervaluedCandidates.length}종목`);
+
   // 점수 산정 및 정렬
-  const scored = candidates.map((s, idx) => {
+  const scored = undervaluedCandidates.map((s, idx) => {
     const score = calcScore(s);
     const grade = getGrade(score);
     const isValueTrap = (s.roe < 8 && s.pbr != null && s.pbr < 0.4);
@@ -266,7 +338,7 @@ export async function runFullMarketScan() {
     lastSyncAt: new Date().toISOString(),
     elapsedSec: parseFloat(elapsed),
     totalScanned: allStocks.length,
-    totalCandidates: candidates.length,
+    totalCandidates: undervaluedCandidates.length,
     topCount: top200.length,
     kospiCount: kospiStocks.length,
     kosdaqCount: kosdaqStocks.length,

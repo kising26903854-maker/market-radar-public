@@ -1,4 +1,4 @@
-// VkospiTrackerTab.jsx — ⚡ KRX 변동성지수 & 코스피/코스닥 당일 장중 실시간 지수 3대 레이더 (초고속 실시간 LIVE)
+// VkospiTrackerTab.jsx — ⚡ 코스피 자체 변동성 추정치(비공식) & 코스피/코스닥 당일 장중 실시간 지수 3대 레이더 (초고속 실시간 LIVE)
 import React, { useState, useEffect, useMemo } from 'react';
 
 const formatNumber = (num) => new Intl.NumberFormat('ko-KR').format(num || 0);
@@ -82,7 +82,7 @@ export default function VkospiTrackerTab() {
       const res = await fetch('/api/telegram/send-vkospi-briefing', { method: 'POST' });
       const resData = await res.json();
       if (resData.success) {
-        showToast('✅ ⚡ KRX 변동성지수 & 코스피 당일 실시간 브리핑이 텔레그램으로 전송되었습니다!');
+        showToast('✅ ⚡ 코스피 변동성 추정치(비공식) & 코스피 당일 실시간 브리핑이 텔레그램으로 전송되었습니다!');
       } else {
         alert(resData.error || '텔레그램 발송 실패');
       }
@@ -274,7 +274,7 @@ export default function VkospiTrackerTab() {
     return { points: linePoints, area: areaPoints, min, max, items: pts, prevCloseY, prevClose, latest: pts[pts.length - 1] };
   }, [kosdaqData, topChartMode, mInnerW, mInnerH, liveKosdaqPrice]);
 
-  // 2-3. ⚡ VOLATILITY (KRX 변동성지수) 전용 실시간 차트
+  // 2-3. ⚡ VOLATILITY (코스피 자체 변동성 추정치, 비공식) 전용 실시간 차트
   const vkospiChart = useMemo(() => {
     const isIntraday = topChartMode === 'INTRADAY';
     const rawList = isIntraday ? (vkospiData.intraday || []) : (vkospiData.timeline || []);
@@ -362,7 +362,7 @@ export default function VkospiTrackerTab() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
           <div>
             <div style={{ fontSize: '1.65rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-              <span style={{ filter: 'drop-shadow(0 0 12px #ef4444)' }}>⚡ KRX 변동성지수 &amp; 코스피 · 코스닥 3대 실시간 지수 레이더</span>
+              <span style={{ filter: 'drop-shadow(0 0 12px #ef4444)' }}>⚡ 변동성 추정치(비공식) &amp; 코스피 · 코스닥 3대 실시간 지수 레이더</span>
               
               {/* 🟢 실시간 LIVE 수신 인디케이터 */}
               <span style={{
@@ -382,7 +382,7 @@ export default function VkospiTrackerTab() {
               </span>
             </div>
             <div style={{ fontSize: '.92rem', color: 'var(--t2)', marginTop: 8, lineHeight: 1.6 }}>
-              한국거래소(KRX) 공식 <strong>코스피({liveKospiPrice.toLocaleString()} pt)</strong>, <strong>코스닥({liveKosdaqPrice.toLocaleString()} pt)</strong>, <strong>변동성지수({liveVkospiPrice} POINT)</strong> 3대 지수가 <strong>초단위로 실시간 드로잉</strong>됩니다.
+              <strong>코스피({liveKospiPrice.toLocaleString()} pt)</strong>, <strong>코스닥({liveKosdaqPrice.toLocaleString()} pt)</strong>, <strong>변동성 추정치({liveVkospiPrice} POINT, 코스피 자체 산출·비공식)</strong> 3대 지수가 <strong>초단위로 실시간 드로잉</strong>됩니다.
             </div>
           </div>
 
@@ -454,7 +454,7 @@ export default function VkospiTrackerTab() {
         {/* 그래프 상단 모드 전환 토글 바 */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, flexWrap: 'wrap', gap: 10 }}>
           <div style={{ fontSize: '1.08rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span>⚡ 코스피 · 코스닥 · KRX 변동성지수 3대 실시간 장중 지수 차트</span>
+            <span>⚡ 코스피 · 코스닥 · 변동성 추정치(비공식) 3대 실시간 장중 지수 차트</span>
             <span style={{ fontSize: '.75rem', background: 'rgba(239,68,68,0.2)', color: '#f87171', border: '1px solid #ef4444', padding: '2px 8px', borderRadius: 6, fontWeight: 900 }}>
               실시간 LIVE 드로잉
             </span>
@@ -812,7 +812,7 @@ export default function VkospiTrackerTab() {
             </div>
           </div>
 
-          {/* 3. ⚡ VOLATILITY (KRX 변동성지수) 전용 실시간 지수 카드 */}
+          {/* 3. ⚡ VOLATILITY (코스피 자체 변동성 추정치, 비공식) 전용 실시간 지수 카드 */}
           <div style={{
             background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.85) 100%)',
             borderRadius: 20,
@@ -824,7 +824,7 @@ export default function VkospiTrackerTab() {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                  <span style={{ fontSize: '1.15rem', fontWeight: 900, color: '#fff' }}>⚡ VOLATILITY (KRX)</span>
+                  <span style={{ fontSize: '1.15rem', fontWeight: 900, color: '#fff' }}>⚡ VOLATILITY (자체추정·비공식)</span>
                   <span style={{
                     padding: '2px 7px',
                     borderRadius: 6,
@@ -851,13 +851,15 @@ export default function VkospiTrackerTab() {
                 <div style={{
                   fontSize: '1rem',
                   fontWeight: 900,
-                  color: '#60a5fa',
+                  color: (cur.vkospiChangePct ?? 0) >= 0 ? '#f87171' : '#60a5fa',
                   fontFamily: 'Space Mono'
                 }}>
-                  −0.47 (−0.83%)
+                  {cur.vkospiChange !== undefined
+                    ? `${cur.vkospiChangePct >= 0 ? '▲ +' : '▼ '}${Math.abs(cur.vkospiChange)} (${cur.vkospiChangePct >= 0 ? '+' : ''}${cur.vkospiChangePct}%)`
+                    : '-'}
                 </div>
                 <div style={{ fontSize: '.72rem', color: 'var(--t3)', marginTop: 4 }}>
-                  고 <strong style={{ color: '#ef4444' }}>61.85</strong> | 저 <strong style={{ color: '#34d399' }}>55.80</strong> | <strong style={{ color: '#34d399' }}>🟢안정</strong>
+                  고 <strong style={{ color: '#ef4444' }}>{vkospiData.highPrice ?? '-'}</strong> | 저 <strong style={{ color: '#34d399' }}>{vkospiData.lowPrice ?? '-'}</strong> | <strong style={{ color: '#34d399' }}>{cur.riskLabel || '-'}</strong>
                 </div>
               </div>
             </div>
@@ -972,7 +974,7 @@ export default function VkospiTrackerTab() {
 
       {/* ─── 2. 4대 KPI 요약 지표 카드 ─── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: 12, marginBottom: 20 }}>
-        {/* 카드 1: KRX 변동성 지수 (56.29 POINT) */}
+        {/* 카드 1: 변동성 추정치 (코스피 자체 산출, 비공식) */}
         <div style={{
           padding: '18px 20px',
           borderRadius: 18,
@@ -981,7 +983,7 @@ export default function VkospiTrackerTab() {
           boxShadow: '0 4px 20px rgba(0,0,0,0.25)'
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '.84rem', fontWeight: 800, color: '#f87171' }}>⚡ VOLATILITY (KRX)</span>
+            <span style={{ fontSize: '.84rem', fontWeight: 800, color: '#f87171' }}>⚡ VOLATILITY (자체추정·비공식)</span>
             <span style={{
               fontSize: '.72rem',
               fontWeight: 900,
@@ -991,14 +993,16 @@ export default function VkospiTrackerTab() {
               color: '#34d399',
               border: '1px solid #10b981'
             }}>
-              {cur.riskLabel || '🟢 안정'}
+              {cur.riskLabel || '-'}
             </span>
           </div>
           <div style={{ fontSize: '1.85rem', fontWeight: 900, color: '#fff', fontFamily: 'Space Mono', marginTop: 8 }}>
             {liveVkospiPrice} <span style={{ fontSize: '.85rem', fontWeight: 600, color: 'var(--t3)' }}>POINT</span>
           </div>
-          <div style={{ fontSize: '.82rem', color: '#60a5fa', fontWeight: 800, marginTop: 4 }}>
-            −0.47 (−0.83%) <span style={{ fontSize: '.74rem', color: 'var(--t3)', marginLeft: 4 }}>({cur.marketStatus || '장중 실시간'})</span>
+          <div style={{ fontSize: '.82rem', color: (cur.vkospiChangePct ?? 0) >= 0 ? '#f87171' : '#60a5fa', fontWeight: 800, marginTop: 4 }}>
+            {cur.vkospiChange !== undefined
+              ? `${cur.vkospiChangePct >= 0 ? '▲ +' : '▼ '}${Math.abs(cur.vkospiChange)} (${cur.vkospiChangePct >= 0 ? '+' : ''}${cur.vkospiChangePct}%)`
+              : '-'} <span style={{ fontSize: '.74rem', color: 'var(--t3)', marginLeft: 4 }}>({cur.marketStatus || '-'})</span>
           </div>
         </div>
 
@@ -1017,8 +1021,10 @@ export default function VkospiTrackerTab() {
           <div style={{ fontSize: '1.85rem', fontWeight: 900, color: '#fff', fontFamily: 'Space Mono', marginTop: 8 }}>
             {liveKospiPrice.toLocaleString()} <span style={{ fontSize: '.85rem', fontWeight: 600, color: 'var(--t3)' }}>pt</span>
           </div>
-          <div style={{ fontSize: '.82rem', color: 'var(--up)', fontWeight: 800, marginTop: 4 }}>
-            ▲ +45.78 (+0.68%)
+          <div style={{ fontSize: '.82rem', color: (kospiData.dayChangePct ?? 0) >= 0 ? 'var(--up)' : 'var(--dn)', fontWeight: 800, marginTop: 4 }}>
+            {kospiData.dayChange !== undefined
+              ? `${kospiData.dayChangePct >= 0 ? '▲ +' : '▼ '}${Math.abs(kospiData.dayChange).toLocaleString()} (${kospiData.dayChangePct >= 0 ? '+' : ''}${kospiData.dayChangePct}%)`
+              : '-'}
           </div>
         </div>
 
@@ -1056,12 +1062,17 @@ export default function VkospiTrackerTab() {
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 10 }}>
             <div>
-              <div style={{ fontSize: '.74rem', color: 'var(--t3)' }}>🇺🇸 미국 VIX</div>
-              <div style={{ fontSize: '1.2rem', fontWeight: 900, color: '#fff', fontFamily: 'Space Mono' }}>{cur.vix || 15.75} pt</div>
+              <div style={{ fontSize: '.74rem', color: 'var(--t3)' }}>
+                🇺🇸 미국 VIX
+                {cur.vixIsLive === false && (
+                  <span style={{ marginLeft: 5, color: '#fbbf24', fontWeight: 800 }}>(실시간 아님)</span>
+                )}
+              </div>
+              <div style={{ fontSize: '1.2rem', fontWeight: 900, color: '#fff', fontFamily: 'Space Mono' }}>{cur.vix ?? '-'} pt</div>
             </div>
             <div style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: '.74rem', color: 'var(--t3)' }}>🇰🇷 코스닥 변동성</div>
-              <div style={{ fontSize: '1.2rem', fontWeight: 900, color: '#fff', fontFamily: 'Space Mono' }}>{cur.vkosdaq || 73.8} pt</div>
+              <div style={{ fontSize: '.74rem', color: 'var(--t3)' }}>🇰🇷 코스닥 변동성 추정치</div>
+              <div style={{ fontSize: '1.2rem', fontWeight: 900, color: '#fff', fontFamily: 'Space Mono' }}>{cur.vkosdaq ?? '-'} pt</div>
             </div>
           </div>
         </div>
@@ -1080,7 +1091,7 @@ export default function VkospiTrackerTab() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14, marginBottom: 16 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
             <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: 8 }}>
-              <span>📊 코스피 지수 vs KRX 변동성지수 ({liveVkospiPrice} POINT) 듀얼 시계열 레이더</span>
+              <span>📊 코스피 지수 vs 변동성 추정치(비공식) ({liveVkospiPrice} POINT) 듀얼 시계열 레이더</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 14, fontSize: '.8rem', fontWeight: 800 }}>
               <span style={{ display: 'flex', alignItems: 'center', gap: 6, color: '#38bdf8' }}>
@@ -1427,7 +1438,7 @@ export default function VkospiTrackerTab() {
       }}>
         <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#fff', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 8 }}>
           <span>💡</span>
-          <span>한국거래소(KRX) 변동성 지표({liveVkospiPrice} POINT) 퀀트 진단</span>
+          <span>코스피 변동성 추정치(비공식, {liveVkospiPrice} POINT) 퀀트 진단</span>
         </div>
         <div style={{ fontSize: '.9rem', color: '#f1f5f9', lineHeight: 1.65 }}>
           {contrarian.desc || '변동성이 56.29 POINT로 전일대비 -0.47pt(-0.83%) 하향 안정세를 보이며 안정 구간 내에서 안정적인 흐름을 유지하고 있습니다.'}

@@ -1,6 +1,7 @@
 /**
  * @file macro_news.js
- * @description 네이버 금융 메인 뉴스 및 네이버 뉴스 경제 섹션에서 글로벌 매크로 뉴스를 스크래핑하고 카테고리별로 분류하는 모듈
+ * @description 네이버 뉴스 경제 섹션(news.naver.com/section/101)에서 글로벌 매크로 뉴스를 스크래핑하고 카테고리별로 분류하는 모듈
+ * (구 finance.naver.com/news/mainnews.naver 소스는 stock.naver.com으로 사이트 이전되어 파싱이 불가능해져 제거됨)
  */
 
 // 메모리 캐시 설정 (10분 TTL)
@@ -73,79 +74,6 @@ export function classifyCategory(title) {
 
   // 6. 기본값: 글로벌이슈
   return '글로벌이슈';
-}
-
-/**
- * 네이버 금융 메인 뉴스 HTML 파싱 (EUC-KR 디코딩된 문자열)
- * @param {string} html - HTML 문자열
- * @returns {Array<object>} 뉴스 목록
- */
-function parseFinanceMainNews(html) {
-  const newsList = [];
-  if (!html) return newsList;
-
-  // 메인 뉴스 리스트 아이템 추출 (<li class="block...">)
-  const itemRegex = /<li\s+class="block\d*">([\s\S]*?)<\/li>/gi;
-  let match;
-
-  while ((match = itemRegex.exec(html)) !== null) {
-    const block = match[1];
-
-    // 제목 및 링크 추출
-    const subjectMatch = block.match(/<dd\s+class="articleSubject"[^>]*>[\s\S]*?<a\s+href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/i);
-    if (!subjectMatch) continue;
-
-    let url = subjectMatch[1].trim();
-    if (url.startsWith('/')) {
-      url = `https://finance.naver.com${url}`;
-    }
-
-    const rawTitle = subjectMatch[2].replace(/<[^>]+>/g, '').trim();
-    const title = decodeHtmlEntities(rawTitle);
-    if (!title) continue;
-
-    // 언론사 추출
-    const pressMatch = block.match(/<span\s+class="press"[^>]*>([\s\S]*?)<\/span>/i);
-    const source = pressMatch ? decodeHtmlEntities(pressMatch[1].replace(/<[^>]+>/g, '')).trim() : '네이버금융';
-
-    // 작성일시 추출
-    const dateMatch = block.match(/<span\s+class="wdate"[^>]*>([\s\S]*?)<\/span>/i);
-    let date = dateMatch ? decodeHtmlEntities(dateMatch[1].replace(/<[^>]+>/g, '')).trim() : '';
-    if (!date) {
-      const urlDateMatch = url.match(/date=(\d{4}-\d{2}-\d{2})/);
-      date = urlDateMatch ? urlDateMatch[1] : new Date().toISOString().split('T')[0];
-    }
-
-    // 기사 요약 추출 (100-150자)
-    const summaryMatch = block.match(/<dd\s+class="articleSummary"[^>]*>([\s\S]*?)<\/dd>/i);
-    let summary = '';
-    if (summaryMatch) {
-      let rawSummary = summaryMatch[1];
-      const pressIndex = rawSummary.indexOf('<span class="press"');
-      if (pressIndex !== -1) {
-        rawSummary = rawSummary.substring(0, pressIndex);
-      }
-      summary = decodeHtmlEntities(rawSummary.replace(/<[^>]+>/g, ''))
-        .replace(/\s+/g, ' ')
-        .trim();
-      if (summary.length > 150) {
-        summary = summary.substring(0, 150).trim() + '...';
-      }
-    }
-
-    const category = classifyCategory(title);
-
-    newsList.push({
-      title,
-      summary: summary || title,
-      source,
-      url,
-      date,
-      category
-    });
-  }
-
-  return newsList;
 }
 
 /**
@@ -259,48 +187,28 @@ export async function getGlobalMacroNews(forceRefresh = false) {
       'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7'
     };
 
-    // 네이버 금융 메인 뉴스 (EUC-KR) 및 네이버 뉴스 경제 섹션 (UTF-8) 병렬 요청
-    const [financeResult, economyResult] = await Promise.allSettled([
-      fetch('https://finance.naver.com/news/mainnews.naver', {
-        headers: fetchHeaders,
-        signal: AbortSignal.timeout(10000)
-      }).then(async (res) => {
-        if (!res.ok) {
-          throw new Error(`네이버 금융 뉴스 응답 오류: HTTP ${res.status}`);
-        }
-        const buffer = await res.arrayBuffer();
-        const html = new TextDecoder('euc-kr').decode(buffer);
-        return parseFinanceMainNews(html);
-      }),
-      fetch('https://news.naver.com/section/101', {
-        headers: fetchHeaders,
-        signal: AbortSignal.timeout(10000)
-      }).then(async (res) => {
-        if (!res.ok) {
-          throw new Error(`네이버 경제 뉴스 응답 오류: HTTP ${res.status}`);
-        }
-        const html = await res.text();
-        return parseSection101News(html);
-      })
-    ]);
-
+    // 네이버 뉴스 경제 섹션 (UTF-8) 요청
+    // (구 finance.naver.com/news/mainnews.naver 소스는 stock.naver.com으로 사이트가 이전되면서
+    //  더 이상 파싱 가능한 HTML을 반환하지 않아 제거됨 — 이 소스 하나로만 수집한다)
     const allNews = [];
 
-    if (financeResult.status === 'fulfilled' && Array.isArray(financeResult.value)) {
-      allNews.push(...financeResult.value);
-    } else if (financeResult.status === 'rejected') {
-      console.warn('네이버 금융 메인 뉴스 스크래핑 실패:', financeResult.reason?.message);
+    try {
+      const res = await fetch('https://news.naver.com/section/101', {
+        headers: fetchHeaders,
+        signal: AbortSignal.timeout(10000)
+      });
+      if (!res.ok) {
+        throw new Error(`네이버 경제 뉴스 응답 오류: HTTP ${res.status}`);
+      }
+      const html = await res.text();
+      allNews.push(...parseSection101News(html));
+    } catch (fetchErr) {
+      console.warn('네이버 경제 섹션 뉴스 스크래핑 실패:', fetchErr.message);
     }
 
-    if (economyResult.status === 'fulfilled' && Array.isArray(economyResult.value)) {
-      allNews.push(...economyResult.value);
-    } else if (economyResult.status === 'rejected') {
-      console.warn('네이버 경제 섹션 뉴스 스크래핑 실패:', economyResult.reason?.message);
-    }
-
-    // 두 요청 모두 실패하고 가져온 뉴스가 없는 경우
-    if (allNews.length === 0 && financeResult.status === 'rejected' && economyResult.status === 'rejected') {
-      const errorMsg = `네이버 뉴스 수집 실패 (금융: ${financeResult.reason?.message}, 경제: ${economyResult.reason?.message})`;
+    // 뉴스를 하나도 가져오지 못한 경우
+    if (allNews.length === 0) {
+      const errorMsg = '네이버 뉴스 수집 실패 (경제 섹션 소스에서 기사를 가져오지 못했습니다)';
       // 기존 캐시가 있다면 폴백으로 반환
       if (newsCache.data) {
         return newsCache.data;

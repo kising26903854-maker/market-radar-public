@@ -6,7 +6,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { runAgent, generateDailyBriefing } from './agent.js'
-import { getPortfolioPrices, getStockChartData, getSmartMoneyAnalysis, searchStockInfo, getStockPrice, getStockNews, getWallStreetAnalysis, getVpvrSupportKospiStocks, getWallStreetPerfectKospiStocks, getFearGreedHistory, getCreditMarginHistory, getStockCreditMarginHistory, getUndervaluedStocks, get52WeekHighStocks, getStockFinancials, getDividendInfo } from './stock.js'
+import { getPortfolioPrices, getStockChartData, getSmartMoneyAnalysis, searchStockInfo, getStockPrice, getStockNews, getWallStreetAnalysis, getVpvrSupportKospiStocks, getWallStreetPerfectKospiStocks, getFearGreedHistory, getCreditMarginHistory, getStockCreditMarginHistory, get52WeekHighStocks, getStockFinancials, getDividendInfo } from './stock.js'
 import { startDailyFinancialsSync } from './financials_sync.js'
 import { startDailyMarketScan, getFullScanCache, runFullMarketScan } from './kospi_kosdaq_scanner.js'
 import { getMarketCapComparison, runMarketCapTracking, startDailyMarketCapTracker } from './market_cap_tracker.js'
@@ -21,7 +21,7 @@ import { getLiveValueChain } from './value_chain.js'
 import { getCompanySummary } from './company_summary.js'
 import { getSmartSupplyDemand } from './smart_supply_demand.js'
 import { getCompanyFinancials } from './company_financials.js'
-import { getMomentumStocks } from './momentum_scanner.js'
+import { getMomentumStocks, startDailyGoldenCrossScan } from './momentum_scanner.js'
 import { getDividendCalendar } from './dividend_calendar.js'
 import { getMorningBriefing } from './morning_briefing.js'
 import { getTelegramConfig, saveTelegramConfig, sendTelegramMessage, detectTelegramChatId, getPriceAlerts, createPriceAlert, updatePriceAlert, deletePriceAlert, getAlertHistory, startAlertEngine, sendHoldingsBriefing, sendWatchlistBriefing, sendNpsDisclosuresBriefing, testSendNpsSingleAlert } from './telegram_alert.js'
@@ -33,6 +33,9 @@ import { getBaseRatesData } from './base_rates.js'
 import { getDoubleBottomCache, isDoubleBottomScanStale, runDoubleBottomScan, startDailyDoubleBottomScan } from './double_bottom_scanner.js'
 import { getBaseBreakoutCache, isBaseBreakoutScanStale, runBaseBreakoutScan, startDailyBaseBreakoutScan } from './base_breakout_scanner.js'
 import { getEnergyCondensationCache, isEnergyCondensationScanStale, runEnergyCondensationScan, startDailyEnergyCondensationScan } from './energy_condensation_scanner.js'
+import { getMonthlyMA10Cache, isMonthlyMA10ScanStale, runMonthlyMA10Scan, startDailyMonthlyMA10Scan } from './monthly_ma10_scanner.js'
+import { getBacktestCache, isBacktestStale, runBacktest, startWeeklyBacktest } from './backtest_engine.js'
+import { getModelCache, isModelStale, runModelTraining, startWeeklyModelTraining } from './ai_prediction_model.js'
 
 const app = express()
 app.use(cors())
@@ -203,99 +206,84 @@ function guessSector(name, code) {
   return '🏢 일반제조·가치주';
 }
 
-// 💎 코스피+코스닥 전 종목 저평가 스캔 API (전종목 스캔 우선, 없으면 36종목 폴백)
+// 💎 코스피+코스닥 전 종목 저평가 스캔 API
+// ⚠️ 예전에는 전종목 스캔 캐시가 비어있으면 36종목 하드코딩 "가짜" 리스트(임의 목표가·서술문·
+// Math.random() 기반 추세 판정)로 조용히 폴백했다. 지금은 그 가짜 데이터를 완전히 제거하고,
+// 캐시가 없으면 백그라운드 스캔을 트리거한 뒤 "스캔 중" 상태를 그대로 알려준다(다른 스캐너들과 동일 패턴).
 app.get('/api/undervalued-stocks', async (req, res) => {
   try {
-    // 1순위: 전종목 스캔 캐시 사용
     const fullScan = getFullScanCache()
-    if (fullScan && fullScan.stocks && fullScan.stocks.length > 0) {
+    if (!fullScan || !fullScan.stocks || fullScan.stocks.length === 0) {
+      runFullMarketScan().catch(e => console.error('[FULL SCAN] 최초 스캔 오류:', e.message))
       return res.json({
         success: true,
-        mode: 'FULL_SCAN',
-        totalScanned: fullScan.totalScanned,
-        kospiCount: fullScan.kospiCount,
-        kosdaqCount: fullScan.kosdaqCount,
-        lastSyncAt: fullScan.lastSyncAt,
-        summary: {
-          total: fullScan.topCount,
-          marketCondition: `📡 코스피 ${fullScan.kospiCount?.toLocaleString()}종목 + 코스닥 ${fullScan.kosdaqCount?.toLocaleString()}종목 전체 스캔 (총 ${fullScan.totalScanned?.toLocaleString()}종목 중 저평가 ${fullScan.totalCandidates}개 발굴)`,
-          scanTime: fullScan.elapsedSec,
-        },
-        stocks: (fullScan.stocks || []).map(s => {
-          // 캐시된 sector가 '일반제조·가치주' 등 기본값이면 guessSector로 재분류
-          const isGenericSector = !s.sector || s.sector.includes('일반제조') || s.sector.includes('기타')
-          const resolvedSector = isGenericSector ? guessSector(s.name, s.code) : s.sector
-          
-          const score = s.investmentScore || s.quantScore || 70;
-          const halfKelly = Math.max(0.05, Math.min(0.25, (score - 50) / 100 * 0.5));
-          const kellyPct = (halfKelly * 100).toFixed(1);
-          
-          // 추세 전환 (단기 모멘텀 지표 대용)
-          const isUptrend = (s.changePct && s.changePct > 0.5) || score >= 92;
-          
-          // 스마트 머니 수급 (임의 추정 지표 - 실제로는 기관 외인 순매수 데이터 연동 필요)
-          const isSmartMoney = score >= 88 && (parseInt(s.code, 10) % 2 === 0);
-          const smartMoneyTrend = s.smartMoneyTrend || (isSmartMoney ? '🔥 기관/외국인 쌍끌이 매수 포착' : null);
-
-          const price = s.price || s.currentPrice || 1000;
-          const bps = s.bps || (s.pbr > 0 ? Math.round(price / s.pbr) : Math.round(price * 1.8));
-          const roe = s.roe || 10;
-          const per = s.per || 8;
-
-          // 🎯 월가 퀀트 개별 정밀 목표가 산출 (ROE 반영 BPS 적정가치 + PER 정상화 복합 모델)
-          let targetPrice = s.targetPrice;
-          if (!targetPrice || targetPrice <= price) {
-            const fairPbr = Math.max(0.6, Math.min(2.5, roe / 10));
-            const targetFromBps = bps * fairPbr;
-            const targetFromPer = price * Math.max(1.18, Math.min(3.2, (10.5 / Math.max(1.1, per))));
-            targetPrice = Math.round((targetFromBps * 0.45 + targetFromPer * 0.55) / 50) * 50;
-            if (targetPrice <= price * 1.15) {
-              targetPrice = Math.round((price * (1 + (score / 160))) / 50) * 50;
-            }
-          }
-          const upsideNum = parseFloat((((targetPrice - price) / price) * 100).toFixed(1));
-          const upsidePct = `+${upsideNum.toFixed(1)}%`;
-
-          return {
-            ...s,
-            targetPrice,
-            upsidePct,
-            sector: resolvedSector,
-            reason: s.reason || '퀀트 스크리닝 저평가 우량주 발굴 대상',
-            kellyPct,
-            isUptrend,
-            smartMoneyTrend
-          }
-        }),
+        scanning: true,
+        mode: 'SCANNING',
+        totalScanned: 0,
+        kospiCount: 0,
+        kosdaqCount: 0,
+        lastSyncAt: fullScan?.lastSyncAt || null,
+        summary: { total: 0, marketCondition: '📡 코스피+코스닥 전종목 실시간 스캔 진행 중...', scanTime: 0 },
+        stocks: [],
       })
     }
-    // 2순위: 기존 36종목 하드코딩 데이터 (스캔 준비 중일 때)
-    const data = await getUndervaluedStocks()
-    const mappedStocks = (data.stocks || []).map(s => {
-      const score = s.investmentScore || s.quantScore || 70;
-      const halfKelly = Math.max(0.05, Math.min(0.25, (score - 50) / 100 * 0.5));
-      const kellyPct = (halfKelly * 100).toFixed(1);
-      const isUptrend = score >= 92 || Math.random() > 0.5; // FIXED_36 fallback
-      const isSmartMoney = score >= 88 && (parseInt(s.code, 10) % 2 === 0);
-      const smartMoneyTrend = s.smartMoneyTrend || (isSmartMoney ? '🔥 기관/외국인 쌍끌이 매수 포착' : null);
 
-      const price = s.price || s.currentPrice || 1000;
-      const bps = s.bps || (s.pbr > 0 ? Math.round(price / s.pbr) : Math.round(price * 1.8));
-      const roe = s.roe || 10;
-      const per = s.per || 8;
-      let targetPrice = s.targetPrice;
-      if (!targetPrice || targetPrice <= price) {
-        const fairPbr = Math.max(0.6, Math.min(2.5, roe / 10));
-        const targetFromBps = bps * fairPbr;
-        const targetFromPer = price * Math.max(1.18, Math.min(3.2, (10.5 / Math.max(1.1, per))));
-        targetPrice = Math.round((targetFromBps * 0.45 + targetFromPer * 0.55) / 50) * 50;
-      }
-      const upsideNum = parseFloat((((targetPrice - price) / price) * 100).toFixed(1));
-      const upsidePct = `+${upsideNum.toFixed(1)}%`;
+    return res.json({
+      success: true,
+      scanning: false,
+      mode: 'FULL_SCAN',
+      totalScanned: fullScan.totalScanned,
+      kospiCount: fullScan.kospiCount,
+      kosdaqCount: fullScan.kosdaqCount,
+      lastSyncAt: fullScan.lastSyncAt,
+      summary: {
+        total: fullScan.topCount,
+        marketCondition: `📡 코스피 ${fullScan.kospiCount?.toLocaleString()}종목 + 코스닥 ${fullScan.kosdaqCount?.toLocaleString()}종목 전체 스캔 (총 ${fullScan.totalScanned?.toLocaleString()}종목 중 저평가 ${fullScan.totalCandidates}개 발굴)`,
+        scanTime: fullScan.elapsedSec,
+      },
+      stocks: (fullScan.stocks || []).map(s => {
+        // 캐시된 sector가 '일반제조·가치주' 등 기본값이면 guessSector로 재분류
+        const isGenericSector = !s.sector || s.sector.includes('일반제조') || s.sector.includes('기타')
+        const resolvedSector = isGenericSector ? guessSector(s.name, s.code) : s.sector
 
-      return { ...s, targetPrice, upsidePct, kellyPct, isUptrend, smartMoneyTrend }
+        const score = s.investmentScore || s.quantScore || 70;
+        const halfKelly = Math.max(0.05, Math.min(0.25, (score - 50) / 100 * 0.5));
+        const kellyPct = (halfKelly * 100).toFixed(1);
+
+        // 추세 전환: 실시간 당일 등락률 기반 (실데이터)
+        const isUptrend = !!(s.changePct && s.changePct > 0.5);
+
+        const price = s.price || s.currentPrice || 1000;
+        const bps = s.bps || (s.pbr > 0 ? Math.round(price / s.pbr) : Math.round(price * 1.8));
+        const roe = s.roe || 10;
+        const per = s.per || 8;
+
+        // 🎯 밸류에이션 모델 목표가 (ROE 반영 BPS 적정가치 + PER 정상화 복합 모델 — 실제 재무데이터 기반 추정치, 애널리스트 목표가 아님)
+        let targetPrice = s.targetPrice;
+        if (!targetPrice || targetPrice <= price) {
+          const fairPbr = Math.max(0.6, Math.min(2.5, roe / 10));
+          const targetFromBps = bps * fairPbr;
+          const targetFromPer = price * Math.max(1.18, Math.min(3.2, (10.5 / Math.max(1.1, per))));
+          targetPrice = Math.round((targetFromBps * 0.45 + targetFromPer * 0.55) / 50) * 50;
+          if (targetPrice <= price * 1.15) {
+            targetPrice = Math.round((price * (1 + (score / 160))) / 50) * 50;
+          }
+        }
+        const upsideNum = parseFloat((((targetPrice - price) / price) * 100).toFixed(1));
+        const upsidePct = `+${upsideNum.toFixed(1)}%`;
+
+        return {
+          ...s,
+          targetPrice,
+          targetPriceNote: '재무지표 기반 밸류에이션 모델 추정치 (실제 애널리스트 목표주가 아님)',
+          upsidePct,
+          sector: resolvedSector,
+          reason: s.reason || '퀀트 스크리닝 저평가 우량주 발굴 대상 (PER/ROE/PBR/배당수익률 종합 점수)',
+          kellyPct,
+          isUptrend,
+        }
+      }),
     })
-    res.json({ ...data, stocks: mappedStocks, mode: 'FIXED_36' })
   } catch (err) {
     res.status(500).json({ success: false, error: err.message })
   }
@@ -407,6 +395,100 @@ app.get('/api/energy-condensation-status', (req, res) => {
 app.post('/api/trigger-energy-condensation-scan', async (req, res) => {
   res.json({ success: true, message: '에너지 응축 패턴 스캔이 백그라운드에서 시작되었습니다.' })
   runEnergyCondensationScan().catch(e => console.error('[ENERGY] 수동 스캔 오류:', e.message))
+})
+
+// 🎯 월봉 10이평선 지지 + 2개월 연속 상승 스캐너 API
+app.get('/api/monthly-ma10-stocks', async (req, res) => {
+  try {
+    const cache = getMonthlyMA10Cache()
+    if (!cache) {
+      runMonthlyMA10Scan().catch(e => console.error('[MONTHLY MA10] 최초 스캔 오류:', e.message))
+      return res.json({ success: true, scanning: true, lastSyncAt: null, kospiCount: 0, kosdaqCount: 0, totalScanned: 0, stocks: [] })
+    }
+    res.json({ success: true, scanning: false, ...cache })
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message })
+  }
+})
+
+// 🎯 월봉 10이평선 스캔 상태 확인 API
+app.get('/api/monthly-ma10-status', (req, res) => {
+  const cache = getMonthlyMA10Cache()
+  res.json({
+    hasCache: !!cache,
+    isStale: isMonthlyMA10ScanStale(),
+    lastSyncAt: cache?.lastSyncAt || null,
+    totalScanned: cache?.totalScanned || 0,
+    totalMatches: cache?.totalMatches || 0,
+  })
+})
+
+// 🔄 수동 월봉 10이평선 스캔 트리거 API
+app.post('/api/trigger-monthly-ma10-scan', async (req, res) => {
+  res.json({ success: true, message: '월봉 10이평선 지지 패턴 스캔이 백그라운드에서 시작되었습니다.' })
+  runMonthlyMA10Scan().catch(e => console.error('[MONTHLY MA10] 수동 스캔 오류:', e.message))
+})
+
+// 📊 패턴 스캐너 과거 성과 백테스트 리포트 API
+app.get('/api/backtest-report', async (req, res) => {
+  try {
+    const cache = getBacktestCache()
+    if (!cache) {
+      runBacktest().catch(e => console.error('[BACKTEST] 최초 백테스트 오류:', e.message))
+      return res.json({ success: true, running: true, lastSyncAt: null, scanners: [] })
+    }
+    res.json({ success: true, running: false, ...cache })
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message })
+  }
+})
+
+// 📊 백테스트 상태 확인 API
+app.get('/api/backtest-status', (req, res) => {
+  const cache = getBacktestCache()
+  res.json({
+    hasCache: !!cache,
+    isStale: isBacktestStale(),
+    lastSyncAt: cache?.lastSyncAt || null,
+    universeSize: cache?.universeSize || 0,
+  })
+})
+
+// 🔄 수동 백테스트 재실행 트리거 API (연산 비용이 크므로 몇 분 소요될 수 있음)
+app.post('/api/trigger-backtest', async (req, res) => {
+  res.json({ success: true, message: '백테스트가 백그라운드에서 시작되었습니다. 수 분 정도 소요될 수 있습니다.' })
+  runBacktest().catch(e => console.error('[BACKTEST] 수동 백테스트 오류:', e.message))
+})
+
+// 🤖 AI 상승확률 예측 모델(로지스틱 회귀) 리포트 API
+app.get('/api/ai-prediction', async (req, res) => {
+  try {
+    const cache = getModelCache()
+    if (!cache) {
+      runModelTraining().catch(e => console.error('[AI MODEL] 최초 학습 오류:', e.message))
+      return res.json({ success: true, training: true, lastSyncAt: null, stocks: [] })
+    }
+    res.json({ success: true, training: false, ...cache })
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message })
+  }
+})
+
+// 🤖 AI 모델 상태 확인 API
+app.get('/api/ai-prediction-status', (req, res) => {
+  const cache = getModelCache()
+  res.json({
+    hasCache: !!cache,
+    isStale: isModelStale(),
+    lastSyncAt: cache?.lastSyncAt || null,
+    testAccuracy: cache?.evaluation?.test?.accuracy || null,
+  })
+})
+
+// 🔄 수동 AI 모델 재학습 트리거 API
+app.post('/api/trigger-ai-training', async (req, res) => {
+  res.json({ success: true, message: 'AI 모델 재학습이 백그라운드에서 시작되었습니다. 수 분 정도 소요될 수 있습니다.' })
+  runModelTraining().catch(e => console.error('[AI MODEL] 수동 재학습 오류:', e.message))
 })
 
 // 🏢 기업 개요 및 주요 사업·제품 핵심 정보 API
@@ -611,7 +693,10 @@ app.get('/api/market-cap-ranking', (req, res) => {
 app.post('/api/trigger-market-cap-ranking', async (req, res) => {
   try {
     const data = await runMarketCapTracking()
-    res.json({ success: true, message: '주간 시가총액 집계가 완료되었습니다.', data })
+    if (!data.success) {
+      return res.status(502).json({ success: false, error: data.error || '시가총액 랭킹 수집에 실패했습니다.', data })
+    }
+    res.json({ success: true, message: '시가총액 랭킹 집계가 완료되었습니다.', data })
   } catch (err) {
     res.status(500).json({ success: false, error: err.message })
   }
@@ -654,7 +739,7 @@ app.get('/api/portfolio-dividend', async (req, res) => {
     const portfolio = await getPortfolioPrices()
     const positions = portfolio?.positions || []
 
-    // quantList에서 배당수익률 폴백 매핑 (getUndervaluedStocks 내 quantList 활용)
+    // 스크래핑 실패 시 마지막 폴백용 배당수익률 참고표 (대형주 한정, 실제 배당수익률 조회 실패 시에만 사용)
     const QUANT_DIVYIELD = {
       '005930': 2.0, '000660': 0.4, '090430': 1.2, '105560': 6.2, '055550': 6.5,
       '086790': 6.9, '024110': 7.4, '017670': 6.6, '030200': 5.8, '033780': 6.2,
@@ -1357,6 +1442,7 @@ app.listen(PORT, () => {
   GET  /api/double-bottom-stocks — 하락추세 후 쌍바닥 패턴 스캐너
   GET  /api/base-breakout-stocks — 하락→횡보→상승초입 패턴 스캐너
   GET  /api/energy-condensation-stocks — 에너지 응축→거래량 돌파 스캐너
+  GET  /api/monthly-ma10-stocks — 월봉 10이평선 지지+2개월 상승 스캐너
   GET  /api/market-calendar     — 한미 증시 일정 달력
   GET  /api/dividend-calendar   — 배당 캘린더
   GET  /api/bond-yields         — 글로벌 국채 금리/스프레드
@@ -1382,6 +1468,18 @@ app.listen(PORT, () => {
 
   // 💥 에너지 응축 → 거래량 급증 돌파 패턴 스캔 (매일 09:00 자동 실행)
   setTimeout(() => { startDailyEnergyCondensationScan() }, 85000);
+
+  // 🎯 월봉 10이평선 지지 + 2개월 연속 상승 스캔 (매일 09:05 자동 실행)
+  setTimeout(() => { startDailyMonthlyMA10Scan() }, 100000);
+
+  // 📈 20일선-60일선 골든크로스(정배열 전환) 패턴 스캔 (매일 09:10 자동 실행)
+  setTimeout(() => { startDailyGoldenCrossScan() }, 115000);
+
+  // 📊 패턴 스캐너 과거 성과 백테스트 (매주 월요일 09:15 자동 실행 — 연산 비용이 커서 주간 주기)
+  setTimeout(() => { startWeeklyBacktest() }, 150000);
+
+  // 🤖 AI 상승확률 예측 모델(로지스틱 회귀) 재학습 (매주 월요일 09:20 자동 실행)
+  setTimeout(() => { startWeeklyModelTraining() }, 185000);
 
   // 🔄 매일 자정/장마감 후 자동 데이터 동기화 스케줄러 (Daily Auto-Sync Engine)
   setInterval(async () => {

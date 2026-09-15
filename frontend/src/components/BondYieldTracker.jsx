@@ -139,17 +139,35 @@ export default function BondYieldTracker() {
                 <span>🇺🇸</span>
                 <span>미국 국채 만기별 일드커브 (Yield Curve) &amp; 환산 채권가격:</span>
               </div>
-              <div style={{
-                fontSize: '.78rem',
-                fontWeight: 900,
-                padding: '2px 10px',
-                borderRadius: 12,
-                background: data?.yieldCurve?.isInverted ? 'rgba(239,68,68,0.2)' : 'rgba(16,185,129,0.2)',
-                border: `1px solid ${data?.yieldCurve?.isInverted ? '#ef4444' : '#10b981'}`,
-                color: data?.yieldCurve?.isInverted ? '#f87171' : '#34d399'
-              }}>
-                {data?.yieldCurve?.isInverted ? '🔴 일드커브 역전 (경기침체 경보)' : '🟢 정상 우상향 일드커브'}
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                <div style={{
+                  fontSize: '.78rem',
+                  fontWeight: 900,
+                  padding: '2px 10px',
+                  borderRadius: 12,
+                  background: data?.yieldCurve?.isInverted ? 'rgba(239,68,68,0.2)' : 'rgba(16,185,129,0.2)',
+                  border: `1px solid ${data?.yieldCurve?.isInverted ? '#ef4444' : '#10b981'}`,
+                  color: data?.yieldCurve?.isInverted ? '#f87171' : '#34d399'
+                }}>
+                  {data?.yieldCurve?.isInverted ? '🔴 커브 역전 (경기침체 경보)' : '🟢 커브 비역전 (순서만 정상)'}
+                </div>
+                {data?.yieldCurve?.yieldLevelLabel && (
+                  <div style={{
+                    fontSize: '.78rem',
+                    fontWeight: 900,
+                    padding: '2px 10px',
+                    borderRadius: 12,
+                    background: data.yieldCurve.yieldLevel === 'ELEVATED' ? 'rgba(239,68,68,0.2)' : data.yieldCurve.yieldLevel === 'LOW' ? 'rgba(16,185,129,0.2)' : 'rgba(234,179,8,0.2)',
+                    border: `1px solid ${data.yieldCurve.yieldLevel === 'ELEVATED' ? '#ef4444' : data.yieldCurve.yieldLevel === 'LOW' ? '#10b981' : '#eab308'}`,
+                    color: data.yieldCurve.yieldLevel === 'ELEVATED' ? '#f87171' : data.yieldCurve.yieldLevel === 'LOW' ? '#34d399' : '#facc15'
+                  }}>
+                    {data.yieldCurve.yieldLevelLabel}
+                  </div>
+                )}
               </div>
+            </div>
+            <div style={{ fontSize: '.74rem', color: 'var(--t3)', marginTop: -6, marginBottom: 10 }}>
+              💡 위 두 뱃지는 서로 다른 지표입니다 — "커브 비역전"은 <strong>장단기 금리 순서</strong>가 정상이라는 뜻이고, "절대 금리 수준"은 <strong>지금 금리 자체가 높은지 낮은지</strong>를 보여줍니다. 커브가 비역전이어도 금리 수준 자체는 높을 수 있습니다.
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 10 }}>
@@ -415,6 +433,18 @@ export default function BondYieldTracker() {
                     {item.desc}
                   </div>
 
+                  {item.note && (
+                    <div style={{ fontSize: '.72rem', color: '#fbbf24', marginTop: 8, lineHeight: 1.4 }}>
+                      {item.note}
+                    </div>
+                  )}
+
+                  {item.isLive === false && (
+                    <div style={{ fontSize: '.7rem', color: '#f87171', marginTop: 6, fontWeight: 800 }}>
+                      ⚠️ 실시간 데이터 아님 (참고용 마지막 확인값)
+                    </div>
+                  )}
+
                   <div style={{
                     marginTop: 12,
                     padding: '10px 12px',
@@ -437,11 +467,19 @@ export default function BondYieldTracker() {
       {/* ─── 3. 🇰🇷 대한민국 국고채 & 실시간 채권가격 ─── */}
       {(activeTab === 'ALL' || activeTab === 'KR') && (
         <div style={{ marginBottom: 30 }}>
-          <div style={{ fontSize: '1.15rem', fontWeight: 900, color: '#fff', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
+          <div style={{ fontSize: '1.15rem', fontWeight: 900, color: '#fff', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
             <span>🇰🇷</span>
             <span>대한민국 국고채 &amp; 실시간 채권가격 (액면 10,000원 기준)</span>
             <span style={{ fontSize: '.75rem', background: '#10b981', color: '#fff', padding: '2px 8px', borderRadius: 10, fontWeight: 800 }}>한은 통화정책</span>
           </div>
+          {krBonds[0]?.isLive === false && (
+            <div style={{
+              marginBottom: 14, padding: '10px 16px', background: 'rgba(239,68,68,0.12)',
+              border: '1px solid rgba(239,68,68,0.4)', borderRadius: 12, fontSize: '.8rem', color: '#fca5a5', fontWeight: 700
+            }}>
+              ⚠️ 네이버 금융 구버전 페이지 개편으로 실시간 수집이 일시 중단되어, 아래 한국 국채·회사채·CD·콜금리는 <strong>참고용 마지막 확인값</strong>입니다 (당일 실시간 변동 미반영).
+            </div>
+          )}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 14 }}>
             {krBonds.map(item => {
               const bp = item.bondPrice || {};

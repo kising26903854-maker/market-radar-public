@@ -1,6 +1,7 @@
 import axios from 'axios'
 import iconv from 'iconv-lite'
 import { getSavedPositions } from './portfolio_db.js'
+import { getFullScanCache } from './kospi_kosdaq_scanner.js'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -886,8 +887,9 @@ export async function getPortfolioPrices() {
     })
   )
 
-  const uStocksResult = await getUndervaluedStocks()
-  const uStocks = uStocksResult.stocks || []
+  // 보유종목의 퀀트 스코어는 (예전 36종목 하드코딩 리스트 대신) 실시간 전종목 스캔 캐시에서 조회한다.
+  // 스캔 캐시에 없는 종목은 quantScore를 null로 둔다 — 임의의 값을 지어내지 않는다.
+  const uStocks = getFullScanCache()?.stocks || []
 
   const processedPositions = dbPositions.map((p, idx) => {
     const curPrice = pricesRes[idx]?.price || p.buy_price
@@ -2014,239 +2016,6 @@ export async function getStockCreditMarginHistory(code) {
   };
 }
 
-// 💎 실시간 코스피 & 코스닥 저평가 상장 종목 발굴 레이더 (Deep Value Quant Engine) - 전체 36대 기업 전수 조사
-export async function getUndervaluedStocks() {
-  // 📊 네이버 금융 실시간 캐시 데이터 로드 (매일 08:35 자동 갱신)
-  let liveFinancials = {};
-  try {
-    const { getAllCachedFinancials } = await import('./financials_sync.js');
-    liveFinancials = getAllCachedFinancials();
-  } catch (e) { /* 캐시 없으면 하드코딩 데이터 사용 */ }
-  const quantList = [
-    // ─── 🚗 자동차·전장 ───
-    { code: '000270', name: '기아', market: '코스피', sector: '🚗 자동차·전장', per: '3.8배', pbr: '0.62배', roe: '18.5%', divYield: '5.8%', quantScore: 99, targetPrice: 165000, currentPrice: 118000, upsidePct: '+39.8%', smartMoneyTrend: '🟢 외국인/기관 7거래일 연속 매수 집중 (3,820억)', reason: '역대 최대 영업이익률 달성에도 불구하고 PER 3배대의 글로벌 최대 저평가. 주주환원율 및 자사주 소각 극대화 기대주.' },
-    { code: '005380', name: '현대차', market: '코스피', sector: '🚗 자동차·전장', per: '5.4배', pbr: '0.74배', roe: '15.2%', divYield: '4.9%', quantScore: 98, targetPrice: 345000, currentPrice: 252000, upsidePct: '+36.9%', smartMoneyTrend: '🔵 밸류업 지수 편입 최고 대장 및 호재성 하이브리드 판매 극대화', reason: '글로벌 북미/인도 시장 점유율 약진 및 인도 법인 상장에 따른 어마어마한 현금 가치 재평가(Re-rating) 진행 중.' },
-    { code: '012330', name: '현대모비스', market: '코스피', sector: '🚗 자동차·전장', per: '6.2배', pbr: '0.51배', roe: '9.4%', divYield: '3.1%', quantScore: 94, targetPrice: 310000, currentPrice: 218000, upsidePct: '+42.2%', smartMoneyTrend: '🟢 전장부품 해외 수익 고도화 및 하반기 ROE 가속 진입', reason: '현물 자산 및 보유 기술 밸류 대비 막대한 통제 PBR 0.5배대 불합리 구간. 전장 코어 부품사 대대적 재도약.' },
-
-    // ─── ⚡ AI·반도체 ───
-    { code: '058470', name: '리노공업', market: '코스닥', sector: '⚡ AI·반도체', per: '14.2배', pbr: '2.85배', roe: '24.1%', divYield: '2.1%', quantScore: 97, targetPrice: 285000, currentPrice: 205000, upsidePct: '+39.0%', smartMoneyTrend: '🟢 AI 온디바이스 테스트 핀 소켓 세력 매물 대거 장악', reason: '글로벌 AI 칩 세대 전환으로 소켓 수명 단축 및 ASP 폭증 수혜 대장주. 영업이익률 40%대 압도적 기술력.' },
-    { code: '042700', name: '한미반도체', market: '코스피', sector: '⚡ AI·반도체', per: '28.4배', pbr: '6.20배', roe: '22.4%', divYield: '1.0%', quantScore: 95, targetPrice: 175000, currentPrice: 128000, upsidePct: '+36.7%', smartMoneyTrend: '🟢 HBM TC 본더 마진율 48% 유지 및 마이크론/SK하이닉스 수주', reason: '글로벌 AI 인프라 대공사에 없어서는 안 될 핵심 본더 독점 지배력. 단기 가격 조정으로 절호의 가성비 달성.' },
-    { code: '035720', name: '동진쎄미켐', market: '코스닥', sector: '⚡ AI·반도체', per: '9.8배', pbr: '1.45배', roe: '16.8%', divYield: '1.1%', quantScore: 94, targetPrice: 52000, currentPrice: 35500, upsidePct: '+46.5%', smartMoneyTrend: '🔥 EUV 포토레지스트 국산화 양산 및 비메모리 공급 대폭 증대', reason: '반도체 선단 공정 내 필수 PR 전도사 1인자. 동종 소재 섹터 대비 PER 9배는 극히 희귀한 역사적 저평가.' },
-    { code: '039030', name: '이오테크닉스', market: '코스닥', sector: '⚡ AI·반도체', per: '15.1배', pbr: '2.10배', roe: '14.2%', divYield: '0.8%', quantScore: 93, targetPrice: 235000, currentPrice: 162000, upsidePct: '+45.1%', smartMoneyTrend: '🔵 레이저 어닐링 및 HBM 레이저 컷팅 장비 호조', reason: '반도체 열처리 및 초정밀 가공 공정 내 전 세계적 기술 과점. 대규모 Capex 확장의 직접적 승리자.' },
-    { code: '222800', name: '심텍', market: '코스닥', sector: '⚡ AI·반도체', per: '8.4배', pbr: '1.10배', roe: '13.9%', divYield: '1.5%', quantScore: 92, targetPrice: 42000, currentPrice: 28500, upsidePct: '+47.4%', smartMoneyTrend: '🟢 메모리 모듈 기판 및 FCCSP 하반기 주문 흑자 급증', reason: '메모리 반동 폭발 주기에 따른 기판 수요 턴어라운드 제 1호 수혜 기업.' },
-    { code: '036930', name: '주성엔지니어링', market: '코스닥', sector: '⚡ AI·반도체', per: '11.2배', pbr: '1.80배', roe: '17.3%', divYield: '1.2%', quantScore: 92, targetPrice: 45000, currentPrice: 31200, upsidePct: '+44.2%', smartMoneyTrend: '🔥 ALD 증착 장비 메모리·태양광 쌍끌이 고효율 대공습', reason: '미세 공정 진화 속 ALD(원자층증착) 비중 급증으로 독점적 하이퍼 마진 창출 달성 중.' },
-
-    // ─── 💄 K-뷰티·의료기기 & 💊 바이오 ───
-    { code: '214150', name: '클래시스', market: '코스닥', sector: '💄 K-뷰티·의료기기', per: '16.5배', pbr: '4.10배', roe: '31.4%', divYield: '1.2%', quantScore: 96, targetPrice: 72000, currentPrice: 53000, upsidePct: '+35.8%', smartMoneyTrend: '🔥 북미/남미 볼루머 장비 폭발 후 글로벌 펀드 지속 입성', reason: '소모품(카트리지) 매출 비중 60% 돌파로 불황 없는 연금성 영업이익률 51% 실현! 최근 조정은 절호의 기회.' },
-    { code: '145020', name: '휴젤', market: '코스닥', sector: '💄 K-뷰티·의료기기', per: '15.4배', pbr: '2.80배', roe: '19.2%', divYield: '1.4%', quantScore: 95, targetPrice: 330000, currentPrice: 242000, upsidePct: '+36.4%', smartMoneyTrend: '🟢 미국 FDA 톡신 승인 후 북미 직시판 마진 본격 폭격', reason: '글로벌 거대 3대 시장(미국, 중국, 유럽) 톡신 승인 및 진출 완료. 마진 급등의 본게임 개막!' },
-    { code: '263800', name: '실리콘투', market: '코스닥', sector: '💄 K-뷰티·의료기기', per: '12.8배', pbr: '3.10배', roe: '28.5%', divYield: '0.9%', quantScore: 94, targetPrice: 54000, currentPrice: 36800, upsidePct: '+46.7%', smartMoneyTrend: '💥 전 세계 K-뷰티 유통 메가 플랫폼 압도적 글로벌 캐시카우', reason: '전 150여 개국 실시간 해외 직접 운송망 독점 구축. K-인디 브랜드 호조파도 최고의 직접 혜택주.' },
-    { code: '145720', name: '덴티움', market: '코스피', sector: '💄 K-뷰티·의료기기', per: '8.2배', pbr: '1.50배', roe: '20.1%', divYield: '1.8%', quantScore: 93, targetPrice: 165000, currentPrice: 112000, upsidePct: '+47.3%', smartMoneyTrend: '🔵 중국/러시아/유럽 임플란트 호조 고가 가성비 지배', reason: '영업이익률 30%대 이상 견고한 현금 파이프라인 형성, 치과 기기 글로벌 가성비 대왕주.' },
-    { code: '068270', name: '셀트리온', market: '코스피', sector: '💊 바이오·제약', per: '22.1배', pbr: '2.10배', roe: '12.4%', divYield: '1.5%', quantScore: 93, targetPrice: 260000, currentPrice: 188000, upsidePct: '+38.3%', smartMoneyTrend: '🔥 짐펜트라(Zymfentra) 미국 3대 PBM 보험 약집행 완전 가동', reason: '합병 일회성 비용 희석 후 고마진 짐펜트라 연간 실적 본격 점프업! 섹터 내 철저한 소외 저평가.' },
-    { code: '028300', name: 'HLB', market: '코스닥', sector: '💊 바이오·제약', per: '31.2배', pbr: '5.10배', roe: '18.4%', divYield: '0.2%', quantScore: 91, targetPrice: 135000, currentPrice: 88500, upsidePct: '+52.5%', smartMoneyTrend: '🚨 세력 바닥 공권력 장악 후 임상 FDA 재도전 기대 가열', reason: '신용 반대매매 청산 후 강력한 주가 바닥권 형성. 간암 약물 글로벌 파이프라인 가치 압도.' },
-    { code: '196170', name: '알테오젠', market: '코스닥', sector: '💊 바이오·제약', per: '42.1배', pbr: '14.2배', roe: '29.8%', divYield: '0.1%', quantScore: 91, targetPrice: 420000, currentPrice: 298000, upsidePct: '+40.9%', smartMoneyTrend: '🟢 키트루다 피하주사(SC) 제형 로열티 현금입금 고성장주', reason: '바이오 코스닥 대장. 머크(Merck)와의 글로벌 독점 수조 원대 로열티 개시로 실질 현금흐름 대장 탄생.' },
-
-    // ─── 🚢 해운·물류 & 🏭 무거운 가치주 ───
-    { code: '011200', name: 'HMM', market: '코스피', sector: '🚢 해운·물류', per: '4.1배', pbr: '0.51배', roe: '14.2%', divYield: '4.5%', quantScore: 95, targetPrice: 28000, currentPrice: 19800, upsidePct: '+41.4%', smartMoneyTrend: '🔵 홍해 불안 및 상해운임지수(SCFI) 연초 대비 고공행진 중', reason: '현금 자산만 시가총액을 뛰어넘는 절대 청취형 가치주. 글로벌 컨테이너 수요 견조로 하반기 서프라이즈.' },
-    { code: '005490', name: 'POSCO홀딩스', market: '코스피', sector: '🏭 철강·소재·지주', per: '11.4배', pbr: '0.61배', roe: '6.8%', divYield: '3.8%', quantScore: 93, targetPrice: 510000, currentPrice: 355000, upsidePct: '+43.7%', smartMoneyTrend: '🟢 이차전지 풀 밸류체인 저점 도약 및 철강 경기 기지개', reason: 'PBR 0.6배의 바닥권 디펜스 가치주이면서 동시에 호주/아르헨티나 리튬 광산 비전 장착 거대 기업.' },
-    { code: '011170', name: '롯데케미칼', market: '코스피', sector: '🏭 철강·소재·지주', per: '14.2배', pbr: '0.38배', roe: '4.2%', divYield: '3.2%', quantScore: 90, targetPrice: 165000, currentPrice: 112000, upsidePct: '+47.3%', smartMoneyTrend: '🚨 역대 최저 PBR 0.38배 및 글로벌 석유화학 턴어라운드 임박', reason: '지나친 우려감에 따른 주가 하향 끝 극도의 과매도 영역(PBR 0.3배 대 진입).' },
-    { code: '004020', name: '현대제철', market: '코스피', sector: '🏭 철강·소재·지주', per: '5.8배', pbr: '0.22배', roe: '5.1%', divYield: '4.1%', quantScore: 89, targetPrice: 42000, currentPrice: 28500, upsidePct: '+47.4%', smartMoneyTrend: '💥 지구상 가장 싼 철강주 PBR 0.22배 극소값 포착', reason: '자동차용 강판 고유 마진 확보 중임에도 불구하고 장부 가치 대비 5분의 1 수준에 비상식 거래 중.' },
-
-    // ─── 🔋 2차전지 ───
-    { code: '247540', name: '에코프로비엠', market: '코스닥', sector: '🔋 2차전지', per: '35.4배', pbr: '4.80배', roe: '9.8%', divYield: '0.3%', quantScore: 94, targetPrice: 240000, currentPrice: 172000, upsidePct: '+39.5%', smartMoneyTrend: '🚨 신용 반대매매 최대치 강제 청산 ➔ 공매도 숏스퀴즈 바닥 발동', reason: '악성 개미 빚투 반대매매 수치가 역대 최하점으로 청산되면서 매물 공백 구간에 안착!' },
-    { code: '348370', name: '엔켐', market: '코스닥', sector: '🔋 2차전지', per: '29.1배', pbr: '4.20배', roe: '15.4%', divYield: '0.0%', quantScore: 92, targetPrice: 285000, currentPrice: 195000, upsidePct: '+46.2%', smartMoneyTrend: '🟢 북미 IRA 법안 파괴적 독점 수혜로 미국 내 전해액 제 1인자 등극', reason: '중국산 전해액 미국 진입 원천 봉쇄로 막대한 글로벌 수주 쓰나미 집중 유입 중.' },
-    { code: '006400', name: '삼성SDI', market: '코스피', sector: '🔋 2차전지', per: '11.8배', pbr: '1.05배', roe: '9.5%', divYield: '1.2%', quantScore: 92, targetPrice: 510000, currentPrice: 345000, upsidePct: '+47.8%', smartMoneyTrend: '🔵 전고체 배터리(ASB) 상업양산 1순위 독자 개척주', reason: '셀 3사 중 가장 안정적인 흑자 내실 경영과 현금흐름, 전고체 테크 압도 우위 밸류에이션 저점.' },
-
-    // ─── 🏛️ 금융·지주·밸류업 ───
-    { code: '105560', name: 'KB금융', market: '코스피', sector: '🏛️ 금융·지주', per: '5.1배', pbr: '0.55배', roe: '11.2%', divYield: '6.2%', quantScore: 96, targetPrice: 125000, currentPrice: 91500, upsidePct: '+36.6%', smartMoneyTrend: '🟢 밸류업 펀드 유입 1순위 및 분기당 1,500억 자사주 지속 소각', reason: '정부 주주가치 제고 최우수 실천 대장주. 배당 및 소각 주주환원율 50% 육박하는 초긴급 기관 픽.' },
-    { code: '055550', name: '신한지주', market: '코스피', sector: '🏛️ 금융·지주', per: '4.8배', pbr: '0.48배', roe: '10.2%', divYield: '6.5%', quantScore: 95, targetPrice: 75000, currentPrice: 54000, upsidePct: '+38.9%', smartMoneyTrend: '🟢 ROE 10% 달성과 함께 연중 지속 대규모 자사주 소각 로드맵 확정', reason: '역대급 저per 4배 및 주당 자본금액 분쇄를 통한 최저 위험 고배당 안정 진주 종목.' },
-    { code: '086790', name: '하나금융지주', market: '코스피', sector: '🏛️ 금융·지주', per: '4.2배', pbr: '0.42배', roe: '10.5%', divYield: '6.9%', quantScore: 94, targetPrice: 88000, currentPrice: 63000, upsidePct: '+39.7%', smartMoneyTrend: '💥 외국인 지분율 지속 신작 및 배당 매력도 1위', reason: '저PER 4.2배, PBR 0.42배의 수학적 상한선 이득 구간! 자사주 매입 동행 진행.' },
-    { code: '024110', name: '기업은행', market: '코스피', sector: '🏛️ 금융·지주', per: '3.9배', pbr: '0.34배', roe: '9.8%', divYield: '7.4%', quantScore: 93, targetPrice: 20000, currentPrice: 13800, upsidePct: '+44.9%', smartMoneyTrend: '🔵 고배당 성향 지속 및 정책 금융 특수 안전 보장주', reason: '배당 수익률 7%대의 불패 연금 가치주. 금리 인하 국면 전 방패 역할.' },
-
-    // ─── 📱 통신·소비·경기 ───
-    { code: '017670', name: 'SK텔레콤', market: '코스피', sector: '📱 통신·소비', per: '8.4배', pbr: '0.85배', roe: '10.4%', divYield: '6.6%', quantScore: 94, targetPrice: 76000, currentPrice: 53500, upsidePct: '+42.1%', smartMoneyTrend: '🟢 AI 데이터센터 사업 수익 구조 성공적 안착', reason: '통신 시장 현금흐름 바탕 위에서 AI 피라미드 수익 확장 중인 최고성능 방어 가치주.' },
-    { code: '030200', name: 'KT', market: '코스피', sector: '📱 통신·소비', per: '6.9배', pbr: '0.55배', roe: '8.2%', divYield: '5.8%', quantScore: 93, targetPrice: 52000, currentPrice: 36800, upsidePct: '+41.3%', smartMoneyTrend: '🟢 기업용 인터넷 및 클라우드 AI 솔루션 매진 고도화', reason: '저PER 6배대 통신 저평가 우량주. 강력한 주주 친화 정책 릴레이 전개.' },
-    { code: '097950', name: 'CJ제일제당', market: '코스피', sector: '📱 통신·소비', per: '8.8배', pbr: '0.72배', roe: '8.5%', divYield: '2.8%', quantScore: 92, targetPrice: 520000, currentPrice: 358000, upsidePct: '+45.3%', smartMoneyTrend: '🔥 북미 만두·K-푸드 시장 영구 1위 장악 및 유럽 매출 맹렬 확장', reason: '비용 효율화 완수 후 해외 식품 수익 고공 점프업! K-푸드 글로벌 대장주.' },
-    { code: '033780', name: 'KT&G', market: '코스피', sector: '📱 통신·소비', per: '10.2배', pbr: '0.94배', roe: '9.4%', divYield: '6.2%', quantScore: 91, targetPrice: 138000, currentPrice: 104000, upsidePct: '+32.7%', smartMoneyTrend: '🟢 전자담배 해외 파이프라인 및 자사주 1조 소각 로드맵 실행', reason: '막대하게 풍성한 캐시 플로우. 밸류업 실천 3년 프레스티지 정책 실현 중.' },
-
-    // ─── 🕹️ 게임·엔터·로봇 ───
-    { code: '263750', name: '펄어비스', market: '코스닥', sector: '🕹️ 게임·엔터·로봇', per: '24.2배', pbr: '2.10배', roe: '12.4%', divYield: '0.0%', quantScore: 92, targetPrice: 68000, currentPrice: 42500, upsidePct: '+60.0%', smartMoneyTrend: '🔥 차기 글로벌 메가 히트 대작 「붉은사막(Crimson Desert)」 완성 마감', reason: '게임스컴 전 세계 유저 찬사! 출시 대기 극대화 기대 효과로 바닥 진공 뚫기 1순위 후보.' },
-    { code: '259960', name: '크래프톤', market: '코스피', sector: '🕹️ 게임·엔터·로봇', per: '11.8배', pbr: '1.85배', roe: '16.8%', divYield: '0.0%', quantScore: 95, targetPrice: 420000, currentPrice: 308000, upsidePct: '+36.4%', smartMoneyTrend: '🔵 인도 시장 및 글로벌 배틀그라운드 IP 매년 사상 최대 매출 갱신', reason: '영업이익이 무려 40% 대에 도달하는 막강한 글로벌 슈팅 캐시카우. 압구정급 매물대 돌파 진행.' },
-    { code: '277810', name: '레인보우로보틱스', market: '코스닥', sector: '🕹️ 게임·엔터·로봇', per: '45.1배', pbr: '8.40배', roe: '14.2%', divYield: '0.0%', quantScore: 91, targetPrice: 245000, currentPrice: 162000, upsidePct: '+51.2%', smartMoneyTrend: '🤖 삼성전자 대규모 로봇 인공지능 양산 편입 대폭 기대주', reason: '국내 최고 보행 및 합동 로봇 원천 특허 기술 보유. 삼성 공장 스마트화 핵심 열쇠.' },
-    { code: '357780', name: '솔브레인', market: '코스닥', sector: '⚡ AI·반도체', per: '12.4배', pbr: '2.15배', roe: '18.4%', divYield: '1.2%', quantScore: 94, targetPrice: 380000, currentPrice: 265000, upsidePct: '+43.4%', smartMoneyTrend: '🟢 GAA 3나노 초선단 반도체 식각액 독점 실현 및 고성장 탄탄대로', reason: '삼성전자 차세대 TSV/GAA 선단 공정 가동 시 필수 불가능한 첨단 소재 공급 원스톱 제왕.' },
-    { code: '047050', name: '포스코인터내셔널', market: '코스피', sector: '🏭 철강·소재·지주', per: '10.8배', pbr: '1.24배', roe: '12.8%', divYield: '2.4%', quantScore: 93, targetPrice: 78000, currentPrice: 53000, upsidePct: '+47.2%', smartMoneyTrend: '🔥 동해 가스전 및 호주 세나텍스 천연가스 에너지 실질 캐시 극대화', reason: '상사 기판을 아득히 뛰어넘어 자원 및 2차전지 모터코어 글로벌 개척 기업으로 완벽 성공 전환.' }
-  ];
-
-  // ─── 📊 실시간 재무 데이터 머지: 캐시된 네이버 데이터로 하드코딩 덮어쓰기 ───
-  const mergedList = quantList.map(item => {
-    const live = liveFinancials[item.code];
-    if (!live || live.error) return item; // 캐시 없으면 하드코딩 그대로
-
-    const liveSource = `📡 네이버 금융 실시간 (${live.period ? live.period.slice(0,4)+'년' : '최신'})`;
-    return {
-      ...item,
-      // 실시간 데이터로 덮어쓰기
-      per:      live.per      != null ? `${live.per}배`      : item.per,
-      pbr:      live.pbr      != null ? `${live.pbr}배`      : item.pbr,
-      roe:      live.roe      != null ? `${live.roe}%`       : item.roe,
-      divYield: live.divYield != null ? `${live.divYield}%`  : item.divYield,
-      eps:      live.eps      != null ? `${live.eps.toLocaleString()}원` : item.eps,
-      // 실시간 ROE 성장 추이 정보 추가
-      roeGrowth: live.roeGrowth,
-      dataSource: liveSource,
-      financialsFetchedAt: live.fetchedAt,
-    };
-  });
-
-  // ─── 밸류트랩(Value Trap) 판별 맵 — 실시간 ROE로 자동 갱신 ───
-  const VALUE_TRAP_MAP = {
-    '004020': { isTrap: true,  trapReason: 'ROE 저조 + 건설경기 침체 + 중국 철강 덤핑 + 내수부진 장기화', trapLevel: 'HIGH' },
-    '011170': { isTrap: true,  trapReason: 'ROE 저조 + 글로벌 석유화학 업황 다운사이클 + 적자구조 지속', trapLevel: 'HIGH' },
-    '005490': { isTrap: false, trapReason: '리튬/이차전지 사업 전환으로 장기 성장성 있음. 철강 업황 단기 위험 존재', trapLevel: 'MEDIUM' },
-    '011200': { isTrap: false, trapReason: '운임지수 변동성 높음. 다만 현금자산 풍부, 실적 변동성 주의 필요', trapLevel: 'LOW' },
-    '028300': { isTrap: false, trapReason: 'FDA 임상 불확실성 내재. 바이오 파이프라인 리스크 주의', trapLevel: 'MEDIUM' },
-    '196170': { isTrap: false, trapReason: '고PBR, 실적 연동 변동성 가능. 단 머크 로열티 캐시플로우 강력', trapLevel: 'LOW' },
-    '348370': { isTrap: false, trapReason: '이차전지 업황 사이클 하락 중. IRA 수혜로 방어력 있음', trapLevel: 'LOW' },
-  };
-
-  // 실시간 ROE 기반으로 밸류트랩 자동 재판별
-  mergedList.forEach(item => {
-    const live = liveFinancials[item.code];
-    if (!live || live.error) return;
-    const realRoe = live.roe;
-    if (realRoe != null && realRoe < 5 && !VALUE_TRAP_MAP[item.code]) {
-      VALUE_TRAP_MAP[item.code] = {
-        isTrap: true,
-        trapReason: `실시간 ROE ${realRoe}% — 수익성 하락 주의. 업황 회복 모니터링 필요`,
-        trapLevel: realRoe < 3 ? 'HIGH' : 'MEDIUM',
-      };
-    }
-    // 기존 HIGH 판정 종목도 ROE 회복 시 자동 해제
-    if (realRoe != null && realRoe >= 10 && VALUE_TRAP_MAP[item.code]?.isTrap) {
-      VALUE_TRAP_MAP[item.code] = {
-        isTrap: false,
-        trapReason: `실시간 ROE ${realRoe}%로 회복 — 밸류트랩 해제. 지속 모니터링 권장`,
-        trapLevel: 'LOW',
-      };
-    }
-  });
-
-  // ─── 투자 우선순위 점수 계산 (100점 만점) ───
-  function calcInvestmentScore(item, trap) {
-    let score = 0;
-    const pbrVal  = parseFloat(item.pbr);
-    const perVal  = parseFloat(item.per);
-    const roeVal  = parseFloat(item.roe);
-    const divVal  = parseFloat(item.divYield);
-    const upside  = parseFloat(item.upsidePct);
-
-    // ROE 품질 (최대 30점): 고ROE일수록 고점수
-    if      (roeVal >= 25) score += 30;
-    else if (roeVal >= 18) score += 25;
-    else if (roeVal >= 12) score += 18;
-    else if (roeVal >= 8)  score += 10;
-    else                   score += 2;
-
-    // PBR 저평가 (최대 20점): 낮을수록 저평가지만 밸류트랩 주의
-    if (trap?.isTrap) {
-      score += (pbrVal < 0.5) ? 5 : 8; // 밸류트랩이면 저PBR 메리트 대폭 감점
-    } else {
-      if      (pbrVal < 0.5) score += 15;
-      else if (pbrVal < 1.0) score += 18;
-      else if (pbrVal < 2.0) score += 20;
-      else if (pbrVal < 4.0) score += 15;
-      else                   score += 8;
-    }
-
-    // PER 저평가 (최대 20점)
-    if      (perVal < 5)  score += 20;
-    else if (perVal < 8)  score += 18;
-    else if (perVal < 12) score += 15;
-    else if (perVal < 18) score += 12;
-    else if (perVal < 25) score += 8;
-    else                  score += 4;
-
-    // 배당수익률 (최대 15점)
-    if      (divVal >= 6) score += 15;
-    else if (divVal >= 4) score += 12;
-    else if (divVal >= 2) score += 8;
-    else if (divVal >= 1) score += 5;
-    else                  score += 0;
-
-    // 업사이드 여력 (최대 15점)
-    if      (upside >= 50) score += 15;
-    else if (upside >= 40) score += 12;
-    else if (upside >= 30) score += 9;
-    else                   score += 5;
-
-    // 밸류트랩 패널티
-    if (trap?.trapLevel === 'HIGH')   score -= 20;
-    else if (trap?.trapLevel === 'MEDIUM') score -= 8;
-
-    return Math.max(0, Math.min(100, Math.round(score)));
-  }
-
-  // ─── 투자 등급 부여 ───
-  function getGrade(score) {
-    if      (score >= 88) return { grade: 'S', label: 'S등급', color: '#fbbf24', bg: 'rgba(251,191,36,0.15)', desc: '최우선 매수' };
-    else if (score >= 75) return { grade: 'A', label: 'A등급', color: '#34d399', bg: 'rgba(52,211,153,0.15)', desc: '적극 매수' };
-    else if (score >= 60) return { grade: 'B', label: 'B등급', color: '#60a5fa', bg: 'rgba(96,165,250,0.15)', desc: '분할 매수' };
-    else if (score >= 45) return { grade: 'C', label: 'C등급', color: '#a78bfa', bg: 'rgba(167,139,250,0.15)', desc: '소량 보유' };
-    else                  return { grade: 'D', label: 'D등급', color: '#f87171', bg: 'rgba(248,113,113,0.15)', desc: '⚠️ 밸류트랩 주의' };
-  }
-
-  const results = await Promise.all(mergedList.map(async item => {
-    try {
-      const p = await fetchStockPrice(item.code);
-      const trap = VALUE_TRAP_MAP[item.code] || null;
-      const invScore = calcInvestmentScore(item, trap);
-      const gradeInfo = getGrade(invScore);
-      if (p && p.current) {
-        const cur = p.current;
-        const tgt = item.targetPrice;
-        const upside = ((tgt - cur) / cur * 100).toFixed(1);
-        return {
-          ...item,
-          currentPrice: cur,
-          upsidePct: upside >= 0 ? `+${upside}%` : `${upside}%`,
-          priceChange: p.change,
-          priceChangePct: p.changePct,
-          isValueTrap: trap?.isTrap || false,
-          trapReason: trap?.trapReason || null,
-          trapLevel: trap?.trapLevel || null,
-          investmentScore: invScore,
-          investmentGrade: gradeInfo,
-          investmentRank: 0 // 정렬 후 재할당
-        };
-      }
-      return {
-        ...item,
-        isValueTrap: trap?.isTrap || false,
-        trapReason: trap?.trapReason || null,
-        trapLevel: trap?.trapLevel || null,
-        investmentScore: invScore,
-        investmentGrade: gradeInfo,
-        investmentRank: 0
-      };
-    } catch (e) {}
-    return item;
-  }));
-
-  // 투자 우선순위 랭킹 부여 (점수 내림차순)
-  const sortedByScore = [...results].sort((a, b) => (b.investmentScore || 0) - (a.investmentScore || 0));
-  sortedByScore.forEach((item, idx) => { item.investmentRank = idx + 1; });
-
-  return {
-    success: true,
-    timestamp: new Date().toISOString(),
-    summary: {
-      totalFound: results.length,
-      avgUpside: '+43.2%',
-      marketCondition: '🟢 코스피·코스닥 36대 주력 종목 악성 반대매매 청산 완료 및 월가 퀀트 저평가 극단 구간',
-      topPick: sortedByScore.slice(0,5).map(s => `${s.name}(${s.investmentGrade?.grade})`).join(', ')
-    },
-    stocks: sortedByScore
-  };
-}
 
 // ═══════════════════════════════════════════════════════════════
 // 📈 52주 신고가 종목 스캐너 (네이버 증권 52주 신고가 순위표 파싱)
@@ -2343,118 +2112,77 @@ export async function getStockFinancials(code) {
   }
 
   const headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36',
-    'Referer': 'https://finance.naver.com/'
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36'
   }
 
   try {
-    // 네이버 증권 종목 메인 페이지 — 기업실적분석 테이블 포함
-    const url = `https://finance.naver.com/item/main.naver?code=${code}`
-    const res = await axios.get(url, { headers, timeout: 10000 })
-    const html = res.data
+    // finance.naver.com/item/main.naver → stock.naver.com 리다이렉트로 죽은 구 HTML 페이지 대신
+    // 네이버 모바일 증권 API(m.stock.naver.com)에서 직접 재무 데이터를 가져온다.
+    const [annualRes, quarterRes] = await Promise.all([
+      axios.get(`https://m.stock.naver.com/api/stock/${code}/finance/annual`, { headers, timeout: 10000 }),
+      axios.get(`https://m.stock.naver.com/api/stock/${code}/finance/quarter`, { headers, timeout: 10000 })
+    ])
 
-    // ── 연도 헤더 파싱 ──
-    const yearHeaders = []
-    const yearRegex = /(\d{4})\.(?:12|03|06|09)(?:\(E\))?/g
-    let ym
-    const tableMatch = /tb_type1_ifrs[^>]*>([\s\S]{0,8000})/.exec(html)
-      || /기업실적분석([\s\S]{0,8000})/.exec(html)
-      || /coinfo_tb_lay([\s\S]{0,8000})/.exec(html)
-
-    const thRegex = /<th[^>]*scope="col"[^>]*>([\s\S]*?)<\/th>/g
-    let thm
-    const allThs = []
-    while ((thm = thRegex.exec(html)) !== null) {
-      const text = thm[1].replace(/<[^>]*>/g, '').trim()
-      if (/^\d{4}\./.test(text)) allThs.push(text)
+    const parseValue = (raw) => {
+      if (raw === undefined || raw === null || raw === '-') return null
+      const num = parseFloat(String(raw).replace(/,/g, ''))
+      return isNaN(num) ? null : num
     }
 
-    const annualThs = allThs.slice(0, 4)
-
-    // ── 재무 지표별 파싱 함수 ──
-    const parseMetric = (keyword) => {
-      const trRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/g
-      let match
-      while ((match = trRegex.exec(html)) !== null) {
-        const row = match[1]
-        if (!row.includes(keyword)) continue
-        const tdRegex = /<td[^>]*>([\s\S]*?)<\/td>/g
-        const vals = []
-        let tdm
-        while ((tdm = tdRegex.exec(row)) !== null) {
-          const raw = tdm[1].replace(/<[^>]*>/g, '').replace(/,/g, '').trim()
-          const num = parseFloat(raw)
-          vals.push(isNaN(num) ? null : num)
-        }
-        if (vals.filter(v => v !== null).length >= 2) return vals
-      }
-      return []
+    const extract = (rowList, trTitleList, title) => {
+      const row = rowList.find(r => r.title === title)
+      return trTitleList.map(t => parseValue(row?.columns?.[t.key]?.value))
     }
 
-    const epsVals = parseMetric('EPS')
-    const roeVals = parseMetric('ROE')
-    const revenueVals = parseMetric('매출액')
-    const opinVals = parseMetric('영업이익')
-
-    const currentYear = new Date().getFullYear()
-    const fallbackYears = [-3, -2, -1, 0].map(d => {
-      const y = currentYear + d
-      return d >= 0 ? `${y}년(E)` : `${y}년`
+    const buildAnnualLabels = (trTitleList) => trTitleList.map(t => {
+      const yr = t.title.match(/(\d{4})/)?.[1]
+      return t.isConsensus === 'Y' ? `${yr}년(E)` : `${yr}년`
     })
-    
-    const labels = annualThs.length === 4
-      ? annualThs.map(y => {
-          const yr = y.match(/(\d{4})/)?.[1]
-          const isEst = y.includes('(E)') || y.includes('&#40;E&#41;')
-          return isEst ? `${yr}년(E)` : `${yr}년`
-        })
-      : fallbackYears
 
-    // 분기 정보 라벨 가공
-    const quarterThs = allThs.slice(4, 10)
-    const quarterLabels = quarterThs.map(q => {
-      const matches = q.match(/(\d{4})\.(\d{2})/)
-      if (!matches) return q
-      const yr = matches[1].slice(2) // '24'
-      const month = parseInt(matches[2], 10)
+    const buildQuarterLabels = (trTitleList) => trTitleList.map(t => {
+      const m = t.title.match(/(\d{4})\.(\d{2})/)
+      if (!m) return t.title
+      const yr = m[1].slice(2)
+      const month = parseInt(m[2], 10)
       const qr = month === 3 ? '1분기' : month === 6 ? '2분기' : month === 9 ? '3분기' : '4분기'
-      const isEst = q.includes('(E)') || q.includes('&#40;E&#41;')
-      return isEst ? `${yr}년 ${qr}(E)` : `${yr}년 ${qr}`
+      return t.isConsensus === 'Y' ? `${yr}년 ${qr}(E)` : `${yr}년 ${qr}`
     })
 
-    const getSlice = (arr, start, end) => {
-      const res = []
-      for (let i = start; i < end; i++) {
-        res.push(arr[i] !== undefined ? arr[i] : null)
-      }
-      return res
+    const annualTrTitleList = annualRes.data?.financeInfo?.trTitleList || []
+    const annualRowList = annualRes.data?.financeInfo?.rowList || []
+    const quarterTrTitleList = quarterRes.data?.financeInfo?.trTitleList || []
+    const quarterRowList = quarterRes.data?.financeInfo?.rowList || []
+
+    const annualLabels = buildAnnualLabels(annualTrTitleList)
+    const quarterLabels = buildQuarterLabels(quarterTrTitleList)
+
+    const annual = {
+      years: annualLabels,
+      eps: extract(annualRowList, annualTrTitleList, 'EPS'),
+      roe: extract(annualRowList, annualTrTitleList, 'ROE'),
+      revenue: extract(annualRowList, annualTrTitleList, '매출액'),
+      opincome: extract(annualRowList, annualTrTitleList, '영업이익')
+    }
+    const quarter = {
+      years: quarterLabels,
+      eps: extract(quarterRowList, quarterTrTitleList, 'EPS'),
+      roe: extract(quarterRowList, quarterTrTitleList, 'ROE'),
+      revenue: extract(quarterRowList, quarterTrTitleList, '매출액'),
+      opincome: extract(quarterRowList, quarterTrTitleList, '영업이익')
     }
 
     const result = {
       success: true,
       code,
       // 하위 호환 필드 (연간 데이터)
-      years: labels,
-      eps: getSlice(epsVals, 0, 4),
-      roe: getSlice(roeVals, 0, 4),
-      revenue: getSlice(revenueVals, 0, 4),
-      opincome: getSlice(opinVals, 0, 4),
+      years: annual.years,
+      eps: annual.eps,
+      roe: annual.roe,
+      revenue: annual.revenue,
+      opincome: annual.opincome,
 
-      // 신규 연간/분기 분류 구조
-      annual: {
-        years: labels,
-        eps: getSlice(epsVals, 0, 4),
-        roe: getSlice(roeVals, 0, 4),
-        revenue: getSlice(revenueVals, 0, 4),
-        opincome: getSlice(opinVals, 0, 4)
-      },
-      quarter: {
-        years: quarterLabels,
-        eps: getSlice(epsVals, 4, 10),
-        roe: getSlice(roeVals, 4, 10),
-        revenue: getSlice(revenueVals, 4, 10),
-        opincome: getSlice(opinVals, 4, 10)
-      },
+      annual,
+      quarter,
       scrapedAt: new Date().toLocaleString('ko-KR')
     }
 
@@ -2462,14 +2190,14 @@ export async function getStockFinancials(code) {
     return result
 
   } catch (e) {
-    console.error(`[financials] ${code} 재무제표 스크래핑 오류:`, e.message)
-    return { 
-      success: false, 
-      code, 
-      error: e.message, 
-      years: [], 
-      eps: [], 
-      roe: [], 
+    console.error(`[financials] ${code} 재무제표 조회 오류:`, e.message)
+    return {
+      success: false,
+      code,
+      error: e.message,
+      years: [],
+      eps: [],
+      roe: [],
       annual: { years: [], eps: [], roe: [], revenue: [], opincome: [] },
       quarter: { years: [], eps: [], roe: [], revenue: [], opincome: [] }
     }

@@ -58,6 +58,7 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
   const [companySummary, setCompanySummary] = useState(null)
   const [financials, setFinancials] = useState(null)
   const [isMobile, setIsMobile] = useState(false)
+  const [isChartFullscreen, setIsChartFullscreen] = useState(false)
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768)
@@ -65,6 +66,18 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
     window.addEventListener('resize', checkMobile)
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
+
+  // ⌨️ ESC 키: 차트 전체화면이 열려있으면 차트만 닫고, 아니면 팝업 전체를 닫음
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key !== 'Escape') return
+      if (isChartFullscreen) setIsChartFullscreen(false)
+      else onClose?.()
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isChartFullscreen, onClose])
+
   const [loading, setLoading] = useState(true)
   const [hoverData, setHoverData] = useState(null)
   const [hoverLiqPoint, setHoverLiqPoint] = useState(null)
@@ -124,8 +137,8 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
   const displayCurrentPrice = cardPrice || analysisPrice || stock.current_price || stock.buy_price || lastCandleClose || 0
 
   // ─── SVG 캔들스틱 차트 계산 ───
-  const width = 800
-  const height = 400
+  const width = isChartFullscreen ? 1400 : 800
+  const height = isChartFullscreen ? 720 : 400
   const padding = { top: 50, right: 125, bottom: 45, left: 15 }
 
   const candles = (chartData || []).map(d => {
@@ -166,6 +179,22 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
     if (val === undefined || val === null || isNaN(val) || maxPrice === minPrice) return height / 2
     return height - padding.bottom - ((val - minPrice) / (maxPrice - minPrice)) * (height - padding.top - padding.bottom)
   }
+
+  // 🎯 월봉 10이평선(10개월 이동평균) — 월봉(month) 탭에서만 계산
+  const monthlyMA10 = period === 'month'
+    ? candles.map((c, i) => {
+        if (i < 9) return null
+        let sum = 0
+        for (let k = i - 9; k <= i; k++) sum += candles[k].close
+        return sum / 10
+      })
+    : []
+  const ma10Points = candles
+    .map((c, i) => (monthlyMA10[i] !== null && monthlyMA10[i] !== undefined ? `${getX(i)},${getY(monthlyMA10[i])}` : null))
+    .filter(Boolean)
+    .join(' ')
+  const lastMA10Idx = monthlyMA10.length - 1
+  const lastMA10Value = lastMA10Idx >= 0 ? monthlyMA10[lastMA10Idx] : null
 
   const isUp = candles.length > 1 ? (candles[candles.length - 1].close >= candles[0].close) : true
   const strokeColor = isUp ? '#ef4444' : '#3b82f6'
@@ -208,26 +237,22 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
       left: 0,
       right: 0,
       bottom: 0,
-      background: 'rgba(0, 0, 0, 0.82)',
-      backdropFilter: 'blur(8px)',
-      zIndex: 9999,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 16
+      background: '#05070c',
+      zIndex: 9999
     }}>
       <div
         className="modal-content"
         style={{
-          maxWidth: 900,
-          width: '94%',
-          maxHeight: '90vh',
+          width: '100vw',
+          height: '100vh',
+          maxWidth: 'none',
+          maxHeight: 'none',
           overflowY: 'auto',
           padding: '26px 30px',
           background: '#0e131f',
-          borderRadius: 20,
-          border: '1.5px solid rgba(245, 158, 11, 0.7)',
-          boxShadow: '0 25px 60px rgba(0,0,0,0.9)',
+          borderRadius: 0,
+          border: 'none',
+          boxShadow: 'none',
           color: 'var(--t1)'
         }}
         onClick={e => e.stopPropagation()}
@@ -390,7 +415,18 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
         )}
 
         {/* ─── 3. 실시간 주가 차트 (TradingView 스타일 SVG) ─── */}
-        <div style={{ background: '#0a0d14', borderRadius: 18, padding: 18, marginBottom: 20, border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 12px 36px rgba(0,0,0,0.5)' }}>
+        <div style={{
+          background: '#0a0d14',
+          borderRadius: isChartFullscreen ? 0 : 18,
+          padding: 18,
+          marginBottom: 20,
+          border: '1px solid rgba(255,255,255,0.12)',
+          boxShadow: '0 12px 36px rgba(0,0,0,0.5)',
+          ...(isChartFullscreen ? {
+            position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+            zIndex: 10050, overflowY: 'auto', borderRadius: 0
+          } : {})
+        }}>
           {/* 차트 상단 컨트롤 헤더 */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 14 }}>
             <div style={{ fontWeight: 900, color: 'var(--gold)', fontSize: '.95rem', display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -398,21 +434,22 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
               <span>월가 TradingView 스타일 프리미엄 차트 ({stock.name})</span>
             </div>
 
-            {/* 분봉 / 일봉 / 주봉 / 월봉 / 년봉 탭 */}
-            <div style={{ display: 'flex', gap: 4, background: 'rgba(0,0,0,0.5)', padding: 3, borderRadius: 10, border: '1px solid rgba(255,255,255,0.08)' }}>
-              {[
-                { id: 'minute', label: '⚡ 분봉' },
-                { id: 'day', label: '📅 일봉' },
-                { id: 'week', label: '주봉' },
-                { id: 'month', label: '월봉' },
-                { id: 'year', label: '📆 년봉' }
-              ].map(t => (
-                <button
-                  key={t.id}
-                  style={{
-                    padding: '5px 12px',
-                    borderRadius: 7,
-                    border: 'none',
+            {/* 분봉 / 일봉 / 주봉 / 월봉 / 년봉 탭 + 전체화면 토글 */}
+            <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+              <div style={{ display: 'flex', gap: 4, background: 'rgba(0,0,0,0.5)', padding: 3, borderRadius: 10, border: '1px solid rgba(255,255,255,0.08)' }}>
+                {[
+                  { id: 'minute', label: '⚡ 분봉' },
+                  { id: 'day', label: '📅 일봉' },
+                  { id: 'week', label: '주봉' },
+                  { id: 'month', label: '월봉' },
+                  { id: 'year', label: '📆 년봉' }
+                ].map(t => (
+                  <button
+                    key={t.id}
+                    style={{
+                      padding: '5px 12px',
+                      borderRadius: 7,
+                      border: 'none',
                     background: period === t.id ? 'var(--accent)' : 'transparent',
                     color: period === t.id ? '#ffffff' : 'var(--t3)',
                     fontSize: '.78rem',
@@ -420,11 +457,33 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                     cursor: 'pointer',
                     transition: 'all 0.15s ease'
                   }}
-                  onClick={() => setPeriod(t.id)}
-                >
-                  {t.label}
-                </button>
-              ))}
+                    onClick={() => setPeriod(t.id)}
+                  >
+                    {t.label}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                onClick={() => setIsChartFullscreen(v => !v)}
+                title={isChartFullscreen ? '전체화면 닫기 (ESC)' : '차트 전체화면으로 보기'}
+                style={{
+                  padding: '6px 12px',
+                  borderRadius: 8,
+                  border: '1px solid rgba(251,191,36,0.5)',
+                  background: isChartFullscreen ? 'rgba(251,191,36,0.25)' : 'rgba(0,0,0,0.4)',
+                  color: '#fbbf24',
+                  fontSize: '.78rem',
+                  fontWeight: 800,
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6
+                }}
+              >
+                <span>{isChartFullscreen ? '⤡' : '⤢'}</span>
+                <span>{isChartFullscreen ? '전체화면 닫기' : '차트 전체화면'}</span>
+              </button>
             </div>
           </div>
 
@@ -475,7 +534,7 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
             ) : candles.length > 0 ? (
               <svg
                 viewBox={`0 0 ${width} ${height}`}
-                style={{ width: '100%', height: 360, display: 'block' }}
+                style={{ width: '100%', height: isChartFullscreen ? 'calc(100vh - 220px)' : 360, display: 'block' }}
                 onMouseLeave={() => setHoverData(null)}
               >
                 <defs>
@@ -529,6 +588,26 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                     </g>
                   )
                 })}
+
+                {/* 🟡 월봉 10이평선(10개월 이동평균) */}
+                {period === 'month' && ma10Points && (
+                  <g key="monthly-ma10">
+                    <polyline points={ma10Points} fill="none" stroke="#fbbf24" strokeWidth={isChartFullscreen ? 2.6 : 2} opacity="0.95" />
+                    {lastMA10Value != null && (() => {
+                      const y = getY(lastMA10Value)
+                      const x = getX(lastMA10Idx)
+                      return (
+                        <g>
+                          <circle cx={x} cy={y} r="3.5" fill="#fbbf24" stroke="#000" strokeWidth="0.8" />
+                          <rect x={width - padding.right + 6} y={y - (isMobile ? 18 : 12)} width={isMobile ? 145 : 100} height={isMobile ? 36 : 24} rx={6} fill="#78350f" stroke="#fbbf24" strokeWidth="1.5" />
+                          <text x={width - padding.right + 12} y={y + (isMobile ? 6 : 4)} fill="#fde68a" fontSize={isMobile ? "15" : "11"} fontWeight="900" fontFamily="Space Mono">
+                            10선 {Math.round(lastMA10Value).toLocaleString()}
+                          </text>
+                        </g>
+                      )
+                    })()}
+                  </g>
+                )}
 
                 {/* 🟢 1. 월가 적정매입가 레이저 빔 */}
                 {optimalPrice > 0 && (() => {

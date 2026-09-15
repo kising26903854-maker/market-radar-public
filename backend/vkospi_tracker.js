@@ -1,14 +1,20 @@
-// vkospi_tracker.js — ⚡ KRX 변동성지수(VKOSPI) & 코스피/코스닥 당일 장중 실시간 지수 듀얼 트래커 엔진
+// vkospi_tracker.js — ⚡ 코스피 자체 변동성 추정치(VKOSPI, 비공식) & 코스피/코스닥 당일 장중 실시간 지수 듀얼 트래커 엔진
+//
+// ⚠️ 참고: 여기서 "VKOSPI"라고 부르는 변동성 지수는 한국거래소(KRX)가 공식 발표하는 지수가 아니다.
+// KRX가 무료로 제공하는 공개 VKOSPI API가 없어서, 코스피 자체 일별 고가/저가/등락률로부터
+// 파킨슨(Parkinson) 변동성 공식을 이용해 이 서버가 자체 산출(합성)한 "비공식 추정치"다.
+// 특정 날짜에 대한 하드코딩된 정답값(과거 버전에 있었던 날짜별 override)은 제거했다 —
+// 모든 날짜가 동일한 공식으로 일관되게 계산된다.
 import { sendTelegramMessage } from './telegram_alert.js';
 
 let vkospiCache = null;
 let lastFetchTime = 0;
 const CACHE_TTL = 3 * 1000; // 3초 초고속 실시간 캐시
 
-// 🎯 한국거래소(KRX) 공식 실시간 정밀 기준치 (8월 31일 공식 마감 종가 46.05 POINT)
-let TARGET_LATEST_VKOSPI = 46.05; // 46.05 POINT
-let TARGET_LATEST_CHANGE = -4.03; // -4.03 pt
-let TARGET_LATEST_CHANGE_PCT = -8.05; // -8.05%
+// 🎯 코스피 자체 변동성 추정치(비공식, 파킨슨 변동성 모델 기반)의 가장 최근 계산값 캐시
+let TARGET_LATEST_VKOSPI = 46.05; // 최근 산출된 값 (기동 시 초기값, 실제 계산 후 갱신됨)
+let TARGET_LATEST_CHANGE = -4.03; // 전일대비 변동폭 (pt)
+let TARGET_LATEST_CHANGE_PCT = -8.05; // 전일대비 변동률 (%)
 
 /**
  * 실시간 한국 시간(KST) 정보 반환
@@ -205,9 +211,12 @@ export async function getKrxVolatilityData(period = '3m') {
     }]));
 
     // 2. 야후 파이낸스 VIX(미국 공포지수) 조회
+    // 야후 API가 429 등으로 실패하면 조용히 하드코딩된 15.75로 대체되던 기존 버그를 고치기 위해,
+    // 실제 라이브 수신 성공 여부를 vixIsLive 플래그로 추적해 프론트엔드가 "실시간 아님"을 표시할 수 있게 한다.
     const vixRange = period === '1m' ? '1mo' : period === '6m' ? '6mo' : period === '1y' ? '1y' : '3mo';
     const vixUrl = `https://query1.finance.yahoo.com/v8/finance/chart/^VIX?range=${vixRange}&interval=1d`;
     let vixMap = {};
+    let vixIsLive = false;
     try {
       const vixRes = await fetch(vixUrl, { headers: { 'User-Agent': 'Mozilla/5.0' } });
       if (vixRes.ok) {
@@ -221,12 +230,17 @@ export async function getKrxVolatilityData(period = '3m') {
             vixMap[d] = vixCloses[i];
           }
         });
+        vixIsLive = Object.keys(vixMap).length > 0;
       }
     } catch (e) {
       console.warn('[VKOSPI Tracker] VIX query warning:', e.message);
     }
+    if (!vixIsLive) {
+      console.warn('[VKOSPI Tracker] VIX 실시간 조회 실패 → 참고용 고정값(15.75)으로 대체, vixIsLive=false');
+    }
 
-    // 3. 한국거래소(KRX) 공식 데이터 및 파킨슨/내재변동성 퀀트 모델 기반 시계열 산출 (과거일자부터 순차 계산)
+    // 3. 코스피 일별 시세(고가/저가/등락률)에 파킨슨/내재변동성 퀀트 모델을 적용한 자체 변동성 추정치 시계열 산출
+    //    (KRX 공식 데이터가 아닌, 이 서버가 코스피 원자료로부터 합성한 비공식 추정치 — 과거일자부터 순차 계산)
     const ascKospiList = [...kospiList].reverse();
     const timeline = [];
     const kospiTimeline = [];
@@ -253,13 +267,8 @@ export async function getKrxVolatilityData(period = '3m') {
       // 하방 쇼크 및 공포 프리미엄 가중치 (지수 폭락 시 급등)
       const shock = signedKospiChange < 0 ? Math.pow(Math.abs(signedKospiChange), 1.35) * 4.2 : -Math.min(5, signedKospiChange * 1.2);
       
-      // 한국거래소 공식 공시 앵커 및 퀀트 수치 정밀 보정
+      // 코스피 파킨슨 변동성 + 하방 쇼크 가중치 기반 자체 추정치 산출 (모든 날짜 동일 공식, 날짜별 특례 없음)
       let vkospiVal = 32.0 + (parkinson * 0.28) + shock * 0.5;
-      if (date === '2026-06-08') vkospiVal = 97.99; // KRX 역사적 최고치 (장중 97.99pt)
-      else if (date === '2026-08-26') vkospiVal = 52.80; // KRX 공식 마감치
-      else if (date === '2026-08-27') vkospiVal = 51.50;
-      else if (date === '2026-08-28') vkospiVal = 50.08;
-      else if (date === '2026-08-31') vkospiVal = 46.05; // KRX 공식 마감 종가 (46.05pt, -4.03pt / -8.05%)
 
       vkospiVal = parseFloat(Math.max(20.0, Math.min(98.5, vkospiVal)).toFixed(2));
 
@@ -269,6 +278,7 @@ export async function getKrxVolatilityData(period = '3m') {
       prevVkospi = vkospiVal;
 
       const vkosdaq = parseFloat((vkospiVal * 1.25 + 3.5).toFixed(2));
+      const dateHasLiveVix = Object.prototype.hasOwnProperty.call(vixMap, date);
       const baseVix = vixMap[date] || 15.75;
 
       let riskZone = 'SAFE';
@@ -304,6 +314,7 @@ export async function getKrxVolatilityData(period = '3m') {
         vkospiChangePct: vChangePct,
         vkosdaq,
         vix: baseVix ? parseFloat(baseVix.toFixed(2)) : 15.75,
+        vixIsLive: vixIsLive && dateHasLiveVix,
         riskZone,
         riskLabel
       });
@@ -422,10 +433,11 @@ export async function getKrxVolatilityData(period = '3m') {
       timeline: kosdaqTimeline
     };
 
-    // 3. ⚡ VOLATILITY (KRX 변동성지수) 전용 실시간 상세 객체
+    // 3. ⚡ VOLATILITY (코스피 자체 변동성 추정치, 비공식) 전용 실시간 상세 객체
     const vkospiSummary = {
-      name: 'VOLATILITY (KRX 변동성지수)',
+      name: 'VOLATILITY (코스피 자체 변동성 추정치 · 비공식)',
       code: 'VKOSPI',
+      isOfficial: false,
       currentPrice: latest.vkospi,
       dayChange: latest.vkospiChange,
       dayChangePct: latest.vkospiChangePct,
@@ -456,7 +468,8 @@ export async function getKrxVolatilityData(period = '3m') {
       success: true,
       period,
       timestamp: new Date().toISOString(),
-      indexName: 'Volatility Index (VOLATILITY / Korea Stock Exchange)',
+      indexName: 'Volatility Index (VOLATILITY — 코스피 자체 산출 추정치, 비공식)',
+      isOfficial: false,
       marketStatus: currentMarketStatus,
       kospi: kospiSummary,
       kosdaq: kosdaqSummary,
@@ -474,6 +487,7 @@ export async function getKrxVolatilityData(period = '3m') {
         kosdaqChangePct: latest.kosdaqChangePct,
         kpi200: latest.kpi200,
         vix: latest.vix,
+        vixIsLive: latest.vixIsLive,
         vkosdaq: latest.vkosdaq,
         riskZone: latest.riskZone,
         riskLabel: latest.riskLabel
@@ -524,17 +538,18 @@ export async function sendVkospiBriefing() {
 
   const kSign = cur.kospiChangePct >= 0 ? '+' : '';
   const kdSign = cur.kosdaqChangePct >= 0 ? '+' : '';
+  const vixLiveNote = cur.vixIsLive === false ? ' (⚠️ 실시간 아님, 최근 참고값)' : '';
 
   const message = `
-⚡ <b>[KRX 변동성지수 (VKOSPI) & 코스피 듀얼 실시간 브리핑]</b>
+⚡ <b>[코스피 자체 변동성 추정치(VKOSPI, 비공식) & 코스피 듀얼 실시간 브리핑]</b>
 ━━━━━━━━━━━━━━━━━
-🏛️ <b>Korea Stock Exchange (KRX) ${cur.marketStatus}:</b>
+🏛️ <b>${cur.marketStatus}:</b>
 
-• <b>변동성 지수 (VOLATILITY):</b> <b>${cur.vkospi} POINT</b> (<b>${cur.vkospiChange}</b> / <b>${cur.vkospiChangePct}%</b>)
+• <b>변동성 추정치 (VOLATILITY, 자체 산출·비공식):</b> <b>${cur.vkospi} POINT</b> (<b>${cur.vkospiChange}</b> / <b>${cur.vkospiChangePct}%</b>)
 • <b>위험도 등급:</b> <b>${cur.riskLabel}</b> (안정 구간 45~58pt)
 • <b>📈 코스피 (KOSPI):</b> <b>${cur.kospi?.toLocaleString()} pt</b> (${kSign}${cur.kospiChangePct}%)
 • <b>📈 코스닥 (KOSDAQ):</b> <b>${cur.kosdaq?.toLocaleString()} pt</b> (${kdSign}${cur.kosdaqChangePct}%)
-• <b>미국 VIX:</b> ${cur.vix} pt | <b>코스닥 변동성:</b> ${cur.vkosdaq} pt
+• <b>미국 VIX:</b> ${cur.vix} pt${vixLiveNote} | <b>코스닥 변동성 추정치:</b> ${cur.vkosdaq} pt
 ━━━━━━━━━━━━━━━━━
 📈 <b>상관관계 & 통계 (최근 3개월):</b>
 • <b>역상관관계 계수:</b> <b>${stats.correlation}</b> (강한 반비례 📉↔️📈)

@@ -10,7 +10,7 @@ import axios from 'axios';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { fetchAllPages } from './kospi_kosdaq_scanner.js';
+import { fetchMarketCapUniverse } from './kospi_kosdaq_scanner.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CACHE_PATH = path.join(__dirname, 'data', 'double_bottom_cache.json');
@@ -21,8 +21,8 @@ const HEADERS_M = {
 };
 
 const MIN_MARKET_CAP = 500; // 억원 — 유동성 낮은 소형주 제외
-const KOSPI_SCAN_PAGES = 8; // 시총 상위 약 400종목 (finance.naver.com은 시총 내림차순 정렬)
-const KOSDAQ_SCAN_PAGES = 6; // 시총 상위 약 300종목
+const KOSPI_SCAN_PAGES = 4; // 시총 상위 약 400종목 (marketValue API는 페이지당 100종목, 시총 내림차순 정렬)
+const KOSDAQ_SCAN_PAGES = 3; // 시총 상위 약 300종목
 const SWING_WINDOW = 4; // 좌우 4거래일보다 낮으면 스윙 저점으로 인정
 const MIN_GAP_DAYS = 8; // 두 저점 사이 최소 거래일
 const MAX_GAP_DAYS = 55; // 두 저점 사이 최대 거래일
@@ -33,14 +33,17 @@ const MIN_DECLINE_PCT = 12; // 1차 저점 진입 전 하락추세 최소 하락
 
 const num = (v) => parseFloat(String(v ?? '').replace(/,/g, '')) || 0;
 
-// ─── 1. 종목별 최근 120거래일 일봉(OHLC) 수집 (2페이지 × 60일) ───
-export async function fetchDailySeries(code) {
+// ─── 1. 종목별 일봉(OHLC) 수집 — 기본 2페이지(120거래일). pages를 늘리면 더 긴 과거 이력 확보 가능
+// (백테스트 엔진처럼 장기 히스토리가 필요한 호출부는 pages를 늘려서 호출한다. 기존 호출부는
+// 인자를 안 넘기므로 동작이 그대로 유지된다).
+export async function fetchDailySeries(code, pages = 2) {
   try {
-    const [p1, p2] = await Promise.all([
-      axios.get(`https://m.stock.naver.com/api/stock/${code}/price?page=1&pageSize=60`, { headers: HEADERS_M, timeout: 4500 }),
-      axios.get(`https://m.stock.naver.com/api/stock/${code}/price?page=2&pageSize=60`, { headers: HEADERS_M, timeout: 4500 }),
-    ]);
-    const raw = [...(Array.isArray(p1.data) ? p1.data : []), ...(Array.isArray(p2.data) ? p2.data : [])];
+    const requests = [];
+    for (let p = 1; p <= pages; p++) {
+      requests.push(axios.get(`https://m.stock.naver.com/api/stock/${code}/price?page=${p}&pageSize=60`, { headers: HEADERS_M, timeout: 4500 }));
+    }
+    const responses = await Promise.all(requests);
+    const raw = responses.flatMap(r => (Array.isArray(r.data) ? r.data : []));
 
     const seen = new Set();
     const series = raw
@@ -186,8 +189,8 @@ async function executeDoubleBottomScan() {
   const startTime = Date.now();
 
   const [kospiStocks, kosdaqStocks] = await Promise.all([
-    fetchAllPages(0, KOSPI_SCAN_PAGES),
-    fetchAllPages(1, KOSDAQ_SCAN_PAGES),
+    fetchMarketCapUniverse(0, KOSPI_SCAN_PAGES),
+    fetchMarketCapUniverse(1, KOSDAQ_SCAN_PAGES),
   ]);
 
   // finance.naver.com 시가총액 순위는 이미 내림차순 정렬이므로, 상위 페이지만 가져오는 것 자체가

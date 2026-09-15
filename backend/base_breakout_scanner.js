@@ -9,15 +9,15 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { fetchAllPages } from './kospi_kosdaq_scanner.js';
+import { fetchMarketCapUniverse } from './kospi_kosdaq_scanner.js';
 import { fetchDailySeries } from './double_bottom_scanner.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CACHE_PATH = path.join(__dirname, 'data', 'base_breakout_cache.json');
 
 const MIN_MARKET_CAP = 500; // 억원 — 유동성 낮은 소형주 제외
-const KOSPI_SCAN_PAGES = 8; // 시총 상위 약 400종목 (finance.naver.com은 시총 내림차순 정렬)
-const KOSDAQ_SCAN_PAGES = 6; // 시총 상위 약 300종목
+const KOSPI_SCAN_PAGES = 4; // 시총 상위 약 400종목 (marketValue API는 페이지당 100종목, 시총 내림차순 정렬)
+const KOSDAQ_SCAN_PAGES = 3; // 시총 상위 약 300종목
 
 const MIN_DECLINE_PCT = 15; // 박스 진입 전 하락추세 최소 하락률
 const MIN_CONSOL_DAYS = 15; // 횡보(박스권) 최소 거래일
@@ -124,8 +124,8 @@ async function executeBaseBreakoutScan() {
   const startTime = Date.now();
 
   const [kospiStocks, kosdaqStocks] = await Promise.all([
-    fetchAllPages(0, KOSPI_SCAN_PAGES),
-    fetchAllPages(1, KOSDAQ_SCAN_PAGES),
+    fetchMarketCapUniverse(0, KOSPI_SCAN_PAGES),
+    fetchMarketCapUniverse(1, KOSDAQ_SCAN_PAGES),
   ]);
 
   const universe = [...kospiStocks, ...kosdaqStocks].filter(s => s.marketCap >= MIN_MARKET_CAP);

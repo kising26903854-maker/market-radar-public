@@ -10,6 +10,7 @@ import iconv from 'iconv-lite';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { fetchMarketCapUniverse } from './kospi_kosdaq_scanner.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CACHE_FILE = path.join(__dirname, 'data', 'growth_screener_cache.json');
@@ -43,44 +44,24 @@ const HEADERS = {
   'Accept': 'application/json'
 };
 
+// ⚠️ 예전에는 finance.naver.com/sise/sise_market_sum.naver를 직접 HTML 스크래핑했으나, 그
+// 구버전 페이지가 stock.naver.com으로 302 리다이렉트되며 완전히 죽어서(응답에 테이블 자체가
+// 없음 → 정규식이 0건 매치) 실제로는 항상 아래 CANDIDATE_STOCKS(80종목)만 스캔되고 있었다.
+// m.stock.naver.com의 marketValue API(kospi_kosdaq_scanner.js에서 검증된 방식)로 교체한다.
 async function getAllMarketStockCandidates() {
   const map = new Map();
   CANDIDATE_STOCKS.forEach(s => map.set(s.code, s));
 
   try {
-    const fetchMarketList = async (sosok, pages) => {
-      const list = [];
-      for (let p = 1; p <= pages; p++) {
-        try {
-          const url = `https://finance.naver.com/sise/sise_market_sum.naver?sosok=${sosok}&page=${p}`;
-          const res = await axios.get(url, { responseType: 'arraybuffer', headers: HEADERS, timeout: 5000 });
-          const html = iconv.decode(Buffer.from(res.data), 'euc-kr');
-          const trPattern = /<tr[^>]*>([\s\S]*?)<\/tr>/g;
-          let trMatch;
-          while ((trMatch = trPattern.exec(html)) !== null) {
-            const row = trMatch[1];
-            const codeMatch = row.match(/code=(\d{6})/);
-            const nameMatch = row.match(/<a[^>]*item\/main[^>]*>([^<]+)<\/a>/);
-            if (codeMatch && nameMatch) {
-              list.push({
-                code: codeMatch[1],
-                name: nameMatch[1].trim(),
-                market: sosok === 0 ? 'KOSPI' : 'KOSDAQ'
-              });
-            }
-          }
-        } catch (e) {}
-      }
-      return list;
-    };
-
     const [kospiList, kosdaqList] = await Promise.all([
-      fetchMarketList(0, 15),
-      fetchMarketList(1, 15)
+      fetchMarketCapUniverse(0, 26), // 코스피 최대 2,600종목
+      fetchMarketCapUniverse(1, 20), // 코스닥 최대 2,000종목
     ]);
 
-    kospiList.forEach(s => map.set(s.code, s));
-    kosdaqList.forEach(s => map.set(s.code, s));
+    kospiList.forEach(s => map.set(s.code, { code: s.code, name: s.name, market: 'KOSPI' }));
+    kosdaqList.forEach(s => map.set(s.code, { code: s.code, name: s.name, market: 'KOSDAQ' }));
+
+    console.log(`[Growth Screener] 전종목 유니버스 수집: 코스피 ${kospiList.length} + 코스닥 ${kosdaqList.length} = 총 ${map.size}종목`);
   } catch (e) {
     console.warn('[Growth Screener] Full candidate fetch warning:', e.message);
   }

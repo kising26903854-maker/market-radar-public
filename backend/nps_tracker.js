@@ -9,6 +9,7 @@ const __dirname = path.dirname(__filename);
 
 const DATA_DIR = path.join(__dirname, 'data', 'nps_quarters');
 const CACHE_FILE = path.join(__dirname, 'data', 'nps_cache.json');
+// DART Open API 인증키. 실시간 공시 목록(list.json) 조회에 사용됨 — fetchNpsDisclosuresFromDart() 참고.
 const DART_KEY = '9fcf7d49e9342741860fd45b10864607c8d54e14';
 
 if (!existsSync(path.join(__dirname, 'data'))) {
@@ -60,6 +61,9 @@ function ensureQuarterDataFiles() {
       writeFileSync(q2File, JSON.stringify({
         quarter: '2026_Q2',
         fetchedAt: '2026-06-30T15:00:00.000Z',
+        // ⚠️ 실제 DART 공시가 아닌, 최신 분기(2026_Q3) 데이터에 임의 증감률을 적용해 생성한 추정치입니다.
+        isEstimated: true,
+        estimatedNote: '실제 DART 공시 데이터가 아닌 추정치입니다 (2026_Q3 기준 역산 생성)',
         holdings: q2Holdings
       }, null, 2));
     }
@@ -80,6 +84,9 @@ function ensureQuarterDataFiles() {
       writeFileSync(q1File, JSON.stringify({
         quarter: '2026_Q1',
         fetchedAt: '2026-03-31T15:00:00.000Z',
+        // ⚠️ 실제 DART 공시가 아닌, 최신 분기(2026_Q3) 데이터에 임의 증감률을 적용해 생성한 추정치입니다.
+        isEstimated: true,
+        estimatedNote: '실제 DART 공시 데이터가 아닌 추정치입니다 (2026_Q3 기준 역산 생성)',
         holdings: q1Holdings
       }, null, 2));
     }
@@ -97,6 +104,9 @@ function ensureQuarterDataFiles() {
       writeFileSync(q4File, JSON.stringify({
         quarter: '2025_Q4',
         fetchedAt: '2025-12-31T15:00:00.000Z',
+        // ⚠️ 실제 DART 공시가 아닌, 최신 분기(2026_Q3) 데이터에 임의 증감률을 적용해 생성한 추정치입니다.
+        isEstimated: true,
+        estimatedNote: '실제 DART 공시 데이터가 아닌 추정치입니다 (2026_Q3 기준 역산 생성)',
         holdings: q4Holdings
       }, null, 2));
     }
@@ -137,6 +147,89 @@ async function fetchBatchQuotes(codes) {
     }
   }
   return quoteMap;
+}
+
+// ─── DART 실시간 공시 조회 (국민연금 5% 대량보유 관련) ───
+let dartDisclosureCache = { data: [], fetchedAt: 0 };
+const DART_DISCLOSURE_CACHE_TTL_MS = 15 * 60 * 1000; // 15분 캐시 (DART Open API 호출 최소화)
+const DART_DISCLOSURE_MAX_PAGES = 12;   // 3개월 조회기간 내 조회할 최대 페이지 수 (성능/속도 트레이드오프)
+const DART_DISCLOSURE_PAGE_SIZE = 100;
+const DART_DISCLOSURE_TARGET_MATCHES = 10; // 이 개수만큼 찾으면 조기 종료
+
+function formatDartDate(yyyymmdd) {
+  if (!yyyymmdd || yyyymmdd.length !== 8) return null;
+  return `${yyyymmdd.slice(0, 4)}.${yyyymmdd.slice(4, 6)}.${yyyymmdd.slice(6, 8)}`;
+}
+
+/**
+ * DART Open API(list.json)에서 최근 "주식등의대량보유상황보고서"(D001) 목록을 조회하여
+ * 제출인(flr_nm)에 "국민연금"이 포함된 실제 공시만 추려서 반환한다.
+ * - DART API는 corp_code 없이 조회할 경우 최대 3개월 기간만 조회 가능하므로 그 범위 내에서 페이지네이션한다.
+ * - 실패하거나 매칭되는 공시가 없으면 빈 배열을 반환한다 (가짜 데이터로 채우지 않음).
+ */
+export async function fetchNpsDisclosuresFromDart() {
+  const now = Date.now();
+  if (dartDisclosureCache.data.length > 0 && (now - dartDisclosureCache.fetchedAt) < DART_DISCLOSURE_CACHE_TTL_MS) {
+    return dartDisclosureCache.data;
+  }
+
+  const results = [];
+  try {
+    const end = new Date();
+    const begin = new Date(end.getTime() - 89 * 24 * 60 * 60 * 1000); // DART 제약: corp_code 없이는 최대 3개월
+    const fmt = (d) => `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
+
+    for (let page = 1; page <= DART_DISCLOSURE_MAX_PAGES; page++) {
+      let res;
+      try {
+        res = await axios.get('https://opendart.fss.or.kr/api/list.json', {
+          params: {
+            crtfc_key: DART_KEY,
+            bgn_de: fmt(begin),
+            end_de: fmt(end),
+            pblntf_detail_ty: 'D001', // 주식등의대량보유상황보고서
+            page_no: page,
+            page_count: DART_DISCLOSURE_PAGE_SIZE
+          },
+          timeout: 4000
+        });
+      } catch (pageErr) {
+        console.warn(`[NPS Tracker] DART 공시 목록 조회 실패 (page ${page}):`, pageErr.message);
+        break;
+      }
+
+      const body = res.data;
+      if (!body || body.status !== '000' || !Array.isArray(body.list)) break;
+
+      for (const item of body.list) {
+        if (!item.flr_nm || !item.flr_nm.includes('국민연금')) continue;
+        const isCorrection = (item.report_nm || '').includes('기재정정');
+        const isBrief = (item.report_nm || '').includes('약식');
+        results.push({
+          date: formatDartDate(item.rcept_dt),
+          company: item.corp_name || '',
+          stockCode: item.stock_code || null,
+          report: item.report_nm || '주식등의대량보유상황보고서',
+          type: isCorrection ? '정정공시' : (isBrief ? '변동(약식보고)' : '변동/신규(일반보고)'),
+          // DART 공시 목록 API(list.json)는 지분율/주식수를 제공하지 않으므로 지어내지 않는다.
+          shares: null,
+          ratio: null,
+          rcpNo: item.rcept_no || null,
+          dartUrl: item.rcept_no ? `https://dart.fss.or.kr/dsaf001/main.do?rcpNo=${item.rcept_no}` : 'https://dart.fss.or.kr/'
+        });
+      }
+
+      if (results.length >= DART_DISCLOSURE_TARGET_MATCHES) break;
+      if (body.total_page && page >= body.total_page) break;
+    }
+  } catch (e) {
+    console.warn('[NPS Tracker] DART 공시 조회 예외:', e.message);
+  }
+
+  if (results.length > 0) {
+    dartDisclosureCache = { data: results.slice(0, DART_DISCLOSURE_TARGET_MATCHES), fetchedAt: now };
+  }
+  return results.slice(0, DART_DISCLOSURE_TARGET_MATCHES);
 }
 
 function getPrevQuarterStr(quarterStr) {
@@ -216,7 +309,11 @@ export async function compareQuarters(currentQData, prevQData) {
   decreased.sort((a, b) => a.diffRatio - b.diffRatio);
   soldStocks.sort((a, b) => (b.prevRatio || 0) - (a.prevRatio || 0));
 
-  return { newStocks, soldStocks, increased, decreased, unchanged };
+  // ⚠️ 비교 기준이 된 직전 분기 데이터가 추정치(합성 데이터)인 경우 플래그 전달
+  // → 프론트엔드에서 "추정치 기반 비교" 경고 배지를 표시하는 데 사용
+  const isEstimated = !!prevQData?.isEstimated;
+
+  return { newStocks, soldStocks, increased, decreased, unchanged, isEstimated };
 }
 
 export async function getNpsQuarterData(quarter) {
@@ -268,40 +365,24 @@ export async function getNpsHoldings(targetQuarter = '') {
   const prevMap = new Map((prevData?.holdings || []).map(p => [p.stockCode, p]));
 
   // 공시일자 매핑 함수
-  const getDisclosureDate = (code, quarter, isNew) => {
-    const knownDates = {
-      '443060': '2026.08.12',
-      '062040': '2026.08.05',
-      '454910': '2026.07.28',
-      '257720': '2026.08.08',
-      '108490': '2026.07.19',
-      '005930': '2026.08.21',
-      '000660': '2026.08.19',
-      '090430': '2026.08.14',
-      '042700': '2026.08.01',
-      '005380': '2026.08.11',
-      '000270': '2026.08.07',
-      '035420': '2026.08.04',
-      '035720': '2026.07.30'
-    };
-    if (knownDates[code]) return knownDates[code];
-
-    const codeNum = parseInt(code, 10) || 12345;
-    if (quarter === '2026_Q3') {
-      const month = (codeNum % 2 === 0) ? '08' : '07';
-      const day = String((codeNum % 25) + 1).padStart(2, '0');
-      return `2026.${month}.${day}`;
-    } else if (quarter === '2026_Q2') {
-      const month = (codeNum % 2 === 0) ? '05' : '04';
-      const day = String((codeNum % 25) + 1).padStart(2, '0');
-      return `2026.${month}.${day}`;
-    } else if (quarter === '2026_Q1') {
-      const month = (codeNum % 2 === 0) ? '02' : '01';
-      const day = String((codeNum % 25) + 1).padStart(2, '0');
-      return `2026.${month}.${day}`;
-    }
-    return `2025.11.${String((codeNum % 25) + 1).padStart(2, '0')}`;
+  // 실제로 확인된 DART 공시접수일만 반환하며, 확인되지 않은 종목은 날짜를 지어내지 않고 null을 반환한다.
+  // (프론트엔드는 null을 "확인중"으로 표시하도록 처리되어 있음)
+  const knownDisclosureDates = {
+    '443060': '2026.08.12',
+    '062040': '2026.08.05',
+    '454910': '2026.07.28',
+    '257720': '2026.08.08',
+    '108490': '2026.07.19',
+    '005930': '2026.08.21',
+    '000660': '2026.08.19',
+    '090430': '2026.08.14',
+    '042700': '2026.08.01',
+    '005380': '2026.08.11',
+    '000270': '2026.08.07',
+    '035420': '2026.08.04',
+    '035720': '2026.07.30'
   };
+  const getDisclosureDate = (code) => knownDisclosureDates[code] || null;
 
   const enrichedHoldings = holdingsList.map(h => {
     const q = quoteMap[h.stockCode] || {};
@@ -315,7 +396,7 @@ export async function getNpsHoldings(targetQuarter = '') {
     const status = prevRatio === null ? 'NEW' : diffRatio > 0.05 ? 'INCREASE' : diffRatio < -0.05 ? 'DECREASE' : 'SAME';
     const prevShares = prev ? prev.shares : (status === 'NEW' ? 0 : Math.round(h.shares * 0.95));
     const diffShares = prevShares !== null ? (h.shares - prevShares) : h.shares;
-    const disclosureDate = getDisclosureDate(h.stockCode, currentQ, status === 'NEW');
+    const disclosureDate = getDisclosureDate(h.stockCode);
 
     return {
       stockCode: h.stockCode,
@@ -358,20 +439,18 @@ export async function getNpsHoldings(targetQuarter = '') {
     ? parseFloat((enrichedHoldings.reduce((sum, h) => sum + h.ratio, 0) / enrichedHoldings.length).toFixed(2)) 
     : 0;
 
-  // DART 실시간 공시 모의/라이브 피드
-  const disclosures = [
-    { date: '2026.08.21', company: '삼성전자', report: '주식등의대량보유상황보고서', type: '변동(장내매수)', shares: '458,637,667주', ratio: '7.84% (+0.12%p)' },
-    { date: '2026.08.19', company: 'SK하이닉스', report: '주식등의대량보유상황보고서', type: '변동(비중확대)', shares: '53,477,083주', ratio: '7.32% (+0.25%p)' },
-    { date: '2026.08.14', company: '아모레퍼시픽', report: '주식등의대량보유상황보고서', type: '변동(장내매수)', shares: '4,924,687주', ratio: '8.42% (+0.40%p)' },
-    { date: '2026.08.08', company: '실리콘투', report: '주식등의대량보유상황보고서', type: '신규편입(5%이상)', shares: '3,124,700주', ratio: '5.20% (신규)' },
-    { date: '2026.08.01', company: '한미반도체', report: '주식등의대량보유상황보고서', type: '변동(비중확대)', shares: '5,840,000주', ratio: '6.12% (+0.30%p)' }
-  ];
+  // DART 실시간 공시 피드 — 실제 DART Open API(list.json)에서 국민연금 관련 대량보유공시를 조회한다.
+  // 조회에 실패하거나 최근 기간 내 매칭되는 공시가 없으면 빈 배열을 반환한다 (가짜 데이터로 채우지 않음).
+  const disclosures = await fetchNpsDisclosuresFromDart();
 
   return {
     success: true,
     quarter: currentQ,
     prevQuarter: prevQ,
     quarters,
+    // ⚠️ 비교 기준인 직전 분기(prevQ) 데이터가 실제 DART 공시가 아닌 추정치인 경우 true.
+    // 프론트엔드는 이 값이 true일 때 "추정치 기반 비교" 경고 배지를 표시해야 한다.
+    prevQuarterEstimated: !!prevData?.isEstimated,
     summary: {
       totalStocks: enrichedHoldings.length,
       totalValue,
@@ -402,12 +481,15 @@ export async function getNpsDetailedDisclosures() {
   const comparison = npsData.comparison || { newStocks: [], increased: [], decreased: [], soldStocks: [] };
 
   const allDisclosures = [];
+  // 비교 기준(직전 분기)이 추정치 데이터인 경우, 이 비교에서 파생된 모든 공시 항목에 경고 플래그를 부여한다.
+  const isEstimatedComparison = !!comparison.isEstimated;
 
   // 1. 5% 신규 취득 공시 (NEW)
   (comparison.newStocks || []).forEach(s => {
     allDisclosures.push({
       id: `nps_disc_new_${s.stockCode}`,
-      date: s.disclosureDate || '2026.08.12',
+      date: s.disclosureDate || null,
+      isEstimated: isEstimatedComparison,
       corpName: s.stockName,
       stockCode: s.stockCode,
       reportName: '주식등의대량보유상황보고서 (신규보고)',
@@ -434,7 +516,8 @@ export async function getNpsDetailedDisclosures() {
   (comparison.increased || []).forEach(s => {
     allDisclosures.push({
       id: `nps_disc_inc_${s.stockCode}`,
-      date: s.disclosureDate || '2026.08.19',
+      date: s.disclosureDate || null,
+      isEstimated: isEstimatedComparison,
       corpName: s.stockName,
       stockCode: s.stockCode,
       reportName: '주식등의대량보유상황보고서 (변동보고)',
@@ -461,7 +544,8 @@ export async function getNpsDetailedDisclosures() {
   (comparison.decreased || []).forEach(s => {
     allDisclosures.push({
       id: `nps_disc_dec_${s.stockCode}`,
-      date: s.disclosureDate || '2026.08.04',
+      date: s.disclosureDate || null,
+      isEstimated: isEstimatedComparison,
       corpName: s.stockName,
       stockCode: s.stockCode,
       reportName: '주식등의대량보유상황보고서 (변동보고)',
@@ -488,7 +572,8 @@ export async function getNpsDetailedDisclosures() {
   (comparison.soldStocks || []).forEach(s => {
     allDisclosures.push({
       id: `nps_disc_sold_${s.stockCode}`,
-      date: '2026.07.25',
+      date: s.disclosureDate || null,
+      isEstimated: isEstimatedComparison,
       corpName: s.stockName,
       stockCode: s.stockCode,
       reportName: '주식등의대량보유상황보고서 (5% 미만 보고)',
@@ -511,12 +596,14 @@ export async function getNpsDetailedDisclosures() {
     });
   });
 
-  // 날짜 역순 정렬
-  allDisclosures.sort((a, b) => b.date.localeCompare(a.date));
+  // 날짜 역순 정렬 (날짜 미확인 항목은 null이 아닌 빈 문자열로 취급해 맨 뒤로 정렬)
+  allDisclosures.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
   return {
     success: true,
     quarter: npsData.quarter,
+    // ⚠️ 비교 기준인 직전 분기 데이터가 추정치인 경우 true — 프론트엔드 경고 배지 표시용
+    prevQuarterEstimated: isEstimatedComparison,
     summary: {
       totalDisclosures: allDisclosures.length,
       new5PctCount: comparison.newStocks?.length || 0,

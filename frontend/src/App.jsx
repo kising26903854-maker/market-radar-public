@@ -18,6 +18,9 @@ import BaseRateChart from './components/BaseRateChart.jsx'
 import DoubleBottomScannerTab from './components/DoubleBottomScannerTab.jsx'
 import BaseBreakoutScannerTab from './components/BaseBreakoutScannerTab.jsx'
 import EnergyCondensationScannerTab from './components/EnergyCondensationScannerTab.jsx'
+import MonthlyMA10ScannerTab from './components/MonthlyMA10ScannerTab.jsx'
+import BacktestReportTab from './components/BacktestReportTab.jsx'
+import AiPredictionTab from './components/AiPredictionTab.jsx'
 
 // 🎨 세련된 현대식 SVG 라인 아이콘 컴포넌트들
 const MenuIcon = ({ type, size = 16, color = "currentColor", style = {} }) => {
@@ -426,6 +429,18 @@ export default function App() {
             <MenuIcon type="accumulation" color={tab === 'energy-condensation' ? '#fff' : '#f59e0b'} />
             에너지 응축 돌파 스캐너
           </button>
+          <button className={`tab-btn ${tab === 'monthly-ma10' ? 'active' : ''}`} onClick={() => { setTab('monthly-ma10'); setIsMenuOpen(false); }}>
+            <MenuIcon type="high52w" color={tab === 'monthly-ma10' ? '#fff' : '#10b981'} />
+            월봉 10이평선 지지 스캐너
+          </button>
+          <button className={`tab-btn ${tab === 'backtest-report' ? 'active' : ''}`} onClick={() => { setTab('backtest-report'); setIsMenuOpen(false); }}>
+            <MenuIcon type="accumulation" color={tab === 'backtest-report' ? '#fff' : '#818cf8'} />
+            패턴 스캐너 백테스트
+          </button>
+          <button className={`tab-btn ${tab === 'ai-prediction' ? 'active' : ''}`} onClick={() => { setTab('ai-prediction'); setIsMenuOpen(false); }}>
+            <MenuIcon type="accumulation" color={tab === 'ai-prediction' ? '#fff' : '#c084fc'} />
+            AI 상승확률 예측
+          </button>
           <button className={`tab-btn ${tab === 'market-calendar' ? 'active' : ''}`} onClick={() => { setTab('market-calendar'); setIsMenuOpen(false); }}>
             <MenuIcon type="market-calendar" color={tab === 'market-calendar' ? '#fff' : '#f472b6'} />
             한·미 증시 일정 달력
@@ -550,6 +565,9 @@ export default function App() {
         {tab === 'double-bottom' && <DoubleBottomScannerTab onSelectStock={handleOpenStockChart} />}
         {tab === 'base-breakout' && <BaseBreakoutScannerTab onSelectStock={handleOpenStockChart} />}
         {tab === 'energy-condensation' && <EnergyCondensationScannerTab onSelectStock={handleOpenStockChart} />}
+        {tab === 'monthly-ma10' && <MonthlyMA10ScannerTab onSelectStock={handleOpenStockChart} />}
+        {tab === 'backtest-report' && <BacktestReportTab />}
+        {tab === 'ai-prediction' && <AiPredictionTab onSelectStock={handleOpenStockChart} />}
 
         {/* 탭 7: 📅 한·미 증시 일정 달력 */}
         {tab === 'market-calendar' && <MarketCalendar />}

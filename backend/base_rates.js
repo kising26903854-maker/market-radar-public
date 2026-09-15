@@ -154,19 +154,7 @@ export async function getBaseRatesData(forceRefresh = false) {
       });
     }
 
-    // 5. 최신 데이터 보강 (FRED 데이터가 아직 안 올라온 현재 달 보정)
-    // 2026년 8월 기준 금리 보정
-    const latestCombined = combined[combined.length - 1];
-    if (latestCombined && latestCombined.date < '2026-08-01') {
-      combined.push({
-        date: '2026-08-01',
-        usRate: 3.63, // 3.50% ~ 3.75% 의 중앙값
-        krRate: 3.00, // 2026.08.27 금융통화위원회 기준금리 인상 (3.00%)
-        gap: -0.63
-      });
-    }
-
-    // 6. 캐시 저장
+    // 5. 캐시 저장
     fs.mkdirSync(path.dirname(CACHE_FILE), { recursive: true });
     fs.writeFileSync(CACHE_FILE, JSON.stringify(combined, null, 2), 'utf-8');
 

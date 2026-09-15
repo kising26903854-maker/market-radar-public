@@ -95,6 +95,13 @@ function calculateBondPrice(yieldPct, years, couponRate = 4.0, parValue = 100, f
 
 /**
  * 네이버 금융 시장지표 금리 테이블 수집
+ *
+ * 주의: finance.naver.com/marketindex/ 구버전 페이지가 stock.naver.com으로 302 리다이렉트되며
+ * 더 이상 HTML 테이블을 반환하지 않는다(2026-09 확인). 새 사이트는 클라이언트 렌더링 방식이라
+ * 이 함수가 쓰던 CSS 셀렉터로는 파싱이 불가능해졌고, 대체 공개 API도 찾지 못했다.
+ * 그래서 스크래핑이 실패하면 아래 하드코딩된 값을 "참고용 마지막 확인값"으로만 쓰고,
+ * isLive:false 플래그를 붙여 프론트엔드가 "실시간 아님"을 명시적으로 표시하게 한다.
+ * (실시간 수치인 것처럼 조용히 고정값을 보여주는 것이 원래 버그였음)
  */
 async function fetchNaverMarketRates() {
   const result = {
@@ -104,6 +111,8 @@ async function fetchNaverMarketRates() {
     cd91: { value: '2.95', numValue: 2.95, diff: '+0.01', diffPct: '+0.34%', isUp: true },
     callRate: { value: '2.75', numValue: 2.75, diff: '+0.01', diffPct: '+0.36%', isUp: true }
   };
+
+  let foundCount = 0;
 
   try {
     const res = await axios.get('https://finance.naver.com/marketindex/', {
@@ -128,12 +137,16 @@ async function fetchNaverMarketRates() {
         if (th.includes('국고채 (3년)') || th.includes('국고채(3년)')) {
           result.kr3y = { value: valStr, numValue: numVal, diff: sign + diffStr, diffPct: '', isUp, isDown };
           result.kr10y = { value: (numVal + 0.13).toFixed(2), numValue: numVal + 0.13, diff: sign + diffStr, diffPct: '', isUp, isDown };
+          foundCount++;
         } else if (th.includes('회사채 (3년)') || th.includes('회사채(3년)')) {
           result.krCorp3y = { value: valStr, numValue: numVal, diff: sign + diffStr, diffPct: '', isUp, isDown };
+          foundCount++;
         } else if (th.includes('CD금리')) {
           result.cd91 = { value: valStr, numValue: numVal, diff: sign + diffStr, diffPct: '', isUp, isDown };
+          foundCount++;
         } else if (th.includes('콜 금리') || th.includes('콜금리')) {
           result.callRate = { value: valStr, numValue: numVal, diff: sign + diffStr, diffPct: '', isUp, isDown };
+          foundCount++;
         }
       }
     });
@@ -141,6 +154,10 @@ async function fetchNaverMarketRates() {
     console.warn('[Bond Tracker] Naver rates scrape warning:', e.message);
   }
 
+  if (foundCount === 0) {
+    console.warn('[Bond Tracker] 한국 국채/회사채 금리 스크래핑 실패 (0건 파싱) → 참고용 고정값으로 대체, isLive=false');
+  }
+  result.isLive = foundCount > 0;
   return result;
 }
 
@@ -194,6 +211,18 @@ export async function getBondYields() {
   const priceKRCorp3Y = calculateBondPrice(naverRates.krCorp3y.numValue, 3, 4.00, 10000, 2);
 
   // 4. 핵심 매크로 스프레드 정밀 계산
+  // ⚠️ 주의: 아래 "정상/비역전" 판정은 장단기 금리의 순서(커브 모양)만 보는 지표다.
+  // 절대적인 금리 수준이 높은지 낮은지와는 무관하므로, 10Y가 5%에 가깝더라도
+  // 2Y·3M보다만 높으면 "정상"으로 표시된다 — statusLabel에 이 구분을 명시한다.
+
+  // 절대 금리 수준 평가 (10Y 기준, 최근 20년 평균적 레인지 참고)
+  const yieldLevel = us10y.numValue >= 4.5 ? 'ELEVATED' : us10y.numValue >= 3.0 ? 'NEUTRAL' : 'LOW';
+  const yieldLevelLabel = yieldLevel === 'ELEVATED'
+    ? '⚠️ 절대 금리 수준: 역사적 고점권 (긴축적)'
+    : yieldLevel === 'NEUTRAL'
+      ? '🟡 절대 금리 수준: 중립 구간'
+      : '🟢 절대 금리 수준: 낮음 (완화적)';
+
   // ① 미국 10Y - 2Y 스프레드
   const diff10y2y = parseFloat((us10y.numValue - us2y.numValue).toFixed(3));
   const is10y2yInverted = diff10y2y < 0;
@@ -205,7 +234,8 @@ export async function getBondYields() {
     numValue: diff10y2y,
     unit: '%p',
     status: is10y2yInverted ? 'INVERTED' : 'NORMAL',
-    statusLabel: is10y2yInverted ? '🔴 역전 (경기침체 경보)' : '🟢 정상 (일드커브 정상화)',
+    statusLabel: is10y2yInverted ? '🔴 역전 (경기침체 경보)' : '🟢 비역전 (침체 신호 아님)',
+    note: '※ "비역전"은 장단기 금리 순서가 정상이라는 뜻으로, 금리 절대 수준이 낮다는 의미는 아닙니다.',
     desc: '월가 공식 경기 침체 조기 경보 지표 (10Y - 2Y)',
     diff: diff10y2y >= 0 ? `+${(diff10y2y * 100).toFixed(0)}bp` : `${(diff10y2y * 100).toFixed(0)}bp`
   };
@@ -221,7 +251,8 @@ export async function getBondYields() {
     numValue: diff10y3m,
     unit: '%p',
     status: is10y3mInverted ? 'INVERTED' : 'NORMAL',
-    statusLabel: is10y3mInverted ? '🔴 역전 (연준 침체확률 급등)' : '🟢 정상 (안정 구간)',
+    statusLabel: is10y3mInverted ? '🔴 역전 (연준 침체확률 급등)' : '🟢 비역전 (단기 유동성 원활)',
+    note: '※ 커브 역전 여부만 판정하며, 현재 금리 절대 수준(위 카드 참고)과는 별개 지표입니다.',
     desc: '뉴욕 연준(NY Fed) 공식 경기침체 확률 모델 지표',
     diff: diff10y3m >= 0 ? `+${(diff10y3m * 100).toFixed(0)}bp` : `${(diff10y3m * 100).toFixed(0)}bp`
   };
@@ -237,7 +268,8 @@ export async function getBondYields() {
     unit: 'bp',
     status: creditSpreadNum > 1.0 ? 'HIGH_RISK' : 'STABLE',
     statusLabel: creditSpreadNum > 1.0 ? '⚠️ 크레딧 리스크 확대' : '🟢 기업 자금조달 안정',
-    desc: '회사채(3Y, AA-) - 국고채(3Y) 스프레드 (신용 위험도)'
+    desc: '회사채(3Y, AA-) - 국고채(3Y) 스프레드 (신용 위험도)',
+    isLive: naverRates.isLive
   };
 
   // ④ 한·미 10년물 국채 금리차 (KR 10Y - US 10Y)
@@ -251,7 +283,8 @@ export async function getBondYields() {
     unit: '%p',
     status: krUsDiff < 0 ? 'US_PREMIUM' : 'KR_PREMIUM',
     statusLabel: krUsDiff < 0 ? '🇺🇸 미국 국채금리 우위' : '🇰🇷 한국 국채금리 우위',
-    desc: '원/달러 환율 및 외국인 자금 흐름에 결정적 영향'
+    desc: '원/달러 환율 및 외국인 자금 흐름에 결정적 영향',
+    isLive: naverRates.isLive
   };
 
   // 5. 섹션별 묶음 데이터
@@ -322,6 +355,7 @@ export async function getBondYields() {
       desc: '대한민국 장기 채권 벤치마크',
       badge: '국내 장기물',
       ...naverRates.kr10y,
+      isLive: naverRates.isLive,
       bondPrice: priceKR10Y,
       benchmarkEtf: { ticker: '302190', name: 'KODEX 국고채10년액티브', price: '108,240원', diff: '+0.35%', isUp: true }
     },
@@ -333,6 +367,7 @@ export async function getBondYields() {
       desc: '한국은행 금통위 통화정책 대표 척도',
       badge: '한은 정책',
       ...naverRates.kr3y,
+      isLive: naverRates.isLive,
       bondPrice: priceKR3Y,
       benchmarkEtf: { ticker: '114820', name: 'KODEX 국고채3년', price: '103,150원', diff: '+0.10%', isUp: true }
     },
@@ -344,6 +379,7 @@ export async function getBondYields() {
       desc: '우량 대기업 회사채 조달 금리',
       badge: '크레딧',
       ...naverRates.krCorp3y,
+      isLive: naverRates.isLive,
       bondPrice: priceKRCorp3Y,
       benchmarkEtf: { ticker: '332610', name: 'KBSTAR 종합채권(A-이상)액티브', price: '102,400원', diff: '+0.08%', isUp: true }
     },
@@ -355,6 +391,7 @@ export async function getBondYields() {
       desc: '시중은행 변동금리 대출 산정 기준',
       badge: '단기 기준',
       ...naverRates.cd91,
+      isLive: naverRates.isLive,
       bondPrice: { formattedPrice: '9,927원', diffFromPar: '-0.73%', duration: 0.25, sensitivity10bp: 0.03 }
     },
     {
@@ -365,6 +402,7 @@ export async function getBondYields() {
       desc: '금융기관 간 초단기 무담보 자금금리',
       badge: '초단기',
       ...naverRates.callRate,
+      isLive: naverRates.isLive,
       bondPrice: { formattedPrice: '9,992원', diffFromPar: '-0.08%', duration: 0.01, sensitivity10bp: 0.00 }
     }
   ];
@@ -399,7 +437,9 @@ export async function getBondYields() {
         { term: '10Y', rate: us10y.numValue, price: priceUS10Y.formattedPrice },
         { term: '30Y', rate: us30y.numValue, price: priceUS30Y.formattedPrice }
       ],
-      isInverted: is10y2yInverted
+      isInverted: is10y2yInverted,
+      yieldLevel,
+      yieldLevelLabel
     },
     sections: {
       usBonds,
@@ -407,6 +447,7 @@ export async function getBondYields() {
       macroSpreads,
       currencies
     },
-    data: allData
+    data: allData,
+    krDataIsLive: naverRates.isLive
   };
 }

@@ -66,10 +66,30 @@ export default function BaseRateChart() {
     }
   }, [rawData, period])
 
+  // 시계열 상에서 직전 값 대비 금리가 바뀐 가장 최근 시점을 탐지 (월 단위 데이터 기준)
+  const findLastRateChange = (sorted, field) => {
+    for (let i = sorted.length - 1; i > 0; i--) {
+      if (sorted[i][field] !== sorted[i - 1][field]) {
+        return {
+          date: sorted[i].date,
+          direction: sorted[i][field] > sorted[i - 1][field] ? '인상' : '인하'
+        }
+      }
+    }
+    return null
+  }
+
+  // YYYY-MM-DD -> YYYY.MM 표기로 변환 (원본 데이터가 월 단위이므로 일자는 표기하지 않음)
+  const formatYm = (dateStr) => {
+    const parts = (dateStr || '').split('-')
+    return parts.length >= 2 ? `${parts[0]}.${parts[1]}` : dateStr
+  }
+
   // 현재 최신 요약 데이터 추출
   const summary = useMemo(() => {
     if (!rawData || rawData.length === 0) return null
-    const latest = rawData[rawData.length - 1]
+    const sorted = [...rawData].sort((a, b) => a.date.localeCompare(b.date))
+    const latest = sorted[sorted.length - 1]
     const gapStatus = latest.gap < 0 ? '역전 (미국 우위)' : '정상 (한국 우위)'
     const gapColor = latest.gap < 0 ? '#ef4444' : '#10b981'
     return {
@@ -78,7 +98,9 @@ export default function BaseRateChart() {
       usRate: latest.usRate,
       gap: latest.gap,
       gapStatus,
-      gapColor
+      gapColor,
+      krChange: findLastRateChange(sorted, 'krRate'),
+      usChange: findLastRateChange(sorted, 'usRate')
     }
   }, [rawData])
 
@@ -136,7 +158,7 @@ export default function BaseRateChart() {
             🏛️ 한·미 기준금리 역사적 추이 (1970 ~ 2026)
           </h2>
           <p style={{ fontSize: '.8rem', color: 'var(--t2)', margin: '4px 0 0 0' }}>
-            미국 연방기금금리(FRED) 및 한국은행 기준금리 공시 데이터를 월별 매핑하여 갱신합니다.
+            미국 연방기금금리(FRED 실시간 연동)와 한국은행 기준금리 변동 이력(수동 업데이트)을 월별로 매핑하여 표시합니다.
           </p>
         </div>
 
@@ -176,7 +198,9 @@ export default function BaseRateChart() {
           <div style={{ fontSize: '.76rem', color: 'var(--t2)', fontWeight: 800 }}>🇰🇷 대한민국 기준금리</div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginTop: 8 }}>
             <span style={{ fontSize: '1.9rem', fontWeight: 900, fontFamily: 'Space Mono', color: '#10b981' }}>{summary.krRate.toFixed(2)}%</span>
-            <span style={{ fontSize: '.72rem', color: 'var(--t3)' }}>최근변동: 2026.08.27 인상</span>
+            <span style={{ fontSize: '.72rem', color: 'var(--t3)' }}>
+              {summary.krChange ? `최근변동: ${formatYm(summary.krChange.date)} ${summary.krChange.direction}` : '변동 이력 없음'}
+            </span>
           </div>
         </div>
 
@@ -185,7 +209,9 @@ export default function BaseRateChart() {
           <div style={{ fontSize: '.76rem', color: 'var(--t2)', fontWeight: 800 }}>🇺🇸 미국 기준금리 (중앙값)</div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginTop: 8 }}>
             <span style={{ fontSize: '1.9rem', fontWeight: 900, fontFamily: 'Space Mono', color: '#ef4444' }}>{summary.usRate.toFixed(2)}%</span>
-            <span style={{ fontSize: '.72rem', color: 'var(--t3)' }}>타겟 밴드: 3.50% ~ 3.75%</span>
+            <span style={{ fontSize: '.72rem', color: 'var(--t3)' }}>
+              {summary.usChange ? `최근변동: ${formatYm(summary.usChange.date)} ${summary.usChange.direction}` : '변동 이력 없음'}
+            </span>
           </div>
         </div>
 

@@ -1,18 +1,18 @@
 {
-  "lastSyncAt": "2026-09-07T20:22:25.141Z",
-  "elapsedSec": 38.5,
-  "totalScanned": 679,
-  "totalMatches": 320,
-  "kospiCount": 190,
-  "kosdaqCount": 130,
+  "lastSyncAt": "2026-09-14T23:50:17.025Z",
+  "elapsedSec": 17,
+  "totalScanned": 700,
+  "totalMatches": 378,
+  "kospiCount": 232,
+  "kosdaqCount": 146,
   "stocks": [
     {
       "code": "161580",
       "name": "필옵틱스",
       "market": "코스닥",
-      "price": 33500,
-      "changePct": 29.84,
-      "marketCap": 7853,
+      "price": 31200,
+      "changePct": 0,
+      "marketCap": 7314,
       "bottom1": {
         "date": "2026-07-21",
         "price": 24650
@@ -29,8 +29,8 @@
       "priceDiffPct": 0.4,
       "reboundPct": 25,
       "gapDays": 24,
-      "currentPrice": 33500,
-      "currentDate": "2026-09-07",
+      "currentPrice": 31200,
+      "currentDate": "2026-09-15",
       "status": "🚀 넥라인 돌파",
       "score": 82
     },
@@ -38,9 +38,9 @@
       "code": "023160",
       "name": "태광",
       "market": "코스닥",
-      "price": 26500,
-      "changePct": 1.34,
-      "marketCap": 6855,
+      "price": 28350,
+      "changePct": 0,
+      "marketCap": 7333,
       "bottom1": {
         "date": "2026-07-21",
         "price": 20200
@@ -57,8 +57,8 @@
       "priceDiffPct": 0.7,
       "reboundPct": 25,
       "gapDays": 22,
-      "currentPrice": 26500,
-      "currentDate": "2026-09-07",
+      "currentPrice": 28350,
+      "currentDate": "2026-09-15",
       "status": "🚀 넥라인 돌파",
       "score": 80
     },
@@ -66,9 +66,9 @@
       "code": "041190",
       "name": "우리기술투자",
       "market": "코스닥",
-      "price": 6030,
-      "changePct": 3.05,
-      "marketCap": 5065,
+      "price": 5580,
+      "changePct": 0,
+      "marketCap": 4453,
       "bottom1": {
         "date": "2026-06-26",
         "price": 4415
@@ -85,8 +85,8 @@
       "priceDiffPct": 0.6,
       "reboundPct": 19.3,
       "gapDays": 36,
-      "currentPrice": 6030,
-      "currentDate": "2026-09-07",
+      "currentPrice": 5580,
+      "currentDate": "2026-09-15",
       "status": "🚀 넥라인 돌파",
       "score": 80
     },
@@ -94,9 +94,9 @@
       "code": "294570",
       "name": "쿠콘",
       "market": "코스닥",
-      "price": 29950,
-      "changePct": 1.96,
-      "marketCap": 3022,
+      "price": 29400,
+      "changePct": 0,
+      "marketCap": 2967,
       "bottom1": {
         "date": "2026-06-08",
         "price": 20000
@@ -113,1446 +113,18 @@
       "priceDiffPct": 0,
       "reboundPct": 15.5,
       "gapDays": 50,
-      "currentPrice": 29950,
-      "currentDate": "2026-09-07",
+      "currentPrice": 29400,
+      "currentDate": "2026-09-15",
       "status": "🚀 넥라인 돌파",
       "score": 80
-    },
-    {
-      "code": "445680",
-      "name": "큐리옥스바이오시스템즈",
-      "market": "코스닥",
-      "price": 50700,
-      "changePct": 6.4,
-      "marketCap": 8726,
-      "bottom1": {
-        "date": "2026-07-09",
-        "price": 38100
-      },
-      "bottom2": {
-        "date": "2026-08-13",
-        "price": 38450
-      },
-      "neckline": {
-        "date": "2026-07-13",
-        "price": 47900
-      },
-      "declinePct": 61.9,
-      "priceDiffPct": 0.9,
-      "reboundPct": 25.1,
-      "gapDays": 24,
-      "currentPrice": 50700,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 78
-    },
-    {
-      "code": "096770",
-      "name": "SK이노베이션",
-      "market": "코스피",
-      "price": 137900,
-      "changePct": 0.29,
-      "marketCap": 233124,
-      "bottom1": {
-        "date": "2026-07-31",
-        "price": 104000
-      },
-      "bottom2": {
-        "date": "2026-08-26",
-        "price": 103700
-      },
-      "neckline": {
-        "date": "2026-08-24",
-        "price": 134500
-      },
-      "declinePct": 23.4,
-      "priceDiffPct": 0.3,
-      "reboundPct": 29.5,
-      "gapDays": 17,
-      "currentPrice": 137900,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 77
-    },
-    {
-      "code": "298020",
-      "name": "효성티앤씨",
-      "market": "코스피",
-      "price": 348000,
-      "changePct": 0.29,
-      "marketCap": 15060,
-      "bottom1": {
-        "date": "2026-06-08",
-        "price": 305000
-      },
-      "bottom2": {
-        "date": "2026-08-21",
-        "price": 305000
-      },
-      "neckline": {
-        "date": "2026-06-15",
-        "price": 370000
-      },
-      "declinePct": 45.2,
-      "priceDiffPct": 0,
-      "reboundPct": 21.3,
-      "gapDays": 52,
-      "currentPrice": 348000,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 77
-    },
-    {
-      "code": "272290",
-      "name": "이녹스첨단소재",
-      "market": "코스닥",
-      "price": 20600,
-      "changePct": 0.73,
-      "marketCap": 4107,
-      "bottom1": {
-        "date": "2026-07-21",
-        "price": 19540
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 19550
-      },
-      "neckline": {
-        "date": "2026-08-13",
-        "price": 24050
-      },
-      "declinePct": 46.2,
-      "priceDiffPct": 0.1,
-      "reboundPct": 23,
-      "gapDays": 24,
-      "currentPrice": 20600,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 77
-    },
-    {
-      "code": "114810",
-      "name": "한솔아이원스",
-      "market": "코스닥",
-      "price": 13880,
-      "changePct": 3.97,
-      "marketCap": 3906,
-      "bottom1": {
-        "date": "2026-06-08",
-        "price": 11400
-      },
-      "bottom2": {
-        "date": "2026-08-19",
-        "price": 11400
-      },
-      "neckline": {
-        "date": "2026-06-12",
-        "price": 16900
-      },
-      "declinePct": 42.7,
-      "priceDiffPct": 0,
-      "reboundPct": 48.2,
-      "gapDays": 50,
-      "currentPrice": 13880,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 77
-    },
-    {
-      "code": "047050",
-      "name": "포스코인터내셔널",
-      "market": "코스피",
-      "price": 54700,
-      "changePct": 0,
-      "marketCap": 96230,
-      "bottom1": {
-        "date": "2026-07-20",
-        "price": 49100
-      },
-      "bottom2": {
-        "date": "2026-08-19",
-        "price": 49100
-      },
-      "neckline": {
-        "date": "2026-08-07",
-        "price": 58200
-      },
-      "declinePct": 31.2,
-      "priceDiffPct": 0,
-      "reboundPct": 18.5,
-      "gapDays": 21,
-      "currentPrice": 54700,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 76
-    },
-    {
-      "code": "100840",
-      "name": "SNT에너지",
-      "market": "코스피",
-      "price": 37600,
-      "changePct": 14.98,
-      "marketCap": 7776,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 25100
-      },
-      "bottom2": {
-        "date": "2026-08-21",
-        "price": 25450
-      },
-      "neckline": {
-        "date": "2026-07-01",
-        "price": 30550
-      },
-      "declinePct": 62.8,
-      "priceDiffPct": 1.4,
-      "reboundPct": 20.9,
-      "gapDays": 38,
-      "currentPrice": 37600,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 76
-    },
-    {
-      "code": "137310",
-      "name": "에스디바이오센서",
-      "market": "코스피",
-      "price": 6170,
-      "changePct": 0.16,
-      "marketCap": 7450,
-      "bottom1": {
-        "date": "2026-07-23",
-        "price": 5800
-      },
-      "bottom2": {
-        "date": "2026-08-21",
-        "price": 5810
-      },
-      "neckline": {
-        "date": "2026-08-11",
-        "price": 6940
-      },
-      "declinePct": 32,
-      "priceDiffPct": 0.2,
-      "reboundPct": 19.6,
-      "gapDays": 20,
-      "currentPrice": 6170,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 76
-    },
-    {
-      "code": "491000",
-      "name": "리브스메드",
-      "market": "코스닥",
-      "price": 33750,
-      "changePct": 2.17,
-      "marketCap": 8524,
-      "bottom1": {
-        "date": "2026-07-03",
-        "price": 31550
-      },
-      "bottom2": {
-        "date": "2026-08-31",
-        "price": 31500
-      },
-      "neckline": {
-        "date": "2026-08-10",
-        "price": 51500
-      },
-      "declinePct": 60,
-      "priceDiffPct": 0.2,
-      "reboundPct": 63.4,
-      "gapDays": 39,
-      "currentPrice": 33750,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 76
-    },
-    {
-      "code": "083450",
-      "name": "GST",
-      "market": "코스닥",
-      "price": 43750,
-      "changePct": 1.74,
-      "marketCap": 8063,
-      "bottom1": {
-        "date": "2026-07-08",
-        "price": 41050
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 41100
-      },
-      "neckline": {
-        "date": "2026-08-11",
-        "price": 53400
-      },
-      "declinePct": 42,
-      "priceDiffPct": 0.1,
-      "reboundPct": 30,
-      "gapDays": 32,
-      "currentPrice": 43750,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 76
-    },
-    {
-      "code": "101730",
-      "name": "위메이드맥스",
-      "market": "코스닥",
-      "price": 4055,
-      "changePct": 0.98,
-      "marketCap": 3398,
-      "bottom1": {
-        "date": "2026-06-11",
-        "price": 3180
-      },
-      "bottom2": {
-        "date": "2026-08-07",
-        "price": 3185
-      },
-      "neckline": {
-        "date": "2026-07-10",
-        "price": 5690
-      },
-      "declinePct": 57.8,
-      "priceDiffPct": 0.2,
-      "reboundPct": 78.8,
-      "gapDays": 40,
-      "currentPrice": 4055,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 76
-    },
-    {
-      "code": "377300",
-      "name": "카카오페이",
-      "market": "코스피",
-      "price": 46750,
-      "changePct": 1.16,
-      "marketCap": 63240,
-      "bottom1": {
-        "date": "2026-06-11",
-        "price": 40650
-      },
-      "bottom2": {
-        "date": "2026-08-19",
-        "price": 40650
-      },
-      "neckline": {
-        "date": "2026-06-17",
-        "price": 48100
-      },
-      "declinePct": 36.7,
-      "priceDiffPct": 0,
-      "reboundPct": 18.3,
-      "gapDays": 47,
-      "currentPrice": 46750,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 75
-    },
-    {
-      "code": "001040",
-      "name": "CJ",
-      "market": "코스피",
-      "price": 132700,
-      "changePct": 0.99,
-      "marketCap": 38718,
-      "bottom1": {
-        "date": "2026-07-29",
-        "price": 116900
-      },
-      "bottom2": {
-        "date": "2026-08-21",
-        "price": 117300
-      },
-      "neckline": {
-        "date": "2026-08-06",
-        "price": 147800
-      },
-      "declinePct": 39.3,
-      "priceDiffPct": 0.3,
-      "reboundPct": 26.2,
-      "gapDays": 16,
-      "currentPrice": 132700,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 75
-    },
-    {
-      "code": "100090",
-      "name": "SK오션플랜트",
-      "market": "코스피",
-      "price": 13190,
-      "changePct": 4.83,
-      "marketCap": 8241,
-      "bottom1": {
-        "date": "2026-07-14",
-        "price": 12500
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 12550
-      },
-      "neckline": {
-        "date": "2026-07-24",
-        "price": 20850
-      },
-      "declinePct": 42.7,
-      "priceDiffPct": 0.4,
-      "reboundPct": 66.5,
-      "gapDays": 28,
-      "currentPrice": 13190,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 75
-    },
-    {
-      "code": "240810",
-      "name": "원익IPS",
-      "market": "코스닥",
-      "price": 117600,
-      "changePct": 2.44,
-      "marketCap": 57723,
-      "bottom1": {
-        "date": "2026-07-09",
-        "price": 100500
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 100900
-      },
-      "neckline": {
-        "date": "2026-07-16",
-        "price": 148100
-      },
-      "declinePct": 46.5,
-      "priceDiffPct": 0.4,
-      "reboundPct": 47.1,
-      "gapDays": 31,
-      "currentPrice": 117600,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 75
-    },
-    {
-      "code": "241710",
-      "name": "코스메카코리아",
-      "market": "코스닥",
-      "price": 129100,
-      "changePct": 4.01,
-      "marketCap": 13788,
-      "bottom1": {
-        "date": "2026-07-21",
-        "price": 73500
-      },
-      "bottom2": {
-        "date": "2026-07-31",
-        "price": 73100
-      },
-      "neckline": {
-        "date": "2026-07-29",
-        "price": 90000
-      },
-      "declinePct": 22.6,
-      "priceDiffPct": 0.5,
-      "reboundPct": 22.8,
-      "gapDays": 8,
-      "currentPrice": 129100,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 75
-    },
-    {
-      "code": "027360",
-      "name": "아주IB투자",
-      "market": "코스닥",
-      "price": 3150,
-      "changePct": 1.1,
-      "marketCap": 3816,
-      "bottom1": {
-        "date": "2026-07-21",
-        "price": 3040
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 3050
-      },
-      "neckline": {
-        "date": "2026-08-14",
-        "price": 4710
-      },
-      "declinePct": 82.9,
-      "priceDiffPct": 0.3,
-      "reboundPct": 54.7,
-      "gapDays": 24,
-      "currentPrice": 3150,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 75
-    },
-    {
-      "code": "448900",
-      "name": "한국피아이엠",
-      "market": "코스닥",
-      "price": 49550,
-      "changePct": 1.29,
-      "marketCap": 3010,
-      "bottom1": {
-        "date": "2026-07-09",
-        "price": 43900
-      },
-      "bottom2": {
-        "date": "2026-07-30",
-        "price": 43750
-      },
-      "neckline": {
-        "date": "2026-07-29",
-        "price": 57400
-      },
-      "declinePct": 67,
-      "priceDiffPct": 0.3,
-      "reboundPct": 31,
-      "gapDays": 14,
-      "currentPrice": 49550,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 75
-    },
-    {
-      "code": "018260",
-      "name": "삼성에스디에스",
-      "market": "코스피",
-      "price": 242500,
-      "changePct": 1.89,
-      "marketCap": 187641,
-      "bottom1": {
-        "date": "2026-06-11",
-        "price": 211000
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 211500
-      },
-      "neckline": {
-        "date": "2026-06-15",
-        "price": 250000
-      },
-      "declinePct": 45.7,
-      "priceDiffPct": 0.2,
-      "reboundPct": 18.3,
-      "gapDays": 51,
-      "currentPrice": 242500,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 74
-    },
-    {
-      "code": "305720",
-      "name": "KODEX 2차전지산업",
-      "market": "코스피",
-      "price": 14835,
-      "changePct": 0.17,
-      "marketCap": 17312,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 13595
-      },
-      "bottom2": {
-        "date": "2026-08-21",
-        "price": 13625
-      },
-      "neckline": {
-        "date": "2026-06-29",
-        "price": 16050
-      },
-      "declinePct": 40.5,
-      "priceDiffPct": 0.2,
-      "reboundPct": 17.9,
-      "gapDays": 38,
-      "currentPrice": 14835,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 74
-    },
-    {
-      "code": "007390",
-      "name": "네이처셀",
-      "market": "코스닥",
-      "price": 24700,
-      "changePct": 3.13,
-      "marketCap": 15915,
-      "bottom1": {
-        "date": "2026-07-03",
-        "price": 20450
-      },
-      "bottom2": {
-        "date": "2026-08-03",
-        "price": 20550
-      },
-      "neckline": {
-        "date": "2026-07-09",
-        "price": 28250
-      },
-      "declinePct": 44.7,
-      "priceDiffPct": 0.5,
-      "reboundPct": 37.8,
-      "gapDays": 20,
-      "currentPrice": 24700,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 74
-    },
-    {
-      "code": "032500",
-      "name": "케이엠더블유",
-      "market": "코스닥",
-      "price": 14730,
-      "changePct": 0.55,
-      "marketCap": 6215,
-      "bottom1": {
-        "date": "2026-07-21",
-        "price": 13450
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 13510
-      },
-      "neckline": {
-        "date": "2026-08-05",
-        "price": 18360
-      },
-      "declinePct": 66.4,
-      "priceDiffPct": 0.4,
-      "reboundPct": 36.2,
-      "gapDays": 24,
-      "currentPrice": 14730,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 74
-    },
-    {
-      "code": "078130",
-      "name": "국일제지",
-      "market": "코스닥",
-      "price": 3480,
-      "changePct": 1.42,
-      "marketCap": 3923,
-      "bottom1": {
-        "date": "2026-06-24",
-        "price": 3400
-      },
-      "bottom2": {
-        "date": "2026-08-31",
-        "price": 3400
-      },
-      "neckline": {
-        "date": "2026-07-20",
-        "price": 4495
-      },
-      "declinePct": 25.7,
-      "priceDiffPct": 0,
-      "reboundPct": 32.2,
-      "gapDays": 46,
-      "currentPrice": 3480,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 74
-    },
-    {
-      "code": "018000",
-      "name": "유니슨",
-      "market": "코스닥",
-      "price": 1241,
-      "changePct": 0.08,
-      "marketCap": 3220,
-      "bottom1": {
-        "date": "2026-06-08",
-        "price": 868
-      },
-      "bottom2": {
-        "date": "2026-08-13",
-        "price": 863
-      },
-      "neckline": {
-        "date": "2026-07-01",
-        "price": 1250
-      },
-      "declinePct": 45.1,
-      "priceDiffPct": 0.6,
-      "reboundPct": 44.4,
-      "gapDays": 47,
-      "currentPrice": 1241,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 74
-    },
-    {
-      "code": "042700",
-      "name": "한미반도체",
-      "market": "코스피",
-      "price": 240500,
-      "changePct": 4.57,
-      "marketCap": 229226,
-      "bottom1": {
-        "date": "2026-07-14",
-        "price": 190600
-      },
-      "bottom2": {
-        "date": "2026-08-07",
-        "price": 189300
-      },
-      "neckline": {
-        "date": "2026-07-16",
-        "price": 275000
-      },
-      "declinePct": 53.1,
-      "priceDiffPct": 0.7,
-      "reboundPct": 44.8,
-      "gapDays": 17,
-      "currentPrice": 240500,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 73
-    },
-    {
-      "code": "035720",
-      "name": "카카오",
-      "market": "코스피",
-      "price": 36550,
-      "changePct": 0.97,
-      "marketCap": 161916,
-      "bottom1": {
-        "date": "2026-07-08",
-        "price": 33400
-      },
-      "bottom2": {
-        "date": "2026-08-21",
-        "price": 33600
-      },
-      "neckline": {
-        "date": "2026-08-12",
-        "price": 41450
-      },
-      "declinePct": 31.1,
-      "priceDiffPct": 0.6,
-      "reboundPct": 23.7,
-      "gapDays": 30,
-      "currentPrice": 36550,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 73
-    },
-    {
-      "code": "047040",
-      "name": "대우건설",
-      "market": "코스피",
-      "price": 18410,
-      "changePct": 9.26,
-      "marketCap": 75648,
-      "bottom1": {
-        "date": "2026-07-09",
-        "price": 15000
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 15100
-      },
-      "neckline": {
-        "date": "2026-08-14",
-        "price": 19130
-      },
-      "declinePct": 54.8,
-      "priceDiffPct": 0.7,
-      "reboundPct": 27.1,
-      "gapDays": 31,
-      "currentPrice": 18410,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 73
-    },
-    {
-      "code": "036570",
-      "name": "NC",
-      "market": "코스피",
-      "price": 223000,
-      "changePct": 0.45,
-      "marketCap": 48043,
-      "bottom1": {
-        "date": "2026-07-29",
-        "price": 216500
-      },
-      "bottom2": {
-        "date": "2026-08-19",
-        "price": 215000
-      },
-      "neckline": {
-        "date": "2026-08-11",
-        "price": 268000
-      },
-      "declinePct": 37,
-      "priceDiffPct": 0.7,
-      "reboundPct": 24.2,
-      "gapDays": 14,
-      "currentPrice": 223000,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 73
-    },
-    {
-      "code": "192820",
-      "name": "코스맥스",
-      "market": "코스피",
-      "price": 274000,
-      "changePct": 0.54,
-      "marketCap": 31098,
-      "bottom1": {
-        "date": "2026-05-20",
-        "price": 169700
-      },
-      "bottom2": {
-        "date": "2026-07-31",
-        "price": 171200
-      },
-      "neckline": {
-        "date": "2026-07-28",
-        "price": 197500
-      },
-      "declinePct": 27.6,
-      "priceDiffPct": 0.9,
-      "reboundPct": 15.9,
-      "gapDays": 49,
-      "currentPrice": 274000,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 73
-    },
-    {
-      "code": "009420",
-      "name": "한올바이오파마",
-      "market": "코스피",
-      "price": 55500,
-      "changePct": 1.46,
-      "marketCap": 28994,
-      "bottom1": {
-        "date": "2026-05-20",
-        "price": 38400
-      },
-      "bottom2": {
-        "date": "2026-07-30",
-        "price": 38150
-      },
-      "neckline": {
-        "date": "2026-05-27",
-        "price": 73000
-      },
-      "declinePct": 42.3,
-      "priceDiffPct": 0.7,
-      "reboundPct": 90.7,
-      "gapDays": 48,
-      "currentPrice": 55500,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 73
-    },
-    {
-      "code": "003540",
-      "name": "대신증권",
-      "market": "코스피",
-      "price": 26650,
-      "changePct": 0.57,
-      "marketCap": 12703,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 25400
-      },
-      "bottom2": {
-        "date": "2026-08-10",
-        "price": 25550
-      },
-      "neckline": {
-        "date": "2026-07-06",
-        "price": 30850
-      },
-      "declinePct": 40.7,
-      "priceDiffPct": 0.6,
-      "reboundPct": 21.1,
-      "gapDays": 30,
-      "currentPrice": 26650,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 73
-    },
-    {
-      "code": "006120",
-      "name": "SK디스커버리",
-      "market": "코스피",
-      "price": 56400,
-      "changePct": 6.62,
-      "marketCap": 9821,
-      "bottom1": {
-        "date": "2026-06-08",
-        "price": 42750
-      },
-      "bottom2": {
-        "date": "2026-07-30",
-        "price": 43050
-      },
-      "neckline": {
-        "date": "2026-07-15",
-        "price": 57100
-      },
-      "declinePct": 37.3,
-      "priceDiffPct": 0.7,
-      "reboundPct": 33.1,
-      "gapDays": 37,
-      "currentPrice": 56400,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 73
-    },
-    {
-      "code": "080220",
-      "name": "제주반도체",
-      "market": "코스닥",
-      "price": 73800,
-      "changePct": 2.79,
-      "marketCap": 25419,
-      "bottom1": {
-        "date": "2026-07-14",
-        "price": 69600
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 70100
-      },
-      "neckline": {
-        "date": "2026-08-11",
-        "price": 94800
-      },
-      "declinePct": 49.6,
-      "priceDiffPct": 0.7,
-      "reboundPct": 35.7,
-      "gapDays": 28,
-      "currentPrice": 73800,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 73
-    },
-    {
-      "code": "166090",
-      "name": "하나머티리얼즈",
-      "market": "코스닥",
-      "price": 52400,
-      "changePct": 5.01,
-      "marketCap": 10364,
-      "bottom1": {
-        "date": "2026-07-08",
-        "price": 47800
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 48100
-      },
-      "neckline": {
-        "date": "2026-08-12",
-        "price": 66000
-      },
-      "declinePct": 45.6,
-      "priceDiffPct": 0.6,
-      "reboundPct": 37.6,
-      "gapDays": 32,
-      "currentPrice": 52400,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 73
-    },
-    {
-      "code": "085660",
-      "name": "차바이오텍",
-      "market": "코스닥",
-      "price": 8090,
-      "changePct": 0,
-      "marketCap": 7522,
-      "bottom1": {
-        "date": "2026-07-29",
-        "price": 7600
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 7650
-      },
-      "neckline": {
-        "date": "2026-08-11",
-        "price": 10030
-      },
-      "declinePct": 44.9,
-      "priceDiffPct": 0.7,
-      "reboundPct": 31.5,
-      "gapDays": 18,
-      "currentPrice": 8090,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 73
-    },
-    {
-      "code": "086900",
-      "name": "메디톡스",
-      "market": "코스닥",
-      "price": 69400,
-      "changePct": 0.29,
-      "marketCap": 5065,
-      "bottom1": {
-        "date": "2026-07-30",
-        "price": 66000
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 65600
-      },
-      "neckline": {
-        "date": "2026-08-10",
-        "price": 81700
-      },
-      "declinePct": 29.5,
-      "priceDiffPct": 0.6,
-      "reboundPct": 24.2,
-      "gapDays": 17,
-      "currentPrice": 69400,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 73
-    },
-    {
-      "code": "099190",
-      "name": "아이센스",
-      "market": "코스닥",
-      "price": 16480,
-      "changePct": 0.06,
-      "marketCap": 4739,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 14410
-      },
-      "bottom2": {
-        "date": "2026-07-30",
-        "price": 14500
-      },
-      "neckline": {
-        "date": "2026-07-27",
-        "price": 18770
-      },
-      "declinePct": 36.8,
-      "priceDiffPct": 0.6,
-      "reboundPct": 29.9,
-      "gapDays": 23,
-      "currentPrice": 16480,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 73
-    },
-    {
-      "code": "016360",
-      "name": "삼성증권",
-      "market": "코스피",
-      "price": 87700,
-      "changePct": 1.04,
-      "marketCap": 78316,
-      "bottom1": {
-        "date": "2026-07-29",
-        "price": 82700
-      },
-      "bottom2": {
-        "date": "2026-08-19",
-        "price": 83400
-      },
-      "neckline": {
-        "date": "2026-08-05",
-        "price": 102000
-      },
-      "declinePct": 36.5,
-      "priceDiffPct": 0.8,
-      "reboundPct": 22.8,
-      "gapDays": 14,
-      "currentPrice": 87700,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 72
-    },
-    {
-      "code": "062040",
-      "name": "산일전기",
-      "market": "코스피",
-      "price": 198900,
-      "changePct": 3.76,
-      "marketCap": 60949,
-      "bottom1": {
-        "date": "2026-07-21",
-        "price": 152900
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 155900
-      },
-      "neckline": {
-        "date": "2026-08-13",
-        "price": 197900
-      },
-      "declinePct": 48.2,
-      "priceDiffPct": 2,
-      "reboundPct": 28.2,
-      "gapDays": 24,
-      "currentPrice": 198900,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 72
-    },
-    {
-      "code": "001120",
-      "name": "LX인터내셔널",
-      "market": "코스피",
-      "price": 39900,
-      "changePct": 0.99,
-      "marketCap": 15465,
-      "bottom1": {
-        "date": "2026-06-23",
-        "price": 33050
-      },
-      "bottom2": {
-        "date": "2026-08-03",
-        "price": 33300
-      },
-      "neckline": {
-        "date": "2026-07-24",
-        "price": 40550
-      },
-      "declinePct": 42.7,
-      "priceDiffPct": 0.8,
-      "reboundPct": 22.2,
-      "gapDays": 28,
-      "currentPrice": 39900,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 72
-    },
-    {
-      "code": "001430",
-      "name": "세아베스틸지주",
-      "market": "코스피",
-      "price": 40050,
-      "changePct": 5.43,
-      "marketCap": 14363,
-      "bottom1": {
-        "date": "2026-07-09",
-        "price": 29400
-      },
-      "bottom2": {
-        "date": "2026-07-30",
-        "price": 28800
-      },
-      "neckline": {
-        "date": "2026-07-27",
-        "price": 37300
-      },
-      "declinePct": 65,
-      "priceDiffPct": 2,
-      "reboundPct": 28.2,
-      "gapDays": 14,
-      "currentPrice": 40050,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 72
-    },
-    {
-      "code": "003090",
-      "name": "대웅",
-      "market": "코스피",
-      "price": 16930,
-      "changePct": 0.42,
-      "marketCap": 9843,
-      "bottom1": {
-        "date": "2026-07-21",
-        "price": 15820
-      },
-      "bottom2": {
-        "date": "2026-08-21",
-        "price": 15870
-      },
-      "neckline": {
-        "date": "2026-08-11",
-        "price": 18970
-      },
-      "declinePct": 25.9,
-      "priceDiffPct": 0.3,
-      "reboundPct": 19.7,
-      "gapDays": 22,
-      "currentPrice": 16930,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 72
-    },
-    {
-      "code": "060370",
-      "name": "LS마린솔루션",
-      "market": "코스닥",
-      "price": 31250,
-      "changePct": 1.13,
-      "marketCap": 16325,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 22450
-      },
-      "bottom2": {
-        "date": "2026-07-30",
-        "price": 22650
-      },
-      "neckline": {
-        "date": "2026-07-27",
-        "price": 31500
-      },
-      "declinePct": 56.5,
-      "priceDiffPct": 0.9,
-      "reboundPct": 39.7,
-      "gapDays": 23,
-      "currentPrice": 31250,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 72
-    },
-    {
-      "code": "101490",
-      "name": "에스앤에스텍",
-      "market": "코스닥",
-      "price": 41650,
-      "changePct": 4,
-      "marketCap": 8886,
-      "bottom1": {
-        "date": "2026-07-21",
-        "price": 38300
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 38600
-      },
-      "neckline": {
-        "date": "2026-08-18",
-        "price": 47100
-      },
-      "declinePct": 54.4,
-      "priceDiffPct": 0.8,
-      "reboundPct": 22.5,
-      "gapDays": 24,
-      "currentPrice": 41650,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 72
-    },
-    {
-      "code": "056080",
-      "name": "유진로봇",
-      "market": "코스닥",
-      "price": 12210,
-      "changePct": 2.69,
-      "marketCap": 4669,
-      "bottom1": {
-        "date": "2026-07-21",
-        "price": 11000
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 11100
-      },
-      "neckline": {
-        "date": "2026-08-14",
-        "price": 15680
-      },
-      "declinePct": 56.9,
-      "priceDiffPct": 0.9,
-      "reboundPct": 41.9,
-      "gapDays": 24,
-      "currentPrice": 12210,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 72
-    },
-    {
-      "code": "084110",
-      "name": "휴온스글로벌",
-      "market": "코스닥",
-      "price": 23600,
-      "changePct": 0.84,
-      "marketCap": 2988,
-      "bottom1": {
-        "date": "2026-06-29",
-        "price": 22150
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 21950
-      },
-      "neckline": {
-        "date": "2026-07-16",
-        "price": 29200
-      },
-      "declinePct": 68.2,
-      "priceDiffPct": 0.9,
-      "reboundPct": 32.4,
-      "gapDays": 39,
-      "currentPrice": 23600,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 72
-    },
-    {
-      "code": "267270",
-      "name": "HD건설기계",
-      "market": "코스피",
-      "price": 140000,
-      "changePct": 0,
-      "marketCap": 67091,
-      "bottom1": {
-        "date": "2026-07-21",
-        "price": 115700
-      },
-      "bottom2": {
-        "date": "2026-08-21",
-        "price": 114500
-      },
-      "neckline": {
-        "date": "2026-08-11",
-        "price": 149100
-      },
-      "declinePct": 32.8,
-      "priceDiffPct": 1,
-      "reboundPct": 29.5,
-      "gapDays": 22,
-      "currentPrice": 140000,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 71
-    },
-    {
-      "code": "322000",
-      "name": "HD현대에너지솔루션",
-      "market": "코스피",
-      "price": 137500,
-      "changePct": 1.01,
-      "marketCap": 15400,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 114000
-      },
-      "bottom2": {
-        "date": "2026-08-11",
-        "price": 115100
-      },
-      "neckline": {
-        "date": "2026-07-24",
-        "price": 212500
-      },
-      "declinePct": 55.5,
-      "priceDiffPct": 1,
-      "reboundPct": 85.5,
-      "gapDays": 31,
-      "currentPrice": 137500,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 71
-    },
-    {
-      "code": "144600",
-      "name": "KODEX 은선물(H)",
-      "market": "코스피",
-      "price": 10660,
-      "changePct": 1.39,
-      "marketCap": 7835,
-      "bottom1": {
-        "date": "2026-06-11",
-        "price": 10170
-      },
-      "bottom2": {
-        "date": "2026-08-19",
-        "price": 10180
-      },
-      "neckline": {
-        "date": "2026-06-15",
-        "price": 11595
-      },
-      "declinePct": 30.4,
-      "priceDiffPct": 0.1,
-      "reboundPct": 14,
-      "gapDays": 47,
-      "currentPrice": 10660,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 71
-    },
-    {
-      "code": "064960",
-      "name": "SNT모티브",
-      "market": "코스피",
-      "price": 26800,
-      "changePct": 2.1,
-      "marketCap": 7113,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 25200
-      },
-      "bottom2": {
-        "date": "2026-08-28",
-        "price": 25150
-      },
-      "neckline": {
-        "date": "2026-08-14",
-        "price": 29000
-      },
-      "declinePct": 33.1,
-      "priceDiffPct": 0.2,
-      "reboundPct": 15.2,
-      "gapDays": 43,
-      "currentPrice": 26800,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 71
-    },
-    {
-      "code": "456160",
-      "name": "지투지바이오",
-      "market": "코스닥",
-      "price": 38300,
-      "changePct": 0.92,
-      "marketCap": 6369,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 34900
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 35250
-      },
-      "neckline": {
-        "date": "2026-07-02",
-        "price": 45000
-      },
-      "declinePct": 60.9,
-      "priceDiffPct": 1,
-      "reboundPct": 28.3,
-      "gapDays": 40,
-      "currentPrice": 38300,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 71
     },
     {
       "code": "080580",
       "name": "오킨스전자",
       "market": "코스닥",
-      "price": 20150,
-      "changePct": 4.19,
-      "marketCap": 4250,
+      "price": 21650,
+      "changePct": 0,
+      "marketCap": 4566,
       "bottom1": {
         "date": "2026-06-08",
         "price": 15230
@@ -1569,298 +141,186 @@
       "priceDiffPct": 1.1,
       "reboundPct": 33.9,
       "gapDays": 54,
-      "currentPrice": 20150,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 71
+      "currentPrice": 21650,
+      "currentDate": "2026-09-15",
+      "status": "🚀 넥라인 돌파",
+      "score": 78
     },
     {
-      "code": "036620",
-      "name": "감성코퍼레이션",
-      "market": "코스닥",
-      "price": 3920,
-      "changePct": 4.81,
-      "marketCap": 3523,
+      "code": "096770",
+      "name": "SK이노베이션",
+      "market": "코스피",
+      "price": 136700,
+      "changePct": 0,
+      "marketCap": 231095,
       "bottom1": {
-        "date": "2026-07-20",
-        "price": 3740
+        "date": "2026-07-31",
+        "price": 104000
+      },
+      "bottom2": {
+        "date": "2026-08-26",
+        "price": 103700
+      },
+      "neckline": {
+        "date": "2026-08-24",
+        "price": 134500
+      },
+      "declinePct": 23.4,
+      "priceDiffPct": 0.3,
+      "reboundPct": 29.5,
+      "gapDays": 17,
+      "currentPrice": 136700,
+      "currentDate": "2026-09-15",
+      "status": "🚀 넥라인 돌파",
+      "score": 77
+    },
+    {
+      "code": "298020",
+      "name": "효성티앤씨",
+      "market": "코스피",
+      "price": 334500,
+      "changePct": 0,
+      "marketCap": 14476,
+      "bottom1": {
+        "date": "2026-06-08",
+        "price": 305000
+      },
+      "bottom2": {
+        "date": "2026-08-21",
+        "price": 305000
+      },
+      "neckline": {
+        "date": "2026-06-15",
+        "price": 370000
+      },
+      "declinePct": 45.2,
+      "priceDiffPct": 0,
+      "reboundPct": 21.3,
+      "gapDays": 52,
+      "currentPrice": 334500,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 77
+    },
+    {
+      "code": "272290",
+      "name": "이녹스첨단소재",
+      "market": "코스닥",
+      "price": 20150,
+      "changePct": 0,
+      "marketCap": 4017,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 19540
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 19550
+      },
+      "neckline": {
+        "date": "2026-08-13",
+        "price": 24050
+      },
+      "declinePct": 46.2,
+      "priceDiffPct": 0.1,
+      "reboundPct": 23,
+      "gapDays": 24,
+      "currentPrice": 20150,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 77
+    },
+    {
+      "code": "114810",
+      "name": "한솔아이원스",
+      "market": "코스닥",
+      "price": 12240,
+      "changePct": 0,
+      "marketCap": 3445,
+      "bottom1": {
+        "date": "2026-06-08",
+        "price": 11400
       },
       "bottom2": {
         "date": "2026-08-19",
-        "price": 3700
+        "price": 11400
       },
       "neckline": {
-        "date": "2026-08-11",
-        "price": 4760
+        "date": "2026-06-12",
+        "price": 16900
       },
-      "declinePct": 31.6,
-      "priceDiffPct": 1.1,
-      "reboundPct": 28,
-      "gapDays": 21,
-      "currentPrice": 3920,
-      "currentDate": "2026-09-07",
+      "declinePct": 42.7,
+      "priceDiffPct": 0,
+      "reboundPct": 48.2,
+      "gapDays": 50,
+      "currentPrice": 12240,
+      "currentDate": "2026-09-15",
       "status": "⚡ 우측바닥 반등중",
-      "score": 71
+      "score": 77
     },
     {
-      "code": "069540",
-      "name": "빛과전자",
-      "market": "코스닥",
-      "price": 2800,
-      "changePct": 3.13,
-      "marketCap": 3155,
+      "code": "047050",
+      "name": "포스코인터내셔널",
+      "market": "코스피",
+      "price": 56600,
+      "changePct": 0,
+      "marketCap": 99572,
       "bottom1": {
-        "date": "2026-07-09",
-        "price": 1643
+        "date": "2026-07-20",
+        "price": 49100
       },
       "bottom2": {
-        "date": "2026-07-30",
-        "price": 1660
+        "date": "2026-08-19",
+        "price": 49100
       },
       "neckline": {
-        "date": "2026-07-15",
-        "price": 3150
-      },
-      "declinePct": 79.1,
-      "priceDiffPct": 1,
-      "reboundPct": 90.7,
-      "gapDays": 14,
-      "currentPrice": 2800,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 71
-    },
-    {
-      "code": "078930",
-      "name": "GS",
-      "market": "코스피",
-      "price": 125600,
-      "changePct": 1.37,
-      "marketCap": 116677,
-      "bottom1": {
-        "date": "2026-06-08",
-        "price": 68700
-      },
-      "bottom2": {
-        "date": "2026-07-31",
-        "price": 69500
-      },
-      "neckline": {
-        "date": "2026-07-24",
-        "price": 99800
-      },
-      "declinePct": 20.8,
-      "priceDiffPct": 1.2,
-      "reboundPct": 44.4,
-      "gapDays": 38,
-      "currentPrice": 125600,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 70
-    },
-    {
-      "code": "023530",
-      "name": "롯데쇼핑",
-      "market": "코스피",
-      "price": 112300,
-      "changePct": 4.47,
-      "marketCap": 31768,
-      "bottom1": {
         "date": "2026-08-07",
-        "price": 95100
+        "price": 58200
       },
-      "bottom2": {
-        "date": "2026-08-21",
-        "price": 93900
-      },
-      "neckline": {
-        "date": "2026-08-10",
-        "price": 106900
-      },
-      "declinePct": 54.9,
-      "priceDiffPct": 1.3,
-      "reboundPct": 13.1,
-      "gapDays": 9,
-      "currentPrice": 112300,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 70
-    },
-    {
-      "code": "131290",
-      "name": "티에스이",
-      "market": "코스닥",
-      "price": 261500,
-      "changePct": 10.57,
-      "marketCap": 28926,
-      "bottom1": {
-        "date": "2026-07-08",
-        "price": 216000
-      },
-      "bottom2": {
-        "date": "2026-08-21",
-        "price": 216500
-      },
-      "neckline": {
-        "date": "2026-07-13",
-        "price": 294000
-      },
-      "declinePct": 23.5,
-      "priceDiffPct": 0.2,
-      "reboundPct": 36,
-      "gapDays": 30,
-      "currentPrice": 261500,
-      "currentDate": "2026-09-07",
+      "declinePct": 31.2,
+      "priceDiffPct": 0,
+      "reboundPct": 18.5,
+      "gapDays": 21,
+      "currentPrice": 56600,
+      "currentDate": "2026-09-15",
       "status": "⚡ 우측바닥 반등중",
-      "score": 70
+      "score": 76
     },
     {
-      "code": "187660",
-      "name": "페니트리움바이오",
-      "market": "코스닥",
-      "price": 6470,
-      "changePct": 10.6,
-      "marketCap": 4139,
-      "bottom1": {
-        "date": "2026-07-21",
-        "price": 3750
-      },
-      "bottom2": {
-        "date": "2026-08-03",
-        "price": 3665
-      },
-      "neckline": {
-        "date": "2026-07-27",
-        "price": 5150
-      },
-      "declinePct": 61.7,
-      "priceDiffPct": 2.3,
-      "reboundPct": 38.9,
-      "gapDays": 9,
-      "currentPrice": 6470,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 70
-    },
-    {
-      "code": "006910",
-      "name": "보성파워텍",
-      "market": "코스닥",
-      "price": 7330,
-      "changePct": 8.11,
-      "marketCap": 3601,
+      "code": "082740",
+      "name": "한화엔진",
+      "market": "코스피",
+      "price": 50600,
+      "changePct": 0,
+      "marketCap": 42224,
       "bottom1": {
         "date": "2026-06-26",
-        "price": 6420
+        "price": 44350
       },
       "bottom2": {
-        "date": "2026-08-25",
-        "price": 6350
+        "date": "2026-09-02",
+        "price": 44300
       },
       "neckline": {
-        "date": "2026-08-13",
-        "price": 8440
+        "date": "2026-07-02",
+        "price": 58000
       },
-      "declinePct": 64.7,
-      "priceDiffPct": 1.1,
-      "reboundPct": 32.2,
-      "gapDays": 40,
-      "currentPrice": 7330,
-      "currentDate": "2026-09-07",
+      "declinePct": 53,
+      "priceDiffPct": 0.1,
+      "reboundPct": 30.9,
+      "gapDays": 46,
+      "currentPrice": 50600,
+      "currentDate": "2026-09-15",
       "status": "⚡ 우측바닥 반등중",
-      "score": 70
-    },
-    {
-      "code": "079370",
-      "name": "제우스",
-      "market": "코스닥",
-      "price": 10780,
-      "changePct": 6.73,
-      "marketCap": 3344,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 9150
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 9050
-      },
-      "neckline": {
-        "date": "2026-06-30",
-        "price": 11300
-      },
-      "declinePct": 48.5,
-      "priceDiffPct": 1.1,
-      "reboundPct": 24.2,
-      "gapDays": 40,
-      "currentPrice": 10780,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 70
-    },
-    {
-      "code": "028050",
-      "name": "삼성E&A",
-      "market": "코스피",
-      "price": 48000,
-      "changePct": 4.69,
-      "marketCap": 94080,
-      "bottom1": {
-        "date": "2026-06-08",
-        "price": 42900
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 43450
-      },
-      "neckline": {
-        "date": "2026-06-17",
-        "price": 59200
-      },
-      "declinePct": 36.3,
-      "priceDiffPct": 1.3,
-      "reboundPct": 37.1,
-      "gapDays": 54,
-      "currentPrice": 48000,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 69
-    },
-    {
-      "code": "018880",
-      "name": "한온시스템",
-      "market": "코스피",
-      "price": 3555,
-      "changePct": 0.85,
-      "marketCap": 36484,
-      "bottom1": {
-        "date": "2026-07-09",
-        "price": 3320
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 3355
-      },
-      "neckline": {
-        "date": "2026-08-13",
-        "price": 3945
-      },
-      "declinePct": 44.1,
-      "priceDiffPct": 1.1,
-      "reboundPct": 18.2,
-      "gapDays": 31,
-      "currentPrice": 3555,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 69
+      "score": 76
     },
     {
       "code": "011170",
       "name": "롯데케미칼",
       "market": "코스피",
-      "price": 58800,
-      "changePct": 2,
-      "marketCap": 25152,
+      "price": 65400,
+      "changePct": 0,
+      "marketCap": 27975,
       "bottom1": {
         "date": "2026-07-30",
         "price": 52500
@@ -1877,1278 +337,914 @@
       "priceDiffPct": 0.8,
       "reboundPct": 15.7,
       "gapDays": 13,
-      "currentPrice": 58800,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 69
+      "currentPrice": 65400,
+      "currentDate": "2026-09-15",
+      "status": "🚀 넥라인 돌파",
+      "score": 76
     },
     {
-      "code": "018670",
-      "name": "SK가스",
+      "code": "0117V0",
+      "name": "TIGER 코리아AI전력기기TOP3플러스",
       "market": "코스피",
-      "price": 239500,
-      "changePct": 0.42,
-      "marketCap": 22200,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 198600
-      },
-      "bottom2": {
-        "date": "2026-08-03",
-        "price": 196100
-      },
-      "neckline": {
-        "date": "2026-07-24",
-        "price": 272000
-      },
-      "declinePct": 34.2,
-      "priceDiffPct": 1.3,
-      "reboundPct": 37.8,
-      "gapDays": 25,
-      "currentPrice": 239500,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 69
-    },
-    {
-      "code": "077970",
-      "name": "STX엔진",
-      "market": "코스피",
-      "price": 23850,
-      "changePct": 1.27,
-      "marketCap": 9575,
-      "bottom1": {
-        "date": "2026-07-21",
-        "price": 22000
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 22300
-      },
-      "neckline": {
-        "date": "2026-08-10",
-        "price": 30850
-      },
-      "declinePct": 58.3,
-      "priceDiffPct": 1.4,
-      "reboundPct": 39.3,
-      "gapDays": 24,
-      "currentPrice": 23850,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 69
-    },
-    {
-      "code": "293490",
-      "name": "카카오게임즈",
-      "market": "코스닥",
-      "price": 8900,
-      "changePct": 1.44,
-      "marketCap": 9500,
-      "bottom1": {
-        "date": "2026-06-11",
-        "price": 8210
-      },
-      "bottom2": {
-        "date": "2026-08-31",
-        "price": 8100
-      },
-      "neckline": {
-        "date": "2026-06-22",
-        "price": 11450
-      },
-      "declinePct": 35.8,
-      "priceDiffPct": 1.3,
-      "reboundPct": 40.4,
-      "gapDays": 55,
-      "currentPrice": 8900,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 69
-    },
-    {
-      "code": "458870",
-      "name": "씨어스",
-      "market": "코스닥",
-      "price": 22450,
-      "changePct": 5.15,
-      "marketCap": 8609,
-      "bottom1": {
-        "date": "2026-07-30",
-        "price": 21300
-      },
-      "bottom2": {
-        "date": "2026-08-13",
-        "price": 21000
-      },
-      "neckline": {
-        "date": "2026-08-04",
-        "price": 29050
-      },
-      "declinePct": 50.3,
-      "priceDiffPct": 1.4,
-      "reboundPct": 37.4,
-      "gapDays": 10,
-      "currentPrice": 22450,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 69
-    },
-    {
-      "code": "417200",
-      "name": "LS머트리얼즈",
-      "market": "코스닥",
-      "price": 11130,
-      "changePct": 1.55,
-      "marketCap": 7530,
-      "bottom1": {
-        "date": "2026-07-21",
-        "price": 10300
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 10440
-      },
-      "neckline": {
-        "date": "2026-08-13",
-        "price": 12930
-      },
-      "declinePct": 59,
-      "priceDiffPct": 1.4,
-      "reboundPct": 24.7,
-      "gapDays": 24,
-      "currentPrice": 11130,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 69
-    },
-    {
-      "code": "009520",
-      "name": "포스코엠텍",
-      "market": "코스닥",
-      "price": 12710,
-      "changePct": 0.47,
-      "marketCap": 5293,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 11370
-      },
-      "bottom2": {
-        "date": "2026-08-19",
-        "price": 11210
-      },
-      "neckline": {
-        "date": "2026-07-03",
-        "price": 13610
-      },
-      "declinePct": 50.8,
-      "priceDiffPct": 1.4,
-      "reboundPct": 20.5,
-      "gapDays": 36,
-      "currentPrice": 12710,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 69
-    },
-    {
-      "code": "352480",
-      "name": "씨앤씨인터내셔널",
-      "market": "코스닥",
-      "price": 21800,
+      "price": 18640,
       "changePct": 0,
-      "marketCap": 2971,
-      "bottom1": {
-        "date": "2026-06-24",
-        "price": 19840
-      },
-      "bottom2": {
-        "date": "2026-08-19",
-        "price": 20100
-      },
-      "neckline": {
-        "date": "2026-08-12",
-        "price": 23900
-      },
-      "declinePct": 38.3,
-      "priceDiffPct": 1.3,
-      "reboundPct": 19.7,
-      "gapDays": 38,
-      "currentPrice": 21800,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 69
-    },
-    {
-      "code": "003670",
-      "name": "포스코퓨처엠",
-      "market": "코스피",
-      "price": 182600,
-      "changePct": 0.54,
-      "marketCap": 162416,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 155700
-      },
-      "bottom2": {
-        "date": "2026-08-19",
-        "price": 153300
-      },
-      "neckline": {
-        "date": "2026-06-29",
-        "price": 187800
-      },
-      "declinePct": 48,
-      "priceDiffPct": 1.5,
-      "reboundPct": 21.6,
-      "gapDays": 36,
-      "currentPrice": 182600,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 68
-    },
-    {
-      "code": "326030",
-      "name": "SK바이오팜",
-      "market": "코스피",
-      "price": 85000,
-      "changePct": 1.85,
-      "marketCap": 66566,
-      "bottom1": {
-        "date": "2026-07-14",
-        "price": 74000
-      },
-      "bottom2": {
-        "date": "2026-07-30",
-        "price": 73000
-      },
-      "neckline": {
-        "date": "2026-07-27",
-        "price": 83300
-      },
-      "declinePct": 27.6,
-      "priceDiffPct": 1.4,
-      "reboundPct": 13.3,
-      "gapDays": 11,
-      "currentPrice": 85000,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 68
-    },
-    {
-      "code": "028670",
-      "name": "팬오션",
-      "market": "코스피",
-      "price": 6060,
-      "changePct": 1.68,
-      "marketCap": 32395,
+      "marketCap": 9972,
       "bottom1": {
         "date": "2026-07-21",
-        "price": 4925
+        "price": 16500
       },
       "bottom2": {
-        "date": "2026-08-03",
-        "price": 4880
-      },
-      "neckline": {
-        "date": "2026-07-31",
-        "price": 5730
-      },
-      "declinePct": 19.8,
-      "priceDiffPct": 0.9,
-      "reboundPct": 16.9,
-      "gapDays": 9,
-      "currentPrice": 6060,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 68
-    },
-    {
-      "code": "120110",
-      "name": "코오롱인더",
-      "market": "코스피",
-      "price": 55200,
-      "changePct": 1.08,
-      "marketCap": 16530,
-      "bottom1": {
-        "date": "2026-07-21",
-        "price": 43750
-      },
-      "bottom2": {
-        "date": "2026-08-03",
-        "price": 44400
+        "date": "2026-08-25",
+        "price": 16535
       },
       "neckline": {
         "date": "2026-07-23",
-        "price": 56500
-      },
-      "declinePct": 45.6,
-      "priceDiffPct": 1.5,
-      "reboundPct": 28.2,
-      "gapDays": 9,
-      "currentPrice": 55200,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 68
-    },
-    {
-      "code": "000210",
-      "name": "DL",
-      "market": "코스피",
-      "price": 53800,
-      "changePct": 0.37,
-      "marketCap": 11274,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 40100
-      },
-      "bottom2": {
-        "date": "2026-07-30",
-        "price": 39000
-      },
-      "neckline": {
-        "date": "2026-07-24",
-        "price": 51800
-      },
-      "declinePct": 48.4,
-      "priceDiffPct": 2.7,
-      "reboundPct": 31,
-      "gapDays": 23,
-      "currentPrice": 53800,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 68
-    },
-    {
-      "code": "036930",
-      "name": "주성엔지니어링",
-      "market": "코스닥",
-      "price": 187200,
-      "changePct": 4.99,
-      "marketCap": 87013,
-      "bottom1": {
-        "date": "2026-07-08",
-        "price": 160000
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 157700
-      },
-      "neckline": {
-        "date": "2026-07-15",
-        "price": 222000
+        "price": 20030
       },
       "declinePct": 43.5,
-      "priceDiffPct": 1.4,
-      "reboundPct": 39.8,
-      "gapDays": 32,
-      "currentPrice": 187200,
-      "currentDate": "2026-09-07",
+      "priceDiffPct": 0.2,
+      "reboundPct": 21.3,
+      "gapDays": 24,
+      "currentPrice": 18640,
+      "currentDate": "2026-09-15",
       "status": "⚡ 우측바닥 반등중",
-      "score": 68
+      "score": 76
     },
     {
-      "code": "178320",
-      "name": "서진시스템",
-      "market": "코스닥",
-      "price": 36600,
-      "changePct": 8.77,
-      "marketCap": 23296,
+      "code": "137310",
+      "name": "에스디바이오센서",
+      "market": "코스피",
+      "price": 6210,
+      "changePct": 0,
+      "marketCap": 7499,
       "bottom1": {
-        "date": "2026-07-21",
-        "price": 33550
-      },
-      "bottom2": {
-        "date": "2026-08-19",
-        "price": 34050
-      },
-      "neckline": {
         "date": "2026-07-23",
-        "price": 42700
+        "price": 5800
       },
-      "declinePct": 59.7,
-      "priceDiffPct": 1.5,
-      "reboundPct": 26.3,
+      "bottom2": {
+        "date": "2026-08-21",
+        "price": 5810
+      },
+      "neckline": {
+        "date": "2026-08-11",
+        "price": 6940
+      },
+      "declinePct": 32,
+      "priceDiffPct": 0.2,
+      "reboundPct": 19.6,
       "gapDays": 20,
-      "currentPrice": 36600,
-      "currentDate": "2026-09-07",
+      "currentPrice": 6210,
+      "currentDate": "2026-09-15",
       "status": "⚡ 우측바닥 반등중",
-      "score": 68
+      "score": 76
     },
     {
-      "code": "323280",
-      "name": "태성",
-      "market": "코스닥",
-      "price": 47450,
-      "changePct": 5.8,
-      "marketCap": 14490,
+      "code": "100840",
+      "name": "SNT에너지",
+      "market": "코스피",
+      "price": 36650,
+      "changePct": 0,
+      "marketCap": 7580,
       "bottom1": {
-        "date": "2026-06-09",
-        "price": 46500
+        "date": "2026-06-26",
+        "price": 25100
       },
       "bottom2": {
-        "date": "2026-08-25",
-        "price": 45800
+        "date": "2026-08-21",
+        "price": 25450
       },
       "neckline": {
-        "date": "2026-08-18",
-        "price": 56400
+        "date": "2026-07-01",
+        "price": 30550
       },
-      "declinePct": 50.5,
-      "priceDiffPct": 1.5,
-      "reboundPct": 22.2,
-      "gapDays": 53,
-      "currentPrice": 47450,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 68
-    },
-    {
-      "code": "213420",
-      "name": "덕산네오룩스",
-      "market": "코스닥",
-      "price": 33350,
-      "changePct": 3.41,
-      "marketCap": 8281,
-      "bottom1": {
-        "date": "2026-06-08",
-        "price": 31250
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 30800
-      },
-      "neckline": {
-        "date": "2026-06-16",
-        "price": 39300
-      },
-      "declinePct": 45.5,
+      "declinePct": 62.8,
       "priceDiffPct": 1.4,
-      "reboundPct": 26.7,
-      "gapDays": 54,
-      "currentPrice": 33350,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 68
+      "reboundPct": 20.9,
+      "gapDays": 38,
+      "currentPrice": 36650,
+      "currentDate": "2026-09-15",
+      "status": "🚀 넥라인 돌파",
+      "score": 76
     },
     {
-      "code": "049070",
-      "name": "인탑스",
+      "code": "127120",
+      "name": "제이에스링크",
       "market": "코스닥",
-      "price": 19280,
-      "changePct": 8.74,
-      "marketCap": 3035,
+      "price": 30100,
+      "changePct": 0,
+      "marketCap": 11156,
       "bottom1": {
-        "date": "2026-06-08",
-        "price": 16800
+        "date": "2026-06-24",
+        "price": 29350
       },
       "bottom2": {
-        "date": "2026-08-24",
-        "price": 17030
-      },
-      "neckline": {
-        "date": "2026-06-19",
-        "price": 21700
-      },
-      "declinePct": 28.5,
-      "priceDiffPct": 1.4,
-      "reboundPct": 28.3,
-      "gapDays": 53,
-      "currentPrice": 19280,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 68
-    },
-    {
-      "code": "200670",
-      "name": "휴메딕스",
-      "market": "코스닥",
-      "price": 25800,
-      "changePct": 0.19,
-      "marketCap": 2897,
-      "bottom1": {
-        "date": "2026-06-08",
-        "price": 23800
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 24150
-      },
-      "neckline": {
-        "date": "2026-06-15",
+        "date": "2026-09-03",
         "price": 29300
       },
-      "declinePct": 37,
-      "priceDiffPct": 1.5,
-      "reboundPct": 22.2,
-      "gapDays": 54,
-      "currentPrice": 25800,
-      "currentDate": "2026-09-07",
+      "neckline": {
+        "date": "2026-08-13",
+        "price": 43500
+      },
+      "declinePct": 38,
+      "priceDiffPct": 0.2,
+      "reboundPct": 48.3,
+      "gapDays": 49,
+      "currentPrice": 30100,
+      "currentDate": "2026-09-15",
       "status": "⚡ 우측바닥 반등중",
-      "score": 68
+      "score": 76
     },
     {
-      "code": "000150",
-      "name": "두산",
-      "market": "코스피",
-      "price": 1271000,
-      "changePct": 11.3,
-      "marketCap": 205824,
+      "code": "083450",
+      "name": "GST",
+      "market": "코스닥",
+      "price": 43700,
+      "changePct": 0,
+      "marketCap": 8054,
       "bottom1": {
-        "date": "2026-07-09",
-        "price": 1160000
+        "date": "2026-07-08",
+        "price": 41050
       },
       "bottom2": {
+        "date": "2026-08-25",
+        "price": 41100
+      },
+      "neckline": {
         "date": "2026-08-11",
-        "price": 1140000
+        "price": 53400
+      },
+      "declinePct": 42,
+      "priceDiffPct": 0.1,
+      "reboundPct": 30,
+      "gapDays": 32,
+      "currentPrice": 43700,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 76
+    },
+    {
+      "code": "101730",
+      "name": "위메이드맥스",
+      "market": "코스닥",
+      "price": 5200,
+      "changePct": 0,
+      "marketCap": 4358,
+      "bottom1": {
+        "date": "2026-06-11",
+        "price": 3180
+      },
+      "bottom2": {
+        "date": "2026-08-07",
+        "price": 3185
       },
       "neckline": {
         "date": "2026-07-10",
-        "price": 1445000
+        "price": 5690
       },
-      "declinePct": 53.4,
-      "priceDiffPct": 1.7,
-      "reboundPct": 25.7,
-      "gapDays": 22,
-      "currentPrice": 1271000,
-      "currentDate": "2026-09-07",
+      "declinePct": 57.8,
+      "priceDiffPct": 0.2,
+      "reboundPct": 78.8,
+      "gapDays": 40,
+      "currentPrice": 5200,
+      "currentDate": "2026-09-15",
       "status": "⚡ 우측바닥 반등중",
-      "score": 67
+      "score": 76
     },
     {
-      "code": "017670",
-      "name": "SK텔레콤",
+      "code": "329180",
+      "name": "HD현대중공업",
       "market": "코스피",
-      "price": 93800,
-      "changePct": 1.41,
-      "marketCap": 201473,
+      "price": 479000,
+      "changePct": 0,
+      "marketCap": 502764,
       "bottom1": {
-        "date": "2026-07-08",
-        "price": 82200
+        "date": "2026-07-29",
+        "price": 411500
       },
       "bottom2": {
-        "date": "2026-08-11",
-        "price": 83600
+        "date": "2026-09-03",
+        "price": 413000
       },
       "neckline": {
-        "date": "2026-07-27",
-        "price": 105600
+        "date": "2026-08-10",
+        "price": 542000
       },
-      "declinePct": 41.1,
-      "priceDiffPct": 1.7,
-      "reboundPct": 27.4,
-      "gapDays": 23,
-      "currentPrice": 93800,
-      "currentDate": "2026-09-07",
+      "declinePct": 44.2,
+      "priceDiffPct": 0.4,
+      "reboundPct": 31.5,
+      "gapDays": 25,
+      "currentPrice": 479000,
+      "currentDate": "2026-09-15",
       "status": "⚡ 우측바닥 반등중",
-      "score": 67
+      "score": 75
     },
     {
-      "code": "241560",
-      "name": "두산밥캣",
+      "code": "377300",
+      "name": "카카오페이",
       "market": "코스피",
-      "price": 63700,
-      "changePct": 1.43,
-      "marketCap": 61060,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 58000
-      },
-      "bottom2": {
-        "date": "2026-08-21",
-        "price": 57200
-      },
-      "neckline": {
-        "date": "2026-07-23",
-        "price": 69300
-      },
-      "declinePct": 27.2,
-      "priceDiffPct": 1.4,
-      "reboundPct": 20.3,
-      "gapDays": 38,
-      "currentPrice": 63700,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 67
-    },
-    {
-      "code": "128940",
-      "name": "한미약품",
-      "market": "코스피",
-      "price": 475500,
-      "changePct": 0.42,
-      "marketCap": 60916,
+      "price": 46900,
+      "changePct": 0,
+      "marketCap": 63456,
       "bottom1": {
         "date": "2026-06-11",
-        "price": 385000
+        "price": 40650
       },
       "bottom2": {
         "date": "2026-08-19",
-        "price": 374000
+        "price": 40650
       },
       "neckline": {
-        "date": "2026-07-03",
-        "price": 470000
+        "date": "2026-06-17",
+        "price": 48100
       },
-      "declinePct": 33.4,
-      "priceDiffPct": 2.9,
-      "reboundPct": 23.8,
+      "declinePct": 36.7,
+      "priceDiffPct": 0,
+      "reboundPct": 18.3,
       "gapDays": 47,
-      "currentPrice": 475500,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 67
+      "currentPrice": 46900,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 75
     },
     {
-      "code": "487240",
-      "name": "KODEX AI전력핵심설비",
+      "code": "122630",
+      "name": "KODEX 레버리지",
       "market": "코스피",
-      "price": 36515,
-      "changePct": 5.47,
-      "marketCap": 31914,
+      "price": 102095,
+      "changePct": 0,
+      "marketCap": 52222,
       "bottom1": {
-        "date": "2026-07-21",
-        "price": 31100
+        "date": "2026-08-19",
+        "price": 94350
       },
       "bottom2": {
-        "date": "2026-08-25",
-        "price": 31635
+        "date": "2026-09-03",
+        "price": 94590
       },
       "neckline": {
-        "date": "2026-08-13",
-        "price": 38685
-      },
-      "declinePct": 45.9,
-      "priceDiffPct": 1.7,
-      "reboundPct": 23.3,
-      "gapDays": 24,
-      "currentPrice": 36515,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 67
-    },
-    {
-      "code": "011780",
-      "name": "금호석유화학",
-      "market": "코스피",
-      "price": 126000,
-      "changePct": 0.08,
-      "marketCap": 31698,
-      "bottom1": {
-        "date": "2026-06-10",
-        "price": 115100
-      },
-      "bottom2": {
         "date": "2026-08-21",
-        "price": 116400
+        "price": 113955
       },
-      "neckline": {
-        "date": "2026-08-07",
-        "price": 139000
-      },
-      "declinePct": 25.9,
-      "priceDiffPct": 1.1,
-      "reboundPct": 20.1,
-      "gapDays": 50,
-      "currentPrice": 126000,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 67
-    },
-    {
-      "code": "012750",
-      "name": "에스원",
-      "market": "코스피",
-      "price": 79100,
-      "changePct": 0.13,
-      "marketCap": 30057,
-      "bottom1": {
-        "date": "2026-07-08",
-        "price": 70300
-      },
-      "bottom2": {
-        "date": "2026-07-31",
-        "price": 70200
-      },
-      "neckline": {
-        "date": "2026-07-09",
-        "price": 82000
-      },
-      "declinePct": 22.6,
-      "priceDiffPct": 0.1,
-      "reboundPct": 16.7,
-      "gapDays": 16,
-      "currentPrice": 79100,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 67
-    },
-    {
-      "code": "139260",
-      "name": "TIGER 200 IT",
-      "market": "코스피",
-      "price": 140900,
-      "changePct": 5.41,
-      "marketCap": 27842,
-      "bottom1": {
-        "date": "2026-07-14",
-        "price": 127115
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 125000
-      },
-      "neckline": {
-        "date": "2026-07-15",
-        "price": 156500
-      },
-      "declinePct": 40.7,
-      "priceDiffPct": 1.7,
-      "reboundPct": 24.1,
-      "gapDays": 28,
-      "currentPrice": 140900,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 67
-    },
-    {
-      "code": "011210",
-      "name": "현대위아",
-      "market": "코스피",
-      "price": 58500,
-      "changePct": 1.56,
-      "marketCap": 15909,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 57400
-      },
-      "bottom2": {
-        "date": "2026-08-21",
-        "price": 57600
-      },
-      "neckline": {
-        "date": "2026-08-14",
-        "price": 68800
-      },
-      "declinePct": 44.5,
+      "declinePct": 61.7,
       "priceDiffPct": 0.3,
-      "reboundPct": 19.7,
-      "gapDays": 38,
-      "currentPrice": 58500,
-      "currentDate": "2026-09-07",
-      "status": "🔍 패턴 형성중",
-      "score": 67
+      "reboundPct": 20.6,
+      "gapDays": 11,
+      "currentPrice": 102095,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 75
+    },
+    {
+      "code": "001040",
+      "name": "CJ",
+      "market": "코스피",
+      "price": 133900,
+      "changePct": 0,
+      "marketCap": 39068,
+      "bottom1": {
+        "date": "2026-07-29",
+        "price": 116900
+      },
+      "bottom2": {
+        "date": "2026-08-21",
+        "price": 117300
+      },
+      "neckline": {
+        "date": "2026-08-06",
+        "price": 147800
+      },
+      "declinePct": 39.3,
+      "priceDiffPct": 0.3,
+      "reboundPct": 26.2,
+      "gapDays": 16,
+      "currentPrice": 133900,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 75
     },
     {
       "code": "466920",
       "name": "SOL 조선TOP3플러스",
       "market": "코스피",
-      "price": 27820,
-      "changePct": 0.87,
-      "marketCap": 14661,
+      "price": 28720,
+      "changePct": 0,
+      "marketCap": 15193,
       "bottom1": {
         "date": "2026-07-14",
         "price": 26100
       },
       "bottom2": {
-        "date": "2026-08-25",
-        "price": 26415
+        "date": "2026-09-03",
+        "price": 26100
       },
       "neckline": {
         "date": "2026-08-10",
         "price": 30770
       },
       "declinePct": 38.1,
-      "priceDiffPct": 1.2,
-      "reboundPct": 17.2,
-      "gapDays": 28,
-      "currentPrice": 27820,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 67
-    },
-    {
-      "code": "068760",
-      "name": "셀트리온제약",
-      "market": "코스닥",
-      "price": 40550,
-      "changePct": 0.73,
-      "marketCap": 18005,
-      "bottom1": {
-        "date": "2026-06-11",
-        "price": 40000
-      },
-      "bottom2": {
-        "date": "2026-08-19",
-        "price": 40000
-      },
-      "neckline": {
-        "date": "2026-08-11",
-        "price": 47000
-      },
-      "declinePct": 32.2,
       "priceDiffPct": 0,
-      "reboundPct": 17.5,
-      "gapDays": 47,
-      "currentPrice": 40550,
-      "currentDate": "2026-09-07",
-      "status": "🔍 패턴 형성중",
-      "score": 67
-    },
-    {
-      "code": "065350",
-      "name": "신성델타테크",
-      "market": "코스닥",
-      "price": 30850,
-      "changePct": 0.16,
-      "marketCap": 8479,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 27000
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 27450
-      },
-      "neckline": {
-        "date": "2026-06-30",
-        "price": 35050
-      },
-      "declinePct": 55.4,
-      "priceDiffPct": 1.7,
-      "reboundPct": 28.7,
-      "gapDays": 40,
-      "currentPrice": 30850,
-      "currentDate": "2026-09-07",
+      "reboundPct": 17.9,
+      "gapDays": 35,
+      "currentPrice": 28720,
+      "currentDate": "2026-09-15",
       "status": "⚡ 우측바닥 반등중",
-      "score": 67
+      "score": 75
     },
     {
-      "code": "053800",
-      "name": "안랩",
-      "market": "코스닥",
-      "price": 57100,
-      "changePct": 1.04,
-      "marketCap": 6353,
-      "bottom1": {
-        "date": "2026-06-11",
-        "price": 55200
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 55600
-      },
-      "neckline": {
-        "date": "2026-08-11",
-        "price": 64500
-      },
-      "declinePct": 26.4,
-      "priceDiffPct": 0.7,
-      "reboundPct": 16.4,
-      "gapDays": 51,
-      "currentPrice": 57100,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 67
-    },
-    {
-      "code": "013030",
-      "name": "하이록코리아",
-      "market": "코스닥",
-      "price": 33800,
-      "changePct": 1.17,
-      "marketCap": 3978,
-      "bottom1": {
-        "date": "2026-07-14",
-        "price": 29350
-      },
-      "bottom2": {
-        "date": "2026-08-21",
-        "price": 29750
-      },
-      "neckline": {
-        "date": "2026-08-11",
-        "price": 35350
-      },
-      "declinePct": 28.2,
-      "priceDiffPct": 1.4,
-      "reboundPct": 19.6,
-      "gapDays": 26,
-      "currentPrice": 33800,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 67
-    },
-    {
-      "code": "035600",
-      "name": "KG이니시스",
-      "market": "코스닥",
-      "price": 10290,
-      "changePct": 0.96,
-      "marketCap": 2835,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 8940
-      },
-      "bottom2": {
-        "date": "2026-07-30",
-        "price": 8920
-      },
-      "neckline": {
-        "date": "2026-07-02",
-        "price": 9690
-      },
-      "declinePct": 23.1,
-      "priceDiffPct": 0.2,
-      "reboundPct": 8.5,
-      "gapDays": 23,
-      "currentPrice": 10290,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 67
-    },
-    {
-      "code": "226490",
-      "name": "KODEX 코스피",
+      "code": "449450",
+      "name": "PLUS K방산",
       "market": "코스피",
-      "price": 71655,
-      "changePct": 4.31,
-      "marketCap": 14976,
+      "price": 53400,
+      "changePct": 0,
+      "marketCap": 10365,
       "bottom1": {
         "date": "2026-07-21",
-        "price": 66180
+        "price": 49220
       },
       "bottom2": {
-        "date": "2026-08-19",
-        "price": 65775
-      },
-      "neckline": {
-        "date": "2026-08-18",
-        "price": 74045
-      },
-      "declinePct": 31.3,
-      "priceDiffPct": 0.6,
-      "reboundPct": 12.2,
-      "gapDays": 20,
-      "currentPrice": 71655,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 66
-    },
-    {
-      "code": "305540",
-      "name": "TIGER 2차전지테마",
-      "market": "코스피",
-      "price": 18865,
-      "changePct": 0.32,
-      "marketCap": 9404,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 16960
-      },
-      "bottom2": {
-        "date": "2026-08-21",
-        "price": 17200
-      },
-      "neckline": {
-        "date": "2026-06-29",
-        "price": 19925
-      },
-      "declinePct": 40.5,
-      "priceDiffPct": 1.4,
-      "reboundPct": 16.7,
-      "gapDays": 38,
-      "currentPrice": 18865,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 66
-    },
-    {
-      "code": "004490",
-      "name": "세방전지",
-      "market": "코스피",
-      "price": 64300,
-      "changePct": 0.16,
-      "marketCap": 8912,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 48250
-      },
-      "bottom2": {
-        "date": "2026-07-30",
-        "price": 46900
-      },
-      "neckline": {
-        "date": "2026-07-13",
-        "price": 56600
-      },
-      "declinePct": 29.7,
-      "priceDiffPct": 2.8,
-      "reboundPct": 19,
-      "gapDays": 23,
-      "currentPrice": 64300,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 66
-    },
-    {
-      "code": "041510",
-      "name": "에스엠",
-      "market": "코스닥",
-      "price": 79900,
-      "changePct": 1.14,
-      "marketCap": 18293,
-      "bottom1": {
-        "date": "2026-06-08",
-        "price": 69800
-      },
-      "bottom2": {
-        "date": "2026-08-19",
-        "price": 68500
-      },
-      "neckline": {
-        "date": "2026-06-11",
-        "price": 88800
-      },
-      "declinePct": 32,
-      "priceDiffPct": 1.9,
-      "reboundPct": 28.4,
-      "gapDays": 50,
-      "currentPrice": 79900,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 66
-    },
-    {
-      "code": "033790",
-      "name": "피노",
-      "market": "코스닥",
-      "price": 9460,
-      "changePct": 7.25,
-      "marketCap": 7882,
-      "bottom1": {
-        "date": "2026-07-09",
-        "price": 5340
-      },
-      "bottom2": {
-        "date": "2026-08-21",
-        "price": 5500
-      },
-      "neckline": {
-        "date": "2026-08-11",
-        "price": 7120
-      },
-      "declinePct": 68.1,
-      "priceDiffPct": 3,
-      "reboundPct": 31.4,
-      "gapDays": 29,
-      "currentPrice": 9460,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 66
-    },
-    {
-      "code": "045100",
-      "name": "한양이엔지",
-      "market": "코스닥",
-      "price": 31400,
-      "changePct": 5.19,
-      "marketCap": 5495,
-      "bottom1": {
-        "date": "2026-07-09",
-        "price": 28250
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 27800
-      },
-      "neckline": {
-        "date": "2026-07-13",
-        "price": 35900
-      },
-      "declinePct": 28.3,
-      "priceDiffPct": 1.6,
-      "reboundPct": 28.1,
-      "gapDays": 31,
-      "currentPrice": 31400,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 66
-    },
-    {
-      "code": "060280",
-      "name": "큐렉소",
-      "market": "코스닥",
-      "price": 8130,
-      "changePct": 0,
-      "marketCap": 3354,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 8300
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 8260
+        "date": "2026-09-03",
+        "price": 49360
       },
       "neckline": {
         "date": "2026-08-14",
-        "price": 10460
+        "price": 59520
       },
-      "declinePct": 54.2,
-      "priceDiffPct": 0.5,
-      "reboundPct": 26.3,
-      "gapDays": 40,
-      "currentPrice": 8130,
-      "currentDate": "2026-09-07",
-      "status": "🔍 패턴 형성중",
-      "score": 66
+      "declinePct": 34.3,
+      "priceDiffPct": 0.3,
+      "reboundPct": 20.8,
+      "gapDays": 31,
+      "currentPrice": 53400,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 75
     },
     {
-      "code": "035810",
-      "name": "이지홀딩스",
+      "code": "240810",
+      "name": "원익IPS",
       "market": "코스닥",
-      "price": 4745,
-      "changePct": 1.06,
-      "marketCap": 3061,
+      "price": 110100,
+      "changePct": 0,
+      "marketCap": 54041,
       "bottom1": {
-        "date": "2026-06-26",
-        "price": 3890
+        "date": "2026-07-09",
+        "price": 100500
       },
       "bottom2": {
-        "date": "2026-07-30",
-        "price": 3785
+        "date": "2026-08-25",
+        "price": 100900
       },
       "neckline": {
-        "date": "2026-07-15",
-        "price": 4530
+        "date": "2026-07-16",
+        "price": 148100
       },
-      "declinePct": 32.2,
-      "priceDiffPct": 2.7,
-      "reboundPct": 18,
-      "gapDays": 23,
-      "currentPrice": 4745,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 66
-    },
-    {
-      "code": "035420",
-      "name": "NAVER",
-      "market": "코스피",
-      "price": 218000,
-      "changePct": 2.11,
-      "marketCap": 331527,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 190300
-      },
-      "bottom2": {
-        "date": "2026-07-30",
-        "price": 194100
-      },
-      "neckline": {
-        "date": "2026-07-27",
-        "price": 234500
-      },
-      "declinePct": 37.4,
-      "priceDiffPct": 2,
-      "reboundPct": 22,
-      "gapDays": 23,
-      "currentPrice": 218000,
-      "currentDate": "2026-09-07",
+      "declinePct": 46.5,
+      "priceDiffPct": 0.4,
+      "reboundPct": 47.1,
+      "gapDays": 31,
+      "currentPrice": 110100,
+      "currentDate": "2026-09-15",
       "status": "⚡ 우측바닥 반등중",
-      "score": 65
+      "score": 75
     },
     {
-      "code": "000810",
-      "name": "삼성화재",
-      "market": "코스피",
-      "price": 656000,
-      "changePct": 1.06,
-      "marketCap": 292887,
-      "bottom1": {
-        "date": "2026-06-10",
-        "price": 596000
-      },
-      "bottom2": {
-        "date": "2026-08-19",
-        "price": 601000
-      },
-      "neckline": {
-        "date": "2026-06-19",
-        "price": 737000
-      },
-      "declinePct": 21.3,
-      "priceDiffPct": 0.8,
-      "reboundPct": 23.1,
-      "gapDays": 48,
-      "currentPrice": 656000,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 65
-    },
-    {
-      "code": "267260",
-      "name": "HD현대일렉트릭",
-      "market": "코스피",
-      "price": 763000,
-      "changePct": 6.86,
-      "marketCap": 275040,
+      "code": "056080",
+      "name": "유진로봇",
+      "market": "코스닥",
+      "price": 11990,
+      "changePct": 0,
+      "marketCap": 4584,
       "bottom1": {
         "date": "2026-07-21",
-        "price": 717000
+        "price": 11000
       },
       "bottom2": {
-        "date": "2026-08-11",
-        "price": 731000
+        "date": "2026-09-03",
+        "price": 10970
       },
       "neckline": {
-        "date": "2026-07-24",
-        "price": 870000
+        "date": "2026-08-14",
+        "price": 15680
       },
-      "declinePct": 41.8,
-      "priceDiffPct": 2,
-      "reboundPct": 20.2,
-      "gapDays": 15,
-      "currentPrice": 763000,
-      "currentDate": "2026-09-07",
+      "declinePct": 56.9,
+      "priceDiffPct": 0.3,
+      "reboundPct": 42.7,
+      "gapDays": 31,
+      "currentPrice": 11990,
+      "currentDate": "2026-09-15",
       "status": "⚡ 우측바닥 반등중",
-      "score": 65
+      "score": 75
     },
     {
-      "code": "138930",
-      "name": "BNK금융지주",
-      "market": "코스피",
-      "price": 15800,
-      "changePct": 2.66,
-      "marketCap": 48481,
+      "code": "027360",
+      "name": "아주IB투자",
+      "market": "코스닥",
+      "price": 3315,
+      "changePct": 0,
+      "marketCap": 4016,
       "bottom1": {
-        "date": "2026-07-29",
-        "price": 14170
+        "date": "2026-07-21",
+        "price": 3040
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 3050
+      },
+      "neckline": {
+        "date": "2026-08-14",
+        "price": 4710
+      },
+      "declinePct": 82.9,
+      "priceDiffPct": 0.3,
+      "reboundPct": 54.7,
+      "gapDays": 24,
+      "currentPrice": 3315,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 75
+    },
+    {
+      "code": "018260",
+      "name": "삼성에스디에스",
+      "market": "코스피",
+      "price": 218500,
+      "changePct": 0,
+      "marketCap": 169070,
+      "bottom1": {
+        "date": "2026-06-11",
+        "price": 211000
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 211500
+      },
+      "neckline": {
+        "date": "2026-06-15",
+        "price": 250000
+      },
+      "declinePct": 45.7,
+      "priceDiffPct": 0.2,
+      "reboundPct": 18.3,
+      "gapDays": 51,
+      "currentPrice": 218500,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 74
+    },
+    {
+      "code": "305720",
+      "name": "KODEX 2차전지산업",
+      "market": "코스피",
+      "price": 14535,
+      "changePct": 0,
+      "marketCap": 17064,
+      "bottom1": {
+        "date": "2026-06-26",
+        "price": 13595
       },
       "bottom2": {
         "date": "2026-08-21",
-        "price": 14010
+        "price": 13625
       },
       "neckline": {
-        "date": "2026-07-30",
-        "price": 15510
+        "date": "2026-06-29",
+        "price": 16050
       },
-      "declinePct": 25.6,
-      "priceDiffPct": 1.1,
-      "reboundPct": 10.1,
-      "gapDays": 16,
-      "currentPrice": 15800,
-      "currentDate": "2026-09-07",
+      "declinePct": 40.5,
+      "priceDiffPct": 0.2,
+      "reboundPct": 17.9,
+      "gapDays": 38,
+      "currentPrice": 14535,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 74
+    },
+    {
+      "code": "166090",
+      "name": "하나머티리얼즈",
+      "market": "코스닥",
+      "price": 50900,
+      "changePct": 0,
+      "marketCap": 10067,
+      "bottom1": {
+        "date": "2026-07-08",
+        "price": 47800
+      },
+      "bottom2": {
+        "date": "2026-09-04",
+        "price": 48050
+      },
+      "neckline": {
+        "date": "2026-08-12",
+        "price": 66000
+      },
+      "declinePct": 45.6,
+      "priceDiffPct": 0.5,
+      "reboundPct": 37.7,
+      "gapDays": 40,
+      "currentPrice": 50900,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 74
+    },
+    {
+      "code": "032500",
+      "name": "케이엠더블유",
+      "market": "코스닥",
+      "price": 16110,
+      "changePct": 0,
+      "marketCap": 6797,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 13450
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 13510
+      },
+      "neckline": {
+        "date": "2026-08-05",
+        "price": 18360
+      },
+      "declinePct": 66.4,
+      "priceDiffPct": 0.4,
+      "reboundPct": 36.2,
+      "gapDays": 24,
+      "currentPrice": 16110,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 74
+    },
+    {
+      "code": "018000",
+      "name": "유니슨",
+      "market": "코스닥",
+      "price": 1223,
+      "changePct": 0,
+      "marketCap": 3174,
+      "bottom1": {
+        "date": "2026-06-08",
+        "price": 868
+      },
+      "bottom2": {
+        "date": "2026-08-13",
+        "price": 863
+      },
+      "neckline": {
+        "date": "2026-07-01",
+        "price": 1250
+      },
+      "declinePct": 45.1,
+      "priceDiffPct": 0.6,
+      "reboundPct": 44.4,
+      "gapDays": 47,
+      "currentPrice": 1223,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 74
+    },
+    {
+      "code": "042700",
+      "name": "한미반도체",
+      "market": "코스피",
+      "price": 225000,
+      "changePct": 0,
+      "marketCap": 214452,
+      "bottom1": {
+        "date": "2026-07-14",
+        "price": 190600
+      },
+      "bottom2": {
+        "date": "2026-08-07",
+        "price": 189300
+      },
+      "neckline": {
+        "date": "2026-07-16",
+        "price": 275000
+      },
+      "declinePct": 53.1,
+      "priceDiffPct": 0.7,
+      "reboundPct": 44.8,
+      "gapDays": 17,
+      "currentPrice": 225000,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 73
+    },
+    {
+      "code": "035720",
+      "name": "카카오",
+      "market": "코스피",
+      "price": 34650,
+      "changePct": 0,
+      "marketCap": 153499,
+      "bottom1": {
+        "date": "2026-07-08",
+        "price": 33400
+      },
+      "bottom2": {
+        "date": "2026-08-21",
+        "price": 33600
+      },
+      "neckline": {
+        "date": "2026-08-12",
+        "price": 41450
+      },
+      "declinePct": 31.1,
+      "priceDiffPct": 0.6,
+      "reboundPct": 23.7,
+      "gapDays": 30,
+      "currentPrice": 34650,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 73
+    },
+    {
+      "code": "047040",
+      "name": "대우건설",
+      "market": "코스피",
+      "price": 18760,
+      "changePct": 0,
+      "marketCap": 77086,
+      "bottom1": {
+        "date": "2026-07-09",
+        "price": 15000
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 15100
+      },
+      "neckline": {
+        "date": "2026-08-14",
+        "price": 19130
+      },
+      "declinePct": 54.8,
+      "priceDiffPct": 0.7,
+      "reboundPct": 27.1,
+      "gapDays": 31,
+      "currentPrice": 18760,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 73
+    },
+    {
+      "code": "003540",
+      "name": "대신증권",
+      "market": "코스피",
+      "price": 27500,
+      "changePct": 0,
+      "marketCap": 13108,
+      "bottom1": {
+        "date": "2026-06-26",
+        "price": 25400
+      },
+      "bottom2": {
+        "date": "2026-08-10",
+        "price": 25550
+      },
+      "neckline": {
+        "date": "2026-07-06",
+        "price": 30850
+      },
+      "declinePct": 40.7,
+      "priceDiffPct": 0.6,
+      "reboundPct": 21.1,
+      "gapDays": 30,
+      "currentPrice": 27500,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 73
+    },
+    {
+      "code": "469150",
+      "name": "ACE AI반도체TOP3+",
+      "market": "코스피",
+      "price": 56645,
+      "changePct": 0,
+      "marketCap": 10423,
+      "bottom1": {
+        "date": "2026-07-14",
+        "price": 53745
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 53365
+      },
+      "neckline": {
+        "date": "2026-07-15",
+        "price": 67580
+      },
+      "declinePct": 38.8,
+      "priceDiffPct": 0.7,
+      "reboundPct": 26.2,
+      "gapDays": 35,
+      "currentPrice": 56645,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 73
+    },
+    {
+      "code": "085660",
+      "name": "차바이오텍",
+      "market": "코스닥",
+      "price": 7940,
+      "changePct": 0,
+      "marketCap": 7382,
+      "bottom1": {
+        "date": "2026-07-29",
+        "price": 7600
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 7650
+      },
+      "neckline": {
+        "date": "2026-08-11",
+        "price": 10030
+      },
+      "declinePct": 44.9,
+      "priceDiffPct": 0.7,
+      "reboundPct": 31.5,
+      "gapDays": 18,
+      "currentPrice": 7940,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 73
+    },
+    {
+      "code": "086900",
+      "name": "메디톡스",
+      "market": "코스닥",
+      "price": 68800,
+      "changePct": 0,
+      "marketCap": 5021,
+      "bottom1": {
+        "date": "2026-07-30",
+        "price": 66000
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 65600
+      },
+      "neckline": {
+        "date": "2026-08-10",
+        "price": 81700
+      },
+      "declinePct": 29.5,
+      "priceDiffPct": 0.6,
+      "reboundPct": 24.2,
+      "gapDays": 17,
+      "currentPrice": 68800,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 73
+    },
+    {
+      "code": "219130",
+      "name": "타이거일렉",
+      "market": "코스닥",
+      "price": 68700,
+      "changePct": 0,
+      "marketCap": 4338,
+      "bottom1": {
+        "date": "2026-08-25",
+        "price": 58600
+      },
+      "bottom2": {
+        "date": "2026-09-07",
+        "price": 58100
+      },
+      "neckline": {
+        "date": "2026-08-27",
+        "price": 66400
+      },
+      "declinePct": 33.3,
+      "priceDiffPct": 0.9,
+      "reboundPct": 13.8,
+      "gapDays": 9,
+      "currentPrice": 68700,
+      "currentDate": "2026-09-15",
       "status": "🚀 넥라인 돌파",
-      "score": 65
+      "score": 73
+    },
+    {
+      "code": "089890",
+      "name": "코세스",
+      "market": "코스닥",
+      "price": 24600,
+      "changePct": 0,
+      "marketCap": 4080,
+      "bottom1": {
+        "date": "2026-08-19",
+        "price": 21050
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 20900
+      },
+      "neckline": {
+        "date": "2026-08-26",
+        "price": 27400
+      },
+      "declinePct": 44.6,
+      "priceDiffPct": 0.7,
+      "reboundPct": 30.6,
+      "gapDays": 11,
+      "currentPrice": 24600,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 73
+    },
+    {
+      "code": "016360",
+      "name": "삼성증권",
+      "market": "코스피",
+      "price": 87500,
+      "changePct": 0,
+      "marketCap": 78138,
+      "bottom1": {
+        "date": "2026-07-29",
+        "price": 82700
+      },
+      "bottom2": {
+        "date": "2026-08-19",
+        "price": 83400
+      },
+      "neckline": {
+        "date": "2026-08-05",
+        "price": 102000
+      },
+      "declinePct": 36.5,
+      "priceDiffPct": 0.8,
+      "reboundPct": 22.8,
+      "gapDays": 14,
+      "currentPrice": 87500,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 72
+    },
+    {
+      "code": "062040",
+      "name": "산일전기",
+      "market": "코스피",
+      "price": 198000,
+      "changePct": 0,
+      "marketCap": 60673,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 152900
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 155900
+      },
+      "neckline": {
+        "date": "2026-08-13",
+        "price": 197900
+      },
+      "declinePct": 48.2,
+      "priceDiffPct": 2,
+      "reboundPct": 28.2,
+      "gapDays": 24,
+      "currentPrice": 198000,
+      "currentDate": "2026-09-15",
+      "status": "🚀 넥라인 돌파",
+      "score": 72
+    },
+    {
+      "code": "251270",
+      "name": "넷마블",
+      "market": "코스피",
+      "price": 35400,
+      "changePct": 0,
+      "marketCap": 29438,
+      "bottom1": {
+        "date": "2026-06-26",
+        "price": 34450
+      },
+      "bottom2": {
+        "date": "2026-09-09",
+        "price": 34150
+      },
+      "neckline": {
+        "date": "2026-08-11",
+        "price": 41300
+      },
+      "declinePct": 34,
+      "priceDiffPct": 0.9,
+      "reboundPct": 20.4,
+      "gapDays": 51,
+      "currentPrice": 35400,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 72
     },
     {
       "code": "005440",
       "name": "현대지에프홀딩스",
       "market": "코스피",
-      "price": 11970,
-      "changePct": 0.5,
-      "marketCap": 21953,
+      "price": 13880,
+      "changePct": 0,
+      "marketCap": 25456,
       "bottom1": {
         "date": "2026-07-30",
         "price": 10800
@@ -3165,18 +1261,2398 @@
       "priceDiffPct": 1.4,
       "reboundPct": 16,
       "gapDays": 13,
-      "currentPrice": 11970,
-      "currentDate": "2026-09-07",
+      "currentPrice": 13880,
+      "currentDate": "2026-09-15",
+      "status": "🚀 넥라인 돌파",
+      "score": 72
+    },
+    {
+      "code": "439260",
+      "name": "대한조선",
+      "market": "코스피",
+      "price": 47050,
+      "changePct": 0,
+      "marketCap": 17921,
+      "bottom1": {
+        "date": "2026-07-29",
+        "price": 43700
+      },
+      "bottom2": {
+        "date": "2026-09-02",
+        "price": 44100
+      },
+      "neckline": {
+        "date": "2026-08-14",
+        "price": 57500
+      },
+      "declinePct": 35.2,
+      "priceDiffPct": 0.9,
+      "reboundPct": 31,
+      "gapDays": 24,
+      "currentPrice": 47050,
+      "currentDate": "2026-09-15",
       "status": "⚡ 우측바닥 반등중",
+      "score": 72
+    },
+    {
+      "code": "003090",
+      "name": "대웅",
+      "market": "코스피",
+      "price": 16350,
+      "changePct": 0,
+      "marketCap": 9506,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 15820
+      },
+      "bottom2": {
+        "date": "2026-08-21",
+        "price": 15870
+      },
+      "neckline": {
+        "date": "2026-08-11",
+        "price": 18970
+      },
+      "declinePct": 25.9,
+      "priceDiffPct": 0.3,
+      "reboundPct": 19.7,
+      "gapDays": 22,
+      "currentPrice": 16350,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 72
+    },
+    {
+      "code": "101490",
+      "name": "에스앤에스텍",
+      "market": "코스닥",
+      "price": 39600,
+      "changePct": 0,
+      "marketCap": 8449,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 38300
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 38600
+      },
+      "neckline": {
+        "date": "2026-08-18",
+        "price": 47100
+      },
+      "declinePct": 54.4,
+      "priceDiffPct": 0.8,
+      "reboundPct": 22.5,
+      "gapDays": 24,
+      "currentPrice": 39600,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 72
+    },
+    {
+      "code": "084110",
+      "name": "휴온스글로벌",
+      "market": "코스닥",
+      "price": 22550,
+      "changePct": 0,
+      "marketCap": 2855,
+      "bottom1": {
+        "date": "2026-06-29",
+        "price": 22150
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 21950
+      },
+      "neckline": {
+        "date": "2026-07-16",
+        "price": 29200
+      },
+      "declinePct": 68.2,
+      "priceDiffPct": 0.9,
+      "reboundPct": 32.4,
+      "gapDays": 39,
+      "currentPrice": 22550,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 72
+    },
+    {
+      "code": "009540",
+      "name": "HD한국조선해양",
+      "market": "코스피",
+      "price": 363500,
+      "changePct": 0,
+      "marketCap": 257260,
+      "bottom1": {
+        "date": "2026-07-14",
+        "price": 323000
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 326000
+      },
+      "neckline": {
+        "date": "2026-08-11",
+        "price": 412500
+      },
+      "declinePct": 29.8,
+      "priceDiffPct": 0.9,
+      "reboundPct": 27.1,
+      "gapDays": 35,
+      "currentPrice": 363500,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 71
+    },
+    {
+      "code": "079550",
+      "name": "LIG디펜스앤에어로스페이스",
+      "market": "코스피",
+      "price": 705000,
+      "changePct": 0,
+      "marketCap": 155100,
+      "bottom1": {
+        "date": "2026-07-09",
+        "price": 653000
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 647000
+      },
+      "neckline": {
+        "date": "2026-08-10",
+        "price": 839000
+      },
+      "declinePct": 40.5,
+      "priceDiffPct": 0.9,
+      "reboundPct": 29.1,
+      "gapDays": 38,
+      "currentPrice": 705000,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 71
+    },
+    {
+      "code": "267270",
+      "name": "HD건설기계",
+      "market": "코스피",
+      "price": 139800,
+      "changePct": 0,
+      "marketCap": 66401,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 115700
+      },
+      "bottom2": {
+        "date": "2026-08-21",
+        "price": 114500
+      },
+      "neckline": {
+        "date": "2026-08-11",
+        "price": 149100
+      },
+      "declinePct": 32.8,
+      "priceDiffPct": 1,
+      "reboundPct": 29.5,
+      "gapDays": 22,
+      "currentPrice": 139800,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 71
+    },
+    {
+      "code": "139260",
+      "name": "TIGER 200 IT",
+      "market": "코스피",
+      "price": 130685,
+      "changePct": 0,
+      "marketCap": 25431,
+      "bottom1": {
+        "date": "2026-07-14",
+        "price": 127115
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 125805
+      },
+      "neckline": {
+        "date": "2026-07-15",
+        "price": 156500
+      },
+      "declinePct": 40.7,
+      "priceDiffPct": 1,
+      "reboundPct": 23.8,
+      "gapDays": 35,
+      "currentPrice": 130685,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 71
+    },
+    {
+      "code": "322000",
+      "name": "HD현대에너지솔루션",
+      "market": "코스피",
+      "price": 127200,
+      "changePct": 0,
+      "marketCap": 14246,
+      "bottom1": {
+        "date": "2026-06-26",
+        "price": 114000
+      },
+      "bottom2": {
+        "date": "2026-08-11",
+        "price": 115100
+      },
+      "neckline": {
+        "date": "2026-07-24",
+        "price": 212500
+      },
+      "declinePct": 55.5,
+      "priceDiffPct": 1,
+      "reboundPct": 85.5,
+      "gapDays": 31,
+      "currentPrice": 127200,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 71
+    },
+    {
+      "code": "064960",
+      "name": "SNT모티브",
+      "market": "코스피",
+      "price": 26450,
+      "changePct": 0,
+      "marketCap": 7020,
+      "bottom1": {
+        "date": "2026-06-26",
+        "price": 25200
+      },
+      "bottom2": {
+        "date": "2026-08-28",
+        "price": 25150
+      },
+      "neckline": {
+        "date": "2026-08-14",
+        "price": 29000
+      },
+      "declinePct": 33.1,
+      "priceDiffPct": 0.2,
+      "reboundPct": 15.2,
+      "gapDays": 43,
+      "currentPrice": 26450,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 71
+    },
+    {
+      "code": "263750",
+      "name": "펄어비스",
+      "market": "코스닥",
+      "price": 34600,
+      "changePct": 0,
+      "marketCap": 21744,
+      "bottom1": {
+        "date": "2026-07-29",
+        "price": 30200
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 30500
+      },
+      "neckline": {
+        "date": "2026-08-11",
+        "price": 37600
+      },
+      "declinePct": 32.7,
+      "priceDiffPct": 1,
+      "reboundPct": 23.9,
+      "gapDays": 25,
+      "currentPrice": 34600,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 71
+    },
+    {
+      "code": "445680",
+      "name": "큐리옥스바이오시스템즈",
+      "market": "코스닥",
+      "price": 47600,
+      "changePct": 0,
+      "marketCap": 8193,
+      "bottom1": {
+        "date": "2026-07-09",
+        "price": 38100
+      },
+      "bottom2": {
+        "date": "2026-08-13",
+        "price": 38450
+      },
+      "neckline": {
+        "date": "2026-07-13",
+        "price": 47900
+      },
+      "declinePct": 61.9,
+      "priceDiffPct": 0.9,
+      "reboundPct": 25.1,
+      "gapDays": 24,
+      "currentPrice": 47600,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 71
+    },
+    {
+      "code": "036620",
+      "name": "감성코퍼레이션",
+      "market": "코스닥",
+      "price": 3875,
+      "changePct": 0,
+      "marketCap": 3482,
+      "bottom1": {
+        "date": "2026-07-20",
+        "price": 3740
+      },
+      "bottom2": {
+        "date": "2026-08-19",
+        "price": 3700
+      },
+      "neckline": {
+        "date": "2026-08-11",
+        "price": 4760
+      },
+      "declinePct": 31.6,
+      "priceDiffPct": 1.1,
+      "reboundPct": 28,
+      "gapDays": 21,
+      "currentPrice": 3875,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 71
+    },
+    {
+      "code": "200670",
+      "name": "휴메딕스",
+      "market": "코스닥",
+      "price": 25700,
+      "changePct": 0,
+      "marketCap": 2886,
+      "bottom1": {
+        "date": "2026-06-24",
+        "price": 25050
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 25000
+      },
+      "neckline": {
+        "date": "2026-06-30",
+        "price": 28650
+      },
+      "declinePct": 33.7,
+      "priceDiffPct": 0.2,
+      "reboundPct": 14.5,
+      "gapDays": 49,
+      "currentPrice": 25700,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 71
+    },
+    {
+      "code": "061970",
+      "name": "LB세미콘",
+      "market": "코스닥",
+      "price": 3940,
+      "changePct": 0,
+      "marketCap": 2761,
+      "bottom1": {
+        "date": "2026-07-09",
+        "price": 3750
+      },
+      "bottom2": {
+        "date": "2026-09-02",
+        "price": 3715
+      },
+      "neckline": {
+        "date": "2026-08-20",
+        "price": 6310
+      },
+      "declinePct": 47,
+      "priceDiffPct": 0.9,
+      "reboundPct": 69.1,
+      "gapDays": 37,
+      "currentPrice": 3940,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 71
+    },
+    {
+      "code": "023530",
+      "name": "롯데쇼핑",
+      "market": "코스피",
+      "price": 119400,
+      "changePct": 0,
+      "marketCap": 33777,
+      "bottom1": {
+        "date": "2026-08-07",
+        "price": 95100
+      },
+      "bottom2": {
+        "date": "2026-08-21",
+        "price": 93900
+      },
+      "neckline": {
+        "date": "2026-08-10",
+        "price": 106900
+      },
+      "declinePct": 54.9,
+      "priceDiffPct": 1.3,
+      "reboundPct": 13.1,
+      "gapDays": 9,
+      "currentPrice": 119400,
+      "currentDate": "2026-09-15",
+      "status": "🚀 넥라인 돌파",
+      "score": 70
+    },
+    {
+      "code": "487230",
+      "name": "KODEX 미국AI전력핵심인프라",
+      "market": "코스피",
+      "price": 18980,
+      "changePct": 0,
+      "marketCap": 14282,
+      "bottom1": {
+        "date": "2026-07-30",
+        "price": 18265
+      },
+      "bottom2": {
+        "date": "2026-09-02",
+        "price": 18065
+      },
+      "neckline": {
+        "date": "2026-08-18",
+        "price": 22275
+      },
+      "declinePct": 36.6,
+      "priceDiffPct": 1.1,
+      "reboundPct": 22.6,
+      "gapDays": 23,
+      "currentPrice": 18980,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 70
+    },
+    {
+      "code": "131290",
+      "name": "티에스이",
+      "market": "코스닥",
+      "price": 236000,
+      "changePct": 0,
+      "marketCap": 26105,
+      "bottom1": {
+        "date": "2026-07-08",
+        "price": 216000
+      },
+      "bottom2": {
+        "date": "2026-08-21",
+        "price": 216500
+      },
+      "neckline": {
+        "date": "2026-07-13",
+        "price": 294000
+      },
+      "declinePct": 23.5,
+      "priceDiffPct": 0.2,
+      "reboundPct": 36,
+      "gapDays": 30,
+      "currentPrice": 236000,
+      "currentDate": "2026-09-14",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 70
+    },
+    {
+      "code": "006910",
+      "name": "보성파워텍",
+      "market": "코스닥",
+      "price": 7260,
+      "changePct": 0,
+      "marketCap": 3567,
+      "bottom1": {
+        "date": "2026-06-26",
+        "price": 6420
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 6350
+      },
+      "neckline": {
+        "date": "2026-08-13",
+        "price": 8440
+      },
+      "declinePct": 64.7,
+      "priceDiffPct": 1.1,
+      "reboundPct": 32.2,
+      "gapDays": 40,
+      "currentPrice": 7260,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 70
+    },
+    {
+      "code": "079370",
+      "name": "제우스",
+      "market": "코스닥",
+      "price": 9690,
+      "changePct": 0,
+      "marketCap": 3006,
+      "bottom1": {
+        "date": "2026-06-26",
+        "price": 9150
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 9050
+      },
+      "neckline": {
+        "date": "2026-06-30",
+        "price": 11300
+      },
+      "declinePct": 48.5,
+      "priceDiffPct": 1.1,
+      "reboundPct": 24.2,
+      "gapDays": 40,
+      "currentPrice": 9690,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 70
+    },
+    {
+      "code": "005930",
+      "name": "삼성전자",
+      "market": "코스피",
+      "price": 249000,
+      "changePct": 0,
+      "marketCap": 14557234,
+      "bottom1": {
+        "date": "2026-07-20",
+        "price": 240000
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 243000
+      },
+      "neckline": {
+        "date": "2026-08-18",
+        "price": 288000
+      },
+      "declinePct": 35.9,
+      "priceDiffPct": 1.3,
+      "reboundPct": 19.3,
+      "gapDays": 32,
+      "currentPrice": 249000,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 69
+    },
+    {
+      "code": "028050",
+      "name": "삼성E&A",
+      "market": "코스피",
+      "price": 50800,
+      "changePct": 0,
+      "marketCap": 99568,
+      "bottom1": {
+        "date": "2026-06-08",
+        "price": 42900
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 43450
+      },
+      "neckline": {
+        "date": "2026-06-17",
+        "price": 59200
+      },
+      "declinePct": 36.3,
+      "priceDiffPct": 1.3,
+      "reboundPct": 37.1,
+      "gapDays": 54,
+      "currentPrice": 50800,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 69
+    },
+    {
+      "code": "018880",
+      "name": "한온시스템",
+      "market": "코스피",
+      "price": 3475,
+      "changePct": 0,
+      "marketCap": 35663,
+      "bottom1": {
+        "date": "2026-07-09",
+        "price": 3320
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 3355
+      },
+      "neckline": {
+        "date": "2026-08-13",
+        "price": 3945
+      },
+      "declinePct": 44.1,
+      "priceDiffPct": 1.1,
+      "reboundPct": 18.2,
+      "gapDays": 31,
+      "currentPrice": 3475,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 69
+    },
+    {
+      "code": "226490",
+      "name": "KODEX 코스피",
+      "market": "코스피",
+      "price": 68650,
+      "changePct": 0,
+      "marketCap": 14005,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 66180
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 66065
+      },
+      "neckline": {
+        "date": "2026-08-18",
+        "price": 74045
+      },
+      "declinePct": 31.3,
+      "priceDiffPct": 0.2,
+      "reboundPct": 12,
+      "gapDays": 31,
+      "currentPrice": 68650,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 69
+    },
+    {
+      "code": "077970",
+      "name": "STX엔진",
+      "market": "코스피",
+      "price": 24050,
+      "changePct": 0,
+      "marketCap": 9656,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 22000
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 22300
+      },
+      "neckline": {
+        "date": "2026-08-10",
+        "price": 30850
+      },
+      "declinePct": 58.3,
+      "priceDiffPct": 1.4,
+      "reboundPct": 39.3,
+      "gapDays": 24,
+      "currentPrice": 24050,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 69
+    },
+    {
+      "code": "293490",
+      "name": "카카오게임즈",
+      "market": "코스닥",
+      "price": 9660,
+      "changePct": 0,
+      "marketCap": 10312,
+      "bottom1": {
+        "date": "2026-06-11",
+        "price": 8210
+      },
+      "bottom2": {
+        "date": "2026-08-31",
+        "price": 8100
+      },
+      "neckline": {
+        "date": "2026-06-22",
+        "price": 11450
+      },
+      "declinePct": 35.8,
+      "priceDiffPct": 1.3,
+      "reboundPct": 40.4,
+      "gapDays": 55,
+      "currentPrice": 9660,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 69
+    },
+    {
+      "code": "458870",
+      "name": "씨어스",
+      "market": "코스닥",
+      "price": 23800,
+      "changePct": 0,
+      "marketCap": 9126,
+      "bottom1": {
+        "date": "2026-07-30",
+        "price": 21300
+      },
+      "bottom2": {
+        "date": "2026-08-13",
+        "price": 21000
+      },
+      "neckline": {
+        "date": "2026-08-04",
+        "price": 29050
+      },
+      "declinePct": 50.3,
+      "priceDiffPct": 1.4,
+      "reboundPct": 37.4,
+      "gapDays": 10,
+      "currentPrice": 23800,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 69
+    },
+    {
+      "code": "417200",
+      "name": "LS머트리얼즈",
+      "market": "코스닥",
+      "price": 11230,
+      "changePct": 0,
+      "marketCap": 7597,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 10300
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 10440
+      },
+      "neckline": {
+        "date": "2026-08-13",
+        "price": 12930
+      },
+      "declinePct": 59,
+      "priceDiffPct": 1.4,
+      "reboundPct": 24.7,
+      "gapDays": 24,
+      "currentPrice": 11230,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 69
+    },
+    {
+      "code": "009520",
+      "name": "포스코엠텍",
+      "market": "코스닥",
+      "price": 12670,
+      "changePct": 0,
+      "marketCap": 5276,
+      "bottom1": {
+        "date": "2026-06-26",
+        "price": 11370
+      },
+      "bottom2": {
+        "date": "2026-08-19",
+        "price": 11210
+      },
+      "neckline": {
+        "date": "2026-07-03",
+        "price": 13610
+      },
+      "declinePct": 50.8,
+      "priceDiffPct": 1.4,
+      "reboundPct": 20.5,
+      "gapDays": 36,
+      "currentPrice": 12670,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 69
+    },
+    {
+      "code": "393890",
+      "name": "더블유씨피",
+      "market": "코스닥",
+      "price": 9660,
+      "changePct": 0,
+      "marketCap": 3269,
+      "bottom1": {
+        "date": "2026-06-29",
+        "price": 9110
+      },
+      "bottom2": {
+        "date": "2026-09-09",
+        "price": 9230
+      },
+      "neckline": {
+        "date": "2026-09-01",
+        "price": 11800
+      },
+      "declinePct": 57.3,
+      "priceDiffPct": 1.3,
+      "reboundPct": 28.7,
+      "gapDays": 50,
+      "currentPrice": 9660,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 69
+    },
+    {
+      "code": "352480",
+      "name": "씨앤씨인터내셔널",
+      "market": "코스닥",
+      "price": 21850,
+      "changePct": 0,
+      "marketCap": 2978,
+      "bottom1": {
+        "date": "2026-06-24",
+        "price": 19840
+      },
+      "bottom2": {
+        "date": "2026-08-19",
+        "price": 20100
+      },
+      "neckline": {
+        "date": "2026-08-12",
+        "price": 23900
+      },
+      "declinePct": 38.3,
+      "priceDiffPct": 1.3,
+      "reboundPct": 19.7,
+      "gapDays": 38,
+      "currentPrice": 21850,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 69
+    },
+    {
+      "code": "448900",
+      "name": "한국피아이엠",
+      "market": "코스닥",
+      "price": 48050,
+      "changePct": 0,
+      "marketCap": 2919,
+      "bottom1": {
+        "date": "2026-07-09",
+        "price": 43900
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 44500
+      },
+      "neckline": {
+        "date": "2026-08-14",
+        "price": 74700
+      },
+      "declinePct": 67,
+      "priceDiffPct": 1.4,
+      "reboundPct": 69,
+      "gapDays": 38,
+      "currentPrice": 48050,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 69
+    },
+    {
+      "code": "003670",
+      "name": "포스코퓨처엠",
+      "market": "코스피",
+      "price": 178900,
+      "changePct": 0,
+      "marketCap": 159125,
+      "bottom1": {
+        "date": "2026-06-26",
+        "price": 155700
+      },
+      "bottom2": {
+        "date": "2026-08-19",
+        "price": 153300
+      },
+      "neckline": {
+        "date": "2026-06-29",
+        "price": 187800
+      },
+      "declinePct": 48,
+      "priceDiffPct": 1.5,
+      "reboundPct": 21.6,
+      "gapDays": 36,
+      "currentPrice": 178900,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 68
+    },
+    {
+      "code": "443060",
+      "name": "HD현대마린솔루션",
+      "market": "코스피",
+      "price": 239000,
+      "changePct": 0,
+      "marketCap": 107152,
+      "bottom1": {
+        "date": "2026-06-23",
+        "price": 203000
+      },
+      "bottom2": {
+        "date": "2026-09-02",
+        "price": 198500
+      },
+      "neckline": {
+        "date": "2026-06-30",
+        "price": 235500
+      },
+      "declinePct": 29.3,
+      "priceDiffPct": 2.2,
+      "reboundPct": 17.3,
+      "gapDays": 49,
+      "currentPrice": 239000,
+      "currentDate": "2026-09-15",
+      "status": "🚀 넥라인 돌파",
+      "score": 68
+    },
+    {
+      "code": "001120",
+      "name": "LX인터내셔널",
+      "market": "코스피",
+      "price": 40650,
+      "changePct": 0,
+      "marketCap": 15756,
+      "bottom1": {
+        "date": "2026-06-08",
+        "price": 37250
+      },
+      "bottom2": {
+        "date": "2026-08-24",
+        "price": 36950
+      },
+      "neckline": {
+        "date": "2026-06-16",
+        "price": 42800
+      },
+      "declinePct": 35.4,
+      "priceDiffPct": 0.8,
+      "reboundPct": 15.4,
+      "gapDays": 53,
+      "currentPrice": 40650,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 68
+    },
+    {
+      "code": "252670",
+      "name": "KODEX 200선물인버스2X",
+      "market": "코스피",
+      "price": 78,
+      "changePct": 0,
+      "marketCap": 8585,
+      "bottom1": {
+        "date": "2026-08-18",
+        "price": 69
+      },
+      "bottom2": {
+        "date": "2026-09-08",
+        "price": 68
+      },
+      "neckline": {
+        "date": "2026-08-19",
+        "price": 90
+      },
+      "declinePct": 55.8,
+      "priceDiffPct": 1.4,
+      "reboundPct": 31.4,
+      "gapDays": 15,
+      "currentPrice": 78,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 68
+    },
+    {
+      "code": "036930",
+      "name": "주성엔지니어링",
+      "market": "코스닥",
+      "price": 206000,
+      "changePct": 0,
+      "marketCap": 95751,
+      "bottom1": {
+        "date": "2026-07-08",
+        "price": 160000
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 157700
+      },
+      "neckline": {
+        "date": "2026-07-15",
+        "price": 222000
+      },
+      "declinePct": 43.5,
+      "priceDiffPct": 1.4,
+      "reboundPct": 39.8,
+      "gapDays": 32,
+      "currentPrice": 206000,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 68
+    },
+    {
+      "code": "178320",
+      "name": "서진시스템",
+      "market": "코스닥",
+      "price": 34900,
+      "changePct": 0,
+      "marketCap": 22239,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 33550
+      },
+      "bottom2": {
+        "date": "2026-08-19",
+        "price": 34050
+      },
+      "neckline": {
+        "date": "2026-07-23",
+        "price": 42700
+      },
+      "declinePct": 59.7,
+      "priceDiffPct": 1.5,
+      "reboundPct": 26.3,
+      "gapDays": 20,
+      "currentPrice": 34900,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 68
+    },
+    {
+      "code": "491000",
+      "name": "리브스메드",
+      "market": "코스닥",
+      "price": 30700,
+      "changePct": 0,
+      "marketCap": 7753,
+      "bottom1": {
+        "date": "2026-07-03",
+        "price": 31550
+      },
+      "bottom2": {
+        "date": "2026-08-31",
+        "price": 31500
+      },
+      "neckline": {
+        "date": "2026-08-10",
+        "price": 51500
+      },
+      "declinePct": 60,
+      "priceDiffPct": 0.2,
+      "reboundPct": 63.4,
+      "gapDays": 39,
+      "currentPrice": 30700,
+      "currentDate": "2026-09-15",
+      "status": "🔍 패턴 형성중",
+      "score": 68
+    },
+    {
+      "code": "399720",
+      "name": "가온칩스",
+      "market": "코스닥",
+      "price": 39750,
+      "changePct": 0,
+      "marketCap": 4714,
+      "bottom1": {
+        "date": "2026-07-29",
+        "price": 39950
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 40000
+      },
+      "neckline": {
+        "date": "2026-08-18",
+        "price": 50600
+      },
+      "declinePct": 37.2,
+      "priceDiffPct": 0.1,
+      "reboundPct": 26.6,
+      "gapDays": 25,
+      "currentPrice": 39750,
+      "currentDate": "2026-09-15",
+      "status": "🔍 패턴 형성중",
+      "score": 68
+    },
+    {
+      "code": "049070",
+      "name": "인탑스",
+      "market": "코스닥",
+      "price": 18200,
+      "changePct": 0,
+      "marketCap": 2865,
+      "bottom1": {
+        "date": "2026-06-08",
+        "price": 16800
+      },
+      "bottom2": {
+        "date": "2026-08-24",
+        "price": 17030
+      },
+      "neckline": {
+        "date": "2026-06-19",
+        "price": 21700
+      },
+      "declinePct": 28.5,
+      "priceDiffPct": 1.4,
+      "reboundPct": 28.3,
+      "gapDays": 53,
+      "currentPrice": 18200,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 68
+    },
+    {
+      "code": "000150",
+      "name": "두산",
+      "market": "코스피",
+      "price": 1255000,
+      "changePct": 0,
+      "marketCap": 203233,
+      "bottom1": {
+        "date": "2026-07-09",
+        "price": 1160000
+      },
+      "bottom2": {
+        "date": "2026-08-11",
+        "price": 1140000
+      },
+      "neckline": {
+        "date": "2026-07-10",
+        "price": 1445000
+      },
+      "declinePct": 53.4,
+      "priceDiffPct": 1.7,
+      "reboundPct": 25.7,
+      "gapDays": 22,
+      "currentPrice": 1255000,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 67
+    },
+    {
+      "code": "017670",
+      "name": "SK텔레콤",
+      "market": "코스피",
+      "price": 90100,
+      "changePct": 0,
+      "marketCap": 193526,
+      "bottom1": {
+        "date": "2026-07-08",
+        "price": 82200
+      },
+      "bottom2": {
+        "date": "2026-08-11",
+        "price": 83600
+      },
+      "neckline": {
+        "date": "2026-07-27",
+        "price": 105600
+      },
+      "declinePct": 41.1,
+      "priceDiffPct": 1.7,
+      "reboundPct": 27.4,
+      "gapDays": 23,
+      "currentPrice": 90100,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 67
+    },
+    {
+      "code": "128940",
+      "name": "한미약품",
+      "market": "코스피",
+      "price": 474000,
+      "changePct": 0,
+      "marketCap": 60724,
+      "bottom1": {
+        "date": "2026-06-11",
+        "price": 385000
+      },
+      "bottom2": {
+        "date": "2026-08-19",
+        "price": 374000
+      },
+      "neckline": {
+        "date": "2026-07-03",
+        "price": 470000
+      },
+      "declinePct": 33.4,
+      "priceDiffPct": 2.9,
+      "reboundPct": 23.8,
+      "gapDays": 47,
+      "currentPrice": 474000,
+      "currentDate": "2026-09-15",
+      "status": "🚀 넥라인 돌파",
+      "score": 67
+    },
+    {
+      "code": "241560",
+      "name": "두산밥캣",
+      "market": "코스피",
+      "price": 61600,
+      "changePct": 0,
+      "marketCap": 59047,
+      "bottom1": {
+        "date": "2026-06-26",
+        "price": 58000
+      },
+      "bottom2": {
+        "date": "2026-08-21",
+        "price": 57200
+      },
+      "neckline": {
+        "date": "2026-07-23",
+        "price": 69300
+      },
+      "declinePct": 27.2,
+      "priceDiffPct": 1.4,
+      "reboundPct": 20.3,
+      "gapDays": 38,
+      "currentPrice": 61600,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 67
+    },
+    {
+      "code": "487240",
+      "name": "KODEX AI전력핵심설비",
+      "market": "코스피",
+      "price": 35670,
+      "changePct": 0,
+      "marketCap": 31176,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 31100
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 31635
+      },
+      "neckline": {
+        "date": "2026-08-13",
+        "price": 38685
+      },
+      "declinePct": 45.9,
+      "priceDiffPct": 1.7,
+      "reboundPct": 23.3,
+      "gapDays": 24,
+      "currentPrice": 35670,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 67
+    },
+    {
+      "code": "011780",
+      "name": "금호석유화학",
+      "market": "코스피",
+      "price": 124900,
+      "changePct": 0,
+      "marketCap": 31421,
+      "bottom1": {
+        "date": "2026-06-10",
+        "price": 115100
+      },
+      "bottom2": {
+        "date": "2026-08-21",
+        "price": 116400
+      },
+      "neckline": {
+        "date": "2026-08-07",
+        "price": 139000
+      },
+      "declinePct": 25.9,
+      "priceDiffPct": 1.1,
+      "reboundPct": 20.1,
+      "gapDays": 50,
+      "currentPrice": 124900,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 67
+    },
+    {
+      "code": "004990",
+      "name": "롯데지주",
+      "market": "코스피",
+      "price": 25350,
+      "changePct": 0,
+      "marketCap": 25265,
+      "bottom1": {
+        "date": "2026-06-26",
+        "price": 22550
+      },
+      "bottom2": {
+        "date": "2026-08-21",
+        "price": 22250
+      },
+      "neckline": {
+        "date": "2026-07-08",
+        "price": 25000
+      },
+      "declinePct": 28.6,
+      "priceDiffPct": 1.3,
+      "reboundPct": 11.6,
+      "gapDays": 38,
+      "currentPrice": 25350,
+      "currentDate": "2026-09-15",
+      "status": "🚀 넥라인 돌파",
+      "score": 67
+    },
+    {
+      "code": "457190",
+      "name": "이수스페셜티케미컬",
+      "market": "코스피",
+      "price": 63000,
+      "changePct": 0,
+      "marketCap": 19038,
+      "bottom1": {
+        "date": "2026-06-26",
+        "price": 62000
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 61800
+      },
+      "neckline": {
+        "date": "2026-09-01",
+        "price": 75700
+      },
+      "declinePct": 51.8,
+      "priceDiffPct": 0.3,
+      "reboundPct": 22.3,
+      "gapDays": 47,
+      "currentPrice": 63000,
+      "currentDate": "2026-09-15",
+      "status": "🔍 패턴 형성중",
+      "score": 67
+    },
+    {
+      "code": "011210",
+      "name": "현대위아",
+      "market": "코스피",
+      "price": 56900,
+      "changePct": 0,
+      "marketCap": 15474,
+      "bottom1": {
+        "date": "2026-06-26",
+        "price": 57400
+      },
+      "bottom2": {
+        "date": "2026-08-21",
+        "price": 57600
+      },
+      "neckline": {
+        "date": "2026-08-14",
+        "price": 68800
+      },
+      "declinePct": 44.5,
+      "priceDiffPct": 0.3,
+      "reboundPct": 19.7,
+      "gapDays": 38,
+      "currentPrice": 56900,
+      "currentDate": "2026-09-15",
+      "status": "🔍 패턴 형성중",
+      "score": 67
+    },
+    {
+      "code": "003570",
+      "name": "SNT다이내믹스",
+      "market": "코스피",
+      "price": 28250,
+      "changePct": 0,
+      "marketCap": 9394,
+      "bottom1": {
+        "date": "2026-07-30",
+        "price": 28000
+      },
+      "bottom2": {
+        "date": "2026-09-02",
+        "price": 27900
+      },
+      "neckline": {
+        "date": "2026-08-19",
+        "price": 34300
+      },
+      "declinePct": 40.6,
+      "priceDiffPct": 0.4,
+      "reboundPct": 22.7,
+      "gapDays": 23,
+      "currentPrice": 28250,
+      "currentDate": "2026-09-15",
+      "status": "🔍 패턴 형성중",
+      "score": 67
+    },
+    {
+      "code": "195870",
+      "name": "해성디에스",
+      "market": "코스피",
+      "price": 49000,
+      "changePct": 0,
+      "marketCap": 8330,
+      "bottom1": {
+        "date": "2026-07-08",
+        "price": 48550
+      },
+      "bottom2": {
+        "date": "2026-09-04",
+        "price": 48700
+      },
+      "neckline": {
+        "date": "2026-07-15",
+        "price": 66800
+      },
+      "declinePct": 55.3,
+      "priceDiffPct": 0.3,
+      "reboundPct": 37.4,
+      "gapDays": 40,
+      "currentPrice": 49000,
+      "currentDate": "2026-09-15",
+      "status": "🔍 패턴 형성중",
+      "score": 67
+    },
+    {
+      "code": "100090",
+      "name": "SK오션플랜트",
+      "market": "코스피",
+      "price": 12320,
+      "changePct": 0,
+      "marketCap": 7697,
+      "bottom1": {
+        "date": "2026-07-14",
+        "price": 12500
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 12550
+      },
+      "neckline": {
+        "date": "2026-07-24",
+        "price": 20850
+      },
+      "declinePct": 42.7,
+      "priceDiffPct": 0.4,
+      "reboundPct": 66.5,
+      "gapDays": 28,
+      "currentPrice": 12320,
+      "currentDate": "2026-09-15",
+      "status": "🔍 패턴 형성중",
+      "score": 67
+    },
+    {
+      "code": "114800",
+      "name": "KODEX 인버스",
+      "market": "코스피",
+      "price": 1038,
+      "changePct": 0,
+      "marketCap": 8074,
+      "bottom1": {
+        "date": "2026-08-18",
+        "price": 969
+      },
+      "bottom2": {
+        "date": "2026-09-08",
+        "price": 962
+      },
+      "neckline": {
+        "date": "2026-08-19",
+        "price": 1101
+      },
+      "declinePct": 31.2,
+      "priceDiffPct": 0.7,
+      "reboundPct": 14,
+      "gapDays": 15,
+      "currentPrice": 1038,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 67
+    },
+    {
+      "code": "298380",
+      "name": "에이비엘바이오",
+      "market": "코스닥",
+      "price": 64900,
+      "changePct": 0,
+      "marketCap": 36336,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 67100
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 66900
+      },
+      "neckline": {
+        "date": "2026-08-11",
+        "price": 95200
+      },
+      "declinePct": 46.6,
+      "priceDiffPct": 0.3,
+      "reboundPct": 42.1,
+      "gapDays": 31,
+      "currentPrice": 64900,
+      "currentDate": "2026-09-15",
+      "status": "🔍 패턴 형성중",
+      "score": 67
+    },
+    {
+      "code": "032820",
+      "name": "우리기술",
+      "market": "코스닥",
+      "price": 13850,
+      "changePct": 0,
+      "marketCap": 23931,
+      "bottom1": {
+        "date": "2026-06-26",
+        "price": 11050
+      },
+      "bottom2": {
+        "date": "2026-08-19",
+        "price": 10760
+      },
+      "neckline": {
+        "date": "2026-07-01",
+        "price": 12900
+      },
+      "declinePct": 53,
+      "priceDiffPct": 2.6,
+      "reboundPct": 18.3,
+      "gapDays": 36,
+      "currentPrice": 13850,
+      "currentDate": "2026-09-15",
+      "status": "🚀 넥라인 돌파",
+      "score": 67
+    },
+    {
+      "code": "068760",
+      "name": "셀트리온제약",
+      "market": "코스닥",
+      "price": 39400,
+      "changePct": 0,
+      "marketCap": 17495,
+      "bottom1": {
+        "date": "2026-06-11",
+        "price": 40000
+      },
+      "bottom2": {
+        "date": "2026-08-19",
+        "price": 40000
+      },
+      "neckline": {
+        "date": "2026-08-11",
+        "price": 47000
+      },
+      "declinePct": 32.2,
+      "priceDiffPct": 0,
+      "reboundPct": 17.5,
+      "gapDays": 47,
+      "currentPrice": 39400,
+      "currentDate": "2026-09-15",
+      "status": "🔍 패턴 형성중",
+      "score": 67
+    },
+    {
+      "code": "007390",
+      "name": "네이처셀",
+      "market": "코스닥",
+      "price": 25350,
+      "changePct": 0,
+      "marketCap": 16334,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 22100
+      },
+      "bottom2": {
+        "date": "2026-08-19",
+        "price": 21650
+      },
+      "neckline": {
+        "date": "2026-07-22",
+        "price": 25000
+      },
+      "declinePct": 40.2,
+      "priceDiffPct": 2,
+      "reboundPct": 14.3,
+      "gapDays": 20,
+      "currentPrice": 25350,
+      "currentDate": "2026-09-15",
+      "status": "🚀 넥라인 돌파",
+      "score": 67
+    },
+    {
+      "code": "065350",
+      "name": "신성델타테크",
+      "market": "코스닥",
+      "price": 30100,
+      "changePct": 0,
+      "marketCap": 8273,
+      "bottom1": {
+        "date": "2026-06-26",
+        "price": 27000
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 27450
+      },
+      "neckline": {
+        "date": "2026-06-30",
+        "price": 35050
+      },
+      "declinePct": 55.4,
+      "priceDiffPct": 1.7,
+      "reboundPct": 28.7,
+      "gapDays": 40,
+      "currentPrice": 30100,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 67
+    },
+    {
+      "code": "053800",
+      "name": "안랩",
+      "market": "코스닥",
+      "price": 61100,
+      "changePct": 0,
+      "marketCap": 6798,
+      "bottom1": {
+        "date": "2026-06-11",
+        "price": 55200
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 55600
+      },
+      "neckline": {
+        "date": "2026-08-11",
+        "price": 64500
+      },
+      "declinePct": 26.4,
+      "priceDiffPct": 0.7,
+      "reboundPct": 16.4,
+      "gapDays": 51,
+      "currentPrice": 61100,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 67
+    },
+    {
+      "code": "048410",
+      "name": "현대바이오",
+      "market": "코스닥",
+      "price": 6610,
+      "changePct": 0,
+      "marketCap": 6379,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 5880
+      },
+      "bottom2": {
+        "date": "2026-09-04",
+        "price": 5780
+      },
+      "neckline": {
+        "date": "2026-08-13",
+        "price": 8340
+      },
+      "declinePct": 64.8,
+      "priceDiffPct": 1.7,
+      "reboundPct": 43.1,
+      "gapDays": 32,
+      "currentPrice": 6610,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 67
+    },
+    {
+      "code": "358570",
+      "name": "지아이이노베이션",
+      "market": "코스닥",
+      "price": 8370,
+      "changePct": 0,
+      "marketCap": 5400,
+      "bottom1": {
+        "date": "2026-08-24",
+        "price": 7560
+      },
+      "bottom2": {
+        "date": "2026-09-04",
+        "price": 7510
+      },
+      "neckline": {
+        "date": "2026-08-26",
+        "price": 8530
+      },
+      "declinePct": 36.3,
+      "priceDiffPct": 0.7,
+      "reboundPct": 13.2,
+      "gapDays": 9,
+      "currentPrice": 8370,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 67
+    },
+    {
+      "code": "013030",
+      "name": "하이록코리아",
+      "market": "코스닥",
+      "price": 34200,
+      "changePct": 0,
+      "marketCap": 4025,
+      "bottom1": {
+        "date": "2026-07-14",
+        "price": 29350
+      },
+      "bottom2": {
+        "date": "2026-08-21",
+        "price": 29750
+      },
+      "neckline": {
+        "date": "2026-08-11",
+        "price": 35350
+      },
+      "declinePct": 28.2,
+      "priceDiffPct": 1.4,
+      "reboundPct": 19.6,
+      "gapDays": 26,
+      "currentPrice": 34200,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 67
+    },
+    {
+      "code": "452430",
+      "name": "사피엔반도체",
+      "market": "코스닥",
+      "price": 37200,
+      "changePct": 0,
+      "marketCap": 3071,
+      "bottom1": {
+        "date": "2026-07-14",
+        "price": 25200
+      },
+      "bottom2": {
+        "date": "2026-08-21",
+        "price": 24500
+      },
+      "neckline": {
+        "date": "2026-07-15",
+        "price": 30500
+      },
+      "declinePct": 55,
+      "priceDiffPct": 2.8,
+      "reboundPct": 22.7,
+      "gapDays": 26,
+      "currentPrice": 37200,
+      "currentDate": "2026-09-15",
+      "status": "🚀 넥라인 돌파",
+      "score": 67
+    },
+    {
+      "code": "007660",
+      "name": "이수페타시스",
+      "market": "코스피",
+      "price": 107400,
+      "changePct": 0,
+      "marketCap": 78842,
+      "bottom1": {
+        "date": "2026-06-29",
+        "price": 102000
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 103900
+      },
+      "neckline": {
+        "date": "2026-07-01",
+        "price": 135200
+      },
+      "declinePct": 36.2,
+      "priceDiffPct": 1.9,
+      "reboundPct": 31.3,
+      "gapDays": 46,
+      "currentPrice": 107400,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 66
+    },
+    {
+      "code": "004800",
+      "name": "효성",
+      "market": "코스피",
+      "price": 157300,
+      "changePct": 0,
+      "marketCap": 26333,
+      "bottom1": {
+        "date": "2026-06-26",
+        "price": 155800
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 156500
+      },
+      "neckline": {
+        "date": "2026-07-01",
+        "price": 191100
+      },
+      "declinePct": 51,
+      "priceDiffPct": 0.4,
+      "reboundPct": 22.4,
+      "gapDays": 47,
+      "currentPrice": 157300,
+      "currentDate": "2026-09-15",
+      "status": "🔍 패턴 형성중",
+      "score": 66
+    },
+    {
+      "code": "005850",
+      "name": "에스엘",
+      "market": "코스피",
+      "price": 50800,
+      "changePct": 0,
+      "marketCap": 23596,
+      "bottom1": {
+        "date": "2026-07-14",
+        "price": 50000
+      },
+      "bottom2": {
+        "date": "2026-09-02",
+        "price": 49750
+      },
+      "neckline": {
+        "date": "2026-08-18",
+        "price": 63400
+      },
+      "declinePct": 37.1,
+      "priceDiffPct": 0.5,
+      "reboundPct": 27.1,
+      "gapDays": 34,
+      "currentPrice": 50800,
+      "currentDate": "2026-09-15",
+      "status": "🔍 패턴 형성중",
+      "score": 66
+    },
+    {
+      "code": "000240",
+      "name": "한국앤컴퍼니",
+      "market": "코스피",
+      "price": 24900,
+      "changePct": 0,
+      "marketCap": 23639,
+      "bottom1": {
+        "date": "2026-07-09",
+        "price": 23850
+      },
+      "bottom2": {
+        "date": "2026-09-08",
+        "price": 23850
+      },
+      "neckline": {
+        "date": "2026-08-07",
+        "price": 26700
+      },
+      "declinePct": 25.5,
+      "priceDiffPct": 0,
+      "reboundPct": 11.9,
+      "gapDays": 41,
+      "currentPrice": 24900,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 66
+    },
+    {
+      "code": "294400",
+      "name": "KIWOOM 200TR",
+      "market": "코스피",
+      "price": 138580,
+      "changePct": 0,
+      "marketCap": 17600,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 134120
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 133040
+      },
+      "neckline": {
+        "date": "2026-07-22",
+        "price": 150635
+      },
+      "declinePct": 32.8,
+      "priceDiffPct": 0.8,
+      "reboundPct": 12.8,
+      "gapDays": 31,
+      "currentPrice": 138580,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 66
+    },
+    {
+      "code": "003530",
+      "name": "한화투자증권",
+      "market": "코스피",
+      "price": 4810,
+      "changePct": 0,
+      "marketCap": 10320,
+      "bottom1": {
+        "date": "2026-06-26",
+        "price": 4550
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 4600
+      },
+      "neckline": {
+        "date": "2026-08-24",
+        "price": 5280
+      },
+      "declinePct": 53.9,
+      "priceDiffPct": 1.1,
+      "reboundPct": 15.4,
+      "gapDays": 47,
+      "currentPrice": 4810,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 66
+    },
+    {
+      "code": "305540",
+      "name": "TIGER 2차전지테마",
+      "market": "코스피",
+      "price": 18400,
+      "changePct": 0,
+      "marketCap": 9182,
+      "bottom1": {
+        "date": "2026-06-26",
+        "price": 16960
+      },
+      "bottom2": {
+        "date": "2026-08-21",
+        "price": 17200
+      },
+      "neckline": {
+        "date": "2026-06-29",
+        "price": 19925
+      },
+      "declinePct": 40.5,
+      "priceDiffPct": 1.4,
+      "reboundPct": 16.7,
+      "gapDays": 38,
+      "currentPrice": 18400,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 66
+    },
+    {
+      "code": "237350",
+      "name": "KODEX 코스피100",
+      "market": "코스피",
+      "price": 84270,
+      "changePct": 0,
+      "marketCap": 9143,
+      "bottom1": {
+        "date": "2026-07-14",
+        "price": 82055
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 80855
+      },
+      "neckline": {
+        "date": "2026-07-15",
+        "price": 96100
+      },
+      "declinePct": 33.2,
+      "priceDiffPct": 1.5,
+      "reboundPct": 18,
+      "gapDays": 35,
+      "currentPrice": 84270,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 66
+    },
+    {
+      "code": "462330",
+      "name": "KODEX 2차전지산업레버리지",
+      "market": "코스피",
+      "price": 1001,
+      "changePct": 0,
+      "marketCap": 7082,
+      "bottom1": {
+        "date": "2026-06-26",
+        "price": 993
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 988
+      },
+      "neckline": {
+        "date": "2026-06-29",
+        "price": 1356
+      },
+      "declinePct": 67,
+      "priceDiffPct": 0.5,
+      "reboundPct": 36.9,
+      "gapDays": 47,
+      "currentPrice": 1001,
+      "currentDate": "2026-09-15",
+      "status": "🔍 패턴 형성중",
+      "score": 66
+    },
+    {
+      "code": "222800",
+      "name": "심텍",
+      "market": "코스닥",
+      "price": 124700,
+      "changePct": 0,
+      "marketCap": 47354,
+      "bottom1": {
+        "date": "2026-06-24",
+        "price": 112200
+      },
+      "bottom2": {
+        "date": "2026-09-04",
+        "price": 111300
+      },
+      "neckline": {
+        "date": "2026-07-01",
+        "price": 164200
+      },
+      "declinePct": 21.7,
+      "priceDiffPct": 0.8,
+      "reboundPct": 46.9,
+      "gapDays": 50,
+      "currentPrice": 124700,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 66
+    },
+    {
+      "code": "041510",
+      "name": "에스엠",
+      "market": "코스닥",
+      "price": 88000,
+      "changePct": 0,
+      "marketCap": 20147,
+      "bottom1": {
+        "date": "2026-06-08",
+        "price": 69800
+      },
+      "bottom2": {
+        "date": "2026-08-19",
+        "price": 68500
+      },
+      "neckline": {
+        "date": "2026-06-11",
+        "price": 88800
+      },
+      "declinePct": 32,
+      "priceDiffPct": 1.9,
+      "reboundPct": 28.4,
+      "gapDays": 50,
+      "currentPrice": 88000,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 66
+    },
+    {
+      "code": "033790",
+      "name": "피노",
+      "market": "코스닥",
+      "price": 7420,
+      "changePct": 0,
+      "marketCap": 6182,
+      "bottom1": {
+        "date": "2026-07-09",
+        "price": 5340
+      },
+      "bottom2": {
+        "date": "2026-08-21",
+        "price": 5500
+      },
+      "neckline": {
+        "date": "2026-08-11",
+        "price": 7120
+      },
+      "declinePct": 68.1,
+      "priceDiffPct": 3,
+      "reboundPct": 31.4,
+      "gapDays": 29,
+      "currentPrice": 7420,
+      "currentDate": "2026-09-15",
+      "status": "🚀 넥라인 돌파",
+      "score": 66
+    },
+    {
+      "code": "045100",
+      "name": "한양이엔지",
+      "market": "코스닥",
+      "price": 28700,
+      "changePct": 0,
+      "marketCap": 5023,
+      "bottom1": {
+        "date": "2026-07-09",
+        "price": 28250
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 27800
+      },
+      "neckline": {
+        "date": "2026-07-13",
+        "price": 35900
+      },
+      "declinePct": 28.3,
+      "priceDiffPct": 1.6,
+      "reboundPct": 28.1,
+      "gapDays": 31,
+      "currentPrice": 28700,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 66
+    },
+    {
+      "code": "078130",
+      "name": "국일제지",
+      "market": "코스닥",
+      "price": 3380,
+      "changePct": 0,
+      "marketCap": 3811,
+      "bottom1": {
+        "date": "2026-06-24",
+        "price": 3400
+      },
+      "bottom2": {
+        "date": "2026-08-31",
+        "price": 3400
+      },
+      "neckline": {
+        "date": "2026-07-20",
+        "price": 4495
+      },
+      "declinePct": 25.7,
+      "priceDiffPct": 0,
+      "reboundPct": 32.2,
+      "gapDays": 46,
+      "currentPrice": 3380,
+      "currentDate": "2026-09-15",
+      "status": "🔍 패턴 형성중",
+      "score": 66
+    },
+    {
+      "code": "060280",
+      "name": "큐렉소",
+      "market": "코스닥",
+      "price": 7920,
+      "changePct": 0,
+      "marketCap": 3268,
+      "bottom1": {
+        "date": "2026-06-26",
+        "price": 8300
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 8260
+      },
+      "neckline": {
+        "date": "2026-08-14",
+        "price": 10460
+      },
+      "declinePct": 54.2,
+      "priceDiffPct": 0.5,
+      "reboundPct": 26.3,
+      "gapDays": 40,
+      "currentPrice": 7920,
+      "currentDate": "2026-09-15",
+      "status": "🔍 패턴 형성중",
+      "score": 66
+    },
+    {
+      "code": "000810",
+      "name": "삼성화재",
+      "market": "코스피",
+      "price": 675000,
+      "changePct": 0,
+      "marketCap": 301370,
+      "bottom1": {
+        "date": "2026-06-10",
+        "price": 596000
+      },
+      "bottom2": {
+        "date": "2026-08-19",
+        "price": 601000
+      },
+      "neckline": {
+        "date": "2026-06-19",
+        "price": 737000
+      },
+      "declinePct": 21.3,
+      "priceDiffPct": 0.8,
+      "reboundPct": 23.1,
+      "gapDays": 48,
+      "currentPrice": 675000,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 65
+    },
+    {
+      "code": "267260",
+      "name": "HD현대일렉트릭",
+      "market": "코스피",
+      "price": 739000,
+      "changePct": 0,
+      "marketCap": 266388,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 717000
+      },
+      "bottom2": {
+        "date": "2026-08-11",
+        "price": 731000
+      },
+      "neckline": {
+        "date": "2026-07-24",
+        "price": 870000
+      },
+      "declinePct": 41.8,
+      "priceDiffPct": 2,
+      "reboundPct": 20.2,
+      "gapDays": 15,
+      "currentPrice": 739000,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 65
+    },
+    {
+      "code": "278530",
+      "name": "KODEX 200TR",
+      "market": "코스피",
+      "price": 38260,
+      "changePct": 0,
+      "marketCap": 74205,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 37025
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 36675
+      },
+      "neckline": {
+        "date": "2026-07-22",
+        "price": 41585
+      },
+      "declinePct": 32.8,
+      "priceDiffPct": 0.9,
+      "reboundPct": 12.8,
+      "gapDays": 31,
+      "currentPrice": 38260,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 65
+    },
+    {
+      "code": "138930",
+      "name": "BNK금융지주",
+      "market": "코스피",
+      "price": 16010,
+      "changePct": 0,
+      "marketCap": 49125,
+      "bottom1": {
+        "date": "2026-07-29",
+        "price": 14170
+      },
+      "bottom2": {
+        "date": "2026-08-21",
+        "price": 14010
+      },
+      "neckline": {
+        "date": "2026-07-30",
+        "price": 15510
+      },
+      "declinePct": 25.6,
+      "priceDiffPct": 1.1,
+      "reboundPct": 10.1,
+      "gapDays": 16,
+      "currentPrice": 16010,
+      "currentDate": "2026-09-15",
+      "status": "🚀 넥라인 돌파",
+      "score": 65
+    },
+    {
+      "code": "036570",
+      "name": "NC",
+      "market": "코스피",
+      "price": 206500,
+      "changePct": 0,
+      "marketCap": 44488,
+      "bottom1": {
+        "date": "2026-07-29",
+        "price": 216500
+      },
+      "bottom2": {
+        "date": "2026-08-19",
+        "price": 215000
+      },
+      "neckline": {
+        "date": "2026-08-11",
+        "price": 268000
+      },
+      "declinePct": 37,
+      "priceDiffPct": 0.7,
+      "reboundPct": 24.2,
+      "gapDays": 14,
+      "currentPrice": 206500,
+      "currentDate": "2026-09-15",
+      "status": "🔍 패턴 형성중",
+      "score": 65
+    },
+    {
+      "code": "005385",
+      "name": "현대차우",
+      "market": "코스피",
+      "price": 178000,
+      "changePct": 0,
+      "marketCap": 41547,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 180500
+      },
+      "bottom2": {
+        "date": "2026-09-02",
+        "price": 179800
+      },
+      "neckline": {
+        "date": "2026-08-18",
+        "price": 212000
+      },
+      "declinePct": 40.8,
+      "priceDiffPct": 0.4,
+      "reboundPct": 17.7,
+      "gapDays": 30,
+      "currentPrice": 178000,
+      "currentDate": "2026-09-15",
+      "status": "🔍 패턴 형성중",
       "score": 65
     },
     {
       "code": "462870",
       "name": "시프트업",
       "market": "코스피",
-      "price": 31550,
-      "changePct": 0.94,
-      "marketCap": 18533,
+      "price": 32100,
+      "changePct": 0,
+      "marketCap": 18856,
       "bottom1": {
         "date": "2026-06-29",
         "price": 30400
@@ -3193,8 +3669,8 @@
       "priceDiffPct": 0.3,
       "reboundPct": 20.2,
       "gapDays": 35,
-      "currentPrice": 31550,
-      "currentDate": "2026-09-07",
+      "currentPrice": 32100,
+      "currentDate": "2026-09-15",
       "status": "⚡ 우측바닥 반등중",
       "score": 65
     },
@@ -3202,9 +3678,9 @@
       "code": "455850",
       "name": "SOL AI반도체소부장",
       "market": "코스피",
-      "price": 25130,
-      "changePct": 4.17,
-      "marketCap": 10492,
+      "price": 24200,
+      "changePct": 0,
+      "marketCap": 10116,
       "bottom1": {
         "date": "2026-07-08",
         "price": 22100
@@ -3221,74 +3697,186 @@
       "priceDiffPct": 2.1,
       "reboundPct": 27.9,
       "gapDays": 32,
-      "currentPrice": 25130,
-      "currentDate": "2026-09-07",
+      "currentPrice": 24200,
+      "currentDate": "2026-09-15",
       "status": "⚡ 우측바닥 반등중",
       "score": 65
     },
     {
-      "code": "367760",
-      "name": "RISE 네트워크인프라",
+      "code": "006120",
+      "name": "SK디스커버리",
       "market": "코스피",
-      "price": 59250,
-      "changePct": 4.49,
-      "marketCap": 6932,
+      "price": 57500,
+      "changePct": 0,
+      "marketCap": 10013,
       "bottom1": {
-        "date": "2026-07-14",
-        "price": 54000
+        "date": "2026-07-03",
+        "price": 46700
       },
       "bottom2": {
-        "date": "2026-08-25",
-        "price": 52900
+        "date": "2026-08-28",
+        "price": 48000
       },
       "neckline": {
         "date": "2026-07-15",
-        "price": 64315
+        "price": 57100
       },
-      "declinePct": 41.9,
-      "priceDiffPct": 2,
-      "reboundPct": 20.3,
-      "gapDays": 28,
-      "currentPrice": 59250,
-      "currentDate": "2026-09-07",
+      "declinePct": 26.9,
+      "priceDiffPct": 2.8,
+      "reboundPct": 20.6,
+      "gapDays": 38,
+      "currentPrice": 57500,
+      "currentDate": "2026-09-15",
+      "status": "🚀 넥라인 돌파",
+      "score": 65
+    },
+    {
+      "code": "295040",
+      "name": "SOL 200TR",
+      "market": "코스피",
+      "price": 39600,
+      "changePct": 0,
+      "marketCap": 9860,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 38360
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 38000
+      },
+      "neckline": {
+        "date": "2026-07-22",
+        "price": 43025
+      },
+      "declinePct": 32.7,
+      "priceDiffPct": 0.9,
+      "reboundPct": 12.7,
+      "gapDays": 31,
+      "currentPrice": 39600,
+      "currentDate": "2026-09-15",
       "status": "⚡ 우측바닥 반등중",
       "score": 65
     },
     {
-      "code": "257720",
-      "name": "실리콘투",
-      "market": "코스닥",
-      "price": 47150,
-      "changePct": 1.77,
-      "marketCap": 30919,
+      "code": "315930",
+      "name": "KODEX Top5PlusTR",
+      "market": "코스피",
+      "price": 78695,
+      "changePct": 0,
+      "marketCap": 9443,
       "bottom1": {
-        "date": "2026-06-08",
-        "price": 31550
+        "date": "2026-07-21",
+        "price": 77230
       },
       "bottom2": {
-        "date": "2026-07-31",
-        "price": 32550
+        "date": "2026-09-03",
+        "price": 76695
       },
       "neckline": {
-        "date": "2026-07-13",
-        "price": 40450
+        "date": "2026-07-22",
+        "price": 86150
       },
-      "declinePct": 37.5,
-      "priceDiffPct": 3.2,
-      "reboundPct": 26.2,
-      "gapDays": 38,
-      "currentPrice": 47150,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
+      "declinePct": 28.8,
+      "priceDiffPct": 0.7,
+      "reboundPct": 11.9,
+      "gapDays": 31,
+      "currentPrice": 78695,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 65
+    },
+    {
+      "code": "495050",
+      "name": "RISE 코리아밸류업",
+      "market": "코스피",
+      "price": 31760,
+      "changePct": 0,
+      "marketCap": 9385,
+      "bottom1": {
+        "date": "2026-08-19",
+        "price": 30475
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 30515
+      },
+      "neckline": {
+        "date": "2026-08-27",
+        "price": 33000
+      },
+      "declinePct": 29.1,
+      "priceDiffPct": 0.1,
+      "reboundPct": 8.2,
+      "gapDays": 11,
+      "currentPrice": 31760,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 65
+    },
+    {
+      "code": "069660",
+      "name": "KIWOOM 200",
+      "market": "코스피",
+      "price": 105525,
+      "changePct": 0,
+      "marketCap": 7228,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 102230
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 101270
+      },
+      "neckline": {
+        "date": "2026-07-22",
+        "price": 114800
+      },
+      "declinePct": 32.8,
+      "priceDiffPct": 0.9,
+      "reboundPct": 12.8,
+      "gapDays": 31,
+      "currentPrice": 105525,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 65
+    },
+    {
+      "code": "080220",
+      "name": "제주반도체",
+      "market": "코스닥",
+      "price": 70500,
+      "changePct": 0,
+      "marketCap": 24282,
+      "bottom1": {
+        "date": "2026-07-14",
+        "price": 69600
+      },
+      "bottom2": {
+        "date": "2026-08-25",
+        "price": 70100
+      },
+      "neckline": {
+        "date": "2026-08-11",
+        "price": 94800
+      },
+      "declinePct": 49.6,
+      "priceDiffPct": 0.7,
+      "reboundPct": 35.7,
+      "gapDays": 28,
+      "currentPrice": 70500,
+      "currentDate": "2026-09-15",
+      "status": "🔍 패턴 형성중",
       "score": 65
     },
     {
       "code": "082920",
       "name": "비츠로셀",
       "market": "코스닥",
-      "price": 29000,
-      "changePct": 2.68,
-      "marketCap": 13090,
+      "price": 27700,
+      "changePct": 0,
+      "marketCap": 12504,
       "bottom1": {
         "date": "2026-07-30",
         "price": 24350
@@ -3305,8 +3893,8 @@
       "priceDiffPct": 2.1,
       "reboundPct": 46.7,
       "gapDays": 21,
-      "currentPrice": 29000,
-      "currentDate": "2026-09-07",
+      "currentPrice": 27700,
+      "currentDate": "2026-09-15",
       "status": "⚡ 우측바닥 반등중",
       "score": 65
     },
@@ -3314,9 +3902,9 @@
       "code": "056190",
       "name": "SFA",
       "market": "코스닥",
-      "price": 24200,
-      "changePct": 2.11,
-      "marketCap": 8690,
+      "price": 24950,
+      "changePct": 0,
+      "marketCap": 8959,
       "bottom1": {
         "date": "2026-06-08",
         "price": 23000
@@ -3333,46 +3921,18 @@
       "priceDiffPct": 2,
       "reboundPct": 23.6,
       "gapDays": 54,
-      "currentPrice": 24200,
-      "currentDate": "2026-09-07",
+      "currentPrice": 24950,
+      "currentDate": "2026-09-15",
       "status": "⚡ 우측바닥 반등중",
-      "score": 65
-    },
-    {
-      "code": "376300",
-      "name": "디어유",
-      "market": "코스닥",
-      "price": 18360,
-      "changePct": 1.66,
-      "marketCap": 4358,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 19220
-      },
-      "bottom2": {
-        "date": "2026-08-07",
-        "price": 19360
-      },
-      "neckline": {
-        "date": "2026-07-02",
-        "price": 23850
-      },
-      "declinePct": 45.4,
-      "priceDiffPct": 0.7,
-      "reboundPct": 23.6,
-      "gapDays": 29,
-      "currentPrice": 18360,
-      "currentDate": "2026-09-07",
-      "status": "🔍 패턴 형성중",
       "score": 65
     },
     {
       "code": "078160",
       "name": "메디포스트",
       "market": "코스닥",
-      "price": 9050,
-      "changePct": 1.46,
-      "marketCap": 3548,
+      "price": 8700,
+      "changePct": 0,
+      "marketCap": 3411,
       "bottom1": {
         "date": "2026-06-29",
         "price": 8000
@@ -3389,8 +3949,8 @@
       "priceDiffPct": 2,
       "reboundPct": 31.2,
       "gapDays": 39,
-      "currentPrice": 9050,
-      "currentDate": "2026-09-07",
+      "currentPrice": 8700,
+      "currentDate": "2026-09-15",
       "status": "⚡ 우측바닥 반등중",
       "score": 65
     },
@@ -3398,9 +3958,9 @@
       "code": "000720",
       "name": "현대건설",
       "market": "코스피",
-      "price": 126900,
-      "changePct": 6.02,
-      "marketCap": 141310,
+      "price": 128200,
+      "changePct": 0,
+      "marketCap": 142758,
       "bottom1": {
         "date": "2026-06-26",
         "price": 100000
@@ -3417,18 +3977,130 @@
       "priceDiffPct": 3.3,
       "reboundPct": 20.7,
       "gapDays": 39,
-      "currentPrice": 126900,
-      "currentDate": "2026-09-07",
+      "currentPrice": 128200,
+      "currentDate": "2026-09-15",
       "status": "🚀 넥라인 돌파",
+      "score": 64
+    },
+    {
+      "code": "102110",
+      "name": "TIGER 200",
+      "market": "코스피",
+      "price": 105825,
+      "changePct": 0,
+      "marketCap": 96936,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 102515
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 101485
+      },
+      "neckline": {
+        "date": "2026-07-22",
+        "price": 115060
+      },
+      "declinePct": 32.8,
+      "priceDiffPct": 1,
+      "reboundPct": 12.8,
+      "gapDays": 31,
+      "currentPrice": 105825,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 64
+    },
+    {
+      "code": "381180",
+      "name": "TIGER 미국필라델피아반도체나스닥",
+      "market": "코스피",
+      "price": 40220,
+      "changePct": 0,
+      "marketCap": 54639,
+      "bottom1": {
+        "date": "2026-07-30",
+        "price": 38955
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 39690
+      },
+      "neckline": {
+        "date": "2026-08-18",
+        "price": 46595
+      },
+      "declinePct": 33.9,
+      "priceDiffPct": 1.9,
+      "reboundPct": 18.5,
+      "gapDays": 24,
+      "currentPrice": 40220,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 64
+    },
+    {
+      "code": "310970",
+      "name": "TIGER MSCI Korea TR",
+      "market": "코스피",
+      "price": 46950,
+      "changePct": 0,
+      "marketCap": 43570,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 45705
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 45170
+      },
+      "neckline": {
+        "date": "2026-08-18",
+        "price": 51390
+      },
+      "declinePct": 33.3,
+      "priceDiffPct": 1.2,
+      "reboundPct": 13.1,
+      "gapDays": 31,
+      "currentPrice": 46950,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
+      "score": 64
+    },
+    {
+      "code": "148020",
+      "name": "RISE 200",
+      "market": "코스피",
+      "price": 106350,
+      "changePct": 0,
+      "marketCap": 42965,
+      "bottom1": {
+        "date": "2026-07-21",
+        "price": 103125
+      },
+      "bottom2": {
+        "date": "2026-09-03",
+        "price": 102015
+      },
+      "neckline": {
+        "date": "2026-07-22",
+        "price": 115770
+      },
+      "declinePct": 32.8,
+      "priceDiffPct": 1.1,
+      "reboundPct": 12.9,
+      "gapDays": 31,
+      "currentPrice": 106350,
+      "currentDate": "2026-09-15",
+      "status": "⚡ 우측바닥 반등중",
       "score": 64
     },
     {
       "code": "004170",
       "name": "신세계",
       "market": "코스피",
-      "price": 396500,
-      "changePct": 3.66,
-      "marketCap": 37450,
+      "price": 376000,
+      "changePct": 0,
+      "marketCap": 35514,
       "bottom1": {
         "date": "2026-07-30",
         "price": 392500
@@ -3445,8 +4117,8 @@
       "priceDiffPct": 0.3,
       "reboundPct": 15.6,
       "gapDays": 9,
-      "currentPrice": 396500,
-      "currentDate": "2026-09-07",
+      "currentPrice": 376000,
+      "currentDate": "2026-09-15",
       "status": "🔍 패턴 형성중",
       "score": 64
     },
@@ -3454,9 +4126,9 @@
       "code": "022100",
       "name": "포스코DX",
       "market": "코스피",
-      "price": 22050,
-      "changePct": 1.85,
-      "marketCap": 33524,
+      "price": 21550,
+      "changePct": 0,
+      "marketCap": 32763,
       "bottom1": {
         "date": "2026-06-26",
         "price": 19510
@@ -3473,36 +4145,8 @@
       "priceDiffPct": 2.2,
       "reboundPct": 19.7,
       "gapDays": 36,
-      "currentPrice": 22050,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 64
-    },
-    {
-      "code": "111770",
-      "name": "영원무역",
-      "market": "코스피",
-      "price": 75100,
-      "changePct": 0.13,
-      "marketCap": 33278,
-      "bottom1": {
-        "date": "2026-06-08",
-        "price": 73000
-      },
-      "bottom2": {
-        "date": "2026-08-21",
-        "price": 72200
-      },
-      "neckline": {
-        "date": "2026-08-06",
-        "price": 95000
-      },
-      "declinePct": 22.3,
-      "priceDiffPct": 1.1,
-      "reboundPct": 30.9,
-      "gapDays": 52,
-      "currentPrice": 75100,
-      "currentDate": "2026-09-07",
+      "currentPrice": 21550,
+      "currentDate": "2026-09-15",
       "status": "⚡ 우측바닥 반등중",
       "score": 64
     },
@@ -3510,9 +4154,9 @@
       "code": "051600",
       "name": "한전KPS",
       "market": "코스피",
-      "price": 47350,
-      "changePct": 3.38,
-      "marketCap": 21308,
+      "price": 47400,
+      "changePct": 0,
+      "marketCap": 21330,
       "bottom1": {
         "date": "2026-07-09",
         "price": 42550
@@ -3529,682 +4173,38 @@
       "priceDiffPct": 1.3,
       "reboundPct": 13.7,
       "gapDays": 30,
-      "currentPrice": 47350,
-      "currentDate": "2026-09-07",
+      "currentPrice": 47400,
+      "currentDate": "2026-09-15",
       "status": "⚡ 우측바닥 반등중",
       "score": 64
     },
     {
-      "code": "330590",
-      "name": "롯데리츠",
+      "code": "292150",
+      "name": "TIGER 코리아TOP10",
       "market": "코스피",
-      "price": 3885,
-      "changePct": 1.02,
-      "marketCap": 11226,
+      "price": 37500,
+      "changePct": 0,
+      "marketCap": 18150,
       "bottom1": {
-        "date": "2026-06-24",
-        "price": 3440
+        "date": "2026-07-21",
+        "price": 35995
       },
       "bottom2": {
-        "date": "2026-07-30",
-        "price": 3385
-      },
-      "neckline": {
-        "date": "2026-07-28",
-        "price": 3745
-      },
-      "declinePct": 28.7,
-      "priceDiffPct": 1.6,
-      "reboundPct": 9.7,
-      "gapDays": 25,
-      "currentPrice": 3885,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 64
-    },
-    {
-      "code": "196170",
-      "name": "알테오젠",
-      "market": "코스닥",
-      "price": 286000,
-      "changePct": 0.87,
-      "marketCap": 199214,
-      "bottom1": {
-        "date": "2026-06-08",
-        "price": 286000
-      },
-      "bottom2": {
-        "date": "2026-08-19",
-        "price": 288000
-      },
-      "neckline": {
-        "date": "2026-06-25",
-        "price": 397500
-      },
-      "declinePct": 29.4,
-      "priceDiffPct": 0.7,
-      "reboundPct": 38.5,
-      "gapDays": 50,
-      "currentPrice": 286000,
-      "currentDate": "2026-09-07",
-      "status": "🔍 패턴 형성중",
-      "score": 64
-    },
-    {
-      "code": "145020",
-      "name": "휴젤",
-      "market": "코스닥",
-      "price": 243000,
-      "changePct": 0.41,
-      "marketCap": 30412,
-      "bottom1": {
-        "date": "2026-06-19",
-        "price": 236500
-      },
-      "bottom2": {
-        "date": "2026-08-19",
-        "price": 233500
-      },
-      "neckline": {
-        "date": "2026-08-06",
-        "price": 295000
-      },
-      "declinePct": 22.8,
-      "priceDiffPct": 1.3,
-      "reboundPct": 25.5,
-      "gapDays": 41,
-      "currentPrice": 243000,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 64
-    },
-    {
-      "code": "035760",
-      "name": "CJ ENM",
-      "market": "코스닥",
-      "price": 33600,
-      "changePct": 1.66,
-      "marketCap": 7368,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 30050
-      },
-      "bottom2": {
-        "date": "2026-08-19",
-        "price": 30700
-      },
-      "neckline": {
-        "date": "2026-08-11",
-        "price": 37350
-      },
-      "declinePct": 46.7,
-      "priceDiffPct": 2.2,
-      "reboundPct": 23,
-      "gapDays": 36,
-      "currentPrice": 33600,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 64
-    },
-    {
-      "code": "019210",
-      "name": "와이지-원",
-      "market": "코스닥",
-      "price": 14290,
-      "changePct": 0.21,
-      "marketCap": 5315,
-      "bottom1": {
-        "date": "2026-05-12",
-        "price": 13710
-      },
-      "bottom2": {
-        "date": "2026-07-30",
-        "price": 13850
-      },
-      "neckline": {
-        "date": "2026-07-06",
-        "price": 28500
-      },
-      "declinePct": 21.7,
-      "priceDiffPct": 1,
-      "reboundPct": 106.8,
-      "gapDays": 54,
-      "currentPrice": 14290,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 64
-    },
-    {
-      "code": "278280",
-      "name": "천보",
-      "market": "코스닥",
-      "price": 39950,
-      "changePct": 0.63,
-      "marketCap": 4895,
-      "bottom1": {
-        "date": "2026-07-09",
-        "price": 32500
-      },
-      "bottom2": {
-        "date": "2026-08-18",
-        "price": 33500
-      },
-      "neckline": {
-        "date": "2026-07-13",
-        "price": 38950
-      },
-      "declinePct": 45,
-      "priceDiffPct": 3.1,
-      "reboundPct": 18,
-      "gapDays": 26,
-      "currentPrice": 39950,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 64
-    },
-    {
-      "code": "064260",
-      "name": "다날",
-      "market": "코스닥",
-      "price": 5070,
-      "changePct": 2.5,
-      "marketCap": 3835,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 4015
-      },
-      "bottom2": {
-        "date": "2026-07-30",
-        "price": 4100
-      },
-      "neckline": {
-        "date": "2026-07-23",
-        "price": 5100
-      },
-      "declinePct": 53.5,
-      "priceDiffPct": 2.1,
-      "reboundPct": 25.7,
-      "gapDays": 23,
-      "currentPrice": 5070,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 64
-    },
-    {
-      "code": "136480",
-      "name": "하림",
-      "market": "코스닥",
-      "price": 2655,
-      "changePct": 0.19,
-      "marketCap": 2820,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 2560
-      },
-      "bottom2": {
-        "date": "2026-07-30",
-        "price": 2550
-      },
-      "neckline": {
-        "date": "2026-07-13",
-        "price": 2850
-      },
-      "declinePct": 25.8,
-      "priceDiffPct": 0.4,
-      "reboundPct": 11.5,
-      "gapDays": 23,
-      "currentPrice": 2655,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 64
-    },
-    {
-      "code": "036200",
-      "name": "유니셈",
-      "market": "코스닥",
-      "price": 9030,
-      "changePct": 1.35,
-      "marketCap": 2769,
-      "bottom1": {
-        "date": "2026-06-26",
-        "price": 8570
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 8380
-      },
-      "neckline": {
-        "date": "2026-06-30",
-        "price": 11330
-      },
-      "declinePct": 40.4,
-      "priceDiffPct": 2.2,
-      "reboundPct": 33.7,
-      "gapDays": 40,
-      "currentPrice": 9030,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 64
-    },
-    {
-      "code": "005930",
-      "name": "삼성전자",
-      "market": "코스피",
-      "price": 270000,
-      "changePct": 5.68,
-      "marketCap": 15784952,
-      "bottom1": {
-        "date": "2026-07-20",
-        "price": 240000
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 245000
-      },
-      "neckline": {
-        "date": "2026-08-18",
-        "price": 288000
-      },
-      "declinePct": 35.9,
-      "priceDiffPct": 2.1,
-      "reboundPct": 18.8,
-      "gapDays": 25,
-      "currentPrice": 270000,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 63
-    },
-    {
-      "code": "005935",
-      "name": "삼성전자우",
-      "market": "코스피",
-      "price": 199600,
-      "changePct": 4.18,
-      "marketCap": 1601533,
-      "bottom1": {
-        "date": "2026-07-20",
-        "price": 163900
-      },
-      "bottom2": {
-        "date": "2026-08-07",
-        "price": 168800
-      },
-      "neckline": {
-        "date": "2026-07-23",
-        "price": 193800
-      },
-      "declinePct": 32.7,
-      "priceDiffPct": 3,
-      "reboundPct": 16.5,
-      "gapDays": 14,
-      "currentPrice": 199600,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 63
-    },
-    {
-      "code": "009150",
-      "name": "삼성전기",
-      "market": "코스피",
-      "price": 1454000,
-      "changePct": 3.78,
-      "marketCap": 1086046,
-      "bottom1": {
-        "date": "2026-07-14",
-        "price": 1163000
-      },
-      "bottom2": {
-        "date": "2026-08-11",
-        "price": 1191000
+        "date": "2026-09-03",
+        "price": 35615
       },
       "neckline": {
         "date": "2026-07-22",
-        "price": 1479000
+        "price": 40350
       },
-      "declinePct": 51.9,
-      "priceDiffPct": 2.4,
-      "reboundPct": 25.7,
-      "gapDays": 19,
-      "currentPrice": 1454000,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 63
-    },
-    {
-      "code": "051910",
-      "name": "LG화학",
-      "market": "코스피",
-      "price": 279500,
-      "changePct": 0.89,
-      "marketCap": 197306,
-      "bottom1": {
-        "date": "2026-07-09",
-        "price": 248500
-      },
-      "bottom2": {
-        "date": "2026-08-21",
-        "price": 251500
-      },
-      "neckline": {
-        "date": "2026-08-14",
-        "price": 282500
-      },
-      "declinePct": 40.9,
-      "priceDiffPct": 1.2,
-      "reboundPct": 13,
-      "gapDays": 29,
-      "currentPrice": 279500,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 63
-    },
-    {
-      "code": "003490",
-      "name": "대한항공",
-      "market": "코스피",
-      "price": 30350,
-      "changePct": 0.5,
-      "marketCap": 111755,
-      "bottom1": {
-        "date": "2026-07-29",
-        "price": 23950
-      },
-      "bottom2": {
-        "date": "2026-08-19",
-        "price": 24400
-      },
-      "neckline": {
-        "date": "2026-08-05",
-        "price": 27800
-      },
-      "declinePct": 23.2,
-      "priceDiffPct": 1.9,
-      "reboundPct": 15,
-      "gapDays": 14,
-      "currentPrice": 30350,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 63
-    },
-    {
-      "code": "032640",
-      "name": "LG유플러스",
-      "market": "코스피",
-      "price": 15090,
-      "changePct": 2.24,
-      "marketCap": 64046,
-      "bottom1": {
-        "date": "2026-06-11",
-        "price": 14280
-      },
-      "bottom2": {
-        "date": "2026-08-19",
-        "price": 14420
-      },
-      "neckline": {
-        "date": "2026-06-16",
-        "price": 16700
-      },
-      "declinePct": 24,
-      "priceDiffPct": 1,
-      "reboundPct": 16.4,
-      "gapDays": 47,
-      "currentPrice": 15090,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 63
-    },
-    {
-      "code": "001450",
-      "name": "현대해상",
-      "market": "코스피",
-      "price": 51000,
-      "changePct": 0.2,
-      "marketCap": 43477,
-      "bottom1": {
-        "date": "2026-07-20",
-        "price": 35600
-      },
-      "bottom2": {
-        "date": "2026-08-04",
-        "price": 35000
-      },
-      "neckline": {
-        "date": "2026-07-24",
-        "price": 41900
-      },
-      "declinePct": 17.7,
-      "priceDiffPct": 1.7,
-      "reboundPct": 18.7,
-      "gapDays": 11,
-      "currentPrice": 51000,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 63
-    },
-    {
-      "code": "161890",
-      "name": "한국콜마",
-      "market": "코스피",
-      "price": 144300,
-      "changePct": 1.03,
-      "marketCap": 34062,
-      "bottom1": {
-        "date": "2026-05-20",
-        "price": 85000
-      },
-      "bottom2": {
-        "date": "2026-07-31",
-        "price": 86900
-      },
-      "neckline": {
-        "date": "2026-07-07",
-        "price": 124600
-      },
-      "declinePct": 20,
-      "priceDiffPct": 2.2,
-      "reboundPct": 45,
-      "gapDays": 49,
-      "currentPrice": 144300,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 63
-    },
-    {
-      "code": "282330",
-      "name": "BGF리테일",
-      "market": "코스피",
-      "price": 150200,
-      "changePct": 1.76,
-      "marketCap": 25960,
-      "bottom1": {
-        "date": "2026-06-01",
-        "price": 120500
-      },
-      "bottom2": {
-        "date": "2026-07-31",
-        "price": 118600
-      },
-      "neckline": {
-        "date": "2026-06-05",
-        "price": 140000
-      },
-      "declinePct": 18.5,
-      "priceDiffPct": 1.6,
-      "reboundPct": 17.1,
-      "gapDays": 42,
-      "currentPrice": 150200,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 63
-    },
-    {
-      "code": "004990",
-      "name": "롯데지주",
-      "market": "코스피",
-      "price": 24850,
-      "changePct": 0.4,
-      "marketCap": 24766,
-      "bottom1": {
-        "date": "2026-07-09",
-        "price": 22550
-      },
-      "bottom2": {
-        "date": "2026-08-21",
-        "price": 22250
-      },
-      "neckline": {
-        "date": "2026-08-18",
-        "price": 24350
-      },
-      "declinePct": 25.8,
-      "priceDiffPct": 1.3,
-      "reboundPct": 8.7,
-      "gapDays": 29,
-      "currentPrice": 24850,
-      "currentDate": "2026-09-07",
-      "status": "🚀 넥라인 돌파",
-      "score": 63
-    },
-    {
-      "code": "009155",
-      "name": "삼성전기우",
-      "market": "코스피",
-      "price": 517000,
-      "changePct": 3.19,
-      "marketCap": 15029,
-      "bottom1": {
-        "date": "2026-07-14",
-        "price": 421000
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 431000
-      },
-      "neckline": {
-        "date": "2026-08-18",
-        "price": 572000
-      },
-      "declinePct": 58.2,
-      "priceDiffPct": 2.4,
-      "reboundPct": 34.3,
-      "gapDays": 28,
-      "currentPrice": 517000,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 63
-    },
-    {
-      "code": "006280",
-      "name": "녹십자",
-      "market": "코스피",
-      "price": 127300,
-      "changePct": 0.24,
-      "marketCap": 14877,
-      "bottom1": {
-        "date": "2026-06-08",
-        "price": 117800
-      },
-      "bottom2": {
-        "date": "2026-08-19",
-        "price": 119200
-      },
-      "neckline": {
-        "date": "2026-08-11",
-        "price": 136000
-      },
-      "declinePct": 26.9,
-      "priceDiffPct": 1.2,
-      "reboundPct": 14.8,
-      "gapDays": 50,
-      "currentPrice": 127300,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 63
-    },
-    {
-      "code": "229640",
-      "name": "LS에코에너지",
-      "market": "코스피",
-      "price": 47650,
-      "changePct": 4.5,
-      "marketCap": 14593,
-      "bottom1": {
-        "date": "2026-07-21",
-        "price": 39800
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 40700
-      },
-      "neckline": {
-        "date": "2026-07-23",
-        "price": 54500
-      },
-      "declinePct": 56.9,
-      "priceDiffPct": 2.3,
-      "reboundPct": 35.4,
-      "gapDays": 24,
-      "currentPrice": 47650,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 63
-    },
-    {
-      "code": "038500",
-      "name": "삼표시멘트",
-      "market": "코스닥",
-      "price": 7240,
-      "changePct": 0.42,
-      "marketCap": 7813,
-      "bottom1": {
-        "date": "2026-07-21",
-        "price": 6910
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 7075
-      },
-      "neckline": {
-        "date": "2026-08-13",
-        "price": 8840
-      },
-      "declinePct": 51.3,
-      "priceDiffPct": 2.4,
-      "reboundPct": 26.4,
-      "gapDays": 24,
-      "currentPrice": 7240,
-      "currentDate": "2026-09-07",
-      "status": "⚡ 우측바닥 반등중",
-      "score": 63
-    },
-    {
-      "code": "101160",
-      "name": "월덱스",
-      "market": "코스닥",
-      "price": 30200,
-      "changePct": 2.37,
-      "marketCap": 4986,
-      "bottom1": {
-        "date": "2026-07-08",
-        "price": 26400
-      },
-      "bottom2": {
-        "date": "2026-08-25",
-        "price": 26700
-      },
-      "neckline": {
-        "date": "2026-07-16",
-        "price": 33450
-      },
-      "declinePct": 20.5,
+      "declinePct": 32.1,
       "priceDiffPct": 1.1,
-      "reboundPct": 26,
-      "gapDays": 32,
-      "currentPrice": 30200,
-      "currentDate": "2026-09-07",
+      "reboundPct": 12.7,
+      "gapDays": 31,
+      "currentPrice": 37500,
+      "currentDate": "2026-09-15",
       "status": "⚡ 우측바닥 반등중",
-      "score": 63
+      "score": 64
     }
   ]
 }
