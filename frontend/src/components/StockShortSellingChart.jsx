@@ -1,13 +1,14 @@
 // StockShortSellingChart.jsx — 📉 한국거래소(KRX) 공식 개별종목 공매도(Short Selling) 거래량·거래대금·비중(%) 인터랙티브 듀얼 차트
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 
 export default function StockShortSellingChart({ stockCode, stockName }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [period, setPeriod] = useState('3m'); // '1m' | '3m' | '6m'
+  const [period, setPeriod] = useState('3m'); // '1m' | '3m' | '6m' | 'all'
   const [hoverIndex, setHoverIndex] = useState(null);
   const [showTable, setShowTable] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const scrollRef = useRef(null);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -44,11 +45,20 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
   const summary = data?.summary || {};
 
   // ─── SVG 듀얼 차트 좌표 계산 (좌측: 주가 vs 우측: 공매도 비중 %) ───
-  const chartWidth = 780;
+  // '전체' 기간처럼 거래일 수가 많아지면 고정폭에 욱여넣지 않고 캔버스 자체를 넓혀서 좌우 스크롤로 본다.
+  const DAY_SPACING = 4.2
+  const chartWidth = Math.max(780, 140 + timeline.length * DAY_SPACING);
   const chartHeight = 280;
   const padding = { top: 35, right: 65, bottom: 40, left: 75 };
   const innerW = chartWidth - padding.left - padding.right;
   const innerH = chartHeight - padding.top - padding.bottom;
+
+  // 데이터가 로드되면(특히 '전체' 기간) 스크롤을 가장 최근 시점(우측 끝)으로 이동
+  useEffect(() => {
+    if (scrollRef.current && timeline.length > 0) {
+      scrollRef.current.scrollLeft = scrollRef.current.scrollWidth;
+    }
+  }, [timeline.length, chartWidth]);
 
   const { priceMin, priceMax, ratioMax, pricePoints, ratioPoints, ratioArea, barItems } = useMemo(() => {
     if (timeline.length === 0) {
@@ -137,7 +147,8 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
           {[
             { id: '1m', label: '1개월' },
             { id: '3m', label: '3개월' },
-            { id: '6m', label: '6개월' }
+            { id: '6m', label: '6개월' },
+            { id: 'all', label: '📜 전체(상장일~)' }
           ].map(tab => (
             <button
               key={tab.id}
@@ -296,10 +307,17 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
           </div>
         </div>
 
+        {/* '전체' 기간 부분 조회 실패 안내 */}
+        {!loading && data?.partialCoverage && (
+          <div style={{ padding: '8px 16px', background: 'rgba(245,158,11,0.1)', borderBottom: '1px solid rgba(245,158,11,0.25)', fontSize: '.76rem', color: '#fbbf24' }}>
+            ⚠️ {data.coverageNote}
+          </div>
+        )}
+
         {/* 차트 본체 */}
         {loading ? (
           <div style={{ padding: '80px 0', textAlign: 'center', color: 'var(--t3)', fontSize: '.9rem' }}>
-            ⏳ 한국거래소(KRX) 공매도 시계열 데이터 수집 중...
+            ⏳ 한국거래소(KRX) 공매도 시계열 데이터 수집 중{period === 'all' ? ' (상장일부터 전체 이력 — 최대 30초 소요될 수 있습니다)' : ''}...
           </div>
         ) : data && !data.success ? (
           <div style={{ padding: '80px 0 60px', textAlign: 'center', color: '#f87171', fontSize: '.9rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
@@ -312,9 +330,10 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
             해당 기간에 조회된 공매도 내역이 없습니다.
           </div>
         ) : (
+          <div ref={scrollRef} style={{ width: '100%', overflowX: chartWidth > 780 ? 'auto' : 'hidden' }}>
           <svg
             viewBox={`0 0 ${chartWidth} ${chartHeight}`}
-            style={{ width: '100%', height: 280, display: 'block' }}
+            style={chartWidth > 780 ? { width: chartWidth, height: 280, display: 'block' } : { width: '100%', height: 280, display: 'block' }}
             onMouseLeave={() => setHoverIndex(null)}
           >
             <defs>
@@ -471,6 +490,7 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
               );
             })}
           </svg>
+          </div>
         )}
       </div>
 

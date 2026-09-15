@@ -1,9 +1,10 @@
 // StockDetailModal.jsx — 🏛️ 종목 상세 퀀트 분석 & 실시간 차트 모달 팝업
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import StockShortSellingChart from './StockShortSellingChart.jsx'
 import EpsTrendChart from './EpsTrendChart.jsx'
 import RoeTrendChart from './RoeTrendChart.jsx'
 import RevenueIncomeChart from './RevenueIncomeChart.jsx'
+import NpsHoldingHistoryChart from './NpsHoldingHistoryChart.jsx'
 
 // 🎨 세련된 현대식 SVG 라인 아이콘 컴포넌트들
 const MenuIcon = ({ type, size = 16, color = "currentColor", style = {} }) => {
@@ -59,6 +60,7 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
   const [financials, setFinancials] = useState(null)
   const [isMobile, setIsMobile] = useState(false)
   const [isChartFullscreen, setIsChartFullscreen] = useState(false)
+  const dayChartScrollRef = useRef(null)
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768)
@@ -78,6 +80,13 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [isChartFullscreen, onClose])
 
+  // 📅 일봉(상장일~오늘)이 넓게 로드되면 스크롤을 가장 최근 시점(우측 끝)으로 이동
+  useEffect(() => {
+    if (period === 'day' && dayChartScrollRef.current && chartData.length > 0) {
+      dayChartScrollRef.current.scrollLeft = dayChartScrollRef.current.scrollWidth
+    }
+  }, [period, chartData.length, isChartFullscreen])
+
   const [loading, setLoading] = useState(true)
   const [hoverData, setHoverData] = useState(null)
   const [hoverLiqPoint, setHoverLiqPoint] = useState(null)
@@ -90,7 +99,7 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
     async function loadDetail() {
       try {
         const [chartRes, wallstreetRes, smartRes, summaryRes, finRes] = await Promise.all([
-          fetch(`/api/chart/${stock.code}?type=${period}`).then(r => r.json()).catch(() => null),
+          fetch(`/api/chart/${stock.code}?type=${period}${period === 'day' ? '&count=3000' : ''}`).then(r => r.json()).catch(() => null),
           fetch(`/api/wallstreet/${stock.code}?days=60`).then(r => r.json()).catch(() => null),
           fetch(`/api/smart-money/${stock.code}?days=60`).then(r => r.json()).catch(() => null),
           fetch(`/api/company-summary/${stock.code}`).then(r => r.json()).catch(() => null),
@@ -137,7 +146,7 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
   const displayCurrentPrice = cardPrice || analysisPrice || stock.current_price || stock.buy_price || lastCandleClose || 0
 
   // ─── SVG 캔들스틱 차트 계산 ───
-  const width = isChartFullscreen ? 1400 : 800
+  const baseWidth = isChartFullscreen ? 1400 : 800
   const height = isChartFullscreen ? 720 : 400
   const padding = { top: 50, right: 125, bottom: 45, left: 15 }
 
@@ -149,6 +158,13 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
     const v = Number(d.volume) || 0
     return { ...d, open: o, high: h, low: l, close: c, volume: v }
   })
+
+  // 일봉(상장일~오늘)처럼 캔들 수가 많아지면 고정폭에 욱여넣지 않고 캔버스를 넓혀서 좌우 스크롤로 본다.
+  const DAY_CANDLE_SPACING = 5
+  const width = (period === 'day' && candles.length > 0)
+    ? Math.max(baseWidth, padding.left + padding.right + candles.length * DAY_CANDLE_SPACING)
+    : baseWidth
+  const isWideChart = width > baseWidth
 
   const optimalPrice = stock.optimalBuyPrice || analysis?.optimalBuyPrice
   const pocPriceLine = analysis?.vpvr?.pocPrice || smartMoney?.pocPrice || 0
@@ -527,14 +543,22 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
 
           {/* SVG 차트 본체 */}
           <div style={{ position: 'relative', width: '100%', overflow: 'hidden', background: '#0a0d14', borderRadius: 14, border: '1px solid rgba(255,255,255,0.08)' }}>
+            {isWideChart && !loading && (
+              <div style={{ padding: '6px 14px', fontSize: '.72rem', color: 'var(--t3)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+                📜 상장일부터 전체 일봉({candles.length.toLocaleString()}거래일) · 좌우로 스크롤해서 과거 흐름을 확인하세요{candles.length >= 3000 ? ' (네이버 제공 일봉 한도 약 3,000거래일 도달 — 그 이전은 조회되지 않을 수 있습니다)' : ''}
+              </div>
+            )}
             {loading ? (
               <div style={{ textAlign: 'center', padding: '70px 0', color: 'var(--gold)', fontSize: '.95rem' }}>
                 ⏳ 실시간 캔들스틱 및 세력선 퀀트 계산 중...
               </div>
             ) : candles.length > 0 ? (
+              <div ref={dayChartScrollRef} style={{ width: '100%', overflowX: isWideChart ? 'auto' : 'hidden' }}>
               <svg
                 viewBox={`0 0 ${width} ${height}`}
-                style={{ width: '100%', height: isChartFullscreen ? 'calc(100vh - 220px)' : 360, display: 'block' }}
+                style={isWideChart
+                  ? { width, height: isChartFullscreen ? 'calc(100vh - 220px)' : 360, display: 'block' }
+                  : { width: '100%', height: isChartFullscreen ? 'calc(100vh - 220px)' : 360, display: 'block' }}
                 onMouseLeave={() => setHoverData(null)}
               >
                 <defs>
@@ -662,6 +686,7 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                   </g>
                 )}
               </svg>
+              </div>
             ) : (
               <div style={{ textAlign: 'center', padding: 40, color: 'var(--t3)' }}>차트 데이터를 불러올 수 없습니다.</div>
             )}
@@ -676,6 +701,9 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
 
         {/* 📊 매출액 & 영업이익 추이 (연간/분기) */}
         <RevenueIncomeChart stock={stock} />
+
+        {/* 🏛️ 국민연금 보유비중 변동 이력 (DART 대량보유 상황보고서 실공시) */}
+        <NpsHoldingHistoryChart stock={stock} />
 
         {/* ─── 📉 한국거래소(KRX) 공식 개별종목 공매도(Short Selling) 거래량·거래대금·비중(%) 인터랙티브 듀얼 차트 ─── */}
         <div id="short-selling-section">

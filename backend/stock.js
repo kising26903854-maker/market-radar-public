@@ -562,7 +562,7 @@ export async function getStockPrice(code) {
 
 
 // 주? 차트 ?이???집 (분봉 & 30???봉 & 1?치 ?봉)
-export async function getStockChartData(code, type = 'minute') {
+export async function getStockChartData(code, type = 'minute', countOverride = null) {
   try {
     if (type === 'minute') {
       const url = `https://m.stock.naver.com/api/chart/domestic/item/${code}?periodType=day&range=1`
@@ -627,6 +627,9 @@ export async function getStockChartData(code, type = 'minute') {
       else if (type === 'week') { tf = 'week'; count = 150; }
       else if (type === 'month') { tf = 'month'; count = 120; }
       else if (type === 'year') { tf = 'month'; count = 240; }
+
+      // 네이버 fchart는 실제로 최대 약 3,000개 일봉(≈12년)까지만 반환한다 — 상장일부터 보기용 override
+      if (countOverride) count = Math.min(3000, Math.max(1, countOverride));
 
       const url = `https://fchart.stock.naver.com/sise.nhn?symbol=${code}&timeframe=${tf}&count=${count}&requestType=0`;
       const res = await axios.get(url, {

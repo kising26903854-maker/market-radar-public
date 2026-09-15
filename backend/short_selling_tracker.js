@@ -59,28 +59,103 @@ function getDateRange(period = '3m') {
 }
 
 /**
- * 네이버 일별 주가 다중 페이지 수집 헬퍼 (네이버 API는 pageSize 최대 60 지원)
+ * 네이버 일별 주가 다중 페이지 수집 헬퍼 (네이버 API는 pageSize 최대 60 지원) — 병렬 수집
  */
 async function fetchNaverPrices(ticker, targetPages = 2) {
-  const allPrices = [];
   const headers = { 'User-Agent': 'Mozilla/5.0' };
 
-  for (let p = 1; p <= targetPages; p++) {
-    try {
-      const url = `https://m.stock.naver.com/api/stock/${ticker}/price?page=${p}&pageSize=60`;
-      const res = await fetch(url, { headers });
-      if (res.ok) {
-        const list = await res.json();
-        if (Array.isArray(list) && list.length > 0) {
-          allPrices.push(...list);
-        }
+  const pagePromises = Array.from({ length: targetPages }, (_, i) => {
+    const p = i + 1;
+    const url = `https://m.stock.naver.com/api/stock/${ticker}/price?page=${p}&pageSize=60`;
+    return fetch(url, { headers })
+      .then(res => (res.ok ? res.json() : []))
+      .catch(e => {
+        console.warn(`[Naver Price] page ${p} error for ${ticker}:`, e.message);
+        return [];
+      });
+  });
+
+  const pages = await Promise.all(pagePromises);
+  return pages.flatMap(list => (Array.isArray(list) ? list : []));
+}
+
+/**
+ * KRX 대량 공매도 API 단일 구간 조회 (재시도 1회 + 타임아웃 포함). 구간은 731일(약 2년) 미만이어야 함(INVALIDPERIOD2).
+ */
+async function fetchKrxChunk(isin, strtDd, endDd, attempt = 0) {
+  const krxUrl = 'https://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd';
+  const krxParams = new URLSearchParams({
+    bld: 'dbms/MDC_OUT/STAT/srt/MDCSTAT30001_OUT',
+    isuCd: isin,
+    strtDd,
+    endDd,
+    share: '1',
+    money: '1',
+    csvxls_isNo: 'false'
+  });
+
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 20000);
+    const res = await fetch(krxUrl, {
+      method: 'POST',
+      body: krxParams,
+      signal: controller.signal,
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Referer': `https://data.krx.co.kr/comm/srt/srtLoader/index.cmd?screenId=MDCSTAT300&isuCd=${isin}`,
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
       }
-    } catch (e) {
-      console.warn(`[Naver Price] page ${p} error for ${ticker}:`, e.message);
+    });
+    clearTimeout(timer);
+    const text = await res.text();
+    if (text.includes('<!DOCTYPE') || text.includes('시스템 점검') || text.includes('<html>')) {
+      throw new Error('KRX 서버 점검 중');
     }
+    const json = JSON.parse(text);
+    if (!Array.isArray(json.OutBlock_1)) throw new Error(json.CI_ID || '알 수 없는 응답');
+    return { ok: true, rows: json.OutBlock_1 };
+  } catch (e) {
+    if (attempt < 1) return fetchKrxChunk(isin, strtDd, endDd, attempt + 1);
+    console.warn(`[KRX Short Selling] chunk ${strtDd}~${endDd} 실패 (${isin}):`, e.message);
+    return { ok: false, rows: [], strtDd, endDd, error: e.message };
+  }
+}
+
+/**
+ * 상장일(또는 KRX 공매도 데이터 존재 시점)부터 오늘까지 전체 이력 조회.
+ * KRX API는 한 번에 최대 730일 구간만 허용하므로(INVALIDPERIOD2), 700일 단위로 쪼개어 병렬 조회 후 병합한다.
+ * 실제 상장일을 미리 알지 못하므로 충분히 넉넉한 과거 시점(12년 전)까지 청크를 만들고,
+ * 상장 이전 구간은 KRX가 자연스럽게 빈 배열을 반환하므로 별도 처리 없이도 정확한 시작 시점부터의 데이터만 남는다.
+ */
+async function fetchKrxShortSellingAll(isin) {
+  const CHUNK_DAYS = 700;
+  const LOOKBACK_YEARS = 12;
+  const now = new Date();
+  const anchor = new Date(now.getTime() - LOOKBACK_YEARS * 365 * 24 * 60 * 60 * 1000);
+
+  const fmt = (d) => `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
+
+  const chunks = [];
+  let cursor = new Date(anchor);
+  while (cursor < now) {
+    const chunkEnd = new Date(Math.min(cursor.getTime() + CHUNK_DAYS * 24 * 60 * 60 * 1000, now.getTime()));
+    chunks.push({ strtDd: fmt(cursor), endDd: fmt(chunkEnd) });
+    cursor = new Date(chunkEnd.getTime() + 24 * 60 * 60 * 1000);
   }
 
-  return allPrices;
+  const results = await Promise.all(chunks.map(c => fetchKrxChunk(isin, c.strtDd, c.endDd)));
+
+  const merged = new Map();
+  results.forEach(r => {
+    if (!r.ok) return;
+    r.rows.forEach(row => merged.set(row.TRD_DD, row));
+  });
+
+  const failedChunks = results.filter(r => !r.ok);
+  const rows = [...merged.values()].sort((a, b) => b.TRD_DD.localeCompare(a.TRD_DD)); // 최신순 (단일구간 API와 동일한 정렬)
+
+  return { OutBlock_1: rows, partialCoverage: failedChunks.length > 0, failedChunks: failedChunks.length, totalChunks: chunks.length, earliestRequested: fmt(anchor) };
 }
 
 /**
@@ -96,59 +171,68 @@ export async function getStockShortSelling(ticker, period = '3m') {
   const cached = shortSellingCache.get(cacheKey);
   const now = Date.now();
 
-  if (cached && (now - cached.timestamp < CACHE_TTL)) {
+  const cacheTtl = period === 'all' ? 2 * 60 * 60 * 1000 : CACHE_TTL; // 전체 이력은 무거우므로 2시간 캐시
+  if (cached && (now - cached.timestamp < cacheTtl)) {
     return cached.data;
   }
 
   try {
     const isin = calculateIsin(cleanCode);
-    const { strtDd, endDd } = getDateRange(period);
+    const isAll = period === 'all';
 
-    // 1. 한국거래소(KRX) 공식 공매도 종합 현황 API 호출
-    const krxUrl = 'https://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd';
-    const krxParams = new URLSearchParams({
-      bld: 'dbms/MDC_OUT/STAT/srt/MDCSTAT30001_OUT',
-      isuCd: isin,
-      strtDd,
-      endDd,
-      share: '1',
-      money: '1',
-      csvxls_isNo: 'false'
-    });
-
+    let krxPromise;
     let krxError = null;
-    const krxPromise = fetch(krxUrl, {
-      method: 'POST',
-      body: krxParams,
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        'Referer': `https://data.krx.co.kr/comm/srt/srtLoader/index.cmd?screenId=MDCSTAT300&isuCd=${cleanCode}`,
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-      }
-    }).then(async r => {
-      const text = await r.text();
-      if (text.includes('<!DOCTYPE') || text.includes('시스템 점검') || text.includes('<html>')) {
-        krxError = '한국거래소(KRX) 서버 점검 중';
+
+    if (isAll) {
+      // 상장일(또는 KRX 데이터 존재 시점)부터 오늘까지 — 700일 단위 청크 병렬 조회
+      krxPromise = fetchKrxShortSellingAll(isin);
+    } else {
+      const { strtDd, endDd } = getDateRange(period);
+      // 1. 한국거래소(KRX) 공식 공매도 종합 현황 API 호출
+      const krxUrl = 'https://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd';
+      const krxParams = new URLSearchParams({
+        bld: 'dbms/MDC_OUT/STAT/srt/MDCSTAT30001_OUT',
+        isuCd: isin,
+        strtDd,
+        endDd,
+        share: '1',
+        money: '1',
+        csvxls_isNo: 'false'
+      });
+
+      krxPromise = fetch(krxUrl, {
+        method: 'POST',
+        body: krxParams,
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+          'Referer': `https://data.krx.co.kr/comm/srt/srtLoader/index.cmd?screenId=MDCSTAT300&isuCd=${cleanCode}`,
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        }
+      }).then(async r => {
+        const text = await r.text();
+        if (text.includes('<!DOCTYPE') || text.includes('시스템 점검') || text.includes('<html>')) {
+          krxError = '한국거래소(KRX) 서버 점검 중';
+          return { OutBlock_1: [] };
+        }
+        try {
+          return JSON.parse(text);
+        } catch (e) {
+          krxError = '한국거래소(KRX) 데이터 파싱 실패';
+          return { OutBlock_1: [] };
+        }
+      }).catch(err => {
+        console.warn(`[KRX Short Selling] Error for ${cleanCode}:`, err.message);
+        krxError = '한국거래소(KRX) 통신 실패';
         return { OutBlock_1: [] };
-      }
-      try {
-        return JSON.parse(text);
-      } catch (e) {
-        krxError = '한국거래소(KRX) 데이터 파싱 실패';
-        return { OutBlock_1: [] };
-      }
-    }).catch(err => {
-      console.warn(`[KRX Short Selling] Error for ${cleanCode}:`, err.message);
-      krxError = '한국거래소(KRX) 통신 실패';
-      return { OutBlock_1: [] };
-    });
+      });
+    }
 
     // 2. 네이버 주가 일별 시세 다중 페이지 병렬 호출
-    const targetPages = period === '1m' ? 1 : period === '6m' ? 4 : 2;
+    const targetPages = isAll ? 50 : period === '1m' ? 1 : period === '6m' ? 4 : 2;
     const naverPromise = fetchNaverPrices(cleanCode, targetPages);
 
     const [krxRes, naverPrices] = await Promise.all([krxPromise, naverPromise]);
-    
+
     if (krxError) {
       const errorResult = {
         success: false,
@@ -314,6 +398,11 @@ export async function getStockShortSelling(ticker, period = '3m') {
       isin,
       period,
       timestamp: new Date().toISOString(),
+      earliestDate: mergedList[0]?.date || null,
+      partialCoverage: isAll ? !!krxRes.partialCoverage : false,
+      coverageNote: isAll && krxRes.partialCoverage
+        ? `과거 구간 중 ${krxRes.failedChunks}/${krxRes.totalChunks}개 조회 구간에서 KRX 서버 응답 실패가 있었습니다. 새로고침 시 재시도됩니다.`
+        : null,
       summary: {
         latestDate: latest?.date || '-',
         latestShortVolume: latest?.shortVolume || 0,

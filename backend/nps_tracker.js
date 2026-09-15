@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 const DATA_DIR = path.join(__dirname, 'data', 'nps_quarters');
 const CACHE_FILE = path.join(__dirname, 'data', 'nps_cache.json');
 // DART Open API 인증키. 실시간 공시 목록(list.json) 조회에 사용됨 — fetchNpsDisclosuresFromDart() 참고.
-const DART_KEY = '9fcf7d49e9342741860fd45b10864607c8d54e14';
+export const DART_KEY = '9fcf7d49e9342741860fd45b10864607c8d54e14';
 
 if (!existsSync(path.join(__dirname, 'data'))) {
   mkdirSync(path.join(__dirname, 'data'));

@@ -17,6 +17,7 @@ import { getBondYields } from './bond_yield_tracker.js'
 import { getGlobalMacroNews } from './macro_news.js'
 import { getMarketCalendarEvents, getMarketCalendarRange } from './market_calendar.js'
 import { getNpsHoldings, getNpsQuarterData, getNpsComparison, refreshNpsData, getNpsDetailedDisclosures } from './nps_tracker.js'
+import { getNpsHoldingHistory } from './nps_holding_history.js'
 import { getLiveValueChain } from './value_chain.js'
 import { getCompanySummary } from './company_summary.js'
 import { getSmartSupplyDemand } from './smart_supply_demand.js'
@@ -30,7 +31,7 @@ import { getBearMarketStocks, sendBearMarketBriefing } from './bear_market_scann
 import { runGrowthStockScreener } from './growth_stock_screener.js'
 import { getStockShortSelling } from './short_selling_tracker.js'
 import { getBaseRatesData } from './base_rates.js'
-import { getDoubleBottomCache, isDoubleBottomScanStale, runDoubleBottomScan, startDailyDoubleBottomScan } from './double_bottom_scanner.js'
+import { getDoubleBottomCache, isDoubleBottomScanStale, runDoubleBottomScan, startDailyDoubleBottomScan, fetchDailySeries } from './double_bottom_scanner.js'
 import { getBaseBreakoutCache, isBaseBreakoutScanStale, runBaseBreakoutScan, startDailyBaseBreakoutScan } from './base_breakout_scanner.js'
 import { getEnergyCondensationCache, isEnergyCondensationScanStale, runEnergyCondensationScan, startDailyEnergyCondensationScan } from './energy_condensation_scanner.js'
 import { getMonthlyMA10Cache, isMonthlyMA10ScanStale, runMonthlyMA10Scan, startDailyMonthlyMA10Scan } from './monthly_ma10_scanner.js'
@@ -722,6 +723,27 @@ app.get('/api/financials/:code', async (req, res) => {
   }
 })
 
+// 📈 종목별 국민연금공단 보유비중 변동 이력 — DART 대량보유 상황보고서(majorstock.json) 실공시 기반
+app.get('/api/nps-holding-history/:code', async (req, res) => {
+  try {
+    const data = await getNpsHoldingHistory(req.params.code)
+    res.json(data)
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message })
+  }
+})
+
+// 📊 종목별 일봉(OHLCV) 시계열 — 국민연금 보유비중 이력 차트에 가격 컨텍스트로 함께 표시하는 용도
+app.get('/api/daily-price/:code', async (req, res) => {
+  try {
+    const pages = Math.max(1, Math.min(25, parseInt(req.query.pages) || 13))
+    const series = await fetchDailySeries(req.params.code, pages)
+    res.json({ success: true, code: req.params.code, series })
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message })
+  }
+})
+
 // 💰 단일 종목 배당 정보
 app.get('/api/dividend/:code', async (req, res) => {
   try {
@@ -1090,8 +1112,8 @@ app.get('/api/portfolio', async (req, res) => {
 app.get('/api/chart/:code', async (req, res) => {
   try {
     const { code } = req.params
-    const { type = 'minute' } = req.query
-    const chart = await getStockChartData(code, type)
+    const { type = 'minute', count } = req.query
+    const chart = await getStockChartData(code, type, count ? parseInt(count) : null)
     res.json({ success: true, code, type, chart })
   } catch (err) {
     res.status(500).json({ success: false, error: err.message })
