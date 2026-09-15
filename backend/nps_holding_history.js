@@ -46,11 +46,21 @@ function getCorpCodeMap() {
 }
 
 const historyCache = {};
-const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
+
+// 하루에 한 번, 매일 새벽 01:00 시점을 기준으로 캐시를 갱신한다 (단순 "마지막 조회 후 24시간"이 아니라
+// 시각 고정 — 예: 00:50에 조회된 캐시는 01:00이 지나면 바로 갱신 대상이 되도록).
+function getLastOneAmBoundary() {
+  const now = new Date();
+  const boundary = new Date(now);
+  boundary.setHours(1, 0, 0, 0);
+  if (now < boundary) boundary.setDate(boundary.getDate() - 1);
+  return boundary.getTime();
+}
 
 export async function getNpsHoldingHistory(code) {
   const now = Date.now();
-  if (historyCache[code] && now - historyCache[code].ts < CACHE_TTL_MS) {
+  const boundary = getLastOneAmBoundary();
+  if (historyCache[code] && historyCache[code].ts >= boundary) {
     return historyCache[code].data;
   }
 

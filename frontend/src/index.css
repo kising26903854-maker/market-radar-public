@@ -461,6 +461,13 @@ body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 2px; }
 
+/* 상장일~오늘 전체 일봉/공매도 차트처럼 가로로 긴 차트의 스크롤바 — 기본 스크롤바는 배경색과 거의 같아 안 보이므로 눈에 띄게 별도 스타일 지정 */
+.wide-chart-scroll::-webkit-scrollbar { height: 10px; }
+.wide-chart-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.06); border-radius: 5px; }
+.wide-chart-scroll::-webkit-scrollbar-thumb { background: var(--gold, #fbbf24); border-radius: 5px; }
+.wide-chart-scroll::-webkit-scrollbar-thumb:hover { background: #f59e0b; }
+.wide-chart-scroll { scrollbar-width: auto; scrollbar-color: var(--gold, #fbbf24) rgba(255,255,255,0.06); }
+
 /* ─── Modal Overlay & Content Center Popup ─── */
 .modal-overlay {
   position: fixed;

@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo, useRef } from 'react';
 export default function StockShortSellingChart({ stockCode, stockName }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [period, setPeriod] = useState('3m'); // '1m' | '3m' | '6m' | 'all'
+  const [period, setPeriod] = useState('all'); // '1m' | '3m' | '6m' | 'all' — 기본값: 상장일부터 전체
   const [hoverIndex, setHoverIndex] = useState(null);
   const [showTable, setShowTable] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -330,7 +330,7 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
             해당 기간에 조회된 공매도 내역이 없습니다.
           </div>
         ) : (
-          <div ref={scrollRef} style={{ width: '100%', overflowX: chartWidth > 780 ? 'auto' : 'hidden' }}>
+          <div ref={scrollRef} className={chartWidth > 780 ? 'wide-chart-scroll' : ''} style={{ width: '100%', overflowX: chartWidth > 780 ? 'auto' : 'hidden' }}>
           <svg
             viewBox={`0 0 ${chartWidth} ${chartHeight}`}
             style={chartWidth > 780 ? { width: chartWidth, height: 280, display: 'block' } : { width: '100%', height: 280, display: 'block' }}

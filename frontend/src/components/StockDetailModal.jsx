@@ -553,7 +553,7 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                 ⏳ 실시간 캔들스틱 및 세력선 퀀트 계산 중...
               </div>
             ) : candles.length > 0 ? (
-              <div ref={dayChartScrollRef} style={{ width: '100%', overflowX: isWideChart ? 'auto' : 'hidden' }}>
+              <div ref={dayChartScrollRef} className={isWideChart ? 'wide-chart-scroll' : ''} style={{ width: '100%', overflowX: isWideChart ? 'auto' : 'hidden' }}>
               <svg
                 viewBox={`0 0 ${width} ${height}`}
                 style={isWideChart
