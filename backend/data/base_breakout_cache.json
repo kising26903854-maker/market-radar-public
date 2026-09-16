@@ -1,18 +1,18 @@
 {
-  "lastSyncAt": "2026-09-14T23:55:17.132Z",
-  "elapsedSec": 17.1,
+  "lastSyncAt": "2026-09-15T23:55:16.650Z",
+  "elapsedSec": 16.6,
   "totalScanned": 700,
-  "totalMatches": 13,
-  "kospiCount": 11,
+  "totalMatches": 12,
+  "kospiCount": 10,
   "kosdaqCount": 2,
   "stocks": [
     {
       "code": "136480",
       "name": "하림",
       "market": "코스닥",
-      "price": 2675,
+      "price": 2665,
       "changePct": 0,
-      "marketCap": 2841,
+      "marketCap": 2830,
       "trough": {
         "date": "2026-07-30",
         "price": 2550
@@ -21,14 +21,14 @@
         "high": 2755,
         "low": 2550,
         "startDate": "2026-07-30",
-        "endDate": "2026-09-10"
+        "endDate": "2026-09-11"
       },
       "declinePct": 19.7,
       "bandPct": 8,
-      "extensionPct": -2.9,
-      "consolDays": 30,
-      "currentPrice": 2675,
-      "currentDate": "2026-09-15",
+      "extensionPct": -3.3,
+      "consolDays": 31,
+      "currentPrice": 2665,
+      "currentDate": "2026-09-16",
       "status": "📦 박스권 상단 임박",
       "score": 58
     },
@@ -36,9 +36,9 @@
       "code": "035250",
       "name": "강원랜드",
       "market": "코스피",
-      "price": 14810,
+      "price": 14730,
       "changePct": 0,
-      "marketCap": 31685,
+      "marketCap": 31513,
       "trough": {
         "date": "2026-06-26",
         "price": 13920
@@ -47,14 +47,14 @@
         "high": 15100,
         "low": 13920,
         "startDate": "2026-06-26",
-        "endDate": "2026-09-10"
+        "endDate": "2026-09-11"
       },
       "declinePct": 19.9,
       "bandPct": 8.5,
-      "extensionPct": -1.9,
-      "consolDays": 53,
-      "currentPrice": 14810,
-      "currentDate": "2026-09-15",
+      "extensionPct": -2.5,
+      "consolDays": 54,
+      "currentPrice": 14730,
+      "currentDate": "2026-09-16",
       "status": "📦 박스권 상단 임박",
       "score": 57
     },
@@ -62,9 +62,9 @@
       "code": "035900",
       "name": "JYP Ent.",
       "market": "코스닥",
-      "price": 39500,
+      "price": 39150,
       "changePct": 0,
-      "marketCap": 14035,
+      "marketCap": 13911,
       "trough": {
         "date": "2026-08-19",
         "price": 38150
@@ -73,76 +73,24 @@
         "high": 41050,
         "low": 38050,
         "startDate": "2026-08-19",
-        "endDate": "2026-09-10"
+        "endDate": "2026-09-11"
       },
       "declinePct": 34.2,
       "bandPct": 7.9,
-      "extensionPct": -3.8,
-      "consolDays": 17,
-      "currentPrice": 39500,
-      "currentDate": "2026-09-15",
+      "extensionPct": -4.6,
+      "consolDays": 18,
+      "currentPrice": 39150,
+      "currentDate": "2026-09-16",
       "status": "📦 박스권 상단 임박",
       "score": 56
-    },
-    {
-      "code": "032640",
-      "name": "LG유플러스",
-      "market": "코스피",
-      "price": 15040,
-      "changePct": 0,
-      "marketCap": 63834,
-      "trough": {
-        "date": "2026-06-26",
-        "price": 13810
-      },
-      "box": {
-        "high": 15750,
-        "low": 13810,
-        "startDate": "2026-06-26",
-        "endDate": "2026-09-10"
-      },
-      "declinePct": 26.5,
-      "bandPct": 14,
-      "extensionPct": -4.5,
-      "consolDays": 53,
-      "currentPrice": 15040,
-      "currentDate": "2026-09-15",
-      "status": "📦 박스권 상단 임박",
-      "score": 55
-    },
-    {
-      "code": "034230",
-      "name": "파라다이스",
-      "market": "코스피",
-      "price": 10080,
-      "changePct": 0,
-      "marketCap": 9337,
-      "trough": {
-        "date": "2026-07-30",
-        "price": 9320
-      },
-      "box": {
-        "high": 10400,
-        "low": 9160,
-        "startDate": "2026-07-30",
-        "endDate": "2026-09-10"
-      },
-      "declinePct": 41.8,
-      "bandPct": 13.5,
-      "extensionPct": -3.1,
-      "consolDays": 30,
-      "currentPrice": 10080,
-      "currentDate": "2026-09-15",
-      "status": "📦 박스권 상단 임박",
-      "score": 55
     },
     {
       "code": "031210",
       "name": "서울보증보험",
       "market": "코스피",
-      "price": 43800,
+      "price": 42950,
       "changePct": 0,
-      "marketCap": 30582,
+      "marketCap": 29988,
       "trough": {
         "date": "2026-06-26",
         "price": 39650
@@ -151,14 +99,14 @@
         "high": 45000,
         "low": 39650,
         "startDate": "2026-06-26",
-        "endDate": "2026-09-10"
+        "endDate": "2026-09-11"
       },
       "declinePct": 21.6,
       "bandPct": 13.5,
-      "extensionPct": -2.7,
-      "consolDays": 53,
-      "currentPrice": 43800,
-      "currentDate": "2026-09-15",
+      "extensionPct": -4.6,
+      "consolDays": 54,
+      "currentPrice": 42950,
+      "currentDate": "2026-09-16",
       "status": "📦 박스권 상단 임박",
       "score": 53
     },
@@ -166,25 +114,25 @@
       "code": "139480",
       "name": "이마트",
       "market": "코스피",
-      "price": 75000,
+      "price": 74200,
       "changePct": 0,
-      "marketCap": 20697,
+      "marketCap": 20476,
       "trough": {
-        "date": "2026-08-19",
-        "price": 72300
+        "date": "2026-08-21",
+        "price": 70800
       },
       "box": {
         "high": 76500,
         "low": 70800,
-        "startDate": "2026-08-19",
-        "endDate": "2026-09-10"
+        "startDate": "2026-08-21",
+        "endDate": "2026-09-11"
       },
-      "declinePct": 21.9,
+      "declinePct": 22.9,
       "bandPct": 8.1,
-      "extensionPct": -2,
-      "consolDays": 17,
-      "currentPrice": 75000,
-      "currentDate": "2026-09-15",
+      "extensionPct": -3,
+      "consolDays": 16,
+      "currentPrice": 74200,
+      "currentDate": "2026-09-16",
       "status": "📦 박스권 상단 임박",
       "score": 53
     },
@@ -192,9 +140,9 @@
       "code": "383220",
       "name": "F&F",
       "market": "코스피",
-      "price": 66600,
+      "price": 67300,
       "changePct": 0,
-      "marketCap": 25513,
+      "marketCap": 25781,
       "trough": {
         "date": "2026-08-04",
         "price": 59900
@@ -203,14 +151,14 @@
         "high": 69600,
         "low": 59900,
         "startDate": "2026-08-04",
-        "endDate": "2026-09-10"
+        "endDate": "2026-09-11"
       },
       "declinePct": 32.7,
       "bandPct": 16.2,
-      "extensionPct": -4.3,
-      "consolDays": 27,
-      "currentPrice": 66600,
-      "currentDate": "2026-09-15",
+      "extensionPct": -3.3,
+      "consolDays": 28,
+      "currentPrice": 67300,
+      "currentDate": "2026-09-16",
       "status": "📦 박스권 상단 임박",
       "score": 51
     },
@@ -218,9 +166,9 @@
       "code": "161510",
       "name": "PLUS 고배당주",
       "market": "코스피",
-      "price": 25635,
+      "price": 25290,
       "changePct": 0,
-      "marketCap": 24571,
+      "marketCap": 24157,
       "trough": {
         "date": "2026-06-26",
         "price": 22620
@@ -229,66 +177,40 @@
         "high": 25955,
         "low": 22620,
         "startDate": "2026-06-26",
-        "endDate": "2026-09-10"
+        "endDate": "2026-09-11"
       },
       "declinePct": 21.6,
       "bandPct": 14.7,
-      "extensionPct": -1.2,
-      "consolDays": 53,
-      "currentPrice": 25635,
-      "currentDate": "2026-09-15",
+      "extensionPct": -2.6,
+      "consolDays": 54,
+      "currentPrice": 25290,
+      "currentDate": "2026-09-16",
       "status": "📦 박스권 상단 임박",
       "score": 51
-    },
-    {
-      "code": "000080",
-      "name": "하이트진로",
-      "market": "코스피",
-      "price": 15340,
-      "changePct": 0,
-      "marketCap": 10758,
-      "trough": {
-        "date": "2026-06-26",
-        "price": 13830
-      },
-      "box": {
-        "high": 15970,
-        "low": 13830,
-        "startDate": "2026-06-26",
-        "endDate": "2026-09-10"
-      },
-      "declinePct": 21.2,
-      "bandPct": 15.5,
-      "extensionPct": -3.9,
-      "consolDays": 53,
-      "currentPrice": 15340,
-      "currentDate": "2026-09-15",
-      "status": "📦 박스권 상단 임박",
-      "score": 50
     },
     {
       "code": "365550",
       "name": "ESR켄달스퀘어리츠",
       "market": "코스피",
-      "price": 3195,
+      "price": 3155,
       "changePct": 0,
-      "marketCap": 7863,
+      "marketCap": 7764,
       "trough": {
-        "date": "2026-08-20",
-        "price": 2955
+        "date": "2026-08-21",
+        "price": 2925
       },
       "box": {
         "high": 3270,
         "low": 2925,
-        "startDate": "2026-08-20",
-        "endDate": "2026-09-10"
+        "startDate": "2026-08-21",
+        "endDate": "2026-09-11"
       },
-      "declinePct": 27.1,
+      "declinePct": 27.9,
       "bandPct": 11.8,
-      "extensionPct": -2.3,
+      "extensionPct": -3.5,
       "consolDays": 16,
-      "currentPrice": 3195,
-      "currentDate": "2026-09-15",
+      "currentPrice": 3155,
+      "currentDate": "2026-09-16",
       "status": "📦 박스권 상단 임박",
       "score": 50
     },
@@ -296,9 +218,9 @@
       "code": "088980",
       "name": "맥쿼리인프라",
       "market": "코스피",
-      "price": 9800,
+      "price": 9780,
       "changePct": 0,
-      "marketCap": 46934,
+      "marketCap": 46839,
       "trough": {
         "date": "2026-08-19",
         "price": 9320
@@ -307,42 +229,94 @@
         "high": 10020,
         "low": 9320,
         "startDate": "2026-08-19",
-        "endDate": "2026-09-10"
+        "endDate": "2026-09-11"
       },
       "declinePct": 16,
       "bandPct": 7.5,
-      "extensionPct": -2.2,
-      "consolDays": 17,
-      "currentPrice": 9800,
-      "currentDate": "2026-09-15",
+      "extensionPct": -2.4,
+      "consolDays": 18,
+      "currentPrice": 9780,
+      "currentDate": "2026-09-16",
       "status": "📦 박스권 상단 임박",
       "score": 49
     },
     {
-      "code": "007310",
-      "name": "오뚜기",
+      "code": "448330",
+      "name": "KODEX 삼성전자채권혼합",
       "market": "코스피",
-      "price": 331500,
+      "price": 17030,
       "changePct": 0,
-      "marketCap": 13286,
+      "marketCap": 12585,
       "trough": {
-        "date": "2026-06-26",
-        "price": 290500
+        "date": "2026-07-29",
+        "price": 15560
       },
       "box": {
-        "high": 342000,
-        "low": 290500,
-        "startDate": "2026-06-26",
-        "endDate": "2026-09-10"
+        "high": 17840,
+        "low": 15560,
+        "startDate": "2026-07-29",
+        "endDate": "2026-09-11"
       },
-      "declinePct": 21.9,
-      "bandPct": 17.7,
-      "extensionPct": -3.1,
-      "consolDays": 53,
-      "currentPrice": 331500,
-      "currentDate": "2026-09-15",
+      "declinePct": 17.6,
+      "bandPct": 14.7,
+      "extensionPct": -4.5,
+      "consolDays": 32,
+      "currentPrice": 17030,
+      "currentDate": "2026-09-16",
       "status": "📦 박스권 상단 임박",
       "score": 48
+    },
+    {
+      "code": "034230",
+      "name": "파라다이스",
+      "market": "코스피",
+      "price": 9880,
+      "changePct": 0,
+      "marketCap": 9152,
+      "trough": {
+        "date": "2026-08-21",
+        "price": 9160
+      },
+      "box": {
+        "high": 10400,
+        "low": 9160,
+        "startDate": "2026-08-21",
+        "endDate": "2026-09-11"
+      },
+      "declinePct": 41.5,
+      "bandPct": 13.5,
+      "extensionPct": -5,
+      "consolDays": 16,
+      "currentPrice": 9880,
+      "currentDate": "2026-09-16",
+      "status": "📦 박스권 상단 임박",
+      "score": 48
+    },
+    {
+      "code": "138930",
+      "name": "BNK금융지주",
+      "market": "코스피",
+      "price": 16040,
+      "changePct": 0,
+      "marketCap": 49217,
+      "trough": {
+        "date": "2026-08-21",
+        "price": 14010
+      },
+      "box": {
+        "high": 16230,
+        "low": 14010,
+        "startDate": "2026-08-21",
+        "endDate": "2026-09-11"
+      },
+      "declinePct": 26.5,
+      "bandPct": 15.8,
+      "extensionPct": -1.2,
+      "consolDays": 16,
+      "currentPrice": 16040,
+      "currentDate": "2026-09-16",
+      "status": "📦 박스권 상단 임박",
+      "score": 46
     }
   ]
 }

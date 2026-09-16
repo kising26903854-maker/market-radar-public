@@ -14,6 +14,7 @@ import {
 
 export default function BaseRateChart() {
   const [rawData, setRawData] = useState([])
+  const [currentTarget, setCurrentTarget] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [period, setPeriod] = useState('all') // 'all' | '2000s' | '2020s' | '2y'
@@ -38,6 +39,7 @@ export default function BaseRateChart() {
       .then(res => {
         if (res.success) {
           setRawData(res.data)
+          setCurrentTarget(res.currentTarget || null)
         } else {
           setError(res.error || '데이터 로드 실패')
         }
@@ -192,7 +194,28 @@ export default function BaseRateChart() {
       </div>
 
       {/* ─── 요약 카드 섹션 ─── */}
-      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: 16, marginBottom: 20 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : `repeat(${currentTarget ? 4 : 3}, 1fr)`, gap: 16, marginBottom: 20 }}>
+        {/* 미국 연준 현재 목표금리 카드 (일별 실시간 — FOMC 결정 당일/익일 즉시 반영) */}
+        {currentTarget && (
+          <div style={{ background: 'var(--bg2)', padding: '16px 20px', borderRadius: 14, border: '1.5px solid rgba(251,191,36,0.45)', boxShadow: '0 4px 12px rgba(0,0,0,0.2)' }}>
+            <div style={{ fontSize: '.76rem', color: 'var(--t2)', fontWeight: 800, display: 'flex', alignItems: 'center', gap: 6 }}>
+              🇺🇸 Fed 현재 목표금리 (실시간)
+              {currentTarget.direction !== '동결' && (
+                <span style={{ fontSize: '.66rem', padding: '1px 7px', borderRadius: 6, background: currentTarget.direction === '인상' ? 'rgba(239,68,68,0.2)' : 'rgba(59,130,246,0.2)', color: currentTarget.direction === '인상' ? '#ef4444' : '#3b82f6', fontWeight: 900 }}>
+                  {currentTarget.direction}
+                </span>
+              )}
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginTop: 8 }}>
+              <span style={{ fontSize: '1.6rem', fontWeight: 900, fontFamily: 'Space Mono', color: 'var(--gold)' }}>
+                {currentTarget.lower.toFixed(2)}~{currentTarget.upper.toFixed(2)}%
+              </span>
+              <span style={{ fontSize: '.72rem', color: 'var(--t3)' }}>{currentTarget.date} 기준</span>
+            </div>
+            <div style={{ fontSize: '.68rem', color: 'var(--t3)', marginTop: 4 }}>FRED 일별 목표범위(DFEDTARU/L) · 왼쪽 카드의 월별 중앙값보다 즉시성 높음</div>
+          </div>
+        )}
+
         {/* 한국 카드 */}
         <div style={{ background: 'var(--bg2)', padding: '16px 20px', borderRadius: 14, border: '1.5px solid rgba(16,185,129,0.35)', boxShadow: '0 4px 12px rgba(0,0,0,0.2)' }}>
           <div style={{ fontSize: '.76rem', color: 'var(--t2)', fontWeight: 800 }}>🇰🇷 대한민국 기준금리</div>

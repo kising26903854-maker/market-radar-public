@@ -98,6 +98,36 @@ function parseCsv(csvText) {
   return result;
 }
 
+// FRED 일별 연준 목표금리 상단/하단(DFEDTARU/DFEDTARL) 최신값 조회.
+// FEDFUNDS(월별 실효금리 평균)는 FOMC 결정 후 다음 달 초에나 반영되므로,
+// "방금 발표된 금리 변경"을 바로 보여주려면 이 일별 목표범위 시리즈가 필요하다.
+async function fetchCurrentFedTarget() {
+  const [upRes, loRes] = await Promise.all([
+    fetch('https://fred.stlouisfed.org/graph/fredgraph.csv?id=DFEDTARU'),
+    fetch('https://fred.stlouisfed.org/graph/fredgraph.csv?id=DFEDTARL')
+  ]);
+  if (!upRes.ok || !loRes.ok) throw new Error('DFEDTARU/DFEDTARL 다운로드 실패');
+  const upData = parseCsv(await upRes.text());
+  const loData = parseCsv(await loRes.text());
+  const latestUp = upData[upData.length - 1];
+  const latestLo = loData[loData.length - 1];
+  if (!latestUp || !latestLo) return null;
+
+  // 직전 값과 비교해 최근 변경 방향(인상/인하/동결) 판정
+  const prevUp = upData.length > 1 ? upData[upData.length - 2] : null;
+  let direction = '동결';
+  if (prevUp && latestUp.val > prevUp.val) direction = '인상';
+  else if (prevUp && latestUp.val < prevUp.val) direction = '인하';
+
+  return {
+    date: latestUp.date,
+    upper: latestUp.val,
+    lower: latestLo.val,
+    direction,
+    prevUpper: prevUp?.val ?? null
+  };
+}
+
 export async function getBaseRatesData(forceRefresh = false) {
   try {
     // 1. 캐시 확인 (24시간 캐싱)
@@ -105,8 +135,10 @@ export async function getBaseRatesData(forceRefresh = false) {
       const stat = fs.statSync(CACHE_FILE);
       const ageHours = (Date.now() - stat.mtime.getTime()) / (1000 * 60 * 60);
       if (ageHours < 24) {
-        const cachedData = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf-8'));
-        return { success: true, data: cachedData, fromCache: true };
+        const cached = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf-8'));
+        const cachedData = Array.isArray(cached) ? cached : cached.combined;
+        const cachedTarget = Array.isArray(cached) ? null : cached.currentTarget;
+        return { success: true, data: cachedData, currentTarget: cachedTarget, fromCache: true };
       }
     }
 
@@ -154,17 +186,27 @@ export async function getBaseRatesData(forceRefresh = false) {
       });
     }
 
-    // 5. 캐시 저장
-    fs.mkdirSync(path.dirname(CACHE_FILE), { recursive: true });
-    fs.writeFileSync(CACHE_FILE, JSON.stringify(combined, null, 2), 'utf-8');
+    // 5. 연준 현재 목표금리 범위(일별, 즉시 반영) 조회 — 실패해도 월별 실효금리 차트는 정상 제공
+    let currentTarget = null;
+    try {
+      currentTarget = await fetchCurrentFedTarget();
+    } catch (e) {
+      console.warn('연준 목표금리(DFEDTARU/L) 조회 실패:', e.message);
+    }
 
-    return { success: true, data: combined, fromCache: false };
+    // 6. 캐시 저장
+    fs.mkdirSync(path.dirname(CACHE_FILE), { recursive: true });
+    fs.writeFileSync(CACHE_FILE, JSON.stringify({ combined, currentTarget }, null, 2), 'utf-8');
+
+    return { success: true, data: combined, currentTarget, fromCache: false };
   } catch (err) {
     console.error("getBaseRatesData 에러:", err);
     // 에러 발생 시 캐시 파일이 있으면 반환
     if (fs.existsSync(CACHE_FILE)) {
-      const cachedData = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf-8'));
-      return { success: true, data: cachedData, error: err.message, fallback: true };
+      const cached = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf-8'));
+      const cachedData = Array.isArray(cached) ? cached : cached.combined;
+      const cachedTarget = Array.isArray(cached) ? null : cached.currentTarget;
+      return { success: true, data: cachedData, currentTarget: cachedTarget, error: err.message, fallback: true };
     }
     return { success: false, error: err.message };
   }
