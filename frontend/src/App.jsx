@@ -7,6 +7,7 @@ import ValueChainModal from './components/ValueChainModal.jsx'
 import GlobalNewsDashboard from './components/GlobalNewsDashboard.jsx'
 import MarketCalendar from './components/MarketCalendar.jsx'
 import NpsTracker from './components/NpsTracker.jsx'
+import NpsNewDisclosuresTab from './components/NpsNewDisclosuresTab.jsx'
 import BondYieldTracker from './components/BondYieldTracker.jsx'
 import MorningBriefingBanner from './components/MorningBriefingBanner.jsx'
 import SmartSupplyDemand from './components/SmartSupplyDemand.jsx'
@@ -397,6 +398,10 @@ export default function App() {
             <MenuIcon type="nps-tracker" color={tab === 'nps-tracker' ? '#fff' : '#34d399'} />
             국민연금 DART 5% 공시
           </button>
+          <button className={`tab-btn ${tab === 'nps-new' ? 'active' : ''}`} onClick={() => { setTab('nps-new'); setIsMenuOpen(false); }}>
+            <MenuIcon type="nps-tracker" color={tab === 'nps-new' ? '#fff' : '#fbbf24'} />
+            🌅 국민연금 신규 공시
+          </button>
           <button className={`tab-btn ${tab === 'bear-market' ? 'active' : ''}`} onClick={() => { setTab('bear-market'); setIsMenuOpen(false); }}>
             <MenuIcon type="undervalued" color={tab === 'bear-market' ? '#fff' : '#34d399'} />
             하락장 역주행주 스캐너
@@ -547,6 +552,7 @@ export default function App() {
 
         {/* 탭 2: 🏛️ 국민연금 DART 5% 대량보유 공시 추적기 */}
         {tab === 'nps-tracker' && <NpsTracker onSelectStock={handleOpenStockChart} onOpenValueChain={handleOpenValueChain} />}
+        {tab === 'nps-new' && <NpsNewDisclosuresTab onSelectStock={handleOpenStockChart} />}
 
         {/* 탭 3: 🛡️ 하락장 역주행주 스캐너 */}
         {tab === 'bear-market' && <BearMarketScannerTab onSelectStock={handleOpenStockChart} onOpenValueChain={handleOpenValueChain} />}

@@ -73,6 +73,11 @@ export default function NpsHoldingHistoryChart({ stock }) {
       <div>
         <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#34d399', display: 'flex', alignItems: 'center', gap: 8 }}>
           🏛️ {stock?.name} 국민연금 보유비중 변동 이력 {candles.length > 0 && <span style={{ fontSize: '.72rem', color: '#f87171', fontWeight: 800 }}>+ 일봉</span>}
+          {data?.isNew && (
+            <span style={{ fontSize: '.68rem', padding: '2px 8px', borderRadius: 6, background: '#ef4444', color: '#fff', fontWeight: 900, animation: 'pulse 1.6s ease-in-out infinite' }}>
+              🆕 NEW
+            </span>
+          )}
         </div>
         <div style={{ fontSize: '.78rem', color: 'var(--t2)', marginTop: 4 }}>
           출처: <span style={{ color: 'var(--t3)' }}>DART 대량보유상황보고서(majorstock.json) 실공시 원문{candles.length > 0 ? ' · 네이버 증권 일봉' : ''}</span>

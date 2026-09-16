@@ -17,7 +17,7 @@ import { getBondYields } from './bond_yield_tracker.js'
 import { getGlobalMacroNews } from './macro_news.js'
 import { getMarketCalendarEvents, getMarketCalendarRange } from './market_calendar.js'
 import { getNpsHoldings, getNpsQuarterData, getNpsComparison, refreshNpsData, getNpsDetailedDisclosures } from './nps_tracker.js'
-import { getNpsHoldingHistory } from './nps_holding_history.js'
+import { getNpsHoldingHistory, runNpsHoldingBatchScan, startDailyNpsHoldingBatchScan, getNpsRecentUpdates, getNpsTodayNewDisclosures } from './nps_holding_history.js'
 import { getLiveValueChain } from './value_chain.js'
 import { getCompanySummary } from './company_summary.js'
 import { getSmartSupplyDemand } from './smart_supply_demand.js'
@@ -731,6 +731,30 @@ app.get('/api/nps-holding-history/:code', async (req, res) => {
   } catch (err) {
     res.status(500).json({ success: false, error: err.message })
   }
+})
+
+// 🆕 최근 3일 내 국민연금 신규 대량보유 공시가 감지된 종목 목록 (NEW 배지용)
+app.get('/api/nps-recent-updates', (req, res) => {
+  try {
+    res.json({ success: true, updates: getNpsRecentUpdates() })
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message })
+  }
+})
+
+// 🌅 오늘 새벽 01:00 배치에서 새로 감지된 국민연금 공시만 (아침 브리핑용)
+app.get('/api/nps-today-new', (req, res) => {
+  try {
+    res.json({ success: true, updates: getNpsTodayNewDisclosures() })
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message })
+  }
+})
+
+// 🔄 수동 국민연금 보유비중 배치 스캔 트리거 API
+app.post('/api/trigger-nps-holding-batch', async (req, res) => {
+  res.json({ success: true, message: '국민연금 신규 대량보유 공시 스캔이 백그라운드에서 시작되었습니다.' })
+  runNpsHoldingBatchScan().catch(e => console.error('[NPS HOLDING BATCH] 수동 스캔 오류:', e.message))
 })
 
 // 📊 종목별 일봉(OHLCV) 시계열 — 국민연금 보유비중 이력 차트에 가격 컨텍스트로 함께 표시하는 용도
@@ -1502,6 +1526,9 @@ app.listen(PORT, () => {
 
   // 🤖 AI 상승확률 예측 모델(로지스틱 회귀) 재학습 (매주 월요일 09:20 자동 실행)
   setTimeout(() => { startWeeklyModelTraining() }, 185000);
+
+  // 🏛️ 국민연금 신규 대량보유 공시 전수 스캔 (매일 새벽 01:00 자동 실행, 서버 기동 시 최초 1회 즉시)
+  setTimeout(() => { startDailyNpsHoldingBatchScan() }, 200000);
 
   // 🔄 매일 자정/장마감 후 자동 데이터 동기화 스케줄러 (Daily Auto-Sync Engine)
   setInterval(async () => {
