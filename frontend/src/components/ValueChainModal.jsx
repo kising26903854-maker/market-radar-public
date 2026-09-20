@@ -158,7 +158,7 @@ export default function ValueChainModal({ stock, stockCode, stockName, onClose, 
         }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-              <span style={{ fontSize: '.75rem', background: '#4f46e5', color: '#fff', padding: '2px 8px', borderRadius: 12, fontWeight: 900 }}>
+              <span style={{ fontSize: '.75rem', background: '#4f46e5', color: '#fff', padding: '2px 8px', borderRadius: 0, fontWeight: 700 }}>
                 {sectorName}
               </span>
               <span style={{ fontSize: '.84rem', fontWeight: 800, color: '#e2e8f0' }}>전후방 생태계 네트워크 분석</span>
@@ -188,9 +188,9 @@ export default function ValueChainModal({ stock, stockCode, stockName, onClose, 
               onClick={() => setFilterType(f.id)}
               style={{
                 padding: '6px 14px',
-                borderRadius: 20,
-                border: filterType === f.id ? '1.5px solid #818cf8' : '1px solid rgba(255,255,255,0.08)',
-                background: filterType === f.id ? 'linear-gradient(135deg, rgba(129,140,248,0.3) 0%, rgba(99,102,241,0.2) 100%)' : 'rgba(0,0,0,0.2)',
+                borderRadius: 0,
+                border: 'none',
+                background: filterType === f.id ? 'var(--accent)' : 'transparent',
                 color: filterType === f.id ? '#ffffff' : 'var(--t3)',
                 fontSize: '.8rem',
                 fontWeight: 800,

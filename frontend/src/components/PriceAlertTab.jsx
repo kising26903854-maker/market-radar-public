@@ -702,10 +702,9 @@ export default function PriceAlertTab({ positions = [] }) {
 
       {/* ─── 2. 텔레그램 발송 히스토리 타임라인 로그 ─── */}
       {activeTab === 'HISTORY' && (
-        <div style={{ background: 'var(--bg2)', padding: '22px 26px', borderRadius: 20, border: '1px solid var(--border)' }}>
-          <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#fff', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span>📜</span>
-            <span>최근 텔레그램 발송 내역 (보유종목 / 관심종목)</span>
+        <div style={{ background: 'var(--bg2)', padding: '22px 26px', borderRadius: 0, border: '1px solid var(--border)' }}>
+          <div style={{ fontSize: '1rem', fontWeight: 800, color: '#fff', marginBottom: 16 }}>
+            최근 텔레그램 발송 내역 (보유종목 / 관심종목)
           </div>
 
           {history.length === 0 ? (
@@ -722,8 +721,8 @@ export default function PriceAlertTab({ positions = [] }) {
                     style={{
                       padding: '12px 16px',
                       background: 'rgba(0,0,0,0.3)',
-                      borderRadius: 12,
-                      borderLeft: `4px solid ${isHolding ? '#3b82f6' : '#fbbf24'}`,
+                      borderRadius: 0,
+                      borderLeft: `3px solid ${isHolding ? '#3b82f6' : '#fbbf24'}`,
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
@@ -735,7 +734,7 @@ export default function PriceAlertTab({ positions = [] }) {
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                         <span style={{
                           padding: '2px 6px',
-                          borderRadius: 4,
+                          borderRadius: 0,
                           fontSize: '.72rem',
                           fontWeight: 900,
                           background: isHolding ? 'rgba(59,130,246,0.2)' : 'rgba(251,191,36,0.2)',
@@ -785,9 +784,10 @@ export default function PriceAlertTab({ positions = [] }) {
             style={{
               width: '100%',
               maxWidth: '580px',
-              background: '#1e293b',
-              border: `2px solid ${formData.category === 'HOLDING' ? '#3b82f6' : '#fbbf24'}`,
-              borderRadius: 22,
+              background: 'var(--bg2)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderTop: `2px solid ${formData.category === 'HOLDING' ? '#3b82f6' : '#fbbf24'}`,
+              borderRadius: 0,
               padding: '28px',
               boxShadow: '0 25px 60px rgba(0, 0, 0, 0.85)',
               animation: 'fadeIn 0.2s ease-out'
@@ -795,9 +795,8 @@ export default function PriceAlertTab({ positions = [] }) {
             onClick={e => e.stopPropagation()}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18, borderBottom: '1px solid rgba(255, 255, 255, 0.1)', paddingBottom: 12 }}>
-              <div style={{ fontSize: '1.25rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span>🔔</span>
-                <span>{editingAlert ? '스마트 가격 알림 수정' : '새 스마트 가격 알림 등록'}</span>
+              <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff' }}>
+                {editingAlert ? '스마트 가격 알림 수정' : '새 스마트 가격 알림 등록'}
               </div>
               <button
                 onClick={() => setShowCreateModal(false)}
@@ -815,16 +814,16 @@ export default function PriceAlertTab({ positions = [] }) {
                 style={{
                   flex: 1,
                   padding: '10px',
-                  borderRadius: 12,
-                  border: formData.category === 'HOLDING' ? '2px solid #3b82f6' : '1px solid rgba(255,255,255,0.1)',
+                  borderRadius: 0,
+                  border: formData.category === 'HOLDING' ? '1px solid #3b82f6' : '1px solid rgba(255,255,255,0.1)',
                   background: formData.category === 'HOLDING' ? 'rgba(59,130,246,0.2)' : 'rgba(0,0,0,0.3)',
                   color: formData.category === 'HOLDING' ? '#60a5fa' : 'var(--t3)',
-                  fontWeight: 900,
+                  fontWeight: 700,
                   fontSize: '.85rem',
                   cursor: 'pointer'
                 }}
               >
-                💼 내 보유종목 (익절/손절)
+                내 보유종목 (익절/손절)
               </button>
 
               <button
@@ -833,16 +832,16 @@ export default function PriceAlertTab({ positions = [] }) {
                 style={{
                   flex: 1,
                   padding: '10px',
-                  borderRadius: 12,
-                  border: formData.category === 'WATCHLIST' ? '2px solid #fbbf24' : '1px solid rgba(255,255,255,0.1)',
+                  borderRadius: 0,
+                  border: formData.category === 'WATCHLIST' ? '1px solid #fbbf24' : '1px solid rgba(255,255,255,0.1)',
                   background: formData.category === 'WATCHLIST' ? 'rgba(251,191,36,0.2)' : 'rgba(0,0,0,0.3)',
                   color: formData.category === 'WATCHLIST' ? '#fbbf24' : 'var(--t3)',
-                  fontWeight: 900,
+                  fontWeight: 700,
                   fontSize: '.85rem',
                   cursor: 'pointer'
                 }}
               >
-                ⭐ 관심종목 (매수 타점/눌림목)
+                관심종목 (매수 타점/눌림목)
               </button>
             </div>
 
@@ -860,7 +859,7 @@ export default function PriceAlertTab({ positions = [] }) {
                     if (found) handleSelectPredefined(found, formData.category);
                     else setFormData(prev => ({ ...prev, stockCode: e.target.value }));
                   }}
-                  style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 10, color: '#fff', outline: 'none' }}
+                  style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 0, color: '#fff', outline: 'none' }}
                 >
                   {(formData.category === 'HOLDING' ? positions : watchlist).map(p => (
                     <option key={p.code} value={p.code}>
@@ -878,7 +877,7 @@ export default function PriceAlertTab({ positions = [] }) {
                     type="text"
                     value={formData.stockName}
                     onChange={e => setFormData({ ...formData, stockName: e.target.value })}
-                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 10, color: '#fff', outline: 'none' }}
+                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 0, color: '#fff', outline: 'none' }}
                   />
                 </div>
                 <div>
@@ -887,7 +886,7 @@ export default function PriceAlertTab({ positions = [] }) {
                     type="text"
                     value={formData.stockCode}
                     onChange={e => setFormData({ ...formData, stockCode: e.target.value })}
-                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 10, color: '#fff', outline: 'none' }}
+                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 0, color: '#fff', outline: 'none' }}
                   />
                 </div>
               </div>
@@ -900,7 +899,7 @@ export default function PriceAlertTab({ positions = [] }) {
                     type="number"
                     value={formData.buyPrice}
                     onChange={e => setFormData({ ...formData, buyPrice: Number(e.target.value) })}
-                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 10, color: '#fff', outline: 'none' }}
+                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 0, color: '#fff', outline: 'none' }}
                   />
                 </div>
               )}
@@ -915,7 +914,7 @@ export default function PriceAlertTab({ positions = [] }) {
                     type="number"
                     value={formData.targetPrice}
                     onChange={e => setFormData({ ...formData, targetPrice: Number(e.target.value) })}
-                    style={{ width: '100%', padding: '10px', background: 'rgba(16,185,129,0.1)', border: '1px solid #10b981', borderRadius: 10, color: '#fff', outline: 'none', fontWeight: 800 }}
+                    style={{ width: '100%', padding: '10px', background: 'rgba(16,185,129,0.1)', border: '1px solid #10b981', borderRadius: 0, color: '#fff', outline: 'none', fontWeight: 800 }}
                   />
                 </div>
                 <div>
@@ -926,7 +925,7 @@ export default function PriceAlertTab({ positions = [] }) {
                     type="number"
                     value={formData.stopLossPrice}
                     onChange={e => setFormData({ ...formData, stopLossPrice: Number(e.target.value) })}
-                    style={{ width: '100%', padding: '10px', background: 'rgba(239,68,68,0.1)', border: '1px solid #ef4444', borderRadius: 10, color: '#fff', outline: 'none', fontWeight: 800 }}
+                    style={{ width: '100%', padding: '10px', background: 'rgba(239,68,68,0.1)', border: '1px solid #ef4444', borderRadius: 0, color: '#fff', outline: 'none', fontWeight: 800 }}
                   />
                 </div>
               </div>
@@ -939,7 +938,7 @@ export default function PriceAlertTab({ positions = [] }) {
                   value={formData.memo}
                   onChange={e => setFormData({ ...formData, memo: e.target.value })}
                   placeholder="예: 지지선 눌림목 3차 분할 매수 진입"
-                  style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 10, color: '#fff', outline: 'none' }}
+                  style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 0, color: '#fff', outline: 'none' }}
                 />
               </div>
 
@@ -948,15 +947,15 @@ export default function PriceAlertTab({ positions = [] }) {
                 <button
                   type="button"
                   onClick={() => setShowCreateModal(false)}
-                  style={{ padding: '10px 16px', background: 'rgba(255,255,255,0.08)', border: 'none', borderRadius: 10, color: '#fff', cursor: 'pointer', fontWeight: 800 }}
+                  style={{ padding: '10px 16px', background: 'transparent', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 0, color: 'var(--t2)', cursor: 'pointer', fontWeight: 700 }}
                 >
                   취소
                 </button>
                 <button
                   type="submit"
-                  style={{ padding: '10px 22px', background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)', border: 'none', borderRadius: 10, color: '#fff', fontWeight: 900, cursor: 'pointer' }}
+                  style={{ padding: '10px 22px', background: '#3b82f6', border: 'none', borderRadius: 0, color: '#fff', fontWeight: 700, cursor: 'pointer' }}
                 >
-                  {editingAlert ? '💾 알림 수정 저장' : '💾 새 알림 등록'}
+                  {editingAlert ? '알림 수정 저장' : '새 알림 등록'}
                 </button>
               </div>
             </form>

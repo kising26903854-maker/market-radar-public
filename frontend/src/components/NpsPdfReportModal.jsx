@@ -229,7 +229,7 @@ export default function NpsPdfReportModal({ data, selectedQuarter, onClose }) {
           maxHeight: '92vh',
           background: '#1e293b',
           border: '2px solid rgba(16, 185, 129, 0.5)',
-          borderRadius: 22,
+          borderRadius: 0,
           boxShadow: '0 25px 60px rgba(0, 0, 0, 0.85)',
           display: 'flex',
           flexDirection: 'column',
@@ -269,7 +269,7 @@ export default function NpsPdfReportModal({ data, selectedQuarter, onClose }) {
                 padding: '9px 18px',
                 background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
                 border: 'none',
-                borderRadius: 10,
+                borderRadius: 0,
                 color: '#fff',
                 fontWeight: 900,
                 fontSize: '.88rem',
@@ -290,7 +290,7 @@ export default function NpsPdfReportModal({ data, selectedQuarter, onClose }) {
                 padding: '9px 14px',
                 background: 'rgba(255,255,255,0.08)',
                 border: '1px solid rgba(255,255,255,0.15)',
-                borderRadius: 10,
+                borderRadius: 0,
                 color: 'var(--t1)',
                 fontWeight: 800,
                 fontSize: '.82rem',
@@ -333,7 +333,7 @@ export default function NpsPdfReportModal({ data, selectedQuarter, onClose }) {
               background: '#fff',
               color: '#111827',
               padding: '36px 40px',
-              borderRadius: 8,
+              borderRadius: 0,
               boxShadow: '0 8px 30px rgba(0,0,0,0.5)',
               margin: '0 auto',
               maxWidth: '800px',
@@ -364,19 +364,19 @@ export default function NpsPdfReportModal({ data, selectedQuarter, onClose }) {
               1. 포트폴리오 총괄 개요
             </div>
             <div className="summary-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, marginBottom: 16 }}>
-              <div className="summary-card" style={{ border: '1px solid #d1d5db', borderRadius: 8, padding: '8px 10px', background: '#f9fafb', textAlign: 'center' }}>
+              <div className="summary-card" style={{ border: '1px solid #d1d5db', borderRadius: 0, padding: '8px 10px', background: '#f9fafb', textAlign: 'center' }}>
                 <div className="summary-label" style={{ fontSize: '8pt', color: '#4b5563', fontWeight: 700 }}>총 보유 종목 수</div>
                 <div className="summary-val" style={{ fontSize: '13pt', fontWeight: 900, color: '#059669', marginTop: 2 }}>{holdings.length}개 종목</div>
               </div>
-              <div className="summary-card" style={{ border: '1px solid #d1d5db', borderRadius: 8, padding: '8px 10px', background: '#f9fafb', textAlign: 'center' }}>
+              <div className="summary-card" style={{ border: '1px solid #d1d5db', borderRadius: 0, padding: '8px 10px', background: '#f9fafb', textAlign: 'center' }}>
                 <div className="summary-label" style={{ fontSize: '8pt', color: '#4b5563', fontWeight: 700 }}>총 보유 평가금액</div>
                 <div className="summary-val" style={{ fontSize: '12pt', fontWeight: 900, color: '#059669', marginTop: 2 }}>{formatJoEok(summary.totalValueEok)}</div>
               </div>
-              <div className="summary-card" style={{ border: '1px solid #d1d5db', borderRadius: 8, padding: '8px 10px', background: '#f9fafb', textAlign: 'center' }}>
+              <div className="summary-card" style={{ border: '1px solid #d1d5db', borderRadius: 0, padding: '8px 10px', background: '#f9fafb', textAlign: 'center' }}>
                 <div className="summary-label" style={{ fontSize: '8pt', color: '#4b5563', fontWeight: 700 }}>평균 보유 지분율</div>
                 <div className="summary-val" style={{ fontSize: '13pt', fontWeight: 900, color: '#059669', marginTop: 2 }}>{formatPct(summary.avgRatio)}</div>
               </div>
-              <div className="summary-card" style={{ border: '1px solid #d1d5db', borderRadius: 8, padding: '8px 10px', background: '#f9fafb', textAlign: 'center' }}>
+              <div className="summary-card" style={{ border: '1px solid #d1d5db', borderRadius: 0, padding: '8px 10px', background: '#f9fafb', textAlign: 'center' }}>
                 <div className="summary-label" style={{ fontSize: '8pt', color: '#4b5563', fontWeight: 700 }}>신규 편입 / 매도</div>
                 <div className="summary-val" style={{ fontSize: '11pt', fontWeight: 900, color: '#1f2937', marginTop: 2 }}>
                   <span style={{ color: '#059669' }}>+{comparison.newStocks?.length || 0}</span> / <span style={{ color: '#dc2626' }}>-{comparison.soldStocks?.length || 0}</span>
@@ -403,7 +403,7 @@ export default function NpsPdfReportModal({ data, selectedQuarter, onClose }) {
                 {/* 신규 편입 */}
                 {(comparison.newStocks || []).slice(0, 5).map((s, idx) => (
                   <tr key={`new-${idx}`} style={{ borderBottom: '1px solid #e5e7eb' }}>
-                    <td style={{ padding: '5px 6px' }}><span className="badge-new" style={{ background: '#dcfce7', color: '#166534', padding: '2px 5px', borderRadius: 4, fontWeight: 800, fontSize: '7.5pt' }}>🆕 신규편입</span></td>
+                    <td style={{ padding: '5px 6px' }}><span className="badge-new" style={{ background: '#dcfce7', color: '#166534', padding: '2px 5px', borderRadius: 0, fontWeight: 800, fontSize: '7.5pt' }}>🆕 신규편입</span></td>
                     <td style={{ padding: '5px 6px', fontWeight: 700 }}>{s.stockName}</td>
                     <td style={{ padding: '5px 6px', color: '#6b7280' }}>{s.stockCode}</td>
                     <td style={{ padding: '5px 6px', textAlign: 'right', fontWeight: 800 }}>{formatPct(s.ratio)}</td>
@@ -414,7 +414,7 @@ export default function NpsPdfReportModal({ data, selectedQuarter, onClose }) {
                 {/* 비중 확대 */}
                 {(comparison.increased || []).slice(0, 5).map((s, idx) => (
                   <tr key={`inc-${idx}`} style={{ borderBottom: '1px solid #e5e7eb' }}>
-                    <td style={{ padding: '5px 6px' }}><span className="badge-inc" style={{ background: '#fee2e2', color: '#991b1b', padding: '2px 5px', borderRadius: 4, fontWeight: 800, fontSize: '7.5pt' }}>📈 비중확대</span></td>
+                    <td style={{ padding: '5px 6px' }}><span className="badge-inc" style={{ background: '#fee2e2', color: '#991b1b', padding: '2px 5px', borderRadius: 0, fontWeight: 800, fontSize: '7.5pt' }}>📈 비중확대</span></td>
                     <td style={{ padding: '5px 6px', fontWeight: 700 }}>{s.stockName}</td>
                     <td style={{ padding: '5px 6px', color: '#6b7280' }}>{s.stockCode}</td>
                     <td style={{ padding: '5px 6px', textAlign: 'right', fontWeight: 800 }}>{formatPct(s.ratio)}</td>
@@ -425,7 +425,7 @@ export default function NpsPdfReportModal({ data, selectedQuarter, onClose }) {
                 {/* 비중 축소 */}
                 {(comparison.decreased || []).slice(0, 4).map((s, idx) => (
                   <tr key={`dec-${idx}`} style={{ borderBottom: '1px solid #e5e7eb' }}>
-                    <td style={{ padding: '5px 6px' }}><span className="badge-dec" style={{ background: '#dbeafe', color: '#1e40af', padding: '2px 5px', borderRadius: 4, fontWeight: 800, fontSize: '7.5pt' }}>📉 비중축소</span></td>
+                    <td style={{ padding: '5px 6px' }}><span className="badge-dec" style={{ background: '#dbeafe', color: '#1e40af', padding: '2px 5px', borderRadius: 0, fontWeight: 800, fontSize: '7.5pt' }}>📉 비중축소</span></td>
                     <td style={{ padding: '5px 6px', fontWeight: 700 }}>{s.stockName}</td>
                     <td style={{ padding: '5px 6px', color: '#6b7280' }}>{s.stockCode}</td>
                     <td style={{ padding: '5px 6px', textAlign: 'right', fontWeight: 800 }}>{formatPct(s.ratio)}</td>
@@ -464,9 +464,9 @@ export default function NpsPdfReportModal({ data, selectedQuarter, onClose }) {
                       {formatJoEok(item.value)}
                     </td>
                     <td style={{ padding: '5px 6px', textAlign: 'center' }}>
-                      {item.status === 'NEW' && <span className="badge-new" style={{ background: '#dcfce7', color: '#166534', padding: '1px 4px', borderRadius: 4, fontWeight: 800, fontSize: '7pt' }}>신규</span>}
-                      {item.status === 'INCREASE' && <span className="badge-inc" style={{ background: '#fee2e2', color: '#991b1b', padding: '1px 4px', borderRadius: 4, fontWeight: 800, fontSize: '7pt' }}>확대</span>}
-                      {item.status === 'DECREASE' && <span className="badge-dec" style={{ background: '#dbeafe', color: '#1e40af', padding: '1px 4px', borderRadius: 4, fontWeight: 800, fontSize: '7pt' }}>축소</span>}
+                      {item.status === 'NEW' && <span className="badge-new" style={{ background: '#dcfce7', color: '#166534', padding: '1px 4px', borderRadius: 0, fontWeight: 800, fontSize: '7pt' }}>신규</span>}
+                      {item.status === 'INCREASE' && <span className="badge-inc" style={{ background: '#fee2e2', color: '#991b1b', padding: '1px 4px', borderRadius: 0, fontWeight: 800, fontSize: '7pt' }}>확대</span>}
+                      {item.status === 'DECREASE' && <span className="badge-dec" style={{ background: '#dbeafe', color: '#1e40af', padding: '1px 4px', borderRadius: 0, fontWeight: 800, fontSize: '7pt' }}>축소</span>}
                       {(!item.status || item.status === 'HOLD' || item.status === 'SAME') && <span style={{ color: '#9ca3af', fontSize: '7.5pt' }}>유지</span>}
                     </td>
                   </tr>

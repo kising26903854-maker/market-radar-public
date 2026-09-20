@@ -25,7 +25,7 @@ import { getCompanyFinancials } from './company_financials.js'
 import { getMomentumStocks, startDailyGoldenCrossScan } from './momentum_scanner.js'
 import { getDividendCalendar } from './dividend_calendar.js'
 import { getMorningBriefing } from './morning_briefing.js'
-import { getTelegramConfig, saveTelegramConfig, sendTelegramMessage, detectTelegramChatId, getPriceAlerts, createPriceAlert, updatePriceAlert, deletePriceAlert, getAlertHistory, startAlertEngine, sendHoldingsBriefing, sendWatchlistBriefing, sendNpsDisclosuresBriefing, testSendNpsSingleAlert } from './telegram_alert.js'
+import { getTelegramConfig, saveTelegramConfig, sendTelegramMessage, detectTelegramChatId, maskTelegramToken, getPriceAlerts, createPriceAlert, updatePriceAlert, deletePriceAlert, getAlertHistory, startAlertEngine, sendHoldingsBriefing, sendWatchlistBriefing, sendNpsDisclosuresBriefing, testSendNpsSingleAlert } from './telegram_alert.js'
 import { getKrxVolatilityData, sendVkospiBriefing } from './vkospi_tracker.js'
 import { getBearMarketStocks, sendBearMarketBriefing } from './bear_market_scanner.js'
 import { runGrowthStockScreener } from './growth_stock_screener.js'
@@ -1237,10 +1237,13 @@ app.post('/api/ai/analyze-news', express.json(), async (req, res) => {
 })
 
 // ─── 🔔 텔레그램 설정 & 스마트 목표가/손절선 알림 REST API ───
+// ⚠️ 봇 토큰 실값은 절대 프론트엔드로 내려보내지 않는다 — 마스킹된 미리보기(botTokenMasked)와
+// 설정 여부(hasBotToken)만 전달한다. 실제 토큰은 서버 내부(telegram_alert.js)에서만 사용한다.
 app.get('/api/telegram/config', (req, res) => {
   try {
     const config = getTelegramConfig()
-    res.json({ success: true, config })
+    const { botToken, ...rest } = config
+    res.json({ success: true, config: { ...rest, botToken: '', botTokenMasked: maskTelegramToken(botToken), hasBotToken: !!botToken } })
   } catch (err) {
     res.status(500).json({ success: false, error: err.message })
   }
@@ -1248,8 +1251,14 @@ app.get('/api/telegram/config', (req, res) => {
 
 app.post('/api/telegram/config', (req, res) => {
   try {
-    const updated = saveTelegramConfig(req.body)
-    res.json({ success: true, message: '텔레그램 설정이 성공적으로 저장되었습니다.', config: updated })
+    const payload = { ...req.body }
+    // 토큰 입력칸을 비워둔 채 저장하면(= 안 바꿨다는 뜻) 기존 저장된 실제 토큰을 유지한다.
+    if (!payload.botToken || !payload.botToken.trim()) {
+      delete payload.botToken
+    }
+    const updated = saveTelegramConfig(payload)
+    const { botToken, ...rest } = updated
+    res.json({ success: true, message: '텔레그램 설정이 성공적으로 저장되었습니다.', config: { ...rest, botToken: '', botTokenMasked: maskTelegramToken(botToken), hasBotToken: !!botToken } })
   } catch (err) {
     res.status(500).json({ success: false, error: err.message })
   }
@@ -1272,8 +1281,11 @@ app.post('/api/telegram/detect', async (req, res) => {
 app.post('/api/telegram/test', async (req, res) => {
   try {
     const { botToken, chatId } = req.body || {}
-    if (botToken || chatId) {
-      saveTelegramConfig({ botToken, chatId })
+    const savePayload = {}
+    if (botToken && botToken.trim()) savePayload.botToken = botToken
+    if (chatId && chatId.trim()) savePayload.chatId = chatId
+    if (Object.keys(savePayload).length > 0) {
+      saveTelegramConfig(savePayload)
     }
 
     const testMsg = `

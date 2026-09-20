@@ -3,12 +3,15 @@ import React, { useState, useEffect } from 'react';
 
 export default function TelegramSettingsModal({ onClose, onSaved }) {
   const [config, setConfig] = useState({
-    botToken: '8323711372:AAHOQzJ689B6jS_rB7OLfGCsbk_H6-yOMME',
+    botToken: '',
     chatId: '',
     isEnabled: true,
     notifyOnTarget: true,
     notifyOnStopLoss: true
   });
+  // 서버에 저장된 실제 토큰 값은 절대 내려받지 않는다 — 마스킹된 미리보기와 존재 여부만 표시용으로 보관.
+  const [botTokenMasked, setBotTokenMasked] = useState('');
+  const [hasBotToken, setHasBotToken] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [testing, setTesting] = useState(false);
@@ -23,8 +26,10 @@ export default function TelegramSettingsModal({ onClose, onSaved }) {
           setConfig(prev => ({
             ...prev,
             ...data.config,
-            botToken: data.config.botToken || '8323711372:AAHOQzJ689B6jS_rB7OLfGCsbk_H6-yOMME'
+            botToken: '' // 입력칸은 항상 비워두고, 새로 입력한 값만 저장 시 반영한다
           }));
+          setBotTokenMasked(data.config.botTokenMasked || '');
+          setHasBotToken(!!data.config.hasBotToken);
         }
       })
       .catch(err => console.error('텔레그램 설정 로드 실패:', err))
@@ -85,7 +90,7 @@ export default function TelegramSettingsModal({ onClose, onSaved }) {
   };
 
   const handleTestSend = async () => {
-    if (!config.botToken.trim() || !config.chatId.trim()) {
+    if ((!config.botToken.trim() && !hasBotToken) || !config.chatId.trim()) {
       alert('봇 토큰(Bot Token)과 챗 ID(Chat ID)를 먼저 입력해주세요.');
       return;
     }
@@ -135,7 +140,7 @@ export default function TelegramSettingsModal({ onClose, onSaved }) {
           overflowY: 'auto',
           background: '#1e293b',
           border: '2px solid rgba(59, 130, 246, 0.5)',
-          borderRadius: 22,
+          borderRadius: 0,
           padding: '28px',
           boxShadow: '0 25px 60px rgba(0, 0, 0, 0.85)',
           animation: 'fadeIn 0.2s ease-out'
@@ -163,7 +168,7 @@ export default function TelegramSettingsModal({ onClose, onSaved }) {
         <div style={{
           padding: '14px 16px',
           background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(16, 185, 129, 0.12) 100%)',
-          borderRadius: 14,
+          borderRadius: 0,
           border: '1.5px solid rgba(59, 130, 246, 0.4)',
           marginBottom: 18,
           fontSize: '.84rem',
@@ -191,19 +196,24 @@ export default function TelegramSettingsModal({ onClose, onSaved }) {
           {/* 봇 토큰 입력 */}
           <div>
             <label style={{ fontSize: '.82rem', color: 'var(--t1)', fontWeight: 800, display: 'block', marginBottom: 6 }}>
-              🔑 텔레그램 봇 토큰 (Bot Token) <span style={{ color: '#10b981' }}>[등록 완료 ✅]</span>
+              🔑 텔레그램 봇 토큰 (Bot Token) {hasBotToken && <span style={{ color: '#10b981' }}>[등록 완료 ✅]</span>}
             </label>
+            {hasBotToken && (
+              <div style={{ fontSize: '.76rem', color: 'var(--t3)', marginBottom: 6, fontFamily: 'Space Mono, monospace' }}>
+                저장된 토큰: {botTokenMasked} (변경하려면 아래에 새 토큰을 입력하세요)
+              </div>
+            )}
             <input
               type="text"
               value={config.botToken}
               onChange={e => setConfig({ ...config, botToken: e.target.value })}
-              placeholder="예: 8323711372:AAHOQzJ689B6jS_rB7OLfGCsbk_H6-yOMME"
+              placeholder={hasBotToken ? '변경할 때만 새 토큰 입력' : '예: 123456789:ABCDefGhIJKlmNoPQRstuVWXyz'}
               style={{
                 width: '100%',
                 padding: '11px 14px',
                 background: 'rgba(0, 0, 0, 0.4)',
                 border: '1px solid rgba(16, 185, 129, 0.4)',
-                borderRadius: 10,
+                borderRadius: 0,
                 color: '#fff',
                 fontFamily: 'Space Mono, monospace',
                 fontSize: '.82rem',
@@ -226,7 +236,7 @@ export default function TelegramSettingsModal({ onClose, onSaved }) {
                   padding: '4px 10px',
                   background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
                   border: 'none',
-                  borderRadius: 8,
+                  borderRadius: 0,
                   color: '#fff',
                   fontSize: '.75rem',
                   fontWeight: 900,
@@ -247,7 +257,7 @@ export default function TelegramSettingsModal({ onClose, onSaved }) {
                 padding: '11px 14px',
                 background: 'rgba(0, 0, 0, 0.4)',
                 border: '1px solid rgba(255, 255, 255, 0.15)',
-                borderRadius: 10,
+                borderRadius: 0,
                 color: '#fff',
                 fontFamily: 'Space Mono, monospace',
                 fontSize: '.85rem',
@@ -260,7 +270,7 @@ export default function TelegramSettingsModal({ onClose, onSaved }) {
           <div style={{
             padding: '12px 16px',
             background: 'rgba(0,0,0,0.3)',
-            borderRadius: 12,
+            borderRadius: 0,
             border: '1px solid rgba(255,255,255,0.06)',
             display: 'flex',
             flexDirection: 'column',
@@ -300,7 +310,7 @@ export default function TelegramSettingsModal({ onClose, onSaved }) {
           {testResult && (
             <div style={{
               padding: '10px 14px',
-              borderRadius: 10,
+              borderRadius: 0,
               fontSize: '.82rem',
               fontWeight: 800,
               background: testResult.success ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.15)',
@@ -322,7 +332,7 @@ export default function TelegramSettingsModal({ onClose, onSaved }) {
                 padding: '10px 16px',
                 background: testing ? 'rgba(59,130,246,0.3)' : 'rgba(59,130,246,0.2)',
                 border: '1px solid #3b82f6',
-                borderRadius: 10,
+                borderRadius: 0,
                 color: '#60a5fa',
                 fontWeight: 900,
                 fontSize: '.85rem',
@@ -340,7 +350,7 @@ export default function TelegramSettingsModal({ onClose, onSaved }) {
               <button
                 type="button"
                 onClick={onClose}
-                style={{ padding: '10px 16px', background: 'rgba(255,255,255,0.08)', border: 'none', borderRadius: 10, color: '#fff', cursor: 'pointer', fontWeight: 800 }}
+                style={{ padding: '10px 16px', background: 'rgba(255,255,255,0.08)', border: 'none', borderRadius: 0, color: '#fff', cursor: 'pointer', fontWeight: 800 }}
               >
                 닫기
               </button>
@@ -351,7 +361,7 @@ export default function TelegramSettingsModal({ onClose, onSaved }) {
                   padding: '10px 22px',
                   background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
                   border: 'none',
-                  borderRadius: 10,
+                  borderRadius: 0,
                   color: '#fff',
                   fontWeight: 900,
                   fontSize: '.88rem',

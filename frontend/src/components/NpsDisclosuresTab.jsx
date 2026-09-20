@@ -59,7 +59,7 @@ export default function NpsDisclosuresTab() {
       const res = await fetch('/api/telegram/send-nps-briefing', { method: 'POST' });
       const resData = await res.json();
       if (resData.success) {
-        showToast('✅ 🏛️ 국민연금 DART 최신 지분공시 브리핑이 텔레그램으로 전송되었습니다!');
+        showToast('✅ 국민연금 DART 최신 지분공시 브리핑이 텔레그램으로 전송되었습니다!');
       } else {
         alert(resData.error || '텔레그램 발송 실패');
       }
@@ -81,7 +81,7 @@ export default function NpsDisclosuresTab() {
       });
       const resData = await res.json();
       if (resData.success) {
-        showToast('🚀 🚨 국민연금 신규 공시 실시간 감시 포착 알림이 텔레그램으로 전송되었습니다!');
+        showToast('🚨 국민연금 신규 공시 실시간 감시 포착 알림이 텔레그램으로 전송되었습니다!');
       } else {
         alert(resData.error || '테스트 발송 실패');
       }
@@ -111,7 +111,7 @@ export default function NpsDisclosuresTab() {
       `"${d.reportName}"`
     ]);
 
-    const csvContent = '\uFEFF' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+    const csvContent = '﻿' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -142,7 +142,7 @@ export default function NpsDisclosuresTab() {
     // 2. 검색어 필터
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase().trim();
-      list = list.filter(d => 
+      list = list.filter(d =>
         (d.corpName || '').toLowerCase().includes(q) ||
         (d.stockCode || '').toLowerCase().includes(q) ||
         (d.reportName || '').toLowerCase().includes(q) ||
@@ -177,7 +177,7 @@ export default function NpsDisclosuresTab() {
           padding: '14px 20px',
           background: 'rgba(15, 23, 42, 0.95)',
           border: '1.5px solid #10b981',
-          borderRadius: 14,
+          borderRadius: 0,
           color: '#fff',
           fontWeight: 800,
           fontSize: '.9rem',
@@ -191,68 +191,59 @@ export default function NpsDisclosuresTab() {
 
       {/* ─── 1. 상단 메인 헤더 배너 ─── */}
       <div style={{
-        padding: '24px 28px',
-        background: 'linear-gradient(135deg, rgba(30, 58, 138, 0.4) 0%, rgba(99, 102, 241, 0.28) 50%, rgba(16, 185, 129, 0.28) 100%)',
-        border: '2px solid rgba(99, 102, 241, 0.5)',
-        borderRadius: 22,
-        marginBottom: 20,
-        boxShadow: '0 10px 36px rgba(0,0,0,0.45)',
+        padding: '22px 26px',
+        background: 'var(--bg2)',
+        borderTop: '2px solid #818cf8',
+        border: '1px solid rgba(255,255,255,0.08)',
+        borderRadius: 0,
+        marginBottom: 18,
+        boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
           <div>
-            <div style={{ fontSize: '1.6rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-              <span style={{ filter: 'drop-shadow(0 0 12px #6366f1)' }}>🏛️ 국민연금 DART 공시 실시간 감시 터미널</span>
+            <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+              <span>국민연금 DART 공시 실시간 감시 터미널</span>
               <span style={{
-                fontSize: '.75rem',
-                background: 'rgba(16, 185, 129, 0.2)',
-                color: '#34d399',
-                border: '1px solid #10b981',
-                padding: '4px 12px',
-                borderRadius: 20,
-                fontWeight: 900,
+                fontSize: '.74rem',
+                color: 'var(--t2)',
+                fontWeight: 700,
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: 6
               }}>
                 <span style={{
-                  width: 8,
-                  height: 8,
+                  width: 6,
+                  height: 6,
                   borderRadius: '50%',
                   background: '#10b981',
-                  boxShadow: '0 0 10px #10b981',
                   display: 'inline-block'
                 }}/>
                 24H 실시간 자동 감시 엔진 가동 중 (30초 주기)
               </span>
             </div>
-            <div style={{ fontSize: '.92rem', color: 'var(--t2)', marginTop: 8, lineHeight: 1.6 }}>
-              국민연금공단의 <strong>5% 이상 신규 편입 및 지분 변동 공시</strong>를 30초 주기로 백그라운드 자동 감시하며, 새로운 공시 발생 시 <strong>스마트폰 텔레그램으로 즉시 자동 푸시 알림</strong>을 발송합니다.
+            <div style={{ fontSize: '.86rem', color: 'var(--t3)', marginTop: 6, lineHeight: 1.6 }}>
+              국민연금공단의 5% 이상 신규 편입 및 지분 변동 공시를 30초 주기로 백그라운드 자동 감시하며, 새로운 공시 발생 시 스마트폰 텔레그램으로 즉시 자동 푸시 알림을 발송합니다.
             </div>
           </div>
 
           {/* 액션 버튼 그룹 */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-            {/* 🚨 실시간 포착 알림 테스트 */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+            {/* 실시간 포착 알림 테스트 */}
             <button
               onClick={handleTestRealtimeAlert}
               disabled={testingAlert}
               style={{
-                padding: '10px 16px',
-                background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)',
+                padding: '9px 14px',
+                background: '#ef4444',
                 border: 'none',
-                borderRadius: 12,
+                borderRadius: 0,
                 color: '#fff',
-                fontWeight: 900,
+                fontWeight: 700,
                 cursor: testingAlert ? 'not-allowed' : 'pointer',
-                fontSize: '.85rem',
-                boxShadow: '0 4px 14px rgba(239,68,68,0.4)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6
+                fontSize: '.82rem'
               }}
             >
-              <span>{testingAlert ? '⏳' : '🚨'}</span>
-              <span>{testingAlert ? '발송 중...' : '실시간 감시 포착 알림 테스트'}</span>
+              {testingAlert ? '발송 중...' : '실시간 감시 포착 알림 테스트'}
             </button>
 
             {/* 텔레그램 종합 브리핑 전송 */}
@@ -260,39 +251,34 @@ export default function NpsDisclosuresTab() {
               onClick={handleSendTelegram}
               disabled={sendingTelegram}
               style={{
-                padding: '10px 16px',
-                background: 'linear-gradient(135deg, #4f46e5 0%, #3730a3 100%)',
+                padding: '9px 14px',
+                background: '#3b82f6',
                 border: 'none',
-                borderRadius: 12,
+                borderRadius: 0,
                 color: '#fff',
-                fontWeight: 900,
+                fontWeight: 700,
                 cursor: sendingTelegram ? 'not-allowed' : 'pointer',
-                fontSize: '.85rem',
-                boxShadow: '0 4px 14px rgba(79,70,229,0.4)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6
+                fontSize: '.82rem'
               }}
             >
-              <span>{sendingTelegram ? '⏳' : '📱'}</span>
-              <span>{sendingTelegram ? '전송 중...' : '공시 전체 브리핑 텔레그램 전송'}</span>
+              {sendingTelegram ? '전송 중...' : '공시 전체 브리핑 텔레그램 전송'}
             </button>
 
             {/* CSV 다운로드 */}
             <button
               onClick={handleDownloadCsv}
               style={{
-                padding: '10px 14px',
-                background: 'rgba(255,255,255,0.08)',
+                padding: '9px 14px',
+                background: 'transparent',
                 border: '1px solid rgba(255,255,255,0.15)',
-                borderRadius: 12,
-                color: '#fff',
-                fontWeight: 800,
+                borderRadius: 0,
+                color: 'var(--t2)',
+                fontWeight: 700,
                 cursor: 'pointer',
-                fontSize: '.85rem'
+                fontSize: '.82rem'
               }}
             >
-              📥 CSV
+              CSV
             </button>
 
             {/* 새로고침 */}
@@ -300,17 +286,17 @@ export default function NpsDisclosuresTab() {
               onClick={handleRefresh}
               disabled={refreshing}
               style={{
-                padding: '10px 14px',
-                background: 'rgba(255,255,255,0.08)',
+                padding: '9px 12px',
+                background: 'transparent',
                 border: '1px solid rgba(255,255,255,0.15)',
-                borderRadius: 12,
-                color: '#fff',
-                fontWeight: 800,
+                borderRadius: 0,
+                color: 'var(--t2)',
+                fontWeight: 700,
                 cursor: 'pointer',
-                fontSize: '.85rem'
+                fontSize: '.82rem'
               }}
             >
-              {refreshing ? '⏳' : '🔄'}
+              {refreshing ? '⋯' : '↻'}
             </button>
           </div>
         </div>
@@ -319,10 +305,10 @@ export default function NpsDisclosuresTab() {
       {/* ─── 2. 4대 KPI 요약 통계 카드 ─── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: 12, marginBottom: 20 }}>
         {[
-          { id: 'ALL', label: '🏛️ 전체 감시 공시', count: summary.totalDisclosures, color: '#818cf8', desc: '국민연금 5% 대량보유 공시' },
-          { id: 'NEW', label: '🆕 5% 신규 취득 공시', count: summary.new5PctCount, color: '#10b981', desc: '신규 5% 이상 편입 보고' },
-          { id: 'INCREASE', label: '📈 지분 확대 (순매수)', count: summary.increasedCount, color: '#60a5fa', desc: '장내 매수 비중 확대' },
-          { id: 'DECREASE', label: '📉 지분 축소 / 매도', count: (summary.decreasedCount || 0) + (summary.soldCount || 0), color: '#f87171', desc: '장내 매도 비중 축소' },
+          { id: 'ALL', label: '전체 감시 공시', count: summary.totalDisclosures, color: '#818cf8', desc: '국민연금 5% 대량보유 공시' },
+          { id: 'NEW', label: '5% 신규 취득 공시', count: summary.new5PctCount, color: '#10b981', desc: '신규 5% 이상 편입 보고' },
+          { id: 'INCREASE', label: '지분 확대 (순매수)', count: summary.increasedCount, color: '#60a5fa', desc: '장내 매수 비중 확대' },
+          { id: 'DECREASE', label: '지분 축소 / 매도', count: (summary.decreasedCount || 0) + (summary.soldCount || 0), color: '#f87171', desc: '장내 매도 비중 축소' },
         ].map(card => {
           const isSelected = activeFilter === card.id;
           return (
@@ -331,21 +317,21 @@ export default function NpsDisclosuresTab() {
               onClick={() => setActiveFilter(card.id)}
               style={{
                 padding: '16px 18px',
-                borderRadius: 16,
-                background: isSelected ? `${card.color}25` : 'rgba(30, 41, 59, 0.75)',
-                border: isSelected ? `2px solid ${card.color}` : '1px solid rgba(255,255,255,0.08)',
+                borderRadius: 0,
+                background: isSelected ? `${card.color}15` : 'var(--bg2)',
+                border: isSelected ? `1px solid ${card.color}` : '1px solid rgba(255,255,255,0.08)',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
-                boxShadow: isSelected ? `0 0 16px ${card.color}40` : 'none'
+                boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '.84rem', fontWeight: 800, color: card.color }}>{card.label}</span>
+                <span style={{ fontSize: '.8rem', fontWeight: 700, color: 'var(--t2)' }}>{card.label}</span>
                 <span style={{ fontSize: '1.3rem', fontWeight: 900, color: '#fff', fontFamily: 'Space Mono' }}>{card.count}건</span>
               </div>
-              <div style={{ fontSize: '.74rem', color: 'var(--t2)', marginTop: 4 }}>{card.desc}</div>
-              <div style={{ fontSize: '.72rem', color: card.color, fontWeight: 800, marginTop: 8 }}>
-                {isSelected ? '✅ 필터링 적용 중' : '클릭 시 필터 ➔'}
+              <div style={{ fontSize: '.74rem', color: 'var(--t3)', marginTop: 4 }}>{card.desc}</div>
+              <div style={{ fontSize: '.72rem', color: card.color, fontWeight: 700, marginTop: 8 }}>
+                {isSelected ? '필터링 적용 중' : '클릭 시 필터'}
               </div>
             </div>
           );
@@ -355,25 +341,25 @@ export default function NpsDisclosuresTab() {
       {/* ─── 3. 필터 칩스 & 검색 & 정렬 바 ─── */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 18 }}>
         {/* 필터 칩스 */}
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: 4, background: 'rgba(0,0,0,0.25)', padding: 3, borderRadius: 0, flexWrap: 'wrap' }}>
           {[
-            { id: 'ALL', label: `🌐 전체 (${summary.totalDisclosures})` },
-            { id: 'NEW', label: `🆕 5% 신규취득 (${summary.new5PctCount})` },
-            { id: 'INCREASE', label: `📈 지분 확대 (${summary.increasedCount})` },
-            { id: 'DECREASE', label: `📉 지분 축소 (${summary.decreasedCount})` },
-            { id: 'LARGE_CAP', label: `🔥 1조원 이상 대형주` }
+            { id: 'ALL', label: `전체 (${summary.totalDisclosures})` },
+            { id: 'NEW', label: `5% 신규취득 (${summary.new5PctCount})` },
+            { id: 'INCREASE', label: `지분 확대 (${summary.increasedCount})` },
+            { id: 'DECREASE', label: `지분 축소 (${summary.decreasedCount})` },
+            { id: 'LARGE_CAP', label: `1조원 이상 대형주` }
           ].map(f => (
             <button
               key={f.id}
               onClick={() => setActiveFilter(f.id)}
               style={{
                 padding: '8px 14px',
-                borderRadius: 12,
-                border: activeFilter === f.id ? '1.5px solid #6366f1' : '1px solid rgba(255,255,255,0.08)',
-                background: activeFilter === f.id ? 'rgba(99, 102, 241, 0.25)' : 'rgba(0,0,0,0.3)',
+                borderRadius: 0,
+                border: 'none',
+                background: activeFilter === f.id ? 'var(--accent)' : 'transparent',
                 color: activeFilter === f.id ? '#fff' : 'var(--t3)',
-                fontWeight: 900,
-                fontSize: '.84rem',
+                fontWeight: 700,
+                fontSize: '.82rem',
                 cursor: 'pointer'
               }}
             >
@@ -384,8 +370,7 @@ export default function NpsDisclosuresTab() {
 
         {/* 검색 & 정렬 컨트롤 */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'var(--bg2)', padding: '8px 14px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.1)' }}>
-            <span>🔍</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'var(--bg2)', padding: '8px 14px', borderRadius: 0, border: '1px solid rgba(255,255,255,0.1)' }}>
             <input
               type="text"
               value={searchQuery}
@@ -405,17 +390,17 @@ export default function NpsDisclosuresTab() {
               padding: '8px 12px',
               background: 'var(--bg2)',
               border: '1px solid rgba(255,255,255,0.1)',
-              borderRadius: 12,
+              borderRadius: 0,
               color: '#fff',
               fontSize: '.84rem',
               outline: 'none',
               cursor: 'pointer'
             }}
           >
-            <option value="DATE_DESC">📅 최신 공시일자순</option>
-            <option value="DIFF_DESC">📈 지분율 변동폭순</option>
-            <option value="RATIO_DESC">🏆 지분율 높은순</option>
-            <option value="VALUE_DESC">💰 평가금액순</option>
+            <option value="DATE_DESC">최신 공시일자순</option>
+            <option value="DIFF_DESC">지분율 변동폭순</option>
+            <option value="RATIO_DESC">지분율 높은순</option>
+            <option value="VALUE_DESC">평가금액순</option>
           </select>
         </div>
       </div>
@@ -423,21 +408,19 @@ export default function NpsDisclosuresTab() {
       {/* ─── 4. 국민연금 DART 공시 테이블 & 상세 뷰 ─── */}
       {loading ? (
         <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)' }}>
-          <div style={{ fontSize: '2.5rem', marginBottom: 12 }}>⏳</div>
-          <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#fff' }}>DART 전자공시 시스템에서 국민연금 공시를 실시간 감시 중입니다...</div>
+          <div style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--t2)' }}>DART 전자공시 시스템에서 국민연금 공시를 실시간 감시 중입니다...</div>
         </div>
       ) : filteredDisclosures.length === 0 ? (
-        <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)', background: 'var(--bg2)', borderRadius: 18 }}>
-          <div style={{ fontSize: '2.5rem', marginBottom: 12 }}>🏛️</div>
-          <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#fff' }}>해당 조건의 국민연금 공시 내역이 없습니다.</div>
+        <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)', background: 'var(--bg2)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 0 }}>
+          <div style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--t2)' }}>해당 조건의 국민연금 공시 내역이 없습니다.</div>
         </div>
       ) : (
         <div style={{
-          background: 'rgba(30, 41, 59, 0.75)',
-          borderRadius: 20,
+          background: 'var(--bg2)',
+          borderRadius: 0,
           border: '1px solid rgba(255,255,255,0.08)',
           overflow: 'hidden',
-          boxShadow: '0 8px 30px rgba(0,0,0,0.3)'
+          boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
         }}>
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '.88rem' }}>
@@ -472,12 +455,12 @@ export default function NpsDisclosuresTab() {
                     >
                       {/* 1. 공시일자 */}
                       <td style={{ padding: '14px 18px', color: 'var(--t2)', fontFamily: 'Space Mono', fontSize: '.84rem' }}>
-                        📅 {item.date}
+                        {item.date}
                       </td>
 
                       {/* 2. 기업명 (종목코드) */}
                       <td style={{ padding: '14px 18px' }}>
-                        <div style={{ fontWeight: 900, color: '#fff', fontSize: '.95rem' }}>{item.corpName}</div>
+                        <div style={{ fontWeight: 800, color: '#fff', fontSize: '.95rem' }}>{item.corpName}</div>
                         <div style={{ fontSize: '.76rem', color: 'var(--t3)', fontFamily: 'Space Mono' }}>{item.stockCode}</div>
                       </td>
 
@@ -485,9 +468,9 @@ export default function NpsDisclosuresTab() {
                       <td style={{ padding: '14px 18px' }}>
                         <span style={{
                           padding: '4px 10px',
-                          borderRadius: 8,
+                          borderRadius: 0,
                           fontSize: '.76rem',
-                          fontWeight: 900,
+                          fontWeight: 700,
                           background: `${item.actionColor}20`,
                           color: item.actionColor,
                           border: `1px solid ${item.actionColor}50`
@@ -502,8 +485,8 @@ export default function NpsDisclosuresTab() {
                           {item.currentRatio}%
                         </div>
                         <div style={{ fontSize: '.78rem', color: diffColor, fontWeight: 800, fontFamily: 'Space Mono' }}>
-                          {item.prevRatio !== null && item.prevRatio > 0 ? `${item.prevRatio}% ➔ ` : ''}
-                          {isUp ? `+${item.diffRatio}%p ▲` : `${item.diffRatio}%p ▼`}
+                          {item.prevRatio !== null && item.prevRatio > 0 ? `${item.prevRatio}% → ` : ''}
+                          {isUp ? `+${item.diffRatio}%p` : `${item.diffRatio}%p`}
                         </div>
                       </td>
 
@@ -530,7 +513,7 @@ export default function NpsDisclosuresTab() {
                       </td>
 
                       {/* 7. 평가금액 */}
-                      <td style={{ padding: '14px 18px', fontFamily: 'Space Mono', color: '#fbbf24', fontWeight: 900 }}>
+                      <td style={{ padding: '14px 18px', fontFamily: 'Space Mono', color: '#fbbf24', fontWeight: 800 }}>
                         {item.valueEok > 0 ? `${formatNumber(item.valueEok)}억 원` : '-'}
                       </td>
 
@@ -544,15 +527,15 @@ export default function NpsDisclosuresTab() {
                             padding: '6px 12px',
                             background: 'rgba(59, 130, 246, 0.15)',
                             border: '1px solid rgba(59, 130, 246, 0.4)',
-                            borderRadius: 8,
+                            borderRadius: 0,
                             color: '#60a5fa',
                             fontSize: '.78rem',
-                            fontWeight: 800,
+                            fontWeight: 700,
                             textDecoration: 'none',
                             display: 'inline-block'
                           }}
                         >
-                          📑 DART 공시 ↗
+                          DART 공시 ↗
                         </a>
                       </td>
                     </tr>
@@ -587,9 +570,10 @@ export default function NpsDisclosuresTab() {
             style={{
               width: '100%',
               maxWidth: '560px',
-              background: '#1e293b',
-              border: `2px solid ${selectedItem.actionColor}`,
-              borderRadius: 22,
+              background: 'var(--bg2)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderTop: `2px solid ${selectedItem.actionColor}`,
+              borderRadius: 0,
               padding: '28px',
               boxShadow: '0 25px 60px rgba(0, 0, 0, 0.85)',
               animation: 'fadeIn 0.2s ease-out'
@@ -597,12 +581,9 @@ export default function NpsDisclosuresTab() {
             onClick={e => e.stopPropagation()}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18, borderBottom: '1px solid rgba(255, 255, 255, 0.1)', paddingBottom: 12 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <span style={{ fontSize: '1.4rem' }}>🏛️</span>
-                <div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 900, color: '#fff' }}>{selectedItem.corpName}</div>
-                  <div style={{ fontSize: '.78rem', color: 'var(--t3)', fontFamily: 'Space Mono' }}>{selectedItem.stockCode}</div>
-                </div>
+              <div>
+                <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff' }}>{selectedItem.corpName}</div>
+                <div style={{ fontSize: '.78rem', color: 'var(--t3)', fontFamily: 'Space Mono' }}>{selectedItem.stockCode}</div>
               </div>
               <button
                 onClick={() => setSelectedItem(null)}
@@ -613,18 +594,18 @@ export default function NpsDisclosuresTab() {
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 16px', background: 'rgba(0,0,0,0.3)', borderRadius: 12 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 16px', background: 'rgba(0,0,0,0.3)', borderRadius: 0 }}>
                 <span style={{ color: 'var(--t3)', fontSize: '.84rem' }}>보고서명</span>
                 <span style={{ color: '#fff', fontWeight: 800, fontSize: '.88rem' }}>{selectedItem.reportName}</span>
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 16px', background: 'rgba(0,0,0,0.3)', borderRadius: 12 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 16px', background: 'rgba(0,0,0,0.3)', borderRadius: 0 }}>
                 <span style={{ color: 'var(--t3)', fontSize: '.84rem' }}>제출인</span>
                 <span style={{ color: '#60a5fa', fontWeight: 800, fontSize: '.88rem' }}>{selectedItem.submitter}</span>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-                <div style={{ padding: '12px 16px', background: 'rgba(0,0,0,0.3)', borderRadius: 12 }}>
+                <div style={{ padding: '12px 16px', background: 'rgba(0,0,0,0.3)', borderRadius: 0 }}>
                   <div style={{ color: 'var(--t3)', fontSize: '.76rem' }}>지분율 변동</div>
                   <div style={{ color: '#fff', fontWeight: 900, fontSize: '1.2rem', fontFamily: 'Space Mono', marginTop: 4 }}>
                     {selectedItem.currentRatio}%
@@ -634,7 +615,7 @@ export default function NpsDisclosuresTab() {
                   </div>
                 </div>
 
-                <div style={{ padding: '12px 16px', background: 'rgba(0,0,0,0.3)', borderRadius: 12 }}>
+                <div style={{ padding: '12px 16px', background: 'rgba(0,0,0,0.3)', borderRadius: 0 }}>
                   <div style={{ color: 'var(--t3)', fontSize: '.76rem' }}>보유주식수</div>
                   <div style={{ color: '#fff', fontWeight: 900, fontSize: '1.1rem', fontFamily: 'Space Mono', marginTop: 4 }}>
                     {formatNumber(selectedItem.shares)}주
@@ -645,7 +626,7 @@ export default function NpsDisclosuresTab() {
                 </div>
               </div>
 
-              <div style={{ padding: '12px 16px', background: 'rgba(0,0,0,0.3)', borderRadius: 12 }}>
+              <div style={{ padding: '12px 16px', background: 'rgba(0,0,0,0.3)', borderRadius: 0 }}>
                 <div style={{ color: 'var(--t3)', fontSize: '.76rem' }}>보유 목적 및 취득 방식</div>
                 <div style={{ color: '#fff', fontSize: '.84rem', marginTop: 4, lineHeight: 1.5 }}>
                   • <strong>목적:</strong> {selectedItem.purpose}<br/>
@@ -660,15 +641,15 @@ export default function NpsDisclosuresTab() {
                   rel="noopener noreferrer"
                   style={{
                     padding: '10px 18px',
-                    background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
-                    borderRadius: 10,
+                    background: '#3b82f6',
+                    borderRadius: 0,
                     color: '#fff',
-                    fontWeight: 900,
+                    fontWeight: 700,
                     textDecoration: 'none',
                     fontSize: '.85rem'
                   }}
                 >
-                  📑 DART 전자공시시스템 원문 바로가기 ↗
+                  DART 전자공시시스템 원문 바로가기 ↗
                 </a>
               </div>
             </div>
@@ -679,18 +660,18 @@ export default function NpsDisclosuresTab() {
       {/* ─── 6. 실시간 자동 감시 안내 박스 ─── */}
       <div style={{
         marginTop: 24,
-        padding: '22px 26px',
-        background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(99, 102, 241, 0.15) 100%)',
-        border: '1.5px solid rgba(16, 185, 129, 0.4)',
-        borderRadius: 20,
+        padding: '18px 22px',
+        background: 'var(--bg2)',
+        borderLeft: '3px solid #34d399',
+        border: '1px solid rgba(255,255,255,0.08)',
+        borderRadius: 0,
       }}>
-        <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#fff', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span>🔔</span>
-          <span>국민연금 5% DART 공시 실시간 자동 감시(Real-time Push) 작동 원리</span>
+        <div style={{ fontSize: '.92rem', fontWeight: 800, color: 'var(--t1)', marginBottom: 10 }}>
+          국민연금 5% DART 공시 실시간 자동 감시(Real-time Push) 작동 원리
         </div>
         <div style={{ fontSize: '.86rem', color: 'var(--t2)', lineHeight: 1.7 }}>
           • <strong>30초 주기 백그라운드 상시 감시:</strong> 서버 백그라운드 엔진이 DART 전자공시를 30초마다 자동으로 스캔합니다.<br/>
-          • <strong>신규 5% 편입 및 대량 확대 즉시 감지:</strong> 국민연금이 신규로 5%를 돌파하거나, 기존 종목 지분을 대량 확대한 공시가 등록되면 <strong>별도의 조작 없이도 스마트폰 텔레그램으로 팝업 알림</strong>이 전송됩니다.<br/>
+          • <strong>신규 5% 편입 및 대량 확대 즉시 감지:</strong> 국민연금이 신규로 5%를 돌파하거나, 기존 종목 지분을 대량 확대한 공시가 등록되면 별도의 조작 없이도 스마트폰 텔레그램으로 팝업 알림이 전송됩니다.<br/>
           • <strong>중복 발송 방지:</strong> 이미 발송된 공시는 고유 ID 기반으로 기록되어 중복 울림 없이 신규 공시만 깔끔하게 받아보실 수 있습니다.
         </div>
       </div>

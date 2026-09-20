@@ -161,6 +161,17 @@ export function getTelegramConfig() {
   }
 }
 
+// 봇 토큰을 프론트엔드로 내려보낼 때 실제 값이 노출되지 않도록 마스킹 (앞 4자 + 뒤 4자만 표시)
+export function maskTelegramToken(token) {
+  if (!token) return '';
+  const parts = String(token).split(':');
+  const idPart = parts[0] || '';
+  const secretPart = parts.slice(1).join(':') || '';
+  const visibleId = idPart.length > 4 ? idPart.slice(0, 4) + '••••' : '••••';
+  const visibleSecretTail = secretPart.length > 4 ? secretPart.slice(-4) : '••••';
+  return `${visibleId}:••••${visibleSecretTail}`;
+}
+
 // 텔레그램 설정 저장
 export function saveTelegramConfig(newConfig) {
   ensureFiles();
