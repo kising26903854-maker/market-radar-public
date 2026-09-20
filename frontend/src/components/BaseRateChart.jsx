@@ -112,18 +112,18 @@ export default function BaseRateChart() {
       return (
         <div style={{
           background: 'rgba(15, 23, 42, 0.95)',
-          border: '1.5px solid var(--border)',
+          border: '1px solid var(--border)',
           padding: '12px 14px',
-          borderRadius: 12,
+          borderRadius: 0,
           fontSize: '.85rem',
           boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
           color: 'var(--t1)'
         }}>
-          <div style={{ fontWeight: 900, marginBottom: 8, color: 'var(--gold)' }}>📅 {label}</div>
+          <div style={{ fontWeight: 700, marginBottom: 8, color: 'var(--gold)' }}>{label}</div>
           {payload.map((item, index) => (
             <div key={index} style={{ display: 'flex', justifyContent: 'space-between', gap: 20, margin: '4px 0' }}>
               <span style={{ color: item.color || '#fff', fontWeight: 700 }}>
-                {item.name === 'krRate' ? '🇰🇷 한국 기준금리' : item.name === 'usRate' ? '🇺🇸 미국 기준금리' : '📊 한미 금리차'}
+                {item.name === 'krRate' ? '한국 기준금리' : item.name === 'usRate' ? '미국 기준금리' : '한미 금리차'}
               </span>
               <span style={{ fontFamily: 'Space Mono', fontWeight: 900 }}>
                 {item.value.toFixed(2)}%
@@ -137,7 +137,7 @@ export default function BaseRateChart() {
   }
 
   if (loading) return (
-    <div style={{ background: 'var(--bg2)', padding: 30, borderRadius: 16, border: '1px solid var(--border)', textAlign: 'center', color: 'var(--t3)' }}>
+    <div style={{ background: 'var(--bg2)', padding: 30, borderRadius: 0, border: '1px solid var(--border)', textAlign: 'center', color: 'var(--t3)' }}>
       <div style={{ display: 'inline-block', width: 40, height: 40, border: '3.5px solid rgba(251,191,36,0.15)', borderTopColor: 'var(--gold)', borderRadius: '50%', animation: 'spin 1s linear infinite', marginBottom: 12 }} />
       <div style={{ fontSize: '1rem', fontWeight: 700 }}>한·미 기준금리 역사적 시계열 로딩 중...</div>
       <style>{`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}</style>
@@ -145,8 +145,8 @@ export default function BaseRateChart() {
   )
 
   if (error || !summary) return (
-    <div style={{ background: 'var(--bg2)', padding: 30, borderRadius: 16, border: '1px solid var(--border)', textAlign: 'center', color: 'var(--t3)' }}>
-      <div style={{ fontSize: '1.2rem', color: '#ef4444', marginBottom: 8 }}>⚠️ 오류 발생</div>
+    <div style={{ background: 'var(--bg2)', padding: 30, borderRadius: 0, border: '1px solid var(--border)', textAlign: 'center', color: 'var(--t3)' }}>
+      <div style={{ fontSize: '1.2rem', color: '#ef4444', marginBottom: 8 }}>오류 발생</div>
       <div>금리 데이터를 불러오지 못했습니다: {error || '데이터 없음'}</div>
     </div>
   )
@@ -156,8 +156,8 @@ export default function BaseRateChart() {
       {/* ─── 헤더 타이틀 & 필터 ─── */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18, flexWrap: 'wrap', gap: 12 }}>
         <div>
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--t1)', margin: 0, display: 'flex', alignItems: 'center', gap: 8 }}>
-            🏛️ 한·미 기준금리 역사적 추이 (1970 ~ 2026)
+          <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--t1)', margin: 0, display: 'flex', alignItems: 'center', gap: 8 }}>
+            한·미 기준금리 역사적 추이 (1970 ~ 2026)
           </h2>
           <p style={{ fontSize: '.8rem', color: 'var(--t2)', margin: '4px 0 0 0' }}>
             미국 연방기금금리(FRED 실시간 연동)와 한국은행 기준금리 변동 이력(수동 업데이트)을 월별로 매핑하여 표시합니다.
@@ -165,7 +165,7 @@ export default function BaseRateChart() {
         </div>
 
         {/* 기간 필터 토글 */}
-        <div style={{ display: 'flex', background: 'rgba(0,0,0,0.3)', padding: 3, borderRadius: 10, border: '1px solid var(--border)' }}>
+        <div style={{ display: 'flex', background: 'rgba(0,0,0,0.25)', padding: 3, borderRadius: 0 }}>
           {[
             { id: 'all', label: '전체 (1970~)' },
             { id: '2000s', label: '2000년대~' },
@@ -179,10 +179,10 @@ export default function BaseRateChart() {
                 padding: '6px 14px',
                 background: period === p.id ? 'var(--accent)' : 'transparent',
                 border: 'none',
-                borderRadius: 8,
-                color: '#fff',
-                fontSize: '.78rem',
-                fontWeight: 800,
+                borderRadius: 0,
+                color: period === p.id ? '#fff' : 'var(--t3)',
+                fontSize: '.8rem',
+                fontWeight: 700,
                 cursor: 'pointer',
                 transition: 'background .15s'
               }}
@@ -197,11 +197,11 @@ export default function BaseRateChart() {
       <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : `repeat(${currentTarget ? 4 : 3}, 1fr)`, gap: 16, marginBottom: 20 }}>
         {/* 미국 연준 현재 목표금리 카드 (일별 실시간 — FOMC 결정 당일/익일 즉시 반영) */}
         {currentTarget && (
-          <div style={{ background: 'var(--bg2)', padding: '16px 20px', borderRadius: 14, border: '1.5px solid rgba(251,191,36,0.45)', boxShadow: '0 4px 12px rgba(0,0,0,0.2)' }}>
-            <div style={{ fontSize: '.76rem', color: 'var(--t2)', fontWeight: 800, display: 'flex', alignItems: 'center', gap: 6 }}>
-              🇺🇸 Fed 현재 목표금리 (실시간)
+          <div style={{ background: 'var(--bg2)', padding: '16px 20px', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 4px 16px rgba(0,0,0,0.2)' }}>
+            <div style={{ fontSize: '.76rem', color: 'var(--t2)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}>
+              Fed 현재 목표금리 (실시간)
               {currentTarget.direction !== '동결' && (
-                <span style={{ fontSize: '.66rem', padding: '1px 7px', borderRadius: 6, background: currentTarget.direction === '인상' ? 'rgba(239,68,68,0.2)' : 'rgba(59,130,246,0.2)', color: currentTarget.direction === '인상' ? '#ef4444' : '#3b82f6', fontWeight: 900 }}>
+                <span style={{ fontSize: '.66rem', padding: '1px 7px', borderRadius: 0, background: currentTarget.direction === '인상' ? 'rgba(239,68,68,0.2)' : 'rgba(59,130,246,0.2)', color: currentTarget.direction === '인상' ? '#ef4444' : '#3b82f6', fontWeight: 700 }}>
                   {currentTarget.direction}
                 </span>
               )}
@@ -217,8 +217,8 @@ export default function BaseRateChart() {
         )}
 
         {/* 한국 카드 */}
-        <div style={{ background: 'var(--bg2)', padding: '16px 20px', borderRadius: 14, border: '1.5px solid rgba(16,185,129,0.35)', boxShadow: '0 4px 12px rgba(0,0,0,0.2)' }}>
-          <div style={{ fontSize: '.76rem', color: 'var(--t2)', fontWeight: 800 }}>🇰🇷 대한민국 기준금리</div>
+        <div style={{ background: 'var(--bg2)', padding: '16px 20px', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 4px 16px rgba(0,0,0,0.2)' }}>
+          <div style={{ fontSize: '.76rem', color: 'var(--t2)', fontWeight: 700 }}>대한민국 기준금리</div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginTop: 8 }}>
             <span style={{ fontSize: '1.9rem', fontWeight: 900, fontFamily: 'Space Mono', color: '#10b981' }}>{summary.krRate.toFixed(2)}%</span>
             <span style={{ fontSize: '.72rem', color: 'var(--t3)' }}>
@@ -228,8 +228,8 @@ export default function BaseRateChart() {
         </div>
 
         {/* 미국 카드 */}
-        <div style={{ background: 'var(--bg2)', padding: '16px 20px', borderRadius: 14, border: '1.5px solid rgba(239,68,68,0.35)', boxShadow: '0 4px 12px rgba(0,0,0,0.2)' }}>
-          <div style={{ fontSize: '.76rem', color: 'var(--t2)', fontWeight: 800 }}>🇺🇸 미국 기준금리 (중앙값)</div>
+        <div style={{ background: 'var(--bg2)', padding: '16px 20px', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 4px 16px rgba(0,0,0,0.2)' }}>
+          <div style={{ fontSize: '.76rem', color: 'var(--t2)', fontWeight: 700 }}>미국 기준금리 (중앙값)</div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginTop: 8 }}>
             <span style={{ fontSize: '1.9rem', fontWeight: 900, fontFamily: 'Space Mono', color: '#ef4444' }}>{summary.usRate.toFixed(2)}%</span>
             <span style={{ fontSize: '.72rem', color: 'var(--t3)' }}>
@@ -239,19 +239,19 @@ export default function BaseRateChart() {
         </div>
 
         {/* 격차/역전폭 카드 */}
-        <div style={{ background: 'var(--bg2)', padding: '16px 20px', borderRadius: 14, border: `1.5px solid ${summary.gap < 0 ? 'rgba(244,63,94,0.35)' : 'rgba(59,130,246,0.35)'}`, boxShadow: '0 4px 12px rgba(0,0,0,0.2)' }}>
-          <div style={{ fontSize: '.76rem', color: 'var(--t2)', fontWeight: 800 }}>📊 한·미 기준금리 격차 (역전폭)</div>
+        <div style={{ background: 'var(--bg2)', padding: '16px 20px', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 4px 16px rgba(0,0,0,0.2)' }}>
+          <div style={{ fontSize: '.76rem', color: 'var(--t2)', fontWeight: 700 }}>한·미 기준금리 격차 (역전폭)</div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginTop: 8 }}>
             <span style={{ fontSize: '1.9rem', fontWeight: 900, fontFamily: 'Space Mono', color: summary.gapColor }}>{summary.gap >= 0 ? '+' : ''}{summary.gap.toFixed(2)}%p</span>
-            <span style={{ fontSize: '.78rem', color: summary.gapColor, fontWeight: 900 }}>{summary.gapStatus}</span>
+            <span style={{ fontSize: '.78rem', color: summary.gapColor, fontWeight: 700 }}>{summary.gapStatus}</span>
           </div>
         </div>
       </div>
 
       {/* ─── 차트 1: 한미 기준금리 라인 차트 ─── */}
-      <div style={{ background: 'var(--bg2)', padding: '22px 24px', borderRadius: 16, border: '1px solid var(--border)', marginBottom: 20, boxShadow: '0 8px 24px rgba(0,0,0,0.3)' }}>
-        <h3 style={{ fontSize: '1rem', fontWeight: 900, color: 'var(--t1)', margin: '0 0 16px 0', display: 'flex', alignItems: 'center', gap: 6 }}>
-          📈 한·미 기준금리 시계열 비교
+      <div style={{ background: 'var(--bg2)', padding: '22px 24px', borderRadius: 0, border: '1px solid var(--border)', marginBottom: 20, boxShadow: '0 4px 16px rgba(0,0,0,0.2)' }}>
+        <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--t1)', margin: '0 0 16px 0', display: 'flex', alignItems: 'center', gap: 6 }}>
+          한·미 기준금리 시계열 비교
         </h3>
         <div style={{ width: '100%', height: 260 }}>
           <ResponsiveContainer>
@@ -301,9 +301,9 @@ export default function BaseRateChart() {
       </div>
 
       {/* ─── 차트 2: 금리차 Area 차트 ─── */}
-      <div style={{ background: 'var(--bg2)', padding: '22px 24px', borderRadius: 16, border: '1px solid var(--border)', boxShadow: '0 8px 24px rgba(0,0,0,0.3)' }}>
-        <h3 style={{ fontSize: '1rem', fontWeight: 900, color: 'var(--t1)', margin: '0 0 16px 0', display: 'flex', alignItems: 'center', gap: 6 }}>
-          📉 한·미 기준금리 스프레드 (한국 금리 - 미국 금리)
+      <div style={{ background: 'var(--bg2)', padding: '22px 24px', borderRadius: 0, border: '1px solid var(--border)', boxShadow: '0 4px 16px rgba(0,0,0,0.2)' }}>
+        <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--t1)', margin: '0 0 16px 0', display: 'flex', alignItems: 'center', gap: 6 }}>
+          한·미 기준금리 스프레드 (한국 금리 - 미국 금리)
         </h3>
         <div style={{ width: '100%', height: 180 }}>
           <ResponsiveContainer>

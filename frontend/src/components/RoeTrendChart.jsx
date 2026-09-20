@@ -33,14 +33,14 @@ export default function RoeTrendChart({ stock }) {
   }, [code])
 
   if (loading) return (
-    <div style={{ background: 'var(--bg3)', borderRadius: 16, padding: '28px 24px', marginBottom: 20, border: '1.5px solid rgba(99,102,241,0.3)', textAlign: 'center', color: 'var(--t3)' }}>
-      <div style={{ fontSize: '1rem', fontWeight: 700 }}>📊 네이버 증권 실제 ROE 데이터 로딩 중...</div>
+    <div style={{ background: 'var(--bg2)', borderRadius: 0, padding: '28px 24px', marginBottom: 20, border: '1px solid rgba(255,255,255,0.08)', textAlign: 'center', color: 'var(--t3)' }}>
+      <div style={{ fontSize: '1rem', fontWeight: 700 }}>네이버 증권 실제 ROE 데이터 로딩 중...</div>
     </div>
   )
 
   if (error || !financials) return (
-    <div style={{ background: 'var(--bg3)', borderRadius: 16, padding: '20px 24px', marginBottom: 20, border: '1.5px solid rgba(99,102,241,0.2)', color: 'var(--t3)', textAlign: 'center' }}>
-      <div style={{ fontSize: '.9rem' }}>📋 ROE 재무데이터를 파싱하지 못했습니다 — {error || '데이터 없음'}</div>
+    <div style={{ background: 'var(--bg2)', borderRadius: 0, padding: '20px 24px', marginBottom: 20, border: '1px solid rgba(255,255,255,0.08)', color: 'var(--t3)', textAlign: 'center' }}>
+      <div style={{ fontSize: '.9rem' }}>ROE 재무데이터를 파싱하지 못했습니다 — {error || '데이터 없음'}</div>
     </div>
   )
 
@@ -66,16 +66,16 @@ export default function RoeTrendChart({ stock }) {
 
   if (rawData.length === 0) {
     return (
-      <div style={{ background: 'var(--bg3)', borderRadius: 16, padding: '20px 24px', marginBottom: 20, border: '1.5px solid rgba(99,102,241,0.35)', color: 'var(--t2)' }}>
+      <div style={{ background: 'var(--bg2)', borderRadius: 0, padding: '20px 24px', marginBottom: 20, border: '1px solid rgba(255,255,255,0.08)', color: 'var(--t2)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-          <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#818cf8' }}>📊 {stock?.name} ROE (자기자본이익률) 추이</div>
-          <div style={{ display: 'flex', background: 'rgba(0,0,0,0.3)', padding: 3, borderRadius: 10, border: '1px solid rgba(255,255,255,0.08)' }}>
-            <button onClick={() => setActiveTab('annual')} style={{ padding: '6px 14px', background: activeTab === 'annual' ? 'var(--accent)' : 'transparent', border: 'none', borderRadius: 8, color: '#fff', fontSize: '.78rem', fontWeight: 800, cursor: 'pointer' }}>연간</button>
-            <button onClick={() => setActiveTab('quarter')} style={{ padding: '6px 14px', background: activeTab === 'quarter' ? 'var(--accent)' : 'transparent', border: 'none', borderRadius: 8, color: '#fff', fontSize: '.78rem', fontWeight: 800, cursor: 'pointer' }}>분기별</button>
+          <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#fff' }}>{stock?.name} ROE (자기자본이익률) 추이</div>
+          <div style={{ display: 'flex', background: 'rgba(0,0,0,0.25)', padding: 3, borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)' }}>
+            <button onClick={() => setActiveTab('annual')} style={{ padding: '6px 14px', background: activeTab === 'annual' ? 'var(--accent)' : 'transparent', border: 'none', borderRadius: 0, color: activeTab === 'annual' ? '#fff' : 'var(--t3)', fontSize: '.78rem', fontWeight: 700, cursor: 'pointer' }}>연간</button>
+            <button onClick={() => setActiveTab('quarter')} style={{ padding: '6px 14px', background: activeTab === 'quarter' ? 'var(--accent)' : 'transparent', border: 'none', borderRadius: 0, color: activeTab === 'quarter' ? '#fff' : 'var(--t3)', fontSize: '.78rem', fontWeight: 700, cursor: 'pointer' }}>분기별</button>
           </div>
         </div>
         <div style={{ textAlign: 'center', padding: '20px 0', color: 'var(--t3)', fontSize: '.85rem' }}>
-          📭 선택하신 {activeTab === 'annual' ? '연간' : '분기별'} ROE 데이터가 네이버 금융에 존재하지 않습니다.
+          선택하신 {activeTab === 'annual' ? '연간' : '분기별'} ROE 데이터가 네이버 금융에 존재하지 않습니다.
         </div>
       </div>
     )
@@ -123,68 +123,64 @@ export default function RoeTrendChart({ stock }) {
   })
 
   return (
-    <div style={{ background: 'var(--bg3)', borderRadius: 16, padding: '20px 24px', marginBottom: 20, border: '1.5px solid rgba(99,102,241,0.35)', boxShadow: '0 8px 24px rgba(0,0,0,0.3)' }}>
+    <div style={{ background: 'var(--bg2)', borderRadius: 0, padding: '20px 24px', marginBottom: 20, border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 4px 16px rgba(0,0,0,0.2)' }}>
       {/* 헤더 */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 14, flexWrap: 'wrap', gap: 12 }}>
         <div>
-          <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#818cf8', display: 'flex', alignItems: 'center', gap: 8 }}>
-            📊 {stock?.name} ROE (자기자본이익률) 추이 ({activeTab === 'annual' ? '연간' : '분기별'})
+          <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: 8 }}>
+            {stock?.name} ROE (자기자본이익률) 추이 ({activeTab === 'annual' ? '연간' : '분기별'})
           </div>
           <div style={{ fontSize: '.78rem', color: 'var(--t2)', marginTop: 4 }}>
-            실적은 <strong style={{ color: '#818cf8' }}>🟣 실선</strong> · 예상치는 <strong style={{ color: '#f59e0b' }}>⚡ 점선</strong> &nbsp;|&nbsp;
+            실적은 <strong style={{ color: '#818cf8' }}>실선</strong> · 예상치는 <strong style={{ color: '#f59e0b' }}>점선</strong> &nbsp;|&nbsp;
             <span style={{ color: 'var(--t3)' }}>출처: 네이버 증권 재무제표</span>
           </div>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
           {/* 전환 탭 */}
-          <div style={{ display: 'flex', background: 'rgba(0,0,0,0.4)', padding: 3, borderRadius: 10, border: '1px solid rgba(255,255,255,0.08)' }}>
-            <button 
-              onClick={() => setActiveTab('annual')} 
-              style={{ 
-                padding: '6px 14px', 
-                background: activeTab === 'annual' ? 'linear-gradient(135deg, #818cf8 0%, #4f46e5 100%)' : 'transparent', 
-                border: 'none', 
-                borderRadius: 8, 
-                color: activeTab === 'annual' ? '#fff' : 'var(--t2)', 
-                fontSize: '.78rem', 
-                fontWeight: 900, 
-                cursor: 'pointer',
-                boxShadow: activeTab === 'annual' ? '0 2px 8px rgba(129,140,248,0.4)' : 'none',
-                transition: 'all 0.2s'
+          <div style={{ display: 'flex', background: 'rgba(0,0,0,0.25)', padding: 3, borderRadius: 0 }}>
+            <button
+              onClick={() => setActiveTab('annual')}
+              style={{
+                padding: '6px 14px',
+                background: activeTab === 'annual' ? 'var(--accent)' : 'transparent',
+                border: 'none',
+                borderRadius: 0,
+                color: activeTab === 'annual' ? '#fff' : 'var(--t3)',
+                fontSize: '.78rem',
+                fontWeight: 700,
+                cursor: 'pointer'
               }}
             >
-              📅 연간
+              연간
             </button>
-            <button 
-              onClick={() => setActiveTab('quarter')} 
-              style={{ 
-                padding: '6px 14px', 
-                background: activeTab === 'quarter' ? 'linear-gradient(135deg, #818cf8 0%, #4f46e5 100%)' : 'transparent', 
-                border: 'none', 
-                borderRadius: 8, 
-                color: activeTab === 'quarter' ? '#fff' : 'var(--t2)', 
-                fontSize: '.78rem', 
-                fontWeight: 900, 
-                cursor: 'pointer',
-                boxShadow: activeTab === 'quarter' ? '0 2px 8px rgba(129,140,248,0.4)' : 'none',
-                transition: 'all 0.2s'
+            <button
+              onClick={() => setActiveTab('quarter')}
+              style={{
+                padding: '6px 14px',
+                background: activeTab === 'quarter' ? 'var(--accent)' : 'transparent',
+                border: 'none',
+                borderRadius: 0,
+                color: activeTab === 'quarter' ? '#fff' : 'var(--t3)',
+                fontSize: '.78rem',
+                fontWeight: 700,
+                cursor: 'pointer'
               }}
             >
-              ⏱️ 분기별
+              분기별
             </button>
           </div>
 
           {/* 실시간 판단 결과 및 성장률 배지 */}
           <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-            <div style={{ padding: '5px 12px', background: 'rgba(99,102,241,0.15)', border: '1px solid rgba(99,102,241,0.4)', borderRadius: 10 }}>
+            <div style={{ padding: '5px 12px', background: 'rgba(99,102,241,0.15)', border: '1px solid rgba(99,102,241,0.4)', borderRadius: 0 }}>
               <span style={{ fontSize: '.68rem', color: 'var(--t3)', fontWeight: 700, marginRight: 6 }}>{activeTab === 'annual' ? '최근 연간' : '최근 분기'} 실적</span>
-              <span style={{ fontSize: '.9rem', fontWeight: 900, color: roeLevelColor }}>{latestRoe}%</span>
+              <span style={{ fontSize: '.9rem', fontWeight: 800, color: roeLevelColor }}>{latestRoe}%</span>
             </div>
             {growthPct !== null && (
-              <div style={{ padding: '5px 12px', background: parseFloat(growthPct) >= 0 ? 'rgba(16,185,129,0.12)' : 'rgba(239,68,68,0.12)', border: `1px solid ${parseFloat(growthPct) >= 0 ? 'rgba(16,185,129,0.35)' : 'rgba(239,68,68,0.35)'}`, borderRadius: 10 }}>
+              <div style={{ padding: '5px 12px', background: parseFloat(growthPct) >= 0 ? 'rgba(16,185,129,0.12)' : 'rgba(239,68,68,0.12)', border: `1px solid ${parseFloat(growthPct) >= 0 ? 'rgba(16,185,129,0.35)' : 'rgba(239,68,68,0.35)'}`, borderRadius: 0 }}>
                 <span style={{ fontSize: '.68rem', color: 'var(--t3)', fontWeight: 700, marginRight: 6 }}>{activeTab === 'annual' ? '차기년도' : '차기분기'} (E)</span>
-                <span style={{ fontSize: '.9rem', fontWeight: 900, color: parseFloat(growthPct) >= 0 ? '#10b981' : '#ef4444' }}>
+                <span style={{ fontSize: '.9rem', fontWeight: 800, color: parseFloat(growthPct) >= 0 ? '#10b981' : '#ef4444' }}>
                   {parseFloat(growthPct) >= 0 ? '+' : ''}{growthPct}%
                 </span>
               </div>
@@ -255,16 +251,16 @@ export default function RoeTrendChart({ stock }) {
       </div>
 
       {/* 범례 */}
-      <div style={{ marginTop: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(0,0,0,0.25)', padding: '7px 13px', borderRadius: 9, fontSize: '.74rem', color: 'var(--t2)', flexWrap: 'wrap', gap: 8 }}>
+      <div style={{ marginTop: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(0,0,0,0.25)', padding: '7px 13px', borderRadius: 0, fontSize: '.74rem', color: 'var(--t2)', flexWrap: 'wrap', gap: 8 }}>
         <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
           <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontWeight: 700 }}>
-            <span style={{ display: 'inline-block', width: 16, height: 3, background: '#818cf8' }} /> 🟣 실적 ROE (실선)
+            <span style={{ display: 'inline-block', width: 16, height: 3, background: '#818cf8' }} /> 실적 ROE (실선)
           </span>
           <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontWeight: 700 }}>
-            <span style={{ display: 'inline-block', width: 16, height: 3, borderTop: '2px dashed #f59e0b' }} /> ⚡ 예상 ROE (점선)
+            <span style={{ display: 'inline-block', width: 16, height: 3, borderTop: '2px dashed #f59e0b' }} /> 예상 ROE (점선)
           </span>
         </div>
-        <div>💡 ROE 우상향 = 자본효율 개선 → PBR 프리미엄 정당화 및 밸류업 대장주 요건 충족</div>
+        <div>ROE 우상향 = 자본효율 개선 → PBR 프리미엄 정당화 및 밸류업 대장주 요건 충족</div>
       </div>
     </div>
   )

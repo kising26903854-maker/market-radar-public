@@ -276,21 +276,21 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
         {/* ─── 1. 상단 모달 헤더 ─── */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 18, borderBottom: '1px solid var(--border)', paddingBottom: 14 }}>
           <div>
-            <div style={{ fontSize: '1.45rem', fontWeight: 900, color: 'var(--gold)', display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span>🏛️ {stock.name}</span>
+            <div style={{ fontSize: '1.45rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: 10 }}>
+              <span>{stock.name}</span>
               <span style={{ fontSize: '1rem', color: 'var(--t3)', fontWeight: 600, fontFamily: 'Space Mono' }}>({stock.code})</span>
               {stock.market && (
-                <span style={{ fontSize: '.72rem', background: 'rgba(255,255,255,0.08)', color: '#38bdf8', padding: '2px 8px', borderRadius: 6, fontWeight: 800 }}>
+                <span style={{ fontSize: '.72rem', background: 'rgba(255,255,255,0.08)', color: '#38bdf8', padding: '2px 8px', borderRadius: 0, fontWeight: 700 }}>
                   {stock.market}
                 </span>
               )}
             </div>
             <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 6, flexWrap: 'wrap' }}>
-              <span style={{ fontSize: '1.15rem', fontWeight: 900, color: '#ffffff', fontFamily: 'Space Mono' }}>
+              <span style={{ fontSize: '1.15rem', fontWeight: 800, color: '#ffffff', fontFamily: 'Space Mono' }}>
                 현재가: {displayCurrentPrice ? Number(displayCurrentPrice).toLocaleString() + '원' : '실시간 시세 동기화 중...'}
               </span>
               {stock.targetPrice && (
-                <span style={{ padding: '3px 10px', background: 'rgba(16,185,129,0.15)', border: '1px solid #10b981', borderRadius: 14, fontSize: '.8rem', color: '#34d399', fontWeight: 800, display: 'inline-flex', alignItems: 'center' }}>
+                <span style={{ padding: '3px 10px', background: 'rgba(16,185,129,0.15)', border: '1px solid #10b981', borderRadius: 0, fontSize: '.8rem', color: '#34d399', fontWeight: 700, display: 'inline-flex', alignItems: 'center' }}>
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: 6 }}>
                     <circle cx="12" cy="12" r="10" />
                     <circle cx="12" cy="12" r="6" />
@@ -306,19 +306,19 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                 }}
                 style={{
                   padding: '4px 12px',
-                  background: 'rgba(239,68,68,0.2)',
-                  border: '1px solid #ef4444',
-                  borderRadius: 20,
+                  background: 'transparent',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  borderRadius: 0,
                   fontSize: '.82rem',
-                  color: '#f87171',
-                  fontWeight: 800,
+                  color: 'var(--t2)',
+                  fontWeight: 700,
                   cursor: 'pointer',
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: 4
                 }}
               >
-                <span><MenuIcon type="short-selling" size={14} color="#f87171" style={{ marginRight: 4 }} />공매도 추이 분석</span>
+                <span><MenuIcon type="short-selling" size={14} color="var(--t2)" style={{ marginRight: 4 }} />공매도 추이 분석</span>
               </button>
             </div>
           </div>
@@ -329,12 +329,12 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                 onClick={() => onOpenValueChain(stock.code, stock.name)}
                 style={{
                   padding: '6px 14px',
-                  background: 'linear-gradient(135deg, rgba(99,102,241,0.25) 0%, rgba(168,85,247,0.25) 100%)',
-                  border: '1px solid #818cf8',
-                  color: '#c084fc',
-                  borderRadius: 10,
+                  background: 'transparent',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  color: 'var(--t2)',
+                  borderRadius: 0,
                   fontSize: '.8rem',
-                  fontWeight: 800,
+                  fontWeight: 700,
                   cursor: 'pointer',
                   display: 'inline-flex',
                   alignItems: 'center'
@@ -352,11 +352,11 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                 background: 'rgba(255,255,255,0.08)',
                 color: '#ffffff',
                 border: '1px solid var(--border)',
-                borderRadius: '50%',
+                borderRadius: 0,
                 width: 36,
                 height: 36,
                 cursor: 'pointer',
-                fontWeight: 900,
+                fontWeight: 800,
                 fontSize: '1.2rem',
                 display: 'flex',
                 alignItems: 'center',
@@ -375,47 +375,47 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
           <div style={{
             marginBottom: 20,
             padding: '16px 20px',
-            background: 'linear-gradient(135deg, rgba(30, 58, 138, 0.25) 0%, rgba(15, 23, 42, 0.8) 100%)',
-            border: '1.5px solid rgba(96, 165, 250, 0.4)',
-            borderRadius: 16,
-            boxShadow: '0 8px 24px rgba(0,0,0,0.3)'
+            background: 'var(--bg2)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            borderRadius: 0,
+            boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10, flexWrap: 'wrap', gap: 8 }}>
-              <div style={{ fontSize: '.95rem', fontWeight: 900, color: '#93c5fd', display: 'flex', alignItems: 'center', gap: 8 }}>
-                <MenuIcon type="company" size={18} color="#93c5fd" style={{ marginRight: 0 }} />
+              <div style={{ fontSize: '.95rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <MenuIcon type="company" size={18} color="var(--t2)" style={{ marginRight: 0 }} />
                 <span>무엇을 하는 회사인가? (기업 개요 & 핵심 비즈니스)</span>
                 {companySummary.wicsSector && (
-                  <span style={{ fontSize: '.74rem', background: 'rgba(59,130,246,0.25)', color: '#60a5fa', padding: '2px 8px', borderRadius: 6, fontWeight: 800 }}>
+                  <span style={{ fontSize: '.74rem', background: 'rgba(59,130,246,0.25)', color: '#60a5fa', padding: '2px 8px', borderRadius: 0, fontWeight: 700 }}>
                     WICS: {companySummary.wicsSector}
                   </span>
                 )}
                 {companySummary.marketCapRank && (
-                  <span style={{ fontSize: '.74rem', background: 'rgba(234,179,8,0.25)', color: '#fbbf24', padding: '2px 8px', borderRadius: 6, fontWeight: 800, display: 'inline-flex', alignItems: 'center' }}>
+                  <span style={{ fontSize: '.74rem', background: 'rgba(234,179,8,0.25)', color: '#fbbf24', padding: '2px 8px', borderRadius: 0, fontWeight: 700, display: 'inline-flex', alignItems: 'center' }}>
                     <MenuIcon type="trophy" size={13} color="#fbbf24" style={{ marginRight: 4 }} /> {companySummary.marketCapRank}
                   </span>
                 )}
               </div>
               <span style={{ fontSize: '.72rem', color: 'var(--t3)', fontWeight: 700 }}>
-                📡 FnGuide 공식 연동
+                FnGuide 공식 연동
               </span>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {companySummary.paragraphs && companySummary.paragraphs.length > 0 ? (
                 companySummary.paragraphs.map((p, pIdx) => {
-                  const tagTitles = ['📌 [설립 및 기본 개요]', '📦 [주요 사업 부문 및 핵심 제품]', '🚀 [미래 성장 전략 및 경쟁력]']
+                  const tagTitles = ['[설립 및 기본 개요]', '[주요 사업 부문 및 핵심 제품]', '[미래 성장 전략 및 경쟁력]']
                   return (
                     <div key={pIdx} style={{
                       padding: '10px 14px',
-                      background: 'rgba(0,0,0,0.3)',
-                      borderRadius: 10,
-                      borderLeft: `4px solid #60a5fa`,
+                      background: 'rgba(0,0,0,0.25)',
+                      borderRadius: 0,
+                      borderLeft: `3px solid #60a5fa`,
                       fontSize: '.82rem',
                       lineHeight: 1.6,
                       color: '#e2e8f0'
                     }}>
-                      <div style={{ fontWeight: 900, color: '#93c5fd', marginBottom: 3 }}>
-                        {tagTitles[pIdx] || `📌 [개요 ${pIdx + 1}]`}
+                      <div style={{ fontWeight: 800, color: '#93c5fd', marginBottom: 3 }}>
+                        {tagTitles[pIdx] || `[개요 ${pIdx + 1}]`}
                       </div>
                       {p}
                     </div>
@@ -433,11 +433,11 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
         {/* ─── 3. 실시간 주가 차트 (TradingView 스타일 SVG) ─── */}
         <div style={{
           background: '#0a0d14',
-          borderRadius: isChartFullscreen ? 0 : 18,
+          borderRadius: 0,
           padding: 18,
           marginBottom: 20,
-          border: '1px solid rgba(255,255,255,0.12)',
-          boxShadow: '0 12px 36px rgba(0,0,0,0.5)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
           ...(isChartFullscreen ? {
             position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
             zIndex: 10050, overflowY: 'auto', borderRadius: 0
@@ -445,31 +445,30 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
         }}>
           {/* 차트 상단 컨트롤 헤더 */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 14 }}>
-            <div style={{ fontWeight: 900, color: 'var(--gold)', fontSize: '.95rem', display: 'flex', alignItems: 'center', gap: 8 }}>
-              <span>📈</span>
+            <div style={{ fontWeight: 800, color: '#fff', fontSize: '.95rem', display: 'flex', alignItems: 'center', gap: 8 }}>
               <span>월가 TradingView 스타일 프리미엄 차트 ({stock.name})</span>
             </div>
 
             {/* 분봉 / 일봉 / 주봉 / 월봉 / 년봉 탭 + 전체화면 토글 */}
             <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-              <div style={{ display: 'flex', gap: 4, background: 'rgba(0,0,0,0.5)', padding: 3, borderRadius: 10, border: '1px solid rgba(255,255,255,0.08)' }}>
+              <div style={{ display: 'flex', gap: 4, background: 'rgba(0,0,0,0.25)', padding: 3, borderRadius: 0 }}>
                 {[
-                  { id: 'minute', label: '⚡ 분봉' },
-                  { id: 'day', label: '📅 일봉' },
+                  { id: 'minute', label: '분봉' },
+                  { id: 'day', label: '일봉' },
                   { id: 'week', label: '주봉' },
                   { id: 'month', label: '월봉' },
-                  { id: 'year', label: '📆 년봉' }
+                  { id: 'year', label: '년봉' }
                 ].map(t => (
                   <button
                     key={t.id}
                     style={{
                       padding: '5px 12px',
-                      borderRadius: 7,
+                      borderRadius: 0,
                       border: 'none',
                     background: period === t.id ? 'var(--accent)' : 'transparent',
                     color: period === t.id ? '#ffffff' : 'var(--t3)',
                     fontSize: '.78rem',
-                    fontWeight: 800,
+                    fontWeight: 700,
                     cursor: 'pointer',
                     transition: 'all 0.15s ease'
                   }}
@@ -485,12 +484,12 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                 title={isChartFullscreen ? '전체화면 닫기 (ESC)' : '차트 전체화면으로 보기'}
                 style={{
                   padding: '6px 12px',
-                  borderRadius: 8,
-                  border: '1px solid rgba(251,191,36,0.5)',
-                  background: isChartFullscreen ? 'rgba(251,191,36,0.25)' : 'rgba(0,0,0,0.4)',
-                  color: '#fbbf24',
+                  borderRadius: 0,
+                  border: 'none',
+                  background: isChartFullscreen ? 'var(--accent)' : 'rgba(0,0,0,0.25)',
+                  color: isChartFullscreen ? '#fff' : 'var(--t3)',
                   fontSize: '.78rem',
-                  fontWeight: 800,
+                  fontWeight: 700,
                   cursor: 'pointer',
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -504,53 +503,53 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
           </div>
 
           {/* 3대 핵심 타점 배너 & Hover HUD */}
-          <div style={{ display: 'flex', gap: 16, fontSize: '.85rem', color: 'var(--t2)', marginBottom: 14, flexWrap: 'wrap', background: 'rgba(15,23,42,0.95)', padding: '10px 16px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.08)', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', gap: 16, fontSize: '.85rem', color: 'var(--t2)', marginBottom: 14, flexWrap: 'wrap', background: 'rgba(15,23,42,0.95)', padding: '10px 16px', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
               <div>
                 <span style={{ color: 'var(--t3)', marginRight: 5, fontWeight: 700 }}>현재가</span>
-                <strong style={{ color: isUp ? '#ef4444' : '#3b82f6', fontFamily: 'Space Mono', fontSize: '1.1rem', fontWeight: 900 }}>{(displayCurrentPrice || 0).toLocaleString()}원</strong>
+                <strong style={{ color: isUp ? '#ef4444' : '#3b82f6', fontFamily: 'Space Mono', fontSize: '1.1rem', fontWeight: 800 }}>{(displayCurrentPrice || 0).toLocaleString()}원</strong>
               </div>
               {smartMoney?.estimatedCost > 0 && (
                 <div style={{ borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: 14 }}>
-                  <span style={{ color: '#c084fc', marginRight: 5, fontWeight: 800 }}>🟣 세력선 (추정평단)</span>
-                  <strong style={{ color: '#ffffff', fontFamily: 'Space Mono', fontSize: '1.05rem', fontWeight: 900 }}>{(smartMoney.estimatedCost || 0).toLocaleString()}원</strong>
+                  <span style={{ color: '#c084fc', marginRight: 5, fontWeight: 700 }}>🟣 세력선 (추정평단)</span>
+                  <strong style={{ color: '#ffffff', fontFamily: 'Space Mono', fontSize: '1.05rem', fontWeight: 800 }}>{(smartMoney.estimatedCost || 0).toLocaleString()}원</strong>
                 </div>
               )}
               {optimalPrice > 0 && (
                 <div style={{ borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: 14 }}>
-                  <span style={{ color: '#34d399', marginRight: 5, fontWeight: 800 }}>🟢 월가 적정매입가</span>
-                  <strong style={{ color: '#ffffff', fontFamily: 'Space Mono', fontSize: '1.05rem', fontWeight: 900 }}>{(optimalPrice || 0).toLocaleString()}원</strong>
+                  <span style={{ color: '#34d399', marginRight: 5, fontWeight: 700 }}>🟢 월가 적정매입가</span>
+                  <strong style={{ color: '#ffffff', fontFamily: 'Space Mono', fontSize: '1.05rem', fontWeight: 800 }}>{(optimalPrice || 0).toLocaleString()}원</strong>
                 </div>
               )}
             </div>
 
             {/* Hover HUD */}
-            <div style={{ background: 'rgba(0,0,0,0.6)', padding: '5px 12px', borderRadius: 8, minWidth: 240, border: '1px solid rgba(255,255,255,0.08)' }}>
+            <div style={{ background: 'rgba(0,0,0,0.6)', padding: '5px 12px', borderRadius: 0, minWidth: 240, border: '1px solid rgba(255,255,255,0.08)' }}>
               {hoverData ? (
                 <div style={{ fontSize: '.76rem', color: '#ffffff' }}>
-                  <span style={{ color: 'var(--gold)', fontWeight: 800 }}>[{hoverData.date || hoverData.time}]</span>
+                  <span style={{ color: 'var(--t1)', fontWeight: 700 }}>[{hoverData.date || hoverData.time}]</span>
                   <span style={{ marginLeft: 6 }}>시: <strong>{(hoverData.open || 0).toLocaleString()}</strong></span>
                   <span style={{ marginLeft: 6 }}>종: <strong style={{ color: hoverData.close >= hoverData.open ? '#ef4444' : '#3b82f6' }}>{(hoverData.close || 0).toLocaleString()}</strong></span>
                   <span style={{ marginLeft: 6 }}>거래량: <strong>{(hoverData.volume || 0).toLocaleString()}</strong></span>
                 </div>
               ) : (
                 <div style={{ color: 'var(--t3)', fontSize: '.76rem', textAlign: 'center' }}>
-                  🕯️ 캔들에 마우스를 올리면 상세 시세가 뜹니다
+                  캔들에 마우스를 올리면 상세 시세가 뜹니다
                 </div>
               )}
             </div>
           </div>
 
           {/* SVG 차트 본체 */}
-          <div style={{ position: 'relative', width: '100%', overflow: 'hidden', background: '#0a0d14', borderRadius: 14, border: '1px solid rgba(255,255,255,0.08)' }}>
+          <div style={{ position: 'relative', width: '100%', overflow: 'hidden', background: '#0a0d14', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)' }}>
             {isWideChart && !loading && (
               <div style={{ padding: '6px 14px', fontSize: '.72rem', color: 'var(--t3)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                 📜 상장일부터 전체 일봉({candles.length.toLocaleString()}거래일) · 좌우로 스크롤해서 과거 흐름을 확인하세요{candles.length >= 3000 ? ' (네이버 제공 일봉 한도 약 3,000거래일 도달 — 그 이전은 조회되지 않을 수 있습니다)' : ''}
               </div>
             )}
             {loading ? (
-              <div style={{ textAlign: 'center', padding: '70px 0', color: 'var(--gold)', fontSize: '.95rem' }}>
-                ⏳ 실시간 캔들스틱 및 세력선 퀀트 계산 중...
+              <div style={{ textAlign: 'center', padding: '70px 0', color: 'var(--t2)', fontSize: '.95rem' }}>
+                실시간 캔들스틱 및 세력선 퀀트 계산 중...
               </div>
             ) : candles.length > 0 ? (
               <div ref={dayChartScrollRef} className={isWideChart ? 'wide-chart-scroll' : ''} style={{ width: '100%', overflowX: isWideChart ? 'auto' : 'hidden' }}>
@@ -715,30 +714,30 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
         {analysis && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 12, marginBottom: 20 }}>
             {/* 1. TWAP */}
-            <div style={{ padding: 14, background: 'var(--bg3)', borderRadius: 12, border: '1px solid var(--border)' }}>
-              <div style={{ fontWeight: 800, color: 'var(--accent)', marginBottom: 4, fontSize: '.84rem' }}>⏱️ TWAP (스텔스 매집도)</div>
-              <div style={{ fontSize: '1.1rem', fontWeight: 900 }}>{analysis.twap?.uniformity || 70}%</div>
+            <div style={{ padding: 14, background: 'var(--bg2)', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)' }}>
+              <div style={{ fontWeight: 700, color: 'var(--t2)', marginBottom: 4, fontSize: '.84rem' }}>TWAP (스텔스 매집도)</div>
+              <div style={{ fontSize: '1.1rem', fontWeight: 800 }}>{analysis.twap?.uniformity || 70}%</div>
               <div style={{ fontSize: '.74rem', color: 'var(--t2)', marginTop: 4 }}>{analysis.twap?.status || '분할 매집 진행'}</div>
             </div>
 
             {/* 2. OBV */}
-            <div style={{ padding: 14, background: 'var(--bg3)', borderRadius: 12, border: '1px solid var(--border)' }}>
-              <div style={{ fontWeight: 800, color: 'var(--accent2)', marginBottom: 4, fontSize: '.84rem' }}>🌊 OBV (자금 유출입)</div>
-              <div style={{ fontSize: '.95rem', fontWeight: 900, color: 'var(--up)' }}>{analysis.obv?.trend || '자금 유입'}</div>
+            <div style={{ padding: 14, background: 'var(--bg2)', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)' }}>
+              <div style={{ fontWeight: 700, color: 'var(--t2)', marginBottom: 4, fontSize: '.84rem' }}>OBV (자금 유출입)</div>
+              <div style={{ fontSize: '.95rem', fontWeight: 800, color: 'var(--up)' }}>{analysis.obv?.trend || '자금 유입'}</div>
               <div style={{ fontSize: '.74rem', color: 'var(--t3)', marginTop: 4 }}>누적: {(analysis.obv?.value || 0).toLocaleString()}</div>
             </div>
 
             {/* 3. Z-Score */}
-            <div style={{ padding: 14, background: 'rgba(99,102,241,0.12)', borderRadius: 12, border: '1px solid rgba(99,102,241,0.4)' }}>
-              <div style={{ fontWeight: 800, color: '#818cf8', marginBottom: 4, fontSize: '.84rem' }}>🌌 Z-Score (평균 회귀)</div>
-              <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#fff' }}>{analysis.zScore?.value || 0.21}σ</div>
+            <div style={{ padding: 14, background: 'var(--bg2)', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)' }}>
+              <div style={{ fontWeight: 700, color: 'var(--t2)', marginBottom: 4, fontSize: '.84rem' }}>Z-Score (평균 회귀)</div>
+              <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff' }}>{analysis.zScore?.value || 0.21}σ</div>
               <div style={{ fontSize: '.74rem', color: 'var(--t2)', marginTop: 4 }}>{analysis.zScore?.status || '정상 평균 균형 구간'}</div>
             </div>
 
             {/* 4. 체결 델타 */}
-            <div style={{ padding: 14, background: 'rgba(239,68,68,0.12)', borderRadius: 12, border: '1px solid rgba(239,68,68,0.4)' }}>
-              <div style={{ fontWeight: 800, color: '#ef4444', marginBottom: 4, fontSize: '.84rem' }}>🩸 Order Flow (체결 델타)</div>
-              <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#fff' }}>체결강도 {analysis.orderDelta?.deltaPct || 7.4}%</div>
+            <div style={{ padding: 14, background: 'var(--bg2)', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)' }}>
+              <div style={{ fontWeight: 700, color: 'var(--t2)', marginBottom: 4, fontSize: '.84rem' }}>Order Flow (체결 델타)</div>
+              <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff' }}>체결강도 {analysis.orderDelta?.deltaPct || 7.4}%</div>
               <div style={{ fontSize: '.74rem', color: 'var(--t2)', marginTop: 4 }}>{analysis.orderDelta?.status || '주포 매수 체결 우위'}</div>
             </div>
           </div>

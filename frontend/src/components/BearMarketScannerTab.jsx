@@ -148,7 +148,7 @@ export default function BearMarketScannerTab({ onSelectStock }) {
           padding: '14px 20px',
           background: 'rgba(15, 23, 42, 0.95)',
           border: '1.5px solid #10b981',
-          borderRadius: 14,
+          borderRadius: 0,
           color: '#fff',
           fontWeight: 800,
           fontSize: '.9rem',
@@ -162,30 +162,29 @@ export default function BearMarketScannerTab({ onSelectStock }) {
 
       {/* ─── 1. 상단 메인 헤더 배너 ─── */}
       <div style={{
-        padding: '24px 28px',
-        background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.28) 0%, rgba(99, 102, 241, 0.25) 50%, rgba(239, 68, 68, 0.25) 100%)',
-        border: '2px solid rgba(16, 185, 129, 0.45)',
-        borderRadius: 22,
+        padding: '22px 26px',
+        background: 'var(--bg2)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        borderRadius: 0,
         marginBottom: 20,
-        boxShadow: '0 10px 36px rgba(0,0,0,0.45)',
+        boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
           <div>
-            <div style={{ fontSize: '1.65rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-              <span style={{ filter: 'drop-shadow(0 0 12px #10b981)' }}>🛡️ 지수 하락일(KOSPI 음봉일) 실제 상승 종목 퀀트 스캐너</span>
+            <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+              <span>지수 하락일(KOSPI 음봉일) 실제 상승 종목 퀀트 스캐너</span>
               <span style={{
                 fontSize: '.75rem',
-                background: 'rgba(16, 185, 129, 0.2)',
-                color: '#34d399',
-                border: '1px solid #10b981',
+                color: 'var(--t2)',
+                border: '1px solid rgba(255,255,255,0.12)',
                 padding: '4px 12px',
-                borderRadius: 20,
-                fontWeight: 900,
+                borderRadius: 0,
+                fontWeight: 700,
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: 6
               }}>
-                <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#10b981', boxShadow: '0 0 10px #10b981', display: 'inline-block' }}/>
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981', display: 'inline-block' }}/>
                 최근 60거래일 코스피 하락 {sum.totalDownDays}일간 실전 백테스팅 검증
               </span>
             </div>
@@ -195,45 +194,40 @@ export default function BearMarketScannerTab({ onSelectStock }) {
           </div>
 
           {/* 액션 버튼 그룹 */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-            {/* 📱 텔레그램 브리핑 발송 */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+            {/* 텔레그램 브리핑 발송 */}
             <button
               onClick={handleSendTelegram}
               disabled={sendingTelegram}
               style={{
-                padding: '10px 16px',
-                background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                padding: '9px 14px',
+                background: '#3b82f6',
                 border: 'none',
-                borderRadius: 12,
+                borderRadius: 0,
                 color: '#fff',
-                fontWeight: 900,
+                fontWeight: 700,
                 cursor: sendingTelegram ? 'not-allowed' : 'pointer',
-                fontSize: '.85rem',
-                boxShadow: '0 4px 14px rgba(16,185,129,0.4)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6
+                fontSize: '.82rem',
               }}
             >
-              <span>{sendingTelegram ? '⏳' : '📱'}</span>
-              <span>{sendingTelegram ? '전송 중...' : '하락일 상승 종목 텔레그램 전송'}</span>
+              {sendingTelegram ? '전송 중...' : '하락일 상승 종목 텔레그램 전송'}
             </button>
 
             {/* CSV 다운로드 */}
             <button
               onClick={handleDownloadCsv}
               style={{
-                padding: '10px 14px',
-                background: 'rgba(255,255,255,0.08)',
+                padding: '9px 14px',
+                background: 'transparent',
                 border: '1px solid rgba(255,255,255,0.15)',
-                borderRadius: 12,
-                color: '#fff',
-                fontWeight: 800,
+                borderRadius: 0,
+                color: 'var(--t2)',
+                fontWeight: 700,
                 cursor: 'pointer',
-                fontSize: '.85rem'
+                fontSize: '.82rem'
               }}
             >
-              📥 CSV
+              CSV
             </button>
 
             {/* 새로고침 */}
@@ -241,17 +235,17 @@ export default function BearMarketScannerTab({ onSelectStock }) {
               onClick={handleRefresh}
               disabled={refreshing}
               style={{
-                padding: '10px 14px',
-                background: 'rgba(255,255,255,0.08)',
+                padding: '9px 12px',
+                background: 'transparent',
                 border: '1px solid rgba(255,255,255,0.15)',
-                borderRadius: 12,
-                color: '#fff',
-                fontWeight: 800,
+                borderRadius: 0,
+                color: 'var(--t2)',
+                fontWeight: 700,
                 cursor: 'pointer',
-                fontSize: '.85rem'
+                fontSize: '.82rem'
               }}
             >
-              {refreshing ? '⏳' : '🔄'}
+              {refreshing ? '⋯' : '↻'}
             </button>
           </div>
         </div>
@@ -262,19 +256,19 @@ export default function BearMarketScannerTab({ onSelectStock }) {
         {/* 카드 1: 인버스 헤지 1위 */}
         <div style={{
           padding: '18px 20px',
-          borderRadius: 18,
-          background: 'rgba(30, 41, 59, 0.8)',
-          border: '1.5px solid rgba(239, 68, 68, 0.45)',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.25)'
+          borderRadius: 0,
+          background: 'var(--bg2)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '.84rem', fontWeight: 800, color: '#f87171' }}>🛡️ 지수 하락 헤지 1위</span>
-            <span style={{ fontSize: '.72rem', color: '#f87171', fontWeight: 900 }}>하락일 승률 {sum.topHedgeWinRate}%</span>
+            <span style={{ fontSize: '.84rem', fontWeight: 700, color: 'var(--t2)' }}>지수 하락 헤지 1위</span>
+            <span style={{ fontSize: '.72rem', color: 'var(--t3)', fontWeight: 800 }}>하락일 승률 {sum.topHedgeWinRate}%</span>
           </div>
-          <div style={{ fontSize: '1.45rem', fontWeight: 900, color: '#fff', marginTop: 8 }}>
+          <div style={{ fontSize: '1.45rem', fontWeight: 800, color: '#fff', marginTop: 8 }}>
             {sum.topHedgeName}
           </div>
-          <div style={{ fontSize: '.78rem', color: '#60a5fa', fontWeight: 800, marginTop: 4 }}>
+          <div style={{ fontSize: '.78rem', color: 'var(--up)', fontWeight: 700, marginTop: 4 }}>
             지수 하락일 평균: <strong>+{sum.topHedgeAvgReturn}%</strong> (26일 중 25일 상승)
           </div>
         </div>
@@ -282,19 +276,19 @@ export default function BearMarketScannerTab({ onSelectStock }) {
         {/* 카드 2: 개별 종목 1위 */}
         <div style={{
           padding: '18px 20px',
-          borderRadius: 18,
-          background: 'rgba(30, 41, 59, 0.8)',
-          border: '1.5px solid rgba(16, 185, 129, 0.45)',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.25)'
+          borderRadius: 0,
+          background: 'var(--bg2)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '.84rem', fontWeight: 800, color: '#34d399' }}>🚀 개별 종목 역주행 1위</span>
-            <span style={{ fontSize: '.72rem', color: '#10b981', fontWeight: 900 }}>하락일 승률 {sum.topStockWinRate}%</span>
+            <span style={{ fontSize: '.84rem', fontWeight: 700, color: 'var(--t2)' }}>개별 종목 역주행 1위</span>
+            <span style={{ fontSize: '.72rem', color: 'var(--t3)', fontWeight: 800 }}>하락일 승률 {sum.topStockWinRate}%</span>
           </div>
-          <div style={{ fontSize: '1.45rem', fontWeight: 900, color: '#fff', marginTop: 8 }}>
+          <div style={{ fontSize: '1.45rem', fontWeight: 800, color: '#fff', marginTop: 8 }}>
             {sum.topStockName}
           </div>
-          <div style={{ fontSize: '.78rem', color: '#10b981', fontWeight: 800, marginTop: 4 }}>
+          <div style={{ fontSize: '.78rem', color: 'var(--up)', fontWeight: 700, marginTop: 4 }}>
             지수 하락일 평균: <strong>+{sum.topStockAvgReturn}%</strong> (26일 중 15일 상승)
           </div>
         </div>
@@ -302,16 +296,16 @@ export default function BearMarketScannerTab({ onSelectStock }) {
         {/* 카드 3: 하락장 검증 기준 */}
         <div style={{
           padding: '18px 20px',
-          borderRadius: 18,
-          background: 'rgba(30, 41, 59, 0.8)',
-          border: '1.5px solid rgba(99, 102, 241, 0.45)',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.25)'
+          borderRadius: 0,
+          background: 'var(--bg2)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '.84rem', fontWeight: 800, color: '#818cf8' }}>📊 코스피 하락일 표본수</span>
-            <span style={{ fontSize: '.72rem', color: '#818cf8', fontWeight: 900 }}>최근 60거래일</span>
+            <span style={{ fontSize: '.84rem', fontWeight: 700, color: 'var(--t2)' }}>코스피 하락일 표본수</span>
+            <span style={{ fontSize: '.72rem', color: 'var(--t3)', fontWeight: 800 }}>최근 60거래일</span>
           </div>
-          <div style={{ fontSize: '1.85rem', fontWeight: 900, color: '#818cf8', fontFamily: 'Space Mono', marginTop: 8 }}>
+          <div style={{ fontSize: '1.85rem', fontWeight: 800, color: '#fff', fontFamily: 'Space Mono', marginTop: 8 }}>
             {sum.totalDownDays} <span style={{ fontSize: '.9rem', fontWeight: 600, color: 'var(--t3)' }}>거래일</span>
           </div>
           <div style={{ fontSize: '.78rem', color: 'var(--t2)', marginTop: 4 }}>
@@ -322,16 +316,16 @@ export default function BearMarketScannerTab({ onSelectStock }) {
         {/* 카드 4: 하락일 승률 50%+ 종목수 */}
         <div style={{
           padding: '18px 20px',
-          borderRadius: 18,
-          background: 'rgba(30, 41, 59, 0.8)',
-          border: '1.5px solid rgba(251, 191, 36, 0.45)',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.25)'
+          borderRadius: 0,
+          background: 'var(--bg2)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '.84rem', fontWeight: 800, color: '#fbbf24' }}>💎 하락일 승률 50%+ 종목</span>
-            <span style={{ fontSize: '.72rem', color: '#fbbf24', fontWeight: 900 }}>초우량 방어</span>
+            <span style={{ fontSize: '.84rem', fontWeight: 700, color: 'var(--t2)' }}>하락일 승률 50%+ 종목</span>
+            <span style={{ fontSize: '.72rem', color: 'var(--t3)', fontWeight: 800 }}>초우량 방어</span>
           </div>
-          <div style={{ fontSize: '1.85rem', fontWeight: 900, color: '#fbbf24', fontFamily: 'Space Mono', marginTop: 8 }}>
+          <div style={{ fontSize: '1.85rem', fontWeight: 800, color: '#fff', fontFamily: 'Space Mono', marginTop: 8 }}>
             6 <span style={{ fontSize: '.9rem', fontWeight: 600, color: 'var(--t3)' }}>개 종목</span>
           </div>
           <div style={{ fontSize: '.78rem', color: 'var(--t2)', marginTop: 4 }}>
@@ -345,22 +339,22 @@ export default function BearMarketScannerTab({ onSelectStock }) {
         {/* 필터 칩스 */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'ALL', label: `🌐 전체 검증 순위 (${data?.stocks?.length || 20})` },
-            { id: 'INVERSE', label: '🛡️ 인버스 직접 헤지 (96% 승률)', color: '#ef4444' },
-            { id: 'WIN_50', label: '🏆 하락일 승률 50% 이상 우수주', color: '#10b981' },
-            { id: 'POSITIVE_RETURN', label: '📈 하락일 평균 수익률 (+) 양수주', color: '#60a5fa' },
-            { id: 'INDIVIDUAL', label: '🏢 개별 우량주만 보기', color: '#a855f7' }
+            { id: 'ALL', label: `전체 검증 순위 (${data?.stocks?.length || 20})` },
+            { id: 'INVERSE', label: '인버스 직접 헤지 (96% 승률)' },
+            { id: 'WIN_50', label: '하락일 승률 50% 이상 우수주' },
+            { id: 'POSITIVE_RETURN', label: '하락일 평균 수익률 (+) 양수주' },
+            { id: 'INDIVIDUAL', label: '개별 우량주만 보기' }
           ].map(f => (
             <button
               key={f.id}
               onClick={() => setActiveFilter(f.id)}
               style={{
                 padding: '8px 14px',
-                borderRadius: 12,
-                border: activeFilter === f.id ? `1.5px solid ${f.color || '#10b981'}` : '1px solid rgba(255,255,255,0.08)',
-                background: activeFilter === f.id ? (f.color ? `${f.color}25` : 'rgba(16, 185, 129, 0.25)') : 'rgba(0,0,0,0.3)',
+                borderRadius: 0,
+                border: 'none',
+                background: activeFilter === f.id ? 'var(--accent)' : 'rgba(0,0,0,0.3)',
                 color: activeFilter === f.id ? '#fff' : 'var(--t3)',
-                fontWeight: 900,
+                fontWeight: 700,
                 fontSize: '.84rem',
                 cursor: 'pointer'
               }}
@@ -372,7 +366,7 @@ export default function BearMarketScannerTab({ onSelectStock }) {
 
         {/* 검색 & 정렬 컨트롤 */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'var(--bg2)', padding: '8px 14px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.1)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'var(--bg2)', padding: '8px 14px', borderRadius: 0, border: '1px solid rgba(255,255,255,0.1)' }}>
             <span>🔍</span>
             <input
               type="text"
@@ -393,16 +387,16 @@ export default function BearMarketScannerTab({ onSelectStock }) {
               padding: '8px 12px',
               background: 'var(--bg2)',
               border: '1px solid rgba(255,255,255,0.1)',
-              borderRadius: 12,
+              borderRadius: 0,
               color: '#fff',
               fontSize: '.84rem',
               outline: 'none',
               cursor: 'pointer'
             }}
           >
-            <option value="WINRATE_DESC">📊 지수 하락일 승률 높은순</option>
-            <option value="RETURN_DESC">📈 하락일 평균 수익률 높은순</option>
-            <option value="CHANGE_DESC">🔥 오늘 상승률 높은순</option>
+            <option value="WINRATE_DESC">지수 하락일 승률 높은순</option>
+            <option value="RETURN_DESC">하락일 평균 수익률 높은순</option>
+            <option value="CHANGE_DESC">오늘 상승률 높은순</option>
           </select>
         </div>
       </div>
@@ -410,13 +404,11 @@ export default function BearMarketScannerTab({ onSelectStock }) {
       {/* ─── 4. 종목별 하락일 실전 백테스팅 카드 그리드 ─── */}
       {loading ? (
         <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)' }}>
-          <div style={{ fontSize: '2.5rem', marginBottom: 12 }}>⏳</div>
-          <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#fff' }}>지수 하락일 실제 상승 종목 실전 백테스팅 계산 중...</div>
+          <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff' }}>지수 하락일 실제 상승 종목 실전 백테스팅 계산 중...</div>
         </div>
       ) : filteredStocks.length === 0 ? (
-        <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)', background: 'var(--bg2)', borderRadius: 18 }}>
-          <div style={{ fontSize: '2.5rem', marginBottom: 12 }}>🛡️</div>
-          <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#fff' }}>해당 조건의 종목이 없습니다.</div>
+        <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)', background: 'var(--bg2)', borderRadius: 0 }}>
+          <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff' }}>해당 조건의 종목이 없습니다.</div>
         </div>
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(330px, 1fr))', gap: 16, marginBottom: 24 }}>
@@ -432,12 +424,12 @@ export default function BearMarketScannerTab({ onSelectStock }) {
                 onClick={() => onSelectStock && onSelectStock({ ...stock, current_price: stock.currentPrice, type: stock.market })}
                 style={{
                   padding: 20,
-                  background: 'rgba(30, 41, 59, 0.75)',
-                  border: `1.5px solid ${winRateColor}50`,
-                  borderRadius: 18,
+                  background: 'var(--bg2)',
+                  border: `1px solid ${winRateColor}50`,
+                  borderRadius: 0,
                   cursor: 'pointer',
                   transition: 'all 0.2s ease',
-                  boxShadow: '0 8px 24px rgba(0,0,0,0.3)'
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
                 }}
               >
                 {/* 헤더 & 순위 뱃지 */}
@@ -448,13 +440,13 @@ export default function BearMarketScannerTab({ onSelectStock }) {
                         padding: '2px 8px',
                         background: idx < 3 ? 'rgba(234,179,8,0.25)' : 'rgba(255,255,255,0.08)',
                         color: idx < 3 ? '#fbbf24' : 'var(--t3)',
-                        borderRadius: 6,
-                        fontWeight: 900,
+                        borderRadius: 0,
+                        fontWeight: 800,
                         fontSize: '.75rem'
                       }}>
                         #{idx + 1}
                       </span>
-                      <span style={{ fontSize: '1.15rem', fontWeight: 900, color: '#fff' }}>{stock.name}</span>
+                      <span style={{ fontSize: '1.15rem', fontWeight: 800, color: '#fff' }}>{stock.name}</span>
                       <span style={{ fontSize: '.78rem', color: 'var(--t3)', fontFamily: 'Space Mono' }}>{stock.code}</span>
                     </div>
                     <div style={{ fontSize: '.76rem', color: 'var(--t2)', marginTop: 4 }}>
@@ -463,9 +455,9 @@ export default function BearMarketScannerTab({ onSelectStock }) {
                   </div>
                   <span style={{
                     padding: '4px 10px',
-                    borderRadius: 8,
+                    borderRadius: 0,
                     fontSize: '.74rem',
-                    fontWeight: 900,
+                    fontWeight: 800,
                     background: `${stock.categoryColor}20`,
                     color: stock.categoryColor,
                     border: `1px solid ${stock.categoryColor}50`
@@ -474,40 +466,40 @@ export default function BearMarketScannerTab({ onSelectStock }) {
                   </span>
                 </div>
 
-                {/* 🎯 핵심 백테스팅 지표 박스: 하락일 승률 & 하락일 평균 수익률 */}
+                {/* 핵심 백테스팅 지표 박스: 하락일 승률 & 하락일 평균 수익률 */}
                 <div style={{
                   padding: '14px 16px',
                   background: 'rgba(0,0,0,0.4)',
-                  borderRadius: 14,
+                  borderRadius: 0,
                   border: `1px solid ${winRateColor}40`,
                   marginBottom: 12
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
                     <div>
                       <div style={{ fontSize: '.74rem', color: 'var(--t3)' }}>지수 하락 {stock.totalDownDays}일 중 상승 횟수</div>
-                      <div style={{ fontSize: '1.45rem', fontWeight: 900, color: winRateColor, fontFamily: 'Space Mono' }}>
+                      <div style={{ fontSize: '1.45rem', fontWeight: 800, color: winRateColor, fontFamily: 'Space Mono' }}>
                         {stock.winRate}% <span style={{ fontSize: '.85rem', color: '#fff' }}>({stock.upCountOnDown}일 상승)</span>
                       </div>
                     </div>
                     <div style={{ textAlign: 'right' }}>
                       <div style={{ fontSize: '.74rem', color: 'var(--t3)' }}>하락일 평균 수익률</div>
-                      <div style={{ fontSize: '1.3rem', fontWeight: 900, color: isAvgUp ? 'var(--up)' : 'var(--dn)', fontFamily: 'Space Mono' }}>
+                      <div style={{ fontSize: '1.3rem', fontWeight: 800, color: isAvgUp ? 'var(--up)' : 'var(--dn)', fontFamily: 'Space Mono' }}>
                         {isAvgUp ? '▲ +' : '▼ '}{stock.avgReturnOnDown}%
                       </div>
                     </div>
                   </div>
 
                   {/* 승률 프로그레스 바 */}
-                  <div style={{ width: '100%', height: 6, background: 'rgba(255,255,255,0.08)', borderRadius: 3, overflow: 'hidden' }}>
-                    <div style={{ width: `${stock.winRate}%`, height: '100%', background: winRateColor, borderRadius: 3 }}/>
+                  <div style={{ width: '100%', height: 6, background: 'rgba(255,255,255,0.08)', borderRadius: 0, overflow: 'hidden' }}>
+                    <div style={{ width: `${stock.winRate}%`, height: '100%', background: winRateColor, borderRadius: 0 }}/>
                   </div>
                 </div>
 
                 {/* 최근 5대 지수 하락일 실전 매칭 검증 칩스 */}
                 {stock.recentDownDaysLog && stock.recentDownDaysLog.length > 0 && (
                   <div style={{ marginBottom: 12 }}>
-                    <div style={{ fontSize: '.72rem', color: 'var(--t3)', fontWeight: 800, marginBottom: 6 }}>
-                      🔍 최근 5대 코스피 하락일 실전 반응 검증:
+                    <div style={{ fontSize: '.72rem', color: 'var(--t3)', fontWeight: 700, marginBottom: 6 }}>
+                      최근 5대 코스피 하락일 실전 반응 검증:
                     </div>
                     <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                       {stock.recentDownDaysLog.map((log, lIdx) => (
@@ -517,13 +509,13 @@ export default function BearMarketScannerTab({ onSelectStock }) {
                             padding: '4px 8px',
                             background: log.isWin ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.15)',
                             border: `1px solid ${log.isWin ? '#10b981' : '#ef4444'}`,
-                            borderRadius: 6,
+                            borderRadius: 0,
                             fontSize: '.7rem',
-                            fontWeight: 800,
+                            fontWeight: 700,
                             color: log.isWin ? '#34d399' : '#f87171'
                           }}
                         >
-                          {log.date.substring(5)}: {log.isWin ? '🟢' : '🔴'} {log.stockChangePct >= 0 ? '+' : ''}{log.stockChangePct}% (코스피 {log.kospiChangePct}%)
+                          {log.date.substring(5)}: {log.stockChangePct >= 0 ? '+' : ''}{log.stockChangePct}% (코스피 {log.kospiChangePct}%)
                         </div>
                       ))}
                     </div>
@@ -547,12 +539,12 @@ export default function BearMarketScannerTab({ onSelectStock }) {
                     }}
                     style={{
                       padding: '6px 12px',
-                      background: 'rgba(99, 102, 241, 0.2)',
-                      border: '1px solid rgba(99, 102, 241, 0.5)',
-                      borderRadius: 8,
-                      color: '#818cf8',
+                      background: 'transparent',
+                      border: '1px solid rgba(255,255,255,0.15)',
+                      borderRadius: 0,
+                      color: 'var(--t2)',
                       fontSize: '.76rem',
-                      fontWeight: 800,
+                      fontWeight: 700,
                       cursor: 'pointer'
                     }}
                   >
@@ -568,12 +560,11 @@ export default function BearMarketScannerTab({ onSelectStock }) {
       {/* ─── 5. 실전 백테스팅 검증 원칙 가이드 ─── */}
       <div style={{
         padding: '22px 26px',
-        background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(99, 102, 241, 0.15) 100%)',
-        border: '1.5px solid rgba(16, 185, 129, 0.4)',
-        borderRadius: 20,
+        background: 'var(--bg2)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        borderRadius: 0,
       }}>
-        <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#fff', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span>💡</span>
+        <div style={{ fontSize: '1.05rem', fontWeight: 700, color: '#fff', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
           <span>지수 하락일(Market Down Days) 실전 백테스팅 산출 공식</span>
         </div>
         <div style={{ fontSize: '.86rem', color: 'var(--t2)', lineHeight: 1.7 }}>

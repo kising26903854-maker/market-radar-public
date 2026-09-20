@@ -140,38 +140,21 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
     <div style={{ animation: 'fadeIn 0.3s ease' }}>
       {/* ─── 1. 상단 타이틀 & 스캔 새로고침 헤더 ─── */}
       <div style={{
-        padding: '24px 28px',
-        background: 'linear-gradient(135deg, rgba(30, 27, 75, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%)',
-        border: '1.5px solid rgba(168, 85, 247, 0.4)',
-        borderRadius: 20,
+        padding: '22px 26px',
+        background: 'var(--bg2)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        borderRadius: 0,
         marginBottom: 20,
-        boxShadow: '0 12px 36px rgba(0,0,0,0.4)',
+        boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
         position: 'relative',
         overflow: 'hidden'
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-              <div style={{
-                width: 44,
-                height: 44,
-                borderRadius: 14,
-                background: 'linear-gradient(135deg, #a855f7 0%, #ec4899 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '1.5rem',
-                boxShadow: '0 0 20px rgba(168,85,247,0.5)'
-              }}>
-                🔍
-              </div>
               <div>
-                <h1 style={{ margin: 0, fontSize: '1.45rem', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.3px' }}>
-                  4대 재무 퀀트 <span style={{
-                    background: 'linear-gradient(135deg, #c084fc 0%, #f472b6 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent'
-                  }}>맞춤형 종목 발굴기</span>
+                <h1 style={{ margin: 0, fontSize: '1.35rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.3px' }}>
+                  4대 재무 퀀트 맞춤형 종목 발굴기
                 </h1>
                 <div style={{ fontSize: '.84rem', color: 'var(--t2)', marginTop: 3 }}>
                   원하는 조건을 상단 체크박스로 자유롭게 선택하세요. 선택된 조건들을 <strong>실시간 AND 결합</strong>하여 종목을 정밀 발굴합니다.
@@ -185,13 +168,13 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
               onClick={() => loadData(true)}
               disabled={refreshing || loading}
               style={{
-                padding: '10px 18px',
-                background: refreshing ? 'rgba(255,255,255,0.08)' : 'linear-gradient(135deg, rgba(168,85,247,0.25) 0%, rgba(236,72,153,0.25) 100%)',
-                border: '1px solid rgba(168,85,247,0.6)',
-                borderRadius: 12,
+                padding: '9px 16px',
+                background: refreshing ? 'rgba(255,255,255,0.08)' : 'var(--accent)',
+                border: 'none',
+                borderRadius: 0,
                 color: '#fff',
                 fontSize: '.85rem',
-                fontWeight: 800,
+                fontWeight: 700,
                 cursor: refreshing ? 'not-allowed' : 'pointer',
                 display: 'flex',
                 alignItems: 'center',
@@ -199,7 +182,6 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
                 transition: 'all 0.2s'
               }}
             >
-              <span>{refreshing ? '⏳' : '🔄'}</span>
               <span>{refreshing ? '퀀트 재계산 중...' : '4대 퀀트 스캔 새로고침'}</span>
             </button>
           </div>
@@ -208,8 +190,7 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
         {/* ─── ⚡ 상단 4대 조건 인터랙티브 체크박스 카드 바 (핵심 신규 기능) ─── */}
         <div style={{ marginTop: 20 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10, flexWrap: 'wrap', gap: 8 }}>
-            <div style={{ fontSize: '.84rem', fontWeight: 800, color: 'var(--gold)', display: 'flex', alignItems: 'center', gap: 6 }}>
-              <span>☑️</span>
+            <div style={{ fontSize: '.84rem', fontWeight: 700, color: 'var(--t2)', display: 'flex', alignItems: 'center', gap: 6 }}>
               <span>체크박스를 클릭하여 원하는 AND 조건을 결합하세요</span>
             </div>
             <div style={{ display: 'flex', gap: 6 }}>
@@ -217,12 +198,12 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
                 onClick={selectAll}
                 style={{
                   padding: '4px 10px',
-                  background: activeCount === 4 ? 'rgba(168,85,247,0.3)' : 'rgba(255,255,255,0.06)',
-                  border: '1px solid rgba(168,85,247,0.5)',
-                  color: '#c084fc',
-                  borderRadius: 8,
+                  background: activeCount === 4 ? 'var(--accent)' : 'rgba(255,255,255,0.06)',
+                  border: 'none',
+                  color: activeCount === 4 ? '#fff' : 'var(--t2)',
+                  borderRadius: 0,
                   fontSize: '.75rem',
-                  fontWeight: 800,
+                  fontWeight: 700,
                   cursor: 'pointer'
                 }}
               >
@@ -233,9 +214,9 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
                 style={{
                   padding: '4px 10px',
                   background: 'rgba(255,255,255,0.06)',
-                  border: '1px solid rgba(255,255,255,0.15)',
+                  border: 'none',
                   color: 'var(--t3)',
-                  borderRadius: 8,
+                  borderRadius: 0,
                   fontSize: '.75rem',
                   fontWeight: 700,
                   cursor: 'pointer'
@@ -255,11 +236,10 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
                   onClick={() => toggleCondition(c.id)}
                   style={{
                     padding: '14px 16px',
-                    borderRadius: 14,
+                    borderRadius: 0,
                     cursor: 'pointer',
-                    background: isChecked ? c.bgActive : 'rgba(0,0,0,0.35)',
-                    border: isChecked ? `2px solid ${c.borderActive}` : '1.5px solid rgba(255,255,255,0.08)',
-                    boxShadow: isChecked ? `0 4px 18px ${c.bgActive}` : 'none',
+                    background: isChecked ? 'rgba(129,140,248,0.14)' : 'rgba(0,0,0,0.35)',
+                    border: isChecked ? '1px solid var(--accent)' : '1px solid rgba(255,255,255,0.08)',
                     transition: 'all 0.18s ease',
                     display: 'flex',
                     alignItems: 'center',
@@ -277,24 +257,24 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
                     <div style={{
                       width: 24,
                       height: 24,
-                      borderRadius: 6,
-                      background: isChecked ? c.borderActive : 'rgba(255,255,255,0.08)',
+                      borderRadius: 0,
+                      background: isChecked ? 'var(--accent)' : 'rgba(255,255,255,0.08)',
                       border: isChecked ? 'none' : '1.5px solid var(--t3)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       color: '#fff',
                       fontSize: '.9rem',
-                      fontWeight: 900,
+                      fontWeight: 800,
                       transition: 'all 0.15s'
                     }}>
                       {isChecked ? '✓' : ''}
                     </div>
                     <div>
-                      <div style={{ fontSize: '.88rem', fontWeight: 900, color: isChecked ? '#ffffff' : 'var(--t2)' }}>
-                        {c.icon} {c.title}
+                      <div style={{ fontSize: '.88rem', fontWeight: 800, color: isChecked ? '#ffffff' : 'var(--t2)' }}>
+                        {c.title}
                       </div>
-                      <div style={{ fontSize: '.72rem', color: isChecked ? c.color : 'var(--t3)', marginTop: 2 }}>
+                      <div style={{ fontSize: '.72rem', color: isChecked ? 'var(--t2)' : 'var(--t3)', marginTop: 2 }}>
                         {c.subtitle}
                       </div>
                     </div>
@@ -303,7 +283,7 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
                   <span style={{
                     fontSize: '.72rem',
                     padding: '2px 7px',
-                    borderRadius: 6,
+                    borderRadius: 0,
                     background: isChecked ? 'rgba(0,0,0,0.3)' : 'transparent',
                     color: isChecked ? '#fff' : 'var(--t3)',
                     fontFamily: 'Space Mono',
@@ -327,25 +307,14 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
         gap: 12,
         marginBottom: 20,
         padding: '14px 18px',
-        background: activeCount === 4 
-          ? 'linear-gradient(135deg, rgba(236,72,153,0.18) 0%, rgba(168,85,247,0.18) 100%)'
-          : activeCount > 0 
-            ? 'linear-gradient(135deg, rgba(16,185,129,0.15) 0%, rgba(56,189,248,0.15) 100%)'
-            : 'rgba(239,68,68,0.12)',
-        borderRadius: 14,
-        border: activeCount === 4 
-          ? '1.5px solid rgba(236,72,153,0.45)' 
-          : activeCount > 0 
-            ? '1.5px solid rgba(16,185,129,0.4)' 
-            : '1.5px solid rgba(239,68,68,0.4)'
+        background: 'var(--bg2)',
+        borderRadius: 0,
+        border: '1px solid rgba(255,255,255,0.08)'
       }}>
         {/* 결과 카운터 뱃지 */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ fontSize: '1.3rem' }}>
-            {activeCount === 4 ? '🏆' : activeCount > 0 ? '⚡' : '⚠️'}
-          </span>
           <div>
-            <div style={{ fontSize: '.95rem', fontWeight: 900, color: '#fff' }}>
+            <div style={{ fontSize: '.95rem', fontWeight: 800, color: '#fff' }}>
               {activeCount === 4 ? (
                 <span>4대 재무 퀀트 올킬 (전체 4개 조건 AND 만족)</span>
               ) : activeCount > 0 ? (
@@ -355,8 +324,8 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
               )}
             </div>
             <div style={{ fontSize: '.76rem', color: 'var(--t2)', marginTop: 2 }}>
-              {activeCount > 0 
-                ? `총 ${filteredList.length}개 종목이 선택된 조건을 모두 통과했습니다.` 
+              {activeCount > 0
+                ? `총 ${filteredList.length}개 종목이 선택된 조건을 모두 통과했습니다.`
                 : '최소 1개 이상의 조건을 체크하시면 실시간으로 종목이 발굴됩니다.'}
             </div>
           </div>
@@ -367,11 +336,11 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
           <div style={{
             padding: '6px 14px',
             background: 'rgba(0,0,0,0.4)',
-            borderRadius: 10,
+            borderRadius: 0,
             border: '1px solid rgba(255,255,255,0.1)',
             fontSize: '.85rem',
-            fontWeight: 900,
-            color: activeCount > 0 ? 'var(--gold)' : 'var(--t3)',
+            fontWeight: 800,
+            color: activeCount > 0 ? 'var(--t1)' : 'var(--t3)',
             fontFamily: 'Space Mono'
           }}>
             발굴: {filteredList.length} 종목
@@ -386,7 +355,7 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
               padding: '8px 14px',
               background: 'rgba(0,0,0,0.4)',
               border: '1px solid var(--border)',
-              borderRadius: 10,
+              borderRadius: 0,
               color: '#fff',
               fontSize: '.85rem',
               outline: 'none',
@@ -398,18 +367,15 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
 
       {/* ─── 3. 메인 콘텐츠 리스트 ─── */}
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '100px 0', color: 'var(--gold)', fontSize: '1.1rem', fontWeight: 800 }}>
-          <div style={{ fontSize: '2.5rem', marginBottom: 12 }}>⏳</div>
+        <div style={{ textAlign: 'center', padding: '100px 0', color: 'var(--t2)', fontSize: '1.1rem', fontWeight: 700 }}>
           80여 개 주요 상장사 3개년 IFRS 재무제표 수집 및 맞춤형 퀀트 연산 중...
         </div>
       ) : activeCount === 0 ? (
-        <div style={{ textAlign: 'center', padding: '80px 0', background: 'var(--bg2)', borderRadius: 16, border: '1px dashed var(--border)', color: 'var(--t3)' }}>
-          <div style={{ fontSize: '2rem', marginBottom: 10 }}>☑️</div>
+        <div style={{ textAlign: 'center', padding: '80px 0', background: 'var(--bg2)', borderRadius: 0, border: '1px dashed var(--border)', color: 'var(--t3)' }}>
           상단에서 원하시는 재무 퀀트 조건을 1개 이상 체크해주세요.
         </div>
       ) : filteredList.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: '80px 0', background: 'var(--bg2)', borderRadius: 16, border: '1px dashed var(--border)', color: 'var(--t3)' }}>
-          <div style={{ fontSize: '2rem', marginBottom: 10 }}>🔍</div>
+        <div style={{ textAlign: 'center', padding: '80px 0', background: 'var(--bg2)', borderRadius: 0, border: '1px dashed var(--border)', color: 'var(--t3)' }}>
           선택하신 {activeCount}개 AND 조건을 동시에 모두 만족하는 종목이 유니버스 내에 없습니다.
         </div>
       ) : (
@@ -422,12 +388,10 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
                 onClick={() => onSelectStock && onSelectStock(stock)}
                 style={{
                   padding: '20px 22px',
-                  background: isPerfect 
-                    ? 'linear-gradient(135deg, rgba(30, 27, 75, 0.7) 0%, rgba(15, 23, 42, 0.95) 100%)' 
-                    : 'var(--bg2)',
-                  borderRadius: 16,
-                  border: isPerfect ? '1.8px solid rgba(236, 72, 153, 0.6)' : '1px solid var(--border)',
-                  boxShadow: isPerfect ? '0 10px 30px rgba(236, 72, 153, 0.2)' : '0 4px 14px rgba(0,0,0,0.2)',
+                  background: 'var(--bg2)',
+                  borderRadius: 0,
+                  border: isPerfect ? '1px solid var(--accent)' : '1px solid var(--border)',
+                  boxShadow: '0 4px 14px rgba(0,0,0,0.2)',
                   cursor: 'pointer',
                   transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
                   position: 'relative',
@@ -435,18 +399,18 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
                 }}
                 onMouseEnter={e => {
                   e.currentTarget.style.transform = 'translateY(-3px)';
-                  e.currentTarget.style.borderColor = isPerfect ? '#ec4899' : 'var(--accent)';
+                  e.currentTarget.style.borderColor = 'var(--accent)';
                 }}
                 onMouseLeave={e => {
                   e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.borderColor = isPerfect ? 'rgba(236, 72, 153, 0.6)' : 'var(--border)';
+                  e.currentTarget.style.borderColor = isPerfect ? 'var(--accent)' : 'var(--border)';
                 }}
               >
                 {/* 상단 뱃지 & 종목 헤더 */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 14 }}>
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span style={{ fontSize: '1.2rem', fontWeight: 900, color: '#ffffff' }}>
+                      <span style={{ fontSize: '1.2rem', fontWeight: 800, color: '#ffffff' }}>
                         {stock.name}
                       </span>
                       <span style={{ fontSize: '.8rem', color: 'var(--t3)', fontFamily: 'Space Mono' }}>
@@ -458,8 +422,8 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
                         color: stock.market === 'KOSPI' ? '#38bdf8' : '#c084fc',
                         border: `1px solid ${stock.market === 'KOSPI' ? 'rgba(56, 189, 248, 0.4)' : 'rgba(168, 85, 247, 0.4)'}`,
                         padding: '1px 6px',
-                        borderRadius: 6,
-                        fontWeight: 800
+                        borderRadius: 0,
+                        fontWeight: 700
                       }}>
                         {stock.market}
                       </span>
@@ -472,27 +436,25 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
                   {isPerfect ? (
                     <div style={{
                       padding: '4px 10px',
-                      background: 'linear-gradient(135deg, #ec4899 0%, #a855f7 100%)',
+                      background: 'var(--accent)',
                       color: '#fff',
-                      borderRadius: 14,
+                      borderRadius: 0,
                       fontSize: '.74rem',
-                      fontWeight: 900,
-                      boxShadow: '0 0 12px rgba(236,72,153,0.5)',
+                      fontWeight: 800,
                       display: 'flex',
                       alignItems: 'center',
                       gap: 4
                     }}>
-                      <span>🎯</span>
                       <span>4대 AND 올킬</span>
                     </div>
                   ) : (
                     <div style={{
                       padding: '3px 8px',
                       background: 'rgba(255,255,255,0.06)',
-                      color: 'var(--gold)',
-                      borderRadius: 8,
+                      color: 'var(--t2)',
+                      borderRadius: 0,
                       fontSize: '.72rem',
-                      fontWeight: 800
+                      fontWeight: 700
                     }}>
                       {stock.matchedCount ? `${stock.matchedCount}개 조건 만족` : '조건 일치'}
                     </div>
@@ -504,10 +466,10 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
                   <span style={{
                     fontSize: '.68rem',
                     padding: '2px 7px',
-                    borderRadius: 6,
-                    background: stock.inTopAsset ? 'rgba(192,132,252,0.2)' : 'rgba(255,255,255,0.04)',
-                    color: stock.inTopAsset ? '#c084fc' : 'var(--t3)',
-                    border: `1px solid ${stock.inTopAsset ? 'rgba(192,132,252,0.4)' : 'transparent'}`,
+                    borderRadius: 0,
+                    background: stock.inTopAsset ? 'rgba(129,140,248,0.15)' : 'rgba(255,255,255,0.04)',
+                    color: stock.inTopAsset ? 'var(--t1)' : 'var(--t3)',
+                    border: `1px solid ${stock.inTopAsset ? 'var(--accent)' : 'transparent'}`,
                     fontWeight: 700
                   }}>
                     {stock.inTopAsset ? '✓ 자산 TOP20' : '자산 미달'}
@@ -515,10 +477,10 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
                   <span style={{
                     fontSize: '.68rem',
                     padding: '2px 7px',
-                    borderRadius: 6,
-                    background: stock.inTopOp ? 'rgba(239,68,68,0.2)' : 'rgba(255,255,255,0.04)',
-                    color: stock.inTopOp ? '#f87171' : 'var(--t3)',
-                    border: `1px solid ${stock.inTopOp ? 'rgba(239,68,68,0.4)' : 'transparent'}`,
+                    borderRadius: 0,
+                    background: stock.inTopOp ? 'rgba(129,140,248,0.15)' : 'rgba(255,255,255,0.04)',
+                    color: stock.inTopOp ? 'var(--t1)' : 'var(--t3)',
+                    border: `1px solid ${stock.inTopOp ? 'var(--accent)' : 'transparent'}`,
                     fontWeight: 700
                   }}>
                     {stock.inTopOp ? '✓ 영업익 TOP20' : '영업익 미달'}
@@ -526,10 +488,10 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
                   <span style={{
                     fontSize: '.68rem',
                     padding: '2px 7px',
-                    borderRadius: 6,
-                    background: stock.isSoundDebt ? 'rgba(16,185,129,0.2)' : 'rgba(255,255,255,0.04)',
-                    color: stock.isSoundDebt ? '#34d399' : 'var(--t3)',
-                    border: `1px solid ${stock.isSoundDebt ? 'rgba(16,185,129,0.4)' : 'transparent'}`,
+                    borderRadius: 0,
+                    background: stock.isSoundDebt ? 'rgba(129,140,248,0.15)' : 'rgba(255,255,255,0.04)',
+                    color: stock.isSoundDebt ? 'var(--t1)' : 'var(--t3)',
+                    border: `1px solid ${stock.isSoundDebt ? 'var(--accent)' : 'transparent'}`,
                     fontWeight: 700
                   }}>
                     {stock.isSoundDebt ? '✓ 부채 ≤120%' : '부채 초과'}
@@ -537,10 +499,10 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
                   <span style={{
                     fontSize: '.68rem',
                     padding: '2px 7px',
-                    borderRadius: 6,
-                    background: stock.inTopRev ? 'rgba(234,179,8,0.2)' : 'rgba(255,255,255,0.04)',
-                    color: stock.inTopRev ? '#fbbf24' : 'var(--t3)',
-                    border: `1px solid ${stock.inTopRev ? 'rgba(234,179,8,0.4)' : 'transparent'}`,
+                    borderRadius: 0,
+                    background: stock.inTopRev ? 'rgba(129,140,248,0.15)' : 'rgba(255,255,255,0.04)',
+                    color: stock.inTopRev ? 'var(--t1)' : 'var(--t3)',
+                    border: `1px solid ${stock.inTopRev ? 'var(--accent)' : 'transparent'}`,
                     fontWeight: 700
                   }}>
                     {stock.inTopRev ? '✓ 매출 TOP20' : '매출 미달'}
@@ -554,38 +516,38 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
                   gap: 8,
                   padding: '12px 14px',
                   background: 'rgba(0,0,0,0.3)',
-                  borderRadius: 12,
+                  borderRadius: 0,
                   marginBottom: 14,
                   border: '1px solid rgba(255,255,255,0.06)'
                 }}>
                   {/* 1. 자산 증가율 */}
                   <div>
-                    <div style={{ fontSize: '.7rem', color: '#c084fc', fontWeight: 800 }}>🏢 자산 증가율</div>
-                    <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#fff', fontFamily: 'Space Mono', marginTop: 1 }}>
+                    <div style={{ fontSize: '.7rem', color: 'var(--t3)', fontWeight: 700 }}>자산 증가율</div>
+                    <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#fff', fontFamily: 'Space Mono', marginTop: 1 }}>
                       {stock.assetGrowthRate !== null ? `+${stock.assetGrowthRate}%` : '-'}
                     </div>
                   </div>
 
                   {/* 2. 영업이익 증가율 */}
                   <div>
-                    <div style={{ fontSize: '.7rem', color: '#f87171', fontWeight: 800 }}>📈 영업익 증가율</div>
-                    <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#ef4444', fontFamily: 'Space Mono', marginTop: 1 }}>
+                    <div style={{ fontSize: '.7rem', color: 'var(--t3)', fontWeight: 700 }}>영업익 증가율</div>
+                    <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#fff', fontFamily: 'Space Mono', marginTop: 1 }}>
                       {stock.opProfitGrowthRate !== null ? `+${stock.opProfitGrowthRate}%` : '-'}
                     </div>
                   </div>
 
                   {/* 3. 매출액 증가율 */}
                   <div>
-                    <div style={{ fontSize: '.7rem', color: '#fbbf24', fontWeight: 800 }}>💰 매출액 증가율</div>
-                    <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#f59e0b', fontFamily: 'Space Mono', marginTop: 1 }}>
+                    <div style={{ fontSize: '.7rem', color: 'var(--t3)', fontWeight: 700 }}>매출액 증가율</div>
+                    <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#fff', fontFamily: 'Space Mono', marginTop: 1 }}>
                       {stock.revenueGrowthRate !== null ? `+${stock.revenueGrowthRate}%` : '-'}
                     </div>
                   </div>
 
                   {/* 4. 부채비율 */}
                   <div>
-                    <div style={{ fontSize: '.7rem', color: '#34d399', fontWeight: 800 }}>🛡️ 부채비율 (≤120%)</div>
-                    <div style={{ fontSize: '1.05rem', fontWeight: 900, color: stock.debtRatio <= 120 ? '#10b981' : '#f87171', fontFamily: 'Space Mono', marginTop: 1 }}>
+                    <div style={{ fontSize: '.7rem', color: 'var(--t3)', fontWeight: 700 }}>부채비율 (≤120%)</div>
+                    <div style={{ fontSize: '1.05rem', fontWeight: 800, color: stock.debtRatio <= 120 ? '#10b981' : '#f87171', fontFamily: 'Space Mono', marginTop: 1 }}>
                       {stock.debtRatio !== null ? `${stock.debtRatio}%` : '-'}
                     </div>
                   </div>
@@ -598,7 +560,7 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
                       <div key={hIdx} style={{
                         padding: '6px 8px',
                         background: 'rgba(255,255,255,0.02)',
-                        borderRadius: 8,
+                        borderRadius: 0,
                         fontSize: '.68rem',
                         textAlign: 'center',
                         border: '1px solid rgba(255,255,255,0.04)'
@@ -617,8 +579,8 @@ export default function GrowthStockScreener({ onSelectStock, onOpenValueChain })
 
                 {/* 하단 클릭 액션 가이드 */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 8, borderTop: '1px dashed rgba(255,255,255,0.08)', fontSize: '.74rem', color: 'var(--t3)' }}>
-                  <span>ROE: <strong style={{ color: '#c084fc' }}>{stock.roe || '-'}%</strong> · PER: <strong style={{ color: '#fff' }}>{stock.per || '-'}배</strong></span>
-                  <span style={{ color: 'var(--accent)', fontWeight: 800 }}>👆 클릭 시 퀀트 차트 & 개요 보기 ➔</span>
+                  <span>ROE: <strong style={{ color: '#fff' }}>{stock.roe || '-'}%</strong> · PER: <strong style={{ color: '#fff' }}>{stock.per || '-'}배</strong></span>
+                  <span style={{ color: 'var(--accent)', fontWeight: 700 }}>클릭 시 퀀트 차트 & 개요 보기 ➔</span>
                 </div>
               </div>
             );

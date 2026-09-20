@@ -294,7 +294,7 @@ export default function PriceAlertTab({ positions = [] }) {
           padding: '14px 20px',
           background: 'rgba(15, 23, 42, 0.95)',
           border: '1.5px solid #10b981',
-          borderRadius: 14,
+          borderRadius: 0,
           color: '#fff',
           fontWeight: 800,
           fontSize: '.9rem',
@@ -308,19 +308,19 @@ export default function PriceAlertTab({ positions = [] }) {
 
       {/* ─── 상단 메인 배너 ─── */}
       <div style={{
-        padding: '24px 28px',
-        background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.18) 0%, rgba(99, 102, 241, 0.18) 50%, rgba(16, 185, 129, 0.18) 100%)',
-        border: '2px solid rgba(239, 68, 68, 0.4)',
-        borderRadius: 22,
-        marginBottom: 22,
-        boxShadow: '0 10px 36px rgba(0,0,0,0.45)',
+        padding: '22px 26px',
+        background: 'var(--bg2)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        borderRadius: 0,
+        marginBottom: 18,
+        boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
           <div>
-            <div style={{ fontSize: '1.55rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-              <span style={{ filter: 'drop-shadow(0 0 10px #ef4444)' }}>🔔 보유종목 &amp; 관심종목 텔레그램 스마트 알리미</span>
-              <span style={{ fontSize: '.75rem', background: '#3b82f6', color: '#fff', padding: '3px 10px', borderRadius: 20, fontWeight: 900 }}>
-                📱 분리 발송 시스템
+            <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+              <span>보유종목 &amp; 관심종목 텔레그램 스마트 알리미</span>
+              <span style={{ fontSize: '.75rem', background: 'var(--accent)', color: '#fff', padding: '3px 10px', borderRadius: 0, fontWeight: 700 }}>
+                분리 발송 시스템
               </span>
             </div>
             <div style={{ fontSize: '.9rem', color: 'var(--t2)', marginTop: 6, lineHeight: 1.6 }}>
@@ -330,49 +330,45 @@ export default function PriceAlertTab({ positions = [] }) {
 
           {/* 메인 액션 버튼 모음 */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-            {/* 💼 보유종목 텔레그램 브리핑 버튼 */}
+            {/* 보유종목 텔레그램 브리핑 버튼 */}
             <button
               onClick={handleSendHoldingsBriefing}
               disabled={sendingHoldings || !isTelegramConfigured}
               style={{
                 padding: '10px 16px',
-                background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
+                background: '#3b82f6',
                 border: 'none',
-                borderRadius: 12,
+                borderRadius: 0,
                 color: '#fff',
-                fontWeight: 900,
+                fontWeight: 700,
                 cursor: (sendingHoldings || !isTelegramConfigured) ? 'not-allowed' : 'pointer',
                 fontSize: '.85rem',
-                boxShadow: '0 4px 14px rgba(59,130,246,0.4)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 6
               }}
             >
-              <span>{sendingHoldings ? '⏳' : '💼'}</span>
               <span>{sendingHoldings ? '전송 중...' : '보유종목 브리핑 텔레그램 전송'}</span>
             </button>
 
-            {/* ⭐ 관심종목 텔레그램 브리핑 버튼 */}
+            {/* 관심종목 텔레그램 브리핑 버튼 */}
             <button
               onClick={handleSendWatchlistBriefing}
               disabled={sendingWatchlist || !isTelegramConfigured}
               style={{
                 padding: '10px 16px',
-                background: 'linear-gradient(135deg, #fbbf24 0%, #d97706 100%)',
+                background: '#eab308',
                 border: 'none',
-                borderRadius: 12,
+                borderRadius: 0,
                 color: '#000',
-                fontWeight: 900,
+                fontWeight: 700,
                 cursor: (sendingWatchlist || !isTelegramConfigured) ? 'not-allowed' : 'pointer',
                 fontSize: '.85rem',
-                boxShadow: '0 4px 14px rgba(251,191,36,0.4)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 6
               }}
             >
-              <span>{sendingWatchlist ? '⏳' : '⭐'}</span>
               <span>{sendingWatchlist ? '전송 중...' : '관심종목 레이더 텔레그램 전송'}</span>
             </button>
 
@@ -381,16 +377,16 @@ export default function PriceAlertTab({ positions = [] }) {
               onClick={() => setShowTelegramModal(true)}
               style={{
                 padding: '10px 14px',
-                background: isTelegramConfigured ? 'rgba(16, 185, 129, 0.2)' : 'rgba(234, 179, 8, 0.2)',
-                border: `1.5px solid ${isTelegramConfigured ? '#10b981' : '#eab308'}`,
-                borderRadius: 12,
+                background: isTelegramConfigured ? 'rgba(16, 185, 129, 0.15)' : 'rgba(234, 179, 8, 0.15)',
+                border: `1px solid ${isTelegramConfigured ? '#10b981' : '#eab308'}`,
+                borderRadius: 0,
                 color: isTelegramConfigured ? '#34d399' : '#fbbf24',
-                fontWeight: 900,
+                fontWeight: 700,
                 cursor: 'pointer',
                 fontSize: '.85rem'
               }}
             >
-              {isTelegramConfigured ? '🟢 텔레그램 연동됨' : '⚠️ 텔레그램 연동'}
+              {isTelegramConfigured ? '텔레그램 연동됨' : '텔레그램 연동'}
             </button>
 
             {/* 신규 알림 등록 */}
@@ -398,17 +394,16 @@ export default function PriceAlertTab({ positions = [] }) {
               onClick={() => handleOpenCreate('HOLDING')}
               style={{
                 padding: '10px 16px',
-                background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+                background: 'var(--accent)',
                 border: 'none',
-                borderRadius: 12,
+                borderRadius: 0,
                 color: '#fff',
-                fontWeight: 900,
+                fontWeight: 700,
                 cursor: 'pointer',
-                fontSize: '.88rem',
-                boxShadow: '0 4px 14px rgba(239,68,68,0.4)'
+                fontSize: '.88rem'
               }}
             >
-              ➕ 새 알림 등록
+              새 알림 등록
             </button>
           </div>
         </div>
@@ -417,10 +412,10 @@ export default function PriceAlertTab({ positions = [] }) {
       {/* ─── 4대 요약 KPI 카드 ─── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 12, marginBottom: 20 }}>
         {[
-          { id: 'ALL', label: '🌐 전체 등록 알림', count: stats.total, color: '#818cf8', desc: '모든 가격 감시 규칙' },
-          { id: 'HOLDING', label: '💼 보유종목 알림', count: stats.holdings, color: '#60a5fa', desc: '목표 익절 & 손절선 관리' },
-          { id: 'WATCHLIST', label: '⭐ 관심종목 알림', count: stats.watchlist, color: '#fbbf24', desc: '신규 매수 타점 & 눌림목 포착' },
-          { id: 'TARGET', label: '🎯 목표가/진입가 도달', count: stats.targetReached, color: '#34d399', desc: '목표가 달성 종목' },
+          { id: 'ALL', label: '전체 등록 알림', count: stats.total, color: '#818cf8', desc: '모든 가격 감시 규칙' },
+          { id: 'HOLDING', label: '보유종목 알림', count: stats.holdings, color: '#60a5fa', desc: '목표 익절 & 손절선 관리' },
+          { id: 'WATCHLIST', label: '관심종목 알림', count: stats.watchlist, color: '#fbbf24', desc: '신규 매수 타점 & 눌림목 포착' },
+          { id: 'TARGET', label: '목표가/진입가 도달', count: stats.targetReached, color: '#34d399', desc: '목표가 달성 종목' },
         ].map(card => {
           const isSelected = activeTab === card.id;
           return (
@@ -429,21 +424,22 @@ export default function PriceAlertTab({ positions = [] }) {
               onClick={() => setActiveTab(card.id)}
               style={{
                 padding: '16px 18px',
-                borderRadius: 16,
-                background: isSelected ? `${card.color}25` : 'rgba(30, 41, 59, 0.75)',
-                border: isSelected ? `2px solid ${card.color}` : '1px solid rgba(255,255,255,0.08)',
+                borderRadius: 0,
+                background: isSelected ? `${card.color}12` : 'var(--bg2)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderTop: `2px solid ${card.color}`,
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
-                boxShadow: isSelected ? `0 0 16px ${card.color}40` : 'none'
+                boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '.84rem', fontWeight: 800, color: card.color }}>{card.label}</span>
-                <span style={{ fontSize: '1.25rem', fontWeight: 900, color: '#fff', fontFamily: 'Space Mono' }}>{card.count}개</span>
+                <span style={{ fontSize: '.84rem', fontWeight: 700, color: card.color }}>{card.label}</span>
+                <span style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff', fontFamily: 'Space Mono' }}>{card.count}개</span>
               </div>
               <div style={{ fontSize: '.74rem', color: 'var(--t2)', marginTop: 4 }}>{card.desc}</div>
-              <div style={{ fontSize: '.72rem', color: card.color, fontWeight: 800, marginTop: 8 }}>
-                {isSelected ? '✅ 필터링 적용 중' : '클릭 시 필터 ➔'}
+              <div style={{ fontSize: '.72rem', color: card.color, fontWeight: 700, marginTop: 8 }}>
+                {isSelected ? '필터링 적용 중' : '클릭 시 필터 ➔'}
               </div>
             </div>
           );
@@ -454,21 +450,21 @@ export default function PriceAlertTab({ positions = [] }) {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 18 }}>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'ALL', label: `🌐 전체 보기 (${stats.total})` },
-            { id: 'HOLDING', label: `💼 보유종목 (${stats.holdings})` },
-            { id: 'WATCHLIST', label: `⭐ 관심종목 (${stats.watchlist})` },
-            { id: 'HISTORY', label: `📜 텔레그램 발송 내역 (${history.length}건)` }
+            { id: 'ALL', label: `전체 보기 (${stats.total})` },
+            { id: 'HOLDING', label: `보유종목 (${stats.holdings})` },
+            { id: 'WATCHLIST', label: `관심종목 (${stats.watchlist})` },
+            { id: 'HISTORY', label: `텔레그램 발송 내역 (${history.length}건)` }
           ].map(t => (
             <button
               key={t.id}
               onClick={() => setActiveTab(t.id)}
               style={{
                 padding: '8px 16px',
-                borderRadius: 12,
-                border: activeTab === t.id ? '1.5px solid #ef4444' : '1px solid rgba(255,255,255,0.08)',
-                background: activeTab === t.id ? 'rgba(239,68,68,0.25)' : 'rgba(0,0,0,0.3)',
+                borderRadius: 0,
+                border: 'none',
+                background: activeTab === t.id ? 'var(--accent)' : 'rgba(0,0,0,0.25)',
                 color: activeTab === t.id ? '#fff' : 'var(--t3)',
-                fontWeight: 900,
+                fontWeight: 700,
                 fontSize: '.84rem',
                 cursor: 'pointer'
               }}
@@ -479,8 +475,7 @@ export default function PriceAlertTab({ positions = [] }) {
         </div>
 
         {activeTab !== 'HISTORY' && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'var(--bg2)', padding: '8px 14px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.1)' }}>
-            <span>🔍</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'var(--bg2)', padding: '8px 14px', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)' }}>
             <input
               type="text"
               value={searchQuery}
@@ -489,7 +484,7 @@ export default function PriceAlertTab({ positions = [] }) {
               style={{ background: 'transparent', border: 'none', outline: 'none', color: '#fff', fontSize: '.85rem' }}
             />
             {searchQuery && (
-              <button onClick={() => setSearchQuery('')} style={{ background: 'transparent', border: 'none', color: 'var(--t3)', cursor: 'pointer' }}>✕</button>
+              <button onClick={() => setSearchQuery('')} style={{ background: 'transparent', border: 'none', color: 'var(--t3)', cursor: 'pointer' }}>초기화</button>
             )}
           </div>
         )}
@@ -499,21 +494,20 @@ export default function PriceAlertTab({ positions = [] }) {
       {activeTab !== 'HISTORY' && (
         <>
           {filteredAlerts.length === 0 ? (
-            <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)', background: 'var(--bg2)', borderRadius: 18, border: '1px dashed rgba(255,255,255,0.1)' }}>
-              <div style={{ fontSize: '2.5rem', marginBottom: 10 }}>🔔</div>
-              <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#fff' }}>등록된 알림 규칙이 없습니다.</div>
+            <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)', background: 'var(--bg2)', borderRadius: 0, border: '1px dashed rgba(255,255,255,0.1)' }}>
+              <div style={{ fontSize: '1.05rem', fontWeight: 700, color: '#fff' }}>등록된 알림 규칙이 없습니다.</div>
               <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginTop: 14 }}>
                 <button
                   onClick={() => handleOpenCreate('HOLDING')}
-                  style={{ padding: '9px 18px', background: '#3b82f6', color: '#fff', border: 'none', borderRadius: 10, fontWeight: 900, cursor: 'pointer' }}
+                  style={{ padding: '9px 18px', background: '#3b82f6', color: '#fff', border: 'none', borderRadius: 0, fontWeight: 700, cursor: 'pointer' }}
                 >
-                  💼 보유종목 알림 등록
+                  보유종목 알림 등록
                 </button>
                 <button
                   onClick={() => handleOpenCreate('WATCHLIST')}
-                  style={{ padding: '9px 18px', background: '#fbbf24', color: '#000', border: 'none', borderRadius: 10, fontWeight: 900, cursor: 'pointer' }}
+                  style={{ padding: '9px 18px', background: '#eab308', color: '#000', border: 'none', borderRadius: 0, fontWeight: 700, cursor: 'pointer' }}
                 >
-                  ⭐ 관심종목 알림 등록
+                  관심종목 알림 등록
                 </button>
               </div>
             </div>
@@ -536,10 +530,11 @@ export default function PriceAlertTab({ positions = [] }) {
                     key={alert.id}
                     style={{
                       padding: '22px 24px',
-                      background: 'rgba(30, 41, 59, 0.75)',
-                      border: alert.isTargetReached ? '1.8px solid #10b981' : isHolding ? '1px solid rgba(59, 130, 246, 0.3)' : '1px solid rgba(251, 191, 36, 0.3)',
-                      borderRadius: 20,
-                      boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
+                      background: 'var(--bg2)',
+                      border: '1px solid rgba(255,255,255,0.08)',
+                      borderTop: `2px solid ${alert.isTargetReached ? '#10b981' : isHolding ? '#3b82f6' : '#fbbf24'}`,
+                      borderRadius: 0,
+                      boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
                       opacity: alert.isEnabled ? 1 : 0.6
                     }}
                   >
@@ -548,16 +543,16 @@ export default function PriceAlertTab({ positions = [] }) {
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                         <span style={{
                           fontSize: '.74rem',
-                          fontWeight: 900,
+                          fontWeight: 700,
                           padding: '3px 8px',
-                          borderRadius: 6,
+                          borderRadius: 0,
                           background: isHolding ? 'rgba(59, 130, 246, 0.2)' : 'rgba(251, 191, 36, 0.2)',
                           color: isHolding ? '#60a5fa' : '#fbbf24',
                           border: `1px solid ${isHolding ? '#3b82f6' : '#f59e0b'}`
                         }}>
-                          {isHolding ? '💼 보유종목' : '⭐ 관심종목'}
+                          {isHolding ? '보유종목' : '관심종목'}
                         </span>
-                        <span style={{ fontSize: '1.15rem', fontWeight: 900, color: '#fff' }}>{alert.stockName}</span>
+                        <span style={{ fontSize: '1.15rem', fontWeight: 800, color: '#fff' }}>{alert.stockName}</span>
                         <span style={{ fontSize: '.78rem', color: 'var(--t3)', fontFamily: 'Space Mono' }}>({alert.stockCode})</span>
                       </div>
 
@@ -566,16 +561,16 @@ export default function PriceAlertTab({ positions = [] }) {
                         onClick={() => handleToggle(alert)}
                         style={{
                           padding: '4px 10px',
-                          borderRadius: 20,
+                          borderRadius: 0,
                           border: `1px solid ${alert.isEnabled ? '#10b981' : 'rgba(255,255,255,0.2)'}`,
                           background: alert.isEnabled ? 'rgba(16,185,129,0.2)' : 'rgba(0,0,0,0.3)',
                           color: alert.isEnabled ? '#34d399' : 'var(--t3)',
                           fontSize: '.74rem',
-                          fontWeight: 800,
+                          fontWeight: 700,
                           cursor: 'pointer'
                         }}
                       >
-                        {alert.isEnabled ? '🟢 감시 중' : '⚪ 일시중지'}
+                        {alert.isEnabled ? '감시 중' : '일시중지'}
                       </button>
                     </div>
 
@@ -583,7 +578,7 @@ export default function PriceAlertTab({ positions = [] }) {
                     <div style={{
                       padding: '12px 14px',
                       background: 'rgba(0,0,0,0.35)',
-                      borderRadius: 12,
+                      borderRadius: 0,
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
@@ -619,16 +614,16 @@ export default function PriceAlertTab({ positions = [] }) {
                       <div style={{
                         padding: '10px 12px',
                         background: alert.isTargetReached ? 'rgba(16,185,129,0.18)' : 'rgba(16,185,129,0.08)',
-                        borderRadius: 10,
+                        borderRadius: 0,
                         border: `1px solid ${alert.isTargetReached ? '#10b981' : 'rgba(16,185,129,0.25)'}`
                       }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '.74rem' }}>
-                          <span style={{ color: '#34d399', fontWeight: 800 }}>
-                            {isHolding ? '🎯 1차 익절 목표가' : '🎯 목표 매수 진입가'}
+                          <span style={{ color: '#34d399', fontWeight: 700 }}>
+                            {isHolding ? '1차 익절 목표가' : '목표 매수 진입가'}
                           </span>
-                          <span style={{ color: alert.isTargetReached ? '#10b981' : 'var(--t3)', fontWeight: 800 }}>
-                            {alert.isTargetReached 
-                              ? (isHolding ? '🚀 달성!' : '✨ 진입 적기') 
+                          <span style={{ color: alert.isTargetReached ? '#10b981' : 'var(--t3)', fontWeight: 700 }}>
+                            {alert.isTargetReached
+                              ? (isHolding ? '달성!' : '진입 적기')
                               : (isHolding ? `+${alert.gapToTargetPct}% 남음` : `-${alert.gapToTargetPct}% 도달`)}
                           </span>
                         </div>
@@ -641,13 +636,13 @@ export default function PriceAlertTab({ positions = [] }) {
                       <div style={{
                         padding: '10px 12px',
                         background: alert.isStopLossTriggered ? 'rgba(239,68,68,0.18)' : 'rgba(239,68,68,0.08)',
-                        borderRadius: 10,
+                        borderRadius: 0,
                         border: `1px solid ${alert.isStopLossTriggered ? '#ef4444' : 'rgba(239,68,68,0.25)'}`
                       }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '.74rem' }}>
-                          <span style={{ color: '#f87171', fontWeight: 800 }}>🛑 지지 손절선</span>
-                          <span style={{ color: alert.isStopLossTriggered ? '#ef4444' : 'var(--t3)', fontWeight: 800 }}>
-                            {alert.isStopLossTriggered ? '⚠️ 이탈 경보' : `-${alert.gapToStopLossPct}% 마진`}
+                          <span style={{ color: '#f87171', fontWeight: 700 }}>지지 손절선</span>
+                          <span style={{ color: alert.isStopLossTriggered ? '#ef4444' : 'var(--t3)', fontWeight: 700 }}>
+                            {alert.isStopLossTriggered ? '이탈 경보' : `-${alert.gapToStopLossPct}% 마진`}
                           </span>
                         </div>
                         <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#fff', marginTop: 3, fontFamily: 'Space Mono' }}>
@@ -661,14 +656,14 @@ export default function PriceAlertTab({ positions = [] }) {
                       <div style={{ marginBottom: 12 }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '.72rem', color: 'var(--t3)', marginBottom: 4 }}>
                           <span>익절 진행률 (매입가 ➔ 목표가)</span>
-                          <span style={{ color: '#34d399', fontWeight: 800 }}>{progressToTarget.toFixed(0)}%</span>
+                          <span style={{ color: '#34d399', fontWeight: 700 }}>{progressToTarget.toFixed(0)}%</span>
                         </div>
-                        <div style={{ width: '100%', height: 6, background: 'rgba(0,0,0,0.5)', borderRadius: 4, overflow: 'hidden' }}>
+                        <div style={{ width: '100%', height: 6, background: 'rgba(0,0,0,0.5)', borderRadius: 0, overflow: 'hidden' }}>
                           <div style={{
                             width: `${progressToTarget}%`,
                             height: '100%',
                             background: alert.isTargetReached ? '#10b981' : 'linear-gradient(90deg, #3b82f6, #10b981)',
-                            borderRadius: 4,
+                            borderRadius: 0,
                             transition: 'width 0.4s ease'
                           }}/>
                         </div>
@@ -677,8 +672,8 @@ export default function PriceAlertTab({ positions = [] }) {
 
                     {/* 전략 메모 */}
                     {alert.memo && (
-                      <div style={{ fontSize: '.78rem', color: 'var(--t2)', background: 'rgba(255,255,255,0.03)', padding: '8px 12px', borderRadius: 8, marginBottom: 14, lineHeight: 1.4 }}>
-                        💡 {alert.memo}
+                      <div style={{ fontSize: '.78rem', color: 'var(--t2)', background: 'rgba(255,255,255,0.03)', padding: '8px 12px', borderRadius: 0, marginBottom: 14, lineHeight: 1.4 }}>
+                        {alert.memo}
                       </div>
                     )}
 
@@ -686,15 +681,15 @@ export default function PriceAlertTab({ positions = [] }) {
                     <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
                       <button
                         onClick={() => handleOpenEdit(alert)}
-                        style={{ padding: '6px 12px', background: 'rgba(255,255,255,0.08)', border: 'none', borderRadius: 8, color: 'var(--t2)', fontSize: '.78rem', fontWeight: 800, cursor: 'pointer' }}
+                        style={{ padding: '6px 12px', background: 'rgba(255,255,255,0.08)', border: 'none', borderRadius: 0, color: 'var(--t2)', fontSize: '.78rem', fontWeight: 700, cursor: 'pointer' }}
                       >
-                        ✏️ 설정 수정
+                        설정 수정
                       </button>
                       <button
                         onClick={() => handleDelete(alert.id)}
-                        style={{ padding: '6px 12px', background: 'rgba(239,68,68,0.15)', border: 'none', borderRadius: 8, color: '#f87171', fontSize: '.78rem', fontWeight: 800, cursor: 'pointer' }}
+                        style={{ padding: '6px 12px', background: 'rgba(239,68,68,0.15)', border: 'none', borderRadius: 0, color: '#f87171', fontSize: '.78rem', fontWeight: 700, cursor: 'pointer' }}
                       >
-                        🗑️ 삭제
+                        삭제
                       </button>
                     </div>
                   </div>

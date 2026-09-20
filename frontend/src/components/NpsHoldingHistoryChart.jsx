@@ -55,14 +55,14 @@ export default function NpsHoldingHistoryChart({ stock }) {
   }, [code, data])
 
   if (loading) return (
-    <div style={{ background: 'var(--bg3)', borderRadius: 16, padding: '28px 24px', marginBottom: 20, border: '1.5px solid rgba(16,185,129,0.3)', textAlign: 'center', color: 'var(--t3)' }}>
-      <div style={{ fontSize: '1rem', fontWeight: 700 }}>🏛️ DART 대량보유 공시 원문 조회 중...</div>
+    <div style={{ background: 'var(--bg2)', borderRadius: 0, padding: '28px 24px', marginBottom: 20, border: '1px solid rgba(255,255,255,0.08)', textAlign: 'center', color: 'var(--t3)' }}>
+      <div style={{ fontSize: '1rem', fontWeight: 700 }}>DART 대량보유 공시 원문 조회 중...</div>
     </div>
   )
 
   if (error) return (
-    <div style={{ background: 'var(--bg3)', borderRadius: 16, padding: '20px 24px', marginBottom: 20, border: '1.5px solid rgba(16,185,129,0.2)', color: 'var(--t3)', textAlign: 'center' }}>
-      <div style={{ fontSize: '.9rem' }}>📋 국민연금 보유이력을 조회하지 못했습니다 — {error}</div>
+    <div style={{ background: 'var(--bg2)', borderRadius: 0, padding: '20px 24px', marginBottom: 20, border: '1px solid rgba(255,255,255,0.08)', color: 'var(--t3)', textAlign: 'center' }}>
+      <div style={{ fontSize: '.9rem' }}>국민연금 보유이력을 조회하지 못했습니다 — {error}</div>
     </div>
   )
 
@@ -71,10 +71,10 @@ export default function NpsHoldingHistoryChart({ stock }) {
   const header = (
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 14, flexWrap: 'wrap', gap: 12 }}>
       <div>
-        <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#34d399', display: 'flex', alignItems: 'center', gap: 8 }}>
-          🏛️ {stock?.name} 국민연금 보유비중 변동 이력 {candles.length > 0 && <span style={{ fontSize: '.72rem', color: '#f87171', fontWeight: 800 }}>+ 일봉</span>}
+        <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: 8 }}>
+          {stock?.name} 국민연금 보유비중 변동 이력 {candles.length > 0 && <span style={{ fontSize: '.72rem', color: 'var(--t3)', fontWeight: 700 }}>+ 일봉</span>}
           {data?.isNew && (
-            <span style={{ fontSize: '.68rem', padding: '2px 8px', borderRadius: 6, background: '#ef4444', color: '#fff', fontWeight: 900, animation: 'pulse 1.6s ease-in-out infinite' }}>
+            <span style={{ fontSize: '.68rem', padding: '2px 8px', borderRadius: 0, background: '#ef4444', color: '#fff', fontWeight: 800, animation: 'pulse 1.6s ease-in-out infinite' }}>
               🆕 NEW
             </span>
           )}
@@ -88,10 +88,10 @@ export default function NpsHoldingHistoryChart({ stock }) {
 
   if (history.length === 0) {
     return (
-      <div style={{ background: 'var(--bg3)', borderRadius: 16, padding: '20px 24px', marginBottom: 20, border: '1.5px solid rgba(16,185,129,0.35)', color: 'var(--t2)' }}>
+      <div style={{ background: 'var(--bg2)', borderRadius: 0, padding: '20px 24px', marginBottom: 20, border: '1px solid rgba(255,255,255,0.08)', color: 'var(--t2)' }}>
         {header}
         <div style={{ textAlign: 'center', padding: '20px 0', color: 'var(--t3)', fontSize: '.85rem' }}>
-          📭 DART에 공시된 국민연금 대량보유(5%+) 변동 이력이 없습니다.<br />
+          DART에 공시된 국민연금 대량보유(5%+) 변동 이력이 없습니다.<br />
           <span style={{ fontSize: '.76rem' }}>국민연금이 5% 미만을 보유했거나, 최근 1%p 이상 지분 변동·보유목적 변경이 없어 신규 공시가 발생하지 않은 종목일 수 있습니다.</span>
         </div>
       </div>
@@ -170,21 +170,21 @@ export default function NpsHoldingHistoryChart({ stock }) {
   const latest = points[points.length - 1]
 
   return (
-    <div style={{ background: 'var(--bg3)', borderRadius: 16, padding: '20px 24px', marginBottom: 20, border: '1.5px solid rgba(16,185,129,0.35)', boxShadow: '0 8px 24px rgba(0,0,0,0.3)' }}>
+    <div style={{ background: 'var(--bg2)', borderRadius: 0, padding: '20px 24px', marginBottom: 20, border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 4px 16px rgba(0,0,0,0.2)' }}>
       {header}
 
       <div style={{ display: 'flex', gap: 8, marginBottom: 14, flexWrap: 'wrap' }}>
-        <div style={{ padding: '5px 12px', background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.4)', borderRadius: 10 }}>
+        <div style={{ padding: '5px 12px', background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.4)', borderRadius: 0 }}>
           <span style={{ fontSize: '.68rem', color: 'var(--t3)', fontWeight: 700, marginRight: 6 }}>최근 공시 비중</span>
-          <span style={{ fontSize: '.9rem', fontWeight: 900, color: '#34d399' }}>{latest.ratio}%</span>
+          <span style={{ fontSize: '.9rem', fontWeight: 800, color: '#34d399' }}>{latest.ratio}%</span>
         </div>
-        <div style={{ padding: '5px 12px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10 }}>
+        <div style={{ padding: '5px 12px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 0 }}>
           <span style={{ fontSize: '.68rem', color: 'var(--t3)', fontWeight: 700, marginRight: 6 }}>공시 건수</span>
-          <span style={{ fontSize: '.9rem', fontWeight: 900, color: 'var(--t1)' }}>{points.length}건</span>
+          <span style={{ fontSize: '.9rem', fontWeight: 800, color: 'var(--t1)' }}>{points.length}건</span>
         </div>
         {priceLoading && (
-          <div style={{ padding: '5px 12px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 10 }}>
-            <span style={{ fontSize: '.72rem', color: 'var(--t3)' }}>📊 일봉 불러오는 중...</span>
+          <div style={{ padding: '5px 12px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 0 }}>
+            <span style={{ fontSize: '.72rem', color: 'var(--t3)' }}>일봉 불러오는 중...</span>
           </div>
         )}
       </div>
@@ -253,10 +253,10 @@ export default function NpsHoldingHistoryChart({ stock }) {
       {hasCandles && (
         <div style={{ marginTop: 4, display: 'flex', gap: 14, alignItems: 'center', fontSize: '.72rem', color: 'var(--t2)', flexWrap: 'wrap' }}>
           <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontWeight: 700 }}>
-            <span style={{ display: 'inline-block', width: 10, height: 10, background: '#f87171', borderRadius: 2 }} /> 일봉 상승
+            <span style={{ display: 'inline-block', width: 10, height: 10, background: '#f87171', borderRadius: 0 }} /> 일봉 상승
           </span>
           <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontWeight: 700 }}>
-            <span style={{ display: 'inline-block', width: 10, height: 10, background: '#60a5fa', borderRadius: 2 }} /> 일봉 하락
+            <span style={{ display: 'inline-block', width: 10, height: 10, background: '#60a5fa', borderRadius: 0 }} /> 일봉 하락
           </span>
           <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontWeight: 700 }}>
             <span style={{ display: 'inline-block', width: 16, height: 3, background: '#34d399' }} /> 국민연금 보유비중(%, 우측축)
@@ -266,7 +266,7 @@ export default function NpsHoldingHistoryChart({ stock }) {
 
       {/* 호버 상세 정보 */}
       {hoveredPoint !== null && points[hoveredPoint] && (
-        <div style={{ marginTop: 8, padding: '10px 14px', background: 'rgba(52,211,153,0.08)', border: '1px solid rgba(52,211,153,0.3)', borderRadius: 10, fontSize: '.78rem', color: 'var(--t1)' }}>
+        <div style={{ marginTop: 8, padding: '10px 14px', background: 'rgba(52,211,153,0.08)', border: '1px solid rgba(52,211,153,0.3)', borderRadius: 0, fontSize: '.78rem', color: 'var(--t1)' }}>
           <strong style={{ color: '#34d399' }}>{fmtDate(points[hoveredPoint].date)}</strong>
           {' — '}비중 <strong>{points[hoveredPoint].ratio}%</strong>
           {points[hoveredPoint].ratioChange !== null && (
@@ -278,8 +278,8 @@ export default function NpsHoldingHistoryChart({ stock }) {
         </div>
       )}
 
-      <div style={{ marginTop: 10, background: 'rgba(0,0,0,0.25)', padding: '7px 13px', borderRadius: 9, fontSize: '.72rem', color: 'var(--t3)' }}>
-        💡 {data.note}
+      <div style={{ marginTop: 10, background: 'rgba(0,0,0,0.25)', padding: '7px 13px', borderRadius: 0, fontSize: '.72rem', color: 'var(--t3)' }}>
+        {data.note}
       </div>
     </div>
   )

@@ -2,13 +2,13 @@
 import { useState, useEffect, useCallback } from 'react'
 
 const CATEGORY_CHIPS = [
-  { label: '🌍 전체', value: 'ALL' },
-  { label: '💱 환율/금리', value: '환율/금리' },
-  { label: '📊 해외증시', value: '해외증시' },
-  { label: '🛢️ 원자재', value: '원자재' },
-  { label: '🚢 무역/통상', value: '무역/통상' },
-  { label: '📜 정책/규제', value: '정책/규제' },
-  { label: '🌐 글로벌이슈', value: '글로벌이슈' }
+  { label: '전체', value: 'ALL' },
+  { label: '환율/금리', value: '환율/금리' },
+  { label: '해외증시', value: '해외증시' },
+  { label: '원자재', value: '원자재' },
+  { label: '무역/통상', value: '무역/통상' },
+  { label: '정책/규제', value: '정책/규제' },
+  { label: '글로벌이슈', value: '글로벌이슈' }
 ]
 
 const CATEGORY_ICONS = {
@@ -81,21 +81,21 @@ export default function GlobalNewsDashboard() {
 
       {/* 헤더 배너 */}
       <div style={{
-        padding: '24px 28px',
-        background: 'linear-gradient(135deg, rgba(99,102,241,0.15) 0%, rgba(59,130,246,0.15) 50%, rgba(16,185,129,0.15) 100%)',
-        border: '2px solid rgba(99,102,241,0.5)',
-        borderRadius: 20,
-        marginBottom: 24,
-        boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+        padding: '22px 26px',
+        background: 'var(--bg2)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        borderRadius: 0,
+        marginBottom: 18,
+        boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
         position: 'relative',
         overflow: 'hidden'
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
           <div>
-            <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span style={{ filter: 'drop-shadow(0 0 10px #6366f1)' }}>🌍 국제 정세 & 매크로 뉴스 대시보드</span>
-              <span style={{ fontSize: '.72rem', background: '#6366f1', color: '#fff', padding: '3px 10px', borderRadius: 20, fontWeight: 800 }}>
-                ⚡ LIVE
+            <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: 10 }}>
+              <span>국제 정세 & 매크로 뉴스 대시보드</span>
+              <span style={{ fontSize: '.72rem', background: 'var(--accent)', color: '#fff', padding: '3px 10px', borderRadius: 0, fontWeight: 700 }}>
+                LIVE
               </span>
             </div>
             <div style={{ fontSize: '.9rem', color: 'var(--t2)', marginTop: 6, lineHeight: 1.5 }}>
@@ -105,21 +105,21 @@ export default function GlobalNewsDashboard() {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             {lastUpdated && (
-              <div style={{ padding: '6px 14px', background: 'rgba(0,0,0,0.4)', borderRadius: 12, border: '1px solid rgba(99,102,241,0.4)', textAlign: 'center' }}>
+              <div style={{ padding: '6px 14px', background: 'rgba(0,0,0,0.25)', borderRadius: 0, border: '1px solid rgba(255,255,255,0.1)', textAlign: 'center' }}>
                 <div style={{ fontSize: '.68rem', color: 'var(--t3)', fontWeight: 700 }}>마지막 업데이트</div>
-                <div style={{ fontSize: '.8rem', fontWeight: 800, color: '#818cf8', marginTop: 2 }}>{new Date(lastUpdated).toLocaleTimeString('ko-KR')}</div>
+                <div style={{ fontSize: '.8rem', fontWeight: 700, color: 'var(--t2)', marginTop: 2 }}>{new Date(lastUpdated).toLocaleTimeString('ko-KR')}</div>
               </div>
             )}
-            <div style={{ padding: '6px 14px', background: 'rgba(0,0,0,0.4)', borderRadius: 12, border: '1px solid rgba(16,185,129,0.4)', textAlign: 'center' }}>
+            <div style={{ padding: '6px 14px', background: 'rgba(0,0,0,0.25)', borderRadius: 0, border: '1px solid rgba(255,255,255,0.1)', textAlign: 'center' }}>
               <div style={{ fontSize: '.68rem', color: 'var(--t3)', fontWeight: 700 }}>뉴스 수집</div>
-              <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#10b981', marginTop: 2 }}>{news.length}건</div>
+              <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#10b981', marginTop: 2 }}>{news.length}건</div>
             </div>
             <button
               onClick={loadNews}
               disabled={loading}
-              style={{ padding: '10px 16px', background: 'var(--accent)', border: 'none', borderRadius: 12, color: '#fff', fontWeight: 800, cursor: 'pointer', fontSize: '.85rem' }}
+              style={{ padding: '10px 16px', background: 'var(--accent)', border: 'none', borderRadius: 0, color: '#fff', fontWeight: 700, cursor: 'pointer', fontSize: '.85rem' }}
             >
-              {loading ? '⏳ 수집 중...' : '🔄 새로고침'}
+              {loading ? '수집 중...' : '새로고침'}
             </button>
           </div>
         </div>
@@ -133,8 +133,8 @@ export default function GlobalNewsDashboard() {
         gap: 12,
         background: 'var(--bg2)',
         padding: '12px 18px',
-        borderRadius: 14,
-        border: '1px solid rgba(255,255,255,0.1)'
+        borderRadius: 0,
+        border: '1px solid rgba(255,255,255,0.08)'
       }}>
         <span style={{ fontSize: '1.2rem' }}>🔍</span>
         <input
@@ -173,11 +173,11 @@ export default function GlobalNewsDashboard() {
               onClick={() => setFilter(chip.value)}
               style={{
                 padding: '8px 14px',
-                borderRadius: 12,
-                border: isActive ? '1.5px solid rgba(99,102,241,0.6)' : '1px solid rgba(255,255,255,0.12)',
-                background: isActive ? 'rgba(99,102,241,0.2)' : 'var(--bg3)',
-                color: isActive ? '#a5b4fc' : 'var(--t2)',
-                fontWeight: isActive ? 800 : 600,
+                borderRadius: 0,
+                border: isActive ? '1px solid var(--accent)' : '1px solid rgba(255,255,255,0.1)',
+                background: isActive ? 'var(--accent)' : 'transparent',
+                color: isActive ? '#fff' : 'var(--t3)',
+                fontWeight: isActive ? 700 : 600,
                 fontSize: '.82rem',
                 cursor: 'pointer',
                 transition: 'all .15s ease',
@@ -202,14 +202,14 @@ export default function GlobalNewsDashboard() {
       {/* 에러 */}
       {error && !loading && (
         <div style={{
-          padding: '20px 24px', borderRadius: 14,
+          padding: '20px 24px', borderRadius: 0,
           background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.4)',
           color: '#f87171', fontSize: '.9rem', fontWeight: 700, textAlign: 'center'
         }}>
-          ⚠️ {error}
+          {error}
           <div style={{ marginTop: 10 }}>
-            <button onClick={loadNews} style={{ padding: '6px 14px', background: '#ef4444', border: 'none', borderRadius: 8, color: '#fff', fontWeight: 800, cursor: 'pointer' }}>
-              🔄 다시 시도
+            <button onClick={loadNews} style={{ padding: '6px 14px', background: '#ef4444', border: 'none', borderRadius: 0, color: '#fff', fontWeight: 700, cursor: 'pointer' }}>
+              다시 시도
             </button>
           </div>
         </div>
@@ -228,23 +228,24 @@ export default function GlobalNewsDashboard() {
                 style={{
                   padding: '18px 20px',
                   background: 'var(--bg2)',
-                  border: `1.5px solid ${catStyle.border}`,
-                  borderRadius: 16,
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  borderRadius: 0,
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
                   cursor: 'pointer',
                   transition: 'transform .15s ease, box-shadow .15s ease'
                 }}
                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.3)' }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none' }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.2)' }}
                 onClick={() => item.url && window.open(item.url, '_blank')}
               >
                 {/* 카테고리 + 출처 + 날짜 */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
                   <span style={{
-                    fontSize: '.72rem', fontWeight: 800, padding: '3px 10px',
-                    borderRadius: 8, background: catStyle.bg, color: catStyle.color,
+                    fontSize: '.72rem', fontWeight: 700, padding: '3px 10px',
+                    borderRadius: 0, background: catStyle.bg, color: catStyle.color,
                     border: `1px solid ${catStyle.border}`
                   }}>
-                    {icon} {item.category}
+                    {item.category}
                   </span>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     {item.source && (

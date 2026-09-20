@@ -80,19 +80,19 @@ export default function DisclosuresTab({ positions = [] }) {
     <div style={{ padding: '10px 0', animation: 'fadeIn 0.3s ease-in-out' }}>
       {/* ─── 상단 메인 헤더 배너 ─── */}
       <div style={{
-        padding: '24px 28px',
-        background: 'linear-gradient(135deg, rgba(99,102,241,0.18) 0%, rgba(168,85,247,0.15) 100%)',
-        border: '2px solid rgba(129,140,248,0.4)',
-        borderRadius: 22,
-        marginBottom: 22,
-        boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+        padding: '22px 26px',
+        background: 'var(--bg2)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        borderRadius: 0,
+        marginBottom: 18,
+        boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
           <div>
-            <div style={{ fontSize: '1.55rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-              <span style={{ filter: 'drop-shadow(0 0 10px #818cf8)' }}>📑 보유 종목 실시간 DART 전자공시</span>
-              <span style={{ fontSize: '.72rem', background: 'var(--accent)', color: '#fff', padding: '3px 10px', borderRadius: 20, fontWeight: 800 }}>
-                ⚡ 금융감독원 공식 연동
+            <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+              <span>보유 종목 실시간 DART 전자공시</span>
+              <span style={{ fontSize: '.72rem', background: 'var(--accent)', color: '#fff', padding: '3px 10px', borderRadius: 0, fontWeight: 700 }}>
+                금융감독원 공식 연동
               </span>
             </div>
             <div style={{ fontSize: '.9rem', color: 'var(--t2)', marginTop: 6, lineHeight: 1.5 }}>
@@ -101,29 +101,27 @@ export default function DisclosuresTab({ positions = [] }) {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-            <div style={{ padding: '8px 16px', background: 'rgba(0,0,0,0.4)', borderRadius: 12, border: '1px solid rgba(129,140,248,0.3)', textAlign: 'center' }}>
-              <div style={{ fontSize: '.72rem', color: 'var(--accent)', fontWeight: 700 }}>총 수집 공시</div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 900, color: '#fff', marginTop: 2 }}>{disclosures.length}건</div>
+            <div style={{ padding: '8px 16px', background: 'rgba(0,0,0,0.25)', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)', textAlign: 'center' }}>
+              <div style={{ fontSize: '.72rem', color: 'var(--t2)', fontWeight: 700 }}>총 수집 공시</div>
+              <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff', marginTop: 2 }}>{disclosures.length}건</div>
             </div>
             <button
               onClick={handleRefresh}
               disabled={refreshing}
               style={{
                 padding: '10px 18px',
-                background: refreshing ? 'rgba(99,102,241,0.3)' : 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+                background: refreshing ? 'rgba(99,102,241,0.3)' : 'var(--accent)',
                 border: 'none',
-                borderRadius: 12,
+                borderRadius: 0,
                 color: '#fff',
-                fontWeight: 900,
+                fontWeight: 700,
                 cursor: refreshing ? 'not-allowed' : 'pointer',
                 fontSize: '.88rem',
-                boxShadow: '0 4px 14px rgba(99,102,241,0.4)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 6
               }}
             >
-              <span>{refreshing ? '⏳' : '🔄'}</span>
               <span>{refreshing ? '공시 수집 중...' : '실시간 공시 새로고침'}</span>
             </button>
           </div>
@@ -133,10 +131,10 @@ export default function DisclosuresTab({ positions = [] }) {
       {/* ─── 4대 공시 유형 통계 카드 ─── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12, marginBottom: 20 }}>
         {[
-          { id: 'ALL', label: '🌐 전체 공시', count: stats.ALL, color: '#818cf8', desc: '수집된 모든 전자공시' },
-          { id: 'EARNINGS', label: '🔥 실적/결산공시', count: stats.EARNINGS, color: '#ef4444', desc: '잠정실적, 분기/반기/사업보고서' },
-          { id: 'MANAGEMENT', label: '💡 경영/주주공시', count: stats.MANAGEMENT, color: '#f59e0b', desc: '지분변동, 배당, 소송, 주요사항' },
-          { id: 'MARKET', label: '⚠️ 시장/수급경보', count: stats.MARKET, color: '#3b82f6', desc: '단기과열, 투자주의/경고, 조회공시' },
+          { id: 'ALL', label: '전체 공시', count: stats.ALL, color: '#818cf8', desc: '수집된 모든 전자공시' },
+          { id: 'EARNINGS', label: '실적/결산공시', count: stats.EARNINGS, color: '#ef4444', desc: '잠정실적, 분기/반기/사업보고서' },
+          { id: 'MANAGEMENT', label: '경영/주주공시', count: stats.MANAGEMENT, color: '#f59e0b', desc: '지분변동, 배당, 소송, 주요사항' },
+          { id: 'MARKET', label: '시장/수급경보', count: stats.MARKET, color: '#3b82f6', desc: '단기과열, 투자주의/경고, 조회공시' },
         ].map(card => {
           const isSelected = typeFilter === card.id;
           return (
@@ -145,28 +143,28 @@ export default function DisclosuresTab({ positions = [] }) {
               onClick={() => setTypeFilter(card.id)}
               style={{
                 padding: '16px 18px',
-                borderRadius: 16,
-                background: isSelected ? `${card.color}25` : 'rgba(30, 41, 59, 0.75)',
-                border: isSelected ? `2px solid ${card.color}` : '1px solid rgba(255,255,255,0.08)',
+                borderRadius: 0,
+                background: isSelected ? 'rgba(129,140,248,0.12)' : 'var(--bg2)',
+                border: isSelected ? '1px solid var(--accent)' : '1px solid rgba(255,255,255,0.08)',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
-                boxShadow: isSelected ? `0 0 16px ${card.color}40` : 'none'
+                boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '.84rem', fontWeight: 800, color: card.color }}>{card.label}</span>
-                <span style={{ fontSize: '1.2rem', fontWeight: 900, color: '#fff', fontFamily: 'Space Mono' }}>{card.count}건</span>
+                <span style={{ fontSize: '.84rem', fontWeight: 700, color: 'var(--t2)' }}>{card.label}</span>
+                <span style={{ fontSize: '1.2rem', fontWeight: 800, color: '#fff', fontFamily: 'Space Mono' }}>{card.count}건</span>
               </div>
               <div style={{ fontSize: '.74rem', color: 'var(--t2)', marginTop: 4 }}>{card.desc}</div>
-              <div style={{ fontSize: '.72rem', color: card.color, fontWeight: 800, marginTop: 8 }}>
-                {isSelected ? '✅ 필터링 적용 중' : '클릭 시 필터 ➔'}
+              <div style={{ fontSize: '.72rem', color: isSelected ? 'var(--accent)' : 'var(--t3)', fontWeight: 700, marginTop: 8 }}>
+                {isSelected ? '필터링 적용 중' : '클릭 시 필터 ➔'}
               </div>
             </div>
           );
         })}
       </div>
 
-      {/* ─── 🔍 실시간 검색창 ─── */}
+      {/* ─── 실시간 검색창 ─── */}
       <div style={{
         marginBottom: 16,
         display: 'flex',
@@ -174,11 +172,10 @@ export default function DisclosuresTab({ positions = [] }) {
         gap: 12,
         background: 'var(--bg2)',
         padding: '12px 18px',
-        borderRadius: 16,
-        border: '1px solid rgba(129,140,248,0.3)',
-        boxShadow: '0 4px 18px rgba(0,0,0,0.25)'
+        borderRadius: 0,
+        border: '1px solid rgba(255,255,255,0.08)',
+        boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
       }}>
-        <span style={{ fontSize: '1.2rem' }}>🔍</span>
         <input
           type="text"
           value={searchQuery}
@@ -196,7 +193,7 @@ export default function DisclosuresTab({ positions = [] }) {
         />
         {searchQuery && (
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span style={{ fontSize: '.78rem', color: 'var(--accent)', fontWeight: 800, background: 'rgba(99,102,241,0.15)', padding: '3px 8px', borderRadius: 8 }}>
+            <span style={{ fontSize: '.78rem', color: 'var(--t2)', fontWeight: 700, background: 'rgba(255,255,255,0.06)', padding: '3px 8px', borderRadius: 0 }}>
               {filteredDisclosures.length}개 매칭
             </span>
             <button
@@ -204,15 +201,15 @@ export default function DisclosuresTab({ positions = [] }) {
               style={{
                 background: 'rgba(255,255,255,0.1)',
                 border: 'none',
-                borderRadius: 8,
+                borderRadius: 0,
                 color: '#fff',
                 cursor: 'pointer',
                 fontSize: '.78rem',
-                fontWeight: 800,
+                fontWeight: 700,
                 padding: '4px 10px'
               }}
             >
-              ✕ 초기화
+              초기화
             </button>
           </div>
         )}
@@ -224,16 +221,16 @@ export default function DisclosuresTab({ positions = [] }) {
           onClick={() => setStockFilter('ALL')}
           style={{
             padding: '6px 14px',
-            borderRadius: 20,
-            border: stockFilter === 'ALL' ? '1.5px solid var(--accent)' : '1px solid rgba(255,255,255,0.1)',
-            background: stockFilter === 'ALL' ? 'rgba(99,102,241,0.25)' : 'rgba(0,0,0,0.3)',
+            borderRadius: 0,
+            border: 'none',
+            background: stockFilter === 'ALL' ? 'var(--accent)' : 'rgba(0,0,0,0.25)',
             color: stockFilter === 'ALL' ? '#fff' : 'var(--t3)',
-            fontWeight: 800,
+            fontWeight: 700,
             fontSize: '.8rem',
             cursor: 'pointer'
           }}
         >
-          🏢 전체 보유 종목
+          전체 보유 종목
         </button>
 
         {positions.map(p => {
@@ -244,11 +241,11 @@ export default function DisclosuresTab({ positions = [] }) {
               onClick={() => setStockFilter(p.code)}
               style={{
                 padding: '6px 14px',
-                borderRadius: 20,
-                border: isSelected ? '1.5px solid #10b981' : '1px solid rgba(255,255,255,0.1)',
-                background: isSelected ? 'rgba(16,185,129,0.25)' : 'rgba(0,0,0,0.3)',
+                borderRadius: 0,
+                border: 'none',
+                background: isSelected ? 'var(--accent)' : 'rgba(0,0,0,0.25)',
                 color: isSelected ? '#fff' : 'var(--t2)',
-                fontWeight: 800,
+                fontWeight: 700,
                 fontSize: '.8rem',
                 cursor: 'pointer'
               }}
@@ -261,19 +258,18 @@ export default function DisclosuresTab({ positions = [] }) {
 
       {/* ─── 공시 목록 리스트 ─── */}
       {loading ? (
-        <div style={{ padding: '80px 20px', textAlign: 'center', color: 'var(--accent)', fontSize: '1.1rem', fontWeight: 800 }}>
-          ⏳ DART 금융감독원 전자공시 실시간 수집 중...
+        <div style={{ padding: '80px 20px', textAlign: 'center', color: 'var(--t2)', fontSize: '1.1rem', fontWeight: 700 }}>
+          DART 금융감독원 전자공시 실시간 수집 중...
         </div>
       ) : filteredDisclosures.length === 0 ? (
-        <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)', background: 'var(--bg2)', borderRadius: 18, border: '1px dashed rgba(255,255,255,0.1)' }}>
-          <div style={{ fontSize: '2.5rem', marginBottom: 10 }}>📑</div>
-          <div style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--t1)' }}>검색 조건과 일치하는 전자공시가 없습니다.</div>
+        <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)', background: 'var(--bg2)', borderRadius: 0, border: '1px dashed rgba(255,255,255,0.1)' }}>
+          <div style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--t1)' }}>검색 조건과 일치하는 전자공시가 없습니다.</div>
           <div style={{ fontSize: '.82rem', color: 'var(--t3)', marginTop: 4 }}>다른 검색어를 입력하시거나 필터를 초기화해 보세요.</div>
           <button
             onClick={() => { setSearchQuery(''); setTypeFilter('ALL'); setStockFilter('ALL'); }}
-            style={{ marginTop: 14, padding: '8px 16px', background: 'var(--accent)', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 800, cursor: 'pointer' }}
+            style={{ marginTop: 14, padding: '8px 16px', background: 'var(--accent)', color: '#fff', border: 'none', borderRadius: 0, fontWeight: 700, cursor: 'pointer' }}
           >
-            🔄 전체 필터 초기화
+            전체 필터 초기화
           </button>
         </div>
       ) : (
@@ -285,7 +281,7 @@ export default function DisclosuresTab({ positions = [] }) {
                 padding: '18px 22px',
                 background: 'var(--bg2)',
                 border: '1px solid var(--border)',
-                borderRadius: 16,
+                borderRadius: 0,
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
@@ -310,15 +306,15 @@ export default function DisclosuresTab({ positions = [] }) {
                     padding: '3px 8px',
                     background: `${item.color || '#818cf8'}20`,
                     border: `1px solid ${item.color || '#818cf8'}50`,
-                    borderRadius: 6,
+                    borderRadius: 0,
                     color: item.color || '#818cf8',
                     fontSize: '.74rem',
-                    fontWeight: 800
+                    fontWeight: 700
                   }}>
-                    {item.typeBadge || '📋 일반공시'}
+                    {item.typeBadge || '일반공시'}
                   </span>
 
-                  <span style={{ fontWeight: 900, color: '#fff', fontSize: '.9rem' }}>
+                  <span style={{ fontWeight: 800, color: '#fff', fontSize: '.9rem' }}>
                     {item.stockName}
                   </span>
                   <span style={{ fontSize: '.76rem', color: 'var(--t3)', fontFamily: 'Space Mono' }}>
@@ -326,12 +322,12 @@ export default function DisclosuresTab({ positions = [] }) {
                   </span>
 
                   <span style={{ fontSize: '.74rem', color: 'var(--t3)', marginLeft: 'auto' }}>
-                    📅 {item.date}
+                    {item.date}
                   </span>
                 </div>
 
                 {/* 공시 제목 */}
-                <div style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--t1)', lineHeight: 1.5, marginBottom: 6 }}>
+                <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--t1)', lineHeight: 1.5, marginBottom: 6 }}>
                   {item.title}
                 </div>
 
@@ -351,10 +347,10 @@ export default function DisclosuresTab({ positions = [] }) {
                     padding: '8px 16px',
                     background: 'rgba(255,255,255,0.06)',
                     border: '1px solid rgba(255,255,255,0.15)',
-                    borderRadius: 10,
+                    borderRadius: 0,
                     color: '#fff',
                     textDecoration: 'none',
-                    fontWeight: 800,
+                    fontWeight: 700,
                     fontSize: '.82rem',
                     display: 'flex',
                     alignItems: 'center',
@@ -365,7 +361,6 @@ export default function DisclosuresTab({ positions = [] }) {
                   onMouseEnter={e => e.currentTarget.style.background = 'rgba(99,102,241,0.3)'}
                   onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.06)'}
                 >
-                  <span>🔗</span>
                   <span>DART 원문 보기</span>
                 </a>
               </div>

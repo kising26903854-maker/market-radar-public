@@ -169,8 +169,8 @@ export default function StockChart({ positions, targetChartCode }) {
   const candleWidth = Math.max(3, Math.min(15, ((width - padding.left - padding.right) / Math.max(1, candles.length)) * 0.68))
 
   return (
-    <div className="card" style={{ marginTop: 20, padding: '24px 28px', background: 'var(--bg2)', borderRadius: 20, border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 12px 36px rgba(0,0,0,0.4)' }}>
-      
+    <div className="card" style={{ marginTop: 20, padding: '22px 26px', background: 'var(--bg2)', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 4px 20px rgba(0,0,0,0.25)' }}>
+
       {/* ─── 차트 상단 컨트롤 헤더 ─── */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14, marginBottom: 22 }}>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
@@ -179,18 +179,17 @@ export default function StockChart({ positions, targetChartCode }) {
               key={p.code}
               onClick={() => setSelectedCode(p.code)}
               style={{
-                background: selectedCode === p.code ? 'linear-gradient(135deg, rgba(129,140,248,0.25), rgba(99,102,241,0.3))' : 'var(--bg3)',
+                background: selectedCode === p.code ? 'var(--accent)' : 'var(--bg3)',
                 borderColor: selectedCode === p.code ? 'var(--accent)' : 'rgba(255,255,255,0.06)',
                 color: selectedCode === p.code ? '#ffffff' : 'var(--t2)',
                 borderWidth: 1,
                 borderStyle: 'solid',
-                borderRadius: 12,
-                fontWeight: selectedCode === p.code ? 900 : 700,
+                borderRadius: 0,
+                fontWeight: selectedCode === p.code ? 700 : 700,
                 fontSize: '.95rem',
                 padding: '10px 20px',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
-                boxShadow: selectedCode === p.code ? '0 0 16px rgba(129,140,248,0.4)' : 'none'
               }}
             >
               <span style={{ color: selectedCode === p.code ? 'var(--gold)' : 'inherit', marginRight: 6 }}>★</span>
@@ -200,26 +199,25 @@ export default function StockChart({ positions, targetChartCode }) {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '.82rem', color: 'var(--gold)', fontWeight: 800 }}>
-            <span style={{ fontSize: '1.1rem' }}>📈</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '.82rem', color: 'var(--gold)', fontWeight: 700 }}>
             <span>월가 TradingView 스타일 프리미엄 차트</span>
           </div>
 
-          <div style={{ display: 'flex', gap: 6, background: 'rgba(0,0,0,0.4)', padding: 5, borderRadius: 12, border: '1px solid rgba(255,255,255,0.06)' }}>
+          <div style={{ display: 'flex', gap: 4, background: 'rgba(0,0,0,0.25)', padding: 3, borderRadius: 0, border: '1px solid rgba(255,255,255,0.06)' }}>
               {[
-                { id: 'minute', label: '⚡ 분봉' },
-                { id: 'day', label: '📅 일봉' },
+                { id: 'minute', label: '분봉' },
+                { id: 'day', label: '일봉' },
                 { id: 'week', label: '주봉' },
                 { id: 'month', label: '월봉' },
-                { id: 'year', label: '📆 년봉' }
+                { id: 'year', label: '년봉' }
               ].map(tab => (
               <button
                 key={tab.id}
                 style={{
-                  padding: '7px 18px', borderRadius: 9, border: 'none',
+                  padding: '6px 14px', borderRadius: 0, border: 'none',
                   background: period === tab.id ? 'var(--accent)' : 'transparent',
                   color: period === tab.id ? '#ffffff' : 'var(--t3)',
-                  fontSize: '.83rem', fontWeight: 800, cursor: 'pointer',
+                  fontSize: '.8rem', fontWeight: 700, cursor: 'pointer',
                   transition: 'background 0.2s ease'
                 }}
                 onClick={() => setPeriod(tab.id)}
@@ -233,44 +231,44 @@ export default function StockChart({ positions, targetChartCode }) {
 
       {/* ─── 종목 금액 및 3대 핵심 타점 하이라이트 배너 ─── */}
       {activePos && (
-        <div style={{ display: 'flex', gap: 24, fontSize: '.95rem', color: 'var(--t2)', marginBottom: 20, flexWrap: 'wrap', background: 'linear-gradient(135deg, rgba(15,23,42,0.9), rgba(30,27,75,0.7))', padding: '16px 22px', borderRadius: 16, border: '1px solid rgba(255,255,255,0.1)', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', gap: 24, fontSize: '.95rem', color: 'var(--t2)', marginBottom: 20, flexWrap: 'wrap', background: 'var(--bg2)', padding: '16px 22px', borderRadius: 0, border: '1px solid rgba(255,255,255,0.1)', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', gap: 30, flexWrap: 'wrap' }}>
             <div>
               <span style={{ color: 'var(--t3)', marginRight: 8, fontWeight: 700 }}>현재가</span>
-              <strong style={{ color: isUp ? '#ef4444' : '#3b82f6', fontFamily: 'Space Mono', fontSize: '1.3rem', fontWeight: 900 }}>{(activePos.current_price || 0).toLocaleString()}원</strong>
+              <strong style={{ color: isUp ? '#ef4444' : '#3b82f6', fontFamily: 'Space Mono', fontSize: '1.3rem', fontWeight: 800 }}>{(activePos.current_price || 0).toLocaleString()}원</strong>
             </div>
             {activePos.buy_price > 0 && (
               <div style={{ borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: 24 }}>
-                <span style={{ color: '#fbbf24', marginRight: 8, fontWeight: 800 }}>🟡 내 평단가</span>
-                <strong style={{ color: '#ffffff', fontFamily: 'Space Mono', fontSize: '1.25rem', fontWeight: 900 }}>{(activePos.buy_price || 0).toLocaleString()}원</strong>
+                <span style={{ color: '#fbbf24', marginRight: 8, fontWeight: 700 }}>🟡 내 평단가</span>
+                <strong style={{ color: '#ffffff', fontFamily: 'Space Mono', fontSize: '1.25rem', fontWeight: 800 }}>{(activePos.buy_price || 0).toLocaleString()}원</strong>
               </div>
             )}
             {smartMoney?.estimatedCost > 0 && (
               <div style={{ borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: 24 }}>
-                <span style={{ color: '#c084fc', marginRight: 8, fontWeight: 800 }}>🟣 세력 추정 단가 ({smartMoney.days}일)</span>
-                <strong style={{ color: '#ffffff', fontFamily: 'Space Mono', fontSize: '1.25rem', fontWeight: 900 }}>{(smartMoney.estimatedCost || 0).toLocaleString()}원</strong>
+                <span style={{ color: '#c084fc', marginRight: 8, fontWeight: 700 }}>🟣 세력 추정 단가 ({smartMoney.days}일)</span>
+                <strong style={{ color: '#ffffff', fontFamily: 'Space Mono', fontSize: '1.25rem', fontWeight: 800 }}>{(smartMoney.estimatedCost || 0).toLocaleString()}원</strong>
               </div>
             )}
             {optimalPrice > 0 && (
               <div style={{ borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: 24 }}>
-                <span style={{ color: '#34d399', marginRight: 8, fontWeight: 800 }}>🟢 월가 최적 적정가</span>
-                <strong style={{ color: '#ffffff', fontFamily: 'Space Mono', fontSize: '1.25rem', fontWeight: 900 }}>{(optimalPrice || 0).toLocaleString()}원</strong>
+                <span style={{ color: '#34d399', marginRight: 8, fontWeight: 700 }}>🟢 월가 최적 적정가</span>
+                <strong style={{ color: '#ffffff', fontFamily: 'Space Mono', fontSize: '1.25rem', fontWeight: 800 }}>{(optimalPrice || 0).toLocaleString()}원</strong>
               </div>
             )}
           </div>
 
           {/* 호버 시 해당 캔들 상세 HUD */}
-          <div style={{ background: 'rgba(0,0,0,0.5)', padding: '8px 16px', borderRadius: 10, minWidth: 280, border: '1px solid rgba(255,255,255,0.06)' }}>
+          <div style={{ background: 'rgba(0,0,0,0.5)', padding: '8px 16px', borderRadius: 0, minWidth: 280, border: '1px solid rgba(255,255,255,0.06)' }}>
             {hoverData ? (
               <div style={{ fontSize: '.82rem', color: '#ffffff' }}>
-                <span style={{ color: 'var(--gold)', fontWeight: 800 }}>[{hoverData.date || hoverData.time}]</span>
+                <span style={{ color: 'var(--gold)', fontWeight: 700 }}>[{hoverData.date || hoverData.time}]</span>
                 <span style={{ marginLeft: 12 }}>시가: <strong style={{ color: '#fff' }}>{(hoverData.open || 0).toLocaleString()}</strong></span>
                 <span style={{ marginLeft: 10 }}>종가: <strong style={{ color: hoverData.close >= hoverData.open ? '#ef4444' : '#3b82f6' }}>{(hoverData.close || 0).toLocaleString()}</strong></span>
                 <span style={{ marginLeft: 10 }}>거래량: <strong>{(hoverData.volume || 0).toLocaleString()}</strong></span>
               </div>
             ) : (
               <div style={{ color: 'var(--t3)', fontSize: '.82rem', textAlign: 'center' }}>
-                🕯️ 캔들에 마우스를 올리면 상세 시세가 뜹니다
+                캔들에 마우스를 올리면 상세 시세가 뜹니다
               </div>
             )}
           </div>

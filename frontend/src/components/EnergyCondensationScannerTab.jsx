@@ -130,7 +130,7 @@ export default function EnergyCondensationScannerTab({ onSelectStock }) {
       {toastMessage && (
         <div style={{
           position: 'fixed', bottom: 24, right: 24, padding: '14px 20px',
-          background: 'rgba(15, 23, 42, 0.95)', border: '1.5px solid #f59e0b', borderRadius: 14,
+          background: 'rgba(15, 23, 42, 0.95)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 0,
           color: '#fff', fontWeight: 800, fontSize: '.9rem', zIndex: 5000,
           boxShadow: '0 10px 30px rgba(0,0,0,0.5)', animation: 'slideUp 0.3s ease-out'
         }}>
@@ -140,25 +140,25 @@ export default function EnergyCondensationScannerTab({ onSelectStock }) {
 
       {/* ─── 1. 상단 메인 헤더 배너 ─── */}
       <div style={{
-        padding: '24px 28px',
-        background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(239, 68, 68, 0.18) 50%, rgba(99, 102, 241, 0.22) 100%)',
-        border: '2px solid rgba(245, 158, 11, 0.45)', borderRadius: 22, marginBottom: 20,
-        boxShadow: '0 10px 36px rgba(0,0,0,0.45)',
+        padding: '22px 26px',
+        background: 'var(--bg2)',
+        border: '1px solid rgba(255,255,255,0.08)', borderRadius: 0, marginBottom: 18,
+        boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
           <div>
-            <div style={{ fontSize: '1.65rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-              <span style={{ filter: 'drop-shadow(0 0 12px #f59e0b)' }}>💥 에너지 응축 → 거래량 돌파 스캐너</span>
+            <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+              <span>에너지 응축 → 거래량 돌파 스캐너</span>
               <span style={{
-                fontSize: '.75rem', background: 'rgba(245, 158, 11, 0.2)', color: '#fbbf24',
-                border: '1px solid #f59e0b', padding: '4px 12px', borderRadius: 20, fontWeight: 900,
+                fontSize: '.75rem', background: 'rgba(255,255,255,0.06)', color: 'var(--t2)',
+                border: '1px solid rgba(255,255,255,0.15)', padding: '4px 12px', borderRadius: 0, fontWeight: 700,
                 display: 'inline-flex', alignItems: 'center', gap: 6
               }}>
-                <span style={{ width: 8, height: 8, borderRadius: '50%', background: isScanning ? '#fbbf24' : '#f59e0b', boxShadow: `0 0 10px ${isScanning ? '#fbbf24' : '#f59e0b'}`, display: 'inline-block' }} />
+                <span style={{ width: 8, height: 8, borderRadius: '50%', background: isScanning ? '#fbbf24' : '#34d399', display: 'inline-block' }} />
                 {isScanning ? '최초 전종목 스캔 진행 중...' : `코스피+코스닥 ${totalScanned.toLocaleString()}종목 스캔 완료`}
               </span>
             </div>
-            <div style={{ fontSize: '.92rem', color: 'var(--t2)', marginTop: 8, lineHeight: 1.6 }}>
+            <div style={{ fontSize: '.86rem', color: 'var(--t3)', marginTop: 6, lineHeight: 1.6 }}>
               코스피·코스닥 <strong>시가총액 상위 종목</strong>을 대상으로, 최근 15거래일 변동폭·거래량이 직전 30거래일 대비 <strong>충분히 수축(에너지 응축)</strong>된 뒤 <strong>거래량 급증과 함께 저항선을 돌파</strong>했거나 돌파 직전인 종목을 발굴합니다. 방향을 예측하기보다 "곧 터진다"를 포착하고, 거래량 동반 돌파를 진입 신호로 삼는 방식입니다.
             </div>
             <div style={{ fontSize: '.76rem', color: 'var(--t3)', marginTop: 6 }}>
@@ -166,20 +166,19 @@ export default function EnergyCondensationScannerTab({ onSelectStock }) {
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
             <button onClick={handleDownloadCsv} style={{
-              padding: '10px 14px', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)',
-              borderRadius: 12, color: '#fff', fontWeight: 800, cursor: 'pointer', fontSize: '.85rem'
+              padding: '9px 14px', background: 'transparent', border: '1px solid rgba(255,255,255,0.15)',
+              borderRadius: 0, color: 'var(--t2)', fontWeight: 700, cursor: 'pointer', fontSize: '.82rem'
             }}>
-              📥 CSV
+              CSV
             </button>
             <button onClick={handleRefresh} disabled={refreshing} style={{
-              padding: '10px 16px', background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)', border: 'none',
-              borderRadius: 12, color: '#fff', fontWeight: 900, cursor: refreshing ? 'not-allowed' : 'pointer',
-              fontSize: '.85rem', boxShadow: '0 4px 14px rgba(245,158,11,0.4)', display: 'flex', alignItems: 'center', gap: 6
+              padding: '9px 16px', background: 'var(--accent)', border: 'none',
+              borderRadius: 0, color: '#fff', fontWeight: 700, cursor: refreshing ? 'not-allowed' : 'pointer',
+              fontSize: '.82rem'
             }}>
-              <span>{refreshing ? '⏳' : '🔄'}</span>
-              <span>{refreshing ? '스캔 요청 중...' : '전종목 재스캔'}</span>
+              {refreshing ? '스캔 요청 중...' : '전종목 재스캔'}
             </button>
           </div>
         </div>
@@ -187,39 +186,39 @@ export default function EnergyCondensationScannerTab({ onSelectStock }) {
 
       {/* ─── 2. 시장별 요약 카드 (체크박스로 필터링 가능) ─── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12, marginBottom: 20 }}>
-        <label style={{ cursor: 'pointer', padding: '18px 20px', borderRadius: 18, background: cardChecks.KOSPI ? 'rgba(59, 130, 246, 0.18)' : 'rgba(30, 41, 59, 0.8)', border: `1.5px solid ${cardChecks.KOSPI ? '#60a5fa' : 'rgba(59, 130, 246, 0.45)'}`, boxShadow: '0 4px 20px rgba(0,0,0,0.25)', display: 'block' }}>
+        <label style={{ cursor: 'pointer', padding: '18px 20px', borderRadius: 0, background: cardChecks.KOSPI ? 'rgba(129,140,248,0.12)' : 'var(--bg2)', border: cardChecks.KOSPI ? '1px solid var(--accent)' : '1px solid rgba(255,255,255,0.08)', boxShadow: '0 4px 16px rgba(0,0,0,0.2)', display: 'block' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '.84rem', fontWeight: 800, color: '#60a5fa' }}>🔵 코스피 응축 발굴 종목</span>
-            <input type="checkbox" checked={cardChecks.KOSPI} onChange={() => toggleCard('KOSPI')} style={{ width: 18, height: 18, accentColor: '#60a5fa', cursor: 'pointer' }} />
+            <span style={{ fontSize: '.84rem', fontWeight: 700, color: 'var(--t2)' }}>코스피 응축 발굴 종목</span>
+            <input type="checkbox" checked={cardChecks.KOSPI} onChange={() => toggleCard('KOSPI')} style={{ width: 18, height: 18, accentColor: 'var(--accent)', cursor: 'pointer' }} />
           </div>
           <div style={{ fontSize: '1.85rem', fontWeight: 900, color: '#fff', marginTop: 8, fontFamily: 'Space Mono' }}>
             {kospiCount} <span style={{ fontSize: '.9rem', fontWeight: 600, color: 'var(--t3)' }}>종목</span>
           </div>
         </label>
-        <label style={{ cursor: 'pointer', padding: '18px 20px', borderRadius: 18, background: cardChecks.KOSDAQ ? 'rgba(167, 139, 250, 0.18)' : 'rgba(30, 41, 59, 0.8)', border: `1.5px solid ${cardChecks.KOSDAQ ? '#a78bfa' : 'rgba(167, 139, 250, 0.45)'}`, boxShadow: '0 4px 20px rgba(0,0,0,0.25)', display: 'block' }}>
+        <label style={{ cursor: 'pointer', padding: '18px 20px', borderRadius: 0, background: cardChecks.KOSDAQ ? 'rgba(129,140,248,0.12)' : 'var(--bg2)', border: cardChecks.KOSDAQ ? '1px solid var(--accent)' : '1px solid rgba(255,255,255,0.08)', boxShadow: '0 4px 16px rgba(0,0,0,0.2)', display: 'block' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '.84rem', fontWeight: 800, color: '#a78bfa' }}>🟣 코스닥 응축 발굴 종목</span>
-            <input type="checkbox" checked={cardChecks.KOSDAQ} onChange={() => toggleCard('KOSDAQ')} style={{ width: 18, height: 18, accentColor: '#a78bfa', cursor: 'pointer' }} />
+            <span style={{ fontSize: '.84rem', fontWeight: 700, color: 'var(--t2)' }}>코스닥 응축 발굴 종목</span>
+            <input type="checkbox" checked={cardChecks.KOSDAQ} onChange={() => toggleCard('KOSDAQ')} style={{ width: 18, height: 18, accentColor: 'var(--accent)', cursor: 'pointer' }} />
           </div>
           <div style={{ fontSize: '1.85rem', fontWeight: 900, color: '#fff', marginTop: 8, fontFamily: 'Space Mono' }}>
             {kosdaqCount} <span style={{ fontSize: '.9rem', fontWeight: 600, color: 'var(--t3)' }}>종목</span>
           </div>
         </label>
-        <label style={{ cursor: 'pointer', padding: '18px 20px', borderRadius: 18, background: cardChecks.BREAKOUT ? 'rgba(245, 158, 11, 0.18)' : 'rgba(30, 41, 59, 0.8)', border: `1.5px solid ${cardChecks.BREAKOUT ? '#fbbf24' : 'rgba(245, 158, 11, 0.45)'}`, boxShadow: '0 4px 20px rgba(0,0,0,0.25)', display: 'block' }}>
+        <label style={{ cursor: 'pointer', padding: '18px 20px', borderRadius: 0, background: cardChecks.BREAKOUT ? 'rgba(129,140,248,0.12)' : 'var(--bg2)', border: cardChecks.BREAKOUT ? '1px solid var(--accent)' : '1px solid rgba(255,255,255,0.08)', boxShadow: '0 4px 16px rgba(0,0,0,0.2)', display: 'block' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '.84rem', fontWeight: 800, color: '#fbbf24' }}>💥 거래량 돌파 신호 종목</span>
-            <input type="checkbox" checked={cardChecks.BREAKOUT} onChange={() => toggleCard('BREAKOUT')} style={{ width: 18, height: 18, accentColor: '#fbbf24', cursor: 'pointer' }} />
+            <span style={{ fontSize: '.84rem', fontWeight: 700, color: 'var(--t2)' }}>거래량 돌파 신호 종목</span>
+            <input type="checkbox" checked={cardChecks.BREAKOUT} onChange={() => toggleCard('BREAKOUT')} style={{ width: 18, height: 18, accentColor: 'var(--accent)', cursor: 'pointer' }} />
           </div>
           <div style={{ fontSize: '1.85rem', fontWeight: 900, color: '#fff', marginTop: 8, fontFamily: 'Space Mono' }}>
             {(data?.stocks || []).filter(s => !!s.breakoutDate).length} <span style={{ fontSize: '.9rem', fontWeight: 600, color: 'var(--t3)' }}>종목</span>
           </div>
         </label>
-        <label style={{ cursor: 'pointer', padding: '18px 20px', borderRadius: 18, background: cardChecks.UNIVERSE ? 'rgba(96, 165, 250, 0.18)' : 'rgba(30, 41, 59, 0.8)', border: `1.5px solid ${cardChecks.UNIVERSE ? '#60a5fa' : 'rgba(96, 165, 250, 0.45)'}`, boxShadow: '0 4px 20px rgba(0,0,0,0.25)', display: 'block' }}>
+        <label style={{ cursor: 'pointer', padding: '18px 20px', borderRadius: 0, background: cardChecks.UNIVERSE ? 'rgba(129,140,248,0.12)' : 'var(--bg2)', border: cardChecks.UNIVERSE ? '1px solid var(--accent)' : '1px solid rgba(255,255,255,0.08)', boxShadow: '0 4px 16px rgba(0,0,0,0.2)', display: 'block' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '.84rem', fontWeight: 800, color: '#60a5fa' }}>📡 전체 스캔 유니버스</span>
-            <input type="checkbox" checked={cardChecks.UNIVERSE} onChange={() => toggleCard('UNIVERSE')} style={{ width: 18, height: 18, accentColor: '#60a5fa', cursor: 'pointer' }} />
+            <span style={{ fontSize: '.84rem', fontWeight: 700, color: 'var(--t2)' }}>전체 스캔 유니버스</span>
+            <input type="checkbox" checked={cardChecks.UNIVERSE} onChange={() => toggleCard('UNIVERSE')} style={{ width: 18, height: 18, accentColor: 'var(--accent)', cursor: 'pointer' }} />
           </div>
-          <div style={{ fontSize: '1.85rem', fontWeight: 900, color: '#60a5fa', marginTop: 8, fontFamily: 'Space Mono' }}>
+          <div style={{ fontSize: '1.85rem', fontWeight: 900, color: '#fff', marginTop: 8, fontFamily: 'Space Mono' }}>
             {totalScanned.toLocaleString()} <span style={{ fontSize: '.9rem', fontWeight: 600, color: 'var(--t3)' }}>종목</span>
           </div>
         </label>
@@ -227,7 +226,7 @@ export default function EnergyCondensationScannerTab({ onSelectStock }) {
       {(cardChecks.KOSPI || cardChecks.KOSDAQ || cardChecks.BREAKOUT || cardChecks.UNIVERSE) && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14, marginTop: -8 }}>
           <span style={{ fontSize: '.78rem', color: 'var(--t3)' }}>체크된 카드 조건으로 {filteredStocks.length}개 종목만 표시 중</span>
-          <button onClick={() => setCardChecks({ KOSPI: false, KOSDAQ: false, BREAKOUT: false, UNIVERSE: false })} style={{ padding: '4px 10px', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 8, color: 'var(--t2)', fontSize: '.74rem', fontWeight: 800, cursor: 'pointer' }}>
+          <button onClick={() => setCardChecks({ KOSPI: false, KOSDAQ: false, BREAKOUT: false, UNIVERSE: false })} style={{ padding: '4px 10px', background: 'transparent', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 0, color: 'var(--t2)', fontSize: '.74rem', fontWeight: 700, cursor: 'pointer' }}>
             체크 초기화
           </button>
         </div>
@@ -235,33 +234,32 @@ export default function EnergyCondensationScannerTab({ onSelectStock }) {
 
       {/* ─── 3. 필터 & 검색 & 정렬 바 ─── */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 18 }}>
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: 4, background: 'rgba(0,0,0,0.25)', padding: 3, borderRadius: 0, flexWrap: 'wrap' }}>
           {[
-            { id: 'ALL', label: `🌐 전체 (${data?.stocks?.length || 0})`, color: '#f59e0b' },
-            { id: '코스피', label: `🔵 코스피 (${kospiCount})`, color: '#3b82f6' },
-            { id: '코스닥', label: `🟣 코스닥 (${kosdaqCount})`, color: '#a78bfa' },
+            { id: 'ALL', label: `전체 (${data?.stocks?.length || 0})` },
+            { id: '코스피', label: `코스피 (${kospiCount})` },
+            { id: '코스닥', label: `코스닥 (${kosdaqCount})` },
           ].map(f => (
             <button key={f.id} onClick={() => setMarketFilter(f.id)} style={{
-              padding: '8px 14px', borderRadius: 12,
-              border: marketFilter === f.id ? `1.5px solid ${f.color}` : '1px solid rgba(255,255,255,0.08)',
-              background: marketFilter === f.id ? `${f.color}25` : 'rgba(0,0,0,0.3)',
-              color: marketFilter === f.id ? '#fff' : 'var(--t3)', fontWeight: 900, fontSize: '.84rem', cursor: 'pointer'
+              padding: '6px 14px', borderRadius: 0, border: 'none',
+              background: marketFilter === f.id ? 'var(--accent)' : 'transparent',
+              color: marketFilter === f.id ? '#fff' : 'var(--t3)', fontWeight: 700, fontSize: '.8rem', cursor: 'pointer'
             }}>
               {f.label}
             </button>
           ))}
-          <span style={{ width: 1, background: 'rgba(255,255,255,0.12)', margin: '0 4px' }} />
+        </div>
+        <div style={{ display: 'flex', gap: 4, background: 'rgba(0,0,0,0.25)', padding: 3, borderRadius: 0, flexWrap: 'wrap' }}>
           {[
             { id: 'ALL', label: '전체 상태' },
-            { id: 'BREAKOUT', label: '💥 거래량 돌파 신호', color: '#fbbf24' },
-            { id: 'WEAK_BREAKOUT', label: '⚡ 거래량 미동반 돌파', color: '#60a5fa' },
-            { id: 'COILING', label: '🔒 응축 지속(임박)', color: '#94a3b8' },
+            { id: 'BREAKOUT', label: '거래량 돌파 신호' },
+            { id: 'WEAK_BREAKOUT', label: '거래량 미동반 돌파' },
+            { id: 'COILING', label: '응축 지속(임박)' },
           ].map(f => (
             <button key={f.id} onClick={() => setStatusFilter(f.id)} style={{
-              padding: '8px 14px', borderRadius: 12,
-              border: statusFilter === f.id ? `1.5px solid ${f.color || '#f59e0b'}` : '1px solid rgba(255,255,255,0.08)',
-              background: statusFilter === f.id ? `${f.color || '#f59e0b'}25` : 'rgba(0,0,0,0.3)',
-              color: statusFilter === f.id ? '#fff' : 'var(--t3)', fontWeight: 900, fontSize: '.84rem', cursor: 'pointer'
+              padding: '6px 14px', borderRadius: 0, border: 'none',
+              background: statusFilter === f.id ? 'var(--accent)' : 'transparent',
+              color: statusFilter === f.id ? '#fff' : 'var(--t3)', fontWeight: 700, fontSize: '.8rem', cursor: 'pointer'
             }}>
               {f.label}
             </button>
@@ -269,20 +267,19 @@ export default function EnergyCondensationScannerTab({ onSelectStock }) {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'var(--bg2)', padding: '8px 14px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.1)' }}>
-            <span>🔍</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'var(--bg2)', padding: '8px 14px', borderRadius: 0, border: '1px solid rgba(255,255,255,0.1)' }}>
             <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="종목명, 코드 검색..."
               style={{ background: 'transparent', border: 'none', outline: 'none', color: '#fff', fontSize: '.85rem', width: '140px' }} />
             {searchQuery && <button onClick={() => setSearchQuery('')} style={{ background: 'transparent', border: 'none', color: 'var(--t3)', cursor: 'pointer' }}>✕</button>}
           </div>
           <select value={sortBy} onChange={e => setSortBy(e.target.value)} style={{
-            padding: '8px 12px', background: 'var(--bg2)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12,
+            padding: '8px 12px', background: 'var(--bg2)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 0,
             color: '#fff', fontSize: '.84rem', outline: 'none', cursor: 'pointer'
           }}>
-            <option value="CAP_DESC">💰 시가총액 큰순</option>
-            <option value="SCORE_DESC">🏆 패턴 스코어 높은순</option>
-            <option value="VOLUME_DESC">📊 오늘 거래량 배율 높은순</option>
-            <option value="RECENT_DESC">🕐 최신 돌파순</option>
+            <option value="CAP_DESC">시가총액 큰순</option>
+            <option value="SCORE_DESC">패턴 스코어 높은순</option>
+            <option value="VOLUME_DESC">오늘 거래량 배율 높은순</option>
+            <option value="RECENT_DESC">최신 돌파순</option>
           </select>
         </div>
       </div>
@@ -290,19 +287,16 @@ export default function EnergyCondensationScannerTab({ onSelectStock }) {
       {/* ─── 4. 종목 카드 그리드 ─── */}
       {loading ? (
         <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)' }}>
-          <div style={{ fontSize: '2.5rem', marginBottom: 12 }}>⏳</div>
-          <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#fff' }}>에너지 응축 패턴 데이터를 불러오는 중...</div>
+          <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff' }}>에너지 응축 패턴 데이터를 불러오는 중...</div>
         </div>
       ) : isScanning ? (
-        <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)', background: 'var(--bg2)', borderRadius: 18 }}>
-          <div style={{ fontSize: '2.5rem', marginBottom: 12 }}>📡</div>
-          <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#fff' }}>코스피+코스닥 전종목 최초 스캔이 백그라운드에서 진행 중입니다.</div>
+        <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)', background: 'var(--bg2)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 0 }}>
+          <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff' }}>코스피+코스닥 전종목 최초 스캔이 백그라운드에서 진행 중입니다.</div>
           <div style={{ fontSize: '.85rem', marginTop: 8 }}>수 분 정도 소요될 수 있습니다. 잠시 후 새로고침 해주세요.</div>
         </div>
       ) : filteredStocks.length === 0 ? (
-        <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)', background: 'var(--bg2)', borderRadius: 18 }}>
-          <div style={{ fontSize: '2.5rem', marginBottom: 12 }}>💥</div>
-          <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#fff' }}>해당 조건의 에너지 응축 패턴 종목이 없습니다.</div>
+        <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)', background: 'var(--bg2)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 0 }}>
+          <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff' }}>해당 조건의 에너지 응축 패턴 종목이 없습니다.</div>
         </div>
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(330px, 1fr))', gap: 16, marginBottom: 24 }}>
@@ -315,37 +309,37 @@ export default function EnergyCondensationScannerTab({ onSelectStock }) {
               <div key={stock.code} className="card"
                 onClick={() => onSelectStock && onSelectStock({ ...stock, current_price: stock.currentPrice, type: stock.market })}
                 style={{
-                  padding: 20, background: 'rgba(30, 41, 59, 0.75)', border: `1.5px solid ${statusColor}50`,
-                  borderRadius: 18, cursor: 'pointer', transition: 'all 0.2s ease', boxShadow: '0 8px 24px rgba(0,0,0,0.3)'
+                  padding: 20, background: 'var(--bg2)', border: '1px solid rgba(255,255,255,0.08)',
+                  borderRadius: 0, cursor: 'pointer', transition: 'all 0.2s ease', boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
                 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-                      <span style={{ padding: '2px 8px', background: idx < 3 ? 'rgba(234,179,8,0.25)' : 'rgba(255,255,255,0.08)', color: idx < 3 ? '#fbbf24' : 'var(--t3)', borderRadius: 6, fontWeight: 900, fontSize: '.75rem' }}>
+                      <span style={{ padding: '2px 8px', background: idx < 3 ? 'rgba(251,191,36,0.15)' : 'rgba(255,255,255,0.08)', color: idx < 3 ? '#fbbf24' : 'var(--t3)', borderRadius: 0, fontWeight: 700, fontSize: '.75rem' }}>
                         #{idx + 1}
                       </span>
-                      <span style={{ fontSize: '1.15rem', fontWeight: 900, color: '#fff' }}>{stock.name}</span>
+                      <span style={{ fontSize: '1.15rem', fontWeight: 800, color: '#fff' }}>{stock.name}</span>
                       <span style={{ fontSize: '.78rem', color: 'var(--t3)', fontFamily: 'Space Mono' }}>{stock.code}</span>
                     </div>
                     <div style={{ display: 'flex', gap: 6, marginTop: 6, flexWrap: 'wrap' }}>
-                      <span style={{ padding: '2px 8px', borderRadius: 6, fontSize: '.7rem', fontWeight: 900, background: `${marketColor}20`, color: marketColor, border: `1px solid ${marketColor}50` }}>
+                      <span style={{ padding: '2px 8px', borderRadius: 0, fontSize: '.7rem', fontWeight: 700, background: 'rgba(255,255,255,0.06)', color: 'var(--t2)' }}>
                         {stock.market}
                       </span>
-                      <span style={{ padding: '2px 8px', borderRadius: 6, fontSize: '.7rem', fontWeight: 900, background: 'rgba(255,255,255,0.06)', color: 'var(--t2)' }}>
+                      <span style={{ padding: '2px 8px', borderRadius: 0, fontSize: '.7rem', fontWeight: 700, background: 'rgba(255,255,255,0.06)', color: 'var(--t2)' }}>
                         스코어 {stock.score}점
                       </span>
-                      <span style={{ padding: '2px 8px', borderRadius: 6, fontSize: '.7rem', fontWeight: 900, background: 'rgba(251,191,36,0.12)', color: '#fbbf24' }}>
+                      <span style={{ padding: '2px 8px', borderRadius: 0, fontSize: '.7rem', fontWeight: 700, background: 'rgba(255,255,255,0.06)', color: 'var(--t2)' }}>
                         시총 {formatMarketCap(stock.marketCap)}
                       </span>
                     </div>
                   </div>
-                  <span style={{ padding: '4px 10px', borderRadius: 8, fontSize: '.74rem', fontWeight: 900, background: `${statusColor}20`, color: statusColor, border: `1px solid ${statusColor}50`, whiteSpace: 'nowrap' }}>
+                  <span style={{ padding: '4px 10px', borderRadius: 0, fontSize: '.74rem', fontWeight: 700, background: `${statusColor}20`, color: statusColor, border: `1px solid ${statusColor}50`, whiteSpace: 'nowrap' }}>
                     {stock.status}
                   </span>
                 </div>
 
                 {/* 에너지 응축 패턴 상세 박스 */}
-                <div style={{ padding: '14px 16px', background: 'rgba(0,0,0,0.4)', borderRadius: 14, border: `1px solid ${statusColor}40`, marginBottom: 12 }}>
+                <div style={{ padding: '14px 16px', background: 'rgba(0,0,0,0.3)', borderRadius: 0, border: '1px solid rgba(255,255,255,0.06)', marginBottom: 12 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '.78rem', marginBottom: 8 }}>
                     <div>
                       <div style={{ color: 'var(--t3)' }}>응축구간 ({stock.coilBox.startDate.slice(5)}~{stock.coilBox.endDate.slice(5)})</div>
@@ -357,9 +351,9 @@ export default function EnergyCondensationScannerTab({ onSelectStock }) {
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: 10, fontSize: '.72rem', color: 'var(--t2)', flexWrap: 'wrap' }}>
-                    <span>📉 밴드 수축 <strong style={{ color: '#34d399' }}>{stock.rangeContractionPct}%</strong></span>
-                    <span>📦 거래량 감소 <strong style={{ color: '#34d399' }}>{stock.volumeDryUpPct}%</strong></span>
-                    <span>🔥 오늘 거래량 <strong style={{ color: stock.todayVolumeRatio >= 1.8 ? '#fbbf24' : '#fff' }}>{stock.todayVolumeRatio}배</strong></span>
+                    <span>밴드 수축 <strong style={{ color: '#34d399' }}>{stock.rangeContractionPct}%</strong></span>
+                    <span>거래량 감소 <strong style={{ color: '#34d399' }}>{stock.volumeDryUpPct}%</strong></span>
+                    <span>오늘 거래량 <strong style={{ color: stock.todayVolumeRatio >= 1.8 ? '#fbbf24' : '#fff' }}>{stock.todayVolumeRatio}배</strong></span>
                   </div>
                 </div>
 
@@ -372,7 +366,7 @@ export default function EnergyCondensationScannerTab({ onSelectStock }) {
                     </span>
                   </div>
                   <button onClick={(e) => { e.stopPropagation(); onSelectStock && onSelectStock({ ...stock, current_price: stock.currentPrice, type: stock.market }); }}
-                    style={{ padding: '6px 12px', background: 'rgba(99, 102, 241, 0.2)', border: '1px solid rgba(99, 102, 241, 0.5)', borderRadius: 8, color: '#818cf8', fontSize: '.76rem', fontWeight: 800, cursor: 'pointer' }}>
+                    style={{ padding: '6px 12px', background: 'rgba(129,140,248,0.15)', border: '1px solid rgba(129,140,248,0.4)', borderRadius: 0, color: 'var(--accent)', fontSize: '.76rem', fontWeight: 700, cursor: 'pointer' }}>
                     차트 상세보기 ➔
                   </button>
                 </div>
@@ -383,9 +377,8 @@ export default function EnergyCondensationScannerTab({ onSelectStock }) {
       )}
 
       {/* ─── 5. 판정 기준 가이드 ─── */}
-      <div style={{ padding: '22px 26px', background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(239, 68, 68, 0.12) 100%)', border: '1.5px solid rgba(245, 158, 11, 0.4)', borderRadius: 20 }}>
-        <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#fff', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span>💡</span>
+      <div style={{ padding: '22px 26px', background: 'var(--bg2)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 0 }}>
+        <div style={{ fontSize: '1rem', fontWeight: 800, color: '#fff', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
           <span>에너지 응축 → 거래량 돌파 패턴 판정 기준</span>
         </div>
         <div style={{ fontSize: '.86rem', color: 'var(--t2)', lineHeight: 1.7 }}>

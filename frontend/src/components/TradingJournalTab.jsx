@@ -192,19 +192,19 @@ export default function TradingJournalTab({ positions = [] }) {
     <div style={{ padding: '10px 0', animation: 'fadeIn 0.3s ease-in-out' }}>
       {/* ─── 상단 메인 헤더 ─── */}
       <div style={{
-        padding: '24px 28px',
-        background: 'linear-gradient(135deg, rgba(234, 179, 8, 0.18) 0%, rgba(99, 102, 241, 0.15) 100%)',
-        border: '2px solid rgba(234, 179, 8, 0.45)',
-        borderRadius: 22,
-        marginBottom: 22,
-        boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+        padding: '22px 26px',
+        background: 'var(--bg2)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        borderRadius: 0,
+        marginBottom: 18,
+        boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
           <div>
-            <div style={{ fontSize: '1.55rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-              <span style={{ filter: 'drop-shadow(0 0 10px #eab308)' }}>📔 나의 실시간 투자 매매일지</span>
-              <span style={{ fontSize: '.72rem', background: 'var(--gold)', color: '#000', padding: '3px 10px', borderRadius: 20, fontWeight: 900 }}>
-                ⚡ 로컬 영구 DB 연동
+            <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+              <span>나의 실시간 투자 매매일지</span>
+              <span style={{ fontSize: '.72rem', background: 'var(--gold)', color: '#000', padding: '3px 10px', borderRadius: 0, fontWeight: 700 }}>
+                로컬 영구 DB 연동
               </span>
             </div>
             <div style={{ fontSize: '.9rem', color: 'var(--t2)', marginTop: 6, lineHeight: 1.5 }}>
@@ -217,20 +217,18 @@ export default function TradingJournalTab({ positions = [] }) {
               onClick={handleOpenCreateModal}
               style={{
                 padding: '10px 20px',
-                background: 'linear-gradient(135deg, #eab308 0%, #ca8a04 100%)',
+                background: 'var(--gold)',
                 border: 'none',
-                borderRadius: 12,
+                borderRadius: 0,
                 color: '#000',
-                fontWeight: 900,
+                fontWeight: 700,
                 cursor: 'pointer',
                 fontSize: '.9rem',
-                boxShadow: '0 4px 16px rgba(234,179,8,0.4)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 6
               }}
             >
-              <span>✍️</span>
               <span>새 투자일지 작성하기</span>
             </button>
 
@@ -238,16 +236,16 @@ export default function TradingJournalTab({ positions = [] }) {
               onClick={fetchJournals}
               style={{
                 padding: '10px 16px',
-                background: 'rgba(255,255,255,0.08)',
+                background: 'transparent',
                 border: '1px solid rgba(255,255,255,0.15)',
-                borderRadius: 12,
-                color: '#fff',
-                fontWeight: 800,
+                borderRadius: 0,
+                color: 'var(--t2)',
+                fontWeight: 700,
                 cursor: 'pointer',
                 fontSize: '.88rem'
               }}
             >
-              🔄 새로고침
+              새로고침
             </button>
           </div>
         </div>
@@ -256,10 +254,10 @@ export default function TradingJournalTab({ positions = [] }) {
       {/* ─── 4대 매매 유형 요약 카드 ─── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 12, marginBottom: 20 }}>
         {[
-          { id: 'ALL', label: '🌐 전체 일지', count: stats.ALL, color: '#818cf8', desc: '총 누적 투자 기록' },
-          { id: 'BUY', label: '🔴 매수(BUY) 기록', count: stats.BUY, color: '#ef4444', desc: '분할 매수 및 진입 일지' },
-          { id: 'SELL', label: '🔵 매도(SELL) 기록', count: stats.SELL, color: '#3b82f6', desc: '익절 및 손절 매도 일지' },
-          { id: 'HOLD', label: '🟡 관망/전략 메모', count: stats.HOLD + stats.MEMO, color: '#eab308', desc: '홀딩 전술 및 퀀트 복기' },
+          { id: 'ALL', label: '전체 일지', count: stats.ALL, color: '#818cf8', desc: '총 누적 투자 기록' },
+          { id: 'BUY', label: '매수(BUY) 기록', count: stats.BUY, color: '#ef4444', desc: '분할 매수 및 진입 일지' },
+          { id: 'SELL', label: '매도(SELL) 기록', count: stats.SELL, color: '#3b82f6', desc: '익절 및 손절 매도 일지' },
+          { id: 'HOLD', label: '관망/전략 메모', count: stats.HOLD + stats.MEMO, color: '#eab308', desc: '홀딩 전술 및 퀀트 복기' },
         ].map(card => {
           const isSelected = typeFilter === card.id;
           return (
@@ -268,28 +266,29 @@ export default function TradingJournalTab({ positions = [] }) {
               onClick={() => setTypeFilter(card.id)}
               style={{
                 padding: '16px 18px',
-                borderRadius: 16,
-                background: isSelected ? `${card.color}25` : 'rgba(30, 41, 59, 0.75)',
-                border: isSelected ? `2px solid ${card.color}` : '1px solid rgba(255,255,255,0.08)',
+                borderRadius: 0,
+                background: isSelected ? `${card.color}12` : 'var(--bg2)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderTop: `2px solid ${card.color}`,
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
-                boxShadow: isSelected ? `0 0 16px ${card.color}40` : 'none'
+                boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '.84rem', fontWeight: 800, color: card.color }}>{card.label}</span>
-                <span style={{ fontSize: '1.2rem', fontWeight: 900, color: '#fff', fontFamily: 'Space Mono' }}>{card.count}건</span>
+                <span style={{ fontSize: '.84rem', fontWeight: 700, color: card.color }}>{card.label}</span>
+                <span style={{ fontSize: '1.2rem', fontWeight: 800, color: '#fff', fontFamily: 'Space Mono' }}>{card.count}건</span>
               </div>
               <div style={{ fontSize: '.74rem', color: 'var(--t2)', marginTop: 4 }}>{card.desc}</div>
-              <div style={{ fontSize: '.72rem', color: card.color, fontWeight: 800, marginTop: 8 }}>
-                {isSelected ? '✅ 필터링 적용 중' : '클릭 시 필터 ➔'}
+              <div style={{ fontSize: '.72rem', color: card.color, fontWeight: 700, marginTop: 8 }}>
+                {isSelected ? '필터링 적용 중' : '클릭 시 필터 ➔'}
               </div>
             </div>
           );
         })}
       </div>
 
-      {/* ─── 🔍 실시간 검색창 ─── */}
+      {/* ─── 실시간 검색창 ─── */}
       <div style={{
         marginBottom: 16,
         display: 'flex',
@@ -297,11 +296,10 @@ export default function TradingJournalTab({ positions = [] }) {
         gap: 12,
         background: 'var(--bg2)',
         padding: '12px 18px',
-        borderRadius: 16,
-        border: '1px solid rgba(234,179,8,0.3)',
-        boxShadow: '0 4px 18px rgba(0,0,0,0.25)'
+        borderRadius: 0,
+        border: '1px solid rgba(255,255,255,0.08)',
+        boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
       }}>
-        <span style={{ fontSize: '1.2rem' }}>🔍</span>
         <input
           type="text"
           value={searchQuery}
@@ -319,7 +317,7 @@ export default function TradingJournalTab({ positions = [] }) {
         />
         {searchQuery && (
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span style={{ fontSize: '.78rem', color: 'var(--gold)', fontWeight: 800, background: 'rgba(234,179,8,0.15)', padding: '3px 8px', borderRadius: 8 }}>
+            <span style={{ fontSize: '.78rem', color: 'var(--t2)', fontWeight: 700, background: 'rgba(255,255,255,0.06)', padding: '3px 8px', borderRadius: 0 }}>
               {filteredJournals.length}개 매칭
             </span>
             <button
@@ -327,15 +325,15 @@ export default function TradingJournalTab({ positions = [] }) {
               style={{
                 background: 'rgba(255,255,255,0.1)',
                 border: 'none',
-                borderRadius: 8,
+                borderRadius: 0,
                 color: '#fff',
                 cursor: 'pointer',
                 fontSize: '.78rem',
-                fontWeight: 800,
+                fontWeight: 700,
                 padding: '4px 10px'
               }}
             >
-              ✕ 초기화
+              초기화
             </button>
           </div>
         )}
@@ -347,16 +345,16 @@ export default function TradingJournalTab({ positions = [] }) {
           onClick={() => setStockFilter('ALL')}
           style={{
             padding: '6px 14px',
-            borderRadius: 20,
-            border: stockFilter === 'ALL' ? '1.5px solid var(--gold)' : '1px solid rgba(255,255,255,0.1)',
-            background: stockFilter === 'ALL' ? 'rgba(234,179,8,0.25)' : 'rgba(0,0,0,0.3)',
+            borderRadius: 0,
+            border: 'none',
+            background: stockFilter === 'ALL' ? 'var(--accent)' : 'rgba(0,0,0,0.25)',
             color: stockFilter === 'ALL' ? '#fff' : 'var(--t3)',
-            fontWeight: 800,
+            fontWeight: 700,
             fontSize: '.8rem',
             cursor: 'pointer'
           }}
         >
-          🏢 전체 종목
+          전체 종목
         </button>
 
         {positions.map(p => {
@@ -367,11 +365,11 @@ export default function TradingJournalTab({ positions = [] }) {
               onClick={() => setStockFilter(p.code)}
               style={{
                 padding: '6px 14px',
-                borderRadius: 20,
-                border: isSelected ? '1.5px solid #10b981' : '1px solid rgba(255,255,255,0.1)',
-                background: isSelected ? 'rgba(16,185,129,0.25)' : 'rgba(0,0,0,0.3)',
+                borderRadius: 0,
+                border: 'none',
+                background: isSelected ? 'var(--accent)' : 'rgba(0,0,0,0.25)',
                 color: isSelected ? '#fff' : 'var(--t2)',
-                fontWeight: 800,
+                fontWeight: 700,
                 fontSize: '.8rem',
                 cursor: 'pointer'
               }}
@@ -384,19 +382,18 @@ export default function TradingJournalTab({ positions = [] }) {
 
       {/* ─── 일지 목록 카드 그리드 ─── */}
       {loading ? (
-        <div style={{ padding: '80px 20px', textAlign: 'center', color: 'var(--gold)', fontSize: '1.1rem', fontWeight: 800 }}>
-          ⏳ 나의 투자일지 DB 불러오는 중...
+        <div style={{ padding: '80px 20px', textAlign: 'center', color: 'var(--t2)', fontSize: '1.1rem', fontWeight: 700 }}>
+          나의 투자일지 DB 불러오는 중...
         </div>
       ) : filteredJournals.length === 0 ? (
-        <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)', background: 'var(--bg2)', borderRadius: 18, border: '1px dashed rgba(255,255,255,0.1)' }}>
-          <div style={{ fontSize: '2.5rem', marginBottom: 10 }}>📔</div>
-          <div style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--t1)' }}>작성된 투자일지가 없거나 검색 조건과 일치하지 않습니다.</div>
+        <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)', background: 'var(--bg2)', borderRadius: 0, border: '1px dashed rgba(255,255,255,0.1)' }}>
+          <div style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--t1)' }}>작성된 투자일지가 없거나 검색 조건과 일치하지 않습니다.</div>
           <div style={{ fontSize: '.82rem', color: 'var(--t3)', marginTop: 4 }}>새로운 매매 복기나 전략 일지를 작성해보세요!</div>
           <button
             onClick={handleOpenCreateModal}
-            style={{ marginTop: 14, padding: '10px 20px', background: 'var(--gold)', color: '#000', border: 'none', borderRadius: 10, fontWeight: 900, cursor: 'pointer' }}
+            style={{ marginTop: 14, padding: '10px 20px', background: 'var(--gold)', color: '#000', border: 'none', borderRadius: 0, fontWeight: 700, cursor: 'pointer' }}
           >
-            ✍️ 첫 투자일지 작성하기
+            첫 투자일지 작성하기
           </button>
         </div>
       ) : (
@@ -414,8 +411,8 @@ export default function TradingJournalTab({ positions = [] }) {
                   padding: '20px 24px',
                   background: 'var(--bg2)',
                   border: '1px solid var(--border)',
-                  borderRadius: 18,
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
+                  borderRadius: 0,
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
                   transition: 'border-color 0.15s ease'
                 }}
               >
@@ -426,15 +423,15 @@ export default function TradingJournalTab({ positions = [] }) {
                       padding: '4px 10px',
                       background: `${badgeColor}20`,
                       border: `1px solid ${badgeColor}60`,
-                      borderRadius: 8,
+                      borderRadius: 0,
                       color: badgeColor,
                       fontSize: '.78rem',
-                      fontWeight: 900
+                      fontWeight: 700
                     }}>
                       {badgeLabel}
                     </span>
 
-                    <span style={{ fontSize: '1.05rem', fontWeight: 900, color: '#fff' }}>
+                    <span style={{ fontSize: '1.05rem', fontWeight: 700, color: '#fff' }}>
                       {j.stockName}
                     </span>
                     <span style={{ fontSize: '.8rem', color: 'var(--t3)', fontFamily: 'Space Mono' }}>
@@ -442,13 +439,13 @@ export default function TradingJournalTab({ positions = [] }) {
                     </span>
 
                     {j.emotion && (
-                      <span style={{ fontSize: '.78rem', background: 'rgba(255,255,255,0.06)', padding: '3px 8px', borderRadius: 6, color: 'var(--t2)' }}>
+                      <span style={{ fontSize: '.78rem', background: 'rgba(255,255,255,0.06)', padding: '3px 8px', borderRadius: 0, color: 'var(--t2)' }}>
                         심리: {j.emotion}
                       </span>
                     )}
 
                     <span style={{ fontSize: '.76rem', color: 'var(--t3)', marginLeft: 4 }}>
-                      📅 {j.date}
+                      {j.date}
                     </span>
                   </div>
 
@@ -460,14 +457,14 @@ export default function TradingJournalTab({ positions = [] }) {
                         padding: '5px 10px',
                         background: 'rgba(255,255,255,0.08)',
                         border: '1px solid rgba(255,255,255,0.15)',
-                        borderRadius: 6,
+                        borderRadius: 0,
                         color: 'var(--t2)',
                         fontSize: '.75rem',
-                        fontWeight: 800,
+                        fontWeight: 700,
                         cursor: 'pointer'
                       }}
                     >
-                      ✏️ 수정
+                      수정
                     </button>
                     <button
                       onClick={() => handleDelete(j.id)}
@@ -475,14 +472,14 @@ export default function TradingJournalTab({ positions = [] }) {
                         padding: '5px 10px',
                         background: 'rgba(239,68,68,0.15)',
                         border: '1px solid rgba(239,68,68,0.3)',
-                        borderRadius: 6,
+                        borderRadius: 0,
                         color: '#f87171',
                         fontSize: '.75rem',
-                        fontWeight: 800,
+                        fontWeight: 700,
                         cursor: 'pointer'
                       }}
                     >
-                      🗑️ 삭제
+                      삭제
                     </button>
                   </div>
                 </div>
@@ -492,7 +489,7 @@ export default function TradingJournalTab({ positions = [] }) {
                   <div style={{
                     padding: '8px 14px',
                     background: 'rgba(0,0,0,0.35)',
-                    borderRadius: 10,
+                    borderRadius: 0,
                     display: 'flex',
                     gap: 16,
                     flexWrap: 'wrap',
@@ -507,7 +504,7 @@ export default function TradingJournalTab({ positions = [] }) {
                 )}
 
                 {/* 일지 제목 */}
-                <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#fff', marginBottom: 8, lineHeight: 1.4 }}>
+                <div style={{ fontSize: '1.05rem', fontWeight: 700, color: '#fff', marginBottom: 8, lineHeight: 1.4 }}>
                   {j.title}
                 </div>
 
@@ -520,7 +517,7 @@ export default function TradingJournalTab({ positions = [] }) {
                 {Array.isArray(j.tags) && j.tags.length > 0 && (
                   <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                     {j.tags.map((t, idx) => (
-                      <span key={idx} style={{ fontSize: '.72rem', background: 'rgba(129,140,248,0.12)', color: '#818cf8', padding: '2px 8px', borderRadius: 6, fontWeight: 700 }}>
+                      <span key={idx} style={{ fontSize: '.72rem', background: 'rgba(129,140,248,0.12)', color: '#818cf8', padding: '2px 8px', borderRadius: 0, fontWeight: 700 }}>
                         #{t}
                       </span>
                     ))}
@@ -558,17 +555,16 @@ export default function TradingJournalTab({ positions = [] }) {
               maxHeight: '90vh',
               overflowY: 'auto',
               background: '#1e293b',
-              border: '2px solid rgba(234,179,8,0.5)',
-              borderRadius: 22,
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderRadius: 0,
               padding: '28px',
-              boxShadow: '0 25px 60px rgba(0,0,0,0.85)',
+              boxShadow: '0 20px 50px rgba(0,0,0,0.6)',
               animation: 'fadeIn 0.2s ease-out'
             }}
             onClick={e => e.stopPropagation()}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: 12 }}>
-              <div style={{ fontSize: '1.25rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span>✍️</span>
+              <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: 8 }}>
                 <span>{editingJournal ? '투자일지 수정하기' : '새 투자일지 작성하기'}</span>
               </div>
               <button
@@ -588,7 +584,7 @@ export default function TradingJournalTab({ positions = [] }) {
                     type="date"
                     value={formData.date}
                     onChange={e => setFormData({ ...formData, date: e.target.value })}
-                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 10, color: '#fff', outline: 'none' }}
+                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 0, color: '#fff', outline: 'none' }}
                   />
                 </div>
 
@@ -597,7 +593,7 @@ export default function TradingJournalTab({ positions = [] }) {
                   <select
                     value={formData.type}
                     onChange={e => setFormData({ ...formData, type: e.target.value })}
-                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 10, color: '#fff', outline: 'none' }}
+                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 0, color: '#fff', outline: 'none' }}
                   >
                     <option value="BUY">🔴 매수 (BUY)</option>
                     <option value="SELL">🔵 매도 (SELL)</option>
@@ -614,7 +610,7 @@ export default function TradingJournalTab({ positions = [] }) {
                   <select
                     value={formData.stockCode}
                     onChange={e => handleStockSelect(e.target.value)}
-                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 10, color: '#fff', outline: 'none' }}
+                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 0, color: '#fff', outline: 'none' }}
                   >
                     {positions.map(p => (
                       <option key={p.code} value={p.code}>{p.name} ({p.code})</option>
@@ -630,7 +626,7 @@ export default function TradingJournalTab({ positions = [] }) {
                     value={formData.stockName}
                     onChange={e => setFormData({ ...formData, stockName: e.target.value })}
                     placeholder="종목명"
-                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 10, color: '#fff', outline: 'none' }}
+                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 0, color: '#fff', outline: 'none' }}
                   />
                 </div>
               </div>
@@ -643,7 +639,7 @@ export default function TradingJournalTab({ positions = [] }) {
                     type="number"
                     value={formData.price}
                     onChange={e => setFormData({ ...formData, price: Number(e.target.value) })}
-                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 10, color: '#fff', outline: 'none' }}
+                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 0, color: '#fff', outline: 'none' }}
                   />
                 </div>
 
@@ -653,7 +649,7 @@ export default function TradingJournalTab({ positions = [] }) {
                     type="number"
                     value={formData.quantity}
                     onChange={e => setFormData({ ...formData, quantity: Number(e.target.value) })}
-                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 10, color: '#fff', outline: 'none' }}
+                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 0, color: '#fff', outline: 'none' }}
                   />
                 </div>
               </div>
@@ -665,7 +661,7 @@ export default function TradingJournalTab({ positions = [] }) {
                   <select
                     value={formData.emotion}
                     onChange={e => setFormData({ ...formData, emotion: e.target.value })}
-                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 10, color: '#fff', outline: 'none' }}
+                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 0, color: '#fff', outline: 'none' }}
                   >
                     <option value="🔥 확신">🔥 확신 (시그널 일치)</option>
                     <option value="🟢 침착">🟢 침착 (원칙 준수)</option>
@@ -682,7 +678,7 @@ export default function TradingJournalTab({ positions = [] }) {
                     value={formData.tags}
                     onChange={e => setFormData({ ...formData, tags: e.target.value })}
                     placeholder="예: 월가5대지표, 세력매집, 턴어라운드"
-                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 10, color: '#fff', outline: 'none' }}
+                    style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 0, color: '#fff', outline: 'none' }}
                   />
                 </div>
               </div>
@@ -695,7 +691,7 @@ export default function TradingJournalTab({ positions = [] }) {
                   value={formData.title}
                   onChange={e => setFormData({ ...formData, title: e.target.value })}
                   placeholder="예: 1Q K반도체 세력 매집 바닥선 확인 후 1차 분할 매수 진입"
-                  style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 10, color: '#fff', outline: 'none', fontWeight: 700 }}
+                  style={{ width: '100%', padding: '10px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 0, color: '#fff', outline: 'none', fontWeight: 700 }}
                 />
               </div>
 
@@ -707,7 +703,7 @@ export default function TradingJournalTab({ positions = [] }) {
                   value={formData.content}
                   onChange={e => setFormData({ ...formData, content: e.target.value })}
                   placeholder="매수한 이유, 목표가, 손절선, 월가 5대 지표 및 수급 현황 등을 상세히 기록하세요..."
-                  style={{ width: '100%', padding: '12px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 10, color: '#fff', outline: 'none', lineHeight: 1.6, resize: 'vertical' }}
+                  style={{ width: '100%', padding: '12px', background: 'rgba(0,0,0,0.4)', border: '1px solid var(--border)', borderRadius: 0, color: '#fff', outline: 'none', lineHeight: 1.6, resize: 'vertical' }}
                 />
               </div>
 
@@ -716,15 +712,15 @@ export default function TradingJournalTab({ positions = [] }) {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  style={{ padding: '10px 18px', background: 'rgba(255,255,255,0.08)', border: 'none', borderRadius: 10, color: '#fff', cursor: 'pointer', fontWeight: 800 }}
+                  style={{ padding: '10px 18px', background: 'rgba(255,255,255,0.08)', border: 'none', borderRadius: 0, color: '#fff', cursor: 'pointer', fontWeight: 700 }}
                 >
                   취소
                 </button>
                 <button
                   type="submit"
-                  style={{ padding: '10px 24px', background: 'linear-gradient(135deg, #eab308 0%, #ca8a04 100%)', border: 'none', borderRadius: 10, color: '#000', fontWeight: 900, cursor: 'pointer' }}
+                  style={{ padding: '10px 24px', background: 'var(--gold)', border: 'none', borderRadius: 0, color: '#000', fontWeight: 700, cursor: 'pointer' }}
                 >
-                  {editingJournal ? '💾 일지 수정 저장' : '💾 새 일지 등록'}
+                  {editingJournal ? '일지 수정 저장' : '새 일지 등록'}
                 </button>
               </div>
             </form>

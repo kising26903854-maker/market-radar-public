@@ -55,7 +55,7 @@ export default function NpsNewDisclosuresTab({ onSelectStock }) {
       {toastMessage && (
         <div style={{
           position: 'fixed', bottom: 24, right: 24, padding: '14px 20px',
-          background: 'rgba(15, 23, 42, 0.95)', border: '1.5px solid #34d399', borderRadius: 14,
+          background: 'rgba(15, 23, 42, 0.95)', border: '1.5px solid #34d399', borderRadius: 0,
           color: '#fff', fontWeight: 800, fontSize: '.9rem', zIndex: 5000,
           boxShadow: '0 10px 30px rgba(0,0,0,0.5)', animation: 'slideUp 0.3s ease-out'
         }}>
@@ -65,35 +65,34 @@ export default function NpsNewDisclosuresTab({ onSelectStock }) {
 
       {/* ─── 헤더 배너 ─── */}
       <div style={{
-        padding: '24px 28px',
-        background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(251, 191, 36, 0.15) 100%)',
-        border: '2px solid rgba(16, 185, 129, 0.45)', borderRadius: 22, marginBottom: 20,
-        boxShadow: '0 10px 36px rgba(0,0,0,0.45)',
+        padding: '22px 26px',
+        background: 'var(--bg2)',
+        borderTop: '2px solid #34d399',
+        border: '1px solid rgba(255,255,255,0.08)', borderRadius: 0, marginBottom: 18,
+        boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
           <div>
-            <div style={{ fontSize: '1.65rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-              <span style={{ filter: 'drop-shadow(0 0 12px #10b981)' }}>🌅 국민연금 신규 공시 (오늘)</span>
+            <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+              <span>국민연금 신규 공시 (오늘)</span>
               <span style={{
-                fontSize: '.75rem', background: 'rgba(16, 185, 129, 0.2)', color: '#34d399',
-                border: '1px solid #10b981', padding: '4px 12px', borderRadius: 20, fontWeight: 900
+                fontSize: '.72rem', color: 'var(--t2)', fontWeight: 700
               }}>
                 오늘 새벽 01:00 배치 기준
               </span>
             </div>
-            <div style={{ fontSize: '.92rem', color: 'var(--t2)', marginTop: 8, lineHeight: 1.6 }}>
-              DART 대량보유상황보고서(majorstock.json) 원문 기준으로, <strong>오늘 새벽 배치에서 처음 감지된</strong> 국민연금공단 지분 변동 공시만 보여줍니다.
-              종목 팝업에서도 3일간 🆕 NEW 배지로 확인할 수 있지만, 이 화면은 "오늘 아침 새로 뜬 것"만 골라서 보여줍니다.
+            <div style={{ fontSize: '.86rem', color: 'var(--t3)', marginTop: 6, lineHeight: 1.6 }}>
+              DART 대량보유상황보고서(majorstock.json) 원문 기준으로, 오늘 새벽 배치에서 처음 감지된 국민연금공단 지분 변동 공시만 보여줍니다.
+              종목 팝업에서도 3일간 NEW 배지로 확인할 수 있지만, 이 화면은 "오늘 아침 새로 뜬 것"만 골라서 보여줍니다.
             </div>
           </div>
 
           <button onClick={handleRefresh} disabled={refreshing} style={{
-            padding: '10px 16px', background: 'linear-gradient(135deg, #10b981 0%, #fbbf24 100%)', border: 'none',
-            borderRadius: 12, color: '#0f172a', fontWeight: 900, cursor: refreshing ? 'not-allowed' : 'pointer',
-            fontSize: '.85rem', boxShadow: '0 4px 14px rgba(16,185,129,0.4)', display: 'flex', alignItems: 'center', gap: 6
+            padding: '9px 14px', background: '#10b981', border: 'none',
+            borderRadius: 0, color: '#0f172a', fontWeight: 700, cursor: refreshing ? 'not-allowed' : 'pointer',
+            fontSize: '.82rem'
           }}>
-            <span>{refreshing ? '⏳' : '🔄'}</span>
-            <span>{refreshing ? '스캔 요청 중...' : '지금 다시 스캔'}</span>
+            {refreshing ? '스캔 요청 중...' : '지금 다시 스캔'}
           </button>
         </div>
       </div>
@@ -101,13 +100,11 @@ export default function NpsNewDisclosuresTab({ onSelectStock }) {
       {/* ─── 목록 ─── */}
       {loading ? (
         <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)' }}>
-          <div style={{ fontSize: '2.5rem', marginBottom: 12 }}>⏳</div>
-          <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#fff' }}>오늘의 국민연금 신규 공시를 불러오는 중...</div>
+          <div style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--t2)' }}>오늘의 국민연금 신규 공시를 불러오는 중...</div>
         </div>
       ) : updates.length === 0 ? (
-        <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)', background: 'var(--bg2)', borderRadius: 18 }}>
-          <div style={{ fontSize: '2.5rem', marginBottom: 12 }}>📭</div>
-          <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#fff' }}>오늘 새벽 배치에서 감지된 국민연금 신규 공시가 없습니다.</div>
+        <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)', background: 'var(--bg2)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 0 }}>
+          <div style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--t2)' }}>오늘 새벽 배치에서 감지된 국민연금 신규 공시가 없습니다.</div>
           <div style={{ fontSize: '.85rem', marginTop: 8 }}>매일 새벽 01:00에 자동으로 다시 확인합니다.</div>
         </div>
       ) : (
@@ -118,23 +115,23 @@ export default function NpsNewDisclosuresTab({ onSelectStock }) {
               <div key={u.stockCode} className="card"
                 onClick={() => onSelectStock && onSelectStock({ code: u.stockCode, name: u.corpName })}
                 style={{
-                  padding: 20, background: 'rgba(30, 41, 59, 0.75)', border: '1.5px solid rgba(52,211,153,0.5)',
-                  borderRadius: 18, cursor: 'pointer', transition: 'all 0.2s ease', boxShadow: '0 8px 24px rgba(0,0,0,0.3)'
+                  padding: 20, background: 'var(--bg2)', border: '1px solid rgba(255,255,255,0.08)',
+                  borderRadius: 0, cursor: 'pointer', transition: 'all 0.2s ease', boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
                 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-                      <span style={{ fontSize: '1.15rem', fontWeight: 900, color: '#fff' }}>{u.corpName}</span>
+                      <span style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff' }}>{u.corpName}</span>
                       <span style={{ fontSize: '.78rem', color: 'var(--t3)', fontFamily: 'Space Mono' }}>{u.stockCode}</span>
                     </div>
                     <div style={{ fontSize: '.72rem', color: 'var(--t3)', marginTop: 4 }}>감지: {fmtDateTime(u.seenAt)}</div>
                   </div>
-                  <span style={{ padding: '3px 9px', borderRadius: 6, fontSize: '.68rem', fontWeight: 900, background: '#ef4444', color: '#fff', animation: 'pulse 1.6s ease-in-out infinite' }}>
-                    🆕 NEW
+                  <span style={{ padding: '3px 9px', borderRadius: 0, fontSize: '.68rem', fontWeight: 900, background: '#ef4444', color: '#fff', animation: 'pulse 1.6s ease-in-out infinite' }}>
+                    NEW
                   </span>
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: '10px 14px', background: 'rgba(0,0,0,0.25)', borderRadius: 12 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: '10px 14px', background: 'rgba(0,0,0,0.25)', borderRadius: 0 }}>
                   <span style={{ fontSize: '1.6rem', fontWeight: 900, fontFamily: 'Space Mono', color: '#34d399' }}>{u.ratio}%</span>
                   {u.ratioChange !== null && (
                     <span style={{ fontSize: '.9rem', fontWeight: 900, color: isUp ? '#34d399' : '#ef4444' }}>

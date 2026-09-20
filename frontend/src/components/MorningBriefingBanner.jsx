@@ -29,7 +29,7 @@ export default function MorningBriefingBanner() {
       marginBottom: 20,
       background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%)',
       border: '1.5px solid rgba(234, 179, 8, 0.4)',
-      borderRadius: 18,
+      borderRadius: 0,
       padding: '16px 20px',
       boxShadow: '0 8px 28px rgba(0,0,0,0.35)',
       position: 'relative',
@@ -44,7 +44,7 @@ export default function MorningBriefingBanner() {
               <span style={{ fontSize: '.98rem', fontWeight: 900, color: 'var(--gold)', letterSpacing: '-0.2px' }}>
                 AI 모닝 장전 브리핑 (30초 핵심 요약)
               </span>
-              <span style={{ fontSize: '.7rem', background: 'rgba(234,179,8,0.2)', color: 'var(--gold)', padding: '2px 8px', borderRadius: 12, fontWeight: 800, border: '1px solid rgba(234,179,8,0.4)' }}>
+              <span style={{ fontSize: '.7rem', background: 'rgba(234,179,8,0.2)', color: 'var(--gold)', padding: '2px 8px', borderRadius: 0, fontWeight: 800, border: '1px solid rgba(234,179,8,0.4)' }}>
                 {data.dateStr || '오늘'}
               </span>
             </div>
@@ -56,7 +56,7 @@ export default function MorningBriefingBanner() {
             onClick={() => setExpanded(!expanded)}
             style={{
               padding: '6px 12px',
-              borderRadius: 10,
+              borderRadius: 0,
               background: 'rgba(255,255,255,0.06)',
               border: '1px solid rgba(255,255,255,0.12)',
               color: 'var(--t1)',
@@ -71,7 +71,7 @@ export default function MorningBriefingBanner() {
             onClick={loadBriefing}
             style={{
               padding: '6px 10px',
-              borderRadius: 10,
+              borderRadius: 0,
               background: 'transparent',
               border: 'none',
               color: 'var(--t3)',
@@ -96,7 +96,7 @@ export default function MorningBriefingBanner() {
           <div key={idx} style={{
             padding: '10px 14px',
             background: 'rgba(0,0,0,0.3)',
-            borderRadius: 12,
+            borderRadius: 0,
             borderLeft: idx === 0 ? '3.5px solid #10b981' : idx === 1 ? '3.5px solid #60a5fa' : '3.5px solid #fbbf24',
             display: 'flex',
             alignItems: 'flex-start',

@@ -53,10 +53,10 @@ function NpsDisclosureModal({ item, onClose, onSelectStock, estimatedComparison 
         style={{
           width: '100%',
           maxWidth: '680px',
-          background: 'rgba(24, 30, 48, 0.98)',
-          border: '1.8px solid rgba(16, 185, 129, 0.45)',
-          borderRadius: '24px',
-          boxShadow: '0 25px 60px -12px rgba(0, 0, 0, 0.85)',
+          background: 'var(--bg2)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          borderRadius: 0,
+          boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
           overflow: 'hidden',
           animation: 'fadeIn 0.25s ease-out',
         }}
@@ -70,26 +70,26 @@ function NpsDisclosureModal({ item, onClose, onSelectStock, estimatedComparison 
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            background: 'linear-gradient(90deg, rgba(16, 185, 129, 0.22) 0%, rgba(59, 130, 246, 0.18) 100%)',
+            background: 'transparent',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <span style={{ fontSize: '2rem', filter: 'drop-shadow(0 0 8px #10b981)' }}>📑</span>
+            <span style={{ fontSize: '2rem' }}>📑</span>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                <span style={{ fontSize: '0.74rem', background: '#10b981', color: '#fff', padding: '2px 8px', borderRadius: 8, fontWeight: 900 }}>
+                <span style={{ fontSize: '0.74rem', background: '#10b981', color: '#fff', padding: '2px 8px', borderRadius: 0, fontWeight: 700 }}>
                   DART 공식 5% 대량보유공시
                 </span>
                 <span style={{ fontSize: '0.8rem', color: '#60a5fa', fontWeight: 800 }}>
-                  📅 공시접수: {formatDisclosureDate(item.disclosureDate)}
+                  공시접수: {formatDisclosureDate(item.disclosureDate)}
                 </span>
                 {estimatedComparison && (
-                  <span style={{ fontSize: '0.7rem', background: '#f59e0b', color: '#1e1b0f', padding: '2px 8px', borderRadius: 8, fontWeight: 900 }}>
-                    ⚠️ 추정치 (실제 DART 공시 아님)
+                  <span style={{ fontSize: '0.7rem', background: '#f59e0b', color: '#1e1b0f', padding: '2px 8px', borderRadius: 0, fontWeight: 700 }}>
+                    추정치 (실제 DART 공시 아님)
                   </span>
                 )}
               </div>
-              <h3 style={{ fontSize: '1.35rem', fontWeight: 900, color: '#fff', margin: 0, display: 'flex', alignItems: 'center', gap: 8 }}>
+              <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', margin: 0, display: 'flex', alignItems: 'center', gap: 8 }}>
                 <span>{item.stockName}</span>
                 <span style={{ fontSize: '.88rem', color: 'var(--t3)', fontWeight: 600 }}>({item.stockCode})</span>
               </h3>
@@ -122,13 +122,9 @@ function NpsDisclosureModal({ item, onClose, onSelectStock, estimatedComparison 
           {/* 지분 변동 요약 배너 */}
           <div style={{
             padding: '16px 20px',
-            borderRadius: 16,
-            background: isNew
-              ? 'linear-gradient(135deg, rgba(16,185,129,0.25) 0%, rgba(5,150,105,0.15) 100%)'
-              : isUp
-              ? 'linear-gradient(135deg, rgba(239,68,68,0.25) 0%, rgba(185,28,28,0.15) 100%)'
-              : 'linear-gradient(135deg, rgba(59,130,246,0.25) 0%, rgba(37,99,235,0.15) 100%)',
-            border: `1.5px solid ${isNew ? '#10b981' : isUp ? '#ef4444' : '#3b82f6'}`,
+            borderRadius: 0,
+            background: 'var(--bg2)',
+            border: `1px solid ${isNew ? 'rgba(16,185,129,0.4)' : isUp ? 'rgba(239,68,68,0.4)' : 'rgba(59,130,246,0.4)'}`,
             marginBottom: 20,
             display: 'flex',
             justifyContent: 'space-between',
@@ -153,7 +149,7 @@ function NpsDisclosureModal({ item, onClose, onSelectStock, estimatedComparison 
           {/* 지분 변동 전후 대조 표 */}
           <div style={{
             background: 'rgba(0,0,0,0.35)',
-            borderRadius: 16,
+            borderRadius: 0,
             border: '1px solid rgba(255,255,255,0.08)',
             overflow: 'hidden',
             marginBottom: 20
@@ -198,19 +194,19 @@ function NpsDisclosureModal({ item, onClose, onSelectStock, estimatedComparison 
 
           {/* 공시 상세 정보 그리드 */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 12, marginBottom: 20 }}>
-            <div style={{ padding: '14px 16px', background: 'rgba(255,255,255,0.03)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.06)' }}>
+            <div style={{ padding: '14px 16px', background: 'rgba(255,255,255,0.03)', borderRadius: 0, border: '1px solid rgba(255,255,255,0.06)' }}>
               <div style={{ fontSize: '.76rem', color: 'var(--t3)', fontWeight: 800 }}>보고서 명칭</div>
               <div style={{ fontSize: '.9rem', fontWeight: 800, color: '#fff', marginTop: 3 }}>{item.reportName || '주식등의대량보유상황보고서 (일반투자)'}</div>
             </div>
-            <div style={{ padding: '14px 16px', background: 'rgba(255,255,255,0.03)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.06)' }}>
+            <div style={{ padding: '14px 16px', background: 'rgba(255,255,255,0.03)', borderRadius: 0, border: '1px solid rgba(255,255,255,0.06)' }}>
               <div style={{ fontSize: '.76rem', color: 'var(--t3)', fontWeight: 800 }}>보고자 (제출인)</div>
               <div style={{ fontSize: '.9rem', fontWeight: 800, color: '#fff', marginTop: 3 }}>{item.submitter || '국민연금공단 (NPS)'}</div>
             </div>
-            <div style={{ padding: '14px 16px', background: 'rgba(255,255,255,0.03)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.06)' }}>
+            <div style={{ padding: '14px 16px', background: 'rgba(255,255,255,0.03)', borderRadius: 0, border: '1px solid rgba(255,255,255,0.06)' }}>
               <div style={{ fontSize: '.76rem', color: 'var(--t3)', fontWeight: 800 }}>보유 목적</div>
               <div style={{ fontSize: '.9rem', fontWeight: 800, color: '#10b981', marginTop: 3 }}>{item.purpose || '일반투자목적 (배당 수령 및 주주가치 제고)'}</div>
             </div>
-            <div style={{ padding: '14px 16px', background: 'rgba(255,255,255,0.03)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.06)' }}>
+            <div style={{ padding: '14px 16px', background: 'rgba(255,255,255,0.03)', borderRadius: 0, border: '1px solid rgba(255,255,255,0.06)' }}>
               <div style={{ fontSize: '.76rem', color: 'var(--t3)', fontWeight: 800 }}>취득 및 매매 방식</div>
               <div style={{ fontSize: '.9rem', fontWeight: 800, color: '#60a5fa', marginTop: 3 }}>{item.acquisitionMethod || '장내 매수 (한국거래소 직접 체결)'}</div>
             </div>
@@ -227,9 +223,9 @@ function NpsDisclosureModal({ item, onClose, onSelectStock, estimatedComparison 
                 padding: '12px 18px',
                 background: 'rgba(255,255,255,0.06)',
                 border: '1px solid rgba(255,255,255,0.15)',
-                borderRadius: 12,
+                borderRadius: 0,
                 color: '#fff',
-                fontWeight: 800,
+                fontWeight: 700,
                 fontSize: '.85rem',
                 textAlign: 'center',
                 textDecoration: 'none',
@@ -239,7 +235,6 @@ function NpsDisclosureModal({ item, onClose, onSelectStock, estimatedComparison 
                 gap: 6
               }}
             >
-              <span>🌐</span>
               <span>금융감독원 DART 공식 공시 원문 보기</span>
             </a>
 
@@ -251,11 +246,11 @@ function NpsDisclosureModal({ item, onClose, onSelectStock, estimatedComparison 
               style={{
                 flex: 1,
                 padding: '12px 18px',
-                background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                background: '#10b981',
                 border: 'none',
-                borderRadius: 12,
+                borderRadius: 0,
                 color: '#fff',
-                fontWeight: 900,
+                fontWeight: 700,
                 fontSize: '.85rem',
                 cursor: 'pointer',
                 display: 'flex',
@@ -264,7 +259,6 @@ function NpsDisclosureModal({ item, onClose, onSelectStock, estimatedComparison 
                 gap: 6
               }}
             >
-              <span>🏛️</span>
               <span>월가 퀀트 &amp; 세력 평단가 분석 보기</span>
             </button>
           </div>
@@ -290,9 +284,9 @@ function NpsDisclosureModal({ item, onClose, onSelectStock, estimatedComparison 
               padding: '8px 20px',
               background: 'rgba(255,255,255,0.1)',
               border: 'none',
-              borderRadius: '10px',
+              borderRadius: 0,
               color: '#fff',
-              fontWeight: 800,
+              fontWeight: 700,
               cursor: 'pointer',
             }}
           >
@@ -422,26 +416,26 @@ export default function NpsTracker({ onSelectStock }) {
     <div style={{ padding: '10px 0', animation: 'fadeIn 0.3s ease-in-out' }}>
       {/* ─── 상단 메인 헤더 ─── */}
       <div style={{
-        padding: '26px 30px',
-        background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.18) 0%, rgba(59, 130, 246, 0.15) 100%)',
-        border: '2px solid rgba(16, 185, 129, 0.5)',
-        borderRadius: 22,
-        marginBottom: 24,
-        boxShadow: '0 10px 36px rgba(0,0,0,0.45)',
+        padding: '22px 26px',
+        background: 'var(--bg2)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        borderRadius: 0,
+        marginBottom: 18,
+        boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
           <div>
-            <div style={{ fontSize: '1.55rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-              <span style={{ filter: 'drop-shadow(0 0 10px #10b981)' }}>🏛️ 국민연금(NPS) 실시간 국내주식 포트폴리오</span>
-              <span style={{ fontSize: '.75rem', background: '#10b981', color: '#fff', padding: '3px 10px', borderRadius: 20, fontWeight: 900 }}>
+            <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+              <span>국민연금(NPS) 실시간 국내주식 포트폴리오</span>
+              <span style={{ fontSize: '.75rem', background: '#10b981', color: '#fff', padding: '3px 10px', borderRadius: 0, fontWeight: 700 }}>
                 {data?.quarter?.replace('_', '년 ')}분기 기준
               </span>
               {data?.prevQuarterEstimated && (
                 <span
-                  style={{ fontSize: '.75rem', background: '#f59e0b', color: '#1e1b0f', padding: '3px 10px', borderRadius: 20, fontWeight: 900 }}
+                  style={{ fontSize: '.75rem', background: '#f59e0b', color: '#1e1b0f', padding: '3px 10px', borderRadius: 0, fontWeight: 700 }}
                   title="전분기 데이터가 실제 DART 공시가 아닌 추정치로 생성되어, 아래 증가/감소/신규편입 비교는 참고용입니다."
                 >
-                  ⚠️ 추정치 기반 비교 (실제 DART 공시 아님)
+                  추정치 기반 비교 (실제 DART 공시 아님)
                 </span>
               )}
             </div>
@@ -459,12 +453,12 @@ export default function NpsTracker({ onSelectStock }) {
               value={selectedQuarter}
               onChange={(e) => handleQuarterChange(e.target.value)}
               style={{
-                padding: '10px 16px',
+                padding: '9px 14px',
                 background: 'rgba(0,0,0,0.5)',
-                border: '1.5px solid #10b981',
-                borderRadius: 12,
+                border: '1px solid rgba(255,255,255,0.15)',
+                borderRadius: 0,
                 color: '#fff',
-                fontWeight: 800,
+                fontWeight: 700,
                 fontSize: '.9rem',
                 cursor: 'pointer',
                 outline: 'none'
@@ -472,7 +466,7 @@ export default function NpsTracker({ onSelectStock }) {
             >
               {quarters.map(q => (
                 <option key={q} value={q} style={{ background: '#1e293b', color: '#fff' }}>
-                  📅 {q.replace('_', '년 ')}분기 {q === quarters[0] ? '(최신)' : ''}
+                  {q.replace('_', '년 ')}분기 {q === quarters[0] ? '(최신)' : ''}
                 </option>
               ))}
             </select>
@@ -481,45 +475,40 @@ export default function NpsTracker({ onSelectStock }) {
               onClick={handleRefresh}
               disabled={refreshing}
               style={{
-                padding: '10px 16px',
-                background: refreshing ? 'rgba(16,185,129,0.3)' : 'rgba(255,255,255,0.08)',
+                padding: '9px 14px',
+                background: 'transparent',
                 border: '1px solid rgba(255,255,255,0.15)',
-                borderRadius: 12,
-                color: '#fff',
-                fontWeight: 800,
+                borderRadius: 0,
+                color: 'var(--t2)',
+                fontWeight: 700,
                 cursor: refreshing ? 'not-allowed' : 'pointer',
-                fontSize: '.88rem',
+                fontSize: '.82rem',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 6
               }}
             >
-              <span>{refreshing ? '⏳' : '🔄'}</span>
+              <span>{refreshing ? '⋯' : '↻'}</span>
               <span>{refreshing ? '갱신 중...' : '시세 갱신'}</span>
             </button>
 
-            {/* 📥 PDF 리포트 다운로드 버튼 */}
+            {/* PDF 리포트 다운로드 버튼 */}
             <button
               onClick={() => setShowPdfModal(true)}
               style={{
-                padding: '10px 20px',
-                background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-                border: '1.5px solid rgba(16, 185, 129, 0.6)',
-                borderRadius: 12,
+                padding: '9px 14px',
+                background: '#3b82f6',
+                border: 'none',
+                borderRadius: 0,
                 color: '#fff',
-                fontWeight: 900,
+                fontWeight: 700,
                 cursor: 'pointer',
-                fontSize: '.9rem',
-                boxShadow: '0 4px 16px rgba(16, 185, 129, 0.4)',
+                fontSize: '.82rem',
                 display: 'flex',
                 alignItems: 'center',
-                gap: 6,
-                transition: 'transform 0.15s ease'
+                gap: 6
               }}
-              onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
-              onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
             >
-              <span>📥</span>
               <span>PDF 리포트 다운로드</span>
             </button>
           </div>
@@ -530,14 +519,13 @@ export default function NpsTracker({ onSelectStock }) {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 14, marginBottom: 24 }}>
         {/* 1. 총 보유 종목 수 */}
         <div style={{
-          padding: '20px 22px',
-          background: 'rgba(30, 41, 59, 0.75)',
-          border: '1.5px solid rgba(59, 130, 246, 0.4)',
-          borderRadius: 18,
-          boxShadow: '0 8px 24px rgba(0,0,0,0.3)'
+          padding: '18px 20px',
+          background: 'var(--bg2)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          borderRadius: 0,
+          boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
         }}>
-          <div style={{ fontSize: '.82rem', color: '#60a5fa', fontWeight: 800, display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span>🏛️</span>
+          <div style={{ fontSize: '.82rem', color: 'var(--t2)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}>
             <span>국민연금 총 보유 종목</span>
           </div>
           <div style={{ fontSize: '1.8rem', fontWeight: 900, color: '#fff', marginTop: 6, fontFamily: 'Space Mono' }}>
@@ -550,14 +538,13 @@ export default function NpsTracker({ onSelectStock }) {
 
         {/* 2. 총 지분 평가액 */}
         <div style={{
-          padding: '20px 22px',
-          background: 'rgba(30, 41, 59, 0.75)',
-          border: '1.5px solid rgba(234, 179, 8, 0.5)',
-          borderRadius: 18,
-          boxShadow: '0 8px 24px rgba(0,0,0,0.3)'
+          padding: '18px 20px',
+          background: 'var(--bg2)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          borderRadius: 0,
+          boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
         }}>
-          <div style={{ fontSize: '.82rem', color: '#fbbf24', fontWeight: 800, display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span>💰</span>
+          <div style={{ fontSize: '.82rem', color: 'var(--t2)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}>
             <span>총 지분 실시간 평가액</span>
           </div>
           <div style={{ fontSize: '1.75rem', fontWeight: 900, color: 'var(--gold)', marginTop: 6, fontFamily: 'Space Mono' }}>
@@ -570,14 +557,13 @@ export default function NpsTracker({ onSelectStock }) {
 
         {/* 3. 신규 편입 종목 */}
         <div style={{
-          padding: '20px 22px',
-          background: 'rgba(30, 41, 59, 0.75)',
-          border: '1.5px solid rgba(16, 185, 129, 0.4)',
-          borderRadius: 18,
-          boxShadow: '0 8px 24px rgba(0,0,0,0.3)'
+          padding: '18px 20px',
+          background: 'var(--bg2)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          borderRadius: 0,
+          boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
         }}>
-          <div style={{ fontSize: '.82rem', color: '#34d399', fontWeight: 800, display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span>🆕</span>
+          <div style={{ fontSize: '.82rem', color: 'var(--t2)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}>
             <span>이번 분기 신규 편입</span>
           </div>
           <div style={{ fontSize: '1.8rem', fontWeight: 900, color: '#10b981', marginTop: 6, fontFamily: 'Space Mono' }}>
@@ -590,14 +576,13 @@ export default function NpsTracker({ onSelectStock }) {
 
         {/* 4. 지분 순확대 (매수 우위) */}
         <div style={{
-          padding: '20px 22px',
-          background: 'rgba(30, 41, 59, 0.75)',
-          border: '1.5px solid rgba(239, 68, 68, 0.4)',
-          borderRadius: 18,
-          boxShadow: '0 8px 24px rgba(0,0,0,0.3)'
+          padding: '18px 20px',
+          background: 'var(--bg2)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          borderRadius: 0,
+          boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
         }}>
-          <div style={{ fontSize: '.82rem', color: '#f87171', fontWeight: 800, display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span>📈</span>
+          <div style={{ fontSize: '.82rem', color: 'var(--t2)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}>
             <span>지분 확대 (순매수)</span>
           </div>
           <div style={{ fontSize: '1.8rem', fontWeight: 900, color: '#ef4444', marginTop: 6, fontFamily: 'Space Mono' }}>
@@ -619,28 +604,26 @@ export default function NpsTracker({ onSelectStock }) {
         marginBottom: 18
       }}>
         {/* 탭 버튼 */}
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: 4, background: 'rgba(0,0,0,0.25)', padding: 3, borderRadius: 0, flexWrap: 'wrap' }}>
           {[
-            { id: 'ALL', label: `📋 전체 포트폴리오 (${summary.totalStocks || data?.holdings?.length || 0})` },
-            { id: 'NEW', label: `🆕 신규편입 (${summary.newCount || comparison.newStocks.length})` },
-            { id: 'INCREASE', label: `📈 비중확대 (${summary.increasedCount || comparison.increased.length})` },
-            { id: 'DECREASE', label: `📉 비중축소 (${summary.decreasedCount || comparison.decreased.length})` },
-            { id: 'SOLD', label: `🔴 완전매도 (${summary.soldCount || comparison.soldStocks.length})` },
+            { id: 'ALL', label: `전체 포트폴리오 (${summary.totalStocks || data?.holdings?.length || 0})` },
+            { id: 'NEW', label: `신규편입 (${summary.newCount || comparison.newStocks.length})` },
+            { id: 'INCREASE', label: `비중확대 (${summary.increasedCount || comparison.increased.length})` },
+            { id: 'DECREASE', label: `비중축소 (${summary.decreasedCount || comparison.decreased.length})` },
+            { id: 'SOLD', label: `완전매도 (${summary.soldCount || comparison.soldStocks.length})` },
           ].map(t => (
             <button
               key={t.id}
               onClick={() => setActiveTab(t.id)}
               style={{
-                padding: '9px 16px',
-                borderRadius: 14,
-                border: activeTab === t.id ? '1.5px solid #10b981' : '1px solid rgba(255,255,255,0.08)',
-                background: activeTab === t.id ? 'linear-gradient(135deg, rgba(16,185,129,0.3) 0%, rgba(5,150,105,0.2) 100%)' : 'rgba(0,0,0,0.3)',
-                color: activeTab === t.id ? '#ffffff' : 'var(--t3)',
-                fontSize: '.85rem',
-                fontWeight: 900,
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                boxShadow: activeTab === t.id ? '0 0 14px rgba(16,185,129,0.35)' : 'none'
+                padding: '6px 14px',
+                borderRadius: 0,
+                border: 'none',
+                background: activeTab === t.id ? 'var(--accent)' : 'transparent',
+                color: activeTab === t.id ? '#fff' : 'var(--t3)',
+                fontSize: '.8rem',
+                fontWeight: 700,
+                cursor: 'pointer'
               }}
             >
               {t.label}
@@ -657,36 +640,36 @@ export default function NpsTracker({ onSelectStock }) {
               setSortConfig({ key, direction });
             }}
             style={{
-              padding: '10px 14px',
+              padding: '9px 14px',
               background: 'rgba(0,0,0,0.4)',
               border: '1px solid rgba(255,255,255,0.12)',
-              borderRadius: 12,
+              borderRadius: 0,
               color: '#fff',
               fontSize: '.85rem',
-              fontWeight: 800,
+              fontWeight: 700,
               outline: 'none',
               cursor: 'pointer'
             }}
           >
-            <option value="value_desc" style={{ background: '#1e293b' }}>💰 평가금액 상위순</option>
-            <option value="ratio_desc" style={{ background: '#1e293b' }}>📊 지분율 상위순</option>
-            <option value="diffRatio_desc" style={{ background: '#1e293b' }}>📈 비중 확대순 (내림차순)</option>
-            <option value="diffRatio_asc" style={{ background: '#1e293b' }}>📉 비중 축소순 (내림차순)</option>
-            <option value="shares_desc" style={{ background: '#1e293b' }}>📦 보유주식 상위순</option>
+            <option value="value_desc" style={{ background: '#1e293b' }}>평가금액 상위순</option>
+            <option value="ratio_desc" style={{ background: '#1e293b' }}>지분율 상위순</option>
+            <option value="diffRatio_desc" style={{ background: '#1e293b' }}>비중 확대순 (내림차순)</option>
+            <option value="diffRatio_asc" style={{ background: '#1e293b' }}>비중 축소순 (내림차순)</option>
+            <option value="shares_desc" style={{ background: '#1e293b' }}>보유주식 상위순</option>
           </select>
-          
+
           <div style={{ position: 'relative', minWidth: 260 }}>
             <input
               type="text"
-              placeholder="🔍 종목명 / 코드 빠른 검색..."
+              placeholder="종목명 / 코드 빠른 검색..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{
                 width: '100%',
-                padding: '10px 16px',
+                padding: '9px 16px',
                 background: 'rgba(0,0,0,0.4)',
                 border: '1px solid rgba(255,255,255,0.12)',
-                borderRadius: 12,
+                borderRadius: 0,
                 color: '#fff',
                 fontSize: '.85rem',
                 outline: 'none'
@@ -718,10 +701,10 @@ export default function NpsTracker({ onSelectStock }) {
       {/* ─── 메인 포트폴리오 테이블 ─── */}
       <div style={{
         background: 'var(--bg2)',
-        borderRadius: 20,
+        borderRadius: 0,
         border: '1px solid rgba(255,255,255,0.08)',
         overflow: 'hidden',
-        boxShadow: '0 10px 36px rgba(0,0,0,0.35)'
+        boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
       }}>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '850px' }}>
@@ -814,17 +797,17 @@ export default function NpsTracker({ onSelectStock }) {
                                 color: '#34d399',
                                 border: '1px solid rgba(16,185,129,0.4)',
                                 padding: '2px 6px',
-                                borderRadius: 4,
-                                fontWeight: 800,
+                                borderRadius: 0,
+                                fontWeight: 700,
                                 cursor: 'pointer'
                               }}
                               title="클릭 시 DART 공시 상세 리포트 보기"
                             >
-                              📅 신규공시: {formatDisclosureDate(item.disclosureDate)}
+                              신규공시: {formatDisclosureDate(item.disclosureDate)}
                             </span>
                           )}
-                          <span style={{ fontSize: '.72rem', background: 'rgba(99,102,241,0.15)', color: '#818cf8', border: '1px solid rgba(99,102,241,0.3)', padding: '1px 6px', borderRadius: 4, fontWeight: 700 }}>
-                            상세 분석 🔗
+                          <span style={{ fontSize: '.72rem', background: 'rgba(99,102,241,0.15)', color: '#818cf8', border: '1px solid rgba(99,102,241,0.3)', padding: '1px 6px', borderRadius: 0, fontWeight: 700 }}>
+                            상세 분석
                           </span>
                         </div>
                         <div style={{ fontSize: '.78rem', color: 'var(--t3)', marginTop: 2, fontFamily: 'Space Mono' }}>
@@ -863,10 +846,10 @@ export default function NpsTracker({ onSelectStock }) {
                       <td style={{ padding: '16px 20px', textAlign: 'center' }}>
                         {item.status === 'NEW' && (
                           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
-                            <span style={{ padding: '3px 8px', borderRadius: 6, background: 'rgba(16,185,129,0.2)', border: '1px solid #10b981', color: '#10b981', fontWeight: 900, fontSize: '.78rem' }}>
-                              🆕 신규 편입
+                            <span style={{ padding: '3px 8px', borderRadius: 0, background: 'rgba(16,185,129,0.2)', border: '1px solid #10b981', color: '#10b981', fontWeight: 700, fontSize: '.78rem' }}>
+                              신규 편입
                             </span>
-                            <span 
+                            <span
                               onClick={(e) => {
                                 e.stopPropagation();
                                 setSelectedDisclosure(item);
@@ -874,10 +857,10 @@ export default function NpsTracker({ onSelectStock }) {
                               style={{
                                 fontSize: '.72rem',
                                 color: '#34d399',
-                                fontWeight: 800,
+                                fontWeight: 700,
                                 background: 'rgba(0,0,0,0.35)',
                                 padding: '2px 6px',
-                                borderRadius: 4,
+                                borderRadius: 0,
                                 display: 'inline-flex',
                                 alignItems: 'center',
                                 gap: 3,
@@ -886,17 +869,17 @@ export default function NpsTracker({ onSelectStock }) {
                               }}
                               title="클릭 시 DART 공시 상세 리포트 보기"
                             >
-                              <span>📅</span><span>{formatDisclosureDate(item.disclosureDate)} 📑</span>
+                              <span>{formatDisclosureDate(item.disclosureDate)}</span>
                             </span>
                           </div>
                         )}
                         {item.status === 'INCREASE' && (
                           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 }}>
-                            <span style={{ padding: '3px 8px', borderRadius: 6, background: 'rgba(239,68,68,0.15)', border: '1px solid #ef4444', color: '#ef4444', fontWeight: 900, fontSize: '.85rem' }}>
+                            <span style={{ padding: '3px 8px', borderRadius: 0, background: 'rgba(239,68,68,0.15)', border: '1px solid #ef4444', color: '#ef4444', fontWeight: 700, fontSize: '.85rem' }}>
                               ▲ +{Math.abs(item.diffRatio)}%p
                             </span>
                             {item.disclosureDate && (
-                              <span 
+                              <span
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   setSelectedDisclosure(item);
@@ -904,18 +887,18 @@ export default function NpsTracker({ onSelectStock }) {
                                 style={{ fontSize: '.7rem', color: '#818cf8', cursor: 'pointer', textDecoration: 'underline' }}
                                 title="클릭 시 DART 공시 상세 보기"
                               >
-                                📅 {item.disclosureDate}
+                                {item.disclosureDate}
                               </span>
                             )}
                           </div>
                         )}
                         {item.status === 'DECREASE' && (
                           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 }}>
-                            <span style={{ padding: '3px 8px', borderRadius: 6, background: 'rgba(59,130,246,0.15)', border: '1px solid #3b82f6', color: '#3b82f6', fontWeight: 900, fontSize: '.85rem' }}>
+                            <span style={{ padding: '3px 8px', borderRadius: 0, background: 'rgba(59,130,246,0.15)', border: '1px solid #3b82f6', color: '#3b82f6', fontWeight: 700, fontSize: '.85rem' }}>
                               ▼ -{Math.abs(item.diffRatio)}%p
                             </span>
                             {item.disclosureDate && (
-                              <span 
+                              <span
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   setSelectedDisclosure(item);
@@ -923,18 +906,18 @@ export default function NpsTracker({ onSelectStock }) {
                                 style={{ fontSize: '.7rem', color: '#818cf8', cursor: 'pointer', textDecoration: 'underline' }}
                                 title="클릭 시 DART 공시 상세 보기"
                               >
-                                📅 {item.disclosureDate}
+                                {item.disclosureDate}
                               </span>
                             )}
                           </div>
                         )}
                         {item.status === 'SOLD' && (
                           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 }}>
-                            <span style={{ padding: '3px 8px', borderRadius: 6, background: 'rgba(244,63,94,0.2)', border: '1px solid #f43f5e', color: '#f43f5e', fontWeight: 900, fontSize: '.78rem' }}>
-                              🔴 완전 매도
+                            <span style={{ padding: '3px 8px', borderRadius: 0, background: 'rgba(244,63,94,0.2)', border: '1px solid #f43f5e', color: '#f43f5e', fontWeight: 700, fontSize: '.78rem' }}>
+                              완전 매도
                             </span>
                             {item.disclosureDate && (
-                              <span 
+                              <span
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   setSelectedDisclosure(item);
@@ -942,16 +925,16 @@ export default function NpsTracker({ onSelectStock }) {
                                 style={{ fontSize: '.7rem', color: '#818cf8', cursor: 'pointer', textDecoration: 'underline' }}
                                 title="클릭 시 DART 공시 상세 보기"
                               >
-                                📅 {item.disclosureDate}
+                                {item.disclosureDate}
                               </span>
                             )}
                           </div>
                         )}
                         {item.status === 'SAME' && (
                           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-                            <span style={{ color: 'var(--t3)', fontWeight: 800, fontSize: '.85rem' }}>−</span>
+                            <span style={{ color: 'var(--t3)', fontWeight: 700, fontSize: '.85rem' }}>−</span>
                             {item.disclosureDate && (
-                              <span 
+                              <span
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   setSelectedDisclosure(item);
@@ -959,7 +942,7 @@ export default function NpsTracker({ onSelectStock }) {
                                 style={{ fontSize: '.68rem', color: 'rgba(255,255,255,0.4)', cursor: 'pointer' }}
                                 title="클릭 시 DART 공시 상세 보기"
                               >
-                                📅 {item.disclosureDate}
+                                {item.disclosureDate}
                               </span>
                             )}
                           </div>
@@ -975,9 +958,8 @@ export default function NpsTracker({ onSelectStock }) {
       </div>
 
       {/* ─── DART 실시간 5% 이상 대량보유 공시 타임라인 (금융감독원 DART Open API 실시간 조회) ─── */}
-      <div style={{ marginTop: 24, padding: '22px 26px', background: 'rgba(30,41,59,0.6)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 20 }}>
-        <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#fff', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span>📑</span>
+      <div style={{ marginTop: 24, padding: '22px 26px', background: 'var(--bg2)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 0 }}>
+        <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--t1)', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
           <span>최근 DART 국민연금 5% 대량보유 주요 공시 타임라인</span>
         </div>
         {data?.disclosures?.length > 0 ? (
@@ -988,11 +970,11 @@ export default function NpsTracker({ onSelectStock }) {
                 href={d.dartUrl || 'https://dart.fss.or.kr/'}
                 target="_blank"
                 rel="noreferrer"
-                style={{ padding: '12px 16px', background: 'rgba(0,0,0,0.3)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.05)', textDecoration: 'none', display: 'block' }}
+                style={{ padding: '12px 16px', background: 'rgba(0,0,0,0.3)', borderRadius: 0, border: '1px solid rgba(255,255,255,0.05)', textDecoration: 'none', display: 'block' }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
-                  <span style={{ fontWeight: 900, color: '#fff', fontSize: '.95rem' }}>{d.company}{d.stockCode ? ` (${d.stockCode})` : ''}</span>
-                  <span style={{ fontSize: '.72rem', background: 'rgba(16,185,129,0.15)', color: '#10b981', padding: '2px 6px', borderRadius: 4, fontWeight: 800 }}>{d.type}</span>
+                  <span style={{ fontWeight: 700, color: '#fff', fontSize: '.95rem' }}>{d.company}{d.stockCode ? ` (${d.stockCode})` : ''}</span>
+                  <span style={{ fontSize: '.72rem', background: 'rgba(16,185,129,0.15)', color: '#10b981', padding: '2px 6px', borderRadius: 0, fontWeight: 700 }}>{d.type}</span>
                 </div>
                 <div style={{ fontSize: '.78rem', color: 'var(--t2)', marginTop: 2 }}>
                   {d.report}

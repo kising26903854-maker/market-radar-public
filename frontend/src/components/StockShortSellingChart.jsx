@@ -117,22 +117,21 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
 
   return (
     <div style={{
-      background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%)',
-      borderRadius: 18,
-      border: '1.5px solid rgba(239, 68, 68, 0.4)',
+      background: 'var(--bg2)',
+      borderRadius: 0,
+      border: '1px solid rgba(255,255,255,0.08)',
       padding: '20px 22px',
       marginBottom: 22,
-      boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
+      boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
       animation: 'fadeIn 0.3s ease'
     }}>
       {/* ─── 1. 헤더 및 컨트롤 바 ─── */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 10 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ fontSize: '1.25rem' }}>📉</span>
           <div>
-            <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#f87171', display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: 8 }}>
               <span>한국거래소(KRX) 공식 공매도(Short Selling) 추이 분석</span>
-              <span style={{ fontSize: '.74rem', background: 'rgba(239,68,68,0.2)', color: '#f87171', border: '1px solid #ef4444', padding: '2px 8px', borderRadius: 6, fontWeight: 900 }}>
+              <span style={{ fontSize: '.74rem', background: 'rgba(255,255,255,0.08)', color: 'var(--t2)', border: '1px solid rgba(255,255,255,0.15)', padding: '2px 8px', borderRadius: 0, fontWeight: 700 }}>
                 KRX 공식 공시
               </span>
             </div>
@@ -143,26 +142,25 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
         </div>
 
         {/* 기간 전환 버튼 */}
-        <div style={{ display: 'flex', gap: 6, background: 'rgba(0,0,0,0.4)', padding: 4, borderRadius: 10, border: '1px solid rgba(255,255,255,0.08)' }}>
+        <div style={{ display: 'flex', gap: 4, background: 'rgba(0,0,0,0.25)', padding: 3, borderRadius: 0 }}>
           {[
             { id: '1m', label: '1개월' },
             { id: '3m', label: '3개월' },
             { id: '6m', label: '6개월' },
-            { id: 'all', label: '📜 전체(상장일~)' }
+            { id: 'all', label: '전체(상장일~)' }
           ].map(tab => (
             <button
               key={tab.id}
               onClick={() => setPeriod(tab.id)}
               style={{
-                padding: '5px 12px',
-                borderRadius: 7,
+                padding: '6px 14px',
+                borderRadius: 0,
                 border: 'none',
-                background: period === tab.id ? '#ef4444' : 'transparent',
+                background: period === tab.id ? 'var(--accent)' : 'transparent',
                 color: period === tab.id ? '#fff' : 'var(--t3)',
-                fontSize: '.78rem',
-                fontWeight: 800,
-                cursor: 'pointer',
-                transition: 'background 0.2s'
+                fontSize: '.8rem',
+                fontWeight: 700,
+                cursor: 'pointer'
               }}
             >
               {tab.label}
@@ -174,7 +172,7 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
       {/* ─── 2. 공매도 4대 핵심 지표 카드 그리드 ─── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: 10, marginBottom: 18 }}>
         {/* 카드 1: 최근 5일 평균 공매도 비중 */}
-        <div style={{ padding: '12px 14px', background: 'rgba(0,0,0,0.3)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.08)' }}>
+        <div style={{ padding: '12px 14px', background: 'rgba(0,0,0,0.3)', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)' }}>
           <div style={{ fontSize: '.74rem', color: 'var(--t3)', fontWeight: 800 }}>최근 5일 평균 공매도 비중</div>
           <div style={{ fontSize: '1.25rem', fontWeight: 900, color: summary.isDecreasing ? '#34d399' : (summary.avgRecentShortRatio >= 10 ? '#f87171' : '#38bdf8'), marginTop: 4, fontFamily: 'Space Mono' }}>
             {summary.avgRecentShortRatio || 0}%
@@ -185,14 +183,14 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
         </div>
 
         {/* 카드 2: 공매도 과열 진단 배지 및 실시간 추세 */}
-        <div style={{ padding: '12px 14px', background: 'rgba(0,0,0,0.3)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.08)' }}>
+        <div style={{ padding: '12px 14px', background: 'rgba(0,0,0,0.3)', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)' }}>
           <div style={{ fontSize: '.74rem', color: 'var(--t3)', fontWeight: 800 }}>공매도 추세 및 과열 진단</div>
           <div style={{ fontSize: '.95rem', fontWeight: 900, color: '#fff', marginTop: 6 }}>
             <span style={{
               padding: '3px 9px',
-              borderRadius: 6,
+              borderRadius: 0,
               fontSize: '.78rem',
-              fontWeight: 900,
+              fontWeight: 700,
               background: summary.overheatStatus === 'OVERHEAT' ? 'rgba(239,68,68,0.25)' : summary.overheatStatus === 'CAUTION' ? 'rgba(245,158,11,0.25)' : 'rgba(16,185,129,0.25)',
               color: summary.overheatStatus === 'OVERHEAT' ? '#f87171' : summary.overheatStatus === 'CAUTION' ? '#fbbf24' : '#34d399',
               border: `1px solid ${summary.overheatStatus === 'OVERHEAT' ? '#ef4444' : summary.overheatStatus === 'CAUTION' ? '#f59e0b' : '#10b981'}`
@@ -206,7 +204,7 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
         </div>
 
         {/* 카드 3: 누적 공매도 거래대금 */}
-        <div style={{ padding: '12px 14px', background: 'rgba(0,0,0,0.3)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.08)' }}>
+        <div style={{ padding: '12px 14px', background: 'rgba(0,0,0,0.3)', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)' }}>
           <div style={{ fontSize: '.74rem', color: 'var(--t3)', fontWeight: 800 }}>기간 누적 공매도 대금</div>
           <div style={{ fontSize: '1.25rem', fontWeight: 900, color: 'var(--gold)', marginTop: 4, fontFamily: 'Space Mono' }}>
             {(summary.totalShortValueIn100M || 0).toLocaleString()}억원
@@ -217,7 +215,7 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
         </div>
 
         {/* 카드 4: 최고 공매도 집중일 */}
-        <div style={{ padding: '12px 14px', background: 'rgba(0,0,0,0.3)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.08)' }}>
+        <div style={{ padding: '12px 14px', background: 'rgba(0,0,0,0.3)', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)' }}>
           <div style={{ fontSize: '.74rem', color: 'var(--t3)', fontWeight: 800 }}>최고 공매도 집중일</div>
           <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#f87171', marginTop: 4, fontFamily: 'Space Mono' }}>
             {summary.maxRatioDay || '-'}
@@ -247,7 +245,7 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
           <div style={{
             padding: '12px 16px',
             background: 'rgba(0,0,0,0.35)',
-            borderRadius: 12,
+            borderRadius: 0,
             borderLeft: `4px solid ${borderColor}`,
             marginBottom: 16,
             fontSize: '.85rem',
@@ -263,7 +261,7 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
       <div style={{
         position: 'relative',
         background: '#070a13',
-        borderRadius: 14,
+        borderRadius: 0,
         border: '1px solid rgba(255,255,255,0.08)',
         overflow: 'hidden',
         boxShadow: 'inset 0 0 20px rgba(0,0,0,0.8)'
@@ -323,7 +321,7 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
           <div style={{ padding: '80px 0 60px', textAlign: 'center', color: '#f87171', fontSize: '.9rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
             <span style={{ fontSize: '1.8rem' }}>⚠️</span>
             <div style={{ fontWeight: 800 }}>공매도 데이터를 불러오지 못했습니다.</div>
-            <div style={{ fontSize: '.85rem', color: '#cbd5e1', background: 'rgba(239, 68, 68, 0.1)', padding: '6px 16px', borderRadius: 8, border: '1px solid rgba(239, 68, 68, 0.3)' }}>{data.error || '알 수 없는 이유로 거래소 데이터 연결에 실패했습니다.'}</div>
+            <div style={{ fontSize: '.85rem', color: '#cbd5e1', background: 'rgba(239, 68, 68, 0.1)', padding: '6px 16px', borderRadius: 0, border: '1px solid rgba(239, 68, 68, 0.3)' }}>{data.error || '알 수 없는 이유로 거래소 데이터 연결에 실패했습니다.'}</div>
           </div>
         ) : timeline.length === 0 ? (
           <div style={{ padding: '80px 0', textAlign: 'center', color: 'var(--t3)', fontSize: '.9rem' }}>
@@ -502,10 +500,10 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
             background: 'rgba(255,255,255,0.06)',
             border: '1px solid rgba(255,255,255,0.12)',
             color: 'var(--t2)',
-            borderRadius: 8,
+            borderRadius: 0,
             padding: '7px 14px',
             fontSize: '.8rem',
-            fontWeight: 800,
+            fontWeight: 700,
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
@@ -519,7 +517,7 @@ export default function StockShortSellingChart({ stockCode, stockName }) {
         {showTable && (
           <div style={{
             marginTop: 10,
-            borderRadius: 12,
+            borderRadius: 0,
             overflow: 'hidden',
             border: '1px solid rgba(255,255,255,0.08)',
             maxHeight: 280,

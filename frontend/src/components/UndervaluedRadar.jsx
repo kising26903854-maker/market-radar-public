@@ -188,8 +188,8 @@ export default function UndervaluedRadar({ onSelectStock }) {
 
   if (loading && !data) {
     return (
-      <div style={{ padding: 60, textAlign: 'center', color: 'var(--gold)', fontWeight: 800, fontSize: '1.2rem' }}>
-        💎 실시간 코스피·코스닥 1·2·3순위 퀀트 가치평가 스크리닝 중... (잠시만 기다려 주세요)
+      <div style={{ padding: 60, textAlign: 'center', color: 'var(--t2)', fontWeight: 700, fontSize: '1.2rem' }}>
+        실시간 코스피·코스닥 1·2·3순위 퀀트 가치평가 스크리닝 중... (잠시만 기다려 주세요)
       </div>
     );
   }
@@ -206,21 +206,21 @@ export default function UndervaluedRadar({ onSelectStock }) {
 
   return (
     <div style={{ padding: '10px 0', animation: 'fadeIn 0.4s ease-in-out' }}>
-      {/* 🌟 레이더 헤더 배너 */}
+      {/* 레이더 헤더 배너 */}
       <div style={{
-        padding: '24px 28px',
-        background: 'linear-gradient(135deg, rgba(16,185,129,0.18) 0%, rgba(234,179,8,0.15) 50%, rgba(99,102,241,0.15) 100%)',
-        border: '2px solid rgba(16,185,129,0.5)',
-        borderRadius: 22,
-        marginBottom: 20,
-        boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+        padding: '22px 26px',
+        background: 'var(--bg2)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        borderRadius: 0,
+        marginBottom: 18,
+        boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
           <div>
-            <div style={{ fontSize: '1.55rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-              <span style={{ filter: 'drop-shadow(0 0 10px #10b981)' }}>💎 코스피·코스닥 1·2·3순위 저평가 발굴 레이더</span>
-              <span style={{ fontSize: '.72rem', background: '#10b981', color: '#fff', padding: '3px 10px', borderRadius: 20, fontWeight: 800 }}>
-                ⚡ 3대 투자 우선순위 등급제 탑재
+            <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+              <span>코스피·코스닥 1·2·3순위 저평가 발굴 레이더</span>
+              <span style={{ fontSize: '.72rem', background: 'var(--accent)', color: '#fff', padding: '3px 10px', borderRadius: 0, fontWeight: 700 }}>
+                3대 투자 우선순위 등급제 탑재
               </span>
             </div>
             <div style={{ fontSize: '.9rem', color: 'var(--t2)', marginTop: 6, lineHeight: 1.5 }}>
@@ -229,28 +229,28 @@ export default function UndervaluedRadar({ onSelectStock }) {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-            <div style={{ padding: '8px 16px', background: 'rgba(0,0,0,0.4)', borderRadius: 12, border: '1px solid rgba(234,179,8,0.4)', textAlign: 'center' }}>
-              <div style={{ fontSize: '.72rem', color: 'var(--gold)', fontWeight: 700 }}>전체 평균 상승여력</div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 900, color: '#10b981', marginTop: 2 }}>{summary.avgUpside || '+42.5%'}</div>
+            <div style={{ padding: '8px 16px', background: 'rgba(0,0,0,0.25)', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)', textAlign: 'center' }}>
+              <div style={{ fontSize: '.72rem', color: 'var(--t2)', fontWeight: 700 }}>전체 평균 상승여력</div>
+              <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#10b981', marginTop: 2 }}>{summary.avgUpside || '+42.5%'}</div>
             </div>
             <button
               onClick={loadRadar}
-              style={{ padding: '10px 16px', background: 'var(--accent)', border: 'none', borderRadius: 12, color: '#fff', fontWeight: 800, cursor: 'pointer', fontSize: '.88rem' }}
+              style={{ padding: '10px 16px', background: 'var(--accent)', border: 'none', borderRadius: 0, color: '#fff', fontWeight: 700, cursor: 'pointer', fontSize: '.88rem' }}
             >
-              🔄 새로고침
+              새로고침
             </button>
             <button
               onClick={triggerFullScan}
               disabled={scanning}
               style={{
                 padding: '10px 16px',
-                background: scanning ? 'rgba(251,191,36,0.3)' : 'linear-gradient(135deg, #f59e0b, #d97706)',
-                border: 'none', borderRadius: 12, color: '#fff', fontWeight: 800,
+                background: scanning ? 'rgba(251,191,36,0.3)' : 'transparent',
+                border: '1px solid rgba(255,255,255,0.15)', borderRadius: 0, color: 'var(--t2)', fontWeight: 700,
                 cursor: scanning ? 'not-allowed' : 'pointer', fontSize: '.88rem',
                 opacity: scanning ? 0.7 : 1,
               }}
             >
-              {scanning ? '⏳ 스캔 중...' : '🔭 전종목 재스캔'}
+              {scanning ? '스캔 중...' : '전종목 재스캔'}
             </button>
           </div>
         </div>
@@ -263,25 +263,24 @@ export default function UndervaluedRadar({ onSelectStock }) {
           onClick={() => setTierFilter(tierFilter === 'TIER1' ? 'ALL' : 'TIER1')}
           style={{
             padding: '18px 20px',
-            borderRadius: 16,
-            background: tierFilter === 'TIER1' 
-              ? 'linear-gradient(135deg, rgba(16,185,129,0.35) 0%, rgba(5,150,105,0.25) 100%)' 
-              : 'rgba(30, 41, 59, 0.75)',
-            border: tierFilter === 'TIER1' ? '2px solid #10b981' : '1px solid rgba(16,185,129,0.4)',
+            borderRadius: 0,
+            background: tierFilter === 'TIER1' ? 'rgba(16,185,129,0.10)' : 'var(--bg2)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            borderTop: '2px solid #10b981',
             cursor: 'pointer',
             transition: 'all 0.2s ease',
-            boxShadow: tierFilter === 'TIER1' ? '0 0 16px rgba(16,185,129,0.4)' : 'none'
+            boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '.82rem', fontWeight: 900, color: '#34d399' }}>🥇 1순위: 실적 슈퍼밸류</span>
-            <span style={{ fontSize: '1.2rem', fontWeight: 900, color: '#10b981', fontFamily: 'Space Mono' }}>{tierCounts.TIER1}개</span>
+            <span style={{ fontSize: '.82rem', fontWeight: 700, color: '#34d399' }}>🥇 1순위: 실적 슈퍼밸류</span>
+            <span style={{ fontSize: '1.2rem', fontWeight: 800, color: '#10b981', fontFamily: 'Space Mono' }}>{tierCounts.TIER1}개</span>
           </div>
           <div style={{ fontSize: '.76rem', color: 'var(--t2)', marginTop: 6, lineHeight: 1.45 }}>
             돈을 잘 버는데(고ROE) 주가는 초저PER로 가장 싼 <strong>최고의 알짜 성장가치주</strong>
           </div>
-          <div style={{ fontSize: '.72rem', color: '#10b981', fontWeight: 800, marginTop: 8 }}>
-            {tierFilter === 'TIER1' ? '✅ 1순위 필터링 활성화 중' : '클릭 시 1순위만 모아보기 ➔'}
+          <div style={{ fontSize: '.72rem', color: '#10b981', fontWeight: 700, marginTop: 8 }}>
+            {tierFilter === 'TIER1' ? '1순위 필터링 활성화 중' : '클릭 시 1순위만 모아보기 ➔'}
           </div>
         </div>
 
@@ -290,25 +289,24 @@ export default function UndervaluedRadar({ onSelectStock }) {
           onClick={() => setTierFilter(tierFilter === 'TIER2' ? 'ALL' : 'TIER2')}
           style={{
             padding: '18px 20px',
-            borderRadius: 16,
-            background: tierFilter === 'TIER2' 
-              ? 'linear-gradient(135deg, rgba(234,179,8,0.35) 0%, rgba(202,138,4,0.25) 100%)' 
-              : 'rgba(30, 41, 59, 0.75)',
-            border: tierFilter === 'TIER2' ? '2px solid #fbbf24' : '1px solid rgba(234,179,8,0.4)',
+            borderRadius: 0,
+            background: tierFilter === 'TIER2' ? 'rgba(234,179,8,0.10)' : 'var(--bg2)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            borderTop: '2px solid #fbbf24',
             cursor: 'pointer',
             transition: 'all 0.2s ease',
-            boxShadow: tierFilter === 'TIER2' ? '0 0 16px rgba(234,179,8,0.4)' : 'none'
+            boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '.82rem', fontWeight: 900, color: '#fbbf24' }}>🥈 2순위: 자산가치 밸류업</span>
-            <span style={{ fontSize: '1.2rem', fontWeight: 900, color: '#fbbf24', fontFamily: 'Space Mono' }}>{tierCounts.TIER2}개</span>
+            <span style={{ fontSize: '.82rem', fontWeight: 700, color: '#fbbf24' }}>🥈 2순위: 자산가치 밸류업</span>
+            <span style={{ fontSize: '1.2rem', fontWeight: 800, color: '#fbbf24', fontFamily: 'Space Mono' }}>{tierCounts.TIER2}개</span>
           </div>
           <div style={{ fontSize: '.76rem', color: 'var(--t2)', marginTop: 6, lineHeight: 1.45 }}>
             순자산과 현금이 시총보다 많은 초저PBR + <strong>기업 밸류업 정책 수혜주</strong>
           </div>
-          <div style={{ fontSize: '.72rem', color: '#fbbf24', fontWeight: 800, marginTop: 8 }}>
-            {tierFilter === 'TIER2' ? '✅ 2순위 필터링 활성화 중' : '클릭 시 2순위만 모아보기 ➔'}
+          <div style={{ fontSize: '.72rem', color: '#fbbf24', fontWeight: 700, marginTop: 8 }}>
+            {tierFilter === 'TIER2' ? '2순위 필터링 활성화 중' : '클릭 시 2순위만 모아보기 ➔'}
           </div>
         </div>
 
@@ -317,30 +315,29 @@ export default function UndervaluedRadar({ onSelectStock }) {
           onClick={() => setTierFilter(tierFilter === 'TIER3' ? 'ALL' : 'TIER3')}
           style={{
             padding: '18px 20px',
-            borderRadius: 16,
-            background: tierFilter === 'TIER3' 
-              ? 'linear-gradient(135deg, rgba(99,102,241,0.35) 0%, rgba(79,70,229,0.25) 100%)' 
-              : 'rgba(30, 41, 59, 0.75)',
-            border: tierFilter === 'TIER3' ? '2px solid #818cf8' : '1px solid rgba(99,102,241,0.4)',
+            borderRadius: 0,
+            background: tierFilter === 'TIER3' ? 'rgba(99,102,241,0.10)' : 'var(--bg2)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            borderTop: '2px solid #818cf8',
             cursor: 'pointer',
             transition: 'all 0.2s ease',
-            boxShadow: tierFilter === 'TIER3' ? '0 0 16px rgba(99,102,241,0.4)' : 'none'
+            boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '.82rem', fontWeight: 900, color: '#818cf8' }}>🥉 3순위: 고배당 방어주</span>
-            <span style={{ fontSize: '1.2rem', fontWeight: 900, color: '#818cf8', fontFamily: 'Space Mono' }}>{tierCounts.TIER3}개</span>
+            <span style={{ fontSize: '.82rem', fontWeight: 700, color: '#818cf8' }}>🥉 3순위: 고배당 방어주</span>
+            <span style={{ fontSize: '1.2rem', fontWeight: 800, color: '#818cf8', fontFamily: 'Space Mono' }}>{tierCounts.TIER3}개</span>
           </div>
           <div style={{ fontSize: '.76rem', color: 'var(--t2)', marginTop: 6, lineHeight: 1.45 }}>
             안정적인 흑자 창출과 <strong>높은 배당수익률로 하락장을 방어하는 캐시카우</strong>
           </div>
-          <div style={{ fontSize: '.72rem', color: '#818cf8', fontWeight: 800, marginTop: 8 }}>
-            {tierFilter === 'TIER3' ? '✅ 3순위 필터링 활성화 중' : '클릭 시 3순위만 모아보기 ➔'}
+          <div style={{ fontSize: '.72rem', color: '#818cf8', fontWeight: 700, marginTop: 8 }}>
+            {tierFilter === 'TIER3' ? '3순위 필터링 활성화 중' : '클릭 시 3순위만 모아보기 ➔'}
           </div>
         </div>
       </div>
 
-      {/* 🔍 [NEW] 실시간 종목 검색 바 */}
+      {/* 실시간 종목 검색 바 */}
       <div style={{
         marginBottom: 16,
         display: 'flex',
@@ -348,11 +345,10 @@ export default function UndervaluedRadar({ onSelectStock }) {
         gap: 12,
         background: 'var(--bg2)',
         padding: '12px 18px',
-        borderRadius: 16,
-        border: '1px solid rgba(16,185,129,0.35)',
-        boxShadow: '0 4px 18px rgba(0,0,0,0.25)'
+        borderRadius: 0,
+        border: '1px solid rgba(255,255,255,0.08)',
+        boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
       }}>
-        <span style={{ fontSize: '1.25rem' }}>🔍</span>
         <input
           type="text"
           value={searchQuery}
@@ -370,7 +366,7 @@ export default function UndervaluedRadar({ onSelectStock }) {
         />
         {searchQuery && (
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span style={{ fontSize: '.78rem', color: '#34d399', fontWeight: 800, background: 'rgba(16,185,129,0.15)', padding: '3px 8px', borderRadius: 8 }}>
+            <span style={{ fontSize: '.78rem', color: 'var(--t2)', fontWeight: 700, background: 'rgba(255,255,255,0.06)', padding: '3px 8px', borderRadius: 0 }}>
               {filtered.length}개 매칭
             </span>
             <button
@@ -378,15 +374,15 @@ export default function UndervaluedRadar({ onSelectStock }) {
               style={{
                 background: 'rgba(255,255,255,0.1)',
                 border: 'none',
-                borderRadius: 8,
+                borderRadius: 0,
                 color: '#fff',
                 cursor: 'pointer',
                 fontSize: '.78rem',
-                fontWeight: 800,
+                fontWeight: 700,
                 padding: '4px 10px'
               }}
             >
-              ✕ 초기화
+              초기화
             </button>
           </div>
         )}
@@ -397,7 +393,7 @@ export default function UndervaluedRadar({ onSelectStock }) {
         {/* 등급 탭 */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[
-            { id: 'ALL', label: `🌐 전체 보기 (${tierCounts.ALL})` },
+            { id: 'ALL', label: `전체 보기 (${tierCounts.ALL})` },
             { id: 'TIER1', label: `🥇 1순위: 실적대비 극초저평가 (${tierCounts.TIER1})`, color: '#10b981' },
             { id: 'TIER2', label: `🥈 2순위: 자산가치 밸류업 (${tierCounts.TIER2})`, color: '#fbbf24' },
             { id: 'TIER3', label: `🥉 3순위: 고배당 방어주 (${tierCounts.TIER3})`, color: '#818cf8' },
@@ -407,12 +403,12 @@ export default function UndervaluedRadar({ onSelectStock }) {
               onClick={() => setTierFilter(t.id)}
               style={{
                 padding: '8px 14px',
-                borderRadius: 12,
-                border: tierFilter === t.id ? `1.5px solid ${t.color || '#10b981'}` : '1px solid rgba(255,255,255,0.08)',
-                background: tierFilter === t.id ? (t.color ? `${t.color}25` : 'rgba(16,185,129,0.25)') : 'rgba(0,0,0,0.3)',
+                borderRadius: 0,
+                border: 'none',
+                background: tierFilter === t.id ? (t.color || 'var(--accent)') : 'rgba(0,0,0,0.25)',
                 color: tierFilter === t.id ? '#fff' : 'var(--t3)',
                 fontSize: '.82rem',
-                fontWeight: 900,
+                fontWeight: 700,
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
               }}
@@ -424,7 +420,7 @@ export default function UndervaluedRadar({ onSelectStock }) {
 
         {/* 정렬 셀렉터 */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ fontSize: '.8rem', color: 'var(--gold)', fontWeight: 800 }}>
+          <span style={{ fontSize: '.8rem', color: 'var(--t2)', fontWeight: 700 }}>
             출력: {filtered.length}개
           </span>
           <select
@@ -433,10 +429,10 @@ export default function UndervaluedRadar({ onSelectStock }) {
             style={{
               padding: '7px 12px',
               background: 'var(--bg3)',
-              color: 'var(--gold)',
-              border: '1px solid rgba(234,179,8,0.4)',
-              borderRadius: 10,
-              fontWeight: 800,
+              color: 'var(--t2)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderRadius: 0,
+              fontWeight: 700,
               cursor: 'pointer',
               fontSize: '.82rem',
               outline: 'none'
@@ -473,9 +469,9 @@ export default function UndervaluedRadar({ onSelectStock }) {
               onClick={() => { setMarketFilter(btn.market); setSectorFilter(btn.sector); }}
               style={{
                 padding: '6px 12px',
-                borderRadius: 14,
+                borderRadius: 0,
                 border: 'none',
-                background: isActive ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)' : 'rgba(255,255,255,0.05)',
+                background: isActive ? 'var(--accent)' : 'rgba(255,255,255,0.05)',
                 color: isActive ? '#fff' : 'var(--t2)',
                 fontWeight: 700,
                 fontSize: '.76rem',
@@ -490,15 +486,14 @@ export default function UndervaluedRadar({ onSelectStock }) {
 
       {/* 🗂️ 저평가 종목 그리드 리스트 */}
       {filtered.length === 0 ? (
-        <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)', background: 'var(--bg2)', borderRadius: 18, border: '1px dashed rgba(255,255,255,0.1)' }}>
-          <div style={{ fontSize: '2.5rem', marginBottom: 10 }}>🔍</div>
-          <div style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--t1)' }}>검색 조건이나 선택하신 등급에 부합하는 종목이 없습니다.</div>
+        <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--t3)', background: 'var(--bg2)', borderRadius: 0, border: '1px dashed rgba(255,255,255,0.1)' }}>
+          <div style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--t1)' }}>검색 조건이나 선택하신 등급에 부합하는 종목이 없습니다.</div>
           <div style={{ fontSize: '.82rem', color: 'var(--t3)', marginTop: 4 }}>다른 검색어를 입력하시거나 필터를 초기화해 보세요.</div>
           <button
             onClick={() => { setSearchQuery(''); setTierFilter('ALL'); setMarketFilter('ALL'); setSectorFilter('ALL'); }}
-            style={{ marginTop: 14, padding: '8px 16px', background: 'var(--accent)', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 800, cursor: 'pointer' }}
+            style={{ marginTop: 14, padding: '8px 16px', background: 'var(--accent)', color: '#fff', border: 'none', borderRadius: 0, fontWeight: 700, cursor: 'pointer' }}
           >
-            🔄 전체 필터 초기화
+            전체 필터 초기화
           </button>
         </div>
       ) : (
@@ -522,13 +517,14 @@ export default function UndervaluedRadar({ onSelectStock }) {
                 onClick={() => onSelectStock && onSelectStock({ ...item, currentPrice: curPrice, score: Math.min(5, Math.max(3, Math.round((item.quantScore || 90) / 20))) })}
                 style={{
                   background: 'var(--bg2)',
-                  border: `1.8px solid ${tierInfo?.border || '#10b981'}`,
-                  borderRadius: 18,
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  borderTop: `2px solid ${tierInfo?.border || '#10b981'}`,
+                  borderRadius: 0,
                   padding: '22px 24px',
                   position: 'relative',
                   cursor: 'pointer',
                   transition: 'transform 0.2s ease, border-color 0.2s ease',
-                  boxShadow: tierInfo?.glow || '0 4px 20px rgba(0,0,0,0.25)'
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-4px)';
@@ -554,7 +550,7 @@ export default function UndervaluedRadar({ onSelectStock }) {
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                       <span style={{
-                        fontSize: '.74rem', fontWeight: 800, padding: '2px 8px', borderRadius: 6,
+                        fontSize: '.74rem', fontWeight: 700, padding: '2px 8px', borderRadius: 0,
                         background: isKospi ? 'rgba(59,130,246,0.2)' : 'rgba(168,85,247,0.2)',
                         color: isKospi ? '#60a5fa' : '#c084fc',
                         border: `1px solid ${isKospi ? 'rgba(96,165,250,0.4)' : 'rgba(192,132,252,0.4)'}`
@@ -563,10 +559,10 @@ export default function UndervaluedRadar({ onSelectStock }) {
                     </div>
                   </div>
 
-                  {/* 🥇 1·2·3순위 저평가 등급 뱃지 */}
+                  {/* 1·2·3순위 저평가 등급 뱃지 */}
                   <div style={{
                     padding: '4px 10px',
-                    borderRadius: 10,
+                    borderRadius: 0,
                     fontWeight: 900,
                     fontSize: '.82rem',
                     background: tierInfo?.badgeBg || 'rgba(16,185,129,0.2)',
@@ -583,7 +579,7 @@ export default function UndervaluedRadar({ onSelectStock }) {
                     <div style={{ fontSize: '1.35rem', fontWeight: 900, color: '#fff', letterSpacing: '-0.3px', display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
                       {item.name} <span style={{ fontSize: '.8rem', color: 'var(--t3)', fontWeight: 600 }}>({item.code})</span>
                       {item.isUptrend && (
-                        <span style={{ fontSize: '.68rem', background: 'rgba(239,68,68,0.15)', color: '#fca5a5', padding: '2px 6px', borderRadius: 6, fontWeight: 800, border: '1px solid rgba(239,68,68,0.3)' }}>
+                        <span style={{ fontSize: '.68rem', background: 'rgba(239,68,68,0.15)', color: '#fca5a5', padding: '2px 6px', borderRadius: 0, fontWeight: 700, border: '1px solid rgba(239,68,68,0.3)' }}>
                           📈 추세전환
                         </span>
                       )}
@@ -609,11 +605,11 @@ export default function UndervaluedRadar({ onSelectStock }) {
                         ✅ 목표가 도달!
                       </div>
                     ) : (
-                      <div style={{ fontSize: '1.35rem', fontWeight: 900, color: '#10b981', filter: 'drop-shadow(0 0 8px rgba(16,185,129,0.3))' }}>
+                      <div style={{ fontSize: '1.35rem', fontWeight: 900, color: '#10b981' }}>
                         {displayUpside}
                       </div>
                     )}
-                    <div style={{ fontSize: '.75rem', color: 'var(--gold)', fontWeight: 700 }}>
+                    <div style={{ fontSize: '.75rem', color: 'var(--t3)', fontWeight: 700 }}>
                       {targetP > 0 ? `목표가 ${targetP.toLocaleString()}원` : ''}
                     </div>
                   </div>
@@ -626,50 +622,50 @@ export default function UndervaluedRadar({ onSelectStock }) {
                   gap: 8,
                   background: 'rgba(0,0,0,0.3)',
                   padding: '10px 12px',
-                  borderRadius: 12,
+                  borderRadius: 0,
                   marginBottom: 12,
                   border: '1px solid rgba(255,255,255,0.04)'
                 }}>
                   <div style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '.68rem', color: 'var(--t3)' }}>PER (실적배수)</div>
-                    <div style={{ fontSize: '.95rem', fontWeight: 800, color: 'var(--gold)', marginTop: 2 }}>{item.per}</div>
+                    <div style={{ fontSize: '.95rem', fontWeight: 700, color: 'var(--t1)', marginTop: 2 }}>{item.per}</div>
                   </div>
                   <div style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '.68rem', color: 'var(--t3)' }}>PBR (자산가치)</div>
-                    <div style={{ fontSize: '.95rem', fontWeight: 800, color: '#60a5fa', marginTop: 2 }}>{item.pbr}</div>
+                    <div style={{ fontSize: '.95rem', fontWeight: 700, color: 'var(--t1)', marginTop: 2 }}>{item.pbr}</div>
                   </div>
                   <div style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '.68rem', color: 'var(--t3)' }}>ROE (수익성)</div>
-                    <div style={{ fontSize: '.95rem', fontWeight: 800, color: '#c084fc', marginTop: 2 }}>{item.roe}</div>
+                    <div style={{ fontSize: '.95rem', fontWeight: 700, color: 'var(--t1)', marginTop: 2 }}>{item.roe}</div>
                   </div>
                   <div style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '.68rem', color: 'var(--t3)' }}>배당수익률</div>
-                    <div style={{ fontSize: '.95rem', fontWeight: 800, color: '#10b981', marginTop: 2 }}>{item.divYield || item.dividendYield || '-'}</div>
+                    <div style={{ fontSize: '.95rem', fontWeight: 700, color: 'var(--t1)', marginTop: 2 }}>{item.divYield || item.dividendYield || '-'}</div>
                   </div>
                   <div style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '.68rem', color: 'var(--t3)' }}>종합 점수</div>
-                    <div style={{ fontSize: '.95rem', fontWeight: 800, color: '#f472b6', marginTop: 2 }}>{item.investmentScore ?? item.quantScore}점</div>
+                    <div style={{ fontSize: '.95rem', fontWeight: 700, color: 'var(--t1)', marginTop: 2 }}>{item.investmentScore ?? item.quantScore}점</div>
                   </div>
                   <div style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '.68rem', color: 'var(--t3)' }}>권장 비중</div>
-                    <div style={{ fontSize: '.95rem', fontWeight: 800, color: '#3b82f6', marginTop: 2 }}>최대 {item.kellyPct || 15}%</div>
+                    <div style={{ fontSize: '.95rem', fontWeight: 700, color: 'var(--t1)', marginTop: 2 }}>최대 {item.kellyPct || 15}%</div>
                   </div>
                 </div>
 
-                {/* 💡 1·2·3순위 등급 선정 사유 한 줄 해설 박스 */}
-                <div style={{ fontSize: '.78rem', color: tierInfo?.badgeColor || 'var(--t2)', background: 'rgba(0,0,0,0.3)', padding: '8px 12px', borderRadius: 10, border: `1px solid ${tierInfo?.border}30`, marginBottom: 10 }}>
+                {/* 1·2·3순위 등급 선정 사유 한 줄 해설 박스 */}
+                <div style={{ fontSize: '.78rem', color: tierInfo?.badgeColor || 'var(--t2)', background: 'rgba(0,0,0,0.3)', padding: '8px 12px', borderRadius: 0, border: `1px solid ${tierInfo?.border}30`, marginBottom: 10 }}>
                   {tierInfo?.actionReason}
                 </div>
 
                 {/* 퀀트 발굴 분석 이유 */}
-                <div style={{ fontSize: '.8rem', color: 'var(--t2)', lineHeight: 1.45, background: 'rgba(255,255,255,0.02)', padding: '8px 12px', borderRadius: 10 }}>
-                  💡 <strong>기업 핵심 모멘텀:</strong> {item.reason}
+                <div style={{ fontSize: '.8rem', color: 'var(--t2)', lineHeight: 1.45, background: 'rgba(255,255,255,0.02)', padding: '8px 12px', borderRadius: 0 }}>
+                  <strong>기업 핵심 모멘텀:</strong> {item.reason}
                 </div>
 
                 {/* 차트 팝업 바로가기 안내 */}
                 <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 10 }}>
-                  <span style={{ fontSize: '.74rem', color: 'var(--accent)', fontWeight: 800, display: 'flex', alignItems: 'center', gap: 4 }}>
-                    📈 클릭 시 실시간 챠트 & 퀀트 모달 ➔
+                  <span style={{ fontSize: '.74rem', color: 'var(--accent)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 4 }}>
+                    클릭 시 실시간 챠트 & 퀀트 모달 ➔
                   </span>
                 </div>
               </div>

@@ -33,14 +33,14 @@ export default function EpsTrendChart({ stock }) {
   }, [code])
 
   if (loading) return (
-    <div style={{ background: 'var(--bg3)', borderRadius: 16, padding: '28px 24px', marginBottom: 20, border: '1.5px solid rgba(234,179,8,0.3)', textAlign: 'center', color: 'var(--t3)' }}>
-      <div style={{ fontSize: '1rem', fontWeight: 700 }}>📈 네이버 증권 실제 EPS 데이터 로딩 중...</div>
+    <div style={{ background: 'var(--bg2)', borderRadius: 0, padding: '28px 24px', marginBottom: 20, border: '1px solid rgba(255,255,255,0.08)', textAlign: 'center', color: 'var(--t3)' }}>
+      <div style={{ fontSize: '1rem', fontWeight: 700 }}>네이버 증권 실제 EPS 데이터 로딩 중...</div>
     </div>
   )
 
   if (error || !financials) return (
-    <div style={{ background: 'var(--bg3)', borderRadius: 16, padding: '20px 24px', marginBottom: 20, border: '1.5px solid rgba(234,179,8,0.2)', color: 'var(--t3)', textAlign: 'center' }}>
-      <div style={{ fontSize: '.9rem' }}>📋 EPS 재무데이터를 파싱하지 못했습니다 — {error || '데이터 없음'}</div>
+    <div style={{ background: 'var(--bg2)', borderRadius: 0, padding: '20px 24px', marginBottom: 20, border: '1px solid rgba(255,255,255,0.08)', color: 'var(--t3)', textAlign: 'center' }}>
+      <div style={{ fontSize: '.9rem' }}>EPS 재무데이터를 파싱하지 못했습니다 — {error || '데이터 없음'}</div>
     </div>
   )
 
@@ -67,16 +67,16 @@ export default function EpsTrendChart({ stock }) {
 
   if (rawData.length === 0) {
     return (
-      <div style={{ background: 'var(--bg3)', borderRadius: 16, padding: '20px 24px', marginBottom: 20, border: '1.5px solid rgba(234,179,8,0.35)', color: 'var(--t2)' }}>
+      <div style={{ background: 'var(--bg2)', borderRadius: 0, padding: '20px 24px', marginBottom: 20, border: '1px solid rgba(255,255,255,0.08)', color: 'var(--t2)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-          <div style={{ fontSize: '1.05rem', fontWeight: 900, color: 'var(--gold)' }}>📈 {stock?.name} EPS (주당순이익) 추이</div>
-          <div style={{ display: 'flex', background: 'rgba(0,0,0,0.3)', padding: 3, borderRadius: 10, border: '1px solid rgba(255,255,255,0.08)' }}>
-            <button onClick={() => setActiveTab('annual')} style={{ padding: '6px 14px', background: activeTab === 'annual' ? 'var(--accent)' : 'transparent', border: 'none', borderRadius: 8, color: '#fff', fontSize: '.78rem', fontWeight: 800, cursor: 'pointer' }}>연간</button>
-            <button onClick={() => setActiveTab('quarter')} style={{ padding: '6px 14px', background: activeTab === 'quarter' ? 'var(--accent)' : 'transparent', border: 'none', borderRadius: 8, color: '#fff', fontSize: '.78rem', fontWeight: 800, cursor: 'pointer' }}>분기별</button>
+          <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#fff' }}>{stock?.name} EPS (주당순이익) 추이</div>
+          <div style={{ display: 'flex', background: 'rgba(0,0,0,0.25)', padding: 3, borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)' }}>
+            <button onClick={() => setActiveTab('annual')} style={{ padding: '6px 14px', background: activeTab === 'annual' ? 'var(--accent)' : 'transparent', border: 'none', borderRadius: 0, color: activeTab === 'annual' ? '#fff' : 'var(--t3)', fontSize: '.78rem', fontWeight: 700, cursor: 'pointer' }}>연간</button>
+            <button onClick={() => setActiveTab('quarter')} style={{ padding: '6px 14px', background: activeTab === 'quarter' ? 'var(--accent)' : 'transparent', border: 'none', borderRadius: 0, color: activeTab === 'quarter' ? '#fff' : 'var(--t3)', fontSize: '.78rem', fontWeight: 700, cursor: 'pointer' }}>분기별</button>
           </div>
         </div>
         <div style={{ textAlign: 'center', padding: '20px 0', color: 'var(--t3)', fontSize: '.85rem' }}>
-          📭 선택하신 {activeTab === 'annual' ? '연간' : '분기별'} EPS 데이터가 네이버 금융에 존재하지 않습니다.
+          선택하신 {activeTab === 'annual' ? '연간' : '분기별'} EPS 데이터가 네이버 금융에 존재하지 않습니다.
         </div>
       </div>
     )
@@ -116,63 +116,59 @@ export default function EpsTrendChart({ stock }) {
   })
 
   return (
-    <div style={{ background: 'var(--bg3)', borderRadius: 16, padding: '20px 24px', marginBottom: 20, border: '1.5px solid rgba(234,179,8,0.35)', boxShadow: '0 8px 24px rgba(0,0,0,0.3)' }}>
+    <div style={{ background: 'var(--bg2)', borderRadius: 0, padding: '20px 24px', marginBottom: 20, border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 4px 16px rgba(0,0,0,0.2)' }}>
       {/* 헤더 */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 14, flexWrap: 'wrap', gap: 12 }}>
         <div>
-          <div style={{ fontSize: '1.05rem', fontWeight: 900, color: 'var(--gold)', display: 'flex', alignItems: 'center', gap: 8 }}>
-            📈 {stock?.name} EPS (주당순이익) 추이 ({activeTab === 'annual' ? '연간' : '분기별'})
+          <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: 8 }}>
+            {stock?.name} EPS (주당순이익) 추이 ({activeTab === 'annual' ? '연간' : '분기별'})
           </div>
           <div style={{ fontSize: '.78rem', color: 'var(--t2)', marginTop: 4 }}>
-            실적은 <strong style={{ color: '#10b981' }}>🟢 실선</strong> · 예상치는 <strong style={{ color: '#eab308' }}>⚡ 점선</strong> &nbsp;|&nbsp;
+            실적은 <strong style={{ color: '#10b981' }}>실선</strong> · 예상치는 <strong style={{ color: '#eab308' }}>점선</strong> &nbsp;|&nbsp;
             <span style={{ color: 'var(--t3)' }}>출처: 네이버 증권 재무제표</span>
           </div>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
           {/* 전환 토글 */}
-          <div style={{ display: 'flex', background: 'rgba(0,0,0,0.4)', padding: 3, borderRadius: 10, border: '1px solid rgba(255,255,255,0.08)' }}>
-            <button 
-              onClick={() => setActiveTab('annual')} 
-              style={{ 
-                padding: '6px 14px', 
-                background: activeTab === 'annual' ? 'linear-gradient(135deg, #fbbf24 0%, #d97706 100%)' : 'transparent', 
-                border: 'none', 
-                borderRadius: 8, 
-                color: activeTab === 'annual' ? '#000' : 'var(--t2)', 
-                fontSize: '.78rem', 
-                fontWeight: 900, 
-                cursor: 'pointer',
-                boxShadow: activeTab === 'annual' ? '0 2px 8px rgba(251,191,36,0.4)' : 'none',
-                transition: 'all 0.2s'
+          <div style={{ display: 'flex', background: 'rgba(0,0,0,0.25)', padding: 3, borderRadius: 0 }}>
+            <button
+              onClick={() => setActiveTab('annual')}
+              style={{
+                padding: '6px 14px',
+                background: activeTab === 'annual' ? 'var(--accent)' : 'transparent',
+                border: 'none',
+                borderRadius: 0,
+                color: activeTab === 'annual' ? '#fff' : 'var(--t3)',
+                fontSize: '.78rem',
+                fontWeight: 700,
+                cursor: 'pointer'
               }}
             >
-              📅 연간
+              연간
             </button>
-            <button 
-              onClick={() => setActiveTab('quarter')} 
-              style={{ 
-                padding: '6px 14px', 
-                background: activeTab === 'quarter' ? 'linear-gradient(135deg, #fbbf24 0%, #d97706 100%)' : 'transparent', 
-                border: 'none', 
-                borderRadius: 8, 
-                color: activeTab === 'quarter' ? '#000' : 'var(--t2)', 
-                fontSize: '.78rem', 
-                fontWeight: 900, 
-                cursor: 'pointer',
-                boxShadow: activeTab === 'quarter' ? '0 2px 8px rgba(251,191,36,0.4)' : 'none',
-                transition: 'all 0.2s'
+            <button
+              onClick={() => setActiveTab('quarter')}
+              style={{
+                padding: '6px 14px',
+                background: activeTab === 'quarter' ? 'var(--accent)' : 'transparent',
+                border: 'none',
+                borderRadius: 0,
+                color: activeTab === 'quarter' ? '#fff' : 'var(--t3)',
+                fontSize: '.78rem',
+                fontWeight: 700,
+                cursor: 'pointer'
               }}
             >
-              ⏱️ 분기별
+              분기별
             </button>
           </div>
 
           {/* 성장률 배지 */}
           {growthPct !== null && (
-            <div style={{ padding: '6px 14px', background: parseFloat(growthPct) >= 0 ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)', border: `1px solid ${parseFloat(growthPct) >= 0 ? 'rgba(16,185,129,0.4)' : 'rgba(239,68,68,0.4)'}`, borderRadius: 12, textAlign: 'right' }}>
+            <div style={{ padding: '6px 14px', background: parseFloat(growthPct) >= 0 ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)', border: `1px solid ${parseFloat(growthPct) >= 0 ? 'rgba(16,185,129,0.4)' : 'rgba(239,68,68,0.4)'}`, borderRadius: 0, textAlign: 'right' }}>
               <span style={{ fontSize: '.68rem', color: 'var(--t3)', fontWeight: 700, marginRight: 6 }}>{activeTab === 'annual' ? '올해 (E) 성장률' : '차기 분기 (E) 성장률'}</span>
-              <span style={{ fontSize: '1.05rem', fontWeight: 900, color: parseFloat(growthPct) >= 0 ? '#10b981' : '#ef4444' }}>
+              <span style={{ fontSize: '1.05rem', fontWeight: 800, color: parseFloat(growthPct) >= 0 ? '#10b981' : '#ef4444' }}>
                 {parseFloat(growthPct) >= 0 ? '+' : ''}{growthPct}%
               </span>
             </div>
@@ -242,16 +238,16 @@ export default function EpsTrendChart({ stock }) {
       </div>
 
       {/* 범례 */}
-      <div style={{ marginTop: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(0,0,0,0.25)', padding: '7px 13px', borderRadius: 9, fontSize: '.74rem', color: 'var(--t2)', flexWrap: 'wrap', gap: 8 }}>
+      <div style={{ marginTop: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(0,0,0,0.25)', padding: '7px 13px', borderRadius: 0, fontSize: '.74rem', color: 'var(--t2)', flexWrap: 'wrap', gap: 8 }}>
         <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
           <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontWeight: 700 }}>
-            <span style={{ display: 'inline-block', width: 16, height: 3, background: '#10b981' }} /> 🟢 실적 EPS (실선)
+            <span style={{ display: 'inline-block', width: 16, height: 3, background: '#10b981' }} /> 실적 EPS (실선)
           </span>
           <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontWeight: 700 }}>
-            <span style={{ display: 'inline-block', width: 16, height: 3, borderTop: '2.5px dashed #eab308' }} /> ⚡ 예상 EPS (점선)
+            <span style={{ display: 'inline-block', width: 16, height: 3, borderTop: '2.5px dashed #eab308' }} /> 예상 EPS (점선)
           </span>
         </div>
-        <div>💡 EPS 우상향 = 기업 순이익 상승 → 주가 밸류에이션 리레이팅 유발</div>
+        <div>EPS 우상향 = 기업 순이익 상승 → 주가 밸류에이션 리레이팅 유발</div>
       </div>
     </div>
   )

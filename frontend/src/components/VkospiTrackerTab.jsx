@@ -338,7 +338,7 @@ export default function VkospiTrackerTab() {
           padding: '14px 20px',
           background: 'rgba(15, 23, 42, 0.95)',
           border: '1.5px solid #10b981',
-          borderRadius: 14,
+          borderRadius: 0,
           color: '#fff',
           fontWeight: 800,
           fontSize: '.9rem',
@@ -352,98 +352,87 @@ export default function VkospiTrackerTab() {
 
       {/* ─── 1. 상단 메인 헤더 배너 (실시간 LIVE 상태바 포함) ─── */}
       <div style={{
-        padding: '24px 28px',
-        background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.28) 0%, rgba(99, 102, 241, 0.25) 50%, rgba(14, 165, 233, 0.25) 100%)',
-        border: '2px solid rgba(239, 68, 68, 0.45)',
-        borderRadius: 22,
-        marginBottom: 20,
-        boxShadow: '0 10px 36px rgba(0,0,0,0.45)',
+        padding: '22px 26px',
+        background: 'var(--bg2)',
+        borderTop: '2px solid #60a5fa',
+        border: '1px solid rgba(255,255,255,0.08)',
+        borderRadius: 0,
+        marginBottom: 18,
+        boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
           <div>
-            <div style={{ fontSize: '1.65rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-              <span style={{ filter: 'drop-shadow(0 0 12px #ef4444)' }}>⚡ 변동성 추정치(비공식) &amp; 코스피 · 코스닥 3대 실시간 지수 레이더</span>
-              
-              {/* 🟢 실시간 LIVE 수신 인디케이터 */}
+            <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+              <span>변동성지수 & 코스피·코스닥 실시간 레이더</span>
+
+              {/* 실시간 LIVE 수신 인디케이터 */}
               <span style={{
-                fontSize: '.78rem',
-                background: 'rgba(16, 185, 129, 0.25)',
-                color: '#34d399',
-                border: '1.5px solid #10b981',
-                padding: '4px 14px',
-                borderRadius: 20,
-                fontWeight: 900,
+                fontSize: '.74rem',
+                color: 'var(--t2)',
+                fontWeight: 700,
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: 7
+                gap: 6
               }}>
-                <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#10b981', display: 'inline-block' }} className="live-indicator-glow" />
-                ⚡ {cur.marketStatus || '장중 실시간'} ({lastLiveUpdated || '09:05:00'})
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#34d399', display: 'inline-block' }} className="live-indicator-glow" />
+                {cur.marketStatus || '장중 실시간'} · {lastLiveUpdated || '09:05:00'}
               </span>
             </div>
-            <div style={{ fontSize: '.92rem', color: 'var(--t2)', marginTop: 8, lineHeight: 1.6 }}>
-              <strong>코스피({liveKospiPrice.toLocaleString()} pt)</strong>, <strong>코스닥({liveKosdaqPrice.toLocaleString()} pt)</strong>, <strong>변동성 추정치({liveVkospiPrice} POINT, 코스피 자체 산출·비공식)</strong> 3대 지수가 <strong>초단위로 실시간 드로잉</strong>됩니다.
+            <div style={{ fontSize: '.86rem', color: 'var(--t3)', marginTop: 6, lineHeight: 1.6 }}>
+              코스피 {liveKospiPrice.toLocaleString()}pt · 코스닥 {liveKosdaqPrice.toLocaleString()}pt · 변동성 추정치 {liveVkospiPrice} POINT (코스피 자체 산출·비공식)
             </div>
           </div>
 
           {/* 액션 버튼 그룹 */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-            {/* 📱 텔레그램 브리핑 발송 */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
             <button
               onClick={handleSendTelegram}
               disabled={sendingTelegram}
               style={{
-                padding: '10px 16px',
-                background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+                padding: '9px 14px',
+                background: '#3b82f6',
                 border: 'none',
-                borderRadius: 12,
+                borderRadius: 0,
                 color: '#fff',
-                fontWeight: 900,
+                fontWeight: 700,
                 cursor: sendingTelegram ? 'not-allowed' : 'pointer',
-                fontSize: '.85rem',
-                boxShadow: '0 4px 14px rgba(239,68,68,0.4)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6
+                fontSize: '.82rem'
               }}
             >
-              <span>{sendingTelegram ? '⏳' : '📱'}</span>
-              <span>{sendingTelegram ? '전송 중...' : '지수 & 변동성 텔레그램 전송'}</span>
+              {sendingTelegram ? '전송 중...' : '텔레그램 전송'}
             </button>
 
-            {/* CSV 다운로드 */}
             <button
               onClick={handleDownloadCsv}
               style={{
-                padding: '10px 14px',
-                background: 'rgba(255,255,255,0.08)',
+                padding: '9px 14px',
+                background: 'transparent',
                 border: '1px solid rgba(255,255,255,0.15)',
-                borderRadius: 12,
-                color: '#fff',
-                fontWeight: 800,
+                borderRadius: 0,
+                color: 'var(--t2)',
+                fontWeight: 700,
                 cursor: 'pointer',
-                fontSize: '.85rem'
+                fontSize: '.82rem'
               }}
             >
-              📥 CSV
+              CSV
             </button>
 
-            {/* 새로고침 */}
             <button
               onClick={() => { setRefreshing(true); fetchVkospiData(period, false); }}
               disabled={refreshing}
               style={{
-                padding: '10px 14px',
-                background: 'rgba(255,255,255,0.08)',
+                padding: '9px 12px',
+                background: 'transparent',
                 border: '1px solid rgba(255,255,255,0.15)',
-                borderRadius: 12,
-                color: '#fff',
-                fontWeight: 800,
+                borderRadius: 0,
+                color: 'var(--t2)',
+                fontWeight: 700,
                 cursor: 'pointer',
-                fontSize: '.85rem'
+                fontSize: '.82rem'
               }}
             >
-              {refreshing ? '⏳' : '🔄'}
+              {refreshing ? '⋯' : '↻'}
             </button>
           </div>
         </div>
@@ -453,43 +442,40 @@ export default function VkospiTrackerTab() {
       <div style={{ marginBottom: 20 }}>
         {/* 그래프 상단 모드 전환 토글 바 */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, flexWrap: 'wrap', gap: 10 }}>
-          <div style={{ fontSize: '1.08rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span>⚡ 코스피 · 코스닥 · 변동성 추정치(비공식) 3대 실시간 장중 지수 차트</span>
-            <span style={{ fontSize: '.75rem', background: 'rgba(239,68,68,0.2)', color: '#f87171', border: '1px solid #ef4444', padding: '2px 8px', borderRadius: 6, fontWeight: 900 }}>
-              실시간 LIVE 드로잉
-            </span>
+          <div style={{ fontSize: '.95rem', fontWeight: 700, color: 'var(--t2)' }}>
+            코스피 · 코스닥 · 변동성 추정치 실시간
           </div>
 
-          <div style={{ display: 'flex', gap: 6 }}>
+          <div style={{ display: 'flex', gap: 4, background: 'rgba(0,0,0,0.25)', padding: 3, borderRadius: 0 }}>
             <button
               onClick={() => setTopChartMode('INTRADAY')}
               style={{
                 padding: '6px 14px',
-                borderRadius: 10,
-                border: topChartMode === 'INTRADAY' ? '1.5px solid #38bdf8' : '1px solid rgba(255,255,255,0.1)',
-                background: topChartMode === 'INTRADAY' ? 'rgba(56, 189, 248, 0.25)' : 'rgba(0,0,0,0.3)',
+                borderRadius: 0,
+                border: 'none',
+                background: topChartMode === 'INTRADAY' ? 'var(--accent)' : 'transparent',
                 color: topChartMode === 'INTRADAY' ? '#fff' : 'var(--t3)',
-                fontWeight: 900,
-                fontSize: '.82rem',
+                fontWeight: 700,
+                fontSize: '.8rem',
                 cursor: 'pointer'
               }}
             >
-              ⏱️ 당일 장중 실시간 (09:00 ~ 15:30)
+              당일 실시간
             </button>
             <button
               onClick={() => setTopChartMode('DAILY')}
               style={{
                 padding: '6px 14px',
-                borderRadius: 10,
-                border: topChartMode === 'DAILY' ? '1.5px solid #a855f7' : '1px solid rgba(255,255,255,0.1)',
-                background: topChartMode === 'DAILY' ? 'rgba(168, 85, 247, 0.25)' : 'rgba(0,0,0,0.3)',
+                borderRadius: 0,
+                border: 'none',
+                background: topChartMode === 'DAILY' ? 'var(--accent)' : 'transparent',
                 color: topChartMode === 'DAILY' ? '#fff' : 'var(--t3)',
-                fontWeight: 900,
-                fontSize: '.82rem',
+                fontWeight: 700,
+                fontSize: '.8rem',
                 cursor: 'pointer'
               }}
             >
-              📅 최근 일별 추이 (히스토리)
+              일별 히스토리
             </button>
           </div>
         </div>
@@ -502,25 +488,21 @@ export default function VkospiTrackerTab() {
         }}>
           {/* 1. 코스피 (KOSPI) 실시간 지수 카드 */}
           <div style={{
-            background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.85) 100%)',
-            borderRadius: 20,
-            border: '1.5px solid rgba(56, 189, 248, 0.4)',
+            background: 'var(--bg2)',
+            borderRadius: 0,
+            border: '1px solid rgba(255,255,255,0.08)',
             padding: '18px 20px',
-            boxShadow: '0 8px 30px rgba(0,0,0,0.3)',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
             position: 'relative'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                  <span style={{ fontSize: '1.15rem', fontWeight: 900, color: '#fff' }}>📈 코스피 (KOSPI)</span>
+                  <span style={{ fontSize: '.95rem', fontWeight: 700, color: 'var(--t2)' }}>코스피</span>
                   <span style={{
-                    padding: '2px 7px',
-                    borderRadius: 6,
-                    fontSize: '.7rem',
-                    fontWeight: 900,
-                    background: 'rgba(56, 189, 248, 0.2)',
-                    color: '#38bdf8',
-                    border: '1px solid #38bdf8',
+                    fontSize: '.68rem',
+                    fontWeight: 700,
+                    color: 'var(--t3)',
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: 4
@@ -639,7 +621,7 @@ export default function VkospiTrackerTab() {
                     right: 6,
                     background: 'rgba(15, 23, 42, 0.95)',
                     border: '1px solid #38bdf8',
-                    borderRadius: 8,
+                    borderRadius: 0,
                     padding: '4px 10px',
                     fontSize: '.74rem',
                     fontFamily: 'Space Mono',
@@ -658,25 +640,21 @@ export default function VkospiTrackerTab() {
 
           {/* 2. 코스닥 (KOSDAQ) 실시간 지수 카드 */}
           <div style={{
-            background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.85) 100%)',
-            borderRadius: 20,
-            border: '1.5px solid rgba(52, 211, 153, 0.4)',
+            background: 'var(--bg2)',
+            borderRadius: 0,
+            border: '1px solid rgba(255,255,255,0.08)',
             padding: '18px 20px',
-            boxShadow: '0 8px 30px rgba(0,0,0,0.3)',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
             position: 'relative'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                  <span style={{ fontSize: '1.15rem', fontWeight: 900, color: '#fff' }}>📈 코스닥 (KOSDAQ)</span>
+                  <span style={{ fontSize: '.95rem', fontWeight: 700, color: 'var(--t2)' }}>코스닥</span>
                   <span style={{
-                    padding: '2px 7px',
-                    borderRadius: 6,
-                    fontSize: '.7rem',
-                    fontWeight: 900,
-                    background: 'rgba(52, 211, 153, 0.2)',
-                    color: '#34d399',
-                    border: '1px solid #34d399',
+                    fontSize: '.68rem',
+                    fontWeight: 700,
+                    color: 'var(--t3)',
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: 4
@@ -795,7 +773,7 @@ export default function VkospiTrackerTab() {
                     right: 6,
                     background: 'rgba(15, 23, 42, 0.95)',
                     border: '1px solid #34d399',
-                    borderRadius: 8,
+                    borderRadius: 0,
                     padding: '4px 10px',
                     fontSize: '.74rem',
                     fontFamily: 'Space Mono',
@@ -812,27 +790,23 @@ export default function VkospiTrackerTab() {
             </div>
           </div>
 
-          {/* 3. ⚡ VOLATILITY (코스피 자체 변동성 추정치, 비공식) 전용 실시간 지수 카드 */}
+          {/* 3. VOLATILITY (코스피 자체 변동성 추정치, 비공식) 전용 실시간 지수 카드 */}
           <div style={{
-            background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.85) 100%)',
-            borderRadius: 20,
-            border: '1.5px solid rgba(239, 68, 68, 0.5)',
+            background: 'var(--bg2)',
+            borderRadius: 0,
+            border: '1px solid rgba(255,255,255,0.08)',
             padding: '18px 20px',
-            boxShadow: '0 8px 30px rgba(0,0,0,0.3)',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
             position: 'relative'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                  <span style={{ fontSize: '1.15rem', fontWeight: 900, color: '#fff' }}>⚡ VOLATILITY (자체추정·비공식)</span>
+                  <span style={{ fontSize: '.95rem', fontWeight: 700, color: 'var(--t2)' }}>변동성 추정치 (비공식)</span>
                   <span style={{
-                    padding: '2px 7px',
-                    borderRadius: 6,
-                    fontSize: '.7rem',
-                    fontWeight: 900,
-                    background: 'rgba(239, 68, 68, 0.2)',
-                    color: '#f87171',
-                    border: '1px solid #ef4444',
+                    fontSize: '.68rem',
+                    fontWeight: 700,
+                    color: 'var(--t3)',
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: 4
@@ -953,7 +927,7 @@ export default function VkospiTrackerTab() {
                     right: 6,
                     background: 'rgba(15, 23, 42, 0.95)',
                     border: '1px solid #ef4444',
-                    borderRadius: 8,
+                    borderRadius: 0,
                     padding: '4px 10px',
                     fontSize: '.74rem',
                     fontFamily: 'Space Mono',
@@ -977,18 +951,18 @@ export default function VkospiTrackerTab() {
         {/* 카드 1: 변동성 추정치 (코스피 자체 산출, 비공식) */}
         <div style={{
           padding: '18px 20px',
-          borderRadius: 18,
-          background: 'rgba(30, 41, 59, 0.8)',
-          border: '1.5px solid rgba(239, 68, 68, 0.45)',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.25)'
+          borderRadius: 0,
+          background: 'var(--bg2)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '.84rem', fontWeight: 800, color: '#f87171' }}>⚡ VOLATILITY (자체추정·비공식)</span>
+            <span style={{ fontSize: '.8rem', fontWeight: 700, color: 'var(--t2)' }}>변동성 추정치 (비공식)</span>
             <span style={{
               fontSize: '.72rem',
               fontWeight: 900,
               padding: '3px 8px',
-              borderRadius: 6,
+              borderRadius: 0,
               background: 'rgba(16,185,129,0.2)',
               color: '#34d399',
               border: '1px solid #10b981'
@@ -1009,13 +983,13 @@ export default function VkospiTrackerTab() {
         {/* 카드 2: 코스피 지수 */}
         <div style={{
           padding: '18px 20px',
-          borderRadius: 18,
-          background: 'rgba(30, 41, 59, 0.8)',
-          border: '1.5px solid rgba(59, 130, 246, 0.4)',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.25)'
+          borderRadius: 0,
+          background: 'var(--bg2)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '.84rem', fontWeight: 800, color: '#60a5fa' }}>📈 코스피 (KOSPI)</span>
+            <span style={{ fontSize: '.8rem', fontWeight: 700, color: 'var(--t2)' }}>코스피 (KOSPI)</span>
             <span style={{ fontSize: '.74rem', color: 'var(--t3)' }}>KPI200: {cur.kpi200?.toLocaleString() || '-'}</span>
           </div>
           <div style={{ fontSize: '1.85rem', fontWeight: 900, color: '#fff', fontFamily: 'Space Mono', marginTop: 8 }}>
@@ -1031,14 +1005,14 @@ export default function VkospiTrackerTab() {
         {/* 카드 3: 역상관성 상관계수 */}
         <div style={{
           padding: '18px 20px',
-          borderRadius: 18,
-          background: 'rgba(30, 41, 59, 0.8)',
-          border: '1.5px solid rgba(168, 85, 247, 0.4)',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.25)'
+          borderRadius: 0,
+          background: 'var(--bg2)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '.84rem', fontWeight: 800, color: '#c084fc' }}>📉↔️📈 역상관관계 계수</span>
-            <span style={{ fontSize: '.72rem', color: '#c084fc', fontWeight: 800 }}>강한 반비례</span>
+            <span style={{ fontSize: '.8rem', fontWeight: 700, color: 'var(--t2)' }}>역상관관계 계수</span>
+            <span style={{ fontSize: '.72rem', color: 'var(--t3)', fontWeight: 700 }}>강한 반비례</span>
           </div>
           <div style={{ fontSize: '1.85rem', fontWeight: 900, color: '#c084fc', fontFamily: 'Space Mono', marginTop: 8 }}>
             {stats.correlation !== undefined ? stats.correlation : -0.85}
@@ -1051,13 +1025,13 @@ export default function VkospiTrackerTab() {
         {/* 카드 4: 글로벌 공포지수 비교 */}
         <div style={{
           padding: '18px 20px',
-          borderRadius: 18,
-          background: 'rgba(30, 41, 59, 0.8)',
-          border: '1.5px solid rgba(251, 191, 36, 0.4)',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.25)'
+          borderRadius: 0,
+          background: 'var(--bg2)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '.84rem', fontWeight: 800, color: '#fbbf24' }}>🌐 글로벌 &amp; 코스닥 비교</span>
+            <span style={{ fontSize: '.8rem', fontWeight: 700, color: 'var(--t2)' }}>글로벌 & 코스닥 비교</span>
             <span style={{ fontSize: '.72rem', color: 'var(--t3)' }}>실시간</span>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 10 }}>
@@ -1078,22 +1052,22 @@ export default function VkospiTrackerTab() {
         </div>
       </div>
 
-      {/* ─── 3. 메인 인터랙티브 듀얼 차트 (코스피 vs VKOSPI 56.29 POINT 실시간 드로잉) ─── */}
+      {/* ─── 3. 메인 인터랙티브 듀얼 차트 (코스피 vs VKOSPI 실시간 드로잉) ─── */}
       <div style={{
-        background: 'rgba(30, 41, 59, 0.75)',
-        borderRadius: 22,
+        background: 'var(--bg2)',
+        borderRadius: 0,
         border: '1px solid rgba(255, 255, 255, 0.08)',
-        padding: '24px',
-        marginBottom: 20,
-        boxShadow: '0 8px 30px rgba(0,0,0,0.3)'
+        padding: '22px',
+        marginBottom: 18,
+        boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
       }}>
         {/* 차트 상단 헤더 & 기간 선택 탭 */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14, marginBottom: 16 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
-            <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: 8 }}>
-              <span>📊 코스피 지수 vs 변동성 추정치(비공식) ({liveVkospiPrice} POINT) 듀얼 시계열 레이더</span>
+            <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--t1)', display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span>코스피 지수 vs 변동성 추정치 ({liveVkospiPrice} POINT)</span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 14, fontSize: '.8rem', fontWeight: 800 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14, fontSize: '.78rem', fontWeight: 700 }}>
               <span style={{ display: 'flex', alignItems: 'center', gap: 6, color: '#38bdf8' }}>
                 <span style={{ width: 12, height: 3, background: '#38bdf8', borderRadius: 2 }}/>
                 코스피 지수 (좌측 축 pt)
@@ -1105,10 +1079,10 @@ export default function VkospiTrackerTab() {
             </div>
           </div>
 
-          {/* 기간 선택 버튼 (⏱️ 당일 실시간 포함) */}
-          <div style={{ display: 'flex', gap: 6 }}>
+          {/* 기간 선택 버튼 */}
+          <div style={{ display: 'flex', gap: 4, background: 'rgba(0,0,0,0.25)', padding: 3, borderRadius: 0 }}>
             {[
-              { id: 'today', label: '⏱️ 당일 실시간' },
+              { id: 'today', label: '당일 실시간' },
               { id: '1m', label: '1개월' },
               { id: '3m', label: '3개월' },
               { id: '6m', label: '6개월' },
@@ -1119,12 +1093,12 @@ export default function VkospiTrackerTab() {
                 onClick={() => handlePeriodChange(p.id)}
                 style={{
                   padding: '6px 14px',
-                  borderRadius: 10,
-                  border: period === p.id ? '1.5px solid #ef4444' : '1px solid rgba(255,255,255,0.08)',
-                  background: period === p.id ? 'rgba(239, 68, 68, 0.25)' : 'rgba(0,0,0,0.3)',
+                  borderRadius: 0,
+                  border: 'none',
+                  background: period === p.id ? 'var(--accent)' : 'transparent',
                   color: period === p.id ? '#fff' : 'var(--t3)',
-                  fontWeight: 900,
-                  fontSize: '.82rem',
+                  fontWeight: 700,
+                  fontSize: '.8rem',
                   cursor: 'pointer'
                 }}
               >
@@ -1401,7 +1375,7 @@ export default function VkospiTrackerTab() {
                   transform: 'translateX(-50%)',
                   background: 'rgba(15, 23, 42, 0.95)',
                   border: '1.5px solid rgba(239, 68, 68, 0.6)',
-                  borderRadius: 12,
+                  borderRadius: 0,
                   padding: '10px 18px',
                   display: 'flex',
                   alignItems: 'center',
@@ -1430,32 +1404,32 @@ export default function VkospiTrackerTab() {
 
       {/* ─── 4. 퀀트 역발상 투자 전략 매트릭스 ─── */}
       <div style={{
-        padding: '20px 24px',
-        background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(99, 102, 241, 0.15) 100%)',
-        border: '1.5px solid rgba(16, 185, 129, 0.4)',
-        borderRadius: 20,
-        marginBottom: 20
+        padding: '18px 22px',
+        background: 'var(--bg2)',
+        borderLeft: '3px solid #34d399',
+        border: '1px solid rgba(255,255,255,0.08)',
+        borderRadius: 0,
+        marginBottom: 18
       }}>
-        <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#fff', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span>💡</span>
-          <span>코스피 변동성 추정치(비공식, {liveVkospiPrice} POINT) 퀀트 진단</span>
+        <div style={{ fontSize: '.92rem', fontWeight: 800, color: 'var(--t1)', marginBottom: 6 }}>
+          퀀트 진단 — 변동성 추정치 {liveVkospiPrice} POINT
         </div>
-        <div style={{ fontSize: '.9rem', color: '#f1f5f9', lineHeight: 1.65 }}>
+        <div style={{ fontSize: '.88rem', color: 'var(--t2)', lineHeight: 1.65 }}>
           {contrarian.desc || '변동성이 56.29 POINT로 전일대비 -0.47pt(-0.83%) 하향 안정세를 보이며 안정 구간 내에서 안정적인 흐름을 유지하고 있습니다.'}
         </div>
       </div>
 
       {/* ─── 5. 변동성 지표 히스토리컬 일별 테이블 ─── */}
       <div style={{
-        background: 'rgba(30, 41, 59, 0.75)',
-        borderRadius: 20,
+        background: 'var(--bg2)',
+        borderRadius: 0,
         border: '1px solid rgba(255,255,255,0.08)',
         overflow: 'hidden',
-        boxShadow: '0 8px 30px rgba(0,0,0,0.3)'
+        boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
       }}>
         <div style={{ padding: '16px 20px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ fontSize: '1.02rem', fontWeight: 900, color: '#fff' }}>
-            📅 최근 {data?.timeline?.length || 60}거래일 코스피 &amp; 코스닥 &amp; 변동성 지표 일별 데이터
+          <div style={{ fontSize: '.92rem', fontWeight: 800, color: 'var(--t1)' }}>
+            최근 {data?.timeline?.length || 60}거래일 코스피 &amp; 코스닥 &amp; 변동성 지표
           </div>
           <div style={{ fontSize: '.78rem', color: 'var(--t3)' }}>
             최고 변동성: <strong style={{ color: '#ef4444' }}>{stats.maxVkospi} POINT</strong> | 최저 변동성: <strong style={{ color: '#34d399' }}>{stats.minVkospi} POINT</strong>
@@ -1515,7 +1489,7 @@ export default function VkospiTrackerTab() {
                   <td style={{ padding: '12px 18px' }}>
                     <span style={{
                       padding: '3px 8px',
-                      borderRadius: 6,
+                      borderRadius: 0,
                       fontSize: '.76rem',
                       fontWeight: 800,
                       background: t.vkospi >= 68 ? 'rgba(239,68,68,0.2)' : 'rgba(16,185,129,0.2)',
