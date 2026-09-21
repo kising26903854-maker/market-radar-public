@@ -570,14 +570,19 @@ export async function getStockChartData(code, type = 'minute', countOverride = n
       const rawPoints = res?.data?.priceInfos || []
       
       if (rawPoints.length > 0) {
-        const chart = rawPoints.map(pt => {
+        // 네이버 API의 accumulatedTradingVolume은 "장 시작부터 지금까지 누적 거래량"이라
+        // 그대로 쓰면 분봉마다 계속 커지기만 하는 값이 된다. 직전 분봉과의 차이를 구해야
+        // 그 1분 동안 실제로 체결된 거래량이 된다.
+        const chart = rawPoints.map((pt, idx) => {
           const close = pt.currentPrice
           const open = pt.openPrice !== undefined ? pt.openPrice : close
           const high = pt.highPrice !== undefined ? pt.highPrice : Math.max(open, close)
           const low = pt.lowPrice !== undefined ? pt.lowPrice : Math.min(open, close)
-          const volume = pt.accumulatedTradingVolume || 0
+          const accVolume = pt.accumulatedTradingVolume || 0
+          const prevAccVolume = idx > 0 ? (rawPoints[idx - 1].accumulatedTradingVolume || 0) : 0
+          const volume = Math.max(0, accVolume - prevAccVolume)
           return {
-            time: pt.localTime ? `${pt.localTime.slice(8, 10)}:${pt.localTime.slice(10, 12)}` : '',
+            time: pt.localDateTime ? `${pt.localDateTime.slice(8, 10)}:${pt.localDateTime.slice(10, 12)}` : '',
             open,
             high,
             low,

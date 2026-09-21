@@ -60,7 +60,10 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
   const [financials, setFinancials] = useState(null)
   const [isMobile, setIsMobile] = useState(false)
   const [isChartFullscreen, setIsChartFullscreen] = useState(false)
-  const dayChartScrollRef = useRef(null)
+  const chartWheelRef = useRef(null)
+  const totalCandlesRef = useRef(0)
+  // 🔍 차트 확대/축소 & 좌우 이동 상태 — count: 화면에 보여줄 캔들 개수(null=기본값), offset: 최신 캔들 기준 뒤로 이동한 캔들 수
+  const [chartView, setChartView] = useState({ count: null, offset: 0 })
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768)
@@ -80,16 +83,43 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [isChartFullscreen, onClose])
 
-  // 📅 일봉(상장일~오늘)이 넓게 로드되면 스크롤을 가장 최근 시점(우측 끝)으로 이동
+  // 종목/기간이 바뀌면 확대/이동 상태를 기본값(최근 구간 전체 화면 표시)으로 초기화
   useEffect(() => {
-    if (period === 'day' && dayChartScrollRef.current && chartData.length > 0) {
-      dayChartScrollRef.current.scrollLeft = dayChartScrollRef.current.scrollWidth
-    }
-  }, [period, chartData.length, isChartFullscreen])
+    setChartView({ count: null, offset: 0 })
+  }, [stock?.code, period])
 
+  // 🖱️ 마우스 휠로 차트 확대/축소(세로 휠), 트랙패드 좌우 스와이프로 과거 흐름 이동(가로 휠)
   const [loading, setLoading] = useState(true)
   const [hoverData, setHoverData] = useState(null)
   const [hoverLiqPoint, setHoverLiqPoint] = useState(null)
+
+  // 🖱️ 마우스 휠로 차트 확대/축소(세로 휠), 트랙패드 좌우 스와이프로 과거 흐름 이동(가로 휠)
+  // loading이 끝나고 실제 차트 DOM(ref)이 마운트된 뒤에 리스너를 붙여야 하므로 loading을 의존성에 넣는다.
+  useEffect(() => {
+    const el = chartWheelRef.current
+    if (!el) return
+    const MIN_VISIBLE = 20
+    const DEFAULT_VISIBLE = 150
+    const handleWheel = (e) => {
+      const total = totalCandlesRef.current
+      if (total <= MIN_VISIBLE) return
+      e.preventDefault()
+      setChartView(prev => {
+        const curCount = prev.count ?? Math.min(total, DEFAULT_VISIBLE)
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+          const maxOffset = Math.max(0, total - curCount)
+          const nextOffset = Math.min(maxOffset, Math.max(0, prev.offset + Math.round(e.deltaX / 3)))
+          return { count: curCount, offset: nextOffset }
+        }
+        const factor = e.deltaY > 0 ? 1.15 : 1 / 1.15
+        const nextCount = Math.max(MIN_VISIBLE, Math.min(total, Math.round(curCount * factor)))
+        const nextOffset = Math.min(prev.offset, Math.max(0, total - nextCount))
+        return { count: nextCount, offset: nextOffset }
+      })
+    }
+    el.addEventListener('wheel', handleWheel, { passive: false })
+    return () => el.removeEventListener('wheel', handleWheel)
+  }, [loading])
 
   useEffect(() => {
     if (!stock?.code) return
@@ -159,18 +189,30 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
     return { ...d, open: o, high: h, low: l, close: c, volume: v }
   })
 
-  // 일봉(상장일~오늘)처럼 캔들 수가 많아지면 고정폭에 욱여넣지 않고 캔버스를 넓혀서 좌우 스크롤로 본다.
-  const DAY_CANDLE_SPACING = 5
-  const width = (period === 'day' && candles.length > 0)
-    ? Math.max(baseWidth, padding.left + padding.right + candles.length * DAY_CANDLE_SPACING)
-    : baseWidth
-  const isWideChart = width > baseWidth
+  const width = baseWidth
+  totalCandlesRef.current = candles.length
+
+  // 🔍 마우스 휠 확대/축소·이동 상태를 반영한 "현재 화면에 보이는 구간"만 잘라서 차트에 그린다
+  // (예전에는 전체 캔들을 다 그려서 캔버스를 무한정 넓힌 뒤 스크롤로 보게 했는데,
+  //  팝업이 열리자마자 아주 넓은 캔버스의 우측 끝으로 스크롤 이동시키는 타이밍이 어긋나면
+  //  처음에 차트 절반만 보이는 것처럼 잘려 보이는 문제가 있었다. 고정폭에 "보이는 구간"만
+  //  그리는 방식으로 바꿔서 항상 팝업 폭에 꽉 차게 렌더링되도록 했다.)
+  const DEFAULT_VISIBLE = 150
+  const totalCandleCount = candles.length
+  const effectiveVisibleCount = totalCandleCount > 0
+    ? Math.max(1, Math.min(chartView.count ?? Math.min(totalCandleCount, DEFAULT_VISIBLE), totalCandleCount))
+    : 0
+  const clampedOffset = Math.min(chartView.offset, Math.max(0, totalCandleCount - effectiveVisibleCount))
+  const viewEndIdx = totalCandleCount - clampedOffset
+  const viewStartIdx = Math.max(0, viewEndIdx - effectiveVisibleCount)
+  const visibleCandles = candles.slice(viewStartIdx, viewEndIdx)
+  const isZoomedOrPanned = totalCandleCount > visibleCandles.length
 
   const optimalPrice = stock.optimalBuyPrice || analysis?.optimalBuyPrice
   const pocPriceLine = analysis?.vpvr?.pocPrice || smartMoney?.pocPrice || 0
 
   const allPrices = []
-  candles.forEach(c => {
+  visibleCandles.forEach(c => {
     if (c.high && !isNaN(c.high) && c.high > 0) allPrices.push(c.high)
     if (c.low && !isNaN(c.low) && c.low > 0) allPrices.push(c.low)
   })
@@ -184,11 +226,11 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
   const priceMargin = (rawMax - rawMin) * 0.1 || 10
   const minPrice = Math.max(1, rawMin - priceMargin)
   const maxPrice = rawMax + priceMargin
-  const maxVolume = Math.max(...candles.map(c => c.volume), 1)
+  const maxVolume = Math.max(...visibleCandles.map(c => c.volume), 1)
 
   const getX = (i) => {
-    if (!candles || candles.length <= 1) return padding.left
-    return padding.left + (i / (candles.length - 1)) * (width - padding.left - padding.right)
+    if (!visibleCandles || visibleCandles.length <= 1) return padding.left
+    return padding.left + (i / (visibleCandles.length - 1)) * (width - padding.left - padding.right)
   }
 
   const getY = (val) => {
@@ -196,25 +238,26 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
     return height - padding.bottom - ((val - minPrice) / (maxPrice - minPrice)) * (height - padding.top - padding.bottom)
   }
 
-  // 🎯 월봉 10이평선(10개월 이동평균) — 월봉(month) 탭에서만 계산
+  // 🎯 월봉 10이평선(10개월 이동평균) — 월봉(month) 탭에서만 계산 (이평선 계산은 화면 밖 과거 데이터도 필요해서 전체 candles 기준으로 값을 구하고, 좌표만 화면에 보이는 구간 기준으로 찍는다)
   const monthlyMA10 = period === 'month'
-    ? candles.map((c, i) => {
-        if (i < 9) return null
+    ? visibleCandles.map((c, localIdx) => {
+        const g = viewStartIdx + localIdx
+        if (g < 9) return null
         let sum = 0
-        for (let k = i - 9; k <= i; k++) sum += candles[k].close
+        for (let k = g - 9; k <= g; k++) sum += candles[k].close
         return sum / 10
       })
     : []
-  const ma10Points = candles
+  const ma10Points = visibleCandles
     .map((c, i) => (monthlyMA10[i] !== null && monthlyMA10[i] !== undefined ? `${getX(i)},${getY(monthlyMA10[i])}` : null))
     .filter(Boolean)
     .join(' ')
   const lastMA10Idx = monthlyMA10.length - 1
   const lastMA10Value = lastMA10Idx >= 0 ? monthlyMA10[lastMA10Idx] : null
 
-  const isUp = candles.length > 1 ? (candles[candles.length - 1].close >= candles[0].close) : true
+  const isUp = visibleCandles.length > 1 ? (visibleCandles[visibleCandles.length - 1].close >= visibleCandles[0].close) : true
   const strokeColor = isUp ? '#ef4444' : '#3b82f6'
-  const candleWidth = Math.max(3, Math.min(13, ((width - padding.left - padding.right) / Math.max(1, candles.length)) * 0.68))
+  const candleWidth = Math.max(3, Math.min(13, ((width - padding.left - padding.right) / Math.max(1, visibleCandles.length)) * 0.68))
 
   // 🕵️‍♂️ 세력 매집봉 (Accumulation Bars) 퀀트 탐지
   const avgVol = candles.length > 0 ? (candles.reduce((acc, c) => acc + c.volume, 0) / candles.length) : 1
@@ -403,7 +446,7 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {companySummary.paragraphs && companySummary.paragraphs.length > 0 ? (
                 companySummary.paragraphs.map((p, pIdx) => {
-                  const tagTitles = ['[설립 및 기본 개요]', '[주요 사업 부문 및 핵심 제품]', '[미래 성장 전략 및 경쟁력]']
+                  const tagTitles = ['[설립 및 기본 개요]', '[주요 사업 부문 및 핵심 제품]', '[최근 주요 연혁]']
                   return (
                     <div key={pIdx} style={{
                       padding: '10px 14px',
@@ -542,9 +585,11 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
 
           {/* SVG 차트 본체 */}
           <div style={{ position: 'relative', width: '100%', overflow: 'hidden', background: '#0a0d14', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)' }}>
-            {isWideChart && !loading && (
+            {!loading && totalCandleCount > 0 && (
               <div style={{ padding: '6px 14px', fontSize: '.72rem', color: 'var(--t3)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-                📜 상장일부터 전체 일봉({candles.length.toLocaleString()}거래일) · 좌우로 스크롤해서 과거 흐름을 확인하세요{candles.length >= 3000 ? ' (네이버 제공 일봉 한도 약 3,000거래일 도달 — 그 이전은 조회되지 않을 수 있습니다)' : ''}
+                {isZoomedOrPanned
+                  ? `🔍 최근 ${totalCandleCount.toLocaleString()}봉 중 ${viewStartIdx + 1}~${viewEndIdx}번째 구간 표시 중 · 마우스 휠로 확대·축소, 트랙패드 좌우 스와이프로 과거 흐름을 확인하세요`
+                  : '🖱️ 마우스 휠로 차트를 확대할 수 있습니다'}
               </div>
             )}
             {loading ? (
@@ -552,12 +597,10 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                 실시간 캔들스틱 및 세력선 퀀트 계산 중...
               </div>
             ) : candles.length > 0 ? (
-              <div ref={dayChartScrollRef} className={isWideChart ? 'wide-chart-scroll' : ''} style={{ width: '100%', overflowX: isWideChart ? 'auto' : 'hidden' }}>
+              <div ref={chartWheelRef} style={{ width: '100%' }}>
               <svg
                 viewBox={`0 0 ${width} ${height}`}
-                style={isWideChart
-                  ? { width, height: isChartFullscreen ? 'calc(100vh - 220px)' : 360, display: 'block' }
-                  : { width: '100%', height: isChartFullscreen ? 'calc(100vh - 220px)' : 360, display: 'block' }}
+                style={{ width: '100%', height: isChartFullscreen ? 'calc(100vh - 220px)' : 360, display: 'block' }}
                 onMouseLeave={() => setHoverData(null)}
               >
                 <defs>
@@ -585,8 +628,60 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                   )
                 })}
 
+                {/* 📅 차트 하단 X축 (날짜/시간) 가이드라인 및 날짜 표시 */}
+                <g key="x-axis-bottom">
+                  <line x1={padding.left} y1={height - padding.bottom} x2={width - padding.right} y2={height - padding.bottom} stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
+                  {(() => {
+                    if (!visibleCandles || visibleCandles.length === 0) return null
+                    const count = Math.min(7, visibleCandles.length)
+                    const step = Math.floor((visibleCandles.length - 1) / Math.max(1, count - 1))
+                    const indices = []
+                    for (let i = 0; i <= visibleCandles.length - 1; i += Math.max(1, step)) {
+                      if (indices.length < count) indices.push(i)
+                    }
+                    if (indices[indices.length - 1] !== visibleCandles.length - 1 && visibleCandles.length > 1) {
+                      indices[indices.length - 1] = visibleCandles.length - 1
+                    }
+
+                    return indices.map((idx, i) => {
+                      const c = visibleCandles[idx]
+                      if (!c) return null
+                      const x = getX(idx)
+
+                      let labelText = ''
+                      if (period === 'minute') {
+                        const t = c.time || ''
+                        labelText = t.length >= 4 ? t.slice(0, 2) + ':' + t.slice(2, 4) : t
+                      } else {
+                        const d = c.date || ''
+                        const cleanD = d.replace(/[^0-9]/g, '')
+                        if (period === 'year') {
+                          labelText = d
+                        } else if (period === 'month' && cleanD.length === 8) {
+                          labelText = `${cleanD.slice(2, 4)}.${cleanD.slice(4, 6)}`
+                        } else if (cleanD.length === 8) {
+                          labelText = `${cleanD.slice(4, 6)}/${cleanD.slice(6, 8)}`
+                        } else {
+                          labelText = d
+                        }
+                      }
+
+                      return (
+                        <g key={`x-tick-${i}`}>
+                          <line x1={x} y1={padding.top} x2={x} y2={height - padding.bottom} stroke="rgba(255,255,255,0.04)" strokeDasharray="3 3" />
+                          <line x1={x} y1={height - padding.bottom} x2={x} y2={height - padding.bottom + 6} stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" />
+                          <rect x={x - (isMobile ? 38 : 28)} y={height - padding.bottom + 8} width={isMobile ? 76 : 56} height={isMobile ? 24 : 20} rx={4} fill="rgba(30,41,59,0.7)" stroke="rgba(255,255,255,0.08)" strokeWidth="0.8" />
+                          <text x={x} y={height - padding.bottom + (isMobile ? 24.5 : 21.5)} fill="#e2e8f0" fontSize={isMobile ? "14" : "11"} fontWeight="800" fontFamily="Space Mono" textAnchor="middle">
+                            {labelText || (idx + 1)}
+                          </text>
+                        </g>
+                      )
+                    })
+                  })()}
+                </g>
+
                 {/* 캔들스틱 & 하단 거래량 바 */}
-                {candles.map((c, i) => {
+                {visibleCandles.map((c, i) => {
                   const cx = getX(i)
                   const isBull = c.close >= c.open
                   const candleColor = isBull ? '#f87171' : '#60a5fa'

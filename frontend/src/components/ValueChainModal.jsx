@@ -107,9 +107,13 @@ export default function ValueChainModal({ stock, stockCode, stockName, onClose, 
             <div style={{ fontSize: '0.78rem', color: '#818cf8', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: 4 }}>
               Precision Value Chain Network
             </div>
-            <div style={{ fontSize: '1.45rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: 10 }}>
+            <div
+              onClick={() => onSelectStock && onSelectStock({ code: currentStock.code, name: currentStock.name })}
+              title="종목 상세 퀀트 분석 팝업 열기"
+              style={{ fontSize: '1.45rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: 10, cursor: onSelectStock ? 'pointer' : 'default' }}
+            >
               <span style={{ color: '#fbbf24', filter: 'drop-shadow(0 0 8px rgba(251,191,36,0.6))' }}>🔗</span>
-              <span>{stock.name}</span>
+              <span style={{ textDecoration: onSelectStock ? 'underline' : 'none', textUnderlineOffset: 4 }}>{stock.name}</span>
               <span style={{ fontSize: '0.88rem', color: 'var(--t3)', fontWeight: 600 }}>
                 ({stock.code}) 전후방 생태계
               </span>

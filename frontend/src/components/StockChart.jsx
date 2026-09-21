@@ -302,7 +302,7 @@ export default function StockChart({ positions, targetChartCode }) {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {companySummary.paragraphs && companySummary.paragraphs.length > 0 ? (
               companySummary.paragraphs.map((p, pIdx) => {
-                const tagTitles = ['[설립 및 기본 개요]', '[주요 사업 부문 및 핵심 제품]', '[미래 성장 전략 및 경쟁력]']
+                const tagTitles = ['[설립 및 기본 개요]', '[주요 사업 부문 및 핵심 제품]', '[최근 주요 연혁]']
                 const borderColors = ['#60a5fa', '#10b981', '#fbbf24']
                 return (
                   <div key={pIdx} style={{

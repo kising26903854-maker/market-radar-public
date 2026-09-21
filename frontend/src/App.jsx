@@ -231,6 +231,7 @@ export default function App() {
   }
 
   const handleOpenValueChain = (code, name) => {
+    setSelectedStock(null)
     setValueChainCode(code)
     setValueChainName(name)
     setShowValueChainModal(true)
@@ -388,6 +389,65 @@ export default function App() {
           </div>
         </div>
 
+        {/* 실시간 종목 검색창 */}
+        <div style={{ marginTop: 10, padding: '0 0 12px 0', borderBottom: '1px solid var(--border)' }}>
+          <div style={{ fontSize: '.78rem', fontWeight: 800, color: 'var(--gold)', marginBottom: 6 }}>🔍 종목 검색</div>
+          <div style={{ position: 'relative' }}>
+            <input
+              type="text"
+              placeholder="종목명 또는 코드 입력..."
+              value={searchQuery}
+              onChange={e => handleSearch(e.target.value)}
+              style={{
+                width: '100%',
+                padding: '9px 12px',
+                borderRadius: 0,
+                border: '1.5px solid rgba(255,255,255,0.3)',
+                background: 'var(--bg3)',
+                color: '#fff',
+                fontSize: '.85rem'
+              }}
+            />
+            {searchResults.length > 0 && (
+              <div style={{
+                position: 'absolute',
+                top: 45,
+                left: 0,
+                right: 0,
+                background: 'rgba(15, 23, 42, 0.98)',
+                border: '1px solid var(--border)',
+                borderRadius: 0,
+                zIndex: 2000,
+                maxHeight: 220,
+                overflowY: 'auto',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.6)'
+              }}>
+                {searchResults.map(s => (
+                  <div
+                    key={s.code}
+                    onClick={() => {
+                      handleOpenStockChart(s)
+                      setSearchResults([])
+                      setSearchQuery('')
+                    }}
+                    style={{
+                      padding: '8px 12px',
+                      cursor: 'pointer',
+                      borderBottom: '1px solid rgba(255,255,255,0.05)',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      fontSize: '.8rem'
+                    }}
+                  >
+                    <span style={{ color: '#fff', fontWeight: 800 }}>{s.name}</span>
+                    <span style={{ color: 'var(--t3)', fontFamily: 'Space Mono' }}>{s.code}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
         <div className="nav-section-label" style={{ marginTop: 8 }}>⚡ 핵심 증시 레이더</div>
         <div className="tab-nav">
           <button className={`tab-btn ${tab === 'vkospi' ? 'active' : ''}`} onClick={() => { setTab('vkospi'); setIsMenuOpen(false); }}>
@@ -466,65 +526,6 @@ export default function App() {
             <MenuIcon type="market_cap" color={tab === 'market_cap' ? '#fff' : '#3b82f6'} />
             코스피·코스닥 시총 랭킹
           </button>
-        </div>
-
-        {/* 실시간 종목 검색창 */}
-        <div style={{ marginTop: 'auto', padding: '12px 0 0 0', borderTop: '1px solid var(--border)' }}>
-          <div style={{ fontSize: '.78rem', fontWeight: 800, color: 'var(--gold)', marginBottom: 6 }}>🔍 종목 퀀트 &amp; 차트 검색</div>
-          <div style={{ position: 'relative' }}>
-            <input
-              type="text"
-              placeholder="종목명 또는 코드 입력..."
-              value={searchQuery}
-              onChange={e => handleSearch(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '9px 12px',
-                borderRadius: 8,
-                border: '1px solid var(--border)',
-                background: 'var(--bg3)',
-                color: '#fff',
-                fontSize: '.85rem'
-              }}
-            />
-            {searchResults.length > 0 && (
-              <div style={{
-                position: 'absolute',
-                bottom: 45,
-                left: 0,
-                right: 0,
-                background: 'rgba(15, 23, 42, 0.98)',
-                border: '1px solid var(--border)',
-                borderRadius: 8,
-                zIndex: 2000,
-                maxHeight: 220,
-                overflowY: 'auto',
-                boxShadow: '0 8px 24px rgba(0,0,0,0.6)'
-              }}>
-                {searchResults.map(s => (
-                  <div
-                    key={s.code}
-                    onClick={() => {
-                      handleOpenStockChart(s)
-                      setSearchResults([])
-                      setSearchQuery('')
-                    }}
-                    style={{
-                      padding: '8px 12px',
-                      cursor: 'pointer',
-                      borderBottom: '1px solid rgba(255,255,255,0.05)',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      fontSize: '.8rem'
-                    }}
-                  >
-                    <span style={{ color: '#fff', fontWeight: 800 }}>{s.name}</span>
-                    <span style={{ color: 'var(--t3)', fontFamily: 'Space Mono' }}>{s.code}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
         </div>
       </aside>
 

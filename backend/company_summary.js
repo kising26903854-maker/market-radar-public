@@ -1,12 +1,19 @@
-// company_summary.js — 🏢 기업 개요 및 주요 사업·제품 핵심 정보 수집 모달 모듈
+// company_summary.js — 🏢 기업 개요 및 주요 사업·제품 핵심 정보 수집 모듈
+//
+// 기존에는 finance.naver.com/item/main.naver(구버전 HTML)를 긁었는데, 이 페이지가
+// stock.naver.com으로 302 리다이렉트되면서 죽어버려 항상 파싱에 실패했고, 그 결과
+// 모든 종목이 똑같은 "대한민국 유가증권시장/코스닥 상장 우량 기업으로..." fallback
+// 문구만 보여주는 문제가 있었다 (지어낸 문구가 전 종목에 동일하게 노출됨).
+// FnGuide 계열의 navercomp.wisereport.co.kr(온라인기업정보)는 아직 살아있고 종목별
+// 실제 데이터(설립일/대표이사/종업원수, 주요제품 매출구성 %, 최근 연혁)를 제공하므로
+// 이를 사용해 종목마다 실제로 다른 내용이 나오도록 재작성했다.
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-import iconv from 'iconv-lite';
 
 const summaryCache = new Map();
 
 /**
- * 네이버 금융에서 기업 개요(FnGuide 공식 기업정보) 및 주요 사업 내용 수집
+ * FnGuide(WiseReport) 온라인기업정보 "기업개요" 탭에서 종목별 실제 프로필/제품구성/연혁을 수집
  * @param {string} code 6자리 종목코드
  */
 export async function getCompanySummary(code) {
@@ -19,75 +26,111 @@ export async function getCompanySummary(code) {
   }
 
   try {
-    const url = `https://finance.naver.com/item/main.naver?code=${code}`;
+    const url = `https://navercomp.wisereport.co.kr/v2/company/c1020001.aspx?cmp_cd=${code}`;
     const res = await axios.get(url, {
-      responseType: 'arraybuffer',
-      timeout: 4000,
+      timeout: 6000,
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
       }
     });
 
-    const html = iconv.decode(res.data, 'utf-8');
-    const $ = cheerio.load(html);
+    const $ = cheerio.load(res.data);
 
-    // 1. 기업개요 단락 추출
+    // 회사명 (페이지 타이틀 "온라인기업정보 - 기업모니터 - 기업개요(삼성전자)" 에서 추출)
+    const titleMatch = $('title').text().match(/기업개요\(([^)]+)\)/);
+    const name = titleMatch ? titleMatch[1].trim() : '';
+
+    // 1. 기본 프로필 (cTB201: 본사주소/설립일/대표이사/계열/종업원수/감사인/주거래은행 등)
+    const profile = {};
+    $('#cTB201 tr').each((i, tr) => {
+      const cells = $(tr).find('th, td');
+      for (let c = 0; c < cells.length; c += 2) {
+        const key = $(cells[c]).text().replace(/\s+/g, ' ').trim();
+        const val = $(cells[c + 1])?.text().replace(/\s+/g, ' ').trim();
+        if (key && val) profile[key] = val;
+      }
+    });
+
+    // 2. 주요제품 매출구성 (cTB203: 제품명 + 비율%)
+    const products = [];
+    $('#cTB203 tbody tr').each((i, tr) => {
+      const label = $(tr).find('th').attr('title') || $(tr).find('th').text().trim();
+      const pct = $(tr).find('td.num').text().trim();
+      if (label && pct && !isNaN(parseFloat(pct))) {
+        products.push({ label, pct: parseFloat(pct) });
+      }
+    });
+
+    // 3. 최근 연혁 (cTB202: 일자 + 상세연혁, 최신 3건)
+    const history = [];
+    $('#cTB202 tbody tr').each((i, tr) => {
+      if (history.length >= 3) return;
+      const date = $(tr).find('th').text().trim();
+      const detail = $(tr).find('td').attr('title') || $(tr).find('td').text().trim();
+      if (date && detail) history.push({ date, detail });
+    });
+
+    // ── 실제 데이터 기반 3단락 구성 ──
     const paragraphs = [];
-    $('div.summary_info p').each((i, el) => {
-      const text = $(el).text().trim();
-      if (text && text.length > 5) {
-        paragraphs.push(text);
-      }
-    });
 
-    // 2. WICS 업종 및 시가총액 정보 추출
-    const wicsSector = $('div.trade_compare h4.h_sub a, div.trade_compare h4.h_sub em a, div.trade_compare h4.h_trade em a').first().text().trim() || '';
-    const name = $('div.wrap_company h2 a').text().trim() || '';
+    const basicBits = [];
+    if (profile['설립일']) basicBits.push(`설립일 ${profile['설립일']}`);
+    if (profile['대표이사']) basicBits.push(`대표이사 ${profile['대표이사']}`);
+    if (profile['계열']) basicBits.push(`계열 ${profile['계열']}`);
+    if (profile['종업원수']) basicBits.push(`종업원수 ${profile['종업원수']}`);
+    if (profile['감사인']) basicBits.push(`감사인 ${profile['감사인']}`);
+    if (profile['주거래은행']) basicBits.push(`주거래은행 ${profile['주거래은행']}`);
+    if (basicBits.length > 0) paragraphs.push(basicBits.join(' · '));
 
-    // 🎯 시가총액 순위 추출 (예: "코스피 1위", "코스닥 39위"로 자동 구분됨)
-    let marketCapRank = '';
-    $('a[href*="sise_market_sum.naver"]').each((i, el) => {
-      const parent = $(el).parent();
-      const td = parent.next('td');
-      if (td.length > 0) {
-        marketCapRank = td.text().trim().replace(/\s+/g, ' ');
-      }
-    });
+    if (products.length > 0) {
+      const topProducts = products
+        .filter(p => p.pct > 0)
+        .sort((a, b) => b.pct - a.pct)
+        .slice(0, 5)
+        .map(p => `${p.label} ${p.pct}%`)
+        .join(', ');
+      if (topProducts) paragraphs.push(`주요제품 매출구성: ${topProducts}`);
+    }
 
-    const summaryText = paragraphs.join('\n\n');
+    if (history.length > 0) {
+      paragraphs.push('최근 주요 연혁: ' + history.map(h => `[${h.date}] ${h.detail}`).join(' · '));
+    }
 
-    // 3. Fallback 기본값 (만약 네이버에서 단락을 못 긁었을 때)
-    const finalParagraphs = paragraphs.length > 0 ? paragraphs : [
-      '대한민국 유가증권시장/코스닥 상장 우량 기업으로 주요 제품 생산 및 고부가가치 사업을 영위하고 있습니다.',
-      '지속적인 R&D 투자와 글로벌 시장 개척을 통해 탄탄한 펀더멘털과 경쟁력을 확보하고 있습니다.'
-    ];
-
+    const success = paragraphs.length > 0;
     const data = {
       code,
       name,
-      wicsSector,
-      marketCapRank,
-      summary: summaryText || finalParagraphs.join('\n\n'),
-      paragraphs: finalParagraphs,
-      overview: finalParagraphs[0] || '',
-      products: finalParagraphs[1] || '',
-      strategy: finalParagraphs[2] || ''
+      wicsSector: '',
+      marketCapRank: '',
+      summary: paragraphs.join('\n\n'),
+      paragraphs,
+      overview: paragraphs[0] || '',
+      products: paragraphs[1] || '',
+      strategy: paragraphs[2] || '',
+      isLive: success,
+      source: 'FnGuide(WiseReport) 온라인기업정보'
     };
 
-    summaryCache.set(code, { timestamp: Date.now(), data });
+    if (success) {
+      summaryCache.set(code, { timestamp: Date.now(), data });
+    }
     return { success: true, ...data };
   } catch (err) {
     console.warn(`[Company Summary] Failed to fetch for ${code}:`, err.message);
+    // ⚠️ 실패 시 지어낸 일반 문구로 채우지 않고, 조회 실패 상태를 있는 그대로 알린다.
     return {
       success: true,
       code,
       name: '',
       wicsSector: '',
-      summary: '기업 개요 및 주요 사업 내용을 조회 중입니다.',
-      paragraphs: ['대한민국 유가증권/코스닥 상장 기업입니다.'],
-      overview: '상장 기업 개요 및 주요 사업 정보',
+      marketCapRank: '',
+      summary: '',
+      paragraphs: [],
+      overview: '',
       products: '',
-      strategy: ''
+      strategy: '',
+      isLive: false,
+      error: err.message
     };
   }
 }
