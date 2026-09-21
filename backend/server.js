@@ -18,13 +18,14 @@ import { getGlobalMacroNews } from './macro_news.js'
 import { getMarketCalendarEvents, getMarketCalendarRange } from './market_calendar.js'
 import { getNpsHoldings, getNpsQuarterData, getNpsComparison, refreshNpsData, getNpsDetailedDisclosures } from './nps_tracker.js'
 import { getNpsHoldingHistory, runNpsHoldingBatchScan, startDailyNpsHoldingBatchScan, getNpsRecentUpdates, getNpsTodayNewDisclosures } from './nps_holding_history.js'
+import { getTradeStatsCache, runTradeStatsSync, startDailyTradeStatsSync } from './trade_stats.js'
 import { getLiveValueChain } from './value_chain.js'
 import { getCompanySummary } from './company_summary.js'
 import { getSmartSupplyDemand } from './smart_supply_demand.js'
 import { getCompanyFinancials } from './company_financials.js'
 import { getMomentumStocks, startDailyGoldenCrossScan } from './momentum_scanner.js'
 import { getDividendCalendar } from './dividend_calendar.js'
-import { getMorningBriefing } from './morning_briefing.js'
+import { getMorningBriefing, startDailyMorningBriefingSync } from './morning_briefing.js'
 import { getTelegramConfig, saveTelegramConfig, sendTelegramMessage, detectTelegramChatId, maskTelegramToken, getPriceAlerts, createPriceAlert, updatePriceAlert, deletePriceAlert, getAlertHistory, startAlertEngine, sendHoldingsBriefing, sendWatchlistBriefing, sendNpsDisclosuresBriefing, testSendNpsSingleAlert } from './telegram_alert.js'
 import { getKrxVolatilityData, sendVkospiBriefing } from './vkospi_tracker.js'
 import { getBearMarketStocks, sendBearMarketBriefing } from './bear_market_scanner.js'
@@ -542,7 +543,7 @@ app.get('/api/dividend-calendar', async (req, res) => {
   }
 })
 
-// 🎙️ 매일 장전 08:35 AI 모닝 브리핑 API
+// 🎙️ 매일 장전 06:00 AI 모닝 브리핑 API
 app.get('/api/morning-briefing', async (req, res) => {
   try {
     const data = await getMorningBriefing()
@@ -1144,6 +1145,17 @@ app.get('/api/chart/:code', async (req, res) => {
   }
 })
 
+// 🚢 관세청 10일 단위 수출입 잠정치 통계 (캐시 조회 — 매일 자동 갱신, 없으면 즉시 1회 동기화)
+app.get('/api/trade-stats', async (req, res) => {
+  try {
+    let cache = getTradeStatsCache()
+    if (!cache) cache = await runTradeStatsSync()
+    res.json({ success: true, ...cache })
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message })
+  }
+})
+
 // 실시간 밸류체인 조회 API
 app.get('/api/value-chain/:code', async (req, res) => {
   try {
@@ -1541,6 +1553,12 @@ app.listen(PORT, () => {
 
   // 🏛️ 국민연금 신규 대량보유 공시 전수 스캔 (매일 새벽 01:00 자동 실행, 서버 기동 시 최초 1회 즉시)
   setTimeout(() => { startDailyNpsHoldingBatchScan() }, 200000);
+
+  // 🚢 관세청 10일 단위 수출입 잠정치 통계 자동 동기화 (매일 07:30 자동 실행, 서버 기동 시 최초 1회 즉시)
+  setTimeout(() => { startDailyTradeStatsSync() }, 215000);
+
+  // 🎙️ AI 모닝 장전 브리핑 자동 생성 (매일 06:00 자동 실행, 서버 기동 시 최초 1회 즉시 — 방문자마다 재호출하지 않고 캐시 공유, 하루 동안 고정)
+  setTimeout(() => { startDailyMorningBriefingSync() }, 230000);
 
   // 🔄 매일 자정/장마감 후 자동 데이터 동기화 스케줄러 (Daily Auto-Sync Engine)
   setInterval(async () => {

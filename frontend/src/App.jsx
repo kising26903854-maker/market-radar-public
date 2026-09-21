@@ -22,6 +22,7 @@ import EnergyCondensationScannerTab from './components/EnergyCondensationScanner
 import MonthlyMA10ScannerTab from './components/MonthlyMA10ScannerTab.jsx'
 import BacktestReportTab from './components/BacktestReportTab.jsx'
 import AiPredictionTab from './components/AiPredictionTab.jsx'
+import TradeStatsTab from './components/TradeStatsTab.jsx'
 
 // 🎨 세련된 현대식 SVG 라인 아이콘 컴포넌트들
 const MenuIcon = ({ type, size = 16, color = "currentColor", style = {} }) => {
@@ -81,6 +82,13 @@ const MenuIcon = ({ type, size = 16, color = "currentColor", style = {} }) => {
         )
       case 'market_cap':
         return <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34M12 2a7 7 0 0 1 7 7c0 2.25-1.5 4.5-4 5H9c-2.5-.5-4-2.75-4-5a7 7 0 0 1 7-7z" />
+      case 'trade-stats':
+        return (
+          <>
+            <path d="M2 12h20M12 2c2.5 2.7 4 6.3 4 10s-1.5 7.3-4 10c-2.5-2.7-4-6.3-4-10s1.5-7.3 4-10z" />
+            <path d="M4 7l3 3-3 3M20 17l-3-3 3-3" />
+          </>
+        )
       case 'high52w':
         return <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
       case 'global-news':
@@ -526,6 +534,10 @@ export default function App() {
             <MenuIcon type="market_cap" color={tab === 'market_cap' ? '#fff' : '#3b82f6'} />
             코스피·코스닥 시총 랭킹
           </button>
+          <button className={`tab-btn ${tab === 'trade-stats' ? 'active' : ''}`} onClick={() => { setTab('trade-stats'); setIsMenuOpen(false); }}>
+            <MenuIcon type="trade-stats" color={tab === 'trade-stats' ? '#fff' : '#38bdf8'} />
+            수출입 동향 (10일 잠정치)
+          </button>
         </div>
       </aside>
 
@@ -590,6 +602,9 @@ export default function App() {
 
         {/* 탭 11: 🏆 코스피·코스닥 시가총액 랭킹 */}
         {tab === 'market_cap' && <MarketCapRanking onSelectStock={handleOpenStockChart} onOpenValueChain={handleOpenValueChain} />}
+
+        {/* 탭 11: 🚢 수출입 동향 (관세청 10일 단위 잠정치) */}
+        {tab === 'trade-stats' && <TradeStatsTab />}
       </main>
 
       {/* ─── 4. 종목 상세 퀀트 분석 & 차트 모달 팝업 ─── */}
