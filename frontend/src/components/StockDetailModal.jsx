@@ -60,6 +60,10 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
   const [financials, setFinancials] = useState(null)
   const [isMobile, setIsMobile] = useState(false)
   const [isChartFullscreen, setIsChartFullscreen] = useState(false)
+  // 현재가/세력선/월가 적정매입가 표시 여부 (기본 전부 표시, 체크 해제하면 차트에서 숨김)
+  const [showCurrentPrice, setShowCurrentPrice] = useState(true)
+  const [showSmartMoneyLine, setShowSmartMoneyLine] = useState(true)
+  const [showOptimalLine, setShowOptimalLine] = useState(true)
   const chartWheelRef = useRef(null)
   const totalCandlesRef = useRef(0)
   // 🔍 차트 확대/축소 & 좌우 이동 상태 — count: 화면에 보여줄 캔들 개수(null=기본값), offset: 최신 캔들 기준 뒤로 이동한 캔들 수
@@ -178,7 +182,7 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
   // ─── SVG 캔들스틱 차트 계산 ───
   const baseWidth = isChartFullscreen ? 1400 : 800
   const height = isChartFullscreen ? 720 : 400
-  const padding = { top: 50, right: 125, bottom: 45, left: 15 }
+  const padding = { top: 50, right: 135, bottom: 45, left: 15 }
 
   const candles = (chartData || []).map(d => {
     const o = d.open !== undefined ? Number(d.open) : Number(d.price || d.close)
@@ -188,6 +192,13 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
     const v = Number(d.volume) || 0
     return { ...d, open: o, high: h, low: l, close: c, volume: v }
   })
+
+  // 전일 종가 대비 등락률 — 일봉 기준 마지막 두 캔들(오늘/전일) 비교. 실시간 폴링으로 candles/현재가가
+  // 주기적으로 갱신되므로 이 값도 함께 자동으로 실시간 반영된다.
+  const prevCloseCandle = candles.length >= 2 ? candles[candles.length - 2] : null
+  const currentChangePct = (prevCloseCandle && prevCloseCandle.close > 0 && displayCurrentPrice > 0)
+    ? ((displayCurrentPrice - prevCloseCandle.close) / prevCloseCandle.close) * 100
+    : null
 
   const width = baseWidth
   totalCandlesRef.current = candles.length
@@ -259,35 +270,110 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
   const strokeColor = isUp ? '#ef4444' : '#3b82f6'
   const candleWidth = Math.max(3, Math.min(13, ((width - padding.left - padding.right) / Math.max(1, visibleCandles.length)) * 0.68))
 
-  // 🕵️‍♂️ 세력 매집봉 (Accumulation Bars) 퀀트 탐지
-  const avgVol = candles.length > 0 ? (candles.reduce((acc, c) => acc + c.volume, 0) / candles.length) : 1
-  const accumulationBars = candles.filter(c => c.volume >= avgVol * 1.5 && c.close >= c.open * 0.995).map(c => {
-    const volRatio = Math.round((c.volume / (avgVol || 1)) * 100)
-    const priceChangePct = (((c.close - c.open) / (c.open || 1)) * 100).toFixed(1)
-    
-    let signal = '🕵️‍♂️ 1차 바닥 매집봉'
-    let signalColor = '#f59e0b'
-    if (volRatio >= 260) {
-      signal = '🔥 세력 물량 잠금 대량 매집봉'
-      signalColor = '#ef4444'
-    } else if (c.close > c.open && parseFloat(priceChangePct) >= 2.0) {
-      signal = '🚀 돌파 강세 매집봉'
-      signalColor = '#10b981'
+  // 🕵️‍♂️ 세력 매집봉(거래량 급증 + 양봉) 탐지 — 화면에 보이는 구간 기준, ma_reversal_scanner.js의
+  // "20일 평균거래량 대비 1.5배 이상 + 양봉" 판정 기준과 동일하게 맞춰서 차트 위에 표시용으로 계산
+  const ACCUM_VOLUME_LOOKBACK = 20
+  const accumulationBars = visibleCandles.map((c, localIdx) => {
+    const g = viewStartIdx + localIdx
+    if (g < ACCUM_VOLUME_LOOKBACK) return null
+    let volSum = 0
+    for (let k = g - ACCUM_VOLUME_LOOKBACK; k < g; k++) volSum += candles[k].volume
+    const avgVol = volSum / ACCUM_VOLUME_LOOKBACK
+    if (avgVol > 0 && c.volume >= avgVol * 1.5 && c.close >= c.open * 0.995) {
+      return { localIdx, date: c.date || c.time || '매집일', volRatio: Math.round((c.volume / avgVol) * 10) / 10 }
     }
+    return null
+  }).filter(Boolean)
 
-    return {
-      date: c.date || c.time || '매집일',
-      open: c.open,
-      high: c.high,
-      low: c.low,
-      close: c.close,
-      volume: c.volume,
-      volRatio,
-      priceChangePct,
-      signal,
-      signalColor
+  // 🎯 "256 기법" 스캐너에서 열었을 때만(trigger/mid/outer 값이 함께 전달된 경우) 해당 패턴의
+  // 이평선 3개만 그린다 — 다른 경로(검색, 다른 스캐너 등)로 열었을 때는 표시하지 않는다.
+  const reversalMaSet = (stock.trigger && stock.mid && stock.outer)
+    ? [
+        { period: stock.trigger, colorKey: 'trigger', color: '#fbbf24' },
+        { period: stock.mid, colorKey: 'mid', color: '#38bdf8' },
+        { period: stock.outer, colorKey: 'outer', color: '#34d399' },
+      ]
+    : []
+  const reversalMaLines = reversalMaSet.map(({ period, color }) => {
+    const points = []
+    let lastVal = null
+    visibleCandles.forEach((c, localIdx) => {
+      const g = viewStartIdx + localIdx
+      if (g - period + 1 < 0) return
+      let sum = 0
+      for (let k = g - period + 1; k <= g; k++) sum += candles[k].close
+      const v = sum / period
+      lastVal = v
+      points.push(`${getX(localIdx)},${getY(v)}`)
+    })
+    return { period, color, pointsStr: points.join(' '), lastVal }
+  }).filter(l => l.pointsStr)
+
+  // 🏷️ 우측 가격 라벨 겹침 방지: 적정매입가/세력선/POC바닥/이평선 라벨을 한데 모아서
+  // 실제 가격이 서로 가까우면 위에서부터 순서대로 최소 간격을 띄워 겹치지 않게 배치한다.
+  // (라벨은 띄운 위치에 그리고, 원래 가격 지점까지는 가는 연결선으로 이어준다)
+  const rightLabels = []
+  if (showCurrentPrice && displayCurrentPrice > 0) {
+    const isUpNow = currentChangePct === null ? true : currentChangePct >= 0
+    const pctText = currentChangePct !== null ? ` (${currentChangePct >= 0 ? '+' : ''}${currentChangePct.toFixed(2)}%)` : ''
+    rightLabels.push({
+      key: 'current', origY: getY(displayCurrentPrice), color: '#ffffff',
+      bg: isUpNow ? '#991b1b' : '#1e3a8a', border: isUpNow ? '#f87171' : '#60a5fa',
+      text: `현재 ${Number(displayCurrentPrice).toLocaleString()}${pctText}`, width: isMobile ? 148 : 118
+    })
+  }
+  if (showOptimalLine && optimalPrice > 0) {
+    rightLabels.push({ key: 'optimal', origY: getY(optimalPrice), color: '#00ff9d', bg: '#059669', border: '#00ff9d', text: `적정 ${Number(optimalPrice).toLocaleString()}` })
+  }
+  if (showSmartMoneyLine && smartMoney?.estimatedCost > 0) {
+    rightLabels.push({ key: 'smart', origY: getY(smartMoney.estimatedCost), color: '#ffffff', bg: '#7e22ce', border: '#d8b4fe', text: `세력 ${Number(smartMoney.estimatedCost).toLocaleString()}` })
+  }
+  if (pocPriceLine > 0) {
+    rightLabels.push({ key: 'poc', origY: getY(pocPriceLine), color: '#ffffff', bg: '#0369a1', border: '#00d2ff', text: `바닥 ${Number(pocPriceLine).toLocaleString()}` })
+  }
+  if (period === 'month' && lastMA10Value != null) {
+    rightLabels.push({ key: 'ma10', origY: getY(lastMA10Value), color: '#fde68a', bg: '#78350f', border: '#fbbf24', text: `10선 ${Math.round(lastMA10Value).toLocaleString()}` })
+  }
+  reversalMaLines.forEach(l => {
+    if (l.lastVal != null) {
+      rightLabels.push({ key: `ma-${l.period}`, origY: getY(l.lastVal), color: l.color, bg: 'rgba(15,23,42,0.95)', border: l.color, text: `${l.period}일 ${Math.round(l.lastVal).toLocaleString()}` })
     }
-  }).reverse()
+  })
+
+  const RIGHT_LABEL_W = isMobile ? 108 : 82
+  const RIGHT_LABEL_H = isMobile ? 26 : 20
+  const RIGHT_LABEL_GAP = 3
+  rightLabels.sort((a, b) => a.origY - b.origY)
+  rightLabels.forEach((l, i) => {
+    l.y = l.origY
+    if (i > 0) {
+      const minY = rightLabels[i - 1].y + RIGHT_LABEL_H + RIGHT_LABEL_GAP
+      if (l.y < minY) l.y = minY
+    }
+  })
+  // 맨 아래부터 위로도 한 번 더 밀어서, 차트 하단 바깥으로 몰려 벗어나지 않게 보정
+  for (let i = rightLabels.length - 2; i >= 0; i--) {
+    const maxY = rightLabels[i + 1].y - RIGHT_LABEL_H - RIGHT_LABEL_GAP
+    if (rightLabels[i].y > maxY) rightLabels[i].y = maxY
+  }
+  // 라벨이 너무 많아서 위 두 단계로도 플롯 영역(top~bottom) 안에 다 못 들어가면,
+  // 순서(가격 오름차순)는 유지한 채 사용 가능한 세로 범위 안에 균등하게 눌러 담는다.
+  if (rightLabels.length > 0) {
+    const topBound = padding.top + RIGHT_LABEL_H / 2
+    const bottomBound = height - padding.bottom - RIGHT_LABEL_H / 2
+    const availableSpan = Math.max(0, bottomBound - topBound)
+    const neededSpan = (rightLabels.length - 1) * (RIGHT_LABEL_H + RIGHT_LABEL_GAP)
+    if (rightLabels.length > 1 && neededSpan > availableSpan) {
+      const step = availableSpan / (rightLabels.length - 1)
+      rightLabels.forEach((l, i) => { l.y = topBound + step * i })
+    } else {
+      const overflowBottom = rightLabels[rightLabels.length - 1].y - bottomBound
+      if (overflowBottom > 0) rightLabels.forEach(l => { l.y -= overflowBottom })
+      const overflowTop = topBound - rightLabels[0].y
+      if (overflowTop > 0) rightLabels.forEach(l => { l.y += overflowTop })
+    }
+  }
+  const rightLabelX = width - padding.right + 16
 
   return (
     <div className="modal-overlay" onClick={onClose} style={{
@@ -545,20 +631,43 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
             </div>
           </div>
 
+          {/* 표시 항목 체크박스 (현재가/세력선/월가 적정매입가를 켜고 끄면 차트도 함께 켜지고 꺼짐) */}
+          <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 8 }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', fontSize: '.76rem', color: showCurrentPrice ? 'var(--t1)' : 'var(--t3)', fontWeight: 700 }}>
+              <input type="checkbox" checked={showCurrentPrice} onChange={() => setShowCurrentPrice(v => !v)} style={{ cursor: 'pointer' }} />
+              현재가
+            </label>
+            <label style={{ display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', fontSize: '.76rem', color: showSmartMoneyLine ? '#c084fc' : 'var(--t3)', fontWeight: 700 }}>
+              <input type="checkbox" checked={showSmartMoneyLine} onChange={() => setShowSmartMoneyLine(v => !v)} style={{ cursor: 'pointer', accentColor: '#c084fc' }} />
+              🟣 세력선 (추정평단)
+            </label>
+            <label style={{ display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', fontSize: '.76rem', color: showOptimalLine ? '#34d399' : 'var(--t3)', fontWeight: 700 }}>
+              <input type="checkbox" checked={showOptimalLine} onChange={() => setShowOptimalLine(v => !v)} style={{ cursor: 'pointer', accentColor: '#34d399' }} />
+              🟢 월가 적정매입가
+            </label>
+          </div>
+
           {/* 3대 핵심 타점 배너 & Hover HUD */}
           <div style={{ display: 'flex', gap: 16, fontSize: '.85rem', color: 'var(--t2)', marginBottom: 14, flexWrap: 'wrap', background: 'rgba(15,23,42,0.95)', padding: '10px 16px', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
-              <div>
-                <span style={{ color: 'var(--t3)', marginRight: 5, fontWeight: 700 }}>현재가</span>
-                <strong style={{ color: isUp ? '#ef4444' : '#3b82f6', fontFamily: 'Space Mono', fontSize: '1.1rem', fontWeight: 800 }}>{(displayCurrentPrice || 0).toLocaleString()}원</strong>
-              </div>
-              {smartMoney?.estimatedCost > 0 && (
+              {showCurrentPrice && (
+                <div>
+                  <span style={{ color: 'var(--t3)', marginRight: 5, fontWeight: 700 }}>현재가</span>
+                  <strong style={{ color: (currentChangePct === null ? isUp : currentChangePct >= 0) ? '#ef4444' : '#3b82f6', fontFamily: 'Space Mono', fontSize: '1.1rem', fontWeight: 800 }}>{(displayCurrentPrice || 0).toLocaleString()}원</strong>
+                  {currentChangePct !== null && (
+                    <strong style={{ color: currentChangePct >= 0 ? '#ef4444' : '#3b82f6', fontFamily: 'Space Mono', fontSize: '.85rem', fontWeight: 800, marginLeft: 6 }}>
+                      ({currentChangePct >= 0 ? '+' : ''}{currentChangePct.toFixed(2)}%)
+                    </strong>
+                  )}
+                </div>
+              )}
+              {showSmartMoneyLine && smartMoney?.estimatedCost > 0 && (
                 <div style={{ borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: 14 }}>
                   <span style={{ color: '#c084fc', marginRight: 5, fontWeight: 700 }}>🟣 세력선 (추정평단)</span>
                   <strong style={{ color: '#ffffff', fontFamily: 'Space Mono', fontSize: '1.05rem', fontWeight: 800 }}>{(smartMoney.estimatedCost || 0).toLocaleString()}원</strong>
                 </div>
               )}
-              {optimalPrice > 0 && (
+              {showOptimalLine && optimalPrice > 0 && (
                 <div style={{ borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: 14 }}>
                   <span style={{ color: '#34d399', marginRight: 5, fontWeight: 700 }}>🟢 월가 적정매입가</span>
                   <strong style={{ color: '#ffffff', fontFamily: 'Space Mono', fontSize: '1.05rem', fontWeight: 800 }}>{(optimalPrice || 0).toLocaleString()}원</strong>
@@ -585,6 +694,17 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
 
           {/* SVG 차트 본체 */}
           <div style={{ position: 'relative', width: '100%', overflow: 'hidden', background: '#0a0d14', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)' }}>
+            {reversalMaLines.length > 0 && (
+              <div style={{ display: 'flex', gap: 14, alignItems: 'center', padding: '8px 14px', fontSize: '.76rem', color: 'var(--t2)', borderBottom: '1px solid rgba(255,255,255,0.06)', flexWrap: 'wrap' }}>
+                <span style={{ color: 'var(--t3)', fontWeight: 700 }}>이평선 범례:</span>
+                {reversalMaLines.map(l => (
+                  <span key={`legend-${l.period}`} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontWeight: 700, color: l.color }}>
+                    <span style={{ width: 10, height: 10, borderRadius: '50%', background: l.color, display: 'inline-block' }} />
+                    {l.period}일선
+                  </span>
+                ))}
+              </div>
+            )}
             {!loading && totalCandleCount > 0 && (
               <div style={{ padding: '6px 14px', fontSize: '.72rem', color: 'var(--t3)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                 {isZoomedOrPanned
@@ -707,52 +827,64 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                   )
                 })}
 
+                {/* 🕵️‍♂️ 매집봉(거래량 급증 + 양봉) 캔들 위 아래방향 화살표 표시 */}
+                {accumulationBars.map(b => {
+                  const c = visibleCandles[b.localIdx]
+                  const cx = getX(b.localIdx)
+                  const tipY = getY(c.high) - 6
+                  return (
+                    <g key={`accum-${b.localIdx}`}>
+                      <polygon points={`${cx - 5},${tipY - 11} ${cx + 5},${tipY - 11} ${cx},${tipY}`} fill="#f59e0b" stroke="#000" strokeWidth="0.6" />
+                      <title>{`🕵️ 매집봉 (${b.date}) — 평균 대비 거래량 ${b.volRatio}배`}</title>
+                    </g>
+                  )
+                })}
+
+                {/* 🎯 "256 기법" 이평선 (스캐너에서 열었을 때만 표시) — 라벨은 하단 통합 라벨 영역에서 겹침 방지 후 그림 */}
+                {reversalMaLines.map(l => (
+                  <polyline key={`reversal-ma-${l.period}`} points={l.pointsStr} fill="none" stroke={l.color} strokeWidth={isChartFullscreen ? 2.2 : 1.8} opacity="0.9" />
+                ))}
+
                 {/* 🟡 월봉 10이평선(10개월 이동평균) */}
                 {period === 'month' && ma10Points && (
                   <g key="monthly-ma10">
                     <polyline points={ma10Points} fill="none" stroke="#fbbf24" strokeWidth={isChartFullscreen ? 2.6 : 2} opacity="0.95" />
-                    {lastMA10Value != null && (() => {
-                      const y = getY(lastMA10Value)
-                      const x = getX(lastMA10Idx)
-                      return (
-                        <g>
-                          <circle cx={x} cy={y} r="3.5" fill="#fbbf24" stroke="#000" strokeWidth="0.8" />
-                          <rect x={width - padding.right + 6} y={y - (isMobile ? 18 : 12)} width={isMobile ? 145 : 100} height={isMobile ? 36 : 24} rx={6} fill="#78350f" stroke="#fbbf24" strokeWidth="1.5" />
-                          <text x={width - padding.right + 12} y={y + (isMobile ? 6 : 4)} fill="#fde68a" fontSize={isMobile ? "15" : "11"} fontWeight="900" fontFamily="Space Mono">
-                            10선 {Math.round(lastMA10Value).toLocaleString()}
-                          </text>
-                        </g>
-                      )
-                    })()}
+                    {lastMA10Value != null && (
+                      <circle cx={getX(lastMA10Idx)} cy={getY(lastMA10Value)} r="3.5" fill="#fbbf24" stroke="#000" strokeWidth="0.8" />
+                    )}
                   </g>
                 )}
 
+                {/* 🔴🔵 0. 현재가 실시간 레이저 빔 (전일 대비 등락률은 우측 라벨에 함께 표시) */}
+                {showCurrentPrice && displayCurrentPrice > 0 && (() => {
+                  const y = getY(displayCurrentPrice)
+                  const isUpNow = currentChangePct === null ? true : currentChangePct >= 0
+                  const lineColor = isUpNow ? '#f87171' : '#60a5fa'
+                  return (
+                    <g key="modal-horiz-current">
+                      <line x1={padding.left} y1={y} x2={width - padding.right + 6} y2={y} stroke={lineColor} strokeWidth="1.4" strokeDasharray="6 3" opacity="0.85" />
+                    </g>
+                  )
+                })()}
+
                 {/* 🟢 1. 월가 적정매입가 레이저 빔 */}
-                {optimalPrice > 0 && (() => {
+                {showOptimalLine && optimalPrice > 0 && (() => {
                   const y = getY(optimalPrice)
                   return (
                     <g key="modal-horiz-optimal">
                       <line x1={padding.left} y1={y} x2={width - padding.right + 6} y2={y} stroke="#00ff9d" strokeWidth="3" filter="url(#modal-glow-green)" opacity="0.9" />
                       <line x1={padding.left} y1={y} x2={width - padding.right + 6} y2={y} stroke="#ffffff" strokeWidth="1.2" />
-                      <rect x={width - padding.right + 6} y={y - (isMobile ? 18 : 12)} width={isMobile ? 155 : 110} height={isMobile ? 36 : 24} rx={6} fill="#059669" stroke="#00ff9d" strokeWidth="1.5" />
-                      <text x={width - padding.right + 12} y={y + (isMobile ? 6 : 4)} fill="#ffffff" fontSize={isMobile ? "15" : "11"} fontWeight="900" fontFamily="Space Mono">
-                        적정 {Number(optimalPrice).toLocaleString()}
-                      </text>
                     </g>
                   )
                 })()}
 
                 {/* 🟣 2. 세력선 (추정평단) 레이저 빔 */}
-                {smartMoney?.estimatedCost > 0 && (() => {
+                {showSmartMoneyLine && smartMoney?.estimatedCost > 0 && (() => {
                   const y = getY(smartMoney.estimatedCost)
                   return (
                     <g key="modal-horiz-smart">
                       <line x1={padding.left} y1={y} x2={width - padding.right + 6} y2={y} stroke="#d8b4fe" strokeWidth="3.5" filter="url(#modal-glow-purple)" opacity="0.95" />
                       <line x1={padding.left} y1={y} x2={width - padding.right + 6} y2={y} stroke="#ffffff" strokeWidth="1.4" />
-                      <rect x={width - padding.right + 6} y={y - (isMobile ? 19 : 13)} width={isMobile ? 155 : 110} height={isMobile ? 38 : 26} rx={6} fill="#7e22ce" stroke="#d8b4fe" strokeWidth="1.5" />
-                      <text x={width - padding.right + 12} y={y + (isMobile ? 6.5 : 4.5)} fill="#ffffff" fontSize={isMobile ? "15" : "11"} fontWeight="900" fontFamily="Space Mono">
-                        세력 {Number(smartMoney.estimatedCost).toLocaleString()}
-                      </text>
                     </g>
                   )
                 })()}
@@ -761,15 +893,23 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                 {pocPriceLine > 0 && (() => {
                   const y = getY(pocPriceLine)
                   return (
-                    <g key="modal-horiz-poc">
-                      <line x1={padding.left} y1={y} x2={width - padding.right + 6} y2={y} stroke="#00d2ff" strokeWidth="2.5" strokeDasharray="4 3" opacity="0.8" />
-                      <rect x={width - padding.right + 6} y={y - (isMobile ? 18 : 12)} width={isMobile ? 155 : 110} height={isMobile ? 36 : 24} rx={6} fill="#0369a1" stroke="#00d2ff" strokeWidth="1.5" />
-                      <text x={width - padding.right + 12} y={y + (isMobile ? 6 : 4)} fill="#ffffff" fontSize={isMobile ? "15" : "11"} fontWeight="900" fontFamily="Space Mono">
-                        바닥 {Number(pocPriceLine).toLocaleString()}
-                      </text>
-                    </g>
+                    <line x1={padding.left} y1={y} x2={width - padding.right + 6} y2={y} stroke="#00d2ff" strokeWidth="2.5" strokeDasharray="4 3" opacity="0.8" />
                   )
                 })()}
+
+                {/* 🏷️ 우측 가격 라벨 통합 표시 (겹치지 않게 미리 계산된 위치 + 원래 가격까지 연결선) */}
+                {rightLabels.map(l => (
+                  <g key={`right-label-${l.key}`}>
+                    {Math.abs(l.y - l.origY) > 1 && (
+                      <line x1={rightLabelX - 8} y1={l.origY} x2={rightLabelX - 2} y2={l.y} stroke={l.border} strokeWidth="1" strokeDasharray="2 2" opacity="0.7" />
+                    )}
+                    <circle cx={rightLabelX - 8} cy={l.origY} r="2.5" fill={l.border} stroke="#000" strokeWidth="0.6" />
+                    <rect x={rightLabelX} y={l.y - RIGHT_LABEL_H / 2} width={l.width || RIGHT_LABEL_W} height={RIGHT_LABEL_H} rx={4} fill={l.bg} stroke={l.border} strokeWidth="1.3" />
+                    <text x={rightLabelX + 6} y={l.y + 4} fill={l.color} fontSize={isMobile ? "13" : "10.5"} fontWeight="800" fontFamily="Space Mono">
+                      {l.text}
+                    </text>
+                  </g>
+                ))}
 
                 {/* 호버 가이드라인 */}
                 {hoverData && hoverData.cx && (

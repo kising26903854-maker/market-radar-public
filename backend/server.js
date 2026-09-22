@@ -24,6 +24,7 @@ import { getCompanySummary } from './company_summary.js'
 import { getSmartSupplyDemand } from './smart_supply_demand.js'
 import { getCompanyFinancials } from './company_financials.js'
 import { getMomentumStocks, startDailyGoldenCrossScan } from './momentum_scanner.js'
+import { getMaReversalCache, runMaReversalScan, startDailyMaReversalScan } from './ma_reversal_scanner.js'
 import { getDividendCalendar } from './dividend_calendar.js'
 import { getMorningBriefing, startDailyMorningBriefingSync } from './morning_briefing.js'
 import { getTelegramConfig, saveTelegramConfig, sendTelegramMessage, detectTelegramChatId, maskTelegramToken, getPriceAlerts, createPriceAlert, updatePriceAlert, deletePriceAlert, getAlertHistory, startAlertEngine, sendHoldingsBriefing, sendWatchlistBriefing, sendNpsDisclosuresBriefing, testSendNpsSingleAlert } from './telegram_alert.js'
@@ -531,6 +532,26 @@ app.get('/api/momentum-stocks', async (req, res) => {
   } catch (err) {
     res.status(500).json({ success: false, error: err.message })
   }
+})
+
+// 🎯 "2·5·6 기법" 이동평균선 역배열→골든크로스 전 종목 스캐너 API (단기/중장기)
+app.get('/api/ma-reversal-stocks', async (req, res) => {
+  try {
+    let cache = getMaReversalCache()
+    if (!cache) {
+      res.json({ success: true, scanning: true, short: [], long: [] })
+      runMaReversalScan().catch(e => console.error('[MA REVERSAL] 즉시 스캔 실패:', e.message))
+      return
+    }
+    res.json({ success: true, scanning: false, ...cache })
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message })
+  }
+})
+
+app.post('/api/trigger-ma-reversal-scan', async (req, res) => {
+  res.json({ success: true, message: '"2·5·6 기법" 전 종목 스캔이 백그라운드에서 시작되었습니다.' })
+  runMaReversalScan().catch(e => console.error('[MA REVERSAL] 수동 스캔 오류:', e.message))
 })
 
 // 💵 내 보유 종목 배당 캘린더 & 세후 배당금 시뮬레이터 API
@@ -1559,6 +1580,10 @@ app.listen(PORT, () => {
 
   // 🎙️ AI 모닝 장전 브리핑 자동 생성 (매일 06:00 자동 실행, 서버 기동 시 최초 1회 즉시 — 방문자마다 재호출하지 않고 캐시 공유, 하루 동안 고정)
   setTimeout(() => { startDailyMorningBriefingSync() }, 230000);
+
+  // 🎯 "2·5·6 기법" 전 종목(코스피+코스닥, ETF/거래정지 제외) 이평선 역배열→골든크로스 스캔
+  // (매일 09:25 자동 실행, 캐시가 20시간 이상 오래됐을 때만 서버 기동 시 즉시 1회 — 전 종목 스캔이라 재시작마다 돌리지 않음)
+  setTimeout(() => { startDailyMaReversalScan() }, 245000);
 
   // 🔄 매일 자정/장마감 후 자동 데이터 동기화 스케줄러 (Daily Auto-Sync Engine)
   setInterval(async () => {
