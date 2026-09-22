@@ -499,7 +499,10 @@ export async function runGrowthStockScreener(forceRefresh = false) {
   if (!forceRefresh && fs.existsSync(CACHE_FILE)) {
     try {
       const cached = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf8'));
-      if (Date.now() - (cached.timestamp || 0) < 2 * 60 * 60 * 1000) {
+      // cached.timestamp는 ISO 문자열이라 Date.now()에서 그냥 빼면 NaN이 되어 캐시가 있어도
+      // 항상 만료된 것으로 취급되던 버그 — Date 객체로 변환해서 실제 경과 시간을 비교한다.
+      const cachedAt = cached.timestamp ? new Date(cached.timestamp).getTime() : 0;
+      if (Date.now() - cachedAt < 2 * 60 * 60 * 1000) {
         return cached;
       }
     } catch (e) {

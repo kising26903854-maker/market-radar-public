@@ -24,6 +24,7 @@ import BacktestReportTab from './components/BacktestReportTab.jsx'
 import AiPredictionTab from './components/AiPredictionTab.jsx'
 import TradeStatsTab from './components/TradeStatsTab.jsx'
 import MaReversalScannerTab from './components/MaReversalScannerTab.jsx'
+import GrowthMaComboScannerTab from './components/GrowthMaComboScannerTab.jsx'
 
 // 🎨 세련된 현대식 SVG 라인 아이콘 컴포넌트들
 const MenuIcon = ({ type, size = 16, color = "currentColor", style = {} }) => {
@@ -511,6 +512,10 @@ export default function App() {
             <MenuIcon type="accumulation" color={tab === 'ma-reversal' ? '#fff' : '#f59e0b'} />
             "256 기법" 전종목 스캐너
           </button>
+          <button className={`tab-btn ${tab === 'growth-ma-combo' ? 'active' : ''}`} onClick={() => { setTab('growth-ma-combo'); setIsMenuOpen(false); }}>
+            <MenuIcon type="growth-screener" color={tab === 'growth-ma-combo' ? '#fff' : '#34d399'} />
+            재무 퀀트 + 256 기법 콤보
+          </button>
           <button className={`tab-btn ${tab === 'backtest-report' ? 'active' : ''}`} onClick={() => { setTab('backtest-report'); setIsMenuOpen(false); }}>
             <MenuIcon type="accumulation" color={tab === 'backtest-report' ? '#fff' : '#818cf8'} />
             패턴 스캐너 백테스트
@@ -591,6 +596,7 @@ export default function App() {
         {tab === 'energy-condensation' && <EnergyCondensationScannerTab onSelectStock={handleOpenStockChart} />}
         {tab === 'monthly-ma10' && <MonthlyMA10ScannerTab onSelectStock={handleOpenStockChart} />}
         {tab === 'ma-reversal' && <MaReversalScannerTab onSelectStock={handleOpenStockChart} />}
+        {tab === 'growth-ma-combo' && <GrowthMaComboScannerTab onSelectStock={handleOpenStockChart} />}
         {tab === 'backtest-report' && <BacktestReportTab />}
         {tab === 'ai-prediction' && <AiPredictionTab onSelectStock={handleOpenStockChart} />}
 

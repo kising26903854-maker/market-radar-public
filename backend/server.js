@@ -25,6 +25,7 @@ import { getSmartSupplyDemand } from './smart_supply_demand.js'
 import { getCompanyFinancials } from './company_financials.js'
 import { getMomentumStocks, startDailyGoldenCrossScan } from './momentum_scanner.js'
 import { getMaReversalCache, runMaReversalScan, startDailyMaReversalScan } from './ma_reversal_scanner.js'
+import { getGrowthMaComboCache, runGrowthMaComboScan, startDailyGrowthMaComboScan } from './growth_ma_combo_scanner.js'
 import { getDividendCalendar } from './dividend_calendar.js'
 import { getMorningBriefing, startDailyMorningBriefingSync } from './morning_briefing.js'
 import { getTelegramConfig, saveTelegramConfig, sendTelegramMessage, detectTelegramChatId, maskTelegramToken, getPriceAlerts, createPriceAlert, updatePriceAlert, deletePriceAlert, getAlertHistory, startAlertEngine, sendHoldingsBriefing, sendWatchlistBriefing, sendNpsDisclosuresBriefing, testSendNpsSingleAlert } from './telegram_alert.js'
@@ -552,6 +553,26 @@ app.get('/api/ma-reversal-stocks', async (req, res) => {
 app.post('/api/trigger-ma-reversal-scan', async (req, res) => {
   res.json({ success: true, message: '"2·5·6 기법" 전 종목 스캔이 백그라운드에서 시작되었습니다.' })
   runMaReversalScan().catch(e => console.error('[MA REVERSAL] 수동 스캔 오류:', e.message))
+})
+
+// 🚀🎯 "4대 재무 퀀트" 강력 후보군(조건 2개↑) + "256 기법" 콤보 스캐너 API
+app.get('/api/growth-ma-combo-stocks', async (req, res) => {
+  try {
+    let cache = getGrowthMaComboCache()
+    if (!cache) {
+      res.json({ success: true, scanning: true, short: [], long: [] })
+      runGrowthMaComboScan().catch(e => console.error('[GROWTH+MA COMBO] 즉시 스캔 실패:', e.message))
+      return
+    }
+    res.json({ success: true, scanning: false, ...cache })
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message })
+  }
+})
+
+app.post('/api/trigger-growth-ma-combo-scan', async (req, res) => {
+  res.json({ success: true, message: '4대 퀀트 후보군 + "256 기법" 콤보 스캔이 백그라운드에서 시작되었습니다.' })
+  runGrowthMaComboScan().catch(e => console.error('[GROWTH+MA COMBO] 수동 스캔 오류:', e.message))
 })
 
 // 💵 내 보유 종목 배당 캘린더 & 세후 배당금 시뮬레이터 API
@@ -1584,6 +1605,10 @@ app.listen(PORT, () => {
   // 🎯 "2·5·6 기법" 전 종목(코스피+코스닥, ETF/거래정지 제외) 이평선 역배열→골든크로스 스캔
   // (매일 09:25 자동 실행, 캐시가 20시간 이상 오래됐을 때만 서버 기동 시 즉시 1회 — 전 종목 스캔이라 재시작마다 돌리지 않음)
   setTimeout(() => { startDailyMaReversalScan() }, 245000);
+
+  // 🚀🎯 4대 재무 퀀트 강력 후보군(조건 2개↑) + "256 기법" 콤보 스캔
+  // (매일 09:40 자동 실행, 캐시가 20시간 이상 오래됐을 때만 서버 기동 시 즉시 1회 — 재무 발굴기·전종목 256기법 스캐너보다 늦게 실행)
+  setTimeout(() => { startDailyGrowthMaComboScan() }, 260000);
 
   // 🔄 매일 자정/장마감 후 자동 데이터 동기화 스케줄러 (Daily Auto-Sync Engine)
   setInterval(async () => {
