@@ -249,7 +249,13 @@ export default function GrowthMaComboScannerTab({ onSelectStock }) {
                 <div style={{ display: 'flex', gap: 10, fontSize: '.74rem', color: 'var(--t2)', flexWrap: 'wrap' }}>
                   <span>매출 <strong style={{ color: '#fff' }}>{pct(stock.revenueGrowthRate)}</strong></span>
                   <span>영업이익 <strong style={{ color: '#fff' }}>{pct(stock.opProfitGrowthRate)}</strong></span>
-                  <span>자산 <strong style={{ color: '#fff' }}>{pct(stock.assetGrowthRate)}</strong></span>
+                  <span>
+                    자산{stock.realAssetGrowthRate != null ? (
+                      <strong style={{ color: '#34d399' }}> {pct(stock.realAssetGrowthRate)} <span style={{ fontSize: '.65rem', color: '#34d399', fontWeight: 700 }}>(DART 실측)</span></strong>
+                    ) : (
+                      <strong style={{ color: '#fff' }}> {pct(stock.assetGrowthRate)} <span style={{ fontSize: '.65rem', color: 'var(--t3)', fontWeight: 700 }}>(추정)</span></strong>
+                    )}
+                  </span>
                   <span>부채비율 <strong style={{ color: '#fff' }}>{stock.debtRatio?.toFixed(0)}%</strong></span>
                 </div>
               </div>

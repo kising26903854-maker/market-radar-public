@@ -26,6 +26,7 @@ import { getCompanyFinancials } from './company_financials.js'
 import { getMomentumStocks, startDailyGoldenCrossScan } from './momentum_scanner.js'
 import { getMaReversalCache, runMaReversalScan, startDailyMaReversalScan } from './ma_reversal_scanner.js'
 import { getGrowthMaComboCache, runGrowthMaComboScan, startDailyGrowthMaComboScan } from './growth_ma_combo_scanner.js'
+import { getAssetGrowthHistory } from './dart_asset_growth.js'
 import { getDividendCalendar } from './dividend_calendar.js'
 import { getMorningBriefing, startDailyMorningBriefingSync } from './morning_briefing.js'
 import { getTelegramConfig, saveTelegramConfig, sendTelegramMessage, detectTelegramChatId, maskTelegramToken, getPriceAlerts, createPriceAlert, updatePriceAlert, deletePriceAlert, getAlertHistory, startAlertEngine, sendHoldingsBriefing, sendWatchlistBriefing, sendNpsDisclosuresBriefing, testSendNpsSingleAlert } from './telegram_alert.js'
@@ -760,6 +761,16 @@ app.get('/api/52week-high', async (req, res) => {
 app.get('/api/financials/:code', async (req, res) => {
   try {
     const data = await getStockFinancials(req.params.code)
+    res.json(data)
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message })
+  }
+})
+
+// 📊 종목별 실제 자산총계(DART 재무상태표 원본) 3개년 추이 — fnlttSinglAcntAll.json 실공시 기반
+app.get('/api/asset-growth/:code', async (req, res) => {
+  try {
+    const data = await getAssetGrowthHistory(req.params.code)
     res.json(data)
   } catch (err) {
     res.status(500).json({ success: false, error: err.message })

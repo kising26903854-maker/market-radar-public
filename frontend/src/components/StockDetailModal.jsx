@@ -4,6 +4,7 @@ import StockShortSellingChart from './StockShortSellingChart.jsx'
 import EpsTrendChart from './EpsTrendChart.jsx'
 import RoeTrendChart from './RoeTrendChart.jsx'
 import RevenueIncomeChart from './RevenueIncomeChart.jsx'
+import AssetGrowthChart from './AssetGrowthChart.jsx'
 import NpsHoldingHistoryChart from './NpsHoldingHistoryChart.jsx'
 
 // 🎨 세련된 현대식 SVG 라인 아이콘 컴포넌트들
@@ -935,6 +936,9 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
 
         {/* 📊 매출액 & 영업이익 추이 (연간/분기) */}
         <RevenueIncomeChart stock={stock} />
+
+        {/* 📊 자산총계 추이 & 증가율 (DART 공식 재무제표 실공시) */}
+        <AssetGrowthChart stock={stock} />
 
         {/* 🏛️ 국민연금 보유비중 변동 이력 (DART 대량보유 상황보고서 실공시) */}
         <NpsHoldingHistoryChart stock={stock} />

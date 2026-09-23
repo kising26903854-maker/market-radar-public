@@ -40,7 +40,8 @@ function buildCorpCodeMap() {
   return map;
 }
 
-function getCorpCodeMap() {
+// stockCode → { corpCode, corpName } 매핑 (자산증가율 등 다른 DART 연동 모듈에서도 재사용)
+export function getCorpCodeMap() {
   if (!corpCodeMapMemo) corpCodeMapMemo = buildCorpCodeMap();
   return corpCodeMapMemo;
 }

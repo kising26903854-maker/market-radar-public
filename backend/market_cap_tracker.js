@@ -3,6 +3,7 @@ import path from 'path';
 import axios from 'axios';
 import { fileURLToPath } from 'url';
 import { fetchMarketCapUniverse } from './kospi_kosdaq_scanner.js';
+import { sendTelegramMessage } from './telegram_alert.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -11,6 +12,7 @@ const DATA_DIR = path.join(__dirname, 'data');
 const STOCK_CAP_FILE = path.join(DATA_DIR, 'stock_market_cap.json');
 const RANKING_CACHE_FILE = path.join(DATA_DIR, 'ranking_cache.json');
 const RANK_HISTORY_FILE = path.join(DATA_DIR, 'market_cap_rank_history.json');
+const NOTIFY_REGISTRY_FILE = path.join(DATA_DIR, 'market_cap_notify_registry.json');
 
 if (!fs.existsSync(DATA_DIR)) {
   fs.mkdirSync(DATA_DIR, { recursive: true });
@@ -195,6 +197,58 @@ function computeComparison(currentList, prevList) {
   };
 }
 
+// ─── 🚨 TOP20 신규진입/이탈 텔레그램 알림 (5분마다 재계산되지만, "오늘 아직 알리지 않은
+// 변동"에 대해서만 1회 발송 — 안 그러면 같은 종목이 하루 종일 5분마다 재발송된다) ───
+function loadNotifyRegistry() {
+  const todayKey = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' });
+  const reg = loadJson(NOTIFY_REGISTRY_FILE, {});
+  if (reg.date !== todayKey) {
+    return { date: todayKey, notifiedNew: [], notifiedOut: [] };
+  }
+  return reg;
+}
+
+async function notifyMarketCapChanges(marketLabel, comparison, registry) {
+  const newEntries = (comparison.current || []).filter(
+    s => s.status === 'NEW' && !registry.notifiedNew.includes(`${marketLabel}_${s.code}`)
+  );
+  const outEntries = (comparison.out || []).filter(
+    s => !registry.notifiedOut.includes(`${marketLabel}_${s.code}`)
+  );
+
+  const nowStr = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
+
+  for (const s of newEntries) {
+    const marketCapEok = s.marketCapEok ?? Math.round((s.marketCap || 0) / 100000000);
+    const message = `
+🆕 <b>[${marketLabel} 시가총액 TOP20 신규 진입]</b>
+━━━━━━━━━━━━━━━━━
+• <b>종목명:</b> ${s.name} (<code>${s.code}</code>)
+• <b>현재 순위:</b> ${s.rank}위
+• <b>현재가:</b> ${(s.price || 0).toLocaleString()}원 (${(s.changePct ?? 0) >= 0 ? '+' : ''}${s.changePct ?? 0}%)
+• <b>시가총액:</b> ${marketCapEok.toLocaleString()}억원
+━━━━━━━━━━━━━━━━━
+💡 시총 상위권 진입은 수급 쏠림·지수 반영 비중 확대의 신호일 수 있습니다.
+⏰ <i>${nowStr}</i>
+`.trim();
+    const result = await sendTelegramMessage(message);
+    if (result.success) registry.notifiedNew.push(`${marketLabel}_${s.code}`);
+  }
+
+  for (const s of outEntries) {
+    const message = `
+📉 <b>[${marketLabel} 시가총액 TOP20 이탈]</b>
+━━━━━━━━━━━━━━━━━
+• <b>종목명:</b> ${s.name} (<code>${s.code}</code>)
+• <b>이전 순위:</b> ${s.rank}위 → <b>현재 순위:</b> ${s.currentRank}
+━━━━━━━━━━━━━━━━━
+⏰ <i>${nowStr}</i>
+`.trim();
+    const result = await sendTelegramMessage(message);
+    if (result.success) registry.notifiedOut.push(`${marketLabel}_${s.code}`);
+  }
+}
+
 export function getMarketCapComparison() {
   const file = RANKING_CACHE_FILE;
   if (fs.existsSync(file)) {
@@ -229,6 +283,15 @@ export async function runMarketCapTracking() {
 
   const kospiComparison = computeComparison(kospiRaw, prevData?.kospi || []);
   const kosdaqComparison = computeComparison(kosdaqRaw, prevData?.kosdaq || []);
+
+  try {
+    const registry = loadNotifyRegistry();
+    await notifyMarketCapChanges('코스피', kospiComparison, registry);
+    await notifyMarketCapChanges('코스닥', kosdaqComparison, registry);
+    saveJson(NOTIFY_REGISTRY_FILE, registry);
+  } catch (e) {
+    console.error('[MARKET CAP] TOP20 변동 텔레그램 알림 실패:', e.message);
+  }
 
   const result = {
     success: true,

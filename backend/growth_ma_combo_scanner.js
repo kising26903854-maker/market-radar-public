@@ -11,6 +11,7 @@ import { fileURLToPath } from 'url'
 import { runGrowthStockScreener } from './growth_stock_screener.js'
 import { fetchDailySeries } from './double_bottom_scanner.js'
 import { detectMaReversalPattern, isExcludedStock } from './ma_reversal_scanner.js'
+import { getRealAssetGrowthRate } from './dart_asset_growth.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const CACHE_PATH = path.join(__dirname, 'data', 'growth_ma_combo_cache.json')
@@ -51,7 +52,10 @@ async function executeCombo() {
     await Promise.all(batch.map(async (s) => {
       if (await isExcludedStock(s.code)) { excludedCount++; return } // 거래정지/관리종목 제외
 
-      const series = await fetchDailySeries(s.code, maxPages)
+      const [series, realAssetGrowthRate] = await Promise.all([
+        fetchDailySeries(s.code, maxPages),
+        getRealAssetGrowthRate(s.code), // DART 재무상태표 실제 자산총계 기준 정확한 증가율 (실패 시 null → 추정치로 폴백)
+      ])
       if (!series || series.length === 0) return
 
       for (const set of PATTERN_SETS) {
@@ -68,7 +72,8 @@ async function executeCombo() {
           matchTags: s.matchTags,
           revenueGrowthRate: s.revenueGrowthRate,
           opProfitGrowthRate: s.opProfitGrowthRate,
-          assetGrowthRate: s.assetGrowthRate,
+          assetGrowthRate: s.assetGrowthRate, // BPS 기반 추정치(전체 스크리닝 랭킹에 쓰인 값, 그대로 보존)
+          realAssetGrowthRate, // DART 실제 자산총계 기준 검증 수치 (null이면 DART 조회 실패 → 프론트에서 추정치로 폴백 표시)
           debtRatio: s.debtRatio,
           growthScore: s.growthScore,
           // 2차(기술적) 패턴 정보
