@@ -10,7 +10,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import { runGrowthStockScreener } from './growth_stock_screener.js'
 import { fetchDailySeries } from './double_bottom_scanner.js'
-import { detectMaReversalPattern } from './ma_reversal_scanner.js'
+import { detectMaReversalPattern, isExcludedStock } from './ma_reversal_scanner.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const CACHE_PATH = path.join(__dirname, 'data', 'growth_ma_combo_cache.json')
@@ -43,11 +43,14 @@ async function executeCombo() {
 
   const resultsBySet = { short: [], long: [] }
   const maxPages = Math.max(...PATTERN_SETS.map(s => s.historyPages))
+  let excludedCount = 0
 
   const batchSize = 8
   for (let i = 0; i < universe.length; i += batchSize) {
     const batch = universe.slice(i, i + batchSize)
     await Promise.all(batch.map(async (s) => {
+      if (await isExcludedStock(s.code)) { excludedCount++; return } // 거래정지/관리종목 제외
+
       const series = await fetchDailySeries(s.code, maxPages)
       if (!series || series.length === 0) return
 
@@ -76,7 +79,7 @@ async function executeCombo() {
     }))
 
     if (i + batchSize < universe.length) await new Promise(r => setTimeout(r, 150))
-    process.stdout.write(`\r[GROWTH+MA COMBO] 진행: ${Math.min(i + batchSize, universe.length)}/${universe.length}종목 (단기 ${resultsBySet.short.length} / 중장기 ${resultsBySet.long.length})`)
+    process.stdout.write(`\r[GROWTH+MA COMBO] 진행: ${Math.min(i + batchSize, universe.length)}/${universe.length}종목 (단기 ${resultsBySet.short.length} / 중장기 ${resultsBySet.long.length}, 거래정지·관리종목 제외 ${excludedCount})`)
   }
   console.log('')
 
@@ -88,6 +91,7 @@ async function executeCombo() {
     elapsedSec: parseFloat(elapsed),
     minMatchedConditions: MIN_MATCHED_CONDITIONS,
     totalCandidates: universe.length,
+    excludedCount, // 거래정지/관리종목(투자주의환기 포함)으로 제외된 종목 수
     growthScanTimestamp: growthData.timestamp || null,
     short: resultsBySet.short,
     long: resultsBySet.long,
@@ -97,7 +101,7 @@ async function executeCombo() {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
   fs.writeFileSync(CACHE_PATH, JSON.stringify(cache, null, 2), 'utf-8')
 
-  console.log(`[GROWTH+MA COMBO] ✅ 완료! ${elapsed}초 소요. 1차 후보 ${universe.length}종목 중 단기 ${resultsBySet.short.length} / 중장기 ${resultsBySet.long.length}종목 최종 발굴 → ${CACHE_PATH}`)
+  console.log(`[GROWTH+MA COMBO] ✅ 완료! ${elapsed}초 소요. 1차 후보 ${universe.length}종목 중 거래정지·관리종목 ${excludedCount}종목 제외, 단기 ${resultsBySet.short.length} / 중장기 ${resultsBySet.long.length}종목 최종 발굴 → ${CACHE_PATH}`)
   return cache
 }
 

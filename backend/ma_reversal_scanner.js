@@ -4,13 +4,8 @@
 // - 단기: 5일선이 20일선을 상향 돌파, 아직 60일선 아래 ("256 자리")
 // - 중장기: 5일선이 112일선을 상향 돌파, 아직 224일선 아래
 // - 매집봉(거래량 급증 + 양봉) 동반 시 보너스 점수
-// - 코스피 + 코스닥 전 종목(ETF/ETN, 실시간 거래정지 제외) 대상
+// - 코스피 + 코스닥 전 종목(ETF/ETN, 거래정지/관리종목/투자주의환기종목 제외) 대상
 // - 매일 09:25 자동 갱신 + 캐시 저장
-//
-// ⚠️ 관리종목/투자위험종목 지정 여부는 무료로 안정적으로 확인 가능한 실시간 API를 찾지
-// 못해 이번 버전에는 반영하지 못했다 (KRX 공식 API는 로그인/등록 필요, 네이버 API는
-// 실시간 거래정지 여부만 제공하고 관리종목 지정 자체는 노출하지 않음). 최소 시가총액
-// 필터로 초소형 부실주 상당수를 간접적으로 걸러내는 정도가 현재 한계.
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 import axios from 'axios';
 import fs from 'fs';
@@ -42,6 +37,21 @@ const VOLUME_SPIKE_MULT = 1.5;      // 매집봉 판정: 20일 평균거래량 �
 const VOLUME_LOOKBACK = 20;
 
 const num = (v) => parseFloat(String(v ?? '').replace(/,/g, '')) || 0;
+
+// 거래정지/관리종목(투자주의환기종목 포함) 여부 확인 — 종목별 basic API의
+// isManagement(관리·주의환기 등 행정조치 여부)와 tradeStopType(실시간 거래정지 여부)로 판별.
+// bulk marketValue API에는 이 필드가 없어 종목별로 별도 호출해야 한다.
+export async function isExcludedStock(code) {
+  try {
+    const url = `https://m.stock.naver.com/api/stock/${code}/basic`;
+    const res = await axios.get(url, { headers: HEADERS_M, timeout: 5000 });
+    const isManagement = res.data?.isManagement === true;
+    const isHalted = (res.data?.tradeStopType?.code ?? '1') !== '1';
+    return isManagement || isHalted;
+  } catch {
+    return false; // 조회 실패 시엔 보수적으로 제외하지 않음(과도한 스캔 누락 방지)
+  }
+}
 
 // ─── 전 종목(ETF/ETN, 실시간 거래정지 제외) 유니버스 수집 ───
 async function fetchFullNormalUniverse(sosok) {
@@ -220,11 +230,14 @@ async function executeMaReversalScan() {
   const resultsBySet = { short: [], long: [] };
   const seriesCache = new Map(); // 종목당 최장 이력(중장기용) 한 번만 수집해서 단기/중장기 공용으로 씀
   const maxPages = Math.max(...PATTERN_SETS.map(s => s.historyPages));
+  let excludedCount = 0;
 
   const batchSize = 8;
   for (let i = 0; i < universe.length; i += batchSize) {
     const batch = universe.slice(i, i + batchSize);
     await Promise.all(batch.map(async (s) => {
+      if (await isExcludedStock(s.code)) { excludedCount++; return; } // 거래정지/관리종목 제외
+
       const series = await fetchDailySeries(s.code, maxPages);
       if (!series || series.length === 0) return;
 
@@ -242,7 +255,7 @@ async function executeMaReversalScan() {
     }));
 
     if (i + batchSize < universe.length) await new Promise(r => setTimeout(r, 150));
-    process.stdout.write(`\r[MA REVERSAL] 진행: ${Math.min(i + batchSize, universe.length)}/${universe.length}종목 (단기 ${resultsBySet.short.length} / 중장기 ${resultsBySet.long.length})`);
+    process.stdout.write(`\r[MA REVERSAL] 진행: ${Math.min(i + batchSize, universe.length)}/${universe.length}종목 (단기 ${resultsBySet.short.length} / 중장기 ${resultsBySet.long.length}, 거래정지·관리종목 제외 ${excludedCount})`);
   }
   console.log('');
 
@@ -253,6 +266,7 @@ async function executeMaReversalScan() {
     lastSyncAt: new Date().toISOString(),
     elapsedSec: parseFloat(elapsed),
     totalScanned: universe.length,
+    excludedCount, // 거래정지/관리종목(투자주의환기 포함)으로 제외된 종목 수
     short: resultsBySet.short.slice(0, 150),
     long: resultsBySet.long.slice(0, 150),
   };
@@ -261,7 +275,7 @@ async function executeMaReversalScan() {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(CACHE_PATH, JSON.stringify(cache, null, 2), 'utf-8');
 
-  console.log(`[MA REVERSAL] ✅ 완료! ${elapsed}초 소요. 단기 ${resultsBySet.short.length}종목 / 중장기 ${resultsBySet.long.length}종목 발굴 → ${CACHE_PATH}`);
+  console.log(`[MA REVERSAL] ✅ 완료! ${elapsed}초 소요. 거래정지·관리종목 ${excludedCount}종목 제외, 단기 ${resultsBySet.short.length}종목 / 중장기 ${resultsBySet.long.length}종목 발굴 → ${CACHE_PATH}`);
   return cache;
 }
 
