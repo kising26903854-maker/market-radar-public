@@ -39,21 +39,61 @@ async function findAssetRow(corpCode) {
 
 // DART가 주는 thstrm_nm 등("제 57 기")은 사업연도를 바로 알기 어려워서, 조회에 쓴 bsnsYear
 // 기준으로 실제 캘린더 연도 레이블("2025년")을 직접 계산해 붙인다.
-function buildHistory(row, bsnsYear) {
-  const points = [
+function buildAnnualPoints(row, bsnsYear) {
+  return [
     { period: `${bsnsYear - 2}년`, fiscalTerm: row.bfefrmtrm_nm, amount: Number(row.bfefrmtrm_amount) },
     { period: `${bsnsYear - 1}년`, fiscalTerm: row.frmtrm_nm, amount: Number(row.frmtrm_amount) },
     { period: `${bsnsYear}년`, fiscalTerm: row.thstrm_nm, amount: Number(row.thstrm_amount) },
-  ].filter(p => Number.isFinite(p.amount) && p.amount > 0);
+  ];
+}
 
-  const history = points.map((p, i) => {
-    const prev = points[i - 1];
+// 올해 들어 가장 최근에 공시된 분기보고서(3분기→반기→1분기 순)에서 자산총계를 추가로 조회
+// — 연간 그래프 맨 끝에 "올해 최근 분기" 한 점을 더 붙이기 위함. 분기 재무상태표의
+// thstrm_amount는 그 분기 말 시점 잔액(누적 손익이 아닌 시점 데이터)이라 그대로 쓸 수 있다.
+const QUARTER_REPRT_CODES = [
+  { code: '11014', label: '3분기' },
+  { code: '11012', label: '반기' },
+  { code: '11013', label: '1분기' },
+];
+
+async function fetchQuarterRow(corpCode, bsnsYear, fsDiv, reprtCode) {
+  const res = await axios.get('https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json', {
+    params: { crtfc_key: DART_KEY, corp_code: corpCode, bsns_year: String(bsnsYear), reprt_code: reprtCode, fs_div: fsDiv },
+    timeout: 8000,
+  });
+  if (res.data?.status !== '000') return null;
+  return (res.data.list || []).find(r => r.sj_div === 'BS' && r.account_nm === '자산총계') || null;
+}
+
+async function findLatestQuarterRow(corpCode, preferredFsDiv, afterYear) {
+  const currentYear = new Date().getFullYear();
+  const fsDivs = preferredFsDiv === 'CFS' ? ['CFS', 'OFS'] : ['OFS', 'CFS'];
+  for (const year of [currentYear, currentYear - 1]) {
+    if (year <= afterYear) break; // 이미 연간 데이터로 커버된 연도는 건너뜀
+    for (const q of QUARTER_REPRT_CODES) {
+      for (const fsDiv of fsDivs) {
+        try {
+          const row = await fetchQuarterRow(corpCode, year, fsDiv, q.code);
+          if (row && Number.isFinite(Number(row.thstrm_amount)) && Number(row.thstrm_amount) > 0) {
+            return { row, year, quarterLabel: q.label };
+          }
+        } catch { /* 다음 조합 시도 */ }
+      }
+    }
+  }
+  return null;
+}
+
+function computeGrowthChain(points) {
+  const valid = points.filter(p => Number.isFinite(p.amount) && p.amount > 0);
+  const history = valid.map((p, i) => {
+    const prev = valid[i - 1];
     const growthRate = prev ? parseFloat((((p.amount - prev.amount) / prev.amount) * 100).toFixed(2)) : null;
-    return { period: p.period, fiscalTerm: p.fiscalTerm, totalAssets: p.amount, growthRate };
+    return { period: p.period, fiscalTerm: p.fiscalTerm, totalAssets: p.amount, growthRate, isQuarter: !!p.isQuarter };
   });
 
-  const first = points[0];
-  const last = points[points.length - 1];
+  const first = valid[0];
+  const last = valid[valid.length - 1];
   const overallGrowthRate = (first && last && first !== last)
     ? parseFloat((((last.amount - first.amount) / first.amount) * 100).toFixed(2))
     : null;
@@ -81,7 +121,19 @@ export async function getAssetGrowthHistory(code) {
       cache.set(code, { data: empty, ts: Date.now() });
       return empty;
     }
-    const { history, overallGrowthRate } = buildHistory(found.row, found.bsnsYear);
+    let points = buildAnnualPoints(found.row, found.bsnsYear);
+
+    const quarter = await findLatestQuarterRow(corpInfo.corpCode, found.fsDiv, found.bsnsYear);
+    if (quarter) {
+      points = [...points, {
+        period: `${quarter.year}년 ${quarter.quarterLabel}`,
+        fiscalTerm: quarter.row.thstrm_nm,
+        amount: Number(quarter.row.thstrm_amount),
+        isQuarter: true,
+      }];
+    }
+
+    const { history, overallGrowthRate } = computeGrowthChain(points);
     const result = {
       success: true,
       code,

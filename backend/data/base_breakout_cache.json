@@ -1,6 +1,6 @@
 {
-  "lastSyncAt": "2026-09-23T08:55:15.066Z",
-  "elapsedSec": 60.5,
+  "lastSyncAt": "2026-09-26T04:47:40.890Z",
+  "elapsedSec": 16.3,
   "totalScanned": 700,
   "totalMatches": 13,
   "kospiCount": 12,
@@ -10,9 +10,9 @@
       "code": "035250",
       "name": "강원랜드",
       "market": "코스피",
-      "price": 14370,
-      "changePct": 0,
-      "marketCap": 30743,
+      "price": 14380,
+      "changePct": 0.07,
+      "marketCap": 30765,
       "trough": {
         "date": "2026-06-26",
         "price": 13920
@@ -27,7 +27,7 @@
       "bandPct": 8.5,
       "extensionPct": -4.8,
       "consolDays": 59,
-      "currentPrice": 14370,
+      "currentPrice": 14380,
       "currentDate": "2026-09-23",
       "status": "📦 박스권 상단 임박",
       "score": 57
@@ -140,9 +140,9 @@
       "code": "365550",
       "name": "ESR켄달스퀘어리츠",
       "market": "코스피",
-      "price": 3240,
-      "changePct": 2.37,
-      "marketCap": 7973,
+      "price": 3250,
+      "changePct": 2.69,
+      "marketCap": 7998,
       "trough": {
         "date": "2026-08-21",
         "price": 2925
@@ -155,9 +155,9 @@
       },
       "declinePct": 27.9,
       "bandPct": 11.8,
-      "extensionPct": -0.9,
+      "extensionPct": -0.6,
       "consolDays": 21,
-      "currentPrice": 3240,
+      "currentPrice": 3250,
       "currentDate": "2026-09-23",
       "status": "📦 박스권 상단 임박",
       "score": 53
@@ -218,9 +218,9 @@
       "code": "088980",
       "name": "맥쿼리인프라",
       "market": "코스피",
-      "price": 9820,
-      "changePct": 0.2,
-      "marketCap": 47030,
+      "price": 9830,
+      "changePct": 0.31,
+      "marketCap": 47078,
       "trough": {
         "date": "2026-08-19",
         "price": 9320
@@ -233,9 +233,9 @@
       },
       "declinePct": 16,
       "bandPct": 8.3,
-      "extensionPct": -2.7,
+      "extensionPct": -2.6,
       "consolDays": 23,
-      "currentPrice": 9820,
+      "currentPrice": 9830,
       "currentDate": "2026-09-23",
       "status": "📦 박스권 상단 임박",
       "score": 51

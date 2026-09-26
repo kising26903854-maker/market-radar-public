@@ -75,6 +75,15 @@ export default function AssetGrowthChart({ stock }) {
     ? `${linePath} L ${points[points.length - 1].x} ${height - pad.bottom} L ${points[0].x} ${height - pad.bottom} Z`
     : ''
 
+  // 마지막 점이 "올해 최근 분기"면 연간 구간(실선)과 분기 구간(점선)을 구분해서 그린다
+  const hasQuarter = points.length > 0 && points[points.length - 1].isQuarter
+  const solidPoints = hasQuarter ? points.slice(0, -1) : points
+  const solidPath = solidPoints.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ')
+  const quarterPoint = hasQuarter ? points[points.length - 1] : null
+  const dashedPath = hasQuarter
+    ? `M ${solidPoints[solidPoints.length - 1].x} ${solidPoints[solidPoints.length - 1].y} L ${quarterPoint.x} ${quarterPoint.y}`
+    : ''
+
   const latest = history[history.length - 1]
   const latestGrowth = latest?.growthRate
 
@@ -94,13 +103,13 @@ export default function AssetGrowthChart({ stock }) {
             {stock?.name} 자산총계 추이 & 증가율
           </div>
           <div style={{ fontSize: '.78rem', color: 'var(--t2)', marginTop: 4 }}>
-            <span style={{ color: '#38bdf8' }}>선 = 자산총계(재무상태표)</span> · 점 옆 숫자는 전년 대비 증가율 &nbsp;|&nbsp;
+            <span style={{ color: '#38bdf8' }}>실선 = 연간</span> · <span style={{ color: '#f59e0b' }}>점선 = 올해 최근 분기</span> · 점 옆 숫자는 직전 시점 대비 증가율 &nbsp;|&nbsp;
             <span style={{ color: 'var(--t3)' }}>출처: DART 공식 정기보고서 ({fsDiv || '재무제표'})</span>
           </div>
         </div>
 
         <div style={{ padding: '6px 14px', background: 'rgba(56,189,248,0.12)', border: `1px solid ${growthColor}66`, borderRadius: 0, textAlign: 'right' }}>
-          <span style={{ fontSize: '.68rem', color: 'var(--t3)', fontWeight: 700, marginRight: 6 }}>최근 {history.length}개년 누적 증가율</span>
+          <span style={{ fontSize: '.68rem', color: 'var(--t3)', fontWeight: 700, marginRight: 6 }}>{hasQuarter ? '최근 분기까지 누적 증가율' : `최근 ${history.length}개년 누적 증가율`}</span>
           <span style={{ fontSize: '.95rem', fontWeight: 800, color: growthColor }}>
             {overallGrowthRate === null || overallGrowthRate === undefined ? '-' : `${overallGrowthRate >= 0 ? '+' : ''}${overallGrowthRate.toFixed(1)}%`}
           </span>
@@ -124,31 +133,36 @@ export default function AssetGrowthChart({ stock }) {
           {/* 면적 채우기 */}
           {points.length > 1 && <path d={areaPath} fill="url(#assetAreaGrad)" />}
 
-          {/* 자산총계 추이선 */}
-          {points.length > 1 && (
-            <path d={linePath} fill="none" stroke="#38bdf8" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" style={{ filter: 'drop-shadow(0 0 6px rgba(56,189,248,0.55))' }} />
+          {/* 자산총계 추이선 (연간 구간: 실선) */}
+          {solidPoints.length > 1 && (
+            <path d={solidPath} fill="none" stroke="#38bdf8" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" style={{ filter: 'drop-shadow(0 0 6px rgba(56,189,248,0.55))' }} />
+          )}
+          {/* 올해 최근 분기 구간: 점선 */}
+          {hasQuarter && (
+            <path d={dashedPath} fill="none" stroke="#f59e0b" strokeWidth="3.5" strokeDasharray="7,7" strokeLinecap="round" strokeLinejoin="round" style={{ filter: 'drop-shadow(0 0 5px rgba(245,158,11,0.5))' }} />
           )}
 
           {/* 데이터 포인트 & 라벨 */}
           {points.map((p, i) => {
             const isHov = hoveredPoint === i
+            const dotColor = p.isQuarter ? '#f59e0b' : '#38bdf8'
             return (
               <g key={i} style={{ cursor: 'pointer' }} onMouseEnter={() => setHoveredPoint(i)} onMouseLeave={() => setHoveredPoint(null)}>
-                {isHov && <circle cx={p.x} cy={p.y} r={15} fill="#38bdf8" opacity={0.15} />}
-                <circle cx={p.x} cy={p.y} r={isHov ? 8.5 : 6} fill="#38bdf8" stroke="#0f172a" strokeWidth="2.5" style={{ transition: 'all .2s' }} />
+                {isHov && <circle cx={p.x} cy={p.y} r={15} fill={dotColor} opacity={0.15} />}
+                <circle cx={p.x} cy={p.y} r={isHov ? 8.5 : 6} fill={dotColor} stroke="#0f172a" strokeWidth="2.5" style={{ transition: 'all .2s' }} />
 
                 {/* 자산총계 값 라벨 */}
-                <text x={p.x} y={p.y - 30} fill="#7dd3fc" fontSize={isMobile ? "14" : "11"} fontWeight="800" textAnchor="middle">
+                <text x={p.x} y={p.y - 30} fill={p.isQuarter ? '#fde68a' : '#7dd3fc'} fontSize={isMobile ? "14" : "11"} fontWeight="800" textAnchor="middle">
                   {formatWon(p.totalAssets)}
                 </text>
-                {/* 전년 대비 증가율 배지 */}
+                {/* 전년(전분기) 대비 증가율 배지 */}
                 {p.growthRate !== null && (
                   <text x={p.x} y={p.y - 14} fill={p.growthRate >= 0 ? '#34d399' : '#f87171'} fontSize={isMobile ? "13" : "10.5"} fontWeight="800" textAnchor="middle">
                     {p.growthRate >= 0 ? '+' : ''}{p.growthRate.toFixed(1)}%
                   </text>
                 )}
-                {/* 연도 라벨 */}
-                <text x={p.x} y={height - 15} fill="var(--t2)" fontSize={isMobile ? "14.5" : "11"} fontWeight="700" textAnchor="middle">
+                {/* 연도/분기 라벨 */}
+                <text x={p.x} y={height - 15} fill={p.isQuarter ? '#f59e0b' : 'var(--t2)'} fontSize={isMobile ? "14.5" : "11"} fontWeight={p.isQuarter ? '900' : '700'} textAnchor="middle">
                   {p.period}
                 </text>
                 <text x={p.x} y={height - 3} fill="var(--t3)" fontSize={isMobile ? "12" : "9"} textAnchor="middle">({p.fiscalTerm})</text>
@@ -164,6 +178,11 @@ export default function AssetGrowthChart({ stock }) {
           <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontWeight: 700 }}>
             <span style={{ display: 'inline-block', width: 16, height: 3, background: '#38bdf8' }} /> 자산총계(연도별)
           </span>
+          {hasQuarter && (
+            <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontWeight: 700 }}>
+              <span style={{ display: 'inline-block', width: 16, height: 3, borderTop: '2px dashed #f59e0b' }} /> 올해 최근 분기(추정 아닌 분기보고서 실측)
+            </span>
+          )}
           <span>추정치가 아닌 {corpName || stock?.name}의 실제 DART 공시 재무상태표 원본 수치입니다.</span>
         </div>
         <div>자산 우상향 = 외형 성장 지속 → 재무 퀀트 "자산증가율 TOP" 조건의 근거 지표</div>
