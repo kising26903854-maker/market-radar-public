@@ -1,0 +1,15 @@
+{
+  "short": [
+    {
+      "code": "065450",
+      "name": "빅텍",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-15",
+      "dropoutDate": "2026-09-23",
+      "reason": "STALE",
+      "reasonLabel": "기간 만료 (교차 신선도 초과)",
+      "priceAtDropout": 2920,
+      "outerGapPctAtDropout": 0.2
+    }
+  ]
+}

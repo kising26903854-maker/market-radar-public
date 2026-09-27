@@ -12,6 +12,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { fetchDailySeries } from './double_bottom_scanner.js';
+import { updateDropoutTracking } from './ma_dropout_tracker.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CACHE_PATH = path.join(__dirname, 'data', 'ma_reversal_cache.json');
@@ -260,6 +261,16 @@ async function executeMaReversalScan() {
   console.log('');
 
   PATTERN_SETS.forEach(set => resultsBySet[set.key].sort((a, b) => b.score - a.score));
+
+  // 🕵️ 탈락 종목 추적 — 어제까지 후보였다가 오늘 사라진 종목을 잡아내고 사유(상승/하락/기간만료) 분류
+  try {
+    for (const set of PATTERN_SETS) {
+      await updateDropoutTracking(set, resultsBySet[set.key]);
+    }
+  } catch (e) {
+    console.error('[MA REVERSAL] 탈락 추적 갱신 실패:', e.message);
+  }
+
   const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
 
   const cache = {

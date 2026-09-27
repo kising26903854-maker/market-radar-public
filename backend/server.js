@@ -27,6 +27,7 @@ import { getMomentumStocks, startDailyGoldenCrossScan } from './momentum_scanner
 import { getMaReversalCache, runMaReversalScan, startDailyMaReversalScan } from './ma_reversal_scanner.js'
 import { getGrowthMaComboCache, runGrowthMaComboScan, startDailyGrowthMaComboScan } from './growth_ma_combo_scanner.js'
 import { getAssetGrowthHistory } from './dart_asset_growth.js'
+import { getDropoutHistory as getMaReversalDropoutHistory } from './ma_dropout_tracker.js'
 import { getDividendCalendar } from './dividend_calendar.js'
 import { getMorningBriefing, startDailyMorningBriefingSync } from './morning_briefing.js'
 import { getTelegramConfig, saveTelegramConfig, sendTelegramMessage, detectTelegramChatId, maskTelegramToken, getPriceAlerts, createPriceAlert, updatePriceAlert, deletePriceAlert, getAlertHistory, startAlertEngine, sendHoldingsBriefing, sendWatchlistBriefing, sendNpsDisclosuresBriefing, testSendNpsSingleAlert } from './telegram_alert.js'
@@ -554,6 +555,19 @@ app.get('/api/ma-reversal-stocks', async (req, res) => {
 app.post('/api/trigger-ma-reversal-scan', async (req, res) => {
   res.json({ success: true, message: '"2·5·6 기법" 전 종목 스캔이 백그라운드에서 시작되었습니다.' })
   runMaReversalScan().catch(e => console.error('[MA REVERSAL] 수동 스캔 오류:', e.message))
+})
+
+// 🕵️ "256 기법" 탈락 종목 추적 — 후보에서 빠진 이유(상승 돌파/하락 붕괴/기간 만료)와 탈락 후 수익률
+app.get('/api/ma-reversal-dropouts', async (req, res) => {
+  try {
+    const [short, long] = await Promise.all([
+      getMaReversalDropoutHistory('short'),
+      getMaReversalDropoutHistory('long'),
+    ])
+    res.json({ success: true, short, long })
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message })
+  }
 })
 
 // 🚀🎯 "4대 재무 퀀트" 강력 후보군(조건 2개↑) + "256 기법" 콤보 스캐너 API

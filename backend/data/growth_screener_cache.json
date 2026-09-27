@@ -1,6 +1,6 @@
 {
   "success": true,
-  "timestamp": "2026-09-26T04:51:22.633Z",
+  "timestamp": "2026-09-27T00:40:20.825Z",
   "totalScanned": 2752,
   "validScanned": 2664,
   "summary": {
@@ -256717,6 +256717,49 @@
           "roe": 15.46
         }
       ],
+      "bowlPattern": {
+        "isBowlStage3": false,
+        "score": 65,
+        "stage": "2번 바닥매집",
+        "stageNum": 2,
+        "curPrice": 4945,
+        "minPrice": 3680,
+        "maxPrice": 5960,
+        "dropRate": -38.3,
+        "daysSinceMin": 49,
+        "reboundFromBottom": 34.4,
+        "ma5": 4967,
+        "ma20": 5009,
+        "volRatio": 0.3,
+        "criteria": [
+          "① 1번 하락 확인: 고점 5,960원 대비 -38.3% 낙폭",
+          "② 2번 매집 횡보: 바닥 3,680원 형성 후 49일간 매집 완료",
+          "④ 이평선 정배열 전환: 5일선(4,967원) ≥ 20일선(5,009원)"
+        ],
+        "summaryDesc": "1번 하락(-38.3%) 후 49일간 2번 바닥 매집 완료 → 바닥 대비 +34.4% 3번 상승초입 진입"
+      },
+      "breakoutAnalysis": {
+        "isTripleBreakout": false,
+        "score": 35,
+        "grade": "일반",
+        "boxTop": 5550,
+        "boxBottom": 3780,
+        "boxHeightPct": 46.8,
+        "breakoutPct": -10.9,
+        "recentVolRatio": 0.6,
+        "maConvergenceSpread": 8.4,
+        "isBoxBreakout": false,
+        "isBoxJustBroken": false,
+        "isMaConverged": true,
+        "isDualBuy": false,
+        "isForeignNetBuy": false,
+        "isInstNetBuy": true,
+        "signals": [
+          "⚡ 5·20·60일선 초밀집(이격도 8.4%) 에너지 응축 완료",
+          "💵 최근 3일 기관 연속 순매수 유입 중"
+        ],
+        "summaryDesc": "42일 박스권(5,550원) 상향 돌파 + 이평선 밀집 발산 + 거래량 실린 시세 분출 초입"
+      },
       "growthScore": 7158,
       "matchedCount": 3,
       "matchTags": [
@@ -256769,6 +256812,48 @@
           "roe": 5.13
         }
       ],
+      "bowlPattern": {
+        "isBowlStage3": true,
+        "score": 75,
+        "stage": "3번 상승초기",
+        "stageNum": 3,
+        "curPrice": 21200,
+        "minPrice": 17900,
+        "maxPrice": 51300,
+        "dropRate": -65.1,
+        "daysSinceMin": 38,
+        "reboundFromBottom": 18.4,
+        "ma5": 21550,
+        "ma20": 23040,
+        "volRatio": 0.8,
+        "criteria": [
+          "① 1번 하락 확인: 고점 51,300원 대비 -65.1% 낙폭",
+          "② 2번 매집 횡보: 바닥 17,900원 형성 후 38일간 매집 완료",
+          "③ 3번 상승초입 가격대: 바닥 대비 +18.4% (과열 없는 맥점)"
+        ],
+        "summaryDesc": "1번 하락(-65.1%) 후 38일간 2번 바닥 매집 완료 → 바닥 대비 +18.4% 3번 상승초입 진입"
+      },
+      "breakoutAnalysis": {
+        "isTripleBreakout": false,
+        "score": 15,
+        "grade": "일반",
+        "boxTop": 27450,
+        "boxBottom": 17900,
+        "boxHeightPct": 53.4,
+        "breakoutPct": -22.8,
+        "recentVolRatio": 1,
+        "maConvergenceSpread": 8.9,
+        "isBoxBreakout": false,
+        "isBoxJustBroken": false,
+        "isMaConverged": false,
+        "isDualBuy": false,
+        "isForeignNetBuy": true,
+        "isInstNetBuy": false,
+        "signals": [
+          "💵 최근 3일 외국인 연속 순매수 유입 중"
+        ],
+        "summaryDesc": "42일 박스권(27,450원) 상향 돌파 + 이평선 밀집 발산 + 거래량 실린 시세 분출 초입"
+      },
       "growthScore": 6167,
       "matchedCount": 3,
       "matchTags": [
@@ -256821,6 +256906,48 @@
           "roe": 15.64
         }
       ],
+      "bowlPattern": {
+        "isBowlStage3": true,
+        "score": 75,
+        "stage": "3번 상승초기",
+        "stageNum": 3,
+        "curPrice": 10130,
+        "minPrice": 9100,
+        "maxPrice": 19400,
+        "dropRate": -53.1,
+        "daysSinceMin": 38,
+        "reboundFromBottom": 11.3,
+        "ma5": 10340,
+        "ma20": 11113,
+        "volRatio": 0.6,
+        "criteria": [
+          "① 1번 하락 확인: 고점 19,400원 대비 -53.1% 낙폭",
+          "② 2번 매집 횡보: 바닥 9,100원 형성 후 38일간 매집 완료",
+          "③ 3번 상승초입 가격대: 바닥 대비 +11.3% (과열 없는 맥점)"
+        ],
+        "summaryDesc": "1번 하락(-53.1%) 후 38일간 2번 바닥 매집 완료 → 바닥 대비 +11.3% 3번 상승초입 진입"
+      },
+      "breakoutAnalysis": {
+        "isTripleBreakout": false,
+        "score": 20,
+        "grade": "일반",
+        "boxTop": 12050,
+        "boxBottom": 9100,
+        "boxHeightPct": 32.4,
+        "breakoutPct": -15.9,
+        "recentVolRatio": 0.6,
+        "maConvergenceSpread": 7.5,
+        "isBoxBreakout": false,
+        "isBoxJustBroken": false,
+        "isMaConverged": true,
+        "isDualBuy": false,
+        "isForeignNetBuy": false,
+        "isInstNetBuy": false,
+        "signals": [
+          "⚡ 5·20·60일선 초밀집(이격도 7.5%) 에너지 응축 완료"
+        ],
+        "summaryDesc": "42일 박스권(12,050원) 상향 돌파 + 이평선 밀집 발산 + 거래량 실린 시세 분출 초입"
+      },
       "growthScore": 2251,
       "matchedCount": 3,
       "matchTags": [
@@ -256873,6 +257000,50 @@
           "roe": 33.57
         }
       ],
+      "bowlPattern": {
+        "isBowlStage3": false,
+        "score": 65,
+        "stage": "2번 바닥매집",
+        "stageNum": 2,
+        "curPrice": 5600,
+        "minPrice": 4225,
+        "maxPrice": 14620,
+        "dropRate": -71.1,
+        "daysSinceMin": 39,
+        "reboundFromBottom": 32.5,
+        "ma5": 5710,
+        "ma20": 5565,
+        "volRatio": 0.7,
+        "criteria": [
+          "① 1번 하락 확인: 고점 14,620원 대비 -71.1% 낙폭",
+          "② 2번 매집 횡보: 바닥 4,225원 형성 후 39일간 매집 완료",
+          "④ 이평선 정배열 전환: 5일선(5,710원) ≥ 20일선(5,565원)"
+        ],
+        "summaryDesc": "1번 하락(-71.1%) 후 39일간 2번 바닥 매집 완료 → 바닥 대비 +32.5% 3번 상승초입 진입"
+      },
+      "breakoutAnalysis": {
+        "isTripleBreakout": false,
+        "score": 45,
+        "grade": "일반",
+        "boxTop": 5880,
+        "boxBottom": 4225,
+        "boxHeightPct": 39.2,
+        "breakoutPct": -4.8,
+        "recentVolRatio": 0.9,
+        "maConvergenceSpread": 7.6,
+        "isBoxBreakout": false,
+        "isBoxJustBroken": false,
+        "isMaConverged": true,
+        "isDualBuy": false,
+        "isForeignNetBuy": false,
+        "isInstNetBuy": true,
+        "signals": [
+          "⚡ 5·20·60일선 초밀집(이격도 7.6%) 에너지 응축 완료",
+          "📈 5일선 > 20일선 정배열 전환 및 상향 발산",
+          "💵 최근 3일 기관 연속 순매수 유입 중"
+        ],
+        "summaryDesc": "42일 박스권(5,880원) 상향 돌파 + 이평선 밀집 발산 + 거래량 실린 시세 분출 초입"
+      },
       "growthScore": 1847,
       "matchedCount": 3,
       "matchTags": [
@@ -256925,6 +257096,49 @@
           "roe": 0.47
         }
       ],
+      "bowlPattern": {
+        "isBowlStage3": true,
+        "score": 75,
+        "stage": "3번 상승초기",
+        "stageNum": 3,
+        "curPrice": 8590,
+        "minPrice": 7440,
+        "maxPrice": 10490,
+        "dropRate": -29.1,
+        "daysSinceMin": 44,
+        "reboundFromBottom": 15.5,
+        "ma5": 8700,
+        "ma20": 9146,
+        "volRatio": 0.4,
+        "criteria": [
+          "① 1번 하락 확인: 고점 10,490원 대비 -29.1% 낙폭",
+          "② 2번 매집 횡보: 바닥 7,440원 형성 후 44일간 매집 완료",
+          "③ 3번 상승초입 가격대: 바닥 대비 +15.5% (과열 없는 맥점)"
+        ],
+        "summaryDesc": "1번 하락(-29.1%) 후 44일간 2번 바닥 매집 완료 → 바닥 대비 +15.5% 3번 상승초입 진입"
+      },
+      "breakoutAnalysis": {
+        "isTripleBreakout": false,
+        "score": 35,
+        "grade": "일반",
+        "boxTop": 9780,
+        "boxBottom": 7440,
+        "boxHeightPct": 31.5,
+        "breakoutPct": -12.2,
+        "recentVolRatio": 0.3,
+        "maConvergenceSpread": 6.8,
+        "isBoxBreakout": false,
+        "isBoxJustBroken": false,
+        "isMaConverged": true,
+        "isDualBuy": false,
+        "isForeignNetBuy": false,
+        "isInstNetBuy": true,
+        "signals": [
+          "⚡ 5·20·60일선 초밀집(이격도 6.8%) 에너지 응축 완료",
+          "💵 최근 3일 기관 연속 순매수 유입 중"
+        ],
+        "summaryDesc": "42일 박스권(9,780원) 상향 돌파 + 이평선 밀집 발산 + 거래량 실린 시세 분출 초입"
+      },
       "growthScore": 1553,
       "matchedCount": 3,
       "matchTags": [
@@ -256977,6 +257191,51 @@
           "roe": -2.72
         }
       ],
+      "bowlPattern": {
+        "isBowlStage3": true,
+        "score": 100,
+        "stage": "3번 상승초기",
+        "stageNum": 3,
+        "curPrice": 2510,
+        "minPrice": 2015,
+        "maxPrice": 5700,
+        "dropRate": -64.6,
+        "daysSinceMin": 38,
+        "reboundFromBottom": 24.6,
+        "ma5": 2569,
+        "ma20": 2445,
+        "volRatio": 1.5,
+        "criteria": [
+          "① 1번 하락 확인: 고점 5,700원 대비 -64.6% 낙폭",
+          "② 2번 매집 횡보: 바닥 2,015원 형성 후 38일간 매집 완료",
+          "③ 3번 상승초입 가격대: 바닥 대비 +24.6% (과열 없는 맥점)",
+          "④ 이평선 정배열 전환: 5일선(2,569원) ≥ 20일선(2,445원)",
+          "⑤ 거래량 점증: 바닥권 대비 최근 거래량 1.5배 증가"
+        ],
+        "summaryDesc": "1번 하락(-64.6%) 후 38일간 2번 바닥 매집 완료 → 바닥 대비 +24.6% 3번 상승초입 진입"
+      },
+      "breakoutAnalysis": {
+        "isTripleBreakout": false,
+        "score": 30,
+        "grade": "일반",
+        "boxTop": 2645,
+        "boxBottom": 2015,
+        "boxHeightPct": 31.3,
+        "breakoutPct": -5.1,
+        "recentVolRatio": 0.8,
+        "maConvergenceSpread": 6.5,
+        "isBoxBreakout": false,
+        "isBoxJustBroken": false,
+        "isMaConverged": true,
+        "isDualBuy": false,
+        "isForeignNetBuy": false,
+        "isInstNetBuy": false,
+        "signals": [
+          "⚡ 5·20·60일선 초밀집(이격도 6.5%) 에너지 응축 완료",
+          "📈 5일선 > 20일선 정배열 전환 및 상향 발산"
+        ],
+        "summaryDesc": "42일 박스권(2,645원) 상향 돌파 + 이평선 밀집 발산 + 거래량 실린 시세 분출 초입"
+      },
       "growthScore": 1205,
       "matchedCount": 3,
       "matchTags": [
@@ -257021,6 +257280,47 @@
           "roe": 5.4
         }
       ],
+      "bowlPattern": {
+        "isBowlStage3": false,
+        "score": 50,
+        "stage": "2번 바닥매집",
+        "stageNum": 2,
+        "curPrice": 48100,
+        "minPrice": 33350,
+        "maxPrice": 89700,
+        "dropRate": -62.8,
+        "daysSinceMin": 39,
+        "reboundFromBottom": 44.2,
+        "ma5": 47110,
+        "ma20": 48020,
+        "volRatio": 0.7,
+        "criteria": [
+          "① 1번 하락 확인: 고점 89,700원 대비 -62.8% 낙폭",
+          "② 2번 매집 횡보: 바닥 33,350원 형성 후 39일간 매집 완료"
+        ],
+        "summaryDesc": "1번 하락(-62.8%) 후 39일간 2번 바닥 매집 완료 → 바닥 대비 +44.2% 3번 상승초입 진입"
+      },
+      "breakoutAnalysis": {
+        "isTripleBreakout": false,
+        "score": 20,
+        "grade": "일반",
+        "boxTop": 54700,
+        "boxBottom": 33350,
+        "boxHeightPct": 64,
+        "breakoutPct": -12.1,
+        "recentVolRatio": 0.9,
+        "maConvergenceSpread": 1.9,
+        "isBoxBreakout": false,
+        "isBoxJustBroken": false,
+        "isMaConverged": true,
+        "isDualBuy": false,
+        "isForeignNetBuy": false,
+        "isInstNetBuy": false,
+        "signals": [
+          "⚡ 5·20·60일선 초밀집(이격도 1.9%) 에너지 응축 완료"
+        ],
+        "summaryDesc": "42일 박스권(54,700원) 상향 돌파 + 이평선 밀집 발산 + 거래량 실린 시세 분출 초입"
+      },
       "growthScore": 1069,
       "matchedCount": 3,
       "matchTags": [
@@ -257073,6 +257373,50 @@
           "roe": 52.78
         }
       ],
+      "bowlPattern": {
+        "isBowlStage3": true,
+        "score": 100,
+        "stage": "3번 상승초기",
+        "stageNum": 3,
+        "curPrice": 25200,
+        "minPrice": 20700,
+        "maxPrice": 52500,
+        "dropRate": -60.6,
+        "daysSinceMin": 14,
+        "reboundFromBottom": 21.7,
+        "ma5": 24770,
+        "ma20": 22928,
+        "volRatio": 1.1,
+        "criteria": [
+          "① 1번 하락 확인: 고점 52,500원 대비 -60.6% 낙폭",
+          "② 2번 매집 횡보: 바닥 20,700원 형성 후 14일간 매집 완료",
+          "③ 3번 상승초입 가격대: 바닥 대비 +21.7% (과열 없는 맥점)",
+          "④ 이평선 정배열 전환: 5일선(24,770원) ≥ 20일선(22,928원)",
+          "⑤ 거래량 점증: 바닥권 대비 최근 거래량 1.1배 증가"
+        ],
+        "summaryDesc": "1번 하락(-60.6%) 후 14일간 2번 바닥 매집 완료 → 바닥 대비 +21.7% 3번 상승초입 진입"
+      },
+      "breakoutAnalysis": {
+        "isTripleBreakout": false,
+        "score": 10,
+        "grade": "일반",
+        "boxTop": 28600,
+        "boxBottom": 20700,
+        "boxHeightPct": 38.2,
+        "breakoutPct": -11.9,
+        "recentVolRatio": 0.7,
+        "maConvergenceSpread": 14.5,
+        "isBoxBreakout": false,
+        "isBoxJustBroken": false,
+        "isMaConverged": false,
+        "isDualBuy": false,
+        "isForeignNetBuy": false,
+        "isInstNetBuy": false,
+        "signals": [
+          "📈 5일선 > 20일선 정배열 전환 및 상향 발산"
+        ],
+        "summaryDesc": "42일 박스권(28,600원) 상향 돌파 + 이평선 밀집 발산 + 거래량 실린 시세 분출 초입"
+      },
       "growthScore": 758,
       "matchedCount": 3,
       "matchTags": [
@@ -257125,6 +257469,48 @@
           "roe": 4.13
         }
       ],
+      "bowlPattern": {
+        "isBowlStage3": true,
+        "score": 75,
+        "stage": "3번 상승초기",
+        "stageNum": 3,
+        "curPrice": 2355,
+        "minPrice": 2205,
+        "maxPrice": 4825,
+        "dropRate": -54.3,
+        "daysSinceMin": 39,
+        "reboundFromBottom": 6.8,
+        "ma5": 2335,
+        "ma20": 2423,
+        "volRatio": 0.8,
+        "criteria": [
+          "① 1번 하락 확인: 고점 4,825원 대비 -54.3% 낙폭",
+          "② 2번 매집 횡보: 바닥 2,205원 형성 후 39일간 매집 완료",
+          "③ 3번 상승초입 가격대: 바닥 대비 +6.8% (과열 없는 맥점)"
+        ],
+        "summaryDesc": "1번 하락(-54.3%) 후 39일간 2번 바닥 매집 완료 → 바닥 대비 +6.8% 3번 상승초입 진입"
+      },
+      "breakoutAnalysis": {
+        "isTripleBreakout": false,
+        "score": 20,
+        "grade": "일반",
+        "boxTop": 2595,
+        "boxBottom": 2205,
+        "boxHeightPct": 17.7,
+        "breakoutPct": -9.2,
+        "recentVolRatio": 0.6,
+        "maConvergenceSpread": 4.1,
+        "isBoxBreakout": false,
+        "isBoxJustBroken": false,
+        "isMaConverged": true,
+        "isDualBuy": false,
+        "isForeignNetBuy": false,
+        "isInstNetBuy": false,
+        "signals": [
+          "⚡ 5·20·60일선 초밀집(이격도 4.1%) 에너지 응축 완료"
+        ],
+        "summaryDesc": "42일 박스권(2,595원) 상향 돌파 + 이평선 밀집 발산 + 거래량 실린 시세 분출 초입"
+      },
       "growthScore": 666,
       "matchedCount": 3,
       "matchTags": [
@@ -257177,6 +257563,50 @@
           "roe": 4.21
         }
       ],
+      "bowlPattern": {
+        "isBowlStage3": true,
+        "score": 75,
+        "stage": "3번 상승초기",
+        "stageNum": 3,
+        "curPrice": 3700,
+        "minPrice": 2790,
+        "maxPrice": 6690,
+        "dropRate": -58.3,
+        "daysSinceMin": 38,
+        "reboundFromBottom": 32.6,
+        "ma5": 3781,
+        "ma20": 3625,
+        "volRatio": 1.2,
+        "criteria": [
+          "① 1번 하락 확인: 고점 6,690원 대비 -58.3% 낙폭",
+          "② 2번 매집 횡보: 바닥 2,790원 형성 후 38일간 매집 완료",
+          "④ 이평선 정배열 전환: 5일선(3,781원) ≥ 20일선(3,625원)",
+          "⑤ 거래량 점증: 바닥권 대비 최근 거래량 1.2배 증가"
+        ],
+        "summaryDesc": "1번 하락(-58.3%) 후 38일간 2번 바닥 매집 완료 → 바닥 대비 +32.6% 3번 상승초입 진입"
+      },
+      "breakoutAnalysis": {
+        "isTripleBreakout": false,
+        "score": 25,
+        "grade": "일반",
+        "boxTop": 3940,
+        "boxBottom": 2790,
+        "boxHeightPct": 41.2,
+        "breakoutPct": -6.1,
+        "recentVolRatio": 0.2,
+        "maConvergenceSpread": 9.8,
+        "isBoxBreakout": false,
+        "isBoxJustBroken": false,
+        "isMaConverged": false,
+        "isDualBuy": false,
+        "isForeignNetBuy": true,
+        "isInstNetBuy": false,
+        "signals": [
+          "📈 5일선 > 20일선 정배열 전환 및 상향 발산",
+          "💵 최근 3일 외국인 연속 순매수 유입 중"
+        ],
+        "summaryDesc": "42일 박스권(3,940원) 상향 돌파 + 이평선 밀집 발산 + 거래량 실린 시세 분출 초입"
+      },
       "growthScore": 573,
       "matchedCount": 3,
       "matchTags": [
@@ -257229,6 +257659,45 @@
           "roe": 39.42
         }
       ],
+      "bowlPattern": {
+        "isBowlStage3": false,
+        "score": 50,
+        "stage": "2번 바닥매집",
+        "stageNum": 2,
+        "curPrice": 251500,
+        "minPrice": 206213,
+        "maxPrice": 348000,
+        "dropRate": -40.7,
+        "daysSinceMin": 44,
+        "reboundFromBottom": 22,
+        "ma5": 253100,
+        "ma20": 276950,
+        "volRatio": 0.4,
+        "criteria": [
+          "② 2번 매집 횡보: 바닥 206,213원 형성 후 44일간 매집 완료",
+          "③ 3번 상승초입 가격대: 바닥 대비 +22.0% (과열 없는 맥점)"
+        ],
+        "summaryDesc": "1번 하락(-40.7%) 후 44일간 2번 바닥 매집 완료 → 바닥 대비 +22.0% 3번 상승초입 진입"
+      },
+      "breakoutAnalysis": {
+        "isTripleBreakout": false,
+        "score": 0,
+        "grade": "일반",
+        "boxTop": 348000,
+        "boxBottom": 206213,
+        "boxHeightPct": 68.8,
+        "breakoutPct": -27.7,
+        "recentVolRatio": 0.3,
+        "maConvergenceSpread": 9.4,
+        "isBoxBreakout": false,
+        "isBoxJustBroken": false,
+        "isMaConverged": false,
+        "isDualBuy": false,
+        "isForeignNetBuy": false,
+        "isInstNetBuy": false,
+        "signals": [],
+        "summaryDesc": "42일 박스권(348,000원) 상향 돌파 + 이평선 밀집 발산 + 거래량 실린 시세 분출 초입"
+      },
       "growthScore": 502,
       "matchedCount": 3,
       "matchTags": [
@@ -257281,6 +257750,51 @@
           "roe": 29.23
         }
       ],
+      "bowlPattern": {
+        "isBowlStage3": true,
+        "score": 75,
+        "stage": "3번 상승초기",
+        "stageNum": 3,
+        "curPrice": 14730,
+        "minPrice": 8810,
+        "maxPrice": 29400,
+        "dropRate": -70,
+        "daysSinceMin": 38,
+        "reboundFromBottom": 67.2,
+        "ma5": 14146,
+        "ma20": 12951,
+        "volRatio": 2.9,
+        "criteria": [
+          "① 1번 하락 확인: 고점 29,400원 대비 -70.0% 낙폭",
+          "② 2번 매집 횡보: 바닥 8,810원 형성 후 38일간 매집 완료",
+          "④ 이평선 정배열 전환: 5일선(14,146원) ≥ 20일선(12,951원)",
+          "⑤ 거래량 점증: 바닥권 대비 최근 거래량 2.9배 증가"
+        ],
+        "summaryDesc": "1번 하락(-70.0%) 후 38일간 2번 바닥 매집 완료 → 바닥 대비 +67.2% 3번 상승초입 진입"
+      },
+      "breakoutAnalysis": {
+        "isTripleBreakout": false,
+        "score": 35,
+        "grade": "일반",
+        "boxTop": 13750,
+        "boxBottom": 8810,
+        "boxHeightPct": 56.1,
+        "breakoutPct": 7.1,
+        "recentVolRatio": 2.3,
+        "maConvergenceSpread": 16.7,
+        "isBoxBreakout": false,
+        "isBoxJustBroken": false,
+        "isMaConverged": false,
+        "isDualBuy": false,
+        "isForeignNetBuy": false,
+        "isInstNetBuy": true,
+        "signals": [
+          "📈 5일선 > 20일선 정배열 전환 및 상향 발산",
+          "💵 최근 3일 기관 연속 순매수 유입 중",
+          "📊 거래량 2.3배 실린 출발"
+        ],
+        "summaryDesc": "42일 박스권(13,750원) 상향 돌파 + 이평선 밀집 발산 + 거래량 실린 시세 분출 초입"
+      },
       "growthScore": 367,
       "matchedCount": 3,
       "matchTags": [
@@ -257333,6 +257847,45 @@
           "roe": 26.65
         }
       ],
+      "bowlPattern": {
+        "isBowlStage3": false,
+        "score": 35,
+        "stage": "1번 하락진행",
+        "stageNum": 1,
+        "curPrice": 2915,
+        "minPrice": 3035,
+        "maxPrice": 20000,
+        "dropRate": -84.8,
+        "daysSinceMin": 5,
+        "reboundFromBottom": -4,
+        "ma5": 2960,
+        "ma20": 3083,
+        "volRatio": 1.3,
+        "criteria": [
+          "① 1번 하락 확인: 고점 20,000원 대비 -84.8% 낙폭",
+          "⑤ 거래량 점증: 바닥권 대비 최근 거래량 1.3배 증가"
+        ],
+        "summaryDesc": "1번 하락(-84.8%) 후 5일간 2번 바닥 매집 완료 → 바닥 대비 +-4.0% 3번 상승초입 진입"
+      },
+      "breakoutAnalysis": {
+        "isTripleBreakout": false,
+        "score": 0,
+        "grade": "일반",
+        "boxTop": 3770,
+        "boxBottom": 3015,
+        "boxHeightPct": 25,
+        "breakoutPct": -22.7,
+        "recentVolRatio": 0.8,
+        "maConvergenceSpread": 13.7,
+        "isBoxBreakout": false,
+        "isBoxJustBroken": false,
+        "isMaConverged": false,
+        "isDualBuy": false,
+        "isForeignNetBuy": false,
+        "isInstNetBuy": false,
+        "signals": [],
+        "summaryDesc": "42일 박스권(3,770원) 상향 돌파 + 이평선 밀집 발산 + 거래량 실린 시세 분출 초입"
+      },
       "growthScore": 346,
       "matchedCount": 3,
       "matchTags": [
@@ -257385,6 +257938,48 @@
           "roe": 46.89
         }
       ],
+      "bowlPattern": {
+        "isBowlStage3": false,
+        "score": 60,
+        "stage": "2번 바닥매집",
+        "stageNum": 2,
+        "curPrice": 38900,
+        "minPrice": 30400,
+        "maxPrice": 54200,
+        "dropRate": -43.9,
+        "daysSinceMin": 61,
+        "reboundFromBottom": 28,
+        "ma5": 40720,
+        "ma20": 45805,
+        "volRatio": 1.1,
+        "criteria": [
+          "② 2번 매집 횡보: 바닥 30,400원 형성 후 61일간 매집 완료",
+          "③ 3번 상승초입 가격대: 바닥 대비 +28.0% (과열 없는 맥점)",
+          "⑤ 거래량 점증: 바닥권 대비 최근 거래량 1.1배 증가"
+        ],
+        "summaryDesc": "1번 하락(-43.9%) 후 61일간 2번 바닥 매집 완료 → 바닥 대비 +28.0% 3번 상승초입 진입"
+      },
+      "breakoutAnalysis": {
+        "isTripleBreakout": false,
+        "score": 15,
+        "grade": "일반",
+        "boxTop": 54200,
+        "boxBottom": 33050,
+        "boxHeightPct": 64,
+        "breakoutPct": -28.2,
+        "recentVolRatio": 0.4,
+        "maConvergenceSpread": 12.5,
+        "isBoxBreakout": false,
+        "isBoxJustBroken": false,
+        "isMaConverged": false,
+        "isDualBuy": false,
+        "isForeignNetBuy": true,
+        "isInstNetBuy": false,
+        "signals": [
+          "💵 최근 3일 외국인 연속 순매수 유입 중"
+        ],
+        "summaryDesc": "42일 박스권(54,200원) 상향 돌파 + 이평선 밀집 발산 + 거래량 실린 시세 분출 초입"
+      },
       "growthScore": 232,
       "matchedCount": 3,
       "matchTags": [
@@ -257437,6 +258032,51 @@
           "roe": 15.86
         }
       ],
+      "bowlPattern": {
+        "isBowlStage3": true,
+        "score": 75,
+        "stage": "3번 상승초기",
+        "stageNum": 3,
+        "curPrice": 7210,
+        "minPrice": 5250,
+        "maxPrice": 24100,
+        "dropRate": -78.2,
+        "daysSinceMin": 38,
+        "reboundFromBottom": 37.3,
+        "ma5": 7214,
+        "ma20": 6658,
+        "volRatio": 2,
+        "criteria": [
+          "① 1번 하락 확인: 고점 24,100원 대비 -78.2% 낙폭",
+          "② 2번 매집 횡보: 바닥 5,250원 형성 후 38일간 매집 완료",
+          "④ 이평선 정배열 전환: 5일선(7,214원) ≥ 20일선(6,658원)",
+          "⑤ 거래량 점증: 바닥권 대비 최근 거래량 2.0배 증가"
+        ],
+        "summaryDesc": "1번 하락(-78.2%) 후 38일간 2번 바닥 매집 완료 → 바닥 대비 +37.3% 3번 상승초입 진입"
+      },
+      "breakoutAnalysis": {
+        "isTripleBreakout": false,
+        "score": 40,
+        "grade": "일반",
+        "boxTop": 7700,
+        "boxBottom": 5250,
+        "boxHeightPct": 46.7,
+        "breakoutPct": -6.4,
+        "recentVolRatio": 1.6,
+        "maConvergenceSpread": 8.4,
+        "isBoxBreakout": false,
+        "isBoxJustBroken": false,
+        "isMaConverged": true,
+        "isDualBuy": false,
+        "isForeignNetBuy": false,
+        "isInstNetBuy": false,
+        "signals": [
+          "⚡ 5·20·60일선 초밀집(이격도 8.4%) 에너지 응축 완료",
+          "📈 5일선 > 20일선 정배열 전환 및 상향 발산",
+          "📊 거래량 1.6배 실린 출발"
+        ],
+        "summaryDesc": "42일 박스권(7,700원) 상향 돌파 + 이평선 밀집 발산 + 거래량 실린 시세 분출 초입"
+      },
       "growthScore": 185,
       "matchedCount": 3,
       "matchTags": [
