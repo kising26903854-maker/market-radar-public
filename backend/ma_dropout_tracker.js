@@ -12,6 +12,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { fetchDailySeries } from './double_bottom_scanner.js';
+import { sendTelegramMessage } from './telegram_alert.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const STATE_PATH = path.join(__dirname, 'data', 'ma_reversal_watch_state.json');
@@ -34,6 +35,24 @@ function saveJson(file, data) {
 }
 function todayKey() {
   return new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' });
+}
+
+// 🚀 상승 탈락(목표선 돌파 성공)만 텔레그램으로 발송 — 하락 탈락/기간만료는 보내지 않음
+async function notifyBreakoutDropout(patternSetDef, item) {
+  const nowStr = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
+  const message = `
+🚀 <b>[256 기법 상승 탈락 - 목표선 돌파 성공] ${item.name}</b>
+━━━━━━━━━━━━━━━━━
+• <b>종목명:</b> ${item.name} (<code>${item.code}</code>)
+• <b>구간:</b> ${patternSetDef.label}
+• <b>최초 포착:</b> ${item.firstSeenDate}
+• <b>돌파일:</b> ${item.dropoutDate}
+• <b>돌파 당시가:</b> ${item.priceAtDropout.toLocaleString()}원
+━━━━━━━━━━━━━━━━━
+💡 목표선(${patternSetDef.outer}일선)을 뚫고 올라간 "성공" 케이스입니다.
+⏰ <i>${nowStr}</i>
+`.trim();
+  await sendTelegramMessage(message);
 }
 
 function sma(closes, period, endIdx) {
@@ -110,14 +129,20 @@ export async function updateDropoutTracking(patternSetDef, currentMatches) {
         if (series && series.length > 0) {
           const { reason, label, outerGapPct } = classifyDropoutReason(series, patternSetDef);
           const lastBar = series[series.length - 1];
-          history[key].unshift({
+          const dropoutItem = {
             code, name: entry.name, market: entry.market,
             firstSeenDate: entry.firstSeenDate,
             dropoutDate: today,
             reason, reasonLabel: label,
             priceAtDropout: lastBar.close,
             outerGapPctAtDropout: outerGapPct ?? null,
-          });
+          };
+          history[key].unshift(dropoutItem);
+
+          if (reason === 'BREAKOUT_UP') {
+            try { await notifyBreakoutDropout(patternSetDef, dropoutItem); }
+            catch (e) { console.warn(`[MA DROPOUT] ${code} 상승 탈락 텔레그램 발송 실패:`, e.message); }
+          }
         }
       } catch (e) {
         console.warn(`[MA DROPOUT] ${code} 탈락 사유 분류 실패:`, e.message);
