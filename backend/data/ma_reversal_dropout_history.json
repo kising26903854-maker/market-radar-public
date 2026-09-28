@@ -1,6 +1,17 @@
 {
   "short": [
     {
+      "code": "034730",
+      "name": "SK",
+      "market": "코스피",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-28",
+      "reason": "BREAKOUT_UP",
+      "reasonLabel": "상승 탈락 (목표선 돌파 성공)",
+      "priceAtDropout": 581000,
+      "outerGapPctAtDropout": null
+    },
+    {
       "code": "065450",
       "name": "빅텍",
       "market": "코스닥",

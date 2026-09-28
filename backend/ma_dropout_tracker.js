@@ -1,7 +1,9 @@
-// ma_dropout_tracker.js — 🕵️ "256 기법" 탈락 종목 추적기
+// ma_dropout_tracker.js — 🕵️ "256 기법" 신규 포착 & 탈락 종목 추적기
 //
-// ma_reversal_scanner.js가 매일 스캔할 때마다 이 모듈을 호출해서, 어제까지 후보였다가
-// 오늘 사라진 종목을 잡아내고 탈락 사유를 분류한다:
+// ma_reversal_scanner.js가 장중 15분마다 스캔할 때마다 이 모듈을 호출해서,
+// (1) 이번에 처음 잡힌 신규 포착 종목과 (2) 후보였다가 이번에 사라진 탈락 종목을 잡아내고
+// 각각 텔레그램으로 알린다(단, 최초 실행 시엔 기존 후보 전체가 "신규"로 오인되지 않도록
+// 조용히 시딩만 한다). 탈락 사유는 다음과 같이 분류한다:
 //   - 상승 탈락(BREAKOUT_UP): 목표선(outer MA)을 돌파해버린 "성공" 케이스
 //   - 하락 탈락(BREAKDOWN): 정배열이 다시 무너진(trigger MA가 mid MA 아래로) "실패" 케이스
 //   - 기간 만료(STALE): 아직 정배열·목표선 아래 상태지만 골든크로스가 너무 오래돼(신선도
@@ -35,6 +37,24 @@ function saveJson(file, data) {
 }
 function todayKey() {
   return new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' });
+}
+
+// 🆕 새로 "256 기법" 후보로 포착된 종목 텔레그램 발송
+async function notifyNewCapture(patternSetDef, s) {
+  const nowStr = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
+  const message = `
+🆕 <b>[256 기법 신규 포착] ${s.name}</b>
+━━━━━━━━━━━━━━━━━
+• <b>종목명:</b> ${s.name} (<code>${s.code}</code>) · ${s.market}
+• <b>구간:</b> ${patternSetDef.label}
+• <b>현재가:</b> ${(s.price || 0).toLocaleString()}원
+• <b>${s.trigger}일선:</b> ${Math.round(s.triggerMa).toLocaleString()} / <b>${s.mid}일선:</b> ${Math.round(s.midMa).toLocaleString()} / <b>${s.outer}일선(목표):</b> ${Math.round(s.outerMa).toLocaleString()}
+• <b>교차 시점:</b> ${s.crossDate} · <b>${s.outer}일선까지</b> +${s.outerGapPct}%
+${s.hasAccumulationBar ? `• 🕵️ 매집봉 동반 (${s.accumulationBar?.volumeRatio}배 거래량)\n` : ''}━━━━━━━━━━━━━━━━━
+💡 역배열 하락 후 골든크로스 초입 구간에 새로 진입했습니다.
+⏰ <i>${nowStr}</i>
+`.trim();
+  await sendTelegramMessage(message);
 }
 
 // 🚀 상승 탈락(목표선 돌파 성공)만 텔레그램으로 발송 — 하락 탈락/기간만료는 보내지 않음
@@ -107,6 +127,9 @@ export async function updateDropoutTracking(patternSetDef, currentMatches) {
   const history = loadJson(HISTORY_PATH, {});
   const today = todayKey();
 
+  // 이 세트를 한 번도 추적한 적 없는 최초 실행(state 파일에 키 자체가 없음)이면, 지금 매칭된
+  // 종목 전부가 "신규"로 잡혀서 한꺼번에 알림이 쏟아지는 걸 막기 위해 이번엔 조용히 시딩만 한다.
+  const isFirstRun = !state[key];
   const bucket = state[key] || {};
   const currentCodes = new Set(currentMatches.map(s => s.code));
 
@@ -117,6 +140,10 @@ export async function updateDropoutTracking(patternSetDef, currentMatches) {
       firstSeenDate: existing?.firstSeenDate || today,
       lastSeenDate: today,
     };
+    if (!existing && !isFirstRun) {
+      try { await notifyNewCapture(patternSetDef, s); }
+      catch (e) { console.warn(`[MA DROPOUT] ${s.code} 신규 포착 텔레그램 발송 실패:`, e.message); }
+    }
   }
 
   const droppedCodes = Object.keys(bucket).filter(code => !currentCodes.has(code));
