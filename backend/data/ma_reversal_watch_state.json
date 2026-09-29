@@ -1,375 +1,382 @@
 {
   "short": {
+    "108320": {
+      "code": "108320",
+      "name": "LX세미콘",
+      "market": "코스피",
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29"
+    },
     "120030": {
       "code": "120030",
       "name": "조선선재",
       "market": "코스피",
-      "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29"
     },
     "126880": {
       "code": "126880",
       "name": "제이엔케이글로벌",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "160980": {
       "code": "160980",
       "name": "싸이맥스",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
-    "187870": {
-      "code": "187870",
-      "name": "디바이스",
+    "199800": {
+      "code": "199800",
+      "name": "툴젠",
       "market": "코스닥",
-      "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29"
     },
-    "192080": {
-      "code": "192080",
-      "name": "더블유게임즈",
-      "market": "코스피",
-      "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
-    },
-    "200710": {
-      "code": "200710",
-      "name": "에이디테크놀로지",
+    "215000": {
+      "code": "215000",
+      "name": "골프존",
       "market": "코스닥",
-      "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29"
     },
     "215200": {
       "code": "215200",
       "name": "메가스터디교육",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "215380": {
       "code": "215380",
       "name": "콜마바이오텍",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
+    },
+    "226330": {
+      "code": "226330",
+      "name": "신테카바이오",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29"
     },
     "228760": {
       "code": "228760",
       "name": "지노믹트리",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "230240": {
       "code": "230240",
       "name": "에치에프알",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
+    },
+    "237820": {
+      "code": "237820",
+      "name": "플레이디",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29"
     },
     "242040": {
       "code": "242040",
       "name": "나무AX",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
-    "251370": {
-      "code": "251370",
-      "name": "와이엠티",
-      "market": "코스닥",
-      "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+    "248070": {
+      "code": "248070",
+      "name": "솔루엠",
+      "market": "코스피",
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29"
     },
     "265520": {
       "code": "265520",
       "name": "AP시스템",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "288180": {
       "code": "288180",
       "name": "케이피항공산업",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
-    "298040": {
-      "code": "298040",
-      "name": "효성중공업",
-      "market": "코스피",
-      "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
-    },
-    "321260": {
-      "code": "321260",
-      "name": "프로이천",
+    "290720": {
+      "code": "290720",
+      "name": "푸드나무",
       "market": "코스닥",
-      "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29"
     },
-    "322310": {
-      "code": "322310",
-      "name": "오로스테크놀로지",
+    "317830": {
+      "code": "317830",
+      "name": "에스피시스템스",
       "market": "코스닥",
-      "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29"
     },
-    "348210": {
-      "code": "348210",
-      "name": "넥스틴",
+    "319660": {
+      "code": "319660",
+      "name": "피에스케이",
       "market": "코스닥",
-      "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
-    },
-    "348340": {
-      "code": "348340",
-      "name": "뉴로메카",
-      "market": "코스닥",
-      "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29"
     },
     "357880": {
       "code": "357880",
       "name": "SKAI",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "365550": {
       "code": "365550",
       "name": "ESR켄달스퀘어리츠",
       "market": "코스피",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
+    },
+    "380550": {
+      "code": "380550",
+      "name": "뉴로핏",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29"
+    },
+    "395400": {
+      "code": "395400",
+      "name": "SK리츠",
+      "market": "코스피",
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29"
     },
     "397030": {
       "code": "397030",
       "name": "에이프릴바이오",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
-    "402340": {
-      "code": "402340",
-      "name": "SK스퀘어",
-      "market": "코스피",
+    "450950": {
+      "code": "450950",
+      "name": "아스테라시스",
+      "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
+    },
+    "451220": {
+      "code": "451220",
+      "name": "아이엠티",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29"
     },
     "454910": {
       "code": "454910",
       "name": "두산로보틱스",
       "market": "코스피",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "456070": {
       "code": "456070",
       "name": "이엔셀",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
-    },
-    "471820": {
-      "code": "471820",
-      "name": "셀로맥스사이언스",
-      "market": "코스닥",
-      "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "475960": {
       "code": "475960",
       "name": "토모큐브",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "476040": {
       "code": "476040",
       "name": "오가노이드사이언스",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
-    "490470": {
-      "code": "490470",
-      "name": "세미파이브",
-      "market": "코스닥",
-      "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+    "483650": {
+      "code": "483650",
+      "name": "달바글로벌",
+      "market": "코스피",
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29"
     },
     "039830": {
       "code": "039830",
       "name": "오로라",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "089970": {
       "code": "089970",
       "name": "브이엠",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "036570": {
       "code": "036570",
       "name": "NC",
       "market": "코스피",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "016360": {
       "code": "016360",
       "name": "삼성증권",
       "market": "코스피",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "052400": {
       "code": "052400",
       "name": "코나아이",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "090710": {
       "code": "090710",
       "name": "휴림로봇",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
-    },
-    "039440": {
-      "code": "039440",
-      "name": "에스티아이",
-      "market": "코스닥",
-      "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "082920": {
       "code": "082920",
       "name": "비츠로셀",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "023410": {
       "code": "023410",
       "name": "유진기업",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
-    },
-    "037350": {
-      "code": "037350",
-      "name": "성도이엔지",
-      "market": "코스닥",
-      "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
-    },
-    "084990": {
-      "code": "084990",
-      "name": "헬릭스미스",
-      "market": "코스닥",
-      "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
-    },
-    "064520": {
-      "code": "064520",
-      "name": "테크엘",
-      "market": "코스닥",
-      "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "047810": {
       "code": "047810",
       "name": "한국항공우주",
       "market": "코스피",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "072990": {
       "code": "072990",
       "name": "에이치시티",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "000250": {
       "code": "000250",
       "name": "삼천당제약",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
-    },
-    "071670": {
-      "code": "071670",
-      "name": "에이테크솔루션",
-      "market": "코스닥",
-      "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
-    },
-    "033780": {
-      "code": "033780",
-      "name": "KT&G",
-      "market": "코스피",
-      "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "037460": {
       "code": "037460",
       "name": "삼지전자",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "009450": {
       "code": "009450",
       "name": "경동나비엔",
       "market": "코스피",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
-    },
-    "031330": {
-      "code": "031330",
-      "name": "에스에이엠티",
-      "market": "코스닥",
-      "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "066430": {
       "code": "066430",
       "name": "아이로보틱스",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "049720": {
       "code": "049720",
       "name": "고려신용정보",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
-    },
-    "089140": {
-      "code": "089140",
-      "name": "넥스턴앤롤코리아",
-      "market": "코스닥",
-      "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
     },
     "079550": {
       "code": "079550",
       "name": "LIG디펜스앤에어로스페이스",
       "market": "코스피",
       "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
+      "lastSeenDate": "2026-09-29"
+    },
+    "053450": {
+      "code": "053450",
+      "name": "세코닉스",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29"
+    },
+    "011070": {
+      "code": "011070",
+      "name": "LG이노텍",
+      "market": "코스피",
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29"
+    },
+    "085660": {
+      "code": "085660",
+      "name": "차바이오텍",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29"
+    },
+    "094840": {
+      "code": "094840",
+      "name": "슈프리마에이치큐",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29"
+    },
+    "064520": {
+      "code": "064520",
+      "name": "테크엘",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29"
+    },
+    "0015G0": {
+      "code": "0015G0",
+      "name": "그린광학",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29"
+    },
+    "089140": {
+      "code": "089140",
+      "name": "넥스턴앤롤코리아",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-29",
+      "lastSeenDate": "2026-09-29"
     }
   },
   "long": {
@@ -429,16 +436,16 @@
       "firstSeenDate": "2026-09-28",
       "lastSeenDate": "2026-09-28"
     },
-    "317530": {
-      "code": "317530",
-      "name": "에피소드컴퍼니",
+    "303810": {
+      "code": "303810",
+      "name": "동국생명과학",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
       "lastSeenDate": "2026-09-28"
     },
-    "318020": {
-      "code": "318020",
-      "name": "포인트모바일",
+    "317530": {
+      "code": "317530",
+      "name": "에피소드컴퍼니",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
       "lastSeenDate": "2026-09-28"
@@ -453,13 +460,6 @@
     "363250": {
       "code": "363250",
       "name": "진시스템",
-      "market": "코스닥",
-      "firstSeenDate": "2026-09-28",
-      "lastSeenDate": "2026-09-28"
-    },
-    "376980": {
-      "code": "376980",
-      "name": "원티드랩",
       "market": "코스닥",
       "firstSeenDate": "2026-09-28",
       "lastSeenDate": "2026-09-28"
@@ -607,6 +607,13 @@
     "000390": {
       "code": "000390",
       "name": "SP삼화",
+      "market": "코스피",
+      "firstSeenDate": "2026-09-28",
+      "lastSeenDate": "2026-09-28"
+    },
+    "026960": {
+      "code": "026960",
+      "name": "동서",
       "market": "코스피",
       "firstSeenDate": "2026-09-28",
       "lastSeenDate": "2026-09-28"

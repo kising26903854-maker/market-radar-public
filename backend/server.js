@@ -28,6 +28,7 @@ import { getMaReversalCache, runMaReversalScan, startDailyMaReversalScan } from 
 import { getGrowthMaComboCache, runGrowthMaComboScan, startDailyGrowthMaComboScan } from './growth_ma_combo_scanner.js'
 import { getAssetGrowthHistory } from './dart_asset_growth.js'
 import { getDropoutHistory as getMaReversalDropoutHistory } from './ma_dropout_tracker.js'
+import { getLeadingStockCache, runLeadingStockScan, startDailyLeadingStockScan } from './leading_stock_screener.js'
 import { getDividendCalendar } from './dividend_calendar.js'
 import { getMorningBriefing, startDailyMorningBriefingSync } from './morning_briefing.js'
 import { getTelegramConfig, saveTelegramConfig, sendTelegramMessage, detectTelegramChatId, maskTelegramToken, getPriceAlerts, createPriceAlert, updatePriceAlert, deletePriceAlert, getAlertHistory, startAlertEngine, sendHoldingsBriefing, sendWatchlistBriefing, sendNpsDisclosuresBriefing, testSendNpsSingleAlert } from './telegram_alert.js'
@@ -555,6 +556,36 @@ app.get('/api/ma-reversal-stocks', async (req, res) => {
 app.post('/api/trigger-ma-reversal-scan', async (req, res) => {
   res.json({ success: true, message: '"2·5·6 기법" 전 종목 스캔이 백그라운드에서 시작되었습니다.' })
   runMaReversalScan().catch(e => console.error('[MA REVERSAL] 수동 스캔 오류:', e.message))
+})
+
+// 🔒 "나만 보기" 비공개 기능용 접근 제어 — 헤더의 키가 안 맞으면 기능이 존재한다는 사실조차
+// 드러나지 않도록 일반 404로 응답한다(403 등으로 "숨겨진 무언가 있다"는 힌트를 주지 않기 위함).
+function requireOwnerKey(req, res, next) {
+  const key = req.headers['x-owner-key']
+  if (!process.env.OWNER_ACCESS_KEY || key !== process.env.OWNER_ACCESS_KEY) {
+    return res.status(404).json({ success: false, error: 'Not found' })
+  }
+  next()
+}
+
+// 🚀 "오늘의 주도주" 스크리너 (시총·거래대금·모멘텀 폭발·추세·신고가 근접 복합 조건) — 비공개(나만 보기)
+app.get('/api/leading-stocks', requireOwnerKey, async (req, res) => {
+  try {
+    let cache = getLeadingStockCache()
+    if (!cache) {
+      res.json({ success: true, scanning: true, matched: [] })
+      runLeadingStockScan().catch(e => console.error('[LEADING STOCK] 즉시 스캔 실패:', e.message))
+      return
+    }
+    res.json({ success: true, scanning: false, ...cache })
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message })
+  }
+})
+
+app.post('/api/trigger-leading-stock-scan', requireOwnerKey, async (req, res) => {
+  res.json({ success: true, message: '"오늘의 주도주" 스캔이 백그라운드에서 시작되었습니다.' })
+  runLeadingStockScan().catch(e => console.error('[LEADING STOCK] 수동 스캔 오류:', e.message))
 })
 
 // 🕵️ "256 기법" 탈락 종목 추적 — 후보에서 빠진 이유(상승 돌파/하락 붕괴/기간 만료)와 탈락 후 수익률
@@ -1634,6 +1665,9 @@ app.listen(PORT, () => {
   // 🚀🎯 4대 재무 퀀트 강력 후보군(조건 2개↑) + "256 기법" 콤보 스캔
   // (매일 09:40 자동 실행, 캐시가 20시간 이상 오래됐을 때만 서버 기동 시 즉시 1회 — 재무 발굴기·전종목 256기법 스캐너보다 늦게 실행)
   setTimeout(() => { startDailyGrowthMaComboScan() }, 260000);
+
+  // 🚀 "오늘의 주도주" 스크리너 (매일 09:50 자동 실행, 캐시가 20시간 이상 오래됐을 때만 서버 기동 시 즉시 1회)
+  setTimeout(() => { startDailyLeadingStockScan() }, 275000);
 
   // 🔄 매일 자정/장마감 후 자동 데이터 동기화 스케줄러 (Daily Auto-Sync Engine)
   setInterval(async () => {

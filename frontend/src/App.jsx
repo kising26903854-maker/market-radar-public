@@ -25,6 +25,7 @@ import AiPredictionTab from './components/AiPredictionTab.jsx'
 import TradeStatsTab from './components/TradeStatsTab.jsx'
 import MaReversalScannerTab from './components/MaReversalScannerTab.jsx'
 import MaReversalDropoutTab from './components/MaReversalDropoutTab.jsx'
+import LeadingStockScreenerTab from './components/LeadingStockScreenerTab.jsx'
 import GrowthMaComboScannerTab from './components/GrowthMaComboScannerTab.jsx'
 
 // 🎨 세련된 현대식 SVG 라인 아이콘 컴포넌트들
@@ -196,6 +197,22 @@ export default function App() {
   const [searchLoading, setSearchLoading] = useState(false)
   const [marketIndices, setMarketIndices] = useState(null)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isOwner, setIsOwner] = useState(false)
+
+  // 🔒 "나만 보기" 비공개 기능(예: 오늘의 주도주) 잠금 해제 — URL에 ?vip=키 로 한 번 접속하면
+  // 이 브라우저에 계속 저장돼서, 이후엔 URL 없이 접속해도 계속 보인다. 실제 검증은 서버가 한다
+  // (틀린 키를 넣어도 여기선 버튼만 보일 뿐, API는 서버에서 404로 막힌다).
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const vipKey = params.get('vip')
+    if (vipKey) {
+      try { localStorage.setItem('ownerKey', vipKey) } catch {}
+      params.delete('vip')
+      const newSearch = params.toString()
+      window.history.replaceState({}, '', window.location.pathname + (newSearch ? `?${newSearch}` : ''))
+    }
+    try { setIsOwner(!!localStorage.getItem('ownerKey')) } catch {}
+  }, [])
 
   // 실시간 3대 시장 지수 요약 로드
   const fetchMarketSummary = useCallback(async () => {
@@ -521,6 +538,12 @@ export default function App() {
             <MenuIcon type="alert-triangle" color={tab === 'ma-reversal-dropout' ? '#fff' : '#fbbf24'} />
             "256 기법" 탈락 종목 추적
           </button>
+          {isOwner && (
+            <button className={`tab-btn ${tab === 'leading-stock' ? 'active' : ''}`} onClick={() => { setTab('leading-stock'); setIsMenuOpen(false); }}>
+              <MenuIcon type="radar" color={tab === 'leading-stock' ? '#fff' : '#f87171'} />
+              오늘의 주도주
+            </button>
+          )}
           <button className={`tab-btn ${tab === 'backtest-report' ? 'active' : ''}`} onClick={() => { setTab('backtest-report'); setIsMenuOpen(false); }}>
             <MenuIcon type="accumulation" color={tab === 'backtest-report' ? '#fff' : '#818cf8'} />
             패턴 스캐너 백테스트
@@ -603,6 +626,7 @@ export default function App() {
         {tab === 'ma-reversal' && <MaReversalScannerTab onSelectStock={handleOpenStockChart} />}
         {tab === 'growth-ma-combo' && <GrowthMaComboScannerTab onSelectStock={handleOpenStockChart} />}
         {tab === 'ma-reversal-dropout' && <MaReversalDropoutTab onSelectStock={handleOpenStockChart} />}
+        {tab === 'leading-stock' && isOwner && <LeadingStockScreenerTab onSelectStock={handleOpenStockChart} />}
         {tab === 'backtest-report' && <BacktestReportTab />}
         {tab === 'ai-prediction' && <AiPredictionTab onSelectStock={handleOpenStockChart} />}
 

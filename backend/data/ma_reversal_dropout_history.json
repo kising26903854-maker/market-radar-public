@@ -1,6 +1,248 @@
 {
   "short": [
     {
+      "code": "031330",
+      "name": "에스에이엠티",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "STALE",
+      "reasonLabel": "기간 만료 (교차 신선도 초과)",
+      "priceAtDropout": 8370,
+      "outerGapPctAtDropout": 9.8
+    },
+    {
+      "code": "033780",
+      "name": "KT&G",
+      "market": "코스피",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "BREAKOUT_UP",
+      "reasonLabel": "상승 탈락 (목표선 돌파 성공)",
+      "priceAtDropout": 176400,
+      "outerGapPctAtDropout": null
+    },
+    {
+      "code": "084990",
+      "name": "헬릭스미스",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "BREAKOUT_UP",
+      "reasonLabel": "상승 탈락 (목표선 돌파 성공)",
+      "priceAtDropout": 3255,
+      "outerGapPctAtDropout": null
+    },
+    {
+      "code": "037350",
+      "name": "성도이엔지",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "BREAKOUT_UP",
+      "reasonLabel": "상승 탈락 (목표선 돌파 성공)",
+      "priceAtDropout": 7740,
+      "outerGapPctAtDropout": null
+    },
+    {
+      "code": "039440",
+      "name": "에스티아이",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "BREAKOUT_UP",
+      "reasonLabel": "상승 탈락 (목표선 돌파 성공)",
+      "priceAtDropout": 22750,
+      "outerGapPctAtDropout": null
+    },
+    {
+      "code": "490470",
+      "name": "세미파이브",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "BREAKOUT_UP",
+      "reasonLabel": "상승 탈락 (목표선 돌파 성공)",
+      "priceAtDropout": 18960,
+      "outerGapPctAtDropout": null
+    },
+    {
+      "code": "471820",
+      "name": "셀로맥스사이언스",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "BREAKDOWN",
+      "reasonLabel": "하락 탈락 (정배열 붕괴)",
+      "priceAtDropout": 4030,
+      "outerGapPctAtDropout": null
+    },
+    {
+      "code": "402340",
+      "name": "SK스퀘어",
+      "market": "코스피",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "BREAKOUT_UP",
+      "reasonLabel": "상승 탈락 (목표선 돌파 성공)",
+      "priceAtDropout": 1121000,
+      "outerGapPctAtDropout": null
+    },
+    {
+      "code": "348340",
+      "name": "뉴로메카",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "STALE",
+      "reasonLabel": "기간 만료 (교차 신선도 초과)",
+      "priceAtDropout": 20100,
+      "outerGapPctAtDropout": 16.1
+    },
+    {
+      "code": "348210",
+      "name": "넥스틴",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "BREAKOUT_UP",
+      "reasonLabel": "상승 탈락 (목표선 돌파 성공)",
+      "priceAtDropout": 34400,
+      "outerGapPctAtDropout": null
+    },
+    {
+      "code": "322310",
+      "name": "오로스테크놀로지",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "BREAKOUT_UP",
+      "reasonLabel": "상승 탈락 (목표선 돌파 성공)",
+      "priceAtDropout": 14790,
+      "outerGapPctAtDropout": null
+    },
+    {
+      "code": "298040",
+      "name": "효성중공업",
+      "market": "코스피",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "BREAKOUT_UP",
+      "reasonLabel": "상승 탈락 (목표선 돌파 성공)",
+      "priceAtDropout": 2804000,
+      "outerGapPctAtDropout": null
+    },
+    {
+      "code": "251370",
+      "name": "와이엠티",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "BREAKOUT_UP",
+      "reasonLabel": "상승 탈락 (목표선 돌파 성공)",
+      "priceAtDropout": 8380,
+      "outerGapPctAtDropout": null
+    },
+    {
+      "code": "200710",
+      "name": "에이디테크놀로지",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "BREAKOUT_UP",
+      "reasonLabel": "상승 탈락 (목표선 돌파 성공)",
+      "priceAtDropout": 27850,
+      "outerGapPctAtDropout": null
+    },
+    {
+      "code": "192080",
+      "name": "더블유게임즈",
+      "market": "코스피",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "STALE",
+      "reasonLabel": "기간 만료 (교차 신선도 초과)",
+      "priceAtDropout": 58700,
+      "outerGapPctAtDropout": 2
+    },
+    {
+      "code": "187870",
+      "name": "디바이스",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "BREAKOUT_UP",
+      "reasonLabel": "상승 탈락 (목표선 돌파 성공)",
+      "priceAtDropout": 11700,
+      "outerGapPctAtDropout": null
+    },
+    {
+      "code": "099430",
+      "name": "바이오플러스",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-28",
+      "reason": "OTHER",
+      "reasonLabel": "기타 조건 미충족",
+      "priceAtDropout": 3360,
+      "outerGapPctAtDropout": 6.1
+    },
+    {
+      "code": "089140",
+      "name": "넥스턴앤롤코리아",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-28",
+      "reason": "OTHER",
+      "reasonLabel": "기타 조건 미충족",
+      "priceAtDropout": 2125,
+      "outerGapPctAtDropout": 3.3
+    },
+    {
+      "code": "064520",
+      "name": "테크엘",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-28",
+      "reason": "OTHER",
+      "reasonLabel": "기타 조건 미충족",
+      "priceAtDropout": 1500,
+      "outerGapPctAtDropout": 1
+    },
+    {
+      "code": "071670",
+      "name": "에이테크솔루션",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-28",
+      "reason": "BREAKDOWN",
+      "reasonLabel": "하락 탈락 (정배열 붕괴)",
+      "priceAtDropout": 5000,
+      "outerGapPctAtDropout": null
+    },
+    {
+      "code": "321260",
+      "name": "프로이천",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-28",
+      "reason": "BREAKOUT_UP",
+      "reasonLabel": "상승 탈락 (목표선 돌파 성공)",
+      "priceAtDropout": 1668,
+      "outerGapPctAtDropout": null
+    },
+    {
+      "code": "120030",
+      "name": "조선선재",
+      "market": "코스피",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-28",
+      "reason": "BREAKDOWN",
+      "reasonLabel": "하락 탈락 (정배열 붕괴)",
+      "priceAtDropout": 82500,
+      "outerGapPctAtDropout": null
+    },
+    {
       "code": "034730",
       "name": "SK",
       "market": "코스피",
@@ -21,6 +263,41 @@
       "reasonLabel": "기간 만료 (교차 신선도 초과)",
       "priceAtDropout": 2920,
       "outerGapPctAtDropout": 0.2
+    }
+  ],
+  "long": [
+    {
+      "code": "950200",
+      "name": "소마젠",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-28",
+      "reason": "BREAKDOWN",
+      "reasonLabel": "하락 탈락 (정배열 붕괴)",
+      "priceAtDropout": 3070,
+      "outerGapPctAtDropout": null
+    },
+    {
+      "code": "376980",
+      "name": "원티드랩",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-28",
+      "reason": "OTHER",
+      "reasonLabel": "기타 조건 미충족",
+      "priceAtDropout": 3135,
+      "outerGapPctAtDropout": 4.4
+    },
+    {
+      "code": "318020",
+      "name": "포인트모바일",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-28",
+      "reason": "BREAKDOWN",
+      "reasonLabel": "하락 탈락 (정배열 붕괴)",
+      "priceAtDropout": 2600,
+      "outerGapPctAtDropout": null
     }
   ]
 }

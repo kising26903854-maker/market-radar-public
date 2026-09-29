@@ -133,6 +133,7 @@ export async function fetchMarketCapUniverse(sosok, totalPages) {
           price: parseInt(String(s.closePriceRaw || '0'), 10) || 0,
           changePct: parseFloat(s.fluctuationsRatio) || 0,
           marketCap: Math.round((parseFloat(s.marketValueRaw) || 0) / 100000000), // 원 -> 억원
+          tradingValue: parseFloat(s.accumulatedTradingValueRaw) || 0, // 당일 누적 거래대금(원)
         }));
       } catch (e) {
         console.warn(`[SCANNER] ${market} ${page}페이지(marketValue) 실패: ${e.message}`);
