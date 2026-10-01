@@ -1,6 +1,17 @@
 {
   "short": [
     {
+      "code": "483650",
+      "name": "달바글로벌",
+      "market": "코스피",
+      "firstSeenDate": "2026-09-29",
+      "dropoutDate": "2026-09-29",
+      "reason": "BREAKDOWN",
+      "reasonLabel": "하락 탈락 (정배열 붕괴)",
+      "priceAtDropout": 188200,
+      "outerGapPctAtDropout": null
+    },
+    {
       "code": "031330",
       "name": "에스에이엠티",
       "market": "코스닥",
@@ -266,6 +277,105 @@
     }
   ],
   "long": [
+    {
+      "code": "030530",
+      "name": "원익홀딩스",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "STALE",
+      "reasonLabel": "기간 만료 (교차 신선도 초과)",
+      "priceAtDropout": 26800,
+      "outerGapPctAtDropout": 6.7
+    },
+    {
+      "code": "005800",
+      "name": "신영와코루",
+      "market": "코스피",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "STALE",
+      "reasonLabel": "기간 만료 (교차 신선도 초과)",
+      "priceAtDropout": 13500,
+      "outerGapPctAtDropout": 8.4
+    },
+    {
+      "code": "439580",
+      "name": "블루엠텍",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "STALE",
+      "reasonLabel": "기간 만료 (교차 신선도 초과)",
+      "priceAtDropout": 2670,
+      "outerGapPctAtDropout": 23.1
+    },
+    {
+      "code": "352480",
+      "name": "씨앤씨인터내셔널",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "OTHER",
+      "reasonLabel": "기타 조건 미충족",
+      "priceAtDropout": 21100,
+      "outerGapPctAtDropout": 25.6
+    },
+    {
+      "code": "317530",
+      "name": "에피소드컴퍼니",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "STALE",
+      "reasonLabel": "기간 만료 (교차 신선도 초과)",
+      "priceAtDropout": 3410,
+      "outerGapPctAtDropout": 11
+    },
+    {
+      "code": "293940",
+      "name": "신한알파리츠",
+      "market": "코스피",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "BREAKOUT_UP",
+      "reasonLabel": "상승 탈락 (목표선 돌파 성공)",
+      "priceAtDropout": 5610,
+      "outerGapPctAtDropout": null
+    },
+    {
+      "code": "264850",
+      "name": "이랜시스",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "BREAKDOWN",
+      "reasonLabel": "하락 탈락 (정배열 붕괴)",
+      "priceAtDropout": 5480,
+      "outerGapPctAtDropout": null
+    },
+    {
+      "code": "158430",
+      "name": "아톤",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "STALE",
+      "reasonLabel": "기간 만료 (교차 신선도 초과)",
+      "priceAtDropout": 5350,
+      "outerGapPctAtDropout": 13
+    },
+    {
+      "code": "105740",
+      "name": "디케이락",
+      "market": "코스닥",
+      "firstSeenDate": "2026-09-28",
+      "dropoutDate": "2026-09-29",
+      "reason": "BREAKOUT_UP",
+      "reasonLabel": "상승 탈락 (목표선 돌파 성공)",
+      "priceAtDropout": 9280,
+      "outerGapPctAtDropout": null
+    },
     {
       "code": "950200",
       "name": "소마젠",

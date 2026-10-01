@@ -18,7 +18,7 @@ import { getGlobalMacroNews } from './macro_news.js'
 import { getMarketCalendarEvents, getMarketCalendarRange } from './market_calendar.js'
 import { getNpsHoldings, getNpsQuarterData, getNpsComparison, refreshNpsData, getNpsDetailedDisclosures } from './nps_tracker.js'
 import { getNpsHoldingHistory, runNpsHoldingBatchScan, startDailyNpsHoldingBatchScan, getNpsRecentUpdates, getNpsTodayNewDisclosures } from './nps_holding_history.js'
-import { getTradeStatsCache, runTradeStatsSync, startDailyTradeStatsSync } from './trade_stats.js'
+import { getTradeStatsCache, runTradeStatsSync, startDailyTradeStatsSync, isTradeStatsStale } from './trade_stats.js'
 import { getLiveValueChain } from './value_chain.js'
 import { getCompanySummary } from './company_summary.js'
 import { getSmartSupplyDemand } from './smart_supply_demand.js'
@@ -1243,11 +1243,15 @@ app.get('/api/chart/:code', async (req, res) => {
   }
 })
 
-// 🚢 관세청 10일 단위 수출입 잠정치 통계 (캐시 조회 — 매일 자동 갱신, 없으면 즉시 1회 동기화)
+// 🚢 관세청 10일 단위 수출입 잠정치 통계 (캐시 조회 — 매일 자동 갱신, 없으면 즉시 1회 동기화,
+// 20시간 이상 오래됐으면 일단 기존 캐시를 보여주면서 백그라운드로 재동기화)
 app.get('/api/trade-stats', async (req, res) => {
   try {
     let cache = getTradeStatsCache()
     if (!cache) cache = await runTradeStatsSync()
+    else if (isTradeStatsStale()) {
+      runTradeStatsSync().catch(e => console.error('[TRADE STATS] 백그라운드 재동기화 실패:', e.message))
+    }
     res.json({ success: true, ...cache })
   } catch (err) {
     res.status(500).json({ success: false, error: err.message })

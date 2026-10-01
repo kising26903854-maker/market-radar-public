@@ -149,6 +149,15 @@ export function getTradeStatsCache() {
   }
 }
 
+// 하루 한 번 정해진 시각(07:30)에만 동기화를 시도하는 구조라, 서버가 그 시각에 꺼져있거나
+// (예: 호스팅이 슬립 후 재기동) 환경변수 누락 등으로 한 번 실패하면 복구 수단이 없었다.
+// 캐시가 20시간 이상 오래됐으면 "stale"로 보고, 요청이 들어올 때 자동으로 재동기화한다.
+export function isTradeStatsStale() {
+  const cache = getTradeStatsCache();
+  if (!cache?.updatedAt) return true;
+  return (Date.now() - new Date(cache.updatedAt).getTime()) > 20 * 60 * 60 * 1000;
+}
+
 // 서버 기동 시 최초 1회 즉시 실행 + 매일 정해진 시각(07:30)에 자동 재동기화
 export function startDailyTradeStatsSync() {
   const scheduleNext = () => {

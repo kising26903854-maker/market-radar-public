@@ -1,249 +1,202 @@
 {
-  "updatedAt": "2026-09-29T08:18:06.477Z",
+  "updatedAt": "2026-10-01T23:04:43.890Z",
   "importItem": {
     "latest": {
       "year": "2026",
       "month": "202609",
-      "periodRange": "01~20",
-      "total": 48443360,
+      "periodRange": "01~30",
+      "total": 71092194,
       "breakdown": [
         {
           "label": "반도체",
-          "amount": 8742493
+          "amount": 12737591
         },
         {
           "label": "원유",
-          "amount": 5798391
+          "amount": 7961010
         },
         {
           "label": "기계류",
-          "amount": 1899537
+          "amount": 2760728
         },
         {
           "label": "가스",
-          "amount": 2002803
+          "amount": 3521462
         },
         {
           "label": "반도체 제조용장비",
-          "amount": 2983231
+          "amount": 4021809
         },
         {
           "label": "정밀기기",
-          "amount": 1115277
+          "amount": 1695892
         },
         {
           "label": "석유제품",
-          "amount": 1092073
+          "amount": 1609944
         },
         {
           "label": "무선 통신기기",
-          "amount": 1440261
+          "amount": 1784021
         },
         {
           "label": "승용차",
-          "amount": 1159649
+          "amount": 1611533
         },
         {
           "label": "석탄",
-          "amount": 846451
+          "amount": 1482767
         }
       ]
     },
     "mom": {
       "year": "2026",
       "month": "202608",
-      "periodRange": "01~20",
-      "total": 41228667,
+      "periodRange": "01~31",
+      "total": 63496948,
       "breakdown": [
         {
           "label": "반도체",
-          "amount": 7470365
+          "amount": 11367901
         },
         {
           "label": "원유",
-          "amount": 5438870
+          "amount": 8282353
         },
         {
           "label": "기계류",
-          "amount": 1735673
+          "amount": 2632392
         },
         {
           "label": "가스",
-          "amount": 1709066
+          "amount": 2766831
         },
         {
           "label": "반도체 제조용장비",
-          "amount": 1877846
+          "amount": 3015439
         },
         {
           "label": "정밀기기",
-          "amount": 1030945
+          "amount": 1598314
         },
         {
           "label": "석유제품",
-          "amount": 832707
+          "amount": 1370213
         },
         {
           "label": "무선 통신기기",
-          "amount": 692466
+          "amount": 1083732
         },
         {
           "label": "승용차",
-          "amount": 744138
+          "amount": 1262517
         },
         {
           "label": "석탄",
-          "amount": 1162544
+          "amount": 1616698
         }
       ],
-      "pct": 17.5
+      "pct": 12
     },
     "qoq": {
       "year": "2026",
       "month": "202606",
-      "periodRange": "01~20",
-      "total": 44452934,
+      "periodRange": "01~30",
+      "total": 66049428,
       "breakdown": [
         {
           "label": "반도체",
-          "amount": 7103514
+          "amount": 10541146
         },
         {
           "label": "원유",
-          "amount": 5430770
+          "amount": 8555568
         },
         {
           "label": "기계류",
-          "amount": 1866739
+          "amount": 2752520
         },
         {
           "label": "가스",
-          "amount": 1711606
+          "amount": 2530275
         },
         {
           "label": "반도체 제조용장비",
-          "amount": 2138581
+          "amount": 3262619
         },
         {
           "label": "정밀기기",
-          "amount": 1174281
+          "amount": 1763140
         },
         {
           "label": "석유제품",
-          "amount": 1341882
+          "amount": 1803774
         },
         {
           "label": "무선 통신기기",
-          "amount": 839981
+          "amount": 1127058
         },
         {
           "label": "승용차",
-          "amount": 905652
+          "amount": 1767487
         },
         {
           "label": "석탄",
-          "amount": 901254
+          "amount": 1390824
         }
       ],
-      "pct": 9
+      "pct": 7.6
     },
     "yoy": {
       "year": "2025",
       "month": "202509",
-      "periodRange": "01~20",
-      "total": 38222378,
+      "periodRange": "01~30",
+      "total": 56419614,
       "breakdown": [
         {
           "label": "반도체",
-          "amount": 4630105
+          "amount": 6606908
         },
         {
           "label": "원유",
-          "amount": 4224510
+          "amount": 5750317
         },
         {
           "label": "기계류",
-          "amount": 1802639
+          "amount": 2768890
         },
         {
           "label": "가스",
-          "amount": 1720747
+          "amount": 2459359
         },
         {
           "label": "반도체 제조용장비",
-          "amount": 1916803
+          "amount": 2695014
         },
         {
           "label": "정밀기기",
-          "amount": 1096541
+          "amount": 1667074
         },
         {
           "label": "석유제품",
-          "amount": 1452353
+          "amount": 1875814
         },
         {
           "label": "무선 통신기기",
-          "amount": 894450
+          "amount": 1374976
         },
         {
           "label": "승용차",
-          "amount": 646190
+          "amount": 1222666
         },
         {
           "label": "석탄",
-          "amount": 814222
+          "amount": 1194120
         }
       ],
-      "pct": 26.7
+      "pct": 26
     },
     "trend": [
-      {
-        "month": "202601",
-        "periodRange": "01~31",
-        "total": 57154349,
-        "breakdown": [
-          {
-            "label": "반도체",
-            "amount": 7516029
-          },
-          {
-            "label": "원유",
-            "amount": 6183876
-          },
-          {
-            "label": "기계류",
-            "amount": 2415346
-          },
-          {
-            "label": "가스",
-            "amount": 2701889
-          },
-          {
-            "label": "반도체 제조용장비",
-            "amount": 2935674
-          },
-          {
-            "label": "정밀기기",
-            "amount": 1452228
-          },
-          {
-            "label": "석유제품",
-            "amount": 1959909
-          },
-          {
-            "label": "무선 통신기기",
-            "amount": 879756
-          },
-          {
-            "label": "승용차",
-            "amount": 851687
-          },
-          {
-            "label": "석탄",
-            "amount": 1143139
-          }
-        ]
-      },
       {
         "month": "202602",
         "periodRange": "01~10",
@@ -1324,6 +1277,53 @@
             "amount": 846451
           }
         ]
+      },
+      {
+        "month": "202609",
+        "periodRange": "01~30",
+        "total": 71092194,
+        "breakdown": [
+          {
+            "label": "반도체",
+            "amount": 12737591
+          },
+          {
+            "label": "원유",
+            "amount": 7961010
+          },
+          {
+            "label": "기계류",
+            "amount": 2760728
+          },
+          {
+            "label": "가스",
+            "amount": 3521462
+          },
+          {
+            "label": "반도체 제조용장비",
+            "amount": 4021809
+          },
+          {
+            "label": "정밀기기",
+            "amount": 1695892
+          },
+          {
+            "label": "석유제품",
+            "amount": 1609944
+          },
+          {
+            "label": "무선 통신기기",
+            "amount": 1784021
+          },
+          {
+            "label": "승용차",
+            "amount": 1611533
+          },
+          {
+            "label": "석탄",
+            "amount": 1482767
+          }
+        ]
       }
     ]
   },
@@ -1331,246 +1331,199 @@
     "latest": {
       "year": "2026",
       "month": "202609",
-      "periodRange": "01~20",
-      "total": 71409349,
+      "periodRange": "01~30",
+      "total": 120943825,
       "breakdown": [
         {
           "label": "반도체",
-          "amount": 34128119
+          "amount": 60503641
         },
         {
           "label": "철강제품",
-          "amount": 2712227
+          "amount": 4277639
         },
         {
           "label": "승용차",
-          "amount": 3734779
+          "amount": 5705946
         },
         {
           "label": "석유제품",
-          "amount": 4012147
+          "amount": 7259591
         },
         {
           "label": "무선통신기기",
-          "amount": 1245445
+          "amount": 1815314
         },
         {
           "label": "선박",
-          "amount": 2446453
+          "amount": 3638696
         },
         {
           "label": "자동차부품",
-          "amount": 1133439
+          "amount": 1678775
         },
         {
           "label": "컴퓨터 주변기기",
-          "amount": 2330034
+          "amount": 7145115
         },
         {
           "label": "정밀기기",
-          "amount": 640533
+          "amount": 966809
         },
         {
           "label": "가전제품",
-          "amount": 377984
+          "amount": 580741
         }
       ]
     },
     "mom": {
       "year": "2026",
       "month": "202608",
-      "periodRange": "01~20",
-      "total": 55219260,
+      "periodRange": "01~31",
+      "total": 98282430,
       "breakdown": [
         {
           "label": "반도체",
-          "amount": 26034569
+          "amount": 46829319
         },
         {
           "label": "철강제품",
-          "amount": 2391216
+          "amount": 4036002
         },
         {
           "label": "승용차",
-          "amount": 1520807
+          "amount": 3643315
         },
         {
           "label": "석유제품",
-          "amount": 4236194
+          "amount": 6882093
         },
         {
           "label": "무선통신기기",
-          "amount": 1040236
+          "amount": 1650086
         },
         {
           "label": "선박",
-          "amount": 913927
+          "amount": 1631184
         },
         {
           "label": "자동차부품",
-          "amount": 796871
+          "amount": 1415382
         },
         {
           "label": "컴퓨터 주변기기",
-          "amount": 2278122
+          "amount": 6410080
         },
         {
           "label": "정밀기기",
-          "amount": 524137
+          "amount": 861045
         },
         {
           "label": "가전제품",
-          "amount": 306820
+          "amount": 509995
         }
       ],
-      "pct": 29.3
+      "pct": 23.1
     },
     "qoq": {
       "year": "2026",
       "month": "202606",
-      "periodRange": "01~20",
-      "total": 61728993,
+      "periodRange": "01~30",
+      "total": 101959795,
       "breakdown": [
         {
           "label": "반도체",
-          "amount": 25503658
+          "amount": 44942586
         },
         {
           "label": "철강제품",
-          "amount": 2799840
+          "amount": 4350841
         },
         {
           "label": "승용차",
-          "amount": 3731563
+          "amount": 6356020
         },
         {
           "label": "석유제품",
-          "amount": 3517134
+          "amount": 5444650
         },
         {
           "label": "무선통신기기",
-          "amount": 1049249
+          "amount": 1576270
         },
         {
           "label": "선박",
-          "amount": 2211475
+          "amount": 2714944
         },
         {
           "label": "자동차부품",
-          "amount": 1102771
+          "amount": 1653180
         },
         {
           "label": "컴퓨터 주변기기",
-          "amount": 3065561
+          "amount": 5584322
         },
         {
           "label": "정밀기기",
-          "amount": 622054
+          "amount": 981939
         },
         {
           "label": "가전제품",
-          "amount": 411351
+          "amount": 660503
         }
       ],
-      "pct": 15.7
+      "pct": 18.6
     },
     "yoy": {
       "year": "2025",
       "month": "202509",
-      "periodRange": "01~20",
-      "total": 40050000,
+      "periodRange": "01~30",
+      "total": 65904118,
       "breakdown": [
         {
           "label": "반도체",
-          "amount": 9495449
+          "amount": 16793796
         },
         {
           "label": "철강제품",
-          "amount": 2511412
+          "amount": 4010790
         },
         {
           "label": "승용차",
-          "amount": 3418359
+          "amount": 6042273
         },
         {
           "label": "석유제품",
-          "amount": 2714051
+          "amount": 4241471
         },
         {
           "label": "무선통신기기",
-          "amount": 1250165
+          "amount": 1843236
         },
         {
           "label": "선박",
-          "amount": 1501289
+          "amount": 2770339
         },
         {
           "label": "자동차부품",
-          "amount": 1209270
+          "amount": 1826428
         },
         {
           "label": "컴퓨터 주변기기",
-          "amount": 810182
+          "amount": 1451348
         },
         {
           "label": "정밀기기",
-          "amount": 683501
+          "amount": 1070757
         },
         {
           "label": "가전제품",
-          "amount": 405054
+          "amount": 628772
         }
       ],
-      "pct": 78.3
+      "pct": 83.5
     },
     "trend": [
-      {
-        "month": "202601",
-        "periodRange": "01~31",
-        "total": 65843637,
-        "breakdown": [
-          {
-            "label": "반도체",
-            "amount": 20687770
-          },
-          {
-            "label": "철강제품",
-            "amount": 4072166
-          },
-          {
-            "label": "승용차",
-            "amount": 5743614
-          },
-          {
-            "label": "석유제품",
-            "amount": 3796655
-          },
-          {
-            "label": "무선통신기기",
-            "amount": 1913420
-          },
-          {
-            "label": "선박",
-            "amount": 2360600
-          },
-          {
-            "label": "자동차부품",
-            "amount": 1541595
-          },
-          {
-            "label": "컴퓨터 주변기기",
-            "amount": 1696075
-          },
-          {
-            "label": "정밀기기",
-            "amount": 884600
-          },
-          {
-            "label": "가전제품",
-            "amount": 560989
-          }
-        ]
-      },
       {
         "month": "202602",
         "periodRange": "01~10",
@@ -2651,6 +2604,53 @@
             "amount": 377984
           }
         ]
+      },
+      {
+        "month": "202609",
+        "periodRange": "01~30",
+        "total": 120943825,
+        "breakdown": [
+          {
+            "label": "반도체",
+            "amount": 60503641
+          },
+          {
+            "label": "철강제품",
+            "amount": 4277639
+          },
+          {
+            "label": "승용차",
+            "amount": 5705946
+          },
+          {
+            "label": "석유제품",
+            "amount": 7259591
+          },
+          {
+            "label": "무선통신기기",
+            "amount": 1815314
+          },
+          {
+            "label": "선박",
+            "amount": 3638696
+          },
+          {
+            "label": "자동차부품",
+            "amount": 1678775
+          },
+          {
+            "label": "컴퓨터 주변기기",
+            "amount": 7145115
+          },
+          {
+            "label": "정밀기기",
+            "amount": 966809
+          },
+          {
+            "label": "가전제품",
+            "amount": 580741
+          }
+        ]
       }
     ]
   },
@@ -2658,246 +2658,199 @@
     "latest": {
       "year": "2026",
       "month": "202609",
-      "periodRange": "01~20",
-      "total": 48443360,
+      "periodRange": "01~30",
+      "total": 71092194,
       "breakdown": [
         {
           "label": "중국",
-          "amount": 13226769
+          "amount": 19293306
         },
         {
           "label": "미국",
-          "amount": 5057804
+          "amount": 7061118
         },
         {
           "label": "유럽연합",
-          "amount": 5126156
+          "amount": 7208917
         },
         {
           "label": "일본",
-          "amount": 3764201
+          "amount": 5228035
         },
         {
           "label": "베트남",
-          "amount": 2373910
+          "amount": 3621231
         },
         {
           "label": "호주",
-          "amount": 1721495
+          "amount": 3151917
         },
         {
           "label": "대만",
-          "amount": 3318235
+          "amount": 5038428
         },
         {
           "label": "사우디아라비아",
-          "amount": 1243010
+          "amount": 1892080
         },
         {
           "label": "러시아연방",
-          "amount": 625809
+          "amount": 891942
         },
         {
           "label": "말레이시아",
-          "amount": 1089843
+          "amount": 1741466
         }
       ]
     },
     "mom": {
       "year": "2026",
       "month": "202608",
-      "periodRange": "01~20",
-      "total": 41228667,
+      "periodRange": "01~31",
+      "total": 63496948,
       "breakdown": [
         {
           "label": "중국",
-          "amount": 9825928
+          "amount": 15327887
         },
         {
           "label": "미국",
-          "amount": 4817341
+          "amount": 7598884
         },
         {
           "label": "유럽연합",
-          "amount": 3853706
+          "amount": 5963497
         },
         {
           "label": "일본",
-          "amount": 3163425
+          "amount": 4758244
         },
         {
           "label": "베트남",
-          "amount": 2327501
+          "amount": 3687361
         },
         {
           "label": "호주",
-          "amount": 1773483
+          "amount": 2928892
         },
         {
           "label": "대만",
-          "amount": 3045446
+          "amount": 4719242
         },
         {
           "label": "사우디아라비아",
-          "amount": 1376238
+          "amount": 1963059
         },
         {
           "label": "러시아연방",
-          "amount": 587500
+          "amount": 840339
         },
         {
           "label": "말레이시아",
-          "amount": 896070
+          "amount": 1482287
         }
       ],
-      "pct": 17.5
+      "pct": 12
     },
     "qoq": {
       "year": "2026",
       "month": "202606",
-      "periodRange": "01~20",
-      "total": 44452934,
+      "periodRange": "01~30",
+      "total": 66049428,
       "breakdown": [
         {
           "label": "중국",
-          "amount": 11273641
+          "amount": 16420873
         },
         {
           "label": "미국",
-          "amount": 5529341
+          "amount": 7911871
         },
         {
           "label": "유럽연합",
-          "amount": 4412569
+          "amount": 6825892
         },
         {
           "label": "일본",
-          "amount": 3243900
+          "amount": 4988543
         },
         {
           "label": "베트남",
-          "amount": 2143973
+          "amount": 3141958
         },
         {
           "label": "호주",
-          "amount": 1992010
+          "amount": 2975529
         },
         {
           "label": "대만",
-          "amount": 2697193
+          "amount": 3769959
         },
         {
           "label": "사우디아라비아",
-          "amount": 1432217
+          "amount": 2695754
         },
         {
           "label": "러시아연방",
-          "amount": 408950
+          "amount": 594653
         },
         {
           "label": "말레이시아",
-          "amount": 1249478
+          "amount": 1789000
         }
       ],
-      "pct": 9
+      "pct": 7.6
     },
     "yoy": {
       "year": "2025",
       "month": "202509",
-      "periodRange": "01~20",
-      "total": 38222378,
+      "periodRange": "01~30",
+      "total": 56419614,
       "breakdown": [
         {
           "label": "중국",
-          "amount": 8897278
+          "amount": 13508598
         },
         {
           "label": "미국",
-          "amount": 3905313
+          "amount": 5936407
         },
         {
           "label": "유럽연합",
-          "amount": 4394393
+          "amount": 6827928
         },
         {
           "label": "일본",
-          "amount": 2859987
+          "amount": 4266280
         },
         {
           "label": "베트남",
-          "amount": 1981152
+          "amount": 2865793
         },
         {
           "label": "호주",
-          "amount": 1995106
+          "amount": 2769550
         },
         {
           "label": "대만",
-          "amount": 1875654
+          "amount": 2819940
         },
         {
           "label": "사우디아라비아",
-          "amount": 1607671
+          "amount": 2141061
         },
         {
           "label": "러시아연방",
-          "amount": 471301
+          "amount": 716443
         },
         {
           "label": "말레이시아",
-          "amount": 1002122
+          "amount": 1345162
         }
       ],
-      "pct": 26.7
+      "pct": 26
     },
     "trend": [
-      {
-        "month": "202601",
-        "periodRange": "01~31",
-        "total": 57154349,
-        "breakdown": [
-          {
-            "label": "중국",
-            "amount": 13189873
-          },
-          {
-            "label": "미국",
-            "amount": 6762138
-          },
-          {
-            "label": "유럽연합",
-            "amount": 5730464
-          },
-          {
-            "label": "일본",
-            "amount": 3900703
-          },
-          {
-            "label": "베트남",
-            "amount": 3055551
-          },
-          {
-            "label": "호주",
-            "amount": 3373170
-          },
-          {
-            "label": "대만",
-            "amount": 2935193
-          },
-          {
-            "label": "사우디아라비아",
-            "amount": 2316666
-          },
-          {
-            "label": "러시아연방",
-            "amount": 543930
-          },
-          {
-            "label": "말레이시아",
-            "amount": 1617620
-          }
-        ]
-      },
       {
         "month": "202602",
         "periodRange": "01~10",
@@ -3978,6 +3931,53 @@
             "amount": 1089843
           }
         ]
+      },
+      {
+        "month": "202609",
+        "periodRange": "01~30",
+        "total": 71092194,
+        "breakdown": [
+          {
+            "label": "중국",
+            "amount": 19293306
+          },
+          {
+            "label": "미국",
+            "amount": 7061118
+          },
+          {
+            "label": "유럽연합",
+            "amount": 7208917
+          },
+          {
+            "label": "일본",
+            "amount": 5228035
+          },
+          {
+            "label": "베트남",
+            "amount": 3621231
+          },
+          {
+            "label": "호주",
+            "amount": 3151917
+          },
+          {
+            "label": "대만",
+            "amount": 5038428
+          },
+          {
+            "label": "사우디아라비아",
+            "amount": 1892080
+          },
+          {
+            "label": "러시아연방",
+            "amount": 891942
+          },
+          {
+            "label": "말레이시아",
+            "amount": 1741466
+          }
+        ]
       }
     ]
   },
@@ -3985,246 +3985,199 @@
     "latest": {
       "year": "2026",
       "month": "202609",
-      "periodRange": "01~20",
-      "total": 71409349,
+      "periodRange": "01~30",
+      "total": 120943825,
       "breakdown": [
         {
           "label": "중국",
-          "amount": 16625500
+          "amount": 26013702
         },
         {
           "label": "미국",
-          "amount": 14215187
+          "amount": 24333677
         },
         {
           "label": "유럽연합",
-          "amount": 5318802
+          "amount": 8652080
         },
         {
           "label": "베트남",
-          "amount": 5869602
+          "amount": 8530440
         },
         {
           "label": "홍콩",
-          "amount": 3843784
+          "amount": 10573575
         },
         {
           "label": "일본",
-          "amount": 2119955
+          "amount": 3208654
         },
         {
           "label": "대만",
-          "amount": 5545530
+          "amount": 10234797
         },
         {
           "label": "인도",
-          "amount": 1694283
+          "amount": 2577082
         },
         {
           "label": "싱가포르",
-          "amount": 1924295
+          "amount": 3792177
         },
         {
           "label": "말레이시아",
-          "amount": 1534344
+          "amount": 3173657
         }
       ]
     },
     "mom": {
       "year": "2026",
       "month": "202608",
-      "periodRange": "01~20",
-      "total": 55219260,
+      "periodRange": "01~31",
+      "total": 98282430,
       "breakdown": [
         {
           "label": "중국",
-          "amount": 15270392
+          "amount": 24112225
         },
         {
           "label": "미국",
-          "amount": 7977815
+          "amount": 16498834
         },
         {
           "label": "유럽연합",
-          "amount": 3556495
+          "amount": 6625654
         },
         {
           "label": "베트남",
-          "amount": 5825599
+          "amount": 8819269
         },
         {
           "label": "홍콩",
-          "amount": 3622749
+          "amount": 8902968
         },
         {
           "label": "일본",
-          "amount": 1691086
+          "amount": 2685117
         },
         {
           "label": "대만",
-          "amount": 3295976
+          "amount": 6471201
         },
         {
           "label": "인도",
-          "amount": 1375101
+          "amount": 2346133
         },
         {
           "label": "싱가포르",
-          "amount": 1118868
+          "amount": 2376963
         },
         {
           "label": "말레이시아",
-          "amount": 1990177
+          "amount": 3363118
         }
       ],
-      "pct": 29.3
+      "pct": 23.1
     },
     "qoq": {
       "year": "2026",
       "month": "202606",
-      "periodRange": "01~20",
-      "total": 61728993,
+      "periodRange": "01~30",
+      "total": 101959795,
       "breakdown": [
         {
           "label": "중국",
-          "amount": 13017082
+          "amount": 20005445
         },
         {
           "label": "미국",
-          "amount": 11373465
+          "amount": 20017387
         },
         {
           "label": "유럽연합",
-          "amount": 4701979
+          "amount": 7630433
         },
         {
           "label": "베트남",
-          "amount": 5917922
+          "amount": 8618848
         },
         {
           "label": "홍콩",
-          "amount": 3871551
+          "amount": 9094976
         },
         {
           "label": "일본",
-          "amount": 1855797
+          "amount": 2798782
         },
         {
           "label": "대만",
-          "amount": 4540190
+          "amount": 8318051
         },
         {
           "label": "인도",
-          "amount": 1366097
+          "amount": 2104498
         },
         {
           "label": "싱가포르",
-          "amount": 2169384
+          "amount": 3123507
         },
         {
           "label": "말레이시아",
-          "amount": 1694599
+          "amount": 2457868
         }
       ],
-      "pct": 15.7
+      "pct": 18.6
     },
     "yoy": {
       "year": "2025",
       "month": "202509",
-      "periodRange": "01~20",
-      "total": 40050000,
+      "periodRange": "01~30",
+      "total": 65904118,
       "breakdown": [
         {
           "label": "중국",
-          "amount": 7775503
+          "amount": 11679519
         },
         {
           "label": "미국",
-          "amount": 6522136
+          "amount": 10267271
         },
         {
           "label": "유럽연합",
-          "amount": 3881328
+          "amount": 7157817
         },
         {
           "label": "베트남",
-          "amount": 4052331
+          "amount": 5925624
         },
         {
           "label": "홍콩",
-          "amount": 1616817
+          "amount": 3496991
         },
         {
           "label": "일본",
-          "amount": 1587506
+          "amount": 2560674
         },
         {
           "label": "대만",
-          "amount": 2427082
+          "amount": 5205355
         },
         {
           "label": "인도",
-          "amount": 1168889
+          "amount": 1721596
         },
         {
           "label": "싱가포르",
-          "amount": 809770
+          "amount": 1510021
         },
         {
           "label": "말레이시아",
-          "amount": 560218
+          "amount": 1025125
         }
       ],
-      "pct": 78.3
+      "pct": 83.5
     },
     "trend": [
-      {
-        "month": "202601",
-        "periodRange": "01~31",
-        "total": 65843637,
-        "breakdown": [
-          {
-            "label": "중국",
-            "amount": 13528177
-          },
-          {
-            "label": "미국",
-            "amount": 12006733
-          },
-          {
-            "label": "유럽연합",
-            "amount": 5400930
-          },
-          {
-            "label": "베트남",
-            "amount": 6453114
-          },
-          {
-            "label": "홍콩",
-            "amount": 4329293
-          },
-          {
-            "label": "일본",
-            "amount": 2245851
-          },
-          {
-            "label": "대만",
-            "amount": 3960781
-          },
-          {
-            "label": "인도",
-            "amount": 1684637
-          },
-          {
-            "label": "싱가포르",
-            "amount": 1702438
-          },
-          {
-            "label": "말레이시아",
-            "amount": 976721
-          }
-        ]
-      },
       {
         "month": "202602",
         "periodRange": "01~10",
@@ -5303,6 +5256,53 @@
           {
             "label": "말레이시아",
             "amount": 1534344
+          }
+        ]
+      },
+      {
+        "month": "202609",
+        "periodRange": "01~30",
+        "total": 120943825,
+        "breakdown": [
+          {
+            "label": "중국",
+            "amount": 26013702
+          },
+          {
+            "label": "미국",
+            "amount": 24333677
+          },
+          {
+            "label": "유럽연합",
+            "amount": 8652080
+          },
+          {
+            "label": "베트남",
+            "amount": 8530440
+          },
+          {
+            "label": "홍콩",
+            "amount": 10573575
+          },
+          {
+            "label": "일본",
+            "amount": 3208654
+          },
+          {
+            "label": "대만",
+            "amount": 10234797
+          },
+          {
+            "label": "인도",
+            "amount": 2577082
+          },
+          {
+            "label": "싱가포르",
+            "amount": 3792177
+          },
+          {
+            "label": "말레이시아",
+            "amount": 3173657
           }
         ]
       }
