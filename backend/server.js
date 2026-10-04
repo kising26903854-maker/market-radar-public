@@ -29,6 +29,7 @@ import { getGrowthMaComboCache, runGrowthMaComboScan, startDailyGrowthMaComboSca
 import { getAssetGrowthHistory } from './dart_asset_growth.js'
 import { getDropoutHistory as getMaReversalDropoutHistory } from './ma_dropout_tracker.js'
 import { getLeadingStockCache, runLeadingStockScan, startDailyLeadingStockScan } from './leading_stock_screener.js'
+import { getYeokmaegongpaCache, runYeokmaegongpaScan, startDailyYeokmaegongpaScan } from './yeokmaegongpa_scanner.js'
 import { getDividendCalendar } from './dividend_calendar.js'
 import { getMorningBriefing, startDailyMorningBriefingSync } from './morning_briefing.js'
 import { getTelegramConfig, saveTelegramConfig, sendTelegramMessage, detectTelegramChatId, maskTelegramToken, getPriceAlerts, createPriceAlert, updatePriceAlert, deletePriceAlert, getAlertHistory, startAlertEngine, sendHoldingsBriefing, sendWatchlistBriefing, sendNpsDisclosuresBriefing, testSendNpsSingleAlert } from './telegram_alert.js'
@@ -556,6 +557,26 @@ app.get('/api/ma-reversal-stocks', async (req, res) => {
 app.post('/api/trigger-ma-reversal-scan', async (req, res) => {
   res.json({ success: true, message: '"2·5·6 기법" 전 종목 스캔이 백그라운드에서 시작되었습니다.' })
   runMaReversalScan().catch(e => console.error('[MA REVERSAL] 수동 스캔 오류:', e.message))
+})
+
+// 🧱 "역매공파" 후보 스캐너 (장기 역배열 하락 → 매집 → 공구리 → 112일선 추세 전환)
+app.get('/api/yeokmaegongpa', async (req, res) => {
+  try {
+    const cache = getYeokmaegongpaCache()
+    if (!cache) {
+      res.json({ success: true, scanning: true, matched: [] })
+      runYeokmaegongpaScan().catch(e => console.error('[YEOKMAEGONGPA] 즉시 스캔 실패:', e.message))
+      return
+    }
+    res.json({ success: true, scanning: false, ...cache })
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message })
+  }
+})
+
+app.post('/api/trigger-yeokmaegongpa-scan', async (req, res) => {
+  res.json({ success: true, message: '"역매공파" 스캔이 백그라운드에서 시작되었습니다.' })
+  runYeokmaegongpaScan().catch(e => console.error('[YEOKMAEGONGPA] 수동 스캔 오류:', e.message))
 })
 
 // 🔒 "나만 보기" 비공개 기능용 접근 제어 — 헤더의 키가 안 맞으면 기능이 존재한다는 사실조차
@@ -1672,6 +1693,9 @@ app.listen(PORT, () => {
 
   // 🚀 "오늘의 주도주" 스크리너 (매일 09:50 자동 실행, 캐시가 20시간 이상 오래됐을 때만 서버 기동 시 즉시 1회)
   setTimeout(() => { startDailyLeadingStockScan() }, 275000);
+
+  // 🧱 "역매공파" 스캐너 (매일 장 마감 후 16:00, 캐시가 20시간 이상 오래됐을 때만 서버 기동 시 즉시 1회)
+  setTimeout(() => { startDailyYeokmaegongpaScan() }, 290000);
 
   // 🔄 매일 자정/장마감 후 자동 데이터 동기화 스케줄러 (Daily Auto-Sync Engine)
   setInterval(async () => {

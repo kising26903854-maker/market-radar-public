@@ -55,7 +55,7 @@ export async function isExcludedStock(code) {
 }
 
 // ─── 전 종목(ETF/ETN, 실시간 거래정지 제외) 유니버스 수집 ───
-async function fetchFullNormalUniverse(sosok) {
+export async function fetchFullNormalUniverse(sosok) {
   const market = sosok === 0 ? '코스피' : '코스닥';
   const marketParam = sosok === 0 ? 'KOSPI' : 'KOSDAQ';
   // 코스피 약 950종목(10페이지), 코스닥 약 1,820종목(19페이지) — 여유 있게 넉넉히 순회

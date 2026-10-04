@@ -1,4 +1,34 @@
 {
+  "120110": {
+    "stockCode": "120110",
+    "corpName": "코오롱인더",
+    "date": "2026-10-02",
+    "ratio": 12.92,
+    "ratioChange": 2,
+    "reason": "단순추가취득/처분",
+    "rceptNo": "20261002000509",
+    "seenAt": 1791091677904
+  },
+  "128940": {
+    "stockCode": "128940",
+    "corpName": "한미약품",
+    "date": "2026-10-02",
+    "ratio": 9.61,
+    "ratioChange": -1,
+    "reason": "단순추가취득/처분",
+    "rceptNo": "20261002000501",
+    "seenAt": 1791091677904
+  },
+  "282330": {
+    "stockCode": "282330",
+    "corpName": "BGF리테일",
+    "date": "2026-10-02",
+    "ratio": 9.31,
+    "ratioChange": 1,
+    "reason": "단순추가취득/처분",
+    "rceptNo": "20261002000496",
+    "seenAt": 1791091677904
+  },
   "298050": {
     "stockCode": "298050",
     "corpName": "HS효성첨단소재",
@@ -28,5 +58,75 @@
     "reason": "단순투자목적에서 일반투자목적으로 보유목적 변경",
     "rceptNo": "20260826000408",
     "seenAt": 1789592944969
+  },
+  "047810": {
+    "stockCode": "047810",
+    "corpName": "한국항공우주",
+    "date": "2026-10-02",
+    "ratio": 7.08,
+    "ratioChange": -1.04,
+    "reason": "단순추가취득/처분",
+    "rceptNo": "20261002000519",
+    "seenAt": 1791091677904
+  },
+  "004020": {
+    "stockCode": "004020",
+    "corpName": "현대제철",
+    "date": "2026-10-02",
+    "ratio": 9.84,
+    "ratioChange": 1,
+    "reason": "단순추가취득/처분",
+    "rceptNo": "20261002000518",
+    "seenAt": 1791091677904
+  },
+  "023530": {
+    "stockCode": "023530",
+    "corpName": "롯데쇼핑",
+    "date": "2026-10-02",
+    "ratio": 11.09,
+    "ratioChange": -1.28,
+    "reason": "단순추가취득/처분",
+    "rceptNo": "20261002000514",
+    "seenAt": 1791091677904
+  },
+  "004170": {
+    "stockCode": "004170",
+    "corpName": "신세계",
+    "date": "2026-10-02",
+    "ratio": 11.52,
+    "ratioChange": -1.18,
+    "reason": "단순추가취득/처분",
+    "rceptNo": "20261002000511",
+    "seenAt": 1791091677904
+  },
+  "034230": {
+    "stockCode": "034230",
+    "corpName": "파라다이스",
+    "date": "2026-10-02",
+    "ratio": 8.39,
+    "ratioChange": -2.98,
+    "reason": "단순추가취득/처분",
+    "rceptNo": "20261002000492",
+    "seenAt": 1791091677904
+  },
+  "001450": {
+    "stockCode": "001450",
+    "corpName": "현대해상",
+    "date": "2026-10-02",
+    "ratio": 11.71,
+    "ratioChange": 2.29,
+    "reason": "단순추가취득/처분",
+    "rceptNo": "20261002000491",
+    "seenAt": 1791091677904
+  },
+  "036570": {
+    "stockCode": "036570",
+    "corpName": "NC",
+    "date": "2026-10-02",
+    "ratio": 10.24,
+    "ratioChange": -0.01,
+    "reason": "단순추가취득/처분",
+    "rceptNo": "20261002000489",
+    "seenAt": 1791091677904
   }
 }
