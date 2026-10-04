@@ -539,10 +539,12 @@ export default function App() {
             <MenuIcon type="alert-triangle" color={tab === 'ma-reversal-dropout' ? '#fff' : '#fbbf24'} />
             "256 기법" 탈락 종목 추적
           </button>
-          <button className={`tab-btn ${tab === 'yeokmaegongpa' ? 'active' : ''}`} onClick={() => { setTab('yeokmaegongpa'); setIsMenuOpen(false); }}>
-            <MenuIcon type="accumulation" color={tab === 'yeokmaegongpa' ? '#fff' : '#a78bfa'} />
-            역매공파
-          </button>
+          {isOwner && (
+            <button className={`tab-btn ${tab === 'yeokmaegongpa' ? 'active' : ''}`} onClick={() => { setTab('yeokmaegongpa'); setIsMenuOpen(false); }}>
+              <MenuIcon type="accumulation" color={tab === 'yeokmaegongpa' ? '#fff' : '#a78bfa'} />
+              역매공파
+            </button>
+          )}
           {isOwner && (
             <button className={`tab-btn ${tab === 'leading-stock' ? 'active' : ''}`} onClick={() => { setTab('leading-stock'); setIsMenuOpen(false); }}>
               <MenuIcon type="radar" color={tab === 'leading-stock' ? '#fff' : '#f87171'} />
@@ -631,7 +633,7 @@ export default function App() {
         {tab === 'ma-reversal' && <MaReversalScannerTab onSelectStock={handleOpenStockChart} />}
         {tab === 'growth-ma-combo' && <GrowthMaComboScannerTab onSelectStock={handleOpenStockChart} />}
         {tab === 'ma-reversal-dropout' && <MaReversalDropoutTab onSelectStock={handleOpenStockChart} />}
-        {tab === 'yeokmaegongpa' && <YeokmaegongpaTab onSelectStock={handleOpenStockChart} />}
+        {tab === 'yeokmaegongpa' && isOwner && <YeokmaegongpaTab onSelectStock={handleOpenStockChart} />}
         {tab === 'leading-stock' && isOwner && <LeadingStockScreenerTab onSelectStock={handleOpenStockChart} />}
         {tab === 'backtest-report' && <BacktestReportTab />}
         {tab === 'ai-prediction' && <AiPredictionTab onSelectStock={handleOpenStockChart} />}

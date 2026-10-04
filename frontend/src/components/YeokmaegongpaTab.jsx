@@ -38,10 +38,13 @@ export default function YeokmaegongpaTab({ onSelectStock }) {
     setTimeout(() => setToastMessage(null), 4000);
   };
 
+  const ownerKey = (() => { try { return localStorage.getItem('ownerKey') || ''; } catch { return ''; } })();
+  const ownerHeaders = { 'x-owner-key': ownerKey };
+
   const fetchStocks = async (isSilent = false) => {
     try {
       if (!isSilent) setLoading(true);
-      const res = await fetch('/api/yeokmaegongpa');
+      const res = await fetch('/api/yeokmaegongpa', { headers: ownerHeaders });
       const json = await res.json();
       if (json.success) setData(json);
     } catch (err) {
@@ -61,7 +64,7 @@ export default function YeokmaegongpaTab({ onSelectStock }) {
   const handleRefresh = async () => {
     setRefreshing(true);
     try {
-      await fetch('/api/trigger-yeokmaegongpa-scan', { method: 'POST' });
+      await fetch('/api/trigger-yeokmaegongpa-scan', { method: 'POST', headers: ownerHeaders });
       showToast('🔄 전 종목 재스캔이 시작되었습니다 (몇 분 걸릴 수 있어요). 잠시 후 새로고침 해주세요.');
     } catch (e) {
       showToast('재스캔 요청 중 오류가 발생했습니다.');

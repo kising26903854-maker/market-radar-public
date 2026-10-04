@@ -559,8 +559,8 @@ app.post('/api/trigger-ma-reversal-scan', async (req, res) => {
   runMaReversalScan().catch(e => console.error('[MA REVERSAL] 수동 스캔 오류:', e.message))
 })
 
-// 🧱 "역매공파" 후보 스캐너 (장기 역배열 하락 → 매집 → 공구리 → 112일선 추세 전환)
-app.get('/api/yeokmaegongpa', async (req, res) => {
+// 🧱 "역매공파" 후보 스캐너 (장기 역배열 하락 → 매집 → 공구리 → 112일선 추세 전환) — 비공개(나만 보기)
+app.get('/api/yeokmaegongpa', requireOwnerKey, async (req, res) => {
   try {
     const cache = getYeokmaegongpaCache()
     if (!cache) {
@@ -574,7 +574,7 @@ app.get('/api/yeokmaegongpa', async (req, res) => {
   }
 })
 
-app.post('/api/trigger-yeokmaegongpa-scan', async (req, res) => {
+app.post('/api/trigger-yeokmaegongpa-scan', requireOwnerKey, async (req, res) => {
   res.json({ success: true, message: '"역매공파" 스캔이 백그라운드에서 시작되었습니다.' })
   runYeokmaegongpaScan().catch(e => console.error('[YEOKMAEGONGPA] 수동 스캔 오류:', e.message))
 })
