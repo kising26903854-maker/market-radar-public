@@ -18,6 +18,7 @@ import { getGlobalMacroNews } from './macro_news.js'
 import { getMarketCalendarEvents, getMarketCalendarRange, getAllCalendarEvents, invalidateCalendarCache } from './market_calendar.js'
 import { startCalendarOutlookSync, syncCalendarOutlook } from './calendar_outlook.js'
 import { startAutoEventSync, syncAutoEvents } from './calendar_auto.js'
+import { getLivePrice } from './live_price.js'
 import { getNpsHoldings, getNpsQuarterData, getNpsComparison, refreshNpsData, getNpsDetailedDisclosures } from './nps_tracker.js'
 import { getNpsHoldingHistory, runNpsHoldingBatchScan, startDailyNpsHoldingBatchScan, getNpsRecentUpdates, getNpsTodayNewDisclosures } from './nps_holding_history.js'
 import { getTradeStatsCache, runTradeStatsSync, startDailyTradeStatsSync, isTradeStatsStale } from './trade_stats.js'
@@ -1275,6 +1276,18 @@ app.get('/api/chart/:code', async (req, res) => {
     res.json({ success: true, code, type, chart })
   } catch (err) {
     res.status(500).json({ success: false, error: err.message })
+  }
+})
+
+// ⚡ 종목 실시간 현재가 (차트 전체화면 현재가 수평선용 — 정규장/NXT 프리·애프터 자동 선택, 2초 캐시)
+app.get('/api/live-price/:code', async (req, res) => {
+  try {
+    const code = String(req.params.code || '').replace(/[^0-9A-Za-z]/g, '')
+    if (!code) return res.status(400).json({ success: false, error: 'invalid code' })
+    const data = await getLivePrice(code)
+    res.json({ success: true, ...data })
+  } catch (err) {
+    res.status(502).json({ success: false, error: err.message })
   }
 })
 

@@ -78,6 +78,8 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
   const [showOptimalLine, setShowOptimalLine] = useState(true)
   // 전체화면 차트 이평선 체크박스 (기본 전부 꺼짐)
   const [maChecks, setMaChecks] = useState({})
+  // 실시간 현재가 (3초 폴링) — 현재가 수평선/라벨/상단 현재가가 이 값을 따라 움직인다. source: 'KRX' | 'NXT'
+  const [livePrice, setLivePrice] = useState(null)
   const chartWheelRef = useRef(null)
   const totalCandlesRef = useRef(0)
   // 🔍 차트 확대/축소 & 좌우 이동 상태 — count: 화면에 보여줄 캔들 개수(null=기본값), offset: 최신 캔들 기준 뒤로 이동한 캔들 수
@@ -139,6 +141,22 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
     return () => el.removeEventListener('wheel', handleWheel)
   }, [loading])
 
+  // ⚡ 실시간 현재가 폴링 (캔들/분석 데이터와 별개로 3초마다)
+  useEffect(() => {
+    if (!stock?.code) return
+    let alive = true
+    setLivePrice(null)
+    const tick = async () => {
+      try {
+        const r = await fetch(`/api/live-price/${stock.code}`).then(res => res.json())
+        if (alive && r?.success && r.price > 0) setLivePrice(r)
+      } catch { /* 일시 오류는 다음 주기에 재시도 */ }
+    }
+    tick()
+    const timer = setInterval(tick, 3000)
+    return () => { alive = false; clearInterval(timer) }
+  }, [stock?.code])
+
   useEffect(() => {
     if (!stock?.code) return
     let isMounted = true
@@ -191,7 +209,7 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
   const cardPrice = (typeof stock.currentPrice === 'number' && stock.currentPrice > 0) ? stock.currentPrice : (typeof stock.currentPrice === 'string' ? parseFloat(stock.currentPrice.replace(/[^0-9.-]/g, '')) : null)
   const analysisPrice = (typeof analysis?.currentPrice === 'number' && analysis.currentPrice > 0) ? analysis.currentPrice : null
   const lastCandleClose = (chartData.length > 0 && chartData[chartData.length - 1].close > 0) ? chartData[chartData.length - 1].close : null
-  const displayCurrentPrice = cardPrice || analysisPrice || stock.current_price || stock.buy_price || lastCandleClose || 0
+  const displayCurrentPrice = livePrice?.price || cardPrice || analysisPrice || stock.current_price || stock.buy_price || lastCandleClose || 0
 
   // ─── SVG 캔들스틱 차트 계산 ───
   const baseWidth = isChartFullscreen ? 1400 : 800
@@ -242,6 +260,8 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
     if (c.low && !isNaN(c.low) && c.low > 0) allPrices.push(c.low)
   })
 
+  // 실시간 현재가가 캔들 범위를 벗어나도 현재가 선이 차트 밖으로 사라지지 않게 가격 범위에 포함
+  if (showCurrentPrice && displayCurrentPrice > 0) allPrices.push(Number(displayCurrentPrice))
   if (smartMoney?.estimatedCost && smartMoney.estimatedCost > 0) allPrices.push(Number(smartMoney.estimatedCost))
   if (optimalPrice && optimalPrice > 0) allPrices.push(Number(optimalPrice))
   if (pocPriceLine && pocPriceLine > 0) allPrices.push(Number(pocPriceLine))
@@ -707,6 +727,11 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
               {showCurrentPrice && (
                 <div>
                   <span style={{ color: 'var(--t3)', marginRight: 5, fontWeight: 700 }}>현재가</span>
+                  {livePrice && (
+                    <span title={`3초마다 갱신 · ${livePrice.source === 'NXT' ? '넥스트레이드 프리/애프터마켓 가격' : '정규장 가격'}`} style={{ marginRight: 6, fontSize: '.66rem', fontWeight: 800, color: livePrice.source === 'NXT' ? '#fbbf24' : '#34d399', border: `1px solid ${livePrice.source === 'NXT' ? '#fbbf24' : '#34d399'}`, padding: '0 5px' }}>
+                      ● LIVE{livePrice.source === 'NXT' ? ' · NXT' : ''}
+                    </span>
+                  )}
                   <strong style={{ color: (currentChangePct === null ? isUp : currentChangePct >= 0) ? '#ef4444' : '#3b82f6', fontFamily: 'Space Mono', fontSize: '1.1rem', fontWeight: 800 }}>{(displayCurrentPrice || 0).toLocaleString()}원</strong>
                   {currentChangePct !== null && (
                     <strong style={{ color: currentChangePct >= 0 ? '#ef4444' : '#3b82f6', fontFamily: 'Space Mono', fontSize: '.85rem', fontWeight: 800, marginLeft: 6 }}>
