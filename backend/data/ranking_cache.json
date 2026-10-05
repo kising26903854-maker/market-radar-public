@@ -219,19 +219,11 @@
         "changePct": 1.01,
         "marketCap": 35117700000000,
         "marketCapEok": 351177,
-        "status": "NEW",
+        "status": "SAME",
         "change": 0
       }
     ],
-    "out": [
-      {
-        "code": "066570",
-        "name": "LG전자",
-        "rank": 20,
-        "currentRank": 21,
-        "marketCap": 35101600000000
-      }
-    ]
+    "out": []
   },
   "kosdaq": {
     "current": [
@@ -459,6 +451,6 @@
     "out": []
   },
   "day": "오늘",
-  "date": "2026-10-04T06:38:03.780Z",
-  "prevDay": "2026-10-02"
+  "date": "2026-10-05T03:44:24.861Z",
+  "prevDay": "2026-10-04"
 }

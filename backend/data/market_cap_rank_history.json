@@ -11167,6 +11167,563 @@
         "change": 0
       }
     ],
-    "updatedAt": "2026-10-04T06:38:03.780Z"
+    "updatedAt": "2026-10-04T06:53:03.811Z"
+  },
+  "2026-10-05": {
+    "kospi": [
+      {
+        "rank": 1,
+        "code": "005930",
+        "name": "삼성전자",
+        "price": 276000,
+        "changePct": 0,
+        "marketCap": 1613572900000000,
+        "marketCapEok": 16135729,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 2,
+        "code": "000660",
+        "name": "SK하이닉스",
+        "price": 1842000,
+        "changePct": 0.49,
+        "marketCap": 1345566900000000,
+        "marketCapEok": 13455669,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 3,
+        "code": "005935",
+        "name": "삼성전자우",
+        "price": 201500,
+        "changePct": -1.47,
+        "marketCap": 161677800000000,
+        "marketCapEok": 1616778,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 4,
+        "code": "402340",
+        "name": "SK스퀘어",
+        "price": 1156000,
+        "changePct": 0.09,
+        "marketCap": 152504100000000,
+        "marketCapEok": 1525041,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 5,
+        "code": "009150",
+        "name": "삼성전기",
+        "price": 1577000,
+        "changePct": 1.02,
+        "marketCap": 117792000000000,
+        "marketCapEok": 1177920,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 6,
+        "code": "373220",
+        "name": "LG에너지솔루션",
+        "price": 369000,
+        "changePct": 2.36,
+        "marketCap": 86346000000000,
+        "marketCapEok": 863460,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 7,
+        "code": "005380",
+        "name": "현대차",
+        "price": 347000,
+        "changePct": -0.57,
+        "marketCap": 70602900000000,
+        "marketCapEok": 706029,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 8,
+        "code": "207940",
+        "name": "삼성바이오로직스",
+        "price": 1366000,
+        "changePct": -3.67,
+        "marketCap": 63233400000000,
+        "marketCapEok": 632334,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 9,
+        "code": "105560",
+        "name": "KB금융",
+        "price": 168400,
+        "changePct": 1.45,
+        "marketCap": 59729400000000,
+        "marketCapEok": 597294,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 10,
+        "code": "032830",
+        "name": "삼성생명",
+        "price": 288000,
+        "changePct": 1.41,
+        "marketCap": 57600000000000,
+        "marketCapEok": 576000,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 11,
+        "code": "028260",
+        "name": "삼성물산",
+        "price": 347000,
+        "changePct": 0,
+        "marketCap": 56272200000000,
+        "marketCapEok": 562722,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 12,
+        "code": "012450",
+        "name": "한화에어로스페이스",
+        "price": 1069000,
+        "changePct": 3.38,
+        "marketCap": 55121300000000,
+        "marketCapEok": 551213,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 13,
+        "code": "034020",
+        "name": "두산에너빌리티",
+        "price": 81400,
+        "changePct": -0.85,
+        "marketCap": 52141700000000,
+        "marketCapEok": 521417,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 14,
+        "code": "055550",
+        "name": "신한지주",
+        "price": 105900,
+        "changePct": 2.02,
+        "marketCap": 49714800000000,
+        "marketCapEok": 497148,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 15,
+        "code": "329180",
+        "name": "HD현대중공업",
+        "price": 426000,
+        "changePct": -1.27,
+        "marketCap": 44713500000000,
+        "marketCapEok": 447135,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 16,
+        "code": "000270",
+        "name": "기아",
+        "price": 113200,
+        "changePct": -0.09,
+        "marketCap": 44194800000000,
+        "marketCapEok": 441948,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 17,
+        "code": "006400",
+        "name": "삼성SDI",
+        "price": 529000,
+        "changePct": 2.32,
+        "marketCap": 42629700000000,
+        "marketCapEok": 426297,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 18,
+        "code": "068270",
+        "name": "셀트리온",
+        "price": 182600,
+        "changePct": -0.54,
+        "marketCap": 42475900000000,
+        "marketCapEok": 424759,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 19,
+        "code": "034730",
+        "name": "SK",
+        "price": 578000,
+        "changePct": -1.53,
+        "marketCap": 41906600000000,
+        "marketCapEok": 419066,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 20,
+        "code": "086790",
+        "name": "하나금융지주",
+        "price": 129600,
+        "changePct": 1.01,
+        "marketCap": 35117700000000,
+        "marketCapEok": 351177,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 21,
+        "code": "066570",
+        "name": "LG전자",
+        "price": 215500,
+        "changePct": 1.89,
+        "marketCap": 35101600000000,
+        "marketCapEok": 351016,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 22,
+        "code": "012330",
+        "name": "현대모비스",
+        "price": 385500,
+        "changePct": 0.92,
+        "marketCap": 34625800000000,
+        "marketCapEok": 346258,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 23,
+        "code": "010120",
+        "name": "LS ELECTRIC",
+        "price": 209000,
+        "changePct": 1.46,
+        "marketCap": 31350000000000,
+        "marketCapEok": 313500,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 24,
+        "code": "035420",
+        "name": "NAVER",
+        "price": 192200,
+        "changePct": 0.52,
+        "marketCap": 29232500000000,
+        "marketCapEok": 292325,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 25,
+        "code": "000810",
+        "name": "삼성화재",
+        "price": 629000,
+        "changePct": 0.48,
+        "marketCap": 28083300000000,
+        "marketCapEok": 280833,
+        "status": "SAME",
+        "change": 0
+      }
+    ],
+    "kosdaq": [
+      {
+        "rank": 1,
+        "code": "196170",
+        "name": "알테오젠",
+        "price": 259500,
+        "changePct": -2.08,
+        "marketCap": 18075500000000,
+        "marketCapEok": 180755,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 2,
+        "code": "086520",
+        "name": "에코프로",
+        "price": 89100,
+        "changePct": 4.7,
+        "marketCap": 12097700000000,
+        "marketCapEok": 120977,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 3,
+        "code": "247540",
+        "name": "에코프로비엠",
+        "price": 115600,
+        "changePct": 0.78,
+        "marketCap": 11309200000000,
+        "marketCapEok": 113092,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 4,
+        "code": "036930",
+        "name": "주성엔지니어링",
+        "price": 239500,
+        "changePct": -0.62,
+        "marketCap": 11132200000000,
+        "marketCapEok": 111322,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 5,
+        "code": "277810",
+        "name": "레인보우로보틱스",
+        "price": 448500,
+        "changePct": 2.16,
+        "marketCap": 8700800000000,
+        "marketCapEok": 87008,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 6,
+        "code": "240810",
+        "name": "원익IPS",
+        "price": 139400,
+        "changePct": -2.86,
+        "marketCap": 6842300000000,
+        "marketCapEok": 68423,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 7,
+        "code": "039030",
+        "name": "이오테크닉스",
+        "price": 537000,
+        "changePct": -4.79,
+        "marketCap": 6615600000000,
+        "marketCapEok": 66156,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 8,
+        "code": "222800",
+        "name": "심텍",
+        "price": 170200,
+        "changePct": 6.57,
+        "marketCap": 6550100000000,
+        "marketCapEok": 65501,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 9,
+        "code": "058470",
+        "name": "리노공업",
+        "price": 85100,
+        "changePct": 4.55,
+        "marketCap": 6485600000000,
+        "marketCapEok": 64856,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 10,
+        "code": "403870",
+        "name": "HPSP",
+        "price": 66200,
+        "changePct": -4.06,
+        "marketCap": 5448300000000,
+        "marketCapEok": 54483,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 11,
+        "code": "028300",
+        "name": "HLB",
+        "price": 40650,
+        "changePct": 0.25,
+        "marketCap": 5414500000000,
+        "marketCapEok": 54145,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 12,
+        "code": "000250",
+        "name": "삼천당제약",
+        "price": 210000,
+        "changePct": 5.32,
+        "marketCap": 4926100000000,
+        "marketCapEok": 49261,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 13,
+        "code": "108490",
+        "name": "로보티즈",
+        "price": 312000,
+        "changePct": 5.23,
+        "marketCap": 4576100000000,
+        "marketCapEok": 45761,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 14,
+        "code": "095340",
+        "name": "ISC",
+        "price": 210000,
+        "changePct": -6.46,
+        "marketCap": 4451400000000,
+        "marketCapEok": 44514,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 15,
+        "code": "319660",
+        "name": "피에스케이",
+        "price": 152000,
+        "changePct": -6.11,
+        "marketCap": 4402900000000,
+        "marketCapEok": 44029,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 16,
+        "code": "440110",
+        "name": "파두",
+        "price": 86900,
+        "changePct": -3.12,
+        "marketCap": 4354600000000,
+        "marketCapEok": 43546,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 17,
+        "code": "031980",
+        "name": "피에스케이홀딩스",
+        "price": 193600,
+        "changePct": -0.21,
+        "marketCap": 4174500000000,
+        "marketCapEok": 41745,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 18,
+        "code": "084370",
+        "name": "유진테크",
+        "price": 179400,
+        "changePct": -3.5,
+        "marketCap": 4111100000000,
+        "marketCapEok": 41111,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 19,
+        "code": "067310",
+        "name": "하나마이크론",
+        "price": 52200,
+        "changePct": 1.95,
+        "marketCap": 3470800000000,
+        "marketCapEok": 34708,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 20,
+        "code": "095610",
+        "name": "테스",
+        "price": 178400,
+        "changePct": -2.99,
+        "marketCap": 3453800000000,
+        "marketCapEok": 34538,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 21,
+        "code": "064760",
+        "name": "티씨케이",
+        "price": 298000,
+        "changePct": -5.1,
+        "marketCap": 3331500000000,
+        "marketCapEok": 33315,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 22,
+        "code": "357780",
+        "name": "솔브레인",
+        "price": 426500,
+        "changePct": -0.81,
+        "marketCap": 3317600000000,
+        "marketCapEok": 33176,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 23,
+        "code": "131290",
+        "name": "티에스이",
+        "price": 292500,
+        "changePct": -4.1,
+        "marketCap": 3235500000000,
+        "marketCapEok": 32355,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 24,
+        "code": "080220",
+        "name": "제주반도체",
+        "price": 92800,
+        "changePct": 5.22,
+        "marketCap": 3196300000000,
+        "marketCapEok": 31963,
+        "status": "SAME",
+        "change": 0
+      },
+      {
+        "rank": 25,
+        "code": "214450",
+        "name": "파마리서치",
+        "price": 307000,
+        "changePct": -2.38,
+        "marketCap": 3189600000000,
+        "marketCapEok": 31896,
+        "status": "SAME",
+        "change": 0
+      }
+    ],
+    "updatedAt": "2026-10-05T03:44:24.861Z"
   }
 }

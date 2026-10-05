@@ -1,8 +1,8 @@
 {
-  "lastSyncAt": "2026-10-04T05:23:38.227Z",
-  "elapsedSec": 92.9,
+  "lastSyncAt": "2026-10-04T23:40:34.547Z",
+  "elapsedSec": 39.7,
   "totalScanned": 4306,
-  "totalCandidates": 848,
+  "totalCandidates": 849,
   "topCount": 200,
   "kospiCount": 2482,
   "kosdaqCount": 1824,
@@ -6978,6 +6978,42 @@
       "investmentRank": 194
     },
     {
+      "code": "003010",
+      "name": "혜인",
+      "price": 9500,
+      "changePct": -5.19,
+      "marketCap": 1208,
+      "tradingValue": 3304000000,
+      "market": "코스피",
+      "per": 4.74,
+      "roe": 11.49,
+      "pbr": 0.41,
+      "eps": 1120,
+      "bps": 13026,
+      "divAmt": 200,
+      "divYield": 2.11,
+      "sector": "🏢 일반제조·가치주",
+      "reason": "퀀트 스크리닝 저평가 우량주 발굴 대상",
+      "investmentScore": 63,
+      "investmentGrade": {
+        "grade": "B",
+        "desc": "분할 매수",
+        "color": "#60a5fa",
+        "bg": "rgba(96,165,250,0.15)"
+      },
+      "isValueTrap": false,
+      "trapReason": null,
+      "trapLevel": null,
+      "perStr": "4.74배",
+      "pbrStr": "0.41배",
+      "roeStr": "11.49%",
+      "divYieldStr": "2.11%",
+      "upsidePct": null,
+      "quantScore": 63,
+      "dataSource": "📡 네이버 금융 실시간 전종목 스캔",
+      "investmentRank": 195
+    },
+    {
       "code": "37550K",
       "name": "DL이앤씨우",
       "price": 26800,
@@ -7011,7 +7047,7 @@
       "upsidePct": null,
       "quantScore": 63,
       "dataSource": "📡 네이버 금융 실시간 전종목 스캔",
-      "investmentRank": 195
+      "investmentRank": 196
     },
     {
       "code": "052330",
@@ -7047,7 +7083,7 @@
       "upsidePct": null,
       "quantScore": 63,
       "dataSource": "📡 네이버 금융 실시간 전종목 스캔",
-      "investmentRank": 196
+      "investmentRank": 197
     },
     {
       "code": "038390",
@@ -7083,7 +7119,7 @@
       "upsidePct": null,
       "quantScore": 63,
       "dataSource": "📡 네이버 금융 실시간 전종목 스캔",
-      "investmentRank": 197
+      "investmentRank": 198
     },
     {
       "code": "079960",
@@ -7119,7 +7155,7 @@
       "upsidePct": null,
       "quantScore": 63,
       "dataSource": "📡 네이버 금융 실시간 전종목 스캔",
-      "investmentRank": 198
+      "investmentRank": 199
     },
     {
       "code": "013310",
@@ -7152,42 +7188,6 @@
       "pbrStr": "0.32배",
       "roeStr": "6.83%",
       "divYieldStr": "4.32%",
-      "upsidePct": null,
-      "quantScore": 63,
-      "dataSource": "📡 네이버 금융 실시간 전종목 스캔",
-      "investmentRank": 199
-    },
-    {
-      "code": "080010",
-      "name": "이상네트웍스",
-      "price": 7390,
-      "changePct": -0.14,
-      "marketCap": 727,
-      "tradingValue": 9000000,
-      "market": "코스닥",
-      "per": 4.72,
-      "roe": 10.8,
-      "pbr": 0.46,
-      "eps": 1484,
-      "bps": 15272,
-      "divAmt": 200,
-      "divYield": 2.71,
-      "sector": "🏢 일반제조·가치주",
-      "reason": "퀀트 스크리닝 저평가 우량주 발굴 대상",
-      "investmentScore": 63,
-      "investmentGrade": {
-        "grade": "B",
-        "desc": "분할 매수",
-        "color": "#60a5fa",
-        "bg": "rgba(96,165,250,0.15)"
-      },
-      "isValueTrap": false,
-      "trapReason": null,
-      "trapLevel": null,
-      "perStr": "4.72배",
-      "pbrStr": "0.46배",
-      "roeStr": "10.8%",
-      "divYieldStr": "2.71%",
       "upsidePct": null,
       "quantScore": 63,
       "dataSource": "📡 네이버 금융 실시간 전종목 스캔",

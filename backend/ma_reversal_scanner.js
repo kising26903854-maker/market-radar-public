@@ -13,6 +13,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { fetchDailySeries } from './double_bottom_scanner.js';
 import { updateDropoutTracking } from './ma_dropout_tracker.js';
+import { isKrxMarketHours } from './krx_calendar.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CACHE_PATH = path.join(__dirname, 'data', 'ma_reversal_cache.json');
@@ -307,24 +308,14 @@ export function isMaReversalScanStale() {
 
 const MARKET_SCAN_INTERVAL_MS = 15 * 60 * 1000; // 장중 재스캔 주기 — 전종목 스캔 1회에 3~4분 걸려서 너무 짧게 잡으면 네이버 API 부하/차단 위험
 
-// KRX 정규장 시간(평일 09:00~15:30, KST) 여부. ⚠️ 공휴일 캘린더는 아직 연동 전이라
-// 추석·설 등 휴장일도 평일이면 그냥 스캔을 시도한다(빈 데이터로 실패해도 캐시엔 영향 없음).
-function isKrxMarketHours() {
-  const kst = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' }));
-  const day = kst.getDay(); // 0=일 ... 6=토
-  if (day === 0 || day === 6) return false;
-  const minutes = kst.getHours() * 60 + kst.getMinutes();
-  return minutes >= 9 * 60 && minutes <= 15 * 60 + 30;
-}
-
-// 서버 기동 시 최초 1회(캐시 없거나 오래됐을 때만) + 장중(평일 09:00~15:30) 15분마다 자동 재스캔
+// 서버 기동 시 최초 1회(캐시 없거나 오래됐을 때만) + 장중(거래일 09:00~15:30, 휴장일 제외) 15분마다 자동 재스캔
 // — 신규 포착/탈락(상승·하락·기간만료)을 장중에 실시간에 가깝게 감지하기 위함.
 export function startDailyMaReversalScan() {
   if (isMaReversalScanStale()) {
     runMaReversalScan().catch(e => console.error('[MA REVERSAL] 초기 스캔 실패:', e.message));
   }
 
-  console.log(`[MA REVERSAL] 장중(평일 09:00~15:30) ${MARKET_SCAN_INTERVAL_MS / 60000}분마다 자동 재스캔 대기 시작`);
+  console.log(`[MA REVERSAL] 장중(거래일 09:00~15:30, 휴장일 제외) ${MARKET_SCAN_INTERVAL_MS / 60000}분마다 자동 재스캔 대기 시작`);
   setInterval(async () => {
     if (!isKrxMarketHours()) return;
     try { await runMaReversalScan(); } catch (e) { console.error('[MA REVERSAL] 장중 자동 스캔 실패:', e.message); }

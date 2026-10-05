@@ -1,9 +1,9 @@
 {
-  "lastSyncAt": "2026-09-28T04:07:01.049Z",
-  "elapsedSec": 48.3,
-  "universeSize": 499,
+  "lastSyncAt": "2026-10-05T00:15:17.364Z",
+  "elapsedSec": 22.5,
+  "universeSize": 500,
   "methodology": {
-    "universe": "코스피 상위 300종목 + 코스닥 상위 199종목 중 시총 1000억 이상",
+    "universe": "코스피 상위 300종목 + 코스닥 상위 200종목 중 시총 1000억 이상",
     "dailyHistory": "약 480거래일(~2년), 3거래일 간격 슬라이딩 검사, 신호 후 20거래일 쿨다운",
     "monthlyHistory": "약 60개월(~5년), 매월 검사, 신호 후 3개월 쿨다운",
     "note": "과거 데이터 기반 검증이며 미래 수익을 보장하지 않습니다. look-ahead bias(미래 데이터 참조)를 방지하기 위해 각 시점까지의 데이터만으로 판정했습니다."
@@ -13,39 +13,39 @@
       "id": "double_bottom",
       "name": "쌍바닥 패턴",
       "timeframe": "일봉",
-      "totalSignals": 5056,
+      "totalSignals": 5049,
       "horizons": {
         "1주": {
-          "signalCount": 5056,
-          "winRate": 52.4,
-          "avgReturnPct": 1.28,
-          "medianReturnPct": 0.47,
-          "bestReturnPct": 172.78,
-          "worstReturnPct": -69.44
+          "signalCount": 5049,
+          "winRate": 52.5,
+          "avgReturnPct": 1.29,
+          "medianReturnPct": 0.41,
+          "bestReturnPct": 66.13,
+          "worstReturnPct": -71.57
         },
         "2주": {
-          "signalCount": 4992,
-          "winRate": 54.1,
-          "avgReturnPct": 2.37,
-          "medianReturnPct": 0.86,
-          "bestReturnPct": 123.3,
-          "worstReturnPct": -73.97
+          "signalCount": 4946,
+          "winRate": 52.5,
+          "avgReturnPct": 2.15,
+          "medianReturnPct": 0.59,
+          "bestReturnPct": 266.6,
+          "worstReturnPct": -82.32
         },
         "3주": {
-          "signalCount": 4898,
-          "winRate": 53,
-          "avgReturnPct": 3.43,
-          "medianReturnPct": 0.87,
-          "bestReturnPct": 214.08,
-          "worstReturnPct": -77.37
+          "signalCount": 4839,
+          "winRate": 54.1,
+          "avgReturnPct": 3.47,
+          "medianReturnPct": 1.07,
+          "bestReturnPct": 177.53,
+          "worstReturnPct": -84.12
         },
         "4주": {
-          "signalCount": 4828,
-          "winRate": 54.5,
-          "avgReturnPct": 4.9,
-          "medianReturnPct": 1.46,
-          "bestReturnPct": 499.71,
-          "worstReturnPct": -87.45
+          "signalCount": 4802,
+          "winRate": 55.1,
+          "avgReturnPct": 5.12,
+          "medianReturnPct": 1.69,
+          "bestReturnPct": 715.79,
+          "worstReturnPct": -78.52
         }
       }
     },
@@ -53,39 +53,39 @@
       "id": "base_breakout",
       "name": "하락→횡보→상승초입",
       "timeframe": "일봉",
-      "totalSignals": 352,
+      "totalSignals": 308,
       "horizons": {
         "1주": {
-          "signalCount": 352,
-          "winRate": 50,
-          "avgReturnPct": 0.32,
-          "medianReturnPct": 0.04,
-          "bestReturnPct": 21.17,
-          "worstReturnPct": -14.22
+          "signalCount": 308,
+          "winRate": 48.4,
+          "avgReturnPct": 0.2,
+          "medianReturnPct": -0.13,
+          "bestReturnPct": 18.17,
+          "worstReturnPct": -13.88
         },
         "2주": {
-          "signalCount": 350,
-          "winRate": 58,
-          "avgReturnPct": 1.21,
-          "medianReturnPct": 1.04,
-          "bestReturnPct": 35.48,
-          "worstReturnPct": -16.24
+          "signalCount": 306,
+          "winRate": 53.6,
+          "avgReturnPct": 0.56,
+          "medianReturnPct": 0.61,
+          "bestReturnPct": 23.5,
+          "worstReturnPct": -17.91
         },
         "3주": {
-          "signalCount": 349,
-          "winRate": 50.7,
-          "avgReturnPct": 1.4,
-          "medianReturnPct": 0.24,
-          "bestReturnPct": 81.26,
-          "worstReturnPct": -22.56
+          "signalCount": 304,
+          "winRate": 54.3,
+          "avgReturnPct": 1.25,
+          "medianReturnPct": 0.95,
+          "bestReturnPct": 52.92,
+          "worstReturnPct": -23.43
         },
         "4주": {
-          "signalCount": 349,
-          "winRate": 61.3,
-          "avgReturnPct": 3.34,
-          "medianReturnPct": 1.86,
-          "bestReturnPct": 100.89,
-          "worstReturnPct": -26.01
+          "signalCount": 303,
+          "winRate": 58.7,
+          "avgReturnPct": 3.27,
+          "medianReturnPct": 2.23,
+          "bestReturnPct": 73.36,
+          "worstReturnPct": -24.51
         }
       }
     },
@@ -93,39 +93,39 @@
       "id": "energy_condensation",
       "name": "에너지 응축 돌파",
       "timeframe": "일봉",
-      "totalSignals": 2117,
+      "totalSignals": 2054,
       "horizons": {
         "1주": {
-          "signalCount": 2117,
-          "winRate": 52.5,
-          "avgReturnPct": 0.68,
-          "medianReturnPct": 0.05,
-          "bestReturnPct": 55.64,
-          "worstReturnPct": -19.22
+          "signalCount": 2054,
+          "winRate": 52.9,
+          "avgReturnPct": 0.63,
+          "medianReturnPct": 0.06,
+          "bestReturnPct": 62.31,
+          "worstReturnPct": -17.87
         },
         "2주": {
-          "signalCount": 2053,
-          "winRate": 56.9,
-          "avgReturnPct": 1.79,
-          "medianReturnPct": 0.3,
-          "bestReturnPct": 77.8,
-          "worstReturnPct": -27.88
+          "signalCount": 2017,
+          "winRate": 55.5,
+          "avgReturnPct": 1.68,
+          "medianReturnPct": 0.16,
+          "bestReturnPct": 85.65,
+          "worstReturnPct": -39.72
         },
         "3주": {
-          "signalCount": 2027,
-          "winRate": 58.2,
-          "avgReturnPct": 3.19,
+          "signalCount": 1949,
+          "winRate": 58.4,
+          "avgReturnPct": 3.29,
           "medianReturnPct": 0.68,
-          "bestReturnPct": 159.07,
-          "worstReturnPct": -32.98
+          "bestReturnPct": 158.26,
+          "worstReturnPct": -31.64
         },
         "4주": {
-          "signalCount": 2010,
-          "winRate": 61.4,
-          "avgReturnPct": 4.89,
-          "medianReturnPct": 1.7,
-          "bestReturnPct": 175.68,
-          "worstReturnPct": -36.06
+          "signalCount": 1936,
+          "winRate": 61.7,
+          "avgReturnPct": 4.97,
+          "medianReturnPct": 1.68,
+          "bestReturnPct": 193.04,
+          "worstReturnPct": -37.23
         }
       }
     },
@@ -133,39 +133,39 @@
       "id": "golden_cross",
       "name": "골든크로스",
       "timeframe": "일봉",
-      "totalSignals": 1511,
+      "totalSignals": 1478,
       "horizons": {
         "1주": {
-          "signalCount": 1511,
-          "winRate": 55.7,
-          "avgReturnPct": 1.85,
-          "medianReturnPct": 0.65,
-          "bestReturnPct": 91.65,
-          "worstReturnPct": -29.58
+          "signalCount": 1478,
+          "winRate": 52.4,
+          "avgReturnPct": 1.64,
+          "medianReturnPct": 0.16,
+          "bestReturnPct": 74.83,
+          "worstReturnPct": -24.36
         },
         "2주": {
-          "signalCount": 1482,
-          "winRate": 58.5,
-          "avgReturnPct": 3.53,
-          "medianReturnPct": 1.67,
-          "bestReturnPct": 76.75,
-          "worstReturnPct": -33.98
+          "signalCount": 1447,
+          "winRate": 56.7,
+          "avgReturnPct": 3.55,
+          "medianReturnPct": 1.04,
+          "bestReturnPct": 83.4,
+          "worstReturnPct": -34.05
         },
         "3주": {
-          "signalCount": 1442,
-          "winRate": 59.2,
-          "avgReturnPct": 5.09,
-          "medianReturnPct": 2.08,
-          "bestReturnPct": 105.69,
-          "worstReturnPct": -43.33
+          "signalCount": 1413,
+          "winRate": 57.9,
+          "avgReturnPct": 4.94,
+          "medianReturnPct": 2.18,
+          "bestReturnPct": 111.56,
+          "worstReturnPct": -42.19
         },
         "4주": {
-          "signalCount": 1391,
-          "winRate": 59.7,
-          "avgReturnPct": 6.43,
-          "medianReturnPct": 2.35,
-          "bestReturnPct": 224.7,
-          "worstReturnPct": -43.96
+          "signalCount": 1396,
+          "winRate": 57.2,
+          "avgReturnPct": 5.79,
+          "medianReturnPct": 1.96,
+          "bestReturnPct": 175.57,
+          "worstReturnPct": -41.37
         }
       }
     },
@@ -173,31 +173,31 @@
       "id": "monthly_ma10",
       "name": "월봉 10이평선 지지",
       "timeframe": "월봉",
-      "totalSignals": 1445,
+      "totalSignals": 1467,
       "horizons": {
         "1개월": {
-          "signalCount": 1445,
-          "winRate": 48.2,
-          "avgReturnPct": 2.02,
-          "medianReturnPct": -0.44,
+          "signalCount": 1467,
+          "winRate": 48.4,
+          "avgReturnPct": 2.03,
+          "medianReturnPct": -0.37,
           "bestReturnPct": 139.31,
           "worstReturnPct": -52.58
         },
         "2개월": {
-          "signalCount": 1432,
-          "winRate": 51,
-          "avgReturnPct": 4.78,
-          "medianReturnPct": 0.79,
+          "signalCount": 1443,
+          "winRate": 50.5,
+          "avgReturnPct": 4.45,
+          "medianReturnPct": 0.35,
           "bestReturnPct": 252.74,
           "worstReturnPct": -68.12
         },
         "3개월": {
-          "signalCount": 1427,
-          "winRate": 57,
-          "avgReturnPct": 12.16,
-          "medianReturnPct": 4.36,
+          "signalCount": 1431,
+          "winRate": 56.5,
+          "avgReturnPct": 11.92,
+          "medianReturnPct": 4.23,
           "bestReturnPct": 428.52,
-          "worstReturnPct": -64.91
+          "worstReturnPct": -63.03
         }
       }
     }
