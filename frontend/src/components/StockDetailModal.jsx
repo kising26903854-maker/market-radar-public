@@ -52,6 +52,17 @@ const MenuIcon = ({ type, size = 16, color = "currentColor", style = {} }) => {
   )
 }
 
+// 전체화면 차트 이평선 — 선마다 색·굵기가 달라서 겹쳐도 구별되고, 긴 이평선일수록 굵게 그린다
+const MA_DEFS = [
+  { period: 5, color: '#ffffff', width: 1.2 },
+  { period: 10, color: '#facc15', width: 1.5 },
+  { period: 20, color: '#f97316', width: 1.8 },
+  { period: 60, color: '#22c55e', width: 2.1 },
+  { period: 120, color: '#06b6d4', width: 2.4 },
+  { period: 224, color: '#a855f7', width: 2.8 },
+  { period: 448, color: '#f472b6', width: 3.2 },
+]
+
 export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
   const [period, setPeriod] = useState('day') // 'minute' | 'day' | 'week' | 'month' | 'year'
   const [chartData, setChartData] = useState([])
@@ -65,6 +76,8 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
   const [showCurrentPrice, setShowCurrentPrice] = useState(true)
   const [showSmartMoneyLine, setShowSmartMoneyLine] = useState(true)
   const [showOptimalLine, setShowOptimalLine] = useState(true)
+  // 전체화면 차트 이평선 체크박스 (기본 전부 꺼짐)
+  const [maChecks, setMaChecks] = useState({})
   const chartWheelRef = useRef(null)
   const totalCandlesRef = useRef(0)
   // 🔍 차트 확대/축소 & 좌우 이동 상태 — count: 화면에 보여줄 캔들 개수(null=기본값), offset: 최신 캔들 기준 뒤로 이동한 캔들 수
@@ -310,6 +323,21 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
     return { period, color, pointsStr: points.join(' '), lastVal }
   }).filter(l => l.pointsStr)
 
+  // 📈 전체화면 이평선 체크박스 — 화면 밖 과거 캔들까지 포함해 종가 누적합으로 계산하고, 좌표만 보이는 구간 기준으로 찍는다
+  const closeCumSum = [0]
+  candles.forEach((c, i) => { closeCumSum.push(closeCumSum[i] + c.close) })
+  const maAt = (g, p) => (g - p + 1 < 0 ? null : (closeCumSum[g + 1] - closeCumSum[g + 1 - p]) / p)
+  const toggleMa = (p) => setMaChecks(prev => ({ ...prev, [p]: !prev[p] }))
+  const userMaLines = MA_DEFS.map(def => {
+    const points = []
+    visibleCandles.forEach((c, localIdx) => {
+      const v = maAt(viewStartIdx + localIdx, def.period)
+      if (v !== null) points.push(`${getX(localIdx)},${getY(v)}`)
+    })
+    return { ...def, pointsStr: points.join(' '), latest: maAt(candles.length - 1, def.period), lastVisible: maAt(viewEndIdx - 1, def.period) }
+  })
+  const activeUserMaLines = isChartFullscreen ? userMaLines.filter(l => maChecks[l.period] && l.pointsStr) : []
+
   // 🏷️ 우측 가격 라벨 겹침 방지: 적정매입가/세력선/POC바닥/이평선 라벨을 한데 모아서
   // 실제 가격이 서로 가까우면 위에서부터 순서대로 최소 간격을 띄워 겹치지 않게 배치한다.
   // (라벨은 띄운 위치에 그리고, 원래 가격 지점까지는 가는 연결선으로 이어준다)
@@ -338,6 +366,13 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
   reversalMaLines.forEach(l => {
     if (l.lastVal != null) {
       rightLabels.push({ key: `ma-${l.period}`, origY: getY(l.lastVal), color: l.color, bg: 'rgba(15,23,42,0.95)', border: l.color, text: `${l.period}일 ${Math.round(l.lastVal).toLocaleString()}` })
+    }
+  })
+
+  activeUserMaLines.forEach(l => {
+    // 가격 범위 밖에 있는 이평선은 라벨을 달지 않는다 (선은 클립되어 안 보임)
+    if (l.lastVisible != null && l.lastVisible >= minPrice && l.lastVisible <= maxPrice) {
+      rightLabels.push({ key: `user-ma-${l.period}`, origY: getY(l.lastVisible), color: l.color, bg: 'rgba(15,23,42,0.95)', border: l.color, text: `${l.period}선 ${Math.round(l.lastVisible).toLocaleString()}` })
     }
   })
 
@@ -648,6 +683,24 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
             </label>
           </div>
 
+          {/* 이평선 체크박스 (전체화면에서만) — 선마다 색이 달라서 체크박스 글자색이 곧 차트의 선 색 */}
+          {isChartFullscreen && (
+            <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', alignItems: 'center', marginBottom: 10, padding: '8px 12px', background: 'rgba(15,23,42,0.95)', border: '1px solid rgba(255,255,255,0.08)' }}>
+              <span style={{ color: 'var(--t3)', fontWeight: 800, fontSize: '.76rem' }}>이평선</span>
+              {userMaLines.map(l => {
+                const on = !!maChecks[l.period]
+                return (
+                  <label key={`ma-chk-${l.period}`} style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', fontSize: '.78rem', fontWeight: 800, color: on ? l.color : 'var(--t3)' }}>
+                    <input type="checkbox" checked={on} onChange={() => toggleMa(l.period)} style={{ cursor: 'pointer', accentColor: l.color }} />
+                    <span style={{ width: 22, height: 0, borderTop: `${Math.max(2, Math.round(l.width))}px solid ${l.color}`, display: 'inline-block', opacity: on ? 1 : 0.4 }} />
+                    {l.period}
+                    {l.latest != null && <span style={{ fontFamily: 'Space Mono', fontSize: '.7rem', fontWeight: 600, opacity: 0.85 }}>{Math.round(l.latest).toLocaleString()}</span>}
+                  </label>
+                )
+              })}
+            </div>
+          )}
+
           {/* 3대 핵심 타점 배너 & Hover HUD */}
           <div style={{ display: 'flex', gap: 16, fontSize: '.85rem', color: 'var(--t2)', marginBottom: 14, flexWrap: 'wrap', background: 'rgba(15,23,42,0.95)', padding: '10px 16px', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
@@ -725,6 +778,9 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                 onMouseLeave={() => setHoverData(null)}
               >
                 <defs>
+                  <clipPath id="modal-ma-clip">
+                    <rect x={padding.left} y={padding.top} width={width - padding.left - padding.right} height={height - padding.top - padding.bottom} />
+                  </clipPath>
                   <filter id="modal-glow-green" x="-20%" y="-20%" width="140%" height="140%">
                     <feGaussianBlur stdDeviation="3" result="blur" />
                     <feComposite in="SourceGraphic" in2="blur" operator="over" />
@@ -853,6 +909,15 @@ export default function StockDetailModal({ stock, onClose, onOpenValueChain }) {
                     {lastMA10Value != null && (
                       <circle cx={getX(lastMA10Idx)} cy={getY(lastMA10Value)} r="3.5" fill="#fbbf24" stroke="#000" strokeWidth="0.8" />
                     )}
+                  </g>
+                )}
+
+                {/* 📈 전체화면 이평선 (체크한 선만) — 가격 범위를 벗어난 구간은 차트 영역 밖으로 나가지 않게 클립 */}
+                {activeUserMaLines.length > 0 && (
+                  <g clipPath="url(#modal-ma-clip)" fill="none" strokeLinejoin="round" strokeLinecap="round">
+                    {activeUserMaLines.map(l => (
+                      <polyline key={`user-ma-${l.period}`} points={l.pointsStr} stroke={l.color} strokeWidth={l.width} opacity="0.95" />
+                    ))}
                   </g>
                 )}
 
