@@ -15,7 +15,9 @@ import { savePosition, deletePosition, getSavedWatchlist, saveWatchlistStock, de
 import { getStockDisclosures } from './dart.js'
 import { getBondYields } from './bond_yield_tracker.js'
 import { getGlobalMacroNews } from './macro_news.js'
-import { getMarketCalendarEvents, getMarketCalendarRange } from './market_calendar.js'
+import { getMarketCalendarEvents, getMarketCalendarRange, getAllCalendarEvents, invalidateCalendarCache } from './market_calendar.js'
+import { startCalendarOutlookSync, syncCalendarOutlook } from './calendar_outlook.js'
+import { startAutoEventSync, syncAutoEvents } from './calendar_auto.js'
 import { getNpsHoldings, getNpsQuarterData, getNpsComparison, refreshNpsData, getNpsDetailedDisclosures } from './nps_tracker.js'
 import { getNpsHoldingHistory, runNpsHoldingBatchScan, startDailyNpsHoldingBatchScan, getNpsRecentUpdates, getNpsTodayNewDisclosures } from './nps_holding_history.js'
 import { getTradeStatsCache, runTradeStatsSync, startDailyTradeStatsSync, isTradeStatsStale } from './trade_stats.js'
@@ -726,6 +728,18 @@ app.get('/api/market-calendar', (req, res) => {
     
     const data = getMarketCalendarEvents(year, month)
     res.json(data)
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message })
+  }
+})
+
+// 📅 캘린더 예상치 즉시 갱신 (화면의 "실적 실시간 동기화" 버튼용 — 갱신이 끝나면 응답)
+app.post('/api/market-calendar/sync', async (req, res) => {
+  try {
+    await syncAutoEvents()                       // 새로 공개된 일정 수집 → 이어서 예상치 갱신
+    invalidateCalendarCache()
+    await syncCalendarOutlook(getAllCalendarEvents)
+    res.json({ success: true })
   } catch (err) {
     res.status(500).json({ success: false, error: err.message })
   }
@@ -1696,6 +1710,12 @@ app.listen(PORT, () => {
 
   // 🧱 "역매공파" 스캐너 (매일 장 마감 후 16:00, 캐시가 20시간 이상 오래됐을 때만 서버 기동 시 즉시 1회)
   setTimeout(() => { startDailyYeokmaegongpaScan() }, 290000);
+
+  // 📅 증시 캘린더 예상치(컨센서스) 자동 갱신 (서버 기동 시 1회 + 3시간마다, 발표 임박 일정만 조회)
+  setTimeout(() => { startCalendarOutlookSync(getAllCalendarEvents) }, 305000);
+
+  // 📅 증시 캘린더 일정 자동 수집 (연준·BLS·BEA·한국은행·Nasdaq 실적 — 하루 1회, 새 연도 일정이 공개되면 자동 반영)
+  setTimeout(() => { startAutoEventSync() }, 280000);
 
   // 🔄 매일 자정/장마감 후 자동 데이터 동기화 스케줄러 (Daily Auto-Sync Engine)
   setInterval(async () => {

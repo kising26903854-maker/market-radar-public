@@ -126,6 +126,40 @@ function EventDetailModal({ event, onClose }) {
 
         {/* 모달 바디 */}
         <div style={{ padding: '24px 28px', maxHeight: '65vh', overflowY: 'auto' }}>
+          {/* 이 일정이 뭔지 / 시장에 왜 중요한지 */}
+          {event.why && (
+            <div style={{ padding: '14px 18px', background: 'rgba(129,140,248,0.08)', border: '1px solid rgba(129,140,248,0.25)', marginBottom: 14 }}>
+              <div style={{ fontSize: '0.8rem', color: '#a5b4fc', fontWeight: 700, marginBottom: 4 }}>이 일정은 무엇이고, 왜 중요한가</div>
+              <div style={{ fontSize: '0.88rem', color: 'var(--t1)', lineHeight: 1.6 }}>{event.why}</div>
+            </div>
+          )}
+
+          {/* 예상치(컨센서스) · 이전 발표치 */}
+          {event.outlook && (
+            <div style={{ padding: '14px 18px', background: 'rgba(251,191,36,0.07)', border: '1px solid rgba(251,191,36,0.3)', marginBottom: 14 }}>
+              <div style={{ fontSize: '0.8rem', color: '#fbbf24', fontWeight: 700, marginBottom: 8 }}>시장 예상치 · 이전 발표치</div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '6px 14px', fontSize: '0.88rem' }}>
+                <span style={{ color: 'var(--t3)', fontWeight: 700 }}>예상치</span>
+                <span style={{ color: '#fff', fontWeight: 700 }}>{event.outlook.forecast || '-'}</span>
+                <span style={{ color: 'var(--t3)', fontWeight: 700 }}>이전</span>
+                <span style={{ color: 'var(--t1)', fontWeight: 600 }}>{event.outlook.previous || '-'}</span>
+              </div>
+              {event.outlook.source && (
+                <div style={{ fontSize: '0.74rem', color: 'var(--t3)', marginTop: 8 }}>
+                  출처: {event.outlook.source}
+                  {event.outlook.updatedAt && ` · ${new Date(event.outlook.updatedAt).toLocaleString('ko-KR')} 기준 (자동 갱신)`}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* 예상치가 아직 없는 예정 일정 안내 */}
+          {!event.outlook && !isConcluded && event.category !== 'HOLIDAY' && event.category !== 'OPTIONS' && (
+            <div style={{ padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px dashed rgba(255,255,255,0.12)', marginBottom: 14, fontSize: '0.78rem', color: 'var(--t3)', lineHeight: 1.5 }}>
+              시장 예상치(컨센서스)는 보통 발표 1주 전쯤 형성되어 아직 집계되지 않았습니다.
+            </div>
+          )}
+
           {/* 어닝 서프라이즈 / 결과 판정 배너 */}
           {res.surpriseLabel && (
             <div style={{
@@ -493,7 +527,10 @@ export default function MarketCalendar() {
             오늘
           </button>
           <button
-            onClick={() => fetchEvents(year, month)}
+            onClick={async () => {
+              try { await fetch('/api/market-calendar/sync', { method: 'POST' }); } catch { /* 갱신 실패해도 기존 데이터는 다시 불러온다 */ }
+              fetchEvents(year, month);
+            }}
             disabled={loading}
             title="오늘 발표된 실적 결과 및 최신 어닝 서프라이즈 데이터를 실시간으로 동기화합니다."
             style={{
@@ -601,7 +638,7 @@ export default function MarketCalendar() {
                 key={`${d.dateStr}-${i}`}
                 onClick={() => setSelectedDate(d.dateStr)}
                 style={{
-                  minHeight: 105,
+                  minHeight: 140,
                   padding: '8px 10px',
                   background: isSelected
                     ? 'rgba(129,140,248,0.15)'
@@ -626,7 +663,7 @@ export default function MarketCalendar() {
                   marginBottom: 4
                 }}>
                   <span style={{
-                    fontSize: '.85rem',
+                    fontSize: '1rem',
                     fontWeight: todayFlag ? 800 : 700,
                     color: todayFlag ? '#fff' : idx === 0 ? '#ef4444' : idx === 6 ? '#3b82f6' : 'var(--t1)',
                     background: todayFlag ? 'var(--accent)' : 'transparent',
@@ -636,15 +673,15 @@ export default function MarketCalendar() {
                     {d.day}
                   </span>
                   {dayEvents.length > 0 && (
-                    <span style={{ fontSize: '.7rem', color: 'var(--t3)', fontWeight: 700 }}>
+                    <span style={{ fontSize: '.78rem', color: 'var(--t3)', fontWeight: 700 }}>
                       {dayEvents.length}개
                     </span>
                   )}
                 </div>
 
                 {/* 이벤트 목록 축약 */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-                  {dayEvents.slice(0, 3).map((evt, eIdx) => (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                  {dayEvents.map((evt, eIdx) => (
                     <div
                       key={eIdx}
                       onClick={(e) => {
@@ -652,19 +689,19 @@ export default function MarketCalendar() {
                         setSelectedEventModal(evt);
                       }}
                       style={{
-                        padding: '2px 6px',
+                        padding: '4px 7px',
                         borderRadius: 0,
                         background: `${CATEGORY_COLORS[evt.category] || '#6366f1'}22`,
                         borderLeft: `3px solid ${CATEGORY_COLORS[evt.category] || '#6366f1'}`,
-                        fontSize: '.68rem',
+                        fontSize: '.8rem',
                         fontWeight: 700,
+                        lineHeight: 1.35,
                         color: '#fff',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
+                        wordBreak: 'keep-all',
+                        overflowWrap: 'anywhere',
                         display: 'flex',
-                        alignItems: 'center',
-                        gap: 3
+                        alignItems: 'flex-start',
+                        gap: 4
                       }}
                       title={`${evt.title} (클릭 시 상세 결과)`}
                     >
@@ -672,11 +709,6 @@ export default function MarketCalendar() {
                       <span>{evt.title}</span>
                     </div>
                   ))}
-                  {dayEvents.length > 3 && (
-                    <div style={{ fontSize: '.65rem', color: 'var(--t3)', textAlign: 'right', fontWeight: 700 }}>
-                      +{dayEvents.length - 3}개 더보기
-                    </div>
-                  )}
                 </div>
               </div>
             );

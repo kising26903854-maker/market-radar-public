@@ -15,3 +15,4 @@ backend/data/watchlist_stocks.json
 backend/data/alert_history.json
 backend/data/leading_stock_cache.json
 backend/data/yeokmaegongpa_cache.json
+backend/data/market_calendar_ff_cache.json
