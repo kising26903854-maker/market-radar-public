@@ -169,6 +169,7 @@ async function fillKrEarnings(events, out) {
       const cons = periods[consIdx], prev = periods[consIdx - 1];
       const yoy = periods.find(p => p.key.slice(0, 4) === String(parseInt(cons.key.slice(0, 4), 10) - 1) && p.key.slice(4) === cons.key.slice(4));
       out[outlookKey(evt)] = {
+        consensus: { rev: toNum(val('매출액', cons)), op: toNum(val('영업이익', cons)) }, // 발표 후 서프라이즈 계산용(억원)
         forecast: `매출 ${eokToJo(val('매출액', cons))} · 영업이익 ${eokToJo(val('영업이익', cons))}`,
         previous: `직전 분기(${prev.title.replace(/\.$/, '')}) 매출 ${eokToJo(val('매출액', prev))} · 영업이익 ${eokToJo(val('영업이익', prev))}`
           + (yoy ? ` / 전년 동기(${yoy.title.replace(/\.$/, '')}) 영업이익 ${eokToJo(val('영업이익', yoy))}` : ''),
@@ -181,20 +182,150 @@ async function fillKrEarnings(events, out) {
   return n;
 }
 
+const toNum = (v) => { const n = parseFloat(String(v ?? '').replace(/,/g, '')); return Number.isFinite(n) ? n : null; };
+
+// ── 발표 결과(실제 발표치) 자동 채우기 — 이미 발표된 일정(최근 30일) 대상 ──
+//  - 미국 고용·CPI·PPI: 미국 노동통계국(BLS) 공개 API (키 불필요, 하루 25회 한도 → 동기화당 1회만 호출)
+//  - 미국 기업 실적: Nasdaq 실적 캘린더의 실제 EPS·서프라이즈
+//  - 한국 기업 실적: 네이버 증권에 확정 실적이 올라오면 저장해 둔 컨센서스와 비교
+// 소매판매·GDP·PCE·ISM 등은 무료 공개 API가 없어 자동 집계 대상이 아니다.
+const BLS_SERIES = ['CES0000000001', 'LNS14000000', 'CUSR0000SA0', 'CUUR0000SA0', 'CUSR0000SA0L1E', 'WPSFD4'];
+
+async function loadBls(year) {
+  try {
+    const res = await fetch('https://api.bls.gov/publicAPI/v1/timeseries/data/', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ seriesid: BLS_SERIES, startyear: String(year - 1), endyear: String(year) }),
+    });
+    const j = await res.json();
+    if (j.status !== 'REQUEST_SUCCEEDED') return null;
+    const map = {};
+    for (const s of j.Results.series) {
+      map[s.seriesID] = s.data.filter(d => /^M\d\d$/.test(d.period)).map(d => ({ y: +d.year, m: +d.period.slice(1), v: parseFloat(d.value) }));
+    }
+    return map;
+  } catch { return null; }
+}
+
+const at = (rows, y, m) => rows?.find(r => r.y === y && r.m === m)?.v;
+const prevYM = (y, m) => (m === 1 ? [y - 1, 12] : [y, m - 1]);
+const pct = (a, b) => (a / b - 1) * 100;
+const sgn = (n, d = 1) => `${n >= 0 ? '+' : ''}${n.toFixed(d)}%`;
+
+function blsResult(evt, bls) {
+  const dm = parseInt(evt.title.match(/(\d{1,2})월/)?.[1], 10);
+  if (!dm || !bls) return null;
+  const evYear = +evt.date.slice(0, 4), evMonth = +evt.date.slice(5, 7);
+  const y = dm > evMonth ? evYear - 1 : evYear; // 1월 발표분은 전년 12월 데이터
+  const [py, pm] = prevYM(y, dm);
+  if (/고용보고서/.test(evt.title)) {
+    const jobs = bls.CES0000000001, un = bls.LNS14000000;
+    const cur = at(jobs, y, dm), prev = at(jobs, py, pm);
+    if (cur == null || prev == null) return null; // 아직 해당 월 데이터가 안 올라옴
+    const [ppy, ppm] = prevYM(py, pm), prev2 = at(jobs, ppy, ppm);
+    const chg = cur - prev; // 천명
+    const fmtMan = (k) => `${k >= 0 ? '+' : ''}${(k / 10).toFixed(1)}만명`;
+    return {
+      actual: `비농업 일자리 ${fmtMan(chg)} · 실업률 ${at(un, y, dm)}%`,
+      previous: prev2 != null ? `직전월 일자리 ${fmtMan(prev - prev2)} · 실업률 ${at(un, py, pm)}%` : null,
+    };
+  }
+  if (/소비자물가/.test(evt.title)) {
+    const sa = bls.CUSR0000SA0, nsa = bls.CUUR0000SA0, core = bls.CUSR0000SA0L1E;
+    const c = at(sa, y, dm), p = at(sa, py, pm), yy = at(nsa, y - 1, dm), cn = at(nsa, y, dm);
+    if (c == null || p == null || yy == null || cn == null) return null;
+    const cc = at(core, y, dm), cp = at(core, py, pm);
+    return { actual: `CPI 전월비 ${sgn(pct(c, p))} · 전년비 ${sgn(pct(cn, yy))}` + (cc != null && cp != null ? ` · 근원 전월비 ${sgn(pct(cc, cp))}` : '') };
+  }
+  if (/생산자물가/.test(evt.title)) {
+    const ppi = bls.WPSFD4, c = at(ppi, y, dm), p = at(ppi, py, pm);
+    if (c == null || p == null) return null;
+    return { actual: `PPI(최종수요) 전월비 ${sgn(pct(c, p))}` };
+  }
+  return null;
+}
+
+async function usEarningsResult(evt) {
+  const tickers = evt.ticker ? [evt.ticker] : (evt.tickers || []);
+  if (!tickers.length) return null;
+  const rows = await nasdaqEarningsByDate(evt.date);
+  const hit = tickers.map(t => rows.find(r => r.symbol === t)).filter(r => r && r.eps && r.eps !== '' && r.epsForecast);
+  if (!hit.length) return null;
+  const multi = hit.length > 1;
+  const sur = hit.map(r => parseFloat(r.surprise)).filter(Number.isFinite);
+  const avgSur = sur.length ? sur.reduce((a, b) => a + b, 0) / sur.length : 0;
+  return {
+    actual: hit.map(r => `${multi ? r.symbol + ' ' : ''}EPS ${r.eps} (예상 ${r.epsForecast}${r.surprise !== undefined && r.surprise !== '' ? `, 서프라이즈 ${sgn(parseFloat(r.surprise), 2)}` : ''})`).join(' · '),
+    surprise: avgSur > 0 ? 'BEAT' : avgSur < 0 ? 'MISS' : 'INLINE',
+    surpriseLabel: avgSur > 0 ? `어닝 서프라이즈 ${sgn(avgSur, 2)}` : avgSur < 0 ? `어닝 쇼크 ${sgn(avgSur, 2)}` : '예상치 부합',
+  };
+}
+
+async function krEarningsResult(evt, stored) {
+  if (!evt.ticker || !/분기/.test(evt.title)) return null;
+  try {
+    const res = await axios.get(`https://m.stock.naver.com/api/stock/${evt.ticker}/finance/quarter`, { headers: { 'User-Agent': UA, 'Referer': 'https://m.stock.naver.com/' }, timeout: 8000 });
+    const info = res.data?.financeInfo;
+    const q = { 1: '03', 2: '06', 3: '09', 4: '12' }[parseInt(evt.title.match(/(\d)분기/)?.[1], 10)];
+    const period = (info?.trTitleList || []).find(p => p.key === `${evt.date.slice(0, 4)}${q}`);
+    if (!period || period.isConsensus !== 'N') return null; // 아직 확정 실적 반영 전
+    const val = (title) => toNum(info.rowList.find(r => r.title === title)?.columns?.[period.key]?.value);
+    const rev = val('매출액'), op = val('영업이익');
+    if (rev == null || op == null) return null;
+    const cOp = stored?.consensus?.op;
+    const sur = cOp ? ((op - cOp) / Math.abs(cOp)) * 100 : null;
+    return {
+      actual: `매출 ${eokToJo(rev)} · 영업이익 ${eokToJo(op)}` + (sur != null ? ` (컨센서스 대비 영업이익 ${sgn(sur)})` : ''),
+      surprise: sur == null ? undefined : sur > 1 ? 'BEAT' : sur < -1 ? 'MISS' : 'INLINE',
+      surpriseLabel: sur == null ? undefined : sur > 1 ? `어닝 서프라이즈 ${sgn(sur)}` : sur < -1 ? `어닝 쇼크 ${sgn(sur)}` : '컨센서스 부합',
+    };
+  } catch { return null; }
+}
+
+async function fillResults(events, items) {
+  const today = kstToday();
+  const past = events.filter(e => { const d = daysFromToday(e.date); return d <= 0 && d >= -30; });
+  const needBls = past.some(e => e.country === 'US' && /고용보고서|소비자물가|생산자물가/.test(e.title));
+  const bls = needBls ? await loadBls(+today.slice(0, 4)) : null;
+  let n = 0;
+  for (const evt of past) {
+    const key = outlookKey(evt);
+    let r = null;
+    if (evt.country === 'US' && evt.category === 'ECONOMIC') r = blsResult(evt, bls);
+    else if (evt.country === 'US' && evt.category === 'EARNINGS') r = await usEarningsResult(evt);
+    else if (evt.country === 'KR' && evt.category === 'EARNINGS') r = await krEarningsResult(evt, items[key]);
+    if (!r) continue;
+    const prev = items[key] || {};
+    items[key] = {
+      ...prev, ...r,
+      previous: prev.previous && prev.previous !== '-' ? prev.previous : (r.previous || prev.previous || '-'),
+      forecast: prev.forecast || '발표 전 예상치 기록 없음',
+      source: prev.source || (evt.category === 'ECONOMIC' ? '미국 노동통계국(BLS) 공개 API' : evt.country === 'KR' ? '네이버 증권' : 'Nasdaq 실적 캘린더'),
+      resultUpdatedAt: new Date().toISOString(),
+    };
+    n++;
+  }
+  return n;
+}
+
 let syncInFlight = null;
 export function syncCalendarOutlook(getEvents) {
   if (syncInFlight) return syncInFlight;
   syncInFlight = (async () => {
     const started = Date.now();
-    // 발표가 임박한(과거 1일 ~ 14일 이내) 일정만 조회 대상
-    const events = getEvents().filter(e => { const d = daysFromToday(e.date); return d >= -1 && d <= 14; });
+    nasdaqCache.clear(); // 날짜별 실적 조회 결과는 주기마다 새로 받는다(추정치·실제치가 계속 바뀜)
+    const allEvents = getEvents();
+    // 발표가 임박한(과거 1일 ~ 14일 이내) 일정만 예상치 조회 대상
+    const events = allEvents.filter(e => { const d = daysFromToday(e.date); return d >= -1 && d <= 14; });
     const items = { ...loadOutlookStore() };
     const fresh = {};
     const ff = await fetchForexFactory();
     const macro = fillMacro(events, ff, fresh);
     const us = await fillUsEarnings(events, fresh);
     const kr = await fillKrEarnings(events, fresh);
-    Object.assign(items, fresh);
+    // 예상치 갱신은 이미 저장된 발표 결과(actual)를 지우지 않도록 병합한다
+    for (const [k, v] of Object.entries(fresh)) items[k] = { ...(items[k] || {}), ...v };
+    const results = await fillResults(allEvents, items);
 
     // 지난 일정의 오래된 예상치는 정리 (30일 이전 일정은 삭제)
     for (const k of Object.keys(items)) {
@@ -204,7 +335,7 @@ export function syncCalendarOutlook(getEvents) {
     const dir = path.dirname(STORE_PATH);
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(STORE_PATH, JSON.stringify({ updatedAt: new Date().toISOString(), items }, null, 2), 'utf-8');
-    console.log(`[CALENDAR OUTLOOK] 예상치 갱신 완료 — 미국 지표 ${macro} / 미국 실적 ${us} / 한국 실적 ${kr}건 (${((Date.now() - started) / 1000).toFixed(1)}초)`);
+    console.log(`[CALENDAR OUTLOOK] 예상치 갱신 완료 — 미국 지표 ${macro} / 미국 실적 ${us} / 한국 실적 ${kr}건, 발표 결과 ${results}건 (${((Date.now() - started) / 1000).toFixed(1)}초)`);
   })().catch(e => console.error('[CALENDAR OUTLOOK] 갱신 실패:', e.message)).finally(() => { syncInFlight = null; });
   return syncInFlight;
 }

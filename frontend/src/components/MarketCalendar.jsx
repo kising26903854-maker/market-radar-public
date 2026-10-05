@@ -34,6 +34,8 @@ function EventDetailModal({ event, onClose }) {
 
   const res = event.result || {};
   const isConcluded = event.isConcluded;
+  // 날짜가 지났어도 실제 발표 수치가 없으면 "집계 완료"라고 하지 않는다
+  const hasResult = !!(res.surpriseLabel || res.epsActual || res.revenueActual || res.actualValue || event.outlook?.actual);
 
   return (
     <div
@@ -87,9 +89,13 @@ function EventDetailModal({ event, onClose }) {
                 <span style={{ fontSize: '0.8rem', color: 'var(--t3)', fontWeight: 700 }}>
                   {COUNTRY_FLAGS[event.country]} {event.date}
                 </span>
-                {isConcluded ? (
+                {isConcluded && hasResult ? (
                   <span style={{ fontSize: '0.7rem', background: 'rgba(16,185,129,0.2)', color: '#10b981', border: '1px solid #10b981', padding: '1px 6px', borderRadius: 0, fontWeight: 700 }}>
                     결과 집계 완료
+                  </span>
+                ) : isConcluded ? (
+                  <span style={{ fontSize: '0.7rem', background: 'rgba(148,163,184,0.15)', color: '#94a3b8', border: '1px solid #64748b', padding: '1px 6px', borderRadius: 0, fontWeight: 700 }}>
+                    발표 완료 · 결과 수치 미집계
                   </span>
                 ) : (
                   <span style={{ fontSize: '0.7rem', background: 'rgba(234,179,8,0.2)', color: '#fbbf24', border: '1px solid #eab308', padding: '1px 6px', borderRadius: 0, fontWeight: 700 }}>
@@ -137,8 +143,23 @@ function EventDetailModal({ event, onClose }) {
           {/* 예상치(컨센서스) · 이전 발표치 */}
           {event.outlook && (
             <div style={{ padding: '14px 18px', background: 'rgba(251,191,36,0.07)', border: '1px solid rgba(251,191,36,0.3)', marginBottom: 14 }}>
-              <div style={{ fontSize: '0.8rem', color: '#fbbf24', fontWeight: 700, marginBottom: 8 }}>시장 예상치 · 이전 발표치</div>
+              <div style={{ fontSize: '0.8rem', color: '#fbbf24', fontWeight: 700, marginBottom: 8 }}>
+                {event.outlook.actual ? '발표 결과 · 시장 예상치 · 이전 발표치' : '시장 예상치 · 이전 발표치'}
+              </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '6px 14px', fontSize: '0.88rem' }}>
+                {event.outlook.actual && (
+                  <>
+                    <span style={{ color: '#34d399', fontWeight: 800 }}>실제 발표</span>
+                    <span style={{ color: '#fff', fontWeight: 800 }}>
+                      {event.outlook.actual}
+                      {event.outlook.surpriseLabel && (
+                        <span style={{ marginLeft: 8, fontSize: '0.74rem', padding: '1px 6px', fontWeight: 800, color: event.outlook.surprise === 'MISS' ? '#f87171' : event.outlook.surprise === 'BEAT' ? '#34d399' : '#a5b4fc', border: `1px solid ${event.outlook.surprise === 'MISS' ? '#f87171' : event.outlook.surprise === 'BEAT' ? '#34d399' : '#818cf8'}` }}>
+                          {event.outlook.surpriseLabel}
+                        </span>
+                      )}
+                    </span>
+                  </>
+                )}
                 <span style={{ color: 'var(--t3)', fontWeight: 700 }}>예상치</span>
                 <span style={{ color: '#fff', fontWeight: 700 }}>{event.outlook.forecast || '-'}</span>
                 <span style={{ color: 'var(--t3)', fontWeight: 700 }}>이전</span>
