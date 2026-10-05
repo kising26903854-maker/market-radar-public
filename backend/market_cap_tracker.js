@@ -4,7 +4,7 @@ import axios from 'axios';
 import { fileURLToPath } from 'url';
 import { fetchMarketCapUniverse } from './kospi_kosdaq_scanner.js';
 import { sendTelegramMessage } from './telegram_alert.js';
-import { isKrxTradingDay } from './krx_calendar.js';
+import { isKrxMarketHours } from './krx_calendar.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -319,8 +319,8 @@ export function startDailyMarketCapTracker() {
   // 초기 실행 및 5분 주기 실시간 추적
   runMarketCapTracking().catch(e => console.warn('Initial market cap tracking failed:', e.message));
   setInterval(() => {
-    // 주말·공휴일(휴장일)엔 시세가 안 바뀌므로 헛돌지 않게 건너뛴다
-    if (!isKrxTradingDay()) return;
+    // 주말·공휴일(휴장일)과 거래 시간(08:00~20:00, NXT 포함) 밖엔 시세가 안 바뀌므로 헛돌지 않게 건너뛴다
+    if (!isKrxMarketHours()) return;
     runMarketCapTracking().catch(e => console.warn('Interval market cap tracking failed:', e.message));
   }, 5 * 60 * 1000);
 }

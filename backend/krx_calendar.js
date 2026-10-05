@@ -113,11 +113,19 @@ export function isKrxTradingDay(date = new Date()) {
   return !krxHolidaysForYear(year)[dateKey];
 }
 
-// 거래일 09:00~15:30 (KST)
-export function isKrxMarketHours(date = new Date()) {
+// 거래일 09:00~15:30 (KST) — KRX 정규장
+export function isKrxRegularHours(date = new Date()) {
   if (!isKrxTradingDay(date)) return false;
   const { minutes } = kstParts(date);
   return minutes >= 9 * 60 && minutes <= 15 * 60 + 30;
+}
+
+// 거래일 08:00~20:00 (KST) — 넥스트레이드(NXT) 프리마켓 08:00~08:50 · 메인 09:00~15:20 · 애프터 15:30~20:00 포함.
+// 마지막 집계가 20:00 종가를 담도록 5분 여유를 둔다.
+export function isKrxMarketHours(date = new Date()) {
+  if (!isKrxTradingDay(date)) return false;
+  const { minutes } = kstParts(date);
+  return minutes >= 8 * 60 && minutes <= 20 * 60 + 5;
 }
 
 // 달력 일정 생성용: 'YYYY-MM-DD' 문자열이 한국 거래일인지
